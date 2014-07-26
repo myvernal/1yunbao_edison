@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="70dip"
+               android:scaleType="fitXY"
+               android:background="@color/orange_order"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:paddingBottom="10dp"
+                  android:paddingLeft="10dp"
+                  android:paddingRight="10dp"
+                  android:paddingTop="10dp"
+                  android:background="#E3E8EC"
+                  android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:layout_weight="2">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <!-- 查找货源 -->
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape1"
+                        android:onClick="onSearchSource"
+                        android:text="查找货源"/>
+
+                <!-- 帮我找货 -->
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape2"
+                        android:onClick="onHelpFindGoods"
+                        android:text="帮我找货"/>
+            </LinearLayout>
+            <!-- 我的好友 -->
+
+            <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1">
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/shape3"
+                        android:onClick="onMyFriends"
+                        android:text="我的好友"/>
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="物流公司 司机好友"
+                        android:textColor="@drawable/button_font_style"/>
+            </FrameLayout>
+        </LinearLayout>
+        <!-- 新货源 -->
+
+        <Button
+                style="@style/home_test_font"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="7dp"
+                android:layout_weight="1"
+                android:background="#D069B8"
+                android:onClick="onNewSource"
+                android:text="新货源"/>
+        <!-- 发布车源 -->
+
+        <Button
+                style="@style/home_test_font"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="7dp"
+                android:layout_weight="1"
+                android:background="#427BC0"
+                android:onClick="onPublishCar"
+                android:text="发布车源"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="7dp"
+                android:layout_weight="2">
+
+            <!-- 我的推广 -->
+
+            <Button
+                    style="@style/home_test_font"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape2"
+                    android:onClick="onSpread"
+                    android:text="我的推广"/>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <!-- 会员特权 -->
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape5"
+                        android:onClick="onVIP"
+                        android:text="会员特权"/>
+                <!-- 互动 -->
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape6"
+                        android:onClick="onInteraction"
+                        android:text="互动"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

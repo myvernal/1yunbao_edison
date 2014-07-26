@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/info_id_register_shuiche_phone"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="随车手机"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@id/info_id_register_name"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:hint="*司机姓名" />
+
+            <EditText
+                android:id="@+id/info_id_register_chezhu_phone"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="车主电话"
+                android:inputType="phone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@id/info_id_register_length"
+                    style="@style/info_edittext_style"
+                    android:layout_weight="1"
+                    android:digits="1234567890."
+                    android:hint="@string/string_tips_length"
+                    android:inputType="number" />
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="@string/string_register_mi" />
+
+                <EditText
+                    android:id="@id/info_id_register_weight"
+                    style="@style/info_edittext_style"
+                    android:layout_weight="1"
+                    android:digits="1234567890."
+                    android:hint="@string/string_tips_weight"
+                    android:inputType="number" />
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="@string/string_register_kg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="@string/string_tips_type" />
+
+                <Spinner
+                    android:id="@id/info_id_register_type"
+                    style="@style/SpinnerStyle"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@id/info_id_register_number"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:hint="@string/string_tips_number" />
+
+            <Button
+                android:id="@id/info_id_register_submit"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/string_tips_optional_submit" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

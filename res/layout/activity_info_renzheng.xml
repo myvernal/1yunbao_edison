@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 选填 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <include
+                android:id="@id/info_id_optional_card"
+                layout="@layout/common_select_photo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_textview_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/string_tips_optional_card_name" />
+
+                <EditText
+                    android:id="@id/info_id_optional_card_name"
+                    style="@style/info_edittext_style"
+                    android:layout_marginLeft="0dp"
+                    android:hint="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_textview_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/string_tips_optional_card_number" />
+
+                <EditText
+                    android:id="@id/info_id_optional_card_number"
+                    style="@style/info_edittext_style"
+                    android:layout_marginLeft="0dp"
+                    android:hint="" />
+            </LinearLayout>
+
+            <include
+                android:id="@id/info_id_optional_license"
+                layout="@layout/common_select_photo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_textview_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/string_tips_optional_license_name" />
+
+                <EditText
+                    android:id="@id/info_id_optional_license_name"
+                    style="@style/info_edittext_style"
+                    android:layout_marginLeft="0dp"
+                    android:hint="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_textview_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/string_tips_optional_license_number" />
+
+                <EditText
+                    android:id="@id/info_id_optional_license_number"
+                    style="@style/info_edittext_style"
+                    android:layout_marginLeft="0dp"
+                    android:hint="" />
+            </LinearLayout>
+
+            <include
+                android:id="@id/info_id_optional_registration"
+                layout="@layout/common_select_photo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_textview_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/string_tips_optional_license_name" />
+
+                <EditText
+                    android:id="@id/info_id_optional_registration_name"
+                    style="@style/info_edittext_style"
+                    android:layout_marginLeft="0dp"
+                    android:hint="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_textview_style"
+                    android:layout_width="wrap_content"
+                    android:text="@string/string_tips_optional_license_number" />
+
+                <EditText
+                    android:id="@id/info_id_optional_registration_number"
+                    style="@style/info_edittext_style"
+                    android:layout_marginLeft="0dp"
+                    android:hint="" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/info_id_optional_car"
+                layout="@layout/common_select_photo" />
+
+            <Button
+                android:id="@id/info_id_optional_dump"
+                style="@style/info_button_style"
+                android:layout_marginTop="20dp"
+                android:text="@string/string_tips_optional_dump" />
+
+            <Button
+                android:id="@id/info_id_optional_submit"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/string_tips_optional_submit" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

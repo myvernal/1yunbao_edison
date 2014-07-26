@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="70dip"
+               android:scaleType="fitXY"
+               android:background="@drawable/top_ad_1"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:paddingBottom="5dp"
+                  android:paddingLeft="5dp"
+                  android:paddingRight="5dp"
+                  android:paddingTop="5dp"
+                  android:background="#E3E8EC"
+                  android:orientation="horizontal">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            <!-- 查找货源 -->
+            <Button
+                    style="@style/home_test_font"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape1"
+                    android:onClick="onSearchSource"
+                    android:text="好友货源"/>
+
+            <!-- 帮我找货 -->
+            <Button
+                    style="@style/home_test_font"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/shape2"
+                    android:onClick="onHelpFindGoods"
+                    android:text="查找货源"/>
+            <!-- 我的好友 -->
+            <Button
+                    style="@style/home_test_font"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/shape3"
+                    android:onClick="onMyFriends"
+                    android:text="发布车源"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            <!-- 我的推广 -->
+            <Button
+                    style="@style/home_test_font"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/shape4"
+                    android:onClick="onSpread"
+                    android:text="关注货源"/>
+
+            <!-- 会员特权 -->
+            <Button
+                    style="@style/home_test_font"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/shape5"
+                    android:onClick="onVIP"
+                    android:text="货运名片"/>
+
+            <!-- 互动 -->
+            <Button
+                    style="@style/home_test_font"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape6"
+                    android:onClick="onInteraction"
+                    android:text="物流园区"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

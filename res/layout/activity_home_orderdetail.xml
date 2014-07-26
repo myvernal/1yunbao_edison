@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 订单详情 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@id/source_id_order_number"
+                style="@style/home_online_order_textview_style" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" >
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="公司名称：" />
+
+                    <TextView
+                        android:id="@+id/source_id_detail_company_name"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_line" />
+
+                    <TextView
+                        android:id="@id/source_id_detail_line"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_name" />
+
+                    <TextView
+                        android:id="@id/source_id_detail_name"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_style" />
+
+                    <TextView
+                        android:id="@id/source_id_detail_type"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_space" />
+
+                    <TextView
+                        android:id="@id/source_id_detail_space"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_price" />
+
+                    <TextView
+                        android:id="@id/source_id_detail_price"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_uploadtime" />
+
+                    <TextView
+                        android:id="@id/source_id_detail_uploadtime"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="货物数量：" />
+
+                    <TextView
+                        android:id="@+id/source_id_detail_num"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+                
+                   <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="补充说明：" />
+
+                    <TextView
+                        android:id="@+id/source_id_detail_mark"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+            </TableLayout>
+
+            <Button
+                android:id="@id/source_id_detail_place"
+                style="@style/info_button_style"
+                android:layout_marginTop="10dp"
+                android:text="@string/string_home_onlinesource_evaluate" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

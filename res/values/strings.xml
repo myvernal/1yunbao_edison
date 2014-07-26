@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">易运宝司机端</string>
+    <string name="progress_loading">正在加载...</string>
+    <string name="string_title_login">登录</string>
+    <string name="string_titlebar_back">返回</string>
+    <string name="string_titlebar_share">礼品</string> <!-- PR113 分享礼品 -->
+    <string name="string_login_phone">手机号</string>
+    <string name="string_login_password">密码</string>
+    <string name="string_title_online_source">在途货源</string>
+    <string name="string_province">省份</string>
+    <string name="string_city">城市</string>
+    <string name="string_tips_select">请选择</string>
+    <!-- main -->
+    <string name="string_main_home">首页</string>
+    <string name="string_main_share">分享</string> <!-- PR113 -->
+    <!-- PR1.2 begin -->
+    <string name="string_main_search">搜索</string>
+    <string name="string_main_tool">工具</string>
+    <string name="string_main_other">我的</string>
+    <!-- PR1.2 end -->
+    <!-- 注册 -->
+    <string name="string_title_register">注册</string>
+    <string name="string_register_getverifycode">获取验证码</string>
+    <string name="string_tips_password">*密码</string>
+    <string name="string_tips_password2">*再次输入密码</string>
+    <string name="string_tips_verifycode">*手机验证码</string>
+    <string name="string_tips_length">*车长</string>
+    <string name="string_tips_type">*车型</string>
+    <string name="string_tips_weight">*载重</string>
+    <string name="string_tips_number">*车牌号</string>
+    <string name="string_register_line">*线路：</string>
+    <string name="string_register_choice">选填</string>
+    <string name="string_register_arrow">同意协议</string>
+    <string name="string_register_kg">吨</string>
+    <string name="string_register_mi">米</string>
+    <string name="string_register_phone">*随车手机</string>
+    <string name="string_register_name">*姓名</string>
+    <string name="string_register_recommender"> 推荐人帐号</string>
+    <string name="string_register_click_skan">点击可进入查看协议</string>
+    <string name="string_register_complete_title">完善资料</string>
+    <!-- 选填 -->
+    <string name="string_tips_optional_driver_name">司机姓名</string>
+    <string name="string_tips_optional_ower_phone">车主电话</string>
+    <string name="string_tips_optional_card">身份证</string>
+    <string name="string_tips_optional_card_name">姓名：</string>
+    <string name="string_tips_optional_card_number">编号：</string>
+    <string name="string_tips_optional_registration">行驶证</string>
+    <string name="string_tips_optional_registration_name">姓名：</string>
+    <string name="string_tips_optional_registration_number">编号：</string>
+    <string name="string_tips_optional_license">驾驶证</string>
+    <string name="string_tips_optional_license_name">姓名：</string>
+    <string name="string_tips_optional_license_number">编号：</string>
+    <string name="string_tips_optional_dump">跳过</string>
+    <string name="string_tips_optional_submit">提交</string>
+    <string name="string_car_img">车辆照片</string>
+    <!-- 忘记密码 -->
+    <string name="string_forget_tips">请填写您注册使用的手机号</string>
+    <string name="string_forget_submit">提交</string>
+    <string name="string_register_new_password">新密码</string>
+    <string name="string_register_new_password2">新确认密码</string>
+    <string name="string_forget">找回密码</string>
+    <string name="string_forget_info">请填写注册手机号码</string>
+    <string name="string_forgot_submit">提交</string>
+    <string name="string_register_wait">%s秒后可重新获取</string>
+    <string name="string_register_verifycode">验证码</string>
+
+    <!-- 修改密码 -->
+    <string name="string_update_oldpwd">请输入初始密码</string>
+    <string name="string_update_newpwd">请输入新密码</string>
+    <string name="string_update_newpwd2">请再次输入新密码</string>
+    <string name="string_update_submit">提交</string>
+    <string name="string_update_title">修改密码</string>
+
+    <!-- 登录 -->
+    <string name="string_info_login_auto">自动登录</string>
+    <string name="string_info_login_forget">忘记密码</string>
+    <!-- 首页 -->
+    <string name="string_home_source_grab">抢单</string>
+    <string name="string_home_source_cancelgrab">取消抢单</string>
+    <string name="string_title_newsource">新货源</string>
+    <!-- 忘记密码 -->
+    <string name="string_info_forget_title">忘记密码</string>
+    <string name="string_home_myabc_title">个人中心</string><!-- 我的易运宝  变成 个人中心 -->
+    <string name="string_home_myabc_title_info">个人资料</string>
+    <string name="string_home_myabc_title_name">姓&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;名：</string>
+    <string name="string_home_myabc_title_carnum">车牌号码：</string>
+    <string name="string_home_myabc_title_phone">手机号码：</string>
+    <string name="string_home_myabc_title_recommend">推荐人帐号：</string>
+    <string name="string_home_myabc_title_myaccount">我的账户</string>
+    <string name="string_home_myabc_title_history">我的历史订单</string>
+    <string name="string_home_myabc_title_history1">历史订单</string>
+    <string name="string_home_myabc_title_share">分享</string>
+    <string name="string_home_myabc_title_updatepwd">密码修改</string>
+    <string name="string_home_myabc_title_over">账户余额</string>
+    <string name="string_home_myabc_title_recharge">帐号充值</string>
+    <string name="string_home_myabc_title_ranking">排名</string>
+    <string name="string_home_myabc_title_onlinetime">在线时间</string>
+    <string name="string_home_myabc_title_recommendcount">推荐人数</string>
+    <string name="string_home_myabc_title_clinch">成交单数</string>
+    <string name="string_home_myabc_title_mycredit">我的信誉</string>
+    <string name="string_home_myabc_title_creditdetail">信誉记录</string>
+    <string name="string_home_myabc_title_setting">系统设置</string>
+    <string name="string_home_myabc_title_checkversion">检查更新</string>
+    <string name="string_home_myabc_title_about">关&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;于</string>
+    <string name="string_home_myabc_title_advice">意见反馈</string>
+    <string name="string_home_myabc_complete">完善资料</string>
+    <string name="string_home_myabc_logout">退出登录</string>
+    <string name="string_home_myabc_rank">排名%d位</string>
+    <string name="string_home_myabc_balance">%.2f物流币</string>
+    <string name="string_home_sourcedetail_title">新货源详情</string>
+    <string name="string_home_sourcedetail_line">线路：</string>
+    <string name="string_home_sourcedetail_name">货物名称：</string>
+    <string name="string_home_sourcedetail_style">货物类型：</string>
+    <string name="string_home_sourcedetail_space">体积重量：</string>
+    <string name="string_home_sourcedetail_weight">货物重量：</string>
+    <string name="string_home_sourcedetail_price">运输总价：</string>
+    <string name="string_home_sourcedetail_needtype">需要车型：</string>
+    <string name="string_home_sourcedetail_uploadtime">装车时间：</string>
+    <string name="string_home_sourcedetail_validtime">有效时间：</string>
+    <string name="string_home_sourcedetail_remark">补充说明：</string>
+    <string name="string_home_sourcedetail_img">货源图片：</string>
+    <string name="string_home_sourcedetail_evaluate">信誉评价：</string>
+    <string name="string_home_sourcedetail_grab">抢单</string>
+    <string name="string_home_sourcedetail_attention">关注</string>
+    <string name="string_home_sourcedetail_needtime">所用时间：</string>
+    <string name="string_home_sourcedetail_true">发货信息准确度：</string>
+    <string name="string_home_sourcedetail_integrity">履约诚信度：</string>
+    <string name="string_home_sourcedetail_timely">付款及时率：</string>
+    <string name="string_home_sourcedetail_detail">详细评价</string>
+    <string name="sourcedetail_weight">%s吨</string>
+    <string name="sourcedetail_number">订单号:%s</string>
+    <string name="sourcedetail_price">%s元</string>
+    <string name="sourcedetail_validtime">有效时间:%s</string>
+    <string name="string_home_unmatched_title">待定货源</string>
+    <string name="string_unmatched_nums">目前有&lt;font color=&quot;#ffab33&quot;&gt;%d&lt;/font&gt;位司机抢单</string>
+    <string name="string_home_onlinesource_contact">联系货主</string>
+    <string name="string_home_onlinesource_chat">在线聊天</string>
+    <string name="string_home_onlinesource_evaluate">评价</string>
+    <!-- 新货源 -->
+    <string name="string_home_newsource_order_number">订单号:%d</string>
+    <string name="string_home_newsource_order_money">保证金&lt;font color=&quot;#FF0000&quot;&gt; %s &lt;/font&gt;元</string>
+    <string name="string_home_newsource_order_evaluate">发货方信誉评价</string>
+    <string name="string_home_newsource_order_evaluate_new">此货被多少人查看：200</string> <!-- add PR104 -->
+    <!-- 分享 -->
+    <string name="string_share_title">分享</string>
+    <string name="string_share_tips">兄弟，快去下载个易运宝找货软件，货很多，还不收费，有很多好的货源。点http://56dp.cn/1.apk 就能下载！赚钱了，请我吃饭！</string>
+    <string name="string_share_send">点击发送</string>
+    <string name="string_share_please_choose">请选择您好友的手机号码</string>
+    <string name="string_home_share_title_hint">请输入姓名或者手机号码查询</string>
+
+    <!-- 在途货源 -->
+    <string name="string_onlinesource_from">发货方：%s</string>
+    <string name="string_onlinesource_send">送货方：%s</string>
+    <string name="string_onlinesource_tips">点击下方图标上传状态</string>
+    <string name="string_onlinesource_state1">到达装货位置</string>
+    <string name="string_onlinesource_state2">启程</string>
+    <string name="string_onlinesource_state3">在途</string>
+    <string name="string_onlinesource_state4">到达目的地</string>
+    <string name="string_onlinesource_state5">卸货</string>
+    <string name="string_onlinesource_state6">回单密码</string>
+    <string name="string_onlinesource_location">汇报位置</string>
+
+    <!-- 聊天 -->
+    <string name="string_home_chat_title">聊天</string>
+    <string name="string_home_chat_presstosay">按住聊天</string>
+    <string name="string_home_chat_send">发送</string>
+
+    <!-- 大图模式 -->
+    <string name="string_home_imageshow_title">大图模式</string>
+
+    <!-- 信息中心 -->
+    <string name="string_info_type">类别：</string>
+    <string name="string_info_time">日期：</string>
+    <string name="string_info_theme">主题：</string>
+    <!-- 其它 -->
+    <string name="string_map_round">周边</string>
+    <!-- 司机个人信誉 -->
+    <string name="string_home_driver_credit_title">我的信誉</string>
+    <string name="string_home_driver_credit_name">姓名：</string>
+    <string name="string_home_driver_credit_phone">司机手机：</string>
+    <string name="string_home_driver_credit_number">车牌号码：</string>
+    <string name="string_home_driver_credit_evaluate">信誉评价：</string>
+    <!-- 充值 -->
+    <string name="string_info_charge_title">充值</string>
+    <string name="string_info_charge_number">当前帐号：%s</string>
+    <string name="string_info_charge_money">充值金额：</string>
+    <string name="string_info_charge_tips">单位:元</string>
+    <string name="string_info_charge_mode">支付方式：</string>
+    <string name="string_info_charge_zfb">支付宝</string>
+    <string name="string_info_charge_yb">易宝</string>
+    <string name="string_info_charge_help">提示：充值金额将按照1：1的比例，直接兑换成物流币充入登录账户</string>
+    <string name="string_info_charge_ok">确定充值</string>
+    <string name="string_info_charge_record">充值记录</string>
+    <!-- 意见反馈 -->
+    <string name="string_others_feedback_title">意见反馈</string>
+    <string name="string_others_feedback_tips">感谢反馈,你的意见是我们前进的最大动力</string>
+    <!-- 信息中心 -->
+    <string name="string_info_title">信息中心详情</string>
+    <string name="string_info_detail_type">类别：%s</string>
+    <string name="string_info_detail_time">时间:%s</string>
+    <!-- 关于 -->
+    <string name="string_other_about_title">联系我们</string>
+    <string name="string_other_about_tip">易运宝 随时随地随便挑!</string>
+    <string name="string_other_about_phone">免费电话：400 876 5156</string>
+    <string name="string_other_about_addr">地址：成都市新都区物流大道88号传化物流基地3楼B343</string>
+    <string name="string_other_about_email">邮箱：yiyuncorp@gmail.com</string>
+    <string name="string_other_about_qq">QQ：246 5656 699</string>
+    <string name="string_other_about_banquan">© 2013 1yunbao.com all rights reserved</string>
+    <!-- 评价 -->
+    <string name="string_evaluate_order">订单号：%s</string>
+    <string name="string_evaluate_line" formatted="false">%s——>%s</string>
+    <string name="string_evaluate_name">货物名称：%s</string>
+    <string name="string_evaluate_lvyue">履约诚信度：</string>
+    <string name="string_evaluate_xinxi">信息真实度：</string>
+    <string name="string_evaluate_fuwu">服务态度：</string>
+    <string name="string_evaluate_detail">详细评价：</string>
+    <!-- 里程计算器 -->
+    <string name="string_calc_title">里程计算器</string>
+    <string name="string_calc_start">起始地</string>
+    <string name="string_calc_end">目的地</string>
+    <string name="string_calc_search">搜索</string>
+    <string name="string_home_publish_title_first">省份</string>
+    <string name="string_home_publish_title_second">城市</string>
+    <string name="string_home_publish_title_thrid">区县</string>
+    <string name="string_other_calc_line">线路:</string>
+    <!-- 已完成订单 -->
+    <string name="string_complete_title">已完成订单</string>
+    <!-- 充值记录 -->
+    <string name="string_charge_record_title">充值记录</string>
+    <string name="string_other_recharge_phone">手机号码:</string>
+    <string name="string_other_recharge_price">充值金额:</string>
+    <string name="string_other_recharge_type">支付方式:</string>
+    <string name="string_other_recharge_type1">支付宝</string>
+    <string name="string_other_recharge_type2">易宝</string>
+    <string name="string_other_recharge_sumbit">立即充值</string>
+    <string name="string_other_recharge_unit">单位:元</string>
+    <string name="string_other_recharge_info">提示：充值金额将按照1：1的比例，直接兑换成物流币充入登录账户</string>
+    <string name="string_other_recharge_records">充值记录</string>
+    <string name="string_other_recharge">充值</string>
+    <string name="string_other_recharge_record_serialnumber">流水号:%d</string>
+    <string name="string_other_recharge_record_phone">帐号:</string>
+    <string name="string_other_recharge_record_money">金额:</string>
+    <string name="string_other_recharge_record_mode">类型:</string>
+    <string name="string_other_recharge_record_time">时间:</string>
+    <string name="string_other_recharge_card">易运宝卡密充值</string>
+    <!-- 支付宝 -->
+    <string name="activity_remote_service_binding">AppDemo4</string>
+    <string name="remote_call_failed">Failure calling remote service</string>
+    <string name="partnerHint">"partner"</string>
+    <string name="sellerHint">"seller"</string>
+    <string name="out_trade_noHint">"out_trade_no"</string>
+    <string name="subjectHint">"subject"</string>
+    <string name="bodyHint">"body"</string>
+    <string name="total_feeHint">"total_fee"</string>
+    <string name="notify_urlHint">"notify_url"</string>
+    <string name="charsetHint">"charset"</string>
+    <string name="signTypeHint">"signType"</string>
+    <string name="confirm_install_hint">"安装提示"</string>
+    <string name="confirm_install">"为保证您的交易安全，需要您安装支付宝安全支付服务，才能进行付款。\n\n点击确定，立即安装。"</string>
+    <string name="Ensure">"确定"</string>
+    <string name="Cancel">"取消"</string>
+    <string name="check_sign_failed">您的订单信息已被非法篡改。</string>
+
+    <!-- vip添加商户 -->
+    <string name="string_vip_add_shop">添加商户</string>
+    <string name="string_vip_add_submit">提交</string>
+    <string name="string_vip_add_other">其他: </string>
+    <string name="string_vip_add_youhui">会员特惠:</string>
+    <string name="string_vip_add_normalprice">正常价格:</string>
+    <string name="string_vip_add_sername">商品或服务名称:</string>
+    <string name="string_vip_add_contact">联系人:</string>
+    <string name="string_vip_add_phone">座机:</string>
+    <string name="string_vip_add_mobilephone">手机:</string>
+    <string name="string_vip_add_lbs">GPS定位:</string>
+    <string name="string_vip_add_lbs_btn">点击定位</string>
+    <string name="string_vip_add_addr">*地址:</string>
+    <string name="string_vip_add_area">区域:</string>
+    <string name="string_vip_add_province">省份</string>
+    <string name="string_vip_add_city">城市</string>
+    <string name="string_vip_add_towns">区县</string>
+    <string name="string_vip_add_type">*分类:</string>
+    <string name="string_vip_add_name">*名称:</string>
+	<!-- add PR1.1 begin-->
+	<string name="user_type_not_choose">请选择身份：【司机版，货主版】</string>
+	<string name="user_driver">司机版</string>
+	<string name="user_shipper">货主版</string>
+	<string name="help_tel_tip">免费咨询热线：</string>
+	<string name="help_tel">"400-876-5156"</string>
+    <string name="fast_enter"><u>直接进入</u></string>
+    <string name="free_register">免费注册</string>
+	<!-- add PR1.1 end-->
+	<!-- add PR1.3 begin -->
+	<string name="share_get_gift">礼品</string>
+	<string name="car_way_part">零担</string>
+	<string name="car_way_whole">整车</string>
+	<string name="focus_line">关注线路</string>
+	<string name="fast_setting">快捷设置</string>
+	<string name="focus_line_dialog_msg">关注此线路后，点击“快速设置”可以帮助你快速填写搜索条件</string>
+	<string name="submit">确定</string>
+	<string name="cancel">取消</string>
+	<!-- add PR1.3 end -->
+	<!-- add PR104 begin-->
+	<string name="feedback">状态反馈</string>
+	<string name="feedback_hylz">货已拉走</string>
+	<string name="feedback_jgtd">价格太低</string>
+	<string name="feedback_lxbs">联系不上</string>
+	<string name="feedback_xjxx">虚假信息</string>
+	<string name="feedback_error">反馈状态错误</string>
+	<string name="feedback_success">感谢你的反馈，我们将会及时处理</string>
+	<string name="feedback_msg">如果你提供的虚假信息，我们将对你的帐号进行处罚。</string>
+	<!-- add PR104 end-->
+	<!-- add PR105 begin -->
+	<string name="menu_publish_car_source">发布车源</string>
+	<string name="control_car_source">管理</string>
+	<string name="car_status">车辆状态：</string>
+	<string name="car_status_idle">空车</string>
+	<string name="car_status_running">在途</string>
+	<string name="added">补充：</string>
+	<string name="added_describe">补充说明：</string>
+	<string name="current_location">当前位置</string>
+	<string name="upload_location">点击上报</string>
+	<string name="source_requirement">货源要求</string>
+	<string name="start_position">*出发地</string>
+	<string name="end_position">*目的地</string>
+	<string name="car_way_all">零整不限</string>
+	<string name="publish_success">发布成功</string>
+	<string name="recomment_content">推广好处多多，一定</string>
+	<string name="recomment">推广</string>
+	<!-- add PR105 end -->
+	<!-- add PR111 begin -->
+	<string name="contact_kehu">联系客服</string>
+	<string name="contact_kehu_qq">请加客户好友后，直接QQ联系，谢谢。</string>
+	<!-- add PR111 end -->
+</resources>

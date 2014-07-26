@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@id/source_id_order_number"
+        style="@style/home_online_order_textview_style" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp" >
+
+        <include
+            android:id="@id/source_id_order_imagetips"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/source_id_order_number"
+            layout="@layout/common_imagetips" />
+
+        <TextView
+            android:id="@id/source_id_order_info"
+            style="@style/home_source_order_info_style"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/source_id_order_imagetips" />
+
+        <TextView
+            android:id="@id/source_id_order_time"
+            style="@style/home_source_order_info_style"
+            android:layout_below="@id/source_id_order_info"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/source_id_order_imagetips" />
+
+        <TextView
+            android:id="@id/source_id_order_nums"
+            style="@style/home_source_order_info_style"
+            android:layout_below="@id/source_id_order_time"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/source_id_order_imagetips" />
+
+        <TextView
+            android:id="@id/source_id_order_evaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/source_id_order_imagetips"
+            android:layout_marginTop="5dp"
+            android:text="@string/string_home_newsource_order_evaluate"
+            android:textSize="@dimen/font_size_normal" />
+
+        <RatingBar
+            android:id="@id/source_id_order_star"
+            style="@style/ratingbar_style"
+            android:layout_below="@id/source_id_order_imagetips"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@id/source_id_order_evaluate" />
+
+        <Button
+            android:id="@id/source_id_order_cancelgrab"
+            style="@style/info_register_button_style"
+            android:layout_below="@id/source_id_order_evaluate"
+            android:layout_marginTop="5dp"
+            android:minWidth="100dp"
+            android:text="@string/string_home_source_cancelgrab" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_info_right" />
+    </RelativeLayout>
+
+</LinearLayout>

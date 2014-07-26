@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="*出发地"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal" />
+
+            <com.maogousoft.logisticsmobile.driver.CitySelectView
+                android:id="@+id/cityselect_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="*目的地"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal" />
+
+            <com.maogousoft.logisticsmobile.driver.CitySelectView
+                android:id="@+id/cityselect_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
+            <!-- 货物名称 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="货物名称：" />
+
+                <EditText
+                    style="@style/info_edittext_weight_style"
+                    android:hint="请输入货物名称" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="货物类型：" />
+
+                <Spinner
+                    android:id="@+id/search_car_type"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/goods_types" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="运输方式：" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/car_status_idle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:onClick="onCarStatus"
+                        android:text="整车" />
+
+                    <RadioButton
+                        android:id="@+id/car_status_running"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onCarStatus"
+                        android:text="零担" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="车长：" />
+
+                <EditText
+                    style="@style/info_edittext_weight_style"
+                    android:text="5.4" />
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="米" />
+            </LinearLayout>
+            <!-- 车型：spinner.setSelection(5) -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="车型：" />
+
+                <Spinner
+                    android:id="@+id/search_car_type"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/car_types_name" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="报价：" />
+
+                <EditText
+                    style="@style/info_edittext_weight_style"
+                    android:text="5.4" />
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="元" />
+
+                <Spinner
+                    android:id="@+id/car_price_unit"
+                    style="@style/home_warp_spinner_style"
+                    android:entries="@array/car_price_unit" />
+            </LinearLayout>
+            <!-- 保证金 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="保证金：" />
+
+                <EditText
+                    style="@style/info_edittext_weight_style"
+                    android:text="0" />
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="元" />
+            </LinearLayout>
+            <!-- 常用语句 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_margin="10dp"
+                android:gravity="clip_vertical" >
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="常用语句" />
+
+                <Spinner
+                    android:id="@+id/search_car_type"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/goods_comments_names" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@android:id/edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:gravity="top"
+                android:hint="补充说明"
+                android:minLines="5" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="联系人：" />
+
+                <EditText
+                    style="@style/info_edittext_weight_style"
+                    android:text="向哥哥" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="手机号码：" />
+
+                <EditText
+                    style="@style/info_edittext_weight_style"
+                    android:text="15928031311" />
+            </LinearLayout>
+
+            <!-- 车源有效时间 -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="有效时间：" />
+
+                <EditText
+                    style="@style/info_edittext_weight_style"
+                    android:inputType="number"
+                    android:text="0" />
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="天" />
+
+                <EditText
+                    style="@style/info_edittext_weight_style"
+                    android:inputType="number"
+                    android:text="8" />
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="小时" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/search_source__submit"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="30dp"
+                android:text="发布货源" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

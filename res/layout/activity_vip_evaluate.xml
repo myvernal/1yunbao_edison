@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/home_sourcedetail_title_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_home_sourcedetail_evaluate" />
+
+                <RatingBar
+                    android:id="@id/evaluate_id_score"
+                    style="@style/ratingbar_style"
+                    android:layout_gravity="center_vertical" />
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" >
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="服务态度" />
+
+                    <RatingBar
+                        android:id="@id/evaluate_id_score_true"
+                        style="@style/ratingbar_big_style"
+                        android:layout_gravity="center_vertical" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="技术水平" />
+
+                    <RatingBar
+                        android:id="@id/evaluate_id_score_integrity"
+                        style="@style/ratingbar_big_style"
+                        android:layout_gravity="center_vertical" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="诚信经营" />
+
+                    <RatingBar
+                        android:id="@id/evaluate_id_score_timely"
+                        style="@style/ratingbar_big_style"
+                        android:layout_gravity="center_vertical" />
+                </TableRow>
+            </TableLayout>
+
+            <EditText
+                android:id="@id/evaluate_id_remark"
+                style="@style/info_edittext_style"
+                android:gravity="top"
+                android:hint="输入评价，奖优罚劣，促进诚信"
+                android:minLines="5"
+                android:singleLine="false" >
+
+                <requestFocus />
+            </EditText>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical" >
+
+                <CheckBox
+                    android:id="@+id/checkbox_istrue"
+                    style="@style/checkboxStyle"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:checked="true"
+                    android:text="商家已经如实提供优惠" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@id/evaluate_id_submit"
+                style="@style/info_button_style"
+                android:layout_marginTop="10dp"
+                android:text="@string/string_home_onlinesource_evaluate" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

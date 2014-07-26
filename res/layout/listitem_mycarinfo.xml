@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 我的车队界面 -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="5dp" >
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/nameId"
+                style="@style/info_left_text_style"
+                android:textSize="@dimen/font_size_large"
+                android:text="陈冲" />
+
+            <TextView
+                android:id="@+id/plate_numberId"
+                style="@style/info_left_text_style"
+                android:text="川A542" />
+
+            <TextView
+                android:id="@+id/car_type_strId"
+                style="@style/info_left_text_style"
+                android:text="高栏" />
+
+            <TextView
+                android:id="@+id/car_lengthId"
+                style="@style/info_left_text_style"
+                android:text="13米" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/wayId"
+                style="@style/info_left_text_style"
+                android:text="成都-上海" />
+
+            <TextView
+                android:id="@+id/locationId"
+                style="@style/info_left_text_style"
+                android:layout_marginLeft="5dp"
+                android:text="成都青羊区" />
+
+            <TextView
+                android:id="@+id/location_timeId"
+                style="@style/info_left_text_style"
+                android:layout_marginLeft="5dp"
+                android:text="03-10 16:53" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

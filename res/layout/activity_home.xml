@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 首页 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="7dp"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@id/home_id_unmatched_source"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_home_unmatched" />
+
+        <Button
+            android:id="@id/home_id_online_source"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_home_onlinesource" />
+    </LinearLayout>
+
+    <Button
+        android:id="@id/home_id_new_source"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="7dp"
+        android:layout_weight="1"
+        android:background="@drawable/selector_home_newsource" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="7dp"
+        android:layout_weight="1" >
+
+        <Button
+            android:id="@+id/home_id_search_source"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_home_searchsource" />
+
+        <Button
+            android:id="@id/home_id_vip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_home_vip" />
+    </LinearLayout>
+
+    <Button
+        android:id="@id/home_id_myabc"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="7dp"
+        android:layout_weight="1"
+        android:background="@drawable/selector_home_myabc" />
+
+</LinearLayout>

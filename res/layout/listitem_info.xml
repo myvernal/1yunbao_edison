@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_normal"
+        android:orientation="horizontal" >
+
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TableRow>
+
+                <TextView
+                    style="@style/info_textstyle"
+                    android:text="@string/string_info_type" />
+
+                <TextView
+                    android:id="@+id/notify_type"
+                    style="@style/info_textstyle"
+                    android:layout_weight="1" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="5dp" >
+
+                <TextView
+                    style="@style/info_textstyle"
+                    android:text="@string/string_info_time" />
+
+                <TextView
+                    android:id="@+id/notify_time"
+                    style="@style/info_textstyle"
+                    android:layout_weight="1" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="5dp" >
+
+                <TextView
+                    style="@style/info_textstyle"
+                    android:text="@string/string_info_theme" />
+
+                <TextView
+                    android:id="@+id/notify_theme"
+                    style="@style/info_textstyle"
+                    android:layout_weight="1" />
+            </TableRow>
+        </TableLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_info_right" />
+    </LinearLayout>
+
+</LinearLayout>

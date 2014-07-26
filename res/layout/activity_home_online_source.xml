@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@android:id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_gray_button"
+                android:padding="5dp"
+                android:text="@string/tips_network_error"
+                android:textColor="@color/font_gray2"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/listContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible" >
+
+                <TextView
+                    android:id="@id/home_id_onlinesource_number"
+                    style="@style/home_online_order_textview_style"
+                    android:text="@string/sourcedetail_number" />
+
+                <TextView
+                    android:id="@id/home_id_onlinesource_line"
+                    style="@style/home_online_order_content_style" />
+
+                <TextView
+                    android:id="@id/home_id_onlinesource_from"
+                    style="@style/home_online_order_content_style"
+                    android:text="@string/string_onlinesource_from" />
+
+                <TextView
+                    android:id="@id/home_id_onlinesource_send"
+                    style="@style/home_online_order_content_style"
+                    android:text="@string/string_onlinesource_send" />
+
+                <TextView
+                    android:id="@+id/home_id_onlinesource_huozhu_name"
+                    style="@style/home_online_order_content_style"
+                    android:text="@string/sourcedetail_number" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/home_id_onlinesource_huozhu_telcom"
+                        style="@style/home_online_order_content_style"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/sourcedetail_number" />
+
+                    <Button
+                        android:id="@+id/btn_huozhu_telcom"
+                        style="@style/home_onlinesource_button_style"
+                        android:text="@string/string_home_onlinesource_contact" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/home_id_onlinesource_huozhu_phone"
+                        style="@style/home_online_order_content_style"
+                        android:layout_width="wrap_content"
+                        android:text="@string/sourcedetail_number" />
+
+                    <Button
+                        android:id="@+id/btn_huozhu_phone"
+                        style="@style/home_onlinesource_button_style"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/string_home_onlinesource_contact" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/home_online_order_content_style"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/string_onlinesource_tips"
+                    android:textSize="@dimen/font_size_small" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <CheckBox
+                        android:id="@+id/chk1"
+                        style="@style/online_checkbox_style"
+                        android:text="@string/string_onlinesource_state1" />
+
+                    <CheckBox
+                        android:id="@+id/chk2"
+                        style="@style/online_checkbox_style"
+                        android:text="@string/string_onlinesource_state2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="0dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <CheckBox
+                        android:id="@+id/chk3"
+                        style="@style/online_checkbox_style"
+                        android:text="@string/string_onlinesource_state3" />
+
+                    <CheckBox
+                        android:id="@+id/chk4"
+                        style="@style/online_checkbox_style"
+                        android:text="@string/string_onlinesource_state4" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+                    <CheckBox
+                        android:id="@+id/chk5"
+                        style="@style/online_checkbox_style"
+                        android:text="@string/string_onlinesource_state5" />
+
+                    <CheckBox
+                        android:id="@+id/chk6"
+                        style="@style/online_checkbox_style"
+                        android:text="@string/string_onlinesource_state6" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="输入回单密码,本次货运即结束,可以开始再次抢单了"
+                    android:textColor="#e6575c"
+                    android:textSize="@dimen/font_size_small" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray_online"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp" >
+
+                    <Button
+                        android:id="@+id/home_id_onlinesource_location"
+                        style="@style/home_onlinesource_button_style"
+                        android:text="@string/string_onlinesource_location" />
+
+                    <Button
+                        android:id="@id/home_id_onlinesource_chat"
+                        style="@style/home_onlinesource_button_style"
+                        android:text="@string/string_home_onlinesource_chat" />
+
+                    <Button
+                        android:id="@+id/home_id_onlinesource_toushu"
+                        style="@style/home_onlinesource_button_style"
+                        android:text="我要投诉" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="20dp" >
+
+            <!-- 个人资料 -->
+
+            <TableLayout
+                style="@style/home_myabc_layout_style"
+                android:layout_height="wrap_content" >
+
+                <TableRow android:background="@drawable/ic_info_topbg" >
+
+                    <TextView
+                        style="@style/home_myabc_title_style"
+                        android:layout_weight="1"
+                        android:drawableLeft="@null"
+                        android:text="@string/string_home_myabc_title_info" />
+
+                    <Button
+                        android:id="@id/myabc_id_update"
+                        style="@style/info_button_wrap_style"
+                        android:layout_width="wrap_content"
+                        android:text="@string/string_home_myabc_complete" />
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg" >
+
+                    <TextView
+                        style="@style/home_myabc_title_style"
+                        android:drawableLeft="@drawable/ic_info_name"
+                        android:text="@string/string_home_myabc_title_name" />
+
+                    <TextView
+                        android:id="@id/myabc_id_name"
+                        style="@style/home_myabc_content_style"
+                        android:text="无" />
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg" >
+
+                    <TextView
+                        style="@style/home_myabc_title_style"
+                        android:drawableLeft="@drawable/ic_info_phone"
+                        android:text="@string/string_home_myabc_title_phone" />
+
+                    <TextView
+                        android:id="@id/myabc_id_phone"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_bottombg" >
+
+                    <TextView
+                        style="@style/home_myabc_title_style"
+                        android:drawableLeft="@drawable/ic_info_recommend"
+                        android:text="@string/string_home_myabc_title_recommend" />
+
+                    <TextView
+                        android:id="@id/myabc_id_recommender"
+                        style="@style/home_myabc_content_style"
+                        android:text="无" />
+                </TableRow>
+            </TableLayout>
+            <!-- 主营路线 -->
+
+            <TableLayout
+                style="@style/home_myabc_layout_nobuttom_style"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_info_topbg"
+                    android:gravity="center_vertical"
+                    android:onClick="onMainLine"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@id/myabc_id_mycredit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="8dp"
+                        android:text="主营路线"
+                        android:textColor="@color/font_gray2"
+                        android:textSize="@dimen/font_size_normal" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_info_right" />
+                </RelativeLayout>
+            </TableLayout>
+            <!-- 车辆信息 -->
+
+            <TableLayout
+                style="@style/home_myabc_layout_style"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_info_topbg"
+                    android:gravity="center_vertical"
+                    android:onClick="onCarInfo"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@id/myabc_id_mycredit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="8dp"
+                        android:text="车辆信息"
+                        android:textColor="@color/font_gray2"
+                        android:textSize="@dimen/font_size_normal" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_info_right" />
+                </RelativeLayout>
+            </TableLayout>
+            <!-- 我的账号 -->
+
+            <TableLayout
+                style="@style/home_myabc_layout_nobuttom_style"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_info_topbg"
+                    android:gravity="center_vertical"
+                    android:onClick="onMyAccountInfo"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@id/myabc_id_mycredit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="8dp"
+                        android:text="我的账号"
+                        android:textColor="@color/font_gray2"
+                        android:textSize="@dimen/font_size_normal" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_info_right" />
+                </RelativeLayout>
+            </TableLayout>
+            <!-- 我的信誉 -->
+
+            <TableLayout
+                style="@style/home_myabc_layout_style"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_info_topbg"
+                    android:gravity="center_vertical"
+                    android:onClick="onMyReputation"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@id/myabc_id_mycredit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="8dp"
+                        android:text="我的信誉"
+                        android:textColor="@color/font_gray2"
+                        android:textSize="@dimen/font_size_normal" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_info_right" />
+                </RelativeLayout>
+            </TableLayout>
+
+            <TableLayout
+                style="@style/home_myabc_layout_nobuttom_style"
+                android:layout_height="wrap_content" >
+
+                <RelativeLayout
+                    android:id="@+id/myabc_id_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_info_topbg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:onClick="onMyHistoryOrder" >
+
+                    <TextView
+                        android:id="@id/myabc_id_mycredit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="8dp"
+                        android:text="@string/string_home_myabc_title_history1"
+                        android:textColor="@color/font_gray2"
+                        android:textSize="@dimen/font_size_normal" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_info_right" />
+                </RelativeLayout>
+            </TableLayout>
+
+            <TableLayout
+                style="@style/home_myabc_layout_style"
+                android:layout_height="wrap_content" >
+                <TableRow android:background="@drawable/ic_info_topbg" >
+
+                    <TextView
+                        style="@style/home_myabc_title_style"
+                        android:drawableLeft="@drawable/ic_info_credit"
+                        android:text="新货源通知铃声" />
+                </TableRow>
+
+                <LinearLayout
+                    android:id="@+id/layout_is_ring"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_info_centerbg"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:onClick="onSound" >
+
+                    <TextView
+                        style="@style/home_myabc_title_more_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_info_balance"
+                        android:drawableRight="@null"
+                        android:text="是否有提示音" />
+
+                    <TextView
+                        android:id="@+id/myabc_is_ring"
+                        style="@style/home_myabc_right_style"
+                        android:layout_marginRight="5dp"
+                        android:text="无" />
+                </LinearLayout>
+            </TableLayout>
+
+            <Button
+                android:id="@id/myabc_id_complete"
+                style="@style/info_button_style"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/string_home_myabc_logout" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

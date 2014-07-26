@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <include layout="@layout/common_timestamp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@id/chat_id_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@id/chat_id_nick_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
+
+            <ImageView
+                android:id="@+id/chat_id_failed_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/msg_state_failed"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@id/chat_id_audio_time_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/font_gray3"
+                android:textSize="@dimen/font_size_litter" />
+
+            <RelativeLayout
+                android:id="@id/chat_id_msgcontainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_chat_bg_left"
+                android:gravity="center"
+                android:minHeight="48dp" >
+
+                <TextView
+                    android:id="@id/chat_id_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/font_size_normal"
+                    android:visibility="visible" />
+
+                <FrameLayout
+                    android:id="@+id/chat_id_imgcontent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:id="@id/chat_id_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="false"
+                        android:contentDescription="@null"
+                        android:maxHeight="@dimen/max_chat_img_size"
+                        android:maxWidth="@dimen/max_chat_img_size"
+                        android:visibility="visible" />
+                </FrameLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@id/chat_id_nick_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@id/chat_id_audio_time_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/font_gray3"
+                android:textSize="@dimen/font_size_litter" />
+
+            <ImageView
+                android:id="@+id/chat_id_failed_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/msg_state_failed"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

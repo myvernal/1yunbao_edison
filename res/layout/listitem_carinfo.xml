@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 车源管理界面 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:id="@+id/wayId"
+            style="@style/info_left_text_style"
+            android:text="成都-重庆" />
+
+        <TextView
+            android:id="@+id/weightId"
+            android:layout_marginLeft="15dp"
+            style="@style/info_left_text_style"
+            android:text="10吨" />
+
+        <TextView
+            android:id="@+id/typeId"
+            style="@style/info_left_text_style"
+            android:text="高栏车" />
+    </LinearLayout>
+
+<!--     <View -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="5dp" -->
+<!--         android:layout_marginTop="2dp" -->
+<!--         android:layout_marginBottom="2dp" -->
+<!--         android:background="@null" /> -->
+
+</LinearLayout>

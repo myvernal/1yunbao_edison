@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@id/info_id_register_phone"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="*注册手机"
+                android:inputType="phone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@id/info_id_register_verifycode"
+                    style="@style/info_edittext_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:hint="@string/string_tips_verifycode" />
+
+                <Button
+                    android:id="@id/info_id_register_getverifycode"
+                    style="@style/info_register_button_style"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/string_register_getverifycode" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@id/info_id_register_password"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:hint="@string/string_tips_password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@id/info_id_register_password2"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:hint="@string/string_tips_password2"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@id/info_id_register_recommender"
+                style="@style/info_edittext_style"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:hint="　推荐人帐号"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/company_nameView"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:hint="*公司名称"/>
+
+            <include
+                android:id="@id/info_id_register_city"
+                layout="@layout/common_city" />
+
+            <include
+                android:id="@id/info_id_register_endcity"
+                layout="@layout/common_city" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp" >
+
+                <CheckBox
+                    android:id="@id/info_id_login_autologin"
+                    style="@style/checkboxStyle"
+                    android:layout_marginLeft="10dp"
+                    android:checked="true"
+                    android:text="@string/string_register_arrow" />
+
+                <TextView
+                    android:id="@id/info_id_register_skan_remark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/string_register_click_skan" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@id/info_id_register_submit"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/string_title_register" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

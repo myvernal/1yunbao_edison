@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 三方首页 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#E3E8EC"
+              android:orientation="vertical">
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="70dip"
+               android:scaleType="fitXY"
+               android:background="@color/orange_order"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:paddingBottom="10dp"
+                  android:paddingLeft="10dp"
+                  android:paddingRight="10dp"
+                  android:paddingTop="10dp"
+                  android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:layout_weight="2">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <!-- 车辆管理 -->
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape1"
+                        android:onClick="onMyCars"
+                        android:text="我的车队"/>
+                <!-- 我要推广 -->
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape5"
+                        android:onClick="onSpread"
+                        android:text="我要推广"/>
+            </LinearLayout>
+            <!-- 我的好友 -->
+
+            <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1">
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/shape3"
+                        android:onClick="onMyFriends"
+                        android:text="我的好友"/>
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="物流公司 司机好友"
+                        android:textColor="@drawable/button_font_style"/>
+            </FrameLayout>
+        </LinearLayout>
+        <!-- 发布货源 -->
+
+        <Button
+                style="@style/home_test_font"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="7dp"
+                android:layout_weight="1"
+                android:background="#C563AE"
+                android:onClick="onPublishGoods"
+                android:text="发布货源"/>
+        <!-- 找车 -->
+
+        <Button
+                style="@style/home_test_font"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="7dp"
+                android:layout_weight="1"
+                android:background="#A25C74"
+                android:onClick="onFindCar"
+                android:text="找车"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="7dp"
+                android:layout_weight="2">
+
+            <!-- 验证保险 -->
+
+            <Button
+                    style="@style/home_test_font"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape7"
+                    android:onClick="onCheckSafe"
+                    android:text="验证保险"/>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <!-- 会员特权 -->
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape5"
+                        android:onClick="onVIP"
+                        android:text="会员特权"/>
+                <!-- 互动 -->
+
+                <Button
+                        style="@style/home_test_font"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape8"
+                        android:onClick="onInteraction"
+                        android:text="互动"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

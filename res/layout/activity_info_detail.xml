@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 信息详情 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/notify_type_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="类别："
+                android:textColor="@color/font_gray"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/notify_type"
+                style="@style/info_textstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/notify_type_title" />
+
+            <TextView
+                android:id="@+id/notify_title"
+                style="@style/info_textstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notify_type"
+                android:gravity="center_horizontal"
+                android:textColor="@color/font_gray"
+                android:textSize="@dimen/font_size_large"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/notify_content"
+                style="@style/info_textstyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notify_title" />
+
+            <TextView
+                android:id="@+id/notify_time"
+                android:textSize="14sp"
+                android:textColor="#abaaaa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notify_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="right" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

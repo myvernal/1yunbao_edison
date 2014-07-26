@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange_order"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:id="@id/source_id_order_number"
+            style="@style/home_online_order_textview_style"
+            android:layout_weight="1"
+            android:background="@android:color/transparent" />
+
+        <Button
+            android:id="@id/source_id_order_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/ic_button_gray_small"
+            android:textColor="#626262"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <include
+                android:id="@id/source_id_order_imagetips"
+                android:layout_alignParentLeft="true"
+                layout="@layout/common_imagetips" />
+
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/car_way_part"
+                android:textColor="#ffffffff"
+                android:visibility="visible"/>
+            <Button
+                android:id="@id/source_id_order_grab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/source_id_order_imagetips"
+                android:background="@drawable/newsource_btn_qd"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:text="抢单或报价"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/font_size_normal" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/source_id_order_grab" >
+
+                <TextView
+                    android:id="@id/source_id_order_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/tv_djshint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/source_id_order_money"
+                    android:singleLine="true"
+                    android:text="剩余:"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_djs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/source_id_order_money"
+                    android:layout_toRightOf="@id/tv_djshint"
+                    android:singleLine="true"
+                    android:text="0时0分"
+                    android:textColor="#dd3e3e"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@id/source_id_order_info"
+                style="@style/home_source_order_info_style"
+                android:layout_alignLeft="@id/source_id_order_grab"
+                android:layout_below="@id/source_id_order_grab"
+                android:layout_marginTop="5dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/source_id_order_imagetips"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@id/source_id_order_evaluate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/string_home_newsource_order_evaluate_new"
+                    android:textSize="@dimen/font_size_normal" />
+
+                <!-- add PR104 begin -->
+                <Button 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/feedback"
+                    android:layout_alignParentRight="true"
+                    android:onClick="onFeedback"/>
+                <!-- add PR104 end -->
+                <!-- PR104 begin string_home_newsource_order_evaluate 修改会+_new
+                <RatingBar
+                    android:id="@id/source_id_order_star"
+                    style="@style/ratingbar_big_style"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/source_id_order_evaluate" />
+                    PR104 end -->
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_info_right" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <TextView
+        android:id="@+id/tv_sharehint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#ffab33"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@android:id/edit"
+            style="@style/share_phone_edittext_style"
+            android:background="@drawable/edit_bg_share"
+            android:drawableLeft="@drawable/ic_share_img"
+            android:hint="@string/string_home_share_title_hint" >
+        </EditText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_normal"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="@string/string_share_please_choose"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal" />
+
+            <ListView
+                android:id="@android:id/list"
+                style="@style/listViewStyle" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/share_id_content"
+            style="@style/info_edittext_style"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="5dp"
+            android:autoLink="web"
+            android:gravity="top"
+            android:minLines="3"
+            android:singleLine="false"
+            android:text="@string/string_share_tips"
+            android:textColor="@color/font_gray2" />
+
+        <Button
+            android:id="@id/info_id_login_loginbtn"
+            style="@style/info_button_style"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/string_share_send" />
+    </LinearLayout>
+
+</LinearLayout>

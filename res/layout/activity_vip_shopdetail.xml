@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/font_gray2"
+            android:textSize="@dimen/font_size_normal" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/font_gray2"
+            android:textSize="@dimen/font_size_normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <LinearLayout style="@style/home_sourcedetail_layout_style" >
+
+            <TextView
+                android:id="@+id/tv_credit_score1"
+                style="@style/home_sourcedetail_cx_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RatingBar
+                android:id="@+id/credit_score1"
+                style="@style/home_sourcedetail_ratingbar_style" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/home_sourcedetail_layout_style"
+            android:layout_marginLeft="5dp" >
+
+            <TextView
+                android:id="@+id/tv_credit_score2"
+                style="@style/home_sourcedetail_cx_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RatingBar
+                android:id="@+id/credit_score2"
+                style="@style/home_sourcedetail_ratingbar_style" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/home_sourcedetail_layout_style"
+            android:layout_marginLeft="5dp" >
+
+            <TextView
+                android:id="@+id/tv_credit_score3"
+                style="@style/home_sourcedetail_cx_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RatingBar
+                android:id="@+id/credit_score3"
+                style="@style/home_sourcedetail_ratingbar_style" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.maogousoft.logisticsmobile.driver.widget.MyGridView
+        android:id="@id/source_id_order_gridview"
+        style="@style/gridviewStyle"
+        android:layout_marginLeft="@dimen/grid_space"
+        android:layout_marginRight="@dimen/grid_space"
+        android:numColumns="4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/home_sourcedetail_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="会员特惠："
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_youhui"
+            style="@style/home_myabc_content_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_addr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#00000000"
+        android:gravity="left"
+        android:text="无地址信息" />
+
+    <Button
+        android:id="@+id/btn_dianpin"
+        style="@style/info_button_style"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="我要点评" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/btn_mobilephone"
+            style="@style/home_onlinesource_button_style" />
+
+        <Button
+            android:id="@+id/btn_phone"
+            style="@style/home_onlinesource_button_style" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        style="@style/listViewStyle"
+        android:dividerHeight="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
+
+</LinearLayout>

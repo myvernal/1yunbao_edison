@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 已完成订单 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@id/source_id_order_number"
+        style="@style/home_online_order_textview_style" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp" >
+
+        <include
+            android:id="@id/source_id_order_imagetips"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/source_id_order_number"
+            layout="@layout/common_imagetips" />
+
+        <TextView
+            android:id="@id/source_id_order_info"
+            style="@style/home_source_order_info_style"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/source_id_order_imagetips" />
+
+        <TextView
+            android:id="@+id/source_id_order_type"
+            style="@style/home_source_order_info_style"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/source_id_order_info"
+            android:layout_toRightOf="@id/source_id_order_imagetips" />
+
+        <TextView
+            android:id="@id/source_id_order_nums"
+            style="@style/home_source_order_info_style"
+            android:layout_below="@+id/source_id_order_type"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/source_id_order_imagetips" />
+
+        <TextView
+            android:id="@id/source_id_order_time"
+            style="@style/home_source_order_info_style"
+            android:layout_below="@id/source_id_order_nums"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/source_id_order_imagetips" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_info_right" />
+    </RelativeLayout>
+
+</LinearLayout>

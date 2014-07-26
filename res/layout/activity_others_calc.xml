@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 里程计算器 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:padding="3dp" >
+
+        <TextView
+            android:id="@+id/calc_line"
+            style="@style/home_publish_title_style"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="2dp"
+            android:textSize="@dimen/font_size_large" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/calc_bty1"
+                style="@style/button1_style5"
+                android:minHeight="30dip"
+                android:text="@string/string_home_publish_title_first" />
+
+            <Button
+                android:id="@+id/calc_bty2"
+                style="@style/button2_style5"
+                android:layout_marginLeft="3dp"
+                android:minHeight="30dip"
+                android:text="@string/string_home_publish_title_second" />
+
+            <ImageView
+                android:id="@+id/calc_change"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_register_arrow" />
+
+            <Button
+                android:id="@+id/calc_bty3"
+                style="@style/button1_style5"
+                android:minHeight="30dip"
+                android:text="@string/string_home_publish_title_first" />
+
+            <Button
+                android:id="@+id/calc_bty4"
+                style="@style/button2_style5"
+                android:layout_marginLeft="3dp"
+                android:minHeight="30dip"
+                android:text="@string/string_home_publish_title_second" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/calc_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:visibility="gone" />
+
+        <com.maogousoft.logisticsmobile.driver.widget.MyGridView
+            android:id="@+id/calc_gridview1"
+            style="@style/gridviewStyle"
+            android:background="@android:color/white"
+            android:horizontalSpacing="3dp"
+            android:numColumns="3"
+            android:verticalSpacing="3dp" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="others">
+        <item>里程计算器</item>
+        <item>帮助中心</item>
+        <item>账户充值</item>
+        <item>附近住宿</item>
+        <item>附近加油站</item>
+        <item>附近银行</item>
+        <item>检查更新</item>
+        <item>意见反馈</item>
+        <item>联系我们</item>
+        <item>路况查询</item>
+        <item>活动中心</item>
+        <item>交罚款</item>
+        <item>周公解梦</item>
+        <item>查天气</item>
+        <item>新闻咨询</item>
+    </string-array>
+    <string-array name="select_photo">
+        <item>手机拍摄</item>
+        <item>相册中选</item>
+    </string-array>
+    <string-array name="charge_money">
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
+        <item>500</item>
+    </string-array>
+    <string-array name="vip">
+        <item>住宿优惠</item>
+        <item>加油优惠</item>
+        <item>餐饮折扣</item>
+        <item>休闲优惠</item>
+        <item>维修保养</item>
+        <item>其他</item>
+    </string-array>
+    <!-- 车辆状态 不限，空车，在途 -->
+    <string-array name="car_status">
+        <item>不限</item>
+        <item>空车</item>
+        <item>在途</item>
+    </string-array>
+    <!-- 车辆定位后地址持续时间 -->
+    <string-array name="car_location_time">
+        <item>今天</item>
+        <item>两小时内</item>
+        <item>六小时内</item>
+    </string-array>
+    <!-- 常用语句 -->
+    <string-array name="goods_comments_names">
+        <item>信息部勿扰</item>
+        <item>急货</item>
+        <item>马上装车</item>
+        <item>价高急走</item>
+        <item>运价好商量</item>
+        <item>价格面议</item>
+    </string-array>
+    <string-array name="car_types">
+        <item>43</item>
+        <item>car_type</item>
+        <item>不限</item>
+        <item>44</item>
+        <item>car_type</item>
+        <item>平板</item>
+        <item>45</item>
+        <item>car_type</item>
+        <item>高栏</item>
+        <item>46</item>
+        <item>car_type</item>
+        <item>厢式</item>
+        <item>47</item>
+        <item>car_type</item>
+        <item>冷藏</item>
+        <item>48</item>
+        <item>car_type</item>
+        <item>集装箱</item>
+        <item>49</item>
+        <item>car_type</item>
+        <item>全封闭</item>
+        <item>50</item>
+        <item>car_type</item>
+        <item>特种</item>
+        <item>51</item>
+        <item>car_type</item>
+        <item>危险</item>
+        <item>52</item>
+        <item>car_type</item>
+        <item>自卸</item>
+        <item>53</item>
+        <item>car_type</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="car_types_name">
+        <item>不限</item>
+        <item>平板</item>
+        <item>高栏</item>
+        <item>厢式</item>
+        <item>冷藏</item>
+        <item>集装箱</item>
+        <item>全封闭</item>
+        <item>特种</item>
+        <item>危险</item>
+        <item>自卸</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="car_types_values">
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+    </string-array>
+    <string-array name="goods_types">
+        <item>普货</item>
+        <item>重货</item>
+        <item>泡货</item>
+        <item>设备</item>
+        <item>大件</item>
+        <item>冷藏</item>
+        <item>鲜活</item>
+        <item>农产品</item>
+        <item>危险品</item>
+        <item>其他</item>
+    </string-array>
+    <!-- PR104 begin -->
+    <string-array name="feedback_type">
+        <item>@string/feedback_hylz</item>
+        <item>@string/feedback_jgtd</item>
+        <item>@string/feedback_lxbs</item>
+        <item>@string/feedback_xjxx</item>
+    </string-array>
+    <!-- PR104 end -->
+    <!-- PR111 brgin -->
+    <string-array name="contact_kehu_items">
+        <item>电话：4008765156</item>
+        <item>QQ ：2465656699</item>
+    </string-array>
+    <!-- PR111 end -->
+    <string-array name="car_length_names">
+        <item>不限</item>
+        <item>3-6.8米</item>
+        <item>6.9-9.6米</item>
+        <item>9.7-13米</item>
+        <item>13米以上</item>
+    </string-array>
+    <string-array name="car_length_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+	<string-array name="menu_friends_operation">
+	    <item>查看他的车源</item>
+	    <item>发送我的定位</item>
+	    <item>请求他的定位</item>
+	    <item>私信</item>
+	    <item>修改备注名</item>
+	    <item>删除好友</item>
+	    <item>拨打</item>
+	    <item>返回</item>
+	</string-array>
+	<!-- 容量体积单位 -->
+	<string-array name="car_price_unit">
+	    <item>吨</item>
+	    <item>方</item>
+	    <item>车</item>
+	</string-array>
+	<!-- 查找车源  位置区间-->
+	<string-array name="car_location_limit">
+	    <item>今天</item>
+	    <item>两小时内</item>
+	    <item>六小时内</item>
+	</string-array>
+	<!-- 保险：险种 -->
+	<string-array name="safe_types">
+	    <item>基本险</item>
+	    <item>综合险</item>
+	    <item>综合险附加被盗险</item>
+	</string-array>
+	<!-- 保险：包装代码 -->
+	<string-array name="safe_bzdm_types">
+	    <item>盘卷包装</item>
+	    <item>罐装</item>
+	    <item>桶装</item>
+	    <item>裸装</item>
+	    <item>散装</item>
+	    <item>托盘</item>
+	    <item>袋装</item>
+	    <item>箱装</item>
+	</string-array>
+</resources>

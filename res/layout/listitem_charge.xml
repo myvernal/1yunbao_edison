@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/listitem_recharge_record_serialnumber"
+        style="@style/other_charge_style"
+        android:text="@string/string_other_recharge_record_serialnumber" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dip" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/home_motorcade_item_title_style"
+                android:text="@string/string_other_recharge_record_phone" />
+
+            <TextView
+                android:id="@+id/listitem_recharge_record_phone"
+                style="@style/home_motorcade_item_title_style2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/home_motorcade_item_title_style"
+                android:text="@string/string_other_recharge_record_money" />
+
+            <TextView
+                android:id="@+id/listitem_recharge_record_money"
+                style="@style/home_motorcade_item_title_style2"
+                android:textSize="@dimen/font_size_small" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/home_motorcade_item_title_style"
+                android:text="@string/string_other_recharge_record_mode" />
+
+            <TextView
+                android:id="@+id/listitem_recharge_record_mode"
+                style="@style/home_motorcade_item_title_style2"
+                android:singleLine="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/home_motorcade_item_title_style"
+                android:text="@string/string_other_recharge_record_time" />
+
+            <TextView
+                android:id="@+id/listitem_recharge_record_time"
+                style="@style/home_motorcade_item_title_style2" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

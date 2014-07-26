@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <TableLayout
+        style="@style/home_myabc_layout_style"
+        android:layout_height="wrap_content" >
+
+        <TableRow android:background="@drawable/ic_info_centerbg" >
+
+            <TextView
+                style="@style/home_myabc_title_style"
+                android:drawableLeft="@drawable/ic_info_carnum"
+                android:text="车牌号：" />
+
+            <TextView
+                android:id="@+id/myabc_id_car_num"
+                style="@style/home_myabc_content_style"
+                android:text="无" />
+        </TableRow>
+
+        <TableRow android:background="@drawable/ic_info_centerbg" >
+
+            <TextView
+                style="@style/home_myabc_title_style"
+                android:drawableLeft="@drawable/ic_info_carnum"
+                android:text="车长：" />
+
+            <TextView
+                android:id="@+id/myabc_id_car_length111"
+                style="@style/home_myabc_content_style"
+                android:text="无" />
+        </TableRow>
+
+        <TableRow android:background="@drawable/ic_info_centerbg" >
+
+            <TextView
+                style="@style/home_myabc_title_style"
+                android:drawableLeft="@drawable/ic_info_phone"
+                android:text="车型：" />
+
+            <TextView
+                android:id="@+id/myabc_id_car_type"
+                style="@style/home_myabc_content_style"
+                android:text="无" />
+        </TableRow>
+
+        <TableRow android:background="@drawable/ic_info_bottombg" >
+
+            <TextView
+                style="@style/home_myabc_title_style"
+                android:drawableLeft="@drawable/ic_info_recommend"
+                android:text="载重：" />
+
+            <TextView
+                android:id="@+id/myabc_id_car_zhaizhong"
+                style="@style/home_myabc_content_style"
+                android:text="无" />
+        </TableRow>
+
+        <Button
+            android:id="@id/myabc_id_update"
+            style="@style/info_button_style"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:onClick="onComplementCarInfo"
+            android:text="完善资料"
+            android:visibility="gone" />
+    </TableLayout>
+
+</LinearLayout>

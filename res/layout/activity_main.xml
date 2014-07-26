@@ -1,0 +1,65 @@
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+         android:id="@android:id/tabhost"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+        <RadioGroup
+                android:id="@id/main_id_radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+            <RadioButton
+                    android:id="@id/main_id_radio_home"
+                    style="@style/main_radio_style"
+                    android:checked="true"
+                    android:drawableTop="@drawable/selector_home_home"
+                    android:text="@string/string_main_home"/>
+
+            <RadioButton
+                    android:id="@id/main_id_radio_share"
+                    style="@style/main_radio_style"
+                    android:drawableTop="@drawable/selector_home_share"
+                    android:text="@string/string_main_share"/>
+
+            <RadioButton
+                    android:id="@id/main_id_radio_search"
+                    style="@style/main_radio_style"
+                    android:drawableTop="@drawable/selector_home_information"
+                    android:text="@string/string_main_search"/>
+
+            <RadioButton
+                    android:id="@id/main_id_radio_tool"
+                    style="@style/main_radio_style"
+                    android:drawableTop="@drawable/selector_home_other"
+                    android:text="@string/string_main_tool"/>
+
+            <RadioButton
+                    android:id="@id/main_id_radio_other"
+                    style="@style/main_radio_style"
+                    android:drawableTop="@drawable/selector_home_other"
+                    android:text="@string/string_main_other"/>
+        </RadioGroup>
+    </LinearLayout>
+
+</TabHost>

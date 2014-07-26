@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <EditText
+        android:id="@+id/other_recharge_card_user"
+        style="@style/info_edittext_style"
+        android:layout_marginTop="10dp"
+        android:hint="请输入卡号"
+        android:inputType="number"
+        android:maxLength="9" />
+
+    <EditText
+        android:id="@+id/other_recharge_card_pwd"
+        style="@style/info_edittext_style"
+        android:layout_marginTop="10dp"
+        android:hint="请输入密码"
+        android:inputType="number"
+        android:maxLength="9" />
+
+    <Button
+        android:id="@+id/other_recharge_card_submit"
+        style="@style/info_button_style"
+        android:layout_marginTop="10dp"
+        android:text="@string/string_update_submit" />
+
+</LinearLayout>

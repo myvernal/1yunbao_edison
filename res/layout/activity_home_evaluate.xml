@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 评价货主 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@id/source_id_order_number"
+                style="@style/home_online_order_textview_style"
+                android:text="@string/sourcedetail_number" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_name" />
+
+                    <TextView
+                        android:id="@id/source_id_detail_name"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_line" />
+
+                    <TextView
+                        android:id="@id/source_id_detail_line"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_uploadtime" />
+
+                    <TextView
+                        android:id="@id/source_id_detail_uploadtime"
+                        style="@style/home_myabc_content_style" />
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/home_sourcedetail_title_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_home_sourcedetail_evaluate" />
+
+                <RatingBar
+                    android:id="@id/evaluate_id_score"
+                    style="@style/ratingbar_style"
+                    android:layout_gravity="center_vertical" />
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" >
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_true" />
+
+                    <RatingBar
+                        android:id="@id/evaluate_id_score_true"
+                        style="@style/ratingbar_big_style"
+                        android:layout_gravity="center_vertical" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_integrity" />
+
+                    <RatingBar
+                        android:id="@id/evaluate_id_score_integrity"
+                        style="@style/ratingbar_big_style"
+                        android:layout_gravity="center_vertical" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:text="@string/string_home_sourcedetail_timely" />
+
+                    <RatingBar
+                        android:id="@id/evaluate_id_score_timely"
+                        style="@style/ratingbar_big_style"
+                        android:layout_gravity="center_vertical" />
+                </TableRow>
+            </TableLayout>
+
+            <EditText
+                android:id="@id/evaluate_id_remark"
+                style="@style/info_edittext_style"
+                android:gravity="top"
+                android:hint="@string/string_home_sourcedetail_detail"
+                android:minLines="5"
+                android:singleLine="false" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@id/evaluate_id_submit"
+                style="@style/info_button_style"
+                android:layout_marginTop="10dp"
+                android:text="@string/string_home_onlinesource_evaluate" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

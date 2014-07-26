@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <EditText
+        android:id="@id/info_id_update_oldpwd"
+        style="@style/info_edittext_style"
+        android:layout_marginTop="10dp"
+        android:hint="@string/string_update_oldpwd"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@id/info_id_update_newpwd"
+        style="@style/info_edittext_style"
+        android:layout_marginTop="10dp"
+        android:hint="@string/string_update_newpwd"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@id/info_id_update_newpwd2"
+        style="@style/info_edittext_style"
+        android:layout_marginTop="10dp"
+        android:hint="@string/string_update_newpwd2"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@id/info_id_login_loginbtn"
+        style="@style/info_button_style"
+        android:layout_marginTop="10dp"
+        android:text="@string/string_update_submit" />
+
+</LinearLayout>

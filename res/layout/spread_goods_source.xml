@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/publish_goods_succeed"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="发布货源成功，是否需要推广"
+                android:textColor="#FFFF0000"
+                android:textSize="22sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/help_find_goods" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="易运保推广中心"
+                android:textColor="#000000"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:text="服务特色:"
+                android:textColor="#000000"
+                android:textSize="19sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="1.排名优先"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="	会员在搜索车源，货源，专线或公司的时候，推广信息会排名靠前，赢得更多客户咨询机会。"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="2.获得推广积分"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="	每一次推广，都能获得推广积分。积分可用于易运保所有服务的消费。"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <Button
+                    style="@style/info_button_wrap_style"
+                    android:layout_weight="1"
+                    android:onClick="onDesc"
+                    android:text="资费说明" />
+
+                <Button
+                    style="@style/info_button_wrap_style"
+                    android:layout_weight="1"
+                    android:onClick="onMySpread"
+                    android:text="我的推广" />
+            </LinearLayout>
+
+            <Button
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:onClick="onSpread"
+                android:text="我要推广" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

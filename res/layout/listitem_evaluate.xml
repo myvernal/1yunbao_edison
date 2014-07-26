@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 评价 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="5dp" >
+
+    <TextView
+        android:id="@+id/evaluate_number"
+        style="@style/evaluate_style"
+        android:text="@string/string_evaluate_order"
+        android:textColor="@color/font_blue" />
+
+    <TextView
+        android:id="@+id/evaluate_line"
+        style="@style/evaluate_style"
+        android:text="@string/string_evaluate_line" />
+
+    <TextView
+        android:id="@+id/evaluate_name"
+        style="@style/evaluate_style"
+        android:text="@string/string_evaluate_name" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/evaluate_style"
+            android:layout_width="wrap_content"
+            android:text="@string/string_evaluate_lvyue" />
+
+        <RatingBar
+            android:id="@+id/evaluate_score1"
+            style="@style/ratingbar_style" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/evaluate_style"
+            android:layout_width="wrap_content"
+            android:text="@string/string_evaluate_xinxi" />
+
+        <RatingBar
+            android:id="@+id/evaluate_score2"
+            style="@style/ratingbar_style" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/evaluate_style"
+            android:layout_width="wrap_content"
+            android:text="@string/string_evaluate_fuwu" />
+
+        <RatingBar
+            android:id="@+id/evaluate_score3"
+            style="@style/ratingbar_style" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/evaluate_style"
+            android:layout_width="wrap_content"
+            android:text="@string/string_evaluate_detail" />
+
+        <TextView
+            android:id="@+id/evaluate_detail"
+            style="@style/evaluate_style" />
+    </LinearLayout>
+
+</LinearLayout>

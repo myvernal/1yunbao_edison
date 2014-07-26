@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PR203找车【三方】 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="*出发地"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal" />
+
+            <com.maogousoft.logisticsmobile.driver.CitySelectView
+                android:id="@+id/cityselect_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="*目的地"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal" />
+
+            <com.maogousoft.logisticsmobile.driver.CitySelectView
+                android:id="@+id/cityselect_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="车型" />
+
+                <Spinner
+                    android:id="@+id/search_car_type"
+                    style="@style/home_publish_spinner_style" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_searchsource_carlength"
+                    style="@style/info_register_text_style"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="车长" />
+
+                <TextView
+                    android:id="@+id/tv_searchsource_mi"
+                    style="@style/info_register_text_style"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="米" />
+
+                <EditText
+                    android:id="@+id/edt_search_source_carlength"
+                    style="@style/info_edittext_style"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="2dp"
+                    android:layout_toLeftOf="@id/tv_searchsource_mi"
+                    android:layout_toRightOf="@id/tv_searchsource_carlength"
+                    android:digits="1234567890."
+                    android:hint="不限"
+                    android:inputType="number" />
+            </RelativeLayout>
+			<!-- PR1.3 begin -->
+			<RadioGroup 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginTop="7dp"
+			    android:layout_marginBottom="7dp"
+			    android:orientation="horizontal">
+			    <RadioButton
+			        android:id="@+id/car_way_part"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/car_way_part"
+			        android:onClick="onChooseCarWay"
+			        android:checked="true"/>
+			    <RadioButton
+					android:id="@+id/car_way_whole"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="@string/car_way_whole"
+			        android:onClick="onChooseCarWay"/>
+			</RadioGroup>
+			<!-- PR1.3 end -->
+            <Button
+                android:id="@+id/search_source__submit"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="30dp"
+                android:text="查找" />
+            <!-- PR1.3 begin -->
+            <RelativeLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/fast_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/fast_setting"
+                    android:onClick="onFastSetting"/>
+                <Button 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/fast_setting"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/focus_line"
+                    android:onClick="onFocusLine"/>
+            </RelativeLayout>
+            <!-- PR1.3 end -->
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

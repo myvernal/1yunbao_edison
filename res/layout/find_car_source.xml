@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="*出发地"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal" />
+
+            <com.maogousoft.logisticsmobile.driver.CitySelectView
+                android:id="@+id/cityselect_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="*目的地"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal" />
+
+            <com.maogousoft.logisticsmobile.driver.CitySelectView
+                android:id="@+id/cityselect_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="车辆状态：" />
+
+                <Spinner
+                    android:id="@+id/edt_search_source_carlength"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/car_status" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical" >
+
+                <EditText
+                    style="@style/info_edittext_weight_style"
+                    android:hint="请输入车辆位置" />
+
+                <Spinner
+                    android:id="@+id/search_car_location_status"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/car_location_limit" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="车长：" />
+
+                <Spinner
+                    android:id="@+id/edt_search_source_carlength"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/car_length_names" />
+            </LinearLayout>
+            <!-- 车型：spinner.setSelection(5) -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    style="@style/info_publish_text_style"
+                    android:text="车型：" />
+
+                <Spinner
+                    android:id="@+id/search_car_type"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/car_types_name" />
+            </LinearLayout>
+            <!-- PR1.3 end -->
+
+            <Button
+                android:id="@+id/search_source__submit"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="30dp"
+                android:text="查找" />
+            <!-- PR1.3 begin -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/fast_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:onClick="onFastSetting"
+                    android:text="@string/fast_setting" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@id/fast_setting"
+                    android:onClick="onFocusLine"
+                    android:text="@string/focus_line" />
+            </RelativeLayout>
+            <!-- PR1.3 end -->
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

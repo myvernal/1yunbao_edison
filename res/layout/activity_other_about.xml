@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 关于 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/web_logo" />
+
+        <TextView
+            style="@style/other_about_style"
+            android:text="@string/string_other_about_tip"
+            android:textSize="@dimen/font_size_large" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp" >
+
+                <TextView
+                    style="@style/other_about_style"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/string_other_about_phone" />
+
+                <TextView
+                    style="@style/other_about_style"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/string_other_about_addr" />
+
+                <TextView
+                    style="@style/other_about_style"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/string_other_about_email" />
+
+                <TextView
+                    style="@style/other_about_style"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/string_other_about_qq" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:autoLink="all"
+                    android:gravity="left"
+                    android:text="乐山地区代理商："
+                    android:textColor="@color/TextColorRed"
+                    android:textSize="@dimen/font_size_normal" />
+
+                <TextView
+                    style="@style/other_about_style"
+                    android:layout_marginTop="10dp"
+                    android:text="乐山禾山物流" />
+
+                <TextView
+                    style="@style/other_about_style"
+                    android:layout_marginTop="10dp"
+                    android:text="地址：乐山市夹江县黄土镇波华大道禾山物流" />
+
+                <TextView
+                    style="@style/other_about_style"
+                    android:layout_marginTop="10dp"
+                    android:text="电话：0833-5833087" />
+
+                <TextView
+                    style="@style/other_about_style"
+                    android:layout_marginTop="10dp"
+                    android:text="QQ：1063353020" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <TextView
+        style="@style/other_about_style"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:text="@string/string_other_about_banquan"
+        android:textSize="@dimen/font_size_litter" />
+
+</LinearLayout>

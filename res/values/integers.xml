@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="slide_animation_duration">200</integer>
+    <integer name="np_config_longAnimTime">500</integer>
+    <integer name="anim_speed">500</integer>
+
+</resources>

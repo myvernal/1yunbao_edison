@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@id/info_id_register_name"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:hint="*联系人" />
+
+            <EditText
+                android:id="@+id/info_id_register_chezhu_phone"
+                style="@style/info_edittext_style"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="*座机号码"
+                android:inputType="phone" />
+
+            <Button
+                android:id="@id/info_id_register_submit"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/string_tips_optional_submit" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

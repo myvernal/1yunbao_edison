@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 意见反馈 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/common_title" />
+
+    <EditText
+        android:id="@android:id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/string_others_feedback_tips"
+        android:minLines="5" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@android:id/button1"
+        style="@style/info_button_style"
+        android:layout_marginTop="10dp"
+        android:text="@string/string_tips_optional_submit" />
+
+</LinearLayout>
