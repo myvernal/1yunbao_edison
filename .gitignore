@@ -36,5 +36,5 @@ Icon
 .Trashes
 
 # ignore folder
-.bin/
-.gen/
+/bin/
+/gen/
