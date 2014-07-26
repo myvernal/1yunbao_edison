@@ -38,3 +38,4 @@ Icon
 # ignore folder
 /bin/
 /gen/
+/.idea/workspace.xml
