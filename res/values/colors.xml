@@ -20,6 +20,7 @@
     <color name="AppBackgroundColor">#FFC0E7FA</color>
 	<color name="TextColorBlack">#FF000000</color>
 	<color name="TextColorWhite">#FFFFFFFF</color>
+    <color name="HafTransparent">#bb000000</color>
 	<color name="TextColorBlue">#0066CC</color>
 	<color name="TextColorGray">#FF505050</color>
 	<color name="TextColorRed">#FFE26926</color>

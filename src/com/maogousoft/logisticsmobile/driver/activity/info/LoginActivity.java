@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import com.maogousoft.logisticsmobile.driver.Constants;
+import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
@@ -160,6 +161,7 @@ public class LoginActivity extends BaseActivity {
                     showMsg(R.string.user_type_not_choose);
                     return;
                 }
+                application.setIsAnonymous(true);
                 startActivity(new Intent(context, MainActivity.class));
                 break;
             default:
@@ -201,8 +203,7 @@ public class LoginActivity extends BaseActivity {
                             application.writeInfo("name",
                                     userInfo.getName());
                             application.startXMPPService();
-                            startActivity(new Intent(context,
-                                    MainActivity.class));
+                            startActivity(new Intent(context, MainActivity.class));
                             // startActivity(new Intent(context,
                             // SearchSourceActivity.class));
                             finish();

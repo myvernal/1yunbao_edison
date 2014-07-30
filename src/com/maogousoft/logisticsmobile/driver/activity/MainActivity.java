@@ -1,5 +1,8 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
+import android.view.View;
+import com.maogousoft.logisticsmobile.driver.activity.info.RegisterActivity;
+import com.maogousoft.logisticsmobile.driver.activity.info.RegisterShipperActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,6 +62,8 @@ public class MainActivity extends TabActivity {
     private RadioGroup mRadioGroup;
     private MGApplication application;
     private BroadcastReceiver switchMainActivityReceiver;
+    private View mAnonymousLayout;
+    private View mMainContentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,6 @@ public class MainActivity extends TabActivity {
         initViews();
 
         LocHelper.getInstance(this).init();
-
         switchMainActivityReceiver = new BroadcastReceiver() {
 
             @Override
@@ -78,8 +82,18 @@ public class MainActivity extends TabActivity {
         };
         registerReceiver(switchMainActivityReceiver, new IntentFilter(
                 ACTION_SWITCH_MAINACTIVITY));
-
         getABCInfo();
+
+        showDialogIfUserIsAnonymous();
+    }
+
+    private void showDialogIfUserIsAnonymous() {
+        if(application.isAnonymous()) {
+            //如果是匿名登陆,弹出半透明对话框
+            mAnonymousLayout.setVisibility(View.VISIBLE);
+            //其他区域不可点击
+            mAnonymousLayout.setOnClickListener(null);
+        }
     }
 
     @Override
@@ -92,6 +106,8 @@ public class MainActivity extends TabActivity {
 
     private void initViews() {
         application = (MGApplication) getApplication();
+        mAnonymousLayout = findViewById(R.id.anonymousLayout);
+        mMainContentLayout = findViewById(R.id.main_content_layout);
         userType = application.getUserType();
         mTabHost = getTabHost();
         switch (userType) {
@@ -175,8 +191,7 @@ public class MainActivity extends TabActivity {
                                 if (!TextUtils.isEmpty(idCard)) {
                                     application.writeIsThroughRezheng(true);
                                 } else {
-                                    application
-                                            .writeIsThroughRezheng(false);
+                                    application.writeIsThroughRezheng(false);
                                 }
 
                                 if (!TextUtils.isEmpty(name)) {
@@ -228,5 +243,30 @@ public class MainActivity extends TabActivity {
                 break;
         }
         return true;
+    }
+
+    public void onClickLoginNow(View view) {
+        finish();
+    }
+
+    public void onClickRegisterNow(View view) {
+        int mUserType = application.getUserType();
+        switch (mUserType) {
+            // 司机
+            case Constants.USER_DRIVER:
+                startActivity(new Intent(mContext, RegisterActivity.class));
+                break;
+            // 货主
+            case Constants.USER_SHIPPER:
+                startActivity(new Intent(mContext, RegisterShipperActivity.class));
+                break;
+            default:
+                break;
+        }
+        finish();
+    }
+
+    public void onClickBackNow(View view) {
+        finish();
     }
 }

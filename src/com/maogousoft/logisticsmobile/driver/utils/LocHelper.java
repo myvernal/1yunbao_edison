@@ -188,10 +188,8 @@ public class LocHelper {
 					resultCallback.onRecivedLoc(location.getLatitude(), location.getLongitude(), location.getAddrStr());
 				}
 			}
-
 			// // 释放资源
 			// release();
-
 		}
 
 		public void onReceivePoi(BDLocation poiLocation) {
@@ -283,10 +281,8 @@ public class LocHelper {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 				return hmResult;
 			}
-
 		}.execute();
 	}
 }

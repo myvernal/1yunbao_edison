@@ -39,7 +39,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:background="@drawable/shape1"
+                        android:background="@drawable/driver_shape1"
                         android:onClick="onSearchSource"
                         android:text="查找货源"/>
 
@@ -51,7 +51,7 @@
                         android:layout_height="0dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="1"
-                        android:background="@drawable/shape2"
+                        android:background="@drawable/driver_shape2"
                         android:onClick="onHelpFindGoods"
                         android:text="帮我找货"/>
             </LinearLayout>
@@ -67,7 +67,7 @@
                         style="@style/home_test_font"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:background="@drawable/shape3"
+                        android:background="@drawable/driver_shape3"
                         android:onClick="onMyFriends"
                         android:text="我的好友"/>
 
@@ -116,7 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/shape2"
+                    android:background="@drawable/driver_shape2"
                     android:onClick="onSpread"
                     android:text="我的推广"/>
 
@@ -134,7 +134,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:background="@drawable/shape5"
+                        android:background="@drawable/driver_shape5"
                         android:onClick="onVIP"
                         android:text="会员特权"/>
                 <!-- 互动 -->
@@ -145,7 +145,7 @@
                         android:layout_height="0dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="1"
-                        android:background="@drawable/shape6"
+                        android:background="@drawable/driver_shape6"
                         android:onClick="onInteraction"
                         android:text="互动"/>
             </LinearLayout>

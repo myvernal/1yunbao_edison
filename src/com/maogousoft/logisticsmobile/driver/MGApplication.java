@@ -78,7 +78,7 @@ public class MGApplication extends Application {
 
 	// 通知栏对象
 	private NotificationManager mNotificationManager = null;
-	
+	private boolean isAnonymous = true;
 
 	@Override
 	public void onCreate() {
@@ -525,4 +525,11 @@ public class MGApplication extends Application {
 		sdb.close();
 	}
 
+    public boolean isAnonymous() {
+        return isAnonymous;
+    }
+
+    public void setIsAnonymous(boolean isAnonymous) {
+        this.isAnonymous = isAnonymous;
+    }
 }

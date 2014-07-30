@@ -39,7 +39,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:background="@drawable/shape1"
+                        android:background="@drawable/driver_shape1"
                         android:onClick="onMyCars"
                         android:text="我的车队"/>
                 <!-- 我要推广 -->
@@ -50,7 +50,7 @@
                         android:layout_height="0dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="1"
-                        android:background="@drawable/shape5"
+                        android:background="@drawable/driver_shape5"
                         android:onClick="onSpread"
                         android:text="我要推广"/>
             </LinearLayout>
@@ -66,7 +66,7 @@
                         style="@style/home_test_font"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:background="@drawable/shape3"
+                        android:background="@drawable/driver_shape3"
                         android:onClick="onMyFriends"
                         android:text="我的好友"/>
 
@@ -133,7 +133,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:background="@drawable/shape5"
+                        android:background="@drawable/driver_shape5"
                         android:onClick="onVIP"
                         android:text="会员特权"/>
                 <!-- 互动 -->

@@ -60,7 +60,7 @@ public class HomeDriverActivity extends BaseActivity {
 		startActivity(new Intent(context, SpreadActivity.class));
 	}
 
-	// 会员特权
+	// 物流园区
 	public void onVIP(View view) {
 		startActivity(new Intent(context, ShopListActivity.class));
 	}
