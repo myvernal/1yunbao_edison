@@ -31,9 +31,9 @@ public class BaseActivity extends Activity implements OnClickListener {
 
 	protected SQLiteDatabase sdb;
 
-	protected MGApplication application;
+	public MGApplication application;
 
-	protected Context context;
+	public Context context;
 
 	protected ImageLoader imageLoader;
 

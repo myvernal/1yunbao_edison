@@ -39,3 +39,5 @@ Icon
 /bin/
 /gen/
 /.idea/
+
+.idea/workspace.xml

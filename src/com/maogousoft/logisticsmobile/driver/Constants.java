@@ -120,7 +120,7 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	public static final String BASE_URL = "http://www.1yunbao.com/service";
-	//public static final String BASE_URL = "http://101.69.181.82:8080/service";
+	//public static final String BASE_URL = " http://112.124.33.14:8083/service";
 	//public static final String BASE_URL = "http://192.168.1.110:8888/service";
 
 	/** 服务器地址 **/

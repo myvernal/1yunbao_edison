@@ -5,10 +5,15 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <ImageView android:layout_width="match_parent"
-               android:layout_height="70dip"
-               android:scaleType="fitXY"
-               android:background="@drawable/top_ad_1"/>
+    <com.maogousoft.logisticsmobile.driver.widget.OneGallery android:id="@+id/top_ad"
+                                                             android:layout_width="fill_parent"
+                                                             android:layout_height="70dip"
+                                                             android:animationCache="false"
+                                                             android:drawingCacheQuality="high"
+                                                             android:fadingEdge="none"
+                                                             android:fadingEdgeLength="0dp"
+                                                             android:soundEffectsEnabled="false"
+                                                             android:unselectedAlpha="1.1" />
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent"

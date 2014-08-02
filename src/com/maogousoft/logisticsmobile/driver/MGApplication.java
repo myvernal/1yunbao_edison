@@ -78,7 +78,7 @@ public class MGApplication extends Application {
 
 	// 通知栏对象
 	private NotificationManager mNotificationManager = null;
-	private boolean isAnonymous = true;
+	private boolean isAnonymous = false;
 
 	@Override
 	public void onCreate() {
