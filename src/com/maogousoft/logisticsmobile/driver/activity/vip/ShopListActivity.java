@@ -159,69 +159,71 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 
 			@Override
 			public void onClick(View v) {
-				final GrabDialog dialog = new GrabDialog(context);
-				dialog.show();
-				final EditText mInput = (EditText) dialog.findViewById(android.R.id.text1);
-				dialog.setTitle("提示");
-				dialog.setMessage("请先输入权限密码");
-				dialog.setLeftButton("确定", new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						
-						dialog.dismiss();
-
-						if (TextUtils.isEmpty(mInput.getText().toString())) {
-							Toast.makeText(ShopListActivity.this, "密码不能为空", Toast.LENGTH_SHORT).show();
-							return;
-						}
-
-						// mInput
-						// 登录
-						final String username = "11111111111";
-						final String password = mInput.getText().toString();
-
-						final JSONObject jsonObject = new JSONObject();
-						try {
-							showDefaultProgress();
-							jsonObject.put(Constants.ACTION, Constants.DRIVER_LOGIN);
-							jsonObject.put(Constants.TOKEN, null);
-							jsonObject.put(
-									Constants.JSON,
-									new JSONObject().put("phone", username).put("password", MD5.encode(password))
-											.put("device_type", Constants.DEVICE_TYPE).toString());
-							ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject, UserInfo.class,
-									new AjaxCallBack() {
-
-										@Override
-										public void receive(int code, Object result) {
-											dismissProgress();
-											switch (code) {
-												case ResultCode.RESULT_OK:
-													startActivity(new Intent(context, AddActivity.class));
-													break;
-
-												default:
-													Toast.makeText(ShopListActivity.this, "密码错误", Toast.LENGTH_SHORT)
-															.show();
-													break;
-
-											}
-										}
-									});
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
-
-					}
-				});
-				dialog.setRightButton("取消", new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-					}
-				});
+                //进入添加物流园区的页面
+                startActivity(new Intent(context, AddActivity.class));
+//				final GrabDialog dialog = new GrabDialog(context);
+//				dialog.show();
+//				final EditText mInput = (EditText) dialog.findViewById(android.R.id.text1);
+//				dialog.setTitle("提示");
+//				dialog.setMessage("请先输入权限密码");
+//				dialog.setLeftButton("确定", new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//
+//						dialog.dismiss();
+//
+//						if (TextUtils.isEmpty(mInput.getText().toString())) {
+//							Toast.makeText(ShopListActivity.this, "密码不能为空", Toast.LENGTH_SHORT).show();
+//							return;
+//						}
+//
+//						// mInput
+//						// 登录
+//						final String username = "11111111111";
+//						final String password = mInput.getText().toString();
+//
+//						final JSONObject jsonObject = new JSONObject();
+//						try {
+//							showDefaultProgress();
+//							jsonObject.put(Constants.ACTION, Constants.DRIVER_LOGIN);
+//							jsonObject.put(Constants.TOKEN, null);
+//							jsonObject.put(
+//									Constants.JSON,
+//									new JSONObject().put("phone", username).put("password", MD5.encode(password))
+//											.put("device_type", Constants.DEVICE_TYPE).toString());
+//							ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject, UserInfo.class,
+//									new AjaxCallBack() {
+//
+//										@Override
+//										public void receive(int code, Object result) {
+//											dismissProgress();
+//											switch (code) {
+//												case ResultCode.RESULT_OK:
+//													startActivity(new Intent(context, AddActivity.class));
+//													break;
+//
+//												default:
+//													Toast.makeText(ShopListActivity.this, "密码错误", Toast.LENGTH_SHORT)
+//															.show();
+//													break;
+//
+//											}
+//										}
+//									});
+//						} catch (JSONException e) {
+//							e.printStackTrace();
+//						}
+//
+//					}
+//				});
+//				dialog.setRightButton("取消", new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						dialog.dismiss();
+//					}
+//				});
 
 			}
 		});
