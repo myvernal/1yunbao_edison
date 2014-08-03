@@ -1,33 +1,11 @@
 package com.maogousoft.logisticsmobile.driver.activity.vip;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.AbsListView;
+import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -40,9 +18,11 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.ShopInfo;
-import com.maogousoft.logisticsmobile.driver.model.UserInfo;
-import com.maogousoft.logisticsmobile.driver.utils.GrabDialog;
-import com.maogousoft.logisticsmobile.driver.utils.MD5;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 商户列表
@@ -66,8 +46,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	private boolean load_all = false;
 
 	private ImageButton ibSearch;
-	private EditText edtSearch;
-
 	/** 定位相关 控制器 */
 	private LocationClient mLocClient;
 
@@ -76,45 +54,27 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 
 	private int shopType = -1;
 
-	private RadioButton radioNear, radioCategory;
-
-	private RadioGroup radioGroup;
-
 	private Button titlebar_id_more;
-
-	private View viewSearch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		initViews();
-		initLinstener();
-		initData();
+		initListener();
 		initMap();
-
 		uploadLocation();
 	}
 
 	private void initViews() {
 
-		LinearLayout viewContainer = (LinearLayout) findViewById(R.id.home_list_container);
-
-		viewSearch = LayoutInflater.from(this).inflate(R.layout.activity_vip_shoplist, null);
-		viewContainer.addView(viewSearch, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
 		ibSearch = (ImageButton) findViewById(R.id.ib_search);
-		edtSearch = (EditText) findViewById(R.id.edt_search);
-
-		radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-		radioNear = (RadioButton) findViewById(R.id.radio_near);
-		radioCategory = (RadioButton) findViewById(R.id.radio_category);
 
 		titlebar_id_more = (Button) findViewById(R.id.titlebar_id_more);
-		titlebar_id_more.setText("添加商户");
+		titlebar_id_more.setText("添加园区");
 
 		mBack = (Button) findViewById(R.id.titlebar_id_back);
-		((TextView) findViewById(R.id.titlebar_id_content)).setText("商户列表");
+		((TextView) findViewById(R.id.titlebar_id_content)).setText("物流园区");
 		mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
 		mFootView.setClickable(false);
 		mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
@@ -129,31 +89,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 		setListShown(false);
 	}
 
-	private void initLinstener() {
-		ibSearch.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				if (TextUtils.isEmpty(edtSearch.getText().toString())) {
-					return;
-				}
-
-				searchData(edtSearch.getText().toString());
-
-			}
-		});
-
-		radioCategory.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					finish();
-					startActivity(new Intent(context, IndexGridActivity.class));
-				}
-			}
-		});
+	private void initListener() {
 
 		titlebar_id_more.setOnClickListener(new OnClickListener() {
 
@@ -227,17 +163,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 
 			}
 		});
-	}
-
-	private void initData() {
-
-		if (getIntent().hasExtra("type")) {
-			shopType = getIntent().getIntExtra("type", -1);
-			if (radioGroup != null) {
-				radioGroup.setVisibility(View.GONE);
-			}
-		}
-
 	}
 
 	private void initMap() {
@@ -490,14 +415,10 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	}
 
 	@Override
-	public void onReceivePoi(BDLocation arg0) {
-
-	}
+	public void onReceivePoi(BDLocation arg0) {}
 
 	@Override
 	protected void onResume() {
-		radioNear.setChecked(true);
-
 		super.onResume();
 	}
 

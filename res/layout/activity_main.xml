@@ -46,7 +46,7 @@
             <RadioButton
                     android:id="@id/main_id_radio_search"
                     style="@style/main_radio_style"
-                    android:drawableTop="@drawable/selector_home_information"
+                    android:drawableTop="@drawable/selector_home_search"
                     android:text="@string/string_main_search"/>
 
             <RadioButton
@@ -58,7 +58,7 @@
             <RadioButton
                     android:id="@id/main_id_radio_other"
                     style="@style/main_radio_style"
-                    android:drawableTop="@drawable/selector_home_other"
+                    android:drawableTop="@drawable/selector_home_account"
                     android:text="@string/string_main_other"/>
         </RadioGroup>
     </LinearLayout>

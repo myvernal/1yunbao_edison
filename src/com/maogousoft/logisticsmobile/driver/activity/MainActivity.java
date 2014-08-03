@@ -1,6 +1,7 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
 import android.view.View;
+import com.maogousoft.logisticsmobile.driver.activity.home.*;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterShipperActivity;
 import org.json.JSONException;
@@ -18,21 +19,13 @@ import android.view.MenuItem;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TabHost;
-import android.widget.Toast;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
-import com.maogousoft.logisticsmobile.driver.activity.home.HomeActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.HomeDriverActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.HomeShipperActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.HomeSpecialActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.MyabcActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.MyabcActivity1;
-import com.maogousoft.logisticsmobile.driver.activity.home.SearchCarSourceActivity;
+import com.maogousoft.logisticsmobile.driver.activity.home.MyBusinessCard;
 import com.maogousoft.logisticsmobile.driver.activity.info.InformationActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.LoginActivity;
-import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -40,10 +33,6 @@ import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.umeng.update.UmengUpdateAgent;
-import com.ybxiang.driver.activity.MyFriendsActivity;
-import com.ybxiang.driver.activity.PublishCarSourceActivity;
-import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
-import com.ybxiang.driver.activity.CheckSafeActivity;
 
 /**
  * 登录之后显示的主页

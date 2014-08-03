@@ -164,11 +164,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.home.MyabcActivity1"
+            android:name=".activity.home.MyBusinessCard"
             android:configChanges="keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity
+                android:name=".activity.home.MyabcActivity1"
+                android:configChanges="keyboardHidden|orientation"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.other.OthersActivity"
             android:configChanges="keyboardHidden|orientation"

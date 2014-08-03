@@ -59,7 +59,7 @@ import com.maogousoft.logisticsmobile.driver.utils.PickPhoto;
 import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
 
 /**
- * 添加商户
+ * 添加物流园区
  * 
  * @author lenovo
  */
@@ -119,8 +119,7 @@ public class AddActivity extends BaseActivity {
 		readSaveInstanceState(savedInstanceState);
 		initViews();
 		initUtils();
-		initData();
-
+		//initData();
 	}
 
 	// 初始化视图

@@ -6,9 +6,6 @@
 
     <include
         android:id="@id/source_id_order_imagetips"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
         layout="@layout/common_imagetips" />
 
     <ImageView
@@ -115,6 +112,6 @@
                 android:textColor="@color/font_gray3"
                 android:textSize="@dimen/font_size_normal" />
         </RelativeLayout>
-    </LinearLayout>
+    </LinearLayout>LinearLayout
 
 </RelativeLayout>

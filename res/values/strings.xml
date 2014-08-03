@@ -82,6 +82,7 @@
     <string name="string_title_newsource">新货源</string>
     <!-- 忘记密码 -->
     <string name="string_info_forget_title">忘记密码</string>
+    <string name="string_home_business_card">货运名片</string>
     <string name="string_home_myabc_title">个人中心</string><!-- 我的易运宝  变成 个人中心 -->
     <string name="string_home_myabc_title_info">个人资料</string>
     <string name="string_home_myabc_title_name">姓&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;名：</string>
@@ -263,16 +264,14 @@
     <string name="Cancel">"取消"</string>
     <string name="check_sign_failed">您的订单信息已被非法篡改。</string>
 
-    <!-- vip添加商户 -->
-    <string name="string_vip_add_shop">添加商户</string>
+    <!-- vip添加园区 -->
+    <string name="string_vip_add_shop">添加物流园区</string>
     <string name="string_vip_add_submit">提交</string>
-    <string name="string_vip_add_other">其他: </string>
+    <string name="string_vip_add_other">园区活动: </string>
     <string name="string_vip_add_youhui">会员特惠:</string>
-    <string name="string_vip_add_normalprice">正常价格:</string>
-    <string name="string_vip_add_sername">商品或服务名称:</string>
-    <string name="string_vip_add_contact">联系人:</string>
-    <string name="string_vip_add_phone">座机:</string>
-    <string name="string_vip_add_mobilephone">手机:</string>
+    <string name="string_vip_add_normalprice">停车价格:</string>
+    <string name="string_vip_add_price">元/天</string>
+    <string name="string_vip_add_phone">电话:</string>
     <string name="string_vip_add_lbs">GPS定位:</string>
     <string name="string_vip_add_lbs_btn">点击定位</string>
     <string name="string_vip_add_addr">*地址:</string>
@@ -282,6 +281,7 @@
     <string name="string_vip_add_towns">区县</string>
     <string name="string_vip_add_type">*分类:</string>
     <string name="string_vip_add_name">*名称:</string>
+    <string name="string_vip_add_park_number">车位数:</string>
 	<!-- add PR1.1 begin-->
 	<string name="user_type_not_choose">请选择身份：【司机版，货主版】</string>
 	<string name="user_driver">司机版</string>

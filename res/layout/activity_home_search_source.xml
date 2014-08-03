@@ -1,145 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <include layout="@layout/common_title" />
+    <include layout="@layout/common_title"/>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:text="*出发地"
-                android:textColor="@color/font_gray2"
-                android:textSize="@dimen/font_size_normal" />
-
-            <com.maogousoft.logisticsmobile.driver.CitySelectView
-                android:id="@+id/cityselect_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp" />
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
-                android:text="*目的地"
-                android:textColor="@color/font_gray2"
-                android:textSize="@dimen/font_size_normal" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="*出发地"
+                    android:textColor="@color/font_gray2"
+                    android:textSize="@dimen/font_size_normal"/>
 
             <com.maogousoft.logisticsmobile.driver.CitySelectView
-                android:id="@+id/cityselect_end"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp" />
+                    android:id="@+id/cityselect_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="2dp"
+                    android:text="*目的地"
+                    android:textColor="@color/font_gray2"
+                    android:textSize="@dimen/font_size_normal"/>
+
+            <com.maogousoft.logisticsmobile.driver.CitySelectView
+                    android:id="@+id/cityselect_end"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp" >
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp">
 
                 <TextView
-                    style="@style/info_register_text_style"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="车型" />
+                        style="@style/info_register_text_style"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="车型"/>
 
                 <Spinner
-                    android:id="@+id/search_car_type"
-                    style="@style/home_publish_spinner_style"
-                    android:entries="@array/car_types_name" />
+                        android:id="@+id/search_car_type"
+                        style="@style/home_publish_spinner_style"
+                        android:entries="@array/car_types_name"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp" >
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp">
 
                 <TextView
-                    style="@style/info_register_text_style"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="车长" />
+                        style="@style/info_register_text_style"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="车长"/>
 
                 <Spinner
-                    android:id="@+id/edt_search_source_carlength"
-                    style="@style/home_publish_spinner_style"
-                    android:entries="@array/car_length_names" />
+                        android:id="@+id/edt_search_source_carlength"
+                        style="@style/home_publish_spinner_style"
+                        android:entries="@array/car_length_names"/>
             </LinearLayout>
             <!-- PR1.3 begin -->
 
             <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="7dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/car_way_part"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onChooseCarWay"
-                    android:text="@string/car_way_part" />
+                        android:id="@+id/car_way_part"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onChooseCarWay"
+                        android:text="@string/car_way_part"/>
 
                 <RadioButton
-                    android:id="@+id/car_way_whole"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onChooseCarWay"
-                    android:text="@string/car_way_whole" />
+                        android:id="@+id/car_way_whole"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onChooseCarWay"
+                        android:text="@string/car_way_whole"/>
 
                 <RadioButton
-                    android:id="@+id/car_way_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:onClick="onChooseCarWay"
-                    android:text="不限" />
+                        android:id="@+id/car_way_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:onClick="onChooseCarWay"
+                        android:text="不限"/>
             </RadioGroup>
             <!-- PR1.3 end -->
 
             <Button
-                android:id="@+id/search_source__submit"
-                style="@style/info_button_style"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
-                android:text="查找" />
+                    android:id="@+id/search_source__submit"
+                    style="@style/info_button_style"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="查找"/>
 
             <Button
-                style="@style/info_button_style"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
-                android:onClick="onFastSetting"
-                android:text="已关注的线路快捷设置" />
+                    style="@style/info_button_style"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:onClick="onFastSetting"
+                    android:text="已关注的线路快捷设置"/>
 
         </LinearLayout>
     </ScrollView>

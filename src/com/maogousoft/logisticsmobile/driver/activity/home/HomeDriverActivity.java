@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import android.widget.AdapterView;
-import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
@@ -15,6 +14,7 @@ import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.AdImageAdapter;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.OneGallery;
+import com.maogousoft.logisticsmobile.driver.widget.OneGalleryBottomView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ybxiang.driver.activity.HelpFindGoodsSourceActivity;
 import com.ybxiang.driver.activity.MyFriendsActivity;
@@ -34,6 +34,7 @@ public class HomeDriverActivity extends BaseActivity {
     private long clickTime = System.currentTimeMillis();
     private static final long clickDuration = 1000L;
     private ImageLoader mImageLoader;
+    private OneGalleryBottomView oneGalleryBottomView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class HomeDriverActivity extends BaseActivity {
 
     private void initViews() {
         gallery = (OneGallery) findViewById(R.id.top_ad);
+        oneGalleryBottomView = (OneGalleryBottomView) findViewById(R.id.top_ad_bottom);
         initGallery(context);
     }
 
@@ -72,6 +74,7 @@ public class HomeDriverActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 //顶部广告图片切换
+                oneGalleryBottomView.setHighLight(position % 3);
             }
 
             @Override
@@ -113,6 +116,11 @@ public class HomeDriverActivity extends BaseActivity {
 	public void onSpread(View view) {
 		startActivity(new Intent(context, SpreadActivity.class));
 	}
+
+    //货运名片
+    public void onCard(View view) {
+        startActivity(new Intent(context, MyBusinessCard.class));
+    }
 
 	// 物流园区
 	public void onVIP(View view) {

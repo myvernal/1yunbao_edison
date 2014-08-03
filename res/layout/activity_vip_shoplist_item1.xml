@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/park_name"
+              android:gravity="center_horizontal"
+              android:textSize="16sp"
+              android:textColor="@color/TextColorBlue"
+              android:textStyle="bold"
+              android:text="四川物流基地"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dp"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="地址:"
+                  android:textSize="15sp"
+                  android:textStyle="bold"
+                  android:textColor="@color/TextColorBlack"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:textSize="15sp"
+                  android:textColor="@color/font_gray2"
+                  android:id="@+id/location_address"
+                  android:text="四川省成都市青白江区"/>
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/location_img"
+                   android:layout_marginRight="5dp"
+                   android:src="@drawable/icon_addr"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dp"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="车位数:"
+                  android:textSize="15sp"
+                  android:textStyle="bold"
+                  android:textColor="@color/TextColorBlack"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:textSize="15sp"
+                  android:textColor="@color/font_gray2"
+                  android:text="1200"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="停车价格:"
+                  android:textSize="15sp"
+                  android:textStyle="bold"
+                  android:textColor="@color/TextColorBlack"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:textSize="15sp"
+                  android:textColor="@color/font_gray2"
+                  android:text="20元/天"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dp"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="会员优惠:"
+                  android:textSize="15sp"
+                  android:textStyle="bold"
+                  android:textColor="@color/TextColorBlack"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:textSize="15sp"
+                  android:textColor="@color/font_gray2"
+                  android:text="18元/天"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dp"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="园区活动:"
+                  android:textSize="15sp"
+                  android:textStyle="bold"
+                  android:textColor="@color/TextColorBlack"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:textSize="15sp"
+                  android:textColor="@color/font_gray2"
+                  android:text="住宿7折"/>
+    </LinearLayout>
+
+</LinearLayout>
