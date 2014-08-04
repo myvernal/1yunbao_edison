@@ -151,7 +151,20 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
                 // PR1.1
-                submit();
+                String loginType = Constants.DRIVER_LOGIN;
+                switch (mUserType) {
+                    // 司机
+                    case Constants.USER_DRIVER:
+                        loginType = Constants.DRIVER_LOGIN;
+                        break;
+                    // 货主
+                    case Constants.USER_SHIPPER:
+                        loginType = Constants.USER_LOGIN;
+                        break;
+                    default:
+                        break;
+                }
+                submit(loginType);
                 break;
             case R.id.info_id_login_forget:
                 startActivity(new Intent(context, ForgetActivity.class));
@@ -170,20 +183,17 @@ public class LoginActivity extends BaseActivity {
     }
 
     // 登录
-    private void submit() {
+    private void submit(String loginType) {
         mInputMethodManager.hideSoftInputFromWindow(mPassword.getWindowToken(),
                 0);
         final JSONObject jsonObject = new JSONObject();
         try {
             showProgress("正在登录...");
-            jsonObject.put(Constants.ACTION, Constants.DRIVER_LOGIN);
+            jsonObject.put(Constants.ACTION, loginType);
             jsonObject.put(Constants.TOKEN, null);
-            jsonObject.put(
-                    Constants.JSON,
-                    new JSONObject()
+            jsonObject.put(Constants.JSON,new JSONObject()
                             .put("phone", mUserName.getText().toString())
-                            .put("password",
-                                    MD5.encode(mPassword.getText().toString()))
+                            .put("password", MD5.encode(mPassword.getText().toString()))
                             .put("device_type", Constants.DEVICE_TYPE)
                             .toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
@@ -240,14 +250,14 @@ public class LoginActivity extends BaseActivity {
 
         switch (view.getId()) {
             // 司机版
-            //18081089935,12345
+            //16899669966,999666
             case R.id.driver:
                 if (mUserTypeChecked)
                     mUserType = Constants.USER_DRIVER;
                 application.writeUserType(Constants.USER_DRIVER);
                 break;
             // 货主版
-            //18899669966,666888
+            //16888668866,888666
             case R.id.shipper:
                 if (mUserTypeChecked)
                     mUserType = Constants.USER_SHIPPER;

@@ -162,7 +162,7 @@ public class SearchSourceActivity extends BaseActivity {
 		final JSONObject params = new JSONObject();
 		try {
 			// 搜索新货源
-			jsonObject.put(Constants.ACTION, Constants.SEARCH_SOURCE_ORDER);
+			jsonObject.put(Constants.ACTION, Constants.QUERY_SOURCE_ORDER);
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			// 添加长期货源
 			if (validateDateLong == 1) {

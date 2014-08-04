@@ -1,30 +1,14 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AbsListView;
+import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
@@ -38,6 +22,11 @@ import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.FocuseLineInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 新货源列表

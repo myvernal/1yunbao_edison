@@ -119,9 +119,14 @@ public class Constants {
 	/** 服务器地址 **/
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
-	public static final String BASE_URL = "http://www.1yunbao.com/service";
-	//public static final String BASE_URL = " http://112.124.33.14:8083/service";
+	//public static final String BASE_URL = "http://www.1yunbao.com/service";
+	public static final String BASE_URL = "http://112.124.33.14:8083/service";
 	//public static final String BASE_URL = "http://192.168.1.110:8888/service";
+    /**
+     1yunbao.com:8083/admin
+     帐号：admin
+     密码：111111
+     */
 
 	/** 服务器地址 **/
 	public static final String DRIVER_SERVER_URL = BASE_URL + "/driver";
@@ -166,6 +171,9 @@ public class Constants {
 
 	/** 司机端登录 **/
 	public static final String DRIVER_LOGIN = "driverlogin";
+
+    /** 货主端登录 **/
+    public static final String USER_LOGIN = "userlogin";
 
 	// /** 货源详情 **/
 	// public static final String GET_SOURCE_ORDER_DETAIL =
