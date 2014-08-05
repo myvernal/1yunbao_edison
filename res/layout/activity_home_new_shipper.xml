@@ -3,150 +3,192 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#E3E8EC"
               android:orientation="vertical">
 
-    <ImageView android:layout_width="match_parent"
-               android:layout_height="70dip"
-               android:scaleType="fitXY"
-               android:background="@color/orange_order"/>
+    <com.maogousoft.logisticsmobile.driver.widget.OneGallery android:id="@+id/top_ad"
+                                                             android:layout_width="fill_parent"
+                                                             android:layout_height="70dip"
+                                                             android:animationCache="false"
+                                                             android:drawingCacheQuality="high"
+                                                             android:fadingEdge="none"
+                                                             android:fadingEdgeLength="0dp"
+                                                             android:soundEffectsEnabled="false"
+                                                             android:unselectedAlpha="1.1"/>
+
+    <com.maogousoft.logisticsmobile.driver.widget.OneGalleryBottomView
+            android:id="@+id/top_ad_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:paddingBottom="10dp"
-                  android:paddingLeft="10dp"
-                  android:paddingRight="10dp"
-                  android:paddingTop="10dp"
+                  android:padding="5dp"
                   android:orientation="vertical">
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="7dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
                 android:layout_weight="2">
 
             <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="3dp"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                <!-- 车辆管理 -->
+                <!-- 我的车队 -->
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/shipper_shape1"
+                                android:onClick="onMyCars">
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:id="@+id/shape1"
+                               android:src="@drawable/ic_home_my_cars"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              style="@style/home_test_font"
+                              android:layout_toRightOf="@id/shape1"
+                              android:layout_alignBottom="@id/shape1"
+                              android:text="我的车队"/>
+                </RelativeLayout>
 
-                <Button
-                        style="@style/home_test_font"
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/driver_shape1"
-                        android:onClick="onMyCars"
-                        android:text="我的车队"/>
-                <!-- 我要推广 -->
-
-                <Button
-                        style="@style/home_test_font"
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/driver_shape5"
-                        android:onClick="onSpread"
-                        android:text="我要推广"/>
+                <!-- 查找车源 -->
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:background="@drawable/shipper_shape2"
+                                android:onClick="onFindCar">
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:id="@+id/shape2"
+                               android:src="@drawable/ic_home_search_car"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              style="@style/home_test_font"
+                              android:layout_toRightOf="@id/shape2"
+                              android:layout_alignBottom="@id/shape2"
+                              android:text="查找车源"/>
+                </RelativeLayout>
             </LinearLayout>
-            <!-- 我的好友 -->
 
-            <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="3dp"
-                    android:layout_weight="1">
-
-                <Button
-                        style="@style/home_test_font"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:background="@drawable/driver_shape3"
-                        android:onClick="onMyFriends"
-                        android:text="我的好友"/>
-
-                <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"
-                        android:text="物流公司 司机好友"
-                        android:textColor="@drawable/button_font_style"/>
-            </FrameLayout>
+            <!-- 发布货源 -->
+            <RelativeLayout android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@drawable/shipper_shape3"
+                            android:onClick="onPublishGoods">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:id="@+id/shape3"
+                           android:layout_centerHorizontal="true"
+                           android:src="@drawable/ic_home_publish_source"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_test_font"
+                          android:layout_below="@id/shape3"
+                          android:layout_centerHorizontal="true"
+                          android:text="发布货源"/>
+            </RelativeLayout>
         </LinearLayout>
-        <!-- 发布货源 -->
-
-        <Button
-                style="@style/home_test_font"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="7dp"
-                android:layout_weight="1"
-                android:background="#C563AE"
-                android:onClick="onPublishGoods"
-                android:text="发布货源"/>
-        <!-- 找车 -->
-
-        <Button
-                style="@style/home_test_font"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="7dp"
-                android:layout_weight="1"
-                android:background="#A25C74"
-                android:onClick="onFindCar"
-                android:text="找车"/>
+        <!-- 货运保险 -->
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/shipper_shape4"
+                        android:onClick="onCheckSafe">
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:id="@+id/shape4"
+                       android:layout_centerVertical="true"
+                       android:src="@drawable/ic_home_safe"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/home_test_font"
+                      android:layout_toRightOf="@id/shape4"
+                      android:layout_centerVertical="true"
+                      android:text="货运保险"/>
+        </RelativeLayout>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginBottom="7dp"
                 android:layout_weight="2">
 
-            <!-- 验证保险 -->
-
-            <Button
-                    style="@style/home_test_font"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape7"
-                    android:onClick="onCheckSafe"
-                    android:text="验证保险"/>
+            <!-- 物流点评 -->
+            <RelativeLayout android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@drawable/shipper_shape5"
+                            android:onClick="onInteraction">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:id="@+id/shape5"
+                           android:layout_centerHorizontal="true"
+                           android:src="@drawable/ic_home_dp"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_test_font"
+                          android:layout_below="@id/shape5"
+                          android:layout_centerHorizontal="true"
+                          android:text="物流点评"/>
+            </RelativeLayout>
 
             <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="6dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                <!-- 会员特权 -->
+                <!-- 证件验证 -->
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:background="@drawable/shipper_shape6"
+                                android:onClick="onCheckSafe">
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:id="@+id/shape6"
+                               android:src="@drawable/ic_home_check_card"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              style="@style/home_test_font"
+                              android:layout_toRightOf="@id/shape6"
+                             android:layout_alignBottom="@id/shape6"
+                              android:text="证件验证"/>
+                </RelativeLayout>
 
-                <Button
-                        style="@style/home_test_font"
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/driver_shape5"
-                        android:onClick="onVIP"
-                        android:text="会员特权"/>
-                <!-- 互动 -->
-
-                <Button
-                        style="@style/home_test_font"
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape8"
-                        android:onClick="onInteraction"
-                        android:text="互动"/>
+                <!-- 查找货源 -->
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/shipper_shape7"
+                                android:onClick="onSearchSource">
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:id="@+id/shape7"
+                               android:src="@drawable/ic_home_search_source"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              style="@style/home_test_font"
+                              android:layout_toRightOf="@id/shape7"
+                              android:layout_alignBottom="@id/shape7"
+                              android:text="查找货源"/>
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

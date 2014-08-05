@@ -4,6 +4,7 @@ import android.view.View;
 import com.maogousoft.logisticsmobile.driver.activity.home.*;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterShipperActivity;
+import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -116,8 +117,15 @@ public class MainActivity extends TabActivity {
 
         mTabHost.addTab(mTabHost.newTabSpec("share").setIndicator("分享") // PR113 改分享为礼品
                 .setContent(new Intent(this, ShareActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec("info").setIndicator("搜索")
-                .setContent(new Intent(this, InformationActivity.class)));
+        if(application.getUserType() == Constants.USER_DRIVER) {
+            mTabHost.addTab(mTabHost.newTabSpec("search").setIndicator("搜索")
+                    .setContent(new Intent(this, InformationActivity.class)));
+            findViewById(R.id.main_id_radio_publish).setVisibility(View.GONE);
+        } else {
+            mTabHost.addTab(mTabHost.newTabSpec("publish").setIndicator("发布")
+                    .setContent(new Intent(this, PublishGoodsSourceActivity.class)));
+            findViewById(R.id.main_id_radio_search).setVisibility(View.GONE);
+        }
         mTabHost.addTab(mTabHost.newTabSpec("tool").setIndicator("工具")
                 .setContent(new Intent(this, MyabcActivity.class)));
         mTabHost.addTab(mTabHost.newTabSpec("others").setIndicator("我X")
@@ -138,6 +146,9 @@ public class MainActivity extends TabActivity {
                         mTabHost.setCurrentTab(1);
                         break;
                     case R.id.main_id_radio_search:
+                        mTabHost.setCurrentTab(2);
+                        break;
+                    case R.id.main_id_radio_publish:
                         mTabHost.setCurrentTab(2);
                         break;
                     case R.id.main_id_radio_tool:

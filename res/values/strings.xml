@@ -17,6 +17,7 @@
     <string name="string_main_share">分享</string> <!-- PR113 -->
     <!-- PR1.2 begin -->
     <string name="string_main_search">搜索</string>
+    <string name="string_main_publish">发布</string>
     <string name="string_main_tool">工具</string>
     <string name="string_main_other">我的</string>
     <!-- PR1.2 end -->

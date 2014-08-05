@@ -152,13 +152,14 @@ public class LoadingActivity extends BaseActivity {
 			}
 			final String phone = application.getUserName();
 			final String password = application.getPassword();
+            final String userType = application.getUserType() == Constants.USER_DRIVER ? Constants.DRIVER_LOGIN : Constants.USER_LOGIN;
 			// 如果保存了用户名和密码，且自动登录
 			if (application.checkAutoLogin() && !TextUtils.isEmpty(phone)
-					&& !TextUtils.isEmpty(password)) {
+					&& !TextUtils.isEmpty(password) && !TextUtils.isEmpty(userType)) {
 				final JSONObject jsonObject = new JSONObject();
 				try {
 					isLogin = true;
-					jsonObject.put(Constants.ACTION, Constants.DRIVER_LOGIN);
+					jsonObject.put(Constants.ACTION, userType);
 					jsonObject.put(Constants.TOKEN, null);
 					jsonObject.put(
 							Constants.JSON,

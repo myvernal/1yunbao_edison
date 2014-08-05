@@ -10,6 +10,7 @@
     <item name="main_id_radio_home" type="id"/>
     <item name="main_id_radio_share" type="id"/>
     <item name="main_id_radio_search" type="id"/>
+    <item name="main_id_radio_publish" type="id"/>
     <item name="main_id_radio_tool" type="id"/>
     <item name="main_id_radio_other" type="id"/>
 

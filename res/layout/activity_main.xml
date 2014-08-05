@@ -50,6 +50,12 @@
                     android:text="@string/string_main_search"/>
 
             <RadioButton
+                    android:id="@id/main_id_radio_publish"
+                    style="@style/main_radio_style"
+                    android:drawableTop="@drawable/selector_home_publish"
+                    android:text="@string/string_main_publish"/>
+
+            <RadioButton
                     android:id="@id/main_id_radio_tool"
                     style="@style/main_radio_style"
                     android:drawableTop="@drawable/selector_home_other"
