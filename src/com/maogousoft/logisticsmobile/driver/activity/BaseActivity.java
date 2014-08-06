@@ -210,4 +210,12 @@ public class BaseActivity extends Activity implements OnClickListener {
 		});
 
 	}
+
+    public void share() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+        intent.putExtra(Intent.EXTRA_TEXT, "I would like to share this with you...");
+        startActivity(Intent.createChooser(intent, getTitle()));
+    }
 }

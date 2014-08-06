@@ -10,4 +10,5 @@
     
     <dimen name="max_chat_img_size">200dp</dimen>
 
+    <dimen name="home_font_text_size">16sp</dimen>
 </resources>

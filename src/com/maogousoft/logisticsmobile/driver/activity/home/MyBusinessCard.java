@@ -45,7 +45,7 @@ public class MyBusinessCard extends BaseActivity {
     // 返回,完善资料
     private Button mBack, mUpdate;
 
-    private Button mContactKeFu;
+    private Button mShareCard;
 
     private TextView mName, mNumber, mPhone, mUpdatePwd, mBalance,
             mCharge, mAccountRecord, mCredit, mOnlineTime, mOnlineTimeRank,
@@ -81,8 +81,8 @@ public class MyBusinessCard extends BaseActivity {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_home_business_card);
 
         setIsRightKeyIntoShare(false);
-        mContactKeFu = (Button) findViewById(R.id.titlebar_id_more);
-        mContactKeFu.setText("联系客服");
+        mShareCard = (Button) findViewById(R.id.titlebar_id_more);
+        mShareCard.setText("发名片");
 
         mBack = (Button) findViewById(R.id.titlebar_id_back);
         mUpdate = (Button) findViewById(R.id.myabc_id_update);
@@ -119,7 +119,7 @@ public class MyBusinessCard extends BaseActivity {
         mCarzhaizhong = (TextView) findViewById(R.id.myabc_id_car_zhaizhong);
         mIsRing = (TextView) findViewById(R.id.myabc_is_ring);
 
-        mContactKeFu.setOnClickListener(this);
+        mShareCard.setOnClickListener(this);
         mCreditContainer.setOnClickListener(this);
         mHistory.setOnClickListener(this);
         mBack.setOnClickListener(this);
@@ -204,33 +204,34 @@ public class MyBusinessCard extends BaseActivity {
                     application.writeIsRingNewSource(false);
                 }
             });
-        } else if (v == mContactKeFu) {
+        } else if (v == mShareCard) {
+            share();
             // PR111 begin
 //			Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
 //					+ "4008765156"));
 //			startActivity(intent);
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext).setTitle(R.string.contact_kehu).setItems(R.array.contact_kehu_items, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        // 打电话
-                        case 0:
-                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+"4008765156"));
-                            startActivity(intent);
-                            break;
-                        // 发QQ
-                        case 1:
-                            Toast.makeText(mContext, R.string.contact_kehu_qq, Toast.LENGTH_LONG).show();
-                            // sendImageToQQ("hello");
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                }
-            });
-            builder.create().show();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(mContext).setTitle(R.string.contact_kehu).setItems(R.array.contact_kehu_items, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    switch (which) {
+//                        // 打电话
+//                        case 0:
+//                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+"4008765156"));
+//                            startActivity(intent);
+//                            break;
+//                        // 发QQ
+//                        case 1:
+//                            Toast.makeText(mContext, R.string.contact_kehu_qq, Toast.LENGTH_LONG).show();
+//                            // sendImageToQQ("hello");
+//                            break;
+//
+//                        default:
+//                            break;
+//                    }
+//
+//                }
+//            });
+//            builder.create().show();
             // PR111 end
         }
     }

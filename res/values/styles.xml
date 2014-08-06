@@ -636,7 +636,7 @@
     </style>
 
     <style name="home_test_font">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/home_font_text_size</item>
         <item name="android:textColor">@drawable/button_font_style</item>
     </style>
 </resources>
