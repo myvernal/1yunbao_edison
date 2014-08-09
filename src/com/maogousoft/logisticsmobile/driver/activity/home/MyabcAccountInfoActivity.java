@@ -64,9 +64,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
 							switch (code) {
 							case ResultCode.RESULT_OK:
 								JSONObject object = (JSONObject) result;
-								mBalance.setText(String
-										.format(getString(R.string.string_home_myabc_balance),
-												object.optDouble("gold")));
+								mBalance.setText(String.format(getString(R.string.string_home_myabc_balance), object.optDouble("gold", 0d)));
 								break;
 							case ResultCode.RESULT_FAILED:
 								break;

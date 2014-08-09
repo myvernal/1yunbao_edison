@@ -125,7 +125,7 @@
     <string name="string_home_sourcedetail_img">货源图片：</string>
     <string name="string_home_sourcedetail_evaluate">信誉评价：</string>
     <string name="string_home_sourcedetail_grab">抢单</string>
-    <string name="string_home_sourcedetail_attention">关注</string>
+    <string name="string_home_sourcedetail_attention">关注货主为好友</string>
     <string name="string_home_sourcedetail_needtime">所用时间：</string>
     <string name="string_home_sourcedetail_true">发货信息准确度：</string>
     <string name="string_home_sourcedetail_integrity">履约诚信度：</string>
@@ -141,7 +141,7 @@
     <string name="string_home_onlinesource_chat">在线聊天</string>
     <string name="string_home_onlinesource_evaluate">评价</string>
     <!-- 新货源 -->
-    <string name="string_home_newsource_order_number">订单号:%d</string>
+    <string name="string_home_newsource_order_number">货源号:%d</string>
     <string name="string_home_newsource_order_money">保证金&lt;font color=&quot;#FF0000&quot;&gt; %s &lt;/font&gt;元</string>
     <string name="string_home_newsource_order_evaluate">发货方信誉评价</string>
     <string name="string_home_newsource_order_evaluate_new">此货被多少人查看：200</string> <!-- add PR104 -->
@@ -334,4 +334,19 @@
 	<string name="contact_kehu">联系客服</string>
 	<string name="contact_kehu_qq">请加客户好友后，直接QQ联系，谢谢。</string>
 	<!-- add PR111 end -->
+
+    <string name="check_card_tip">
+        说明:\n
+        1.付费身份证验证是直接连接到中国全国公民身份证号码查询服务中心,根据输入的姓名和身份证号码验证其一致性\n
+        2.返回结果包括初始发证地,出生年月日,性别及验证结果(一致或不一致).在结果"一致"的情况下,还可以进一步对比身份证证件照是否与本人一致\n
+        注:由于数据通过问题,并不保证所有人都包含身份证证件照.查询成功后结果将自动保存在验证记录里.
+    </string>
+
+    <string name="safe_text_one" formatted="false">
+        综合附加被盗险费率0.05%;,除了综合险责任外,还承保货物被盗的损失;
+    </string>
+    <string name="safe_text_two" formatted="false">
+        1.易碎品风险每次事故绝对免费RMB1000或损失金额的20%;,其余风险每次事故绝对免赔RMB1000或损失金额的10%;,二者以高为准;\n
+        2.裸装货物提出锈损和刮擦责任.
+    </string>
 </resources>

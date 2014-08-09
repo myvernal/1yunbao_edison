@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/common_title"/>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <ImageView android:layout_width="match_parent"
+                       android:layout_height="80dip"
+                       android:scaleType="fitXY"
+                       android:src="@drawable/top_ad_1"
+                       android:layout_marginBottom="10dp"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="left|center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="5dp"
+                          android:paddingRight="5dp">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:text="险种:"/>
+
+                <Spinner android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:entries="@array/safe_types"
+                         android:layout_weight="1"/>
+            </LinearLayout>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:paddingRight="5dp"
+                      android:textSize="16sp"
+                      android:text="@string/safe_text_one"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:paddingRight="5dp"
+                      style="@style/safe_text_title_style"
+                      android:text="免赔条款:"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:paddingRight="5dp"
+                      android:textSize="16sp"
+                      style="@style/info_left_text_style"
+                      android:text="@string/safe_text_two"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="5dp">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:text="费率:"/>
+
+                <EditText android:layout_width="70dp"
+                          android:layout_height="40dip"
+                          android:gravity="right|center_vertical"
+                          android:text="0.05"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_other_style"
+                          android:text="%"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="5dp"
+                          android:paddingRight="5dp">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:text="保险金额:"/>
+
+                <EditText android:layout_width="100dp"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:hint="必填"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_other_style"
+                          android:text="万元(人民币)"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="5dp"
+                          android:paddingRight="5dp">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:text="保费:"/>
+
+                <EditText android:layout_width="100dp"
+                          android:layout_height="40dip"
+                          android:gravity="center_vertical"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_other_style"
+                          android:text="元(物流币)"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="5dp"
+                          android:gravity="center">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="18sp"
+                          android:text="账户余额:720元"/>
+
+                <Button style="@style/button1_style2"
+                        android:onClick="onCharge"
+                        android:text="充值"/>
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/safe_text_title_style"
+                      android:layout_marginTop="2dp"
+                      android:layout_gravity="center"
+                      android:linksClickable="false"
+                      android:autoLink="all"
+                      android:text="查看保险协议"/>
+
+            <CheckBox android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/safe_text_title_style"
+                      android:layout_gravity="center"
+                      android:text="同意保险协议"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="2dp"
+                          android:layout_marginBottom="5dp"
+                          android:gravity="center">
+                <Button style="@style/button1_style6"
+                        android:onClick="onClickBack"
+                        android:text="返回"/>
+
+                <Button style="@style/button1_style6"
+                        android:onClick="onClickNext"
+                        android:text="下一步"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

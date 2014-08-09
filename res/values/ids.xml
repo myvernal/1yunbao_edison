@@ -191,4 +191,22 @@
     <item name="vip_id_add_type" type="id"/>
     <item name="vip_id_add_name" type="id"/>
 
+    <!-- 发布货源 -->
+    <item name="source_id_publish_cargo_desc" type="id"/>
+    <item name="source_id_publish_cargo_type" type="id"/>
+    <item name="source_id_publish_cargo_number" type="id"/>
+    <item name="source_id_publish_cargo_unit" type="id"/>
+    <item name="source_id_publish_unit_price" type="id"/>
+    <item name="source_id_publish_ship_type" type="id"/>
+    <item name="source_id_publish_car_length" type="id"/>
+    <item name="source_id_publish_car_type" type="id"/>
+    <item name="source_id_publish_loading_time" type="id"/>
+    <item name="source_id_publish_cargo_remark" type="id"/>
+    <item name="source_id_publish_validate_hour" type="id"/>
+    <item name="source_id_publish_validate_day" type="id"/>
+    <item name="source_id_publish_user_bond" type="id"/>
+    <item name="source_id_publish_contact_name" type="id"/>
+    <item name="source_id_publish_contact_phone" type="id"/>
+    <item name="source_id_publish_cargo_tip" type="id"/>
+    <item name="source_id_publish_commit" type="id"/>
 </resources>

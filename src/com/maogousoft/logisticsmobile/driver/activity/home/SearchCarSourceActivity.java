@@ -185,13 +185,9 @@ public class SearchCarSourceActivity extends BaseActivity {
 
 	private void submit() {
 
-		if (cityselectStart.getSelectedProvince() == null
-				| cityselectEnd.getSelectedProvince() == null) {
-
+		if (cityselectStart.getSelectedProvince() == null || cityselectEnd.getSelectedProvince() == null) {
 			showMsg("请选择出发地，目的地。");
-
 			return;
-
 		}
 
 		final JSONObject jsonObject = new JSONObject();

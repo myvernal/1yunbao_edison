@@ -71,7 +71,7 @@ public class SearchSourceActivity extends BaseActivity {
 		mBack = (Button) findViewById(R.id.titlebar_id_back);
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("查找货源");
 		mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
-		mTitleBarMore.setText("长期货源");
+		mTitleBarMore.setVisibility(View.GONE);
 		carTypeSpinner = (Spinner) findViewById(R.id.search_car_type);
 		edtCarLength = (Spinner) findViewById(R.id.edt_search_source_carlength);
 

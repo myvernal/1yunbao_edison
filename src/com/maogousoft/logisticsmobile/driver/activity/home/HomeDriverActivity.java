@@ -107,6 +107,20 @@ public class HomeDriverActivity extends BaseActivity {
 		startActivity(intentNewSource);
 	}
 
+	// 好友货源
+	public void onFriendsSource(View view) {
+		Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+		intentNewSource.putExtra("getFriendOrderList", true);
+		startActivity(intentNewSource);
+	}
+
+    // 关注货源
+    public void onFocusSource(View view) {
+        Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+        intentNewSource.putExtra("QUERY_MAIN_LINE_ORDER", true);
+        startActivity(intentNewSource);
+    }
+
 	// 发布车源
 	public void onPublishCar(View view) {
 		startActivity(new Intent(context, PublishCarSourceActivity.class));

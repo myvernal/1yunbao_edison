@@ -2,6 +2,7 @@ package com.maogousoft.logisticsmobile.driver.adapter;
 // PR104
 import java.util.ArrayList;
 
+import android.net.Uri;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,6 +67,8 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 			convertView = mInflater.inflate(R.layout.listitem_newsoure, parent,
 					false);
 			holder = new ViewHolder();
+            holder.source_detail_phone = (Button) convertView
+                    .findViewById(R.id.source_detail_phone);
 			holder.order_image = (ImageView) convertView
 					.findViewById(R.id.source_id_order_image);
 			holder.order_number = (TextView) convertView
@@ -96,8 +99,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		holder.order_number.setText(String.format(mResources
 				.getString(R.string.string_home_newsource_order_number),
 				sourceInfo.getId()));
-		mImageLoader.displayImage(sourceInfo.getCargo_photo1(),
-				holder.order_image);
+		mImageLoader.displayImage(sourceInfo.getCargo_photo1(), holder.order_image);
 		final StringBuilder title = new StringBuilder();
 
 		if (sourceInfo.getStart_province_str().equals(
@@ -175,7 +177,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		// 已关注
 		if (sourceInfo.getFavorite_status() == 1) {
 			holder.order_state.setText("已关注");
-			holder.order_state.setVisibility(View.VISIBLE);
+			//holder.order_state.setVisibility(View.VISIBLE);
 			// holder.order_state.setTextColor(Color.RED);
 			// holder.order_state.setBackgroundResource(R.drawable.ic_button_gray_normal);
 		} else {
@@ -218,6 +220,18 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		} else {
 			holder.tvDjs.setVisibility(View.GONE);
 		}
+        //电话号码
+        holder.source_detail_phone.setText(sourceInfo.getCargo_user_phone());
+        holder.source_detail_phone.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneStr = ((Button)view).getText().toString();
+                if (!TextUtils.isEmpty(phoneStr) && !phoneStr.equals("无")) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneStr));
+                    mContext.startActivity(intent);
+                }
+            }
+        });
 
 		holder.order_grab.setOnClickListener(new ClickListener(position,
 				sourceInfo, mContext));
@@ -282,7 +296,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 
 		View order_imagetips;
 
-		Button order_grab;
+		Button order_grab, source_detail_phone;
 
 		TextView tvDjs;
 	}

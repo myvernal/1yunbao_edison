@@ -107,9 +107,15 @@
                     style="@style/home_myabc_layout_style"
                     android:layout_height="wrap_content">
 
-                <TableRow android:background="@drawable/ic_info_topbg">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:id="@+id/business_card_part2_title"
+                              android:background="@drawable/ic_info_topbg"
+                              android:orientation="horizontal">
 
                     <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             style="@style/home_myabc_title_style"
                             android:layout_weight="1"
                             android:drawableLeft="@null"
@@ -121,7 +127,7 @@
                             android:layout_width="wrap_content"
                             android:text="修改" />
 
-                </TableRow>
+                </LinearLayout>
 
                 <TableRow android:background="@drawable/ic_info_centerbg">
 

@@ -61,7 +61,7 @@
         android:shadowDy="1.0"
         android:shadowRadius="1.0"
         android:singleLine="true"
-        android:textColor="@drawable/selector_titlebar_textview"
+        android:textColor="#80ffff00"
         android:textSize="@dimen/font_size_small"
         android:visibility="visible"
         android:text="@string/string_titlebar_share" />

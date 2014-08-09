@@ -58,6 +58,9 @@ public class NewSourceActivity extends BaseListActivity implements
 
 	private FocuseLineInfo focuseLineInfo = new FocuseLineInfo();// 上一页传输过来的省市区
 
+    //请求类型
+    private String queryType = Constants.QUERY_SOURCE_ORDER;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,7 +132,16 @@ public class NewSourceActivity extends BaseListActivity implements
 			focuseLineInfo = (FocuseLineInfo) getIntent().getSerializableExtra(
 					"focuseLineInfo");
 		}
-
+        if(getIntent().hasExtra("getFriendOrderList")) {
+            if(getIntent().getBooleanExtra("getFriendOrderList", false)) {
+                queryType = Constants.FRIEND_ORDER_LIST;//好友货源
+            }
+        }
+        if(getIntent().hasExtra("QUERY_MAIN_LINE_ORDER")) {
+            if(getIntent().getBooleanExtra("QUERY_MAIN_LINE_ORDER", false)) {
+                queryType = Constants.QUERY_MAIN_LINE_ORDER;//关注货源
+            }
+        }
 	}
 
 	@Override
@@ -315,7 +327,7 @@ public class NewSourceActivity extends BaseListActivity implements
 		try {
 			state = ISREFRESHING;
 			final JSONObject jsonObject = new JSONObject();
-			jsonObject.put(Constants.ACTION, Constants.QUERY_SOURCE_ORDER);
+			jsonObject.put(Constants.ACTION, queryType);
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
 					.toString());

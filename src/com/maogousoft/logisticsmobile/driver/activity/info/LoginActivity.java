@@ -210,8 +210,7 @@ public class LoginActivity extends BaseActivity {
                                     .toString(), mPassword.getText()
                                     .toString(), userInfo.getDriver_id());
                             application.setToken(userInfo.getToken());
-                            application.writeInfo("name",
-                                    userInfo.getName());
+                            application.writeInfo("name",userInfo.getName());
                             application.startXMPPService();
                             startActivity(new Intent(context, MainActivity.class));
                             // startActivity(new Intent(context,

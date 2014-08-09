@@ -115,8 +115,8 @@ public class MainActivity extends TabActivity {
                 break;
         }
 
-        mTabHost.addTab(mTabHost.newTabSpec("share").setIndicator("分享") // PR113 改分享为礼品
-                .setContent(new Intent(this, ShareActivity.class)));
+//        mTabHost.addTab(mTabHost.newTabSpec("share").setIndicator("分享") // PR113 改分享为礼品
+//                .setContent(new Intent(this, ShareActivity.class)));
         if(application.getUserType() == Constants.USER_DRIVER) {
             mTabHost.addTab(mTabHost.newTabSpec("search").setIndicator("搜索")
                     .setContent(new Intent(this, InformationActivity.class)));
@@ -143,19 +143,20 @@ public class MainActivity extends TabActivity {
                         mTabHost.setCurrentTab(0);
                         break;
                     case R.id.main_id_radio_share:
-                        mTabHost.setCurrentTab(1);
+                        //mTabHost.setCurrentTab(1);
+                        share();
                         break;
                     case R.id.main_id_radio_search:
-                        mTabHost.setCurrentTab(2);
+                        mTabHost.setCurrentTab(1);
                         break;
                     case R.id.main_id_radio_publish:
-                        mTabHost.setCurrentTab(2);
+                        mTabHost.setCurrentTab(1);
                         break;
                     case R.id.main_id_radio_tool:
-                        mTabHost.setCurrentTab(3);
+                        mTabHost.setCurrentTab(2);
                         break;
                     case R.id.main_id_radio_other:
-                        mTabHost.setCurrentTab(4);
+                        mTabHost.setCurrentTab(3);
                         break;
                     default:
                         break;
@@ -268,5 +269,12 @@ public class MainActivity extends TabActivity {
 
     public void onClickBackNow(View view) {
         finish();
+    }
+
+    public void share() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
+        startActivity(Intent.createChooser(intent, getTitle()));
     }
 }

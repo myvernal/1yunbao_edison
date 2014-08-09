@@ -50,47 +50,12 @@
     </string-array>
     <!-- 常用语句 -->
     <string-array name="goods_comments_names">
-        <item>信息部勿扰</item>
+        <item>非诚勿扰</item>
         <item>急货</item>
         <item>马上装车</item>
         <item>价高急走</item>
         <item>运价好商量</item>
         <item>价格面议</item>
-    </string-array>
-    <string-array name="car_types">
-        <item>43</item>
-        <item>car_type</item>
-        <item>不限</item>
-        <item>44</item>
-        <item>car_type</item>
-        <item>平板</item>
-        <item>45</item>
-        <item>car_type</item>
-        <item>高栏</item>
-        <item>46</item>
-        <item>car_type</item>
-        <item>厢式</item>
-        <item>47</item>
-        <item>car_type</item>
-        <item>冷藏</item>
-        <item>48</item>
-        <item>car_type</item>
-        <item>集装箱</item>
-        <item>49</item>
-        <item>car_type</item>
-        <item>全封闭</item>
-        <item>50</item>
-        <item>car_type</item>
-        <item>特种</item>
-        <item>51</item>
-        <item>car_type</item>
-        <item>危险</item>
-        <item>52</item>
-        <item>car_type</item>
-        <item>自卸</item>
-        <item>53</item>
-        <item>car_type</item>
-        <item>其他</item>
     </string-array>
     <string-array name="car_types_name">
         <item>不限</item>
@@ -105,29 +70,14 @@
         <item>自卸</item>
         <item>其他</item>
     </string-array>
-    <string-array name="car_types_values">
-        <item>43</item>
-        <item>44</item>
-        <item>45</item>
-        <item>46</item>
-        <item>47</item>
-        <item>48</item>
-        <item>49</item>
-        <item>50</item>
-        <item>51</item>
-        <item>52</item>
-        <item>53</item>
-    </string-array>
     <string-array name="goods_types">
         <item>普货</item>
         <item>重货</item>
-        <item>泡货</item>
-        <item>设备</item>
+        <item>轻货</item>
         <item>大件</item>
-        <item>冷藏</item>
-        <item>鲜活</item>
-        <item>农产品</item>
         <item>危险品</item>
+        <item>冷藏品</item>
+        <item>设备</item>
         <item>其他</item>
     </string-array>
     <!-- PR104 begin -->
@@ -151,13 +101,13 @@
         <item>9.7-13米</item>
         <item>13米以上</item>
     </string-array>
-    <string-array name="car_length_values">
+    <integer-array name="car_length_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
-    </string-array>
+    </integer-array>
 	<string-array name="menu_friends_operation">
 	    <item>查看他的车源</item>
 	    <item>发送我的定位</item>

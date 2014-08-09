@@ -50,7 +50,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
 
 		mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
 		mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
-		mTitleBarMore.setText(R.string.control_car_source);
+		mTitleBarMore.setText("已发布");
 		mCar_locationView = (EditText) findViewById(R.id.car_location);
 
 		mTitleBarMore.setOnClickListener(this);

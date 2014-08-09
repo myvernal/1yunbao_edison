@@ -176,8 +176,7 @@ public class Constants {
     public static final String USER_LOGIN = "userlogin";
 
 	// /** 货源详情 **/
-	// public static final String GET_SOURCE_ORDER_DETAIL =
-	// "get_source_order_detail";
+	public static final String GET_SOURCE_ORDER_DETAIL = "get_source_order_detail";
 
 	/** 货源详情 2 **/
 	public static final String GET_SOURCE_ORDER_DETAIL2 = "get_source_order_detail_2";
@@ -315,8 +314,21 @@ public class Constants {
 
 	/** 新货源推送，是否响铃 */
 	public static final String IS_RING_NEW_SOURCE = "is_ring_new_source";
+
 	/** 司机端：发布车源 */
 	public static final String PUBLISH_CAR = "publish_car";
+
+    /** 货主端:发布货源 */
+    public static final String PUBLISH_SOURCE = "publish_order";
+
+    /** 司机端:关注货主 */
+    public static final String ATTENTION_SOURCE_USER = "attentionSourceUser";
+
+    /** 司机端:好友货源 */
+    public static final String FRIEND_ORDER_LIST = "getFriendOrderList";
+
+    /** 司机端:关注货源 */
+    public static final String QUERY_MAIN_LINE_ORDER = "query_main_line_order";
 
     public static final int USER_DRIVER = 1; //司机
     public static final int USER_SHIPPER = 3;//货主
@@ -327,4 +339,11 @@ public class Constants {
 		int[] carTypeValues = new int[]{43,44,45,46,47,48,49,50,51,52,53};
 		return carTypeValues[position];
 	}
+    /**
+     * 通过位置获取货物类型
+     */
+    public static int getSourceTypeValues(int position){
+        int[] carTypeValues = new int[]{34,36,37,38,39,40,41,42};
+        return carTypeValues[position];
+    }
 }

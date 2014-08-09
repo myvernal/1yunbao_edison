@@ -7,7 +7,7 @@ package com.maogousoft.logisticsmobile.driver.model;
  */
 public class UserInfo {
 
-	// 司机id
+	// id
 	private int driver_id = -1;
 
 	// 授权码

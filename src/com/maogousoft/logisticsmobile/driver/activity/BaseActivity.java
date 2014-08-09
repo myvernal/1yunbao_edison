@@ -180,10 +180,10 @@ public class BaseActivity extends Activity implements OnClickListener {
 		if (v.getId() == R.id.titlebar_id_back) {
 			onBackPressed();
 		} else if (v.getId() == R.id.titlebar_id_more) {
-			if (isRightKeyIntoShare) {
-				startActivity(new Intent(context, ShareActivity.class)
-						.putExtra("share", content));
-			}
+//			if (isRightKeyIntoShare) {
+//				startActivity(new Intent(context, ShareActivity.class)
+//						.putExtra("share", content));
+//			}
 		}
 	}
 
@@ -214,8 +214,7 @@ public class BaseActivity extends Activity implements OnClickListener {
     public void share() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-        intent.putExtra(Intent.EXTRA_TEXT, "I would like to share this with you...");
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
         startActivity(Intent.createChooser(intent, getTitle()));
     }
 }

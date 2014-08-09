@@ -153,6 +153,8 @@ public class NewSourceInfo implements Serializable {
 
 	private String cargo_user_phone = "";// 发货时，填写的 联系电话
 
+    private String cargo_tip = ""; //常用短语
+
 	public double getCar_length() {
 		return car_length;
 	}
@@ -529,4 +531,11 @@ public class NewSourceInfo implements Serializable {
 		this.user_name = user_name;
 	}
 
+    public String getCargo_tip() {
+        return cargo_tip;
+    }
+
+    public void setCargo_tip(String cargo_tip) {
+        this.cargo_tip = cargo_tip;
+    }
 }

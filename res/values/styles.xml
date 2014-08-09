@@ -196,6 +196,23 @@
         <item name="android:minWidth">30dp</item>
         <item name="android:textColor">@color/font_gray2</item>
     </style>
+
+    <style name="safe_text_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/TextColorBlue</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">3dp</item>
+    </style>
+
+    <style name="safe_text_other_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/TextColorBlack</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">3dp</item>
+    </style>
+
     <style name="info_text_style">
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:layout_width">wrap_content</item>
@@ -345,6 +362,15 @@
         <item name="android:textColor">@color/font_gray2</item>
     </style>
 
+    <style name="home_source_detail_top_style">
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textColor">@color/font_gray2</item>
+    </style>
+
     <style name="home_sourcedetail_cx_text_style">
         <item name="android:paddingTop">3dp</item>
         <item name="android:paddingBottom">3dp</item>
@@ -468,6 +494,13 @@
         <item name="android:layout_marginRight">0dp</item>
         <item name="android:layout_weight">1.0</item>
         <item name="android:minHeight">30dip</item>
+    </style>
+
+    <style name="button1_style6" parent="button1_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:paddingLeft">40dp</item>
+        <item name="android:paddingRight">40dp</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="button2_style">
@@ -638,5 +671,11 @@
     <style name="home_test_font">
         <item name="android:textSize">@dimen/home_font_text_size</item>
         <item name="android:textColor">@drawable/button_font_style</item>
+    </style>
+
+    <style name="dp_style">
+        <item name="android:textSize">@dimen/home_font_text_size</item>
+        <item name="android:textColor">@color/TextColorBlack</item>
+        <item name="android:gravity">center_horizontal</item>
     </style>
 </resources>

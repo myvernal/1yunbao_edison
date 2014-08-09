@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/common_title"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="40dp"
+                  android:gravity="center">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  style="@style/dp_style"
+                  android:id="@+id/part1"
+                  android:text="三方物流"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="40dp"
+                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  style="@style/dp_style"
+                  android:id="@+id/part2"
+                  android:text="零担专线"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="20dp"
+                  android:gravity="center">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  style="@style/dp_style"
+                  android:id="@+id/part3"
+                  android:text="工厂货主"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="40dp"
+                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  style="@style/dp_style"
+                  android:id="@+id/part4"
+                  android:text="物流园区"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="20dp"
+                  android:gravity="center">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  style="@style/dp_style"
+                  android:id="@+id/part5"
+                  android:text="物流名片"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="40dp"
+                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  style="@style/dp_style"
+                  android:visibility="invisible"
+                  android:text="零担专线"/>
+    </LinearLayout>
+</LinearLayout>

@@ -16,12 +16,7 @@ import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.OneGallery;
 import com.maogousoft.logisticsmobile.driver.widget.OneGalleryBottomView;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.ybxiang.driver.activity.CheckSafeActivity;
-import com.ybxiang.driver.activity.FindCarActivity;
-import com.ybxiang.driver.activity.MyCarsActivity;
-import com.ybxiang.driver.activity.MyFriendsActivity;
-import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
-import com.ybxiang.driver.activity.SpreadActivity;
+import com.ybxiang.driver.activity.*;
 
 /**
  * 三方首页
@@ -114,8 +109,13 @@ public class HomeShipperActivity extends BaseActivity {
 
 	// 验证保险
 	public void onCheckSafe(View view) {
-		startActivity(new Intent(context, CheckSafeActivity.class));
+		startActivity(new Intent(context, SafeActivity.class));
 	}
+
+    // 验证证件
+    public void onCheckCard(View view) {
+        startActivity(new Intent(context, CheckCardActivity.class));
+    }
 
 	// 会员特权
 	public void onVIP(View view) {
@@ -124,7 +124,7 @@ public class HomeShipperActivity extends BaseActivity {
 
 	// 物流点评
 	public void onInteraction(View view) {
-		startActivity(new Intent(context, OthersActivity.class));
+		startActivity(new Intent(context, ShipDPActivity.class));
 	}
 
     // 查找货源
