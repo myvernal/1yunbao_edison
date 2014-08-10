@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import android.widget.AdapterView;
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
 import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.AdImageAdapter;
+import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
+import com.maogousoft.logisticsmobile.driver.api.ApiClient;
+import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.model.AdvertInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.OneGallery;
 import com.maogousoft.logisticsmobile.driver.widget.OneGalleryBottomView;
@@ -20,6 +25,11 @@ import com.ybxiang.driver.activity.HelpFindGoodsSourceActivity;
 import com.ybxiang.driver.activity.MyFriendsActivity;
 import com.ybxiang.driver.activity.PublishCarSourceActivity;
 import com.ybxiang.driver.activity.SpreadActivity;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 司机首页
@@ -28,6 +38,7 @@ import com.ybxiang.driver.activity.SpreadActivity;
  */
 public class HomeDriverActivity extends BaseActivity {
 
+    private static final String TAG = "HomeDriverActivity";
     private OneGallery gallery;
     private AdImageAdapter adapter = null;
     private String[] adUrlArray;
@@ -44,6 +55,7 @@ public class HomeDriverActivity extends BaseActivity {
         mImageLoader = ((MGApplication)getApplication()).getImageLoader();
         adUrlArray = new String[]{""+ R.drawable.top_ad_1, ""+ R.drawable.top_ad_2, ""+ R.drawable.top_ad_3};
         initViews();
+        getAdvertList();
 	}
 
     private void initViews() {
@@ -151,4 +163,51 @@ public class HomeDriverActivity extends BaseActivity {
 		exitAppHint();
 	}
 
+    // 获取我的广告信息
+    private void getAdvertList() {
+
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.ACTION, Constants.QUERY_ADVERT_LIST);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, new JSONObject().put("userType", 2).toString());
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    AdvertInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result != null) {
+                                        List<AdvertInfo> list = (List<AdvertInfo>) result;
+                                        LogUtil.d(TAG, "list:" + list.size());
+                                        for(int i=0;i<list.size();i++) {
+                                            if(i <= 2) {
+                                                AdvertInfo ad = list.get(i);
+                                                if(ad.getStatus() == 0) {
+                                                    adUrlArray[i] = ad.getAd_img();
+                                                }
+                                            }
+                                        }
+                                        adapter.setNewAdList(adUrlArray);
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    // if (result != null)
+                                    // showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    // if (result != null)
+                                    // showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

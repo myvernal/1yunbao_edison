@@ -330,20 +330,43 @@ public class Constants {
     /** 司机端:关注货源 */
     public static final String QUERY_MAIN_LINE_ORDER = "query_main_line_order";
 
+    /** 司机端:发布车源 */
+    public static final String PUBLISH_DRIVER_CAR_INFO = "pulish_driverCarInfo";
+
+    /** 司机端:已发布车源列表 */
+    public static final String QUERY_DRIVER_CAR_INFO_LIST = "getPublishOptionsInfoListByDriver";
+
+     /** 广告列表 */
+    public static final String QUERY_ADVERT_LIST = "get_advert_list";
+
     public static final int USER_DRIVER = 1; //司机
     public static final int USER_SHIPPER = 3;//货主
 	/**
 	 * 通过位置获取车型车型
 	 */
+    public static int[] carTypeValues = new int[]{43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53};
 	public static int getCarTypeValues(int position){
-		int[] carTypeValues = new int[]{43,44,45,46,47,48,49,50,51,52,53};
+        if(position > carTypeValues.length) {
+            return 43;
+        }
 		return carTypeValues[position];
 	}
     /**
      * 通过位置获取货物类型
      */
+    public static int[] sourceTypeValues = new int[]{34,36,37,38,39,40,41,42};
     public static int getSourceTypeValues(int position){
-        int[] carTypeValues = new int[]{34,36,37,38,39,40,41,42};
-        return carTypeValues[position];
+        if(position > sourceTypeValues.length) {
+            return 34;
+        }
+        return sourceTypeValues[position];
+    }
+
+    public static int[] unitTypeValues = new int[]{83,84,85};
+    public static int getUnitTypeValues(int position){
+        if(position > unitTypeValues.length) {
+            return 34;
+        }
+        return unitTypeValues[position];
     }
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Stack;
 
+import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -79,6 +80,8 @@ public class MGApplication extends Application {
 	// 通知栏对象
 	private NotificationManager mNotificationManager = null;
 	private boolean isAnonymous = false;
+    //
+    private AbcInfo abcInfo = null;
 
 	@Override
 	public void onCreate() {
@@ -531,5 +534,13 @@ public class MGApplication extends Application {
 
     public void setIsAnonymous(boolean isAnonymous) {
         this.isAnonymous = isAnonymous;
+    }
+
+    public AbcInfo getAbcInfo() {
+        return abcInfo;
+    }
+
+    public void setAbcInfo(AbcInfo abcInfo) {
+        this.abcInfo = abcInfo;
     }
 }

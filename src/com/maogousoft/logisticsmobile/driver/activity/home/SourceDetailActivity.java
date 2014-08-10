@@ -270,7 +270,7 @@ public class SourceDetailActivity extends BaseActivity {
         mSourceName.setText(mSourceName.getText() + sourceInfo.getCargo_desc());
         mSourceType.setText(mSourceType.getText() + sourceInfo.getCargo_type_str());
         mShipType.setText(mShipType.getText() + sourceInfo.getShip_type_str());
-        mSourceCarLength.setText(mSourceCarLength.getText().toString() + sourceInfo.getCar_length());
+        mSourceCarLength.setText(mSourceCarLength.getText().toString() + sourceInfo.getCar_length() + "米");
         mSourceCarType.setText(mSourceCarType.getText() + sourceInfo.getCar_type_str());
         mSourcePrice.setText(mSourcePrice.getText().toString() + sourceInfo.getPrice() + sourceInfo.getCargo_unit_name());
         mSourceGold.setText(mSourceGold.getText().toString() + sourceInfo.getUser_bond() + "元");

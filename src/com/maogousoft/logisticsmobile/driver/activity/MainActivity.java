@@ -4,6 +4,8 @@ import android.view.View;
 import com.maogousoft.logisticsmobile.driver.activity.home.*;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterShipperActivity;
+import com.maogousoft.logisticsmobile.driver.model.AdvertInfo;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,12 +37,15 @@ import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.umeng.update.UmengUpdateAgent;
 
+import java.util.List;
+
 /**
  * 登录之后显示的主页
  *
  * @author ybxiang
  */
 public class MainActivity extends TabActivity {
+
     private Context mContext; // PR105
     private int userType; // PR112 账户身份
     /**
@@ -73,7 +78,6 @@ public class MainActivity extends TabActivity {
         registerReceiver(switchMainActivityReceiver, new IntentFilter(
                 ACTION_SWITCH_MAINACTIVITY));
         getABCInfo();
-
         showDialogIfUserIsAnonymous();
     }
 
@@ -185,7 +189,7 @@ public class MainActivity extends TabActivity {
                         case ResultCode.RESULT_OK:
                             if (result != null) {
                                 AbcInfo mAbcInfo = (AbcInfo) result;
-
+                                application.setAbcInfo(mAbcInfo);
                                 String idCard = mAbcInfo.getId_card();// 身份证号码
                                 String name = mAbcInfo.getName();// 司机姓名
 
@@ -277,4 +281,6 @@ public class MainActivity extends TabActivity {
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
         startActivity(Intent.createChooser(intent, getTitle()));
     }
+
+
 }
