@@ -1,17 +1,12 @@
-package com.maogousoft.logisticsmobile.driver.activity.home;
+package com.maogousoft.logisticsmobile.driver.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.AdapterView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
-import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
-import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.AdImageAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -21,24 +16,18 @@ import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.OneGallery;
 import com.maogousoft.logisticsmobile.driver.widget.OneGalleryBottomView;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.ybxiang.driver.activity.HelpFindGoodsSourceActivity;
-import com.ybxiang.driver.activity.MyFriendsActivity;
-import com.ybxiang.driver.activity.PublishCarSourceActivity;
-import com.ybxiang.driver.activity.SpreadActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 司机首页
- * 
- * @author ybxiang
+ * Created by EdisonZhao on 14-8-11.
+ * Email:zhaoliangyu@sobey.com
  */
-public class HomeDriverActivity extends BaseActivity {
+public class BaseHomeActivity extends  BaseActivity{
 
-    private static final String TAG = "HomeDriverActivity";
+    private static final String TAG = "BaseHomeActivity";
     private OneGallery gallery;
     private AdImageAdapter adapter = null;
     private String[] adUrlArray;
@@ -47,16 +36,14 @@ public class HomeDriverActivity extends BaseActivity {
     private ImageLoader mImageLoader;
     private OneGalleryBottomView oneGalleryBottomView;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		LogUtil.i("wst", "HomeActivity driver -onCreate");
-		setContentView(R.layout.activity_home_new_driver1);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mImageLoader = ((MGApplication)getApplication()).getImageLoader();
         adUrlArray = new String[]{""+ R.drawable.top_ad_1, ""+ R.drawable.top_ad_2, ""+ R.drawable.top_ad_3};
         initViews();
         getAdvertList();
-	}
+    }
 
     private void initViews() {
         gallery = (OneGallery) findViewById(R.id.top_ad);
@@ -94,74 +81,7 @@ public class HomeDriverActivity extends BaseActivity {
 
             }
         });
-
     }
-
-	// 查找货源
-	public void onSearchSource(View view) {
-		startActivity(new Intent(context, SearchSourceActivity.class));
-	}
-
-	// 帮我找货
-	public void onHelpFindGoods(View view) {
-		startActivity(new Intent(context, HelpFindGoodsSourceActivity.class));
-	}
-
-	// 我的好友
-	public void onMyFriends(View view) {
-		startActivity(new Intent(context, MyFriendsActivity.class));
-	}
-
-	// 新货源
-	public void onNewSource(View view) {
-		Intent intentNewSource = new Intent(context, NewSourceActivity.class);
-		intentNewSource.putExtra("isFromHomeActivity", true);
-		startActivity(intentNewSource);
-	}
-
-	// 好友货源
-	public void onFriendsSource(View view) {
-		Intent intentNewSource = new Intent(context, NewSourceActivity.class);
-		intentNewSource.putExtra("getFriendOrderList", true);
-		startActivity(intentNewSource);
-	}
-
-    // 关注货源
-    public void onFocusSource(View view) {
-        Intent intentNewSource = new Intent(context, NewSourceActivity.class);
-        intentNewSource.putExtra("QUERY_MAIN_LINE_ORDER", true);
-        startActivity(intentNewSource);
-    }
-
-	// 发布车源
-	public void onPublishCar(View view) {
-		startActivity(new Intent(context, PublishCarSourceActivity.class));
-	}
-
-	// 我的推广
-	public void onSpread(View view) {
-		startActivity(new Intent(context, SpreadActivity.class));
-	}
-
-    //货运名片
-    public void onCard(View view) {
-        startActivity(new Intent(context, MyBusinessCard.class));
-    }
-
-	// 物流园区
-	public void onVIP(View view) {
-		startActivity(new Intent(context, ShopListActivity.class));
-	}
-
-	// 互动
-	public void onInteraction(View view) {
-		startActivity(new Intent(context, OthersActivity.class));
-	}
-
-	@Override
-	public void onBackPressed() {
-		exitAppHint();
-	}
 
     // 获取我的广告信息
     private void getAdvertList() {
@@ -170,7 +90,7 @@ public class HomeDriverActivity extends BaseActivity {
         try {
             jsonObject.put(Constants.ACTION, Constants.QUERY_ADVERT_LIST);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject().put("userType", 2).toString());
+            jsonObject.put(Constants.JSON, new JSONObject().put("userType", application.getUserType()).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     AdvertInfo.class, new AjaxCallBack() {
 
@@ -181,10 +101,10 @@ public class HomeDriverActivity extends BaseActivity {
                                     if (result != null) {
                                         List<AdvertInfo> list = (List<AdvertInfo>) result;
                                         LogUtil.d(TAG, "list:" + list.size());
-                                        for(int i=0;i<list.size();i++) {
-                                            if(i <= 2) {
+                                        for (int i = 0; i < list.size(); i++) {
+                                            if (i <= 2) {
                                                 AdvertInfo ad = list.get(i);
-                                                if(ad.getStatus() == 0) {
+                                                if (ad.getStatus() == 0) {
                                                     adUrlArray[i] = ad.getAd_img();
                                                 }
                                             }

@@ -120,8 +120,8 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
-	public static final String BASE_URL = "http://112.124.33.14:8083/service";
-	//public static final String BASE_URL = "http://192.168.1.110:8888/service";
+	//public static final String BASE_URL = "http://112.124.33.14:8083/service";
+	public static final String BASE_URL = "http://192.168.1.101:8888/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -339,8 +339,8 @@ public class Constants {
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
-    public static final int USER_DRIVER = 1; //司机
-    public static final int USER_SHIPPER = 3;//货主
+    public static final int USER_DRIVER = 2; //司机
+    public static final int USER_SHIPPER = 1;//货主
 	/**
 	 * 通过位置获取车型车型
 	 */

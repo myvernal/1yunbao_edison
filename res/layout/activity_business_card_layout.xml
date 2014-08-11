@@ -45,11 +45,13 @@
                                 android:background="@drawable/ic_info_centerbg">
                     <ImageView
                             android:id="@+id/business_card_part1_photo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dip"
+                            android:layout_height="70dip"
                             android:layout_marginLeft="10dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/ic_other_advice_normal"/>
+                            android:layout_marginRight="10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_img_loading"/>
 
                     <TextView
                             android:id="@+id/business_card_part1_name"
@@ -103,9 +105,7 @@
             </LinearLayout>
 
             <!-- 主营路线 -->
-            <TableLayout
-                    style="@style/home_myabc_layout_style"
-                    android:layout_height="wrap_content">
+            <TableLayout style="@style/home_myabc_layout_style">
 
                 <LinearLayout android:layout_width="match_parent"
                               android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                             android:id="@+id/myabc_id_change_path"
                             style="@style/info_button_wrap_style"
                             android:layout_width="wrap_content"
-                            android:text="修改" />
+                            android:text="修改"/>
 
                 </LinearLayout>
 
@@ -166,24 +166,20 @@
                 </TableRow>
             </TableLayout>
 
-            <TableLayout
-                    style="@style/home_myabc_layout_style"
-                    android:layout_height="wrap_content">
+            <TableLayout style="@style/home_myabc_layout_style">
 
                 <TableRow android:background="@drawable/ic_info_topbg">
 
                     <TextView
                             style="@style/home_myabc_title_style"
                             android:layout_weight="1"
-                            android:drawableLeft="@null"
                             android:text="车辆信息"/>
 
                     <Button
                             android:id="@id/myabc_id_update"
                             style="@style/info_button_wrap_style"
                             android:layout_width="wrap_content"
-                            android:text="@string/string_home_myabc_complete"
-                            android:visibility="gone"/>
+                            android:text="修改"/>
                 </TableRow>
 
                 <TableRow android:background="@drawable/ic_info_centerbg">
@@ -239,239 +235,90 @@
                 </TableRow>
             </TableLayout>
 
-            <TableLayout
-                    style="@style/home_myabc_layout_style"
-                    android:layout_height="wrap_content">
 
-                <RelativeLayout
-                        android:id="@+id/myabc_id_history"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_info_topbg"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            android:id="@id/myabc_id_mycredit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:padding="8dp"
-                            android:text="@string/string_home_myabc_title_history1"
-                            android:textColor="@color/font_gray2"
-                            android:textSize="@dimen/font_size_normal"/>
-
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:src="@drawable/ic_info_right"/>
-                </RelativeLayout>
-            </TableLayout>
-
-            <TableLayout
-                    style="@style/home_myabc_layout_style"
-                    android:layout_height="wrap_content">
+            <TableLayout style="@style/home_myabc_layout_style">
 
                 <TableRow android:background="@drawable/ic_info_topbg">
 
                     <TextView
                             style="@style/home_myabc_title_style"
-                            android:drawableLeft="@null"
-                            android:text="@string/string_home_myabc_title_myaccount"/>
-                </TableRow>
-
-                <TextView
-                        android:id="@id/myabc_id_updatepwd"
-                        style="@style/home_myabc_title_more_style"
-                        android:background="@drawable/ic_info_centerbg"
-                        android:drawableLeft="@drawable/ic_info_update"
-                        android:text="@string/string_home_myabc_title_updatepwd"/>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_info_centerbg"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            style="@style/home_myabc_title_more_style"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@null"
-                            android:drawableLeft="@drawable/ic_info_balance"
-                            android:drawableRight="@null"
-                            android:text="@string/string_home_myabc_title_over"/>
+                            android:text="诚信认证"/>
+
+                    <Button
+                            android:id="@+id/myabc_card_update"
+                            style="@style/info_button_wrap_style"
+                            android:layout_width="wrap_content"
+                            android:text="修改"/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg">
 
                     <TextView
-                            android:id="@id/myabc_id_balance"
-                            style="@style/home_myabc_right_style"
-                            android:layout_marginRight="5dp"
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_recommend"
+                            android:text="身份证"/>
+
+                    <TextView
+                            android:id="@+id/myabc_id_shenfen"
+                            style="@style/home_myabc_content_style"
                             android:text="无"/>
-                </LinearLayout>
+                </TableRow>
 
-                <TextView
-                        android:id="@id/myabc_id_account_record"
-                        style="@style/home_myabc_title_more_style"
-                        android:background="@drawable/ic_info_bottombg"
-                        android:drawableLeft="@drawable/ic_info_accountrecord"
-                        android:text="账户记录"/>
+                <TableRow android:background="@drawable/ic_info_centerbg">
 
-                <TextView
-                        android:id="@id/myabc_id_charge"
-                        style="@style/home_myabc_title_more_style"
-                        android:background="@drawable/ic_info_bottombg"
-                        android:drawableLeft="@drawable/ic_info_recharge"
-                        android:text="@string/string_home_myabc_title_recharge"/>
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_recommend"
+                            android:text="驾驶证"/>
+
+                    <TextView
+                            android:id="@+id/myabc_id_jiashi"
+                            style="@style/home_myabc_content_style"
+                            android:text="无"/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_bottombg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_recommend"
+                            android:text="行驶证"/>
+
+                    <TextView
+                            android:id="@+id/myabc_id_xingshi"
+                            style="@style/home_myabc_content_style"
+                            android:text="无"/>
+                </TableRow>
             </TableLayout>
 
-            <TableLayout
-                    style="@style/home_myabc_layout_style"
-                    android:layout_height="wrap_content">
+            <TableLayout style="@style/home_myabc_layout_style">
 
                 <TableRow android:background="@drawable/ic_info_topbg">
 
                     <TextView
                             style="@style/home_myabc_title_style"
-                            android:drawableLeft="@drawable/ic_info_credit"
-                            android:text="@string/string_home_myabc_title_mycredit"/>
-                </TableRow>
-
-                <RelativeLayout
-                        android:id="@+id/myabc_id_mycreditcontainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_info_centerbg"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            android:id="@id/myabc_id_mycredit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:padding="8dp"
-                            android:text="@string/string_home_myabc_title_creditdetail"
-                            android:textColor="@color/font_gray2"
-                            android:textSize="@dimen/font_size_normal"/>
-
-                    <RatingBar
-                            android:id="@+id/myabc_id_ratingbar"
-                            style="@style/ratingbar_style"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="10dp"
-                            android:layout_toRightOf="@id/myabc_id_mycredit"/>
-
-                    <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:src="@drawable/ic_info_right"/>
-                </RelativeLayout>
-
-                <LinearLayout
-                        style="@style/home_myabc_title_base_style"
-                        android:background="@drawable/ic_info_centerbg"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            style="@style/home_myabc_right_style"
-                            android:text="@string/string_home_myabc_title_onlinetime"/>
-
-                    <TextView
-                            android:id="@id/myabc_id_onlinetime"
-                            style="@style/home_myabc_right_style"
-                            android:layout_marginLeft="20dp"
-                            android:layout_weight="1"/>
-
-                    <TextView
-                            android:id="@id/myabc_id_onlinetime_rank"
-                            style="@style/home_myabc_right_blue_style"/>
-                </LinearLayout>
-
-                <LinearLayout
-                        style="@style/home_myabc_title_base_style"
-                        android:background="@drawable/ic_info_centerbg"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            style="@style/home_myabc_right_style"
-                            android:text="@string/string_home_myabc_title_clinch"/>
-
-                    <TextView
-                            android:id="@id/myabc_id_clinch"
-                            style="@style/home_myabc_right_style"
-                            android:layout_marginLeft="20dp"
-                            android:layout_weight="1"/>
-
-                    <TextView
-                            android:id="@id/myabc_id_clinch_rank"
-                            style="@style/home_myabc_right_blue_style"/>
-                </LinearLayout>
-
-                <LinearLayout
-                        style="@style/home_myabc_title_base_style"
-                        android:background="@drawable/ic_info_bottombg"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            style="@style/home_myabc_right_style"
-                            android:text="@string/string_home_myabc_title_recommendcount"/>
-
-                    <TextView
-                            android:id="@id/myabc_id_recommendcount"
-                            style="@style/home_myabc_right_style"
-                            android:layout_marginLeft="20dp"
-                            android:layout_weight="1"/>
-
-                    <TextView
-                            android:id="@id/myabc_id_recommendcount_rank"
-                            style="@style/home_myabc_right_blue_style"/>
-                </LinearLayout>
-            </TableLayout>
-
-            <TableLayout
-                    style="@style/home_myabc_layout_style"
-                    android:layout_height="wrap_content">
-
-                <TableRow android:background="@drawable/ic_info_topbg">
-
-                    <TextView
-                            style="@style/home_myabc_title_style"
-                            android:drawableLeft="@drawable/ic_info_credit"
-                            android:text="新货源通知铃声"/>
-                </TableRow>
-
-                <LinearLayout
-                        android:id="@+id/layout_is_ring"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_info_centerbg"
-                        android:orientation="horizontal">
-
-                    <TextView
-                            style="@style/home_myabc_title_more_style"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@null"
-                            android:drawableLeft="@drawable/ic_info_balance"
-                            android:drawableRight="@null"
-                            android:text="是否有提示音"/>
+                            android:text="自我推荐"/>
+
+                    <Button
+                            android:id="@+id/myabc_description_update"
+                            style="@style/info_button_wrap_style"
+                            android:layout_width="wrap_content"
+                            android:text="修改"/>
+                </TableRow>
+
+                <LinearLayout
+                        style="@style/home_myabc_title_base_style"
+                        android:background="@drawable/ic_info_centerbg"
+                        android:orientation="horizontal">
 
                     <TextView
-                            android:id="@+id/myabc_is_ring"
                             style="@style/home_myabc_right_style"
-                            android:layout_marginRight="5dp"
-                            android:text="无"/>
+                            android:singleLine="false"
+                            android:text="@string/business_description"/>
                 </LinearLayout>
             </TableLayout>
-
         </LinearLayout>
     </ScrollView>
 
