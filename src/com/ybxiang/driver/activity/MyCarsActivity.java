@@ -106,14 +106,14 @@ public class MyCarsActivity extends BaseListActivity implements
 		// switch (code) {
 		// case ResultCode.RESULT_OK:
 		List<CarInfo> result = new ArrayList<CarInfo>();
-		CarInfo carInfo1 = new CarInfo("陈冲1", "川A542", "高栏", 13, "成都-上海",
-				"成都青羊区", "03-10 16:53", 0);
-		CarInfo carInfo2 = new CarInfo("陈冲2", "川A542", "高栏", 13, "成都-上海",
-				"成都青羊区", "03-10 16:53", 0);
-		CarInfo carInfo3 = new CarInfo("陈冲3", "川A542", "高栏", 13, "成都-上海",
-				"成都青羊区", "03-10 16:53", 0);
-		CarInfo carInfo4 = new CarInfo("陈冲4", "川A542", "高栏", 13, "成都-上海",
-				"成都青羊区", "03-10 16:53", 0);
+		CarInfo carInfo1 = new CarInfo();
+        carInfo1.setOwer_name("测试司机1");
+		CarInfo carInfo2 = new CarInfo();
+        carInfo2.setOwer_name("测试司机2");
+		CarInfo carInfo3 = new CarInfo();
+        carInfo3.setOwer_name("测试司机3");
+		CarInfo carInfo4 = new CarInfo();
+        carInfo4.setOwer_name("测试司机4");
 		result.add(carInfo1);
 		result.add(carInfo2);
 		result.add(carInfo3);

@@ -199,16 +199,14 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 			showMsg("请等待获取位置");
 			return;
 		}
-
 		try {
 			state = ISREFRESHING;
 			final JSONObject jsonObject = new JSONObject();
 			jsonObject.put(Constants.ACTION, Constants.QUERY_VENDER);
 			jsonObject.put(Constants.TOKEN, application.getToken());
-			jsonObject
-					.put(Constants.JSON,
-							new JSONObject().put("page", page).put("latitude", latitude).put("longitude", longitude)
-									.toString());
+			jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
+                    .put("latitude", latitude)
+                    .put("longitude", longitude).toString());
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject, ShopInfo.class, new AjaxCallBack() {
 
 				@Override
@@ -303,14 +301,14 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 
 							if (result instanceof List) {
 
-								List<ShopInfo> shopInfos = (List<ShopInfo>) result;
+								List<ShopInfo> shopInfoList = (List<ShopInfo>) result;
 
-								if (shopInfos == null || shopInfos.isEmpty()) {
+								if (shopInfoList == null || shopInfoList.isEmpty()) {
 									load_all = true;
 									mFootProgress.setVisibility(View.GONE);
 									mFootMsg.setText("已加载全部");
 								} else {
-									if (shopInfos.size() < 10) {
+									if (shopInfoList.size() < 10) {
 										load_all = true;
 										mFootProgress.setVisibility(View.GONE);
 										mFootMsg.setText("已加载全部");
@@ -321,7 +319,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 									}
 
 									mAdapter.removeAll();
-									mAdapter.addAll(shopInfos);
+									mAdapter.addAll(shopInfoList);
 								}
 							}
 							break;
@@ -372,31 +370,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 			getData(++pageIndex);
 		}
 	}
-
-	// @Override
-	// protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	// super.onActivityResult(requestCode, resultCode, data);
-	// if (resultCode == RESULT_OK && requestCode == 1000) {
-	// System.out.println("执行onActivityResult");
-	// if (data.hasExtra("sourceInfo")) {
-	// NewSourceInfo sourceInfo = (NewSourceInfo) data.getSerializableExtra("sourceInfo");
-	// try {
-	// for (int i = 0; i < mAdapter.getList().size(); i++) {
-	// if (sourceInfo.getId().intValue() == ((NewSourceInfo) mAdapter.getList().get(i)).getId()
-	// .intValue()) {
-	// ((NewSourceInfo) mAdapter.getList().get(i)).setFavorite_status(sourceInfo
-	// .getFavorite_status());
-	// mAdapter.notifyDataSetChanged();
-	// break;
-	// }
-	// }
-	// } catch (Exception e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-	// }
 
 	@Override
 	public void onReceiveLocation(BDLocation arg0) {

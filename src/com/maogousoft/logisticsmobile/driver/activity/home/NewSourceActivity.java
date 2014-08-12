@@ -43,7 +43,7 @@ public class NewSourceActivity extends BaseListActivity implements
     // 底部更多
     private View mFootView;
     private ProgressBar mFootProgress;
-    private TextView mFootMsg;
+    private TextView mFootMsg, titlebar_id_content;
     // 当前模式
     private int state = WAIT;
     // 当前页码
@@ -84,8 +84,8 @@ public class NewSourceActivity extends BaseListActivity implements
         // R.drawable.icon_newsource_search)), null, null,
         // null);
 
-        ((TextView) findViewById(R.id.titlebar_id_content))
-                .setText(R.string.string_title_newsource);
+        titlebar_id_content = (TextView) findViewById(R.id.titlebar_id_content);
+        titlebar_id_content.setText(R.string.string_title_newsource);
         // 页脚信息
         mFootView = getLayoutInflater().inflate(R.layout.listview_footview,
                 null);
@@ -125,7 +125,7 @@ public class NewSourceActivity extends BaseListActivity implements
             mFootProgress.setVisibility(View.GONE);
             mFootMsg.setText("已加载全部");
 
-            ((NewSourceListAdapter) mAdapter).addAll(sort(newSourceInfos));
+            mAdapter.addAll(sort(newSourceInfos));
             setListShown(true);
 
         }
@@ -137,6 +137,7 @@ public class NewSourceActivity extends BaseListActivity implements
             if (getIntent().getBooleanExtra("getFriendOrderList", false)) {
                 queryType = Constants.FRIEND_ORDER_LIST;//好友货源
                 mMore.setText("好友管理");
+                titlebar_id_content.setText("好友货源");
                 rightButton = 2;
             }
         }
@@ -144,6 +145,7 @@ public class NewSourceActivity extends BaseListActivity implements
             if (getIntent().getBooleanExtra("QUERY_MAIN_LINE_ORDER", false)) {
                 queryType = Constants.QUERY_MAIN_LINE_ORDER;//关注货源
                 mMore.setText("主营线路");
+                titlebar_id_content.setText("关注货源");
                 rightButton = 3;
             }
         }
@@ -269,8 +271,7 @@ public class NewSourceActivity extends BaseListActivity implements
                         SourceDetailActivity.class);
                 intent.putExtra(
                         SourceDetailActivity.ORDER_ID,
-                        ((NewSourceListAdapter) mAdapter).getList()
-                                .get(position).getId());
+                        ((NewSourceListAdapter) mAdapter).getList().get(position).getId());
                 intent.putExtra("type", "NewSourceActivity");
                 startActivityForResult(intent, 1000);
             } else {
@@ -368,8 +369,7 @@ public class NewSourceActivity extends BaseListActivity implements
                                                 mFootMsg.setText(R.string.tips_isloading);
                                             }
 
-                                            ((NewSourceListAdapter) mAdapter)
-                                                    .addAll(sort(mList));
+                                            mAdapter.addAll(sort(mList));
                                         }
 
                                     }

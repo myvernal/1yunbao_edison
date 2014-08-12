@@ -26,9 +26,9 @@ public class MyCarInfoListAdapter extends BaseListAdapter<CarInfo> {
 			convertView = mInflater.inflate(R.layout.listitem_mycarinfo, parent,
 					false);
 		}
-		((TextView) convertView.findViewById(R.id.nameId)).setText(mList.get(position).getName());
+		((TextView) convertView.findViewById(R.id.nameId)).setText(mList.get(position).getOwer_name());
 		((TextView) convertView.findViewById(R.id.plate_numberId)).setText(mList.get(position).getPlate_number());
-		((TextView) convertView.findViewById(R.id.car_type_strId)).setText(mList.get(position).getCar_type_str());
+		((TextView) convertView.findViewById(R.id.car_type_strId)).setText(mList.get(position).getCar_type());
 		((TextView) convertView.findViewById(R.id.car_lengthId)).setText(String.valueOf(mList.get(position).getCar_length()));
 		((TextView) convertView.findViewById(R.id.locationId)).setText(mList.get(position).getLocation());
 		((TextView) convertView.findViewById(R.id.location_timeId)).setText(mList.get(position).getLocation_time());

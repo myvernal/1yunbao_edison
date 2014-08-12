@@ -155,29 +155,6 @@ public class AddActivity extends BaseActivity {
 		mCarGallery = (ImageButton) mCar.findViewById(R.id.common_id_select_gallery);
 		((TextView) mCar.findViewById(R.id.common_id_select_title)).setText("照片");
 
-		// String categoryStr = "";
-		// switch (shopInfo.getCategory()) {
-		//
-		// case 0:
-		// categoryStr = "住宿优惠";
-		// break;
-		// case 1:
-		// categoryStr = "加油优惠";
-		// break;
-		// case 2:
-		// categoryStr = "餐饮折扣";
-		// break;
-		// case 3:
-		// categoryStr = "休闲优惠";
-		// break;
-		// case 4:
-		// categoryStr = "维修保养";
-		// break;
-		// case 5:
-		// categoryStr = "其他";
-		// break;
-		// }
-
 		mCarCamera.setOnClickListener(this);
 		mCarGallery.setOnClickListener(this);
 		mBack.setOnClickListener(this);
@@ -267,37 +244,31 @@ public class AddActivity extends BaseActivity {
 			final int mDeep = mCityInfo.getDeep();
 			switch (mDeep) {
 				case 1:
-
 					currentProvince = mCityInfo;
 					currentCity = null;
 					currentTowns = null;
-
 					mProvince.setText(mCityInfo.getName());
 					mCity.setText(R.string.string_city);
 					mTowns.setText("区县");
-
 					List<CityInfo> mList2 = mDBUtils.getSecondCity(currentProvince.getId());
 					mAdapter.setList(mList2);
+                    mAddr.setText(currentProvince.getName());
 					break;
 				case 2:
-
 					currentCity = mCityInfo;
 					currentTowns = null;
-
 					mCity.setText(mCityInfo.getName());
 					mTowns.setText("区县");
-
 					List<CityInfo> mList3 = mDBUtils.getThridCity(currentCity.getId());
 					mAdapter.setList(mList3);
-
+                    mAddr.setText(mAddr.getText() + currentCity.getName());
 					break;
-
 				case 3:
 					currentTowns = mCityInfo;
 					mTowns.setText(mCityInfo.getName());
 					mGridView.setVisibility(View.GONE);
+                    mAddr.setText(mAddr.getText() + currentTowns.getName());
 					break;
-
 				default:
 					break;
 			}
@@ -462,12 +433,12 @@ public class AddActivity extends BaseActivity {
 	private void submit() {
 
 		if (TextUtils.isEmpty(mName.getText().toString())) {
-			showMsg("请输入商户名称");
+			showMsg("请输入园区名称");
 			return;
 		}
 
 		if (TextUtils.isEmpty(mAddr.getText().toString())) {
-			showMsg("请输入商户地址");
+			showMsg("请输入园区地址");
 			return;
 		}
 
@@ -482,7 +453,6 @@ public class AddActivity extends BaseActivity {
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			final JSONObject params = new JSONObject();
 			params.put("vender_name", mName.getText().toString());
-			params.put("category", mType.getSelectedItemPosition());
 			params.put("vender_address", mAddr.getText().toString());
 
 			if (currentProvince != null) {
@@ -494,17 +464,14 @@ public class AddActivity extends BaseActivity {
 			if (currentTowns != null) {
 				params.put("vender_district", currentTowns.getId());
 			}
-
 			params.put("longitude", longitude);
 			params.put("latitude", latitude);
 			params.put("contact", mContact.getText().toString());
-			params.put("vender_mobile", mMobilePhone.getText().toString());
 			params.put("vender_phone", mPhone.getText().toString());
-			params.put("goods_name", mSerName.getText().toString());
 			params.put("normal_price", mNormalPrice.getText().toString());
 			params.put("member_price", mYouHui.getText().toString());
 			params.put("other", mOther.getText().toString());
-
+            params.put("category", 5);
 			// vender_name int 是 商家名称
 			// category int 是 分类
 			// vender_address String 是 地址

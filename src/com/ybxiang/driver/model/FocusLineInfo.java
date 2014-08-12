@@ -1,6 +1,8 @@
 package com.ybxiang.driver.model;
 
 public class FocusLineInfo {
+
+    private int id;
     // 线路名称
     private String title;
     // 出发地
@@ -19,6 +21,14 @@ public class FocusLineInfo {
     private int car_way;
 
     public FocusLineInfo() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

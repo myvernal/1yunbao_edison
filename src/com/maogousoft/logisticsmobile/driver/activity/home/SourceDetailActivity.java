@@ -1,12 +1,5 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -14,15 +7,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RatingBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
@@ -38,6 +24,12 @@ import com.maogousoft.logisticsmobile.driver.utils.GrabDialog;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * 货源详情
@@ -266,7 +258,7 @@ public class SourceDetailActivity extends BaseActivity {
         // webview.loadData(sourceInfo.getCargo_remark(), "text/html", "UTF-8");
         sourceOther.setText(sourceInfo.getCargo_remark() + "\n" + sourceInfo.getCargo_tip());
         mLine.setText(mLine.getText() + sourceInfo.getStart_province_str() + sourceInfo.getStart_city_str() + sourceInfo.getStart_district_str() +
-                        "-" + sourceInfo.getEnd_province_str() + sourceInfo.getEnd_city_str() + sourceInfo.getEnd_district_str());
+                "-" + sourceInfo.getEnd_province_str() + sourceInfo.getEnd_city_str() + sourceInfo.getEnd_district_str());
         mSourceName.setText(mSourceName.getText() + sourceInfo.getCargo_desc());
         mSourceType.setText(mSourceType.getText() + sourceInfo.getCargo_type_str());
         mShipType.setText(mShipType.getText() + sourceInfo.getShip_type_str());
@@ -323,6 +315,12 @@ public class SourceDetailActivity extends BaseActivity {
         });
         mAdapter.setList(list);
         mPingjia.setClickable(true);
+
+        if(mSourceInfo.getFavorite_status() == 0) {
+            mAttention.setText("关注货主为好友");
+        } else {
+            mAttention.setText("取消关注货主");
+        }
     }
 
     // 货源详情
@@ -535,7 +533,7 @@ public class SourceDetailActivity extends BaseActivity {
     private void attentionOrder() {
         final JSONObject params = new JSONObject();
         try {
-            params.put(Constants.ACTION, Constants.ATTENTION_SOURCE_USER);
+            params.put(Constants.ACTION, mSourceInfo.getFavorite_status() == 0? Constants.ATTENTION_SOURCE_USER : Constants.CANCEL_ATTENTION_SOURCE_USER);
             params.put(Constants.TOKEN, application.getToken());
             params.put(Constants.JSON,
                     new JSONObject().put("userId", mSourceInfo.getUser_id()).toString());
@@ -549,7 +547,16 @@ public class SourceDetailActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     showMsg(R.string.tips_sourcedetail_attention_success);
-                                    finish();
+                                    if(mSourceInfo.getFavorite_status() == 0) {
+                                        mSourceInfo.setFavorite_status(1);
+                                    }else {
+                                        mSourceInfo.setFavorite_status(0);
+                                    }
+                                    if(mSourceInfo.getFavorite_status() == 0) {
+                                        mAttention.setText("关注货主为好友");
+                                    } else {
+                                        mAttention.setText("取消关注货主");
+                                    }
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     showMsg(result.toString());

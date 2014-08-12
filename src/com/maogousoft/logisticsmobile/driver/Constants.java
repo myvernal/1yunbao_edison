@@ -120,8 +120,8 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
-	//public static final String BASE_URL = "http://112.124.33.14:8083/service";
-	public static final String BASE_URL = "http://192.168.1.101:8888/service";
+	public static final String BASE_URL = "http://112.124.33.14:8083/service";
+	//public static final String BASE_URL = "http://192.168.1.101:8888/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -188,7 +188,7 @@ public class Constants {
 	public static final String SEARCH_SOURCE_ORDER = "search_source_order";
 	
 	/** 关注此路线  **/
-	public static final String FOCUS_LINE = "focus_line";
+	public static final String FOCUS_LINE = "add_Attention_Line";
 
 	/** 新货源关注 **/
 	public static final String ATTENTION_SOURCE_ORDER = "attention_source_order";
@@ -315,14 +315,14 @@ public class Constants {
 	/** 新货源推送，是否响铃 */
 	public static final String IS_RING_NEW_SOURCE = "is_ring_new_source";
 
-	/** 司机端：发布车源 */
-	public static final String PUBLISH_CAR = "publish_car";
-
     /** 货主端:发布货源 */
     public static final String PUBLISH_SOURCE = "publish_order";
 
     /** 司机端:关注货主 */
     public static final String ATTENTION_SOURCE_USER = "attentionSourceUser";
+
+    /** 司机端:取消关注货主 */
+    public static final String CANCEL_ATTENTION_SOURCE_USER = "cancelSourceUser";
 
     /** 司机端:好友货源 */
     public static final String FRIEND_ORDER_LIST = "getFriendOrderList";
@@ -335,6 +335,15 @@ public class Constants {
 
     /** 司机端:已发布车源列表 */
     public static final String QUERY_DRIVER_CAR_INFO_LIST = "getPublishOptionsInfoListByDriver";
+
+    /** 司机端:查询多有关注线路 */
+    public static final String QUERY_ALL_FOCUS_LINE = "get_Attention_Line";
+
+    /** 司机端:更新关注线路 */
+    public static final String UPDATE_FOCUS_LINE = "update_Attention_Line";
+
+    /** 司机端:删除关注线路 */
+    public static final String DELETE_ALL_FOCUS_LINE = "delete_Attention_Line";
 
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";

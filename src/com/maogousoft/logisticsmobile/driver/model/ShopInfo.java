@@ -11,7 +11,38 @@ import java.io.Serializable;
  */
 public class ShopInfo implements Serializable {
 
-	
+    /**
+     *
+     */
+    private static final long serialVersionUID = -1065127737032264398L;
+    private int id;// 是 商家名称
+    private String vender_name;// 是 商家名称
+    private int category;// 是 分类
+    private String vender_address = "";// 是 地址
+    private int vender_province;// 省
+    private int vender_city;// 市
+    private int vender_district;// 区
+    private double longitude;// 经度
+    private double latitude;// 纬度
+    private String contact = "";// 联系人
+    private String vender_mobile = "";// 联系手机
+    private String vender_phone = "";// 联系电话
+    private String goods_name = "";// 商品名称
+    private String normal_price = "";// 正常价格
+    private String member_price = "";// 会员特惠
+    private String other = "";// 其他
+    private String photo1 = "";// 照片1
+    private String Photo2 = "";// 照片2
+    private String Photo3 = "";// 照片3
+    private String Photo4 = "";// 照片4
+    private String Photo5 = "";// 照片5
+    private double score1;// 评分1
+    private double score2;// 评分2
+    private double score3;// 评分3
+    private double score;// 评分
+    private int read_time;// 阅读次数
+    private int status;// 状态
+    private int parking_spaces_num; //车位数
 	
 	public int getId() {
 		return id;
@@ -228,38 +259,22 @@ public class ShopInfo implements Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1065127737032264398L;
-	private int id;// 是 商家名称
-	private String vender_name;// 是 商家名称
-	private int category;// 是 分类
-	private String vender_address = "";// 是 地址
-	private int vender_province;// 省
-	private int vender_city;// 市
-	private int vender_district;// 区
-	private double longitude;// 经度
-	private double latitude;// 纬度
-	private String contact = "";// 联系人
-	private String vender_mobile = "";// 联系手机
-	private String vender_phone = "";// 联系电话
-	private String goods_name = "";// 商品名称
-	private String normal_price = "";// 正常价格
-	private String member_price = "";// 会员特惠
-	private String other = "";// 其他
-	private String photo1 = "";// 照片1
-	private String Photo2 = "";// 照片2
-	private String Photo3 = "";// 照片3
-	private String Photo4 = "";// 照片4
-	private String Photo5 = "";// 照片5
-	private double score1;// 评分1
-	private double score2;// 评分2
-	private double score3;// 评分3
-	private double score;// 评分
-	private int read_time;// 阅读次数
-	private int status;// 状态
 
-	
+	private String campus_activities;//园区活动
 
+    public int getParking_spaces_num() {
+        return parking_spaces_num;
+    }
+
+    public void setParking_spaces_num(int parking_spaces_num) {
+        this.parking_spaces_num = parking_spaces_num;
+    }
+
+    public String getCampus_activities() {
+        return campus_activities;
+    }
+
+    public void setCampus_activities(String campus_activities) {
+        this.campus_activities = campus_activities;
+    }
 }
