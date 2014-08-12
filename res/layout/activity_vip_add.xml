@@ -125,7 +125,7 @@
                         android:text="@string/string_vip_add_phone"/>
 
                 <EditText
-                        android:id="@id/vip_id_add_contact"
+                        android:id="@+id/vender_phone"
                         style="@style/info_edittext_style"
                         android:inputType="number"
                         android:layout_marginLeft="0dp"
@@ -144,7 +144,7 @@
                         android:text="@string/string_vip_add_park_number"/>
 
                 <EditText
-                        android:id="@id/vip_id_add_phone"
+                        android:id="@+id/parking_spaces_num"
                         style="@style/info_edittext_style"
                         android:inputType="number"
                         android:layout_marginLeft="0dp"
@@ -188,7 +188,7 @@
                         android:text="@string/string_vip_add_youhui"/>
 
                 <EditText
-                        android:id="@id/vip_id_add_youhui"
+                        android:id="@+id/member_price"
                         style="@style/info_edittext_style"
                         android:layout_marginLeft="0dp"
                         android:hint=""/>

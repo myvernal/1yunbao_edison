@@ -212,7 +212,7 @@
     <string name="string_other_about_banquan">© 2013 1yunbao.com all rights reserved</string>
     <!-- 评价 -->
     <string name="string_evaluate_order">订单号：%s</string>
-    <string name="string_evaluate_line" formatted="false">%s——>%s</string>
+    <string name="string_evaluate_line" formatted="false">%s—>%s</string>
     <string name="string_evaluate_name">货物名称：%s</string>
     <string name="string_evaluate_lvyue">履约诚信度：</string>
     <string name="string_evaluate_xinxi">信息真实度：</string>
@@ -351,4 +351,6 @@
     </string>
 
     <string name="business_description">本人从事货运工作多年,经验丰富,稳重负责,受到众多客户的好评!欢迎有货的朋友联系我,价格从优!</string>
+
+    <string name="focus_line_count">(%s)</string>
 </resources>

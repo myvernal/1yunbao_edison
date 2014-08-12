@@ -16,6 +16,7 @@ import com.nostra13.universalimageloader.core.assist.PauseOnScrollListener;
 
 public class BaseListActivity extends BaseActivity {
 
+    protected View mCitySelectView;
 	protected ListView mListView;
 
 	protected BaseListAdapter mAdapter;
@@ -153,6 +154,7 @@ public class BaseListActivity extends BaseActivity {
 		if (mListView != null) {
 			return;
 		}
+        mCitySelectView = findViewById(R.id.common_city_selected);
 		mStandardEmptyView = (TextView) findViewById(android.R.id.empty);
 		mProgressContainer = findViewById(R.id.progressContainer);
 		ImageView ivProgress = (ImageView) findViewById(R.id.iv_progress);

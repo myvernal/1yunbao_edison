@@ -4,6 +4,7 @@ import android.view.View;
 import com.maogousoft.logisticsmobile.driver.activity.home.*;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterShipperActivity;
+import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
 import com.maogousoft.logisticsmobile.driver.model.AdvertInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
@@ -123,7 +124,7 @@ public class MainActivity extends TabActivity {
 //                .setContent(new Intent(this, ShareActivity.class)));
         if(application.getUserType() == Constants.USER_DRIVER) {
             mTabHost.addTab(mTabHost.newTabSpec("search").setIndicator("搜索")
-                    .setContent(new Intent(this, InformationActivity.class)));
+                    .setContent(new Intent(this, SearchSourceActivity.class)));
             findViewById(R.id.main_id_radio_publish).setVisibility(View.GONE);
         } else {
             mTabHost.addTab(mTabHost.newTabSpec("publish").setIndicator("发布")
@@ -131,7 +132,7 @@ public class MainActivity extends TabActivity {
             findViewById(R.id.main_id_radio_search).setVisibility(View.GONE);
         }
         mTabHost.addTab(mTabHost.newTabSpec("tool").setIndicator("工具")
-                .setContent(new Intent(this, MyabcActivity.class)));
+                .setContent(new Intent(this, OthersActivity.class)));
         mTabHost.addTab(mTabHost.newTabSpec("others").setIndicator("我X")
                 .setContent(new Intent(this, MyabcActivity1.class)));
         // OthersActivity -->MyabcActivity;
@@ -281,6 +282,4 @@ public class MainActivity extends TabActivity {
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
         startActivity(Intent.createChooser(intent, getTitle()));
     }
-
-
 }

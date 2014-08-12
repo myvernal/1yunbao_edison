@@ -37,8 +37,6 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
@@ -65,7 +63,7 @@ import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
  */
 public class AddActivity extends BaseActivity {
 
-	private EditText mName, mAddr, mContact, mMobilePhone, mPhone, mSerName, mNormalPrice, mYouHui, mOther;
+	private EditText mName, mAddr, vender_phone, mNormalPrice, mParkingNum, mVipContent, mOther;
 	private RadioButton mProvince, mCity, mTowns;
 	private Button mLBS;
 	private Button mSubmit;
@@ -134,12 +132,10 @@ public class AddActivity extends BaseActivity {
 		mTowns = (RadioButton) findViewById(R.id.vip_id_add_towns);
 		mAddr = (EditText) findViewById(R.id.vip_id_add_addr);
 		mLBS = (Button) findViewById(R.id.vip_id_add_lbs);
-		mContact = (EditText) findViewById(R.id.vip_id_add_contact);
-		mMobilePhone = (EditText) findViewById(R.id.vip_id_add_mobilephone);
-		mPhone = (EditText) findViewById(R.id.vip_id_add_phone);
-		mSerName = (EditText) findViewById(R.id.vip_id_add_sername);
+		vender_phone = (EditText) findViewById(R.id.vender_phone);
 		mNormalPrice = (EditText) findViewById(R.id.vip_id_add_normalprice);
-		mYouHui = (EditText) findViewById(R.id.vip_id_add_youhui);
+		mParkingNum = (EditText) findViewById(R.id.parking_spaces_num);
+        mVipContent = (EditText) findViewById(R.id.member_price);
 		mOther = (EditText) findViewById(R.id.vip_id_add_other);
 		// mPhoto = (EditText) findViewById(R.id.vip_id_add_photo);
 		mSubmit = (Button) findViewById(R.id.vip_id_add_submit);
@@ -453,7 +449,7 @@ public class AddActivity extends BaseActivity {
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			final JSONObject params = new JSONObject();
 			params.put("vender_name", mName.getText().toString());
-			params.put("vender_address", mAddr.getText().toString());
+			params.put("vender_address", mLBS.getText().toString());
 
 			if (currentProvince != null) {
 				params.put("vender_province", currentProvince.getId());
@@ -466,11 +462,11 @@ public class AddActivity extends BaseActivity {
 			}
 			params.put("longitude", longitude);
 			params.put("latitude", latitude);
-			params.put("contact", mContact.getText().toString());
-			params.put("vender_phone", mPhone.getText().toString());
+			params.put("vender_phone", vender_phone.getText().toString());
+            params.put("parking_spaces_num", mParkingNum.getText().toString());
 			params.put("normal_price", mNormalPrice.getText().toString());
-			params.put("member_price", mYouHui.getText().toString());
-			params.put("other", mOther.getText().toString());
+			params.put("member_price", mVipContent.getText().toString());
+			params.put("campus_activities", mOther.getText().toString());
             params.put("category", 5);
 			// vender_name int 是 商家名称
 			// category int 是 分类

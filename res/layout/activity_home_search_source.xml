@@ -155,11 +155,13 @@
 
             </RelativeLayout>
 
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:id="@+id/focus_line_container"
-                          android:orientation="vertical"
-                          android:gravity="center"/>
+            <GridView
+                    android:id="@+id/focus_line_gridview"
+                    style="@style/gridviewStyle"
+                    android:listSelector="@android:color/transparent"
+                    android:numColumns="2"
+                    android:padding="@dimen/grid_space"
+                    android:verticalSpacing="@dimen/grid_space" />
 
         </LinearLayout>
     </ScrollView>

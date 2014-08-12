@@ -179,6 +179,7 @@
                             android:id="@id/myabc_id_update"
                             style="@style/info_button_wrap_style"
                             android:layout_width="wrap_content"
+                            android:visibility="gone"
                             android:text="修改"/>
                 </TableRow>
 
@@ -249,6 +250,7 @@
                             android:id="@+id/myabc_card_update"
                             style="@style/info_button_wrap_style"
                             android:layout_width="wrap_content"
+                            android:visibility="gone"
                             android:text="修改"/>
                 </TableRow>
 
@@ -305,6 +307,7 @@
                             android:id="@+id/myabc_description_update"
                             style="@style/info_button_wrap_style"
                             android:layout_width="wrap_content"
+                            android:visibility="gone"
                             android:text="修改"/>
                 </TableRow>
 

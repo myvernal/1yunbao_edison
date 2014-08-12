@@ -72,7 +72,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 
 		titlebar_id_more = (Button) findViewById(R.id.titlebar_id_more);
 		titlebar_id_more.setText("添加园区");
-
 		mBack = (Button) findViewById(R.id.titlebar_id_back);
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("物流园区");
 		mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
@@ -169,14 +168,12 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 		if (application.getBMapManager() == null) {
 			application.initBMapManager();
 		}
-
 		LocationClientOption option = new LocationClientOption();
 		// option.setOpenGps(true);// 打开gps
 		option.setCoorType("bd09ll"); // 设置坐标类型
 		option.setScanSpan(200); // 定位时间，毫秒 小于1秒则一次定位;大于等于1秒则定时定位
 		mLocClient = new LocationClient(this);
 		mLocClient.setLocOption(option);
-
 	}
 
 	private void uploadLocation() {
@@ -187,9 +184,9 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		Intent intent = new Intent(context, ShopDetailActivity.class);
-		intent.putExtra("ShopInfo", (ShopInfo) mAdapter.getItem(position));
-		startActivityForResult(intent, 1000);
+//		Intent intent = new Intent(context, ShopDetailActivity.class);
+//		intent.putExtra("ShopInfo", (ShopInfo) mAdapter.getItem(position));
+//		startActivityForResult(intent, 1000);
 	}
 
 	// 请求指定页数的数据
@@ -390,9 +387,30 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	@Override
 	public void onReceivePoi(BDLocation arg0) {}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
+    protected void onPause() {
+        mLocClient.stop();
+        super.onPause();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mLocClient != null)
+            mLocClient.stop();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 }

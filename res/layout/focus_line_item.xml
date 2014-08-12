@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/focus_line_item_height"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:paddingBottom="5dp"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
+              android:paddingTop="5dp"
+        android:background="@drawable/ic_button_gray">
+
+    <TextView
+            android:id="@+id/wayBegin"
+            android:layout_marginLeft="10dp"
+            style="@style/info_text_style"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="成都"/>
+
+    <ImageView android:layout_width="20dp"
+               android:layout_height="20dp"
+               android:layout_gravity="center_vertical"
+               android:scaleType="fitXY"
+               android:src="@drawable/ic_register_arrow"/>
+
+    <TextView
+            android:id="@+id/wayEnd"
+            style="@style/info_text_style"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="成都"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/source_count"
+              android:layout_gravity="center_vertical"
+              android:textColor="@color/TextColorRed"
+              android:text="(%s)"/>
+</LinearLayout>

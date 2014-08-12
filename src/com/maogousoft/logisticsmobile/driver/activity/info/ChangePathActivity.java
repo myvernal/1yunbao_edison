@@ -645,7 +645,7 @@ public class ChangePathActivity extends BaseActivity {
 		final JSONObject jsonObject = new JSONObject();
 		final JSONObject params = new JSONObject();
 		try {
-			jsonObject.put(Constants.ACTION, Constants.DRIVER_UPDATE_LINE2);
+			jsonObject.put(Constants.ACTION, Constants.DRIVER_UPDATE_LINE);
 			jsonObject.put(Constants.TOKEN, application.getToken());
 
 			if (currentProvinceFirst != null && currentCityFirst != null
@@ -686,11 +686,9 @@ public class ChangePathActivity extends BaseActivity {
 							dismissProgress();
 							switch (code) {
 							case ResultCode.RESULT_OK:
-
 								setResult(RESULT_OK);
 								showMsg("线路修改成功.");
 								finish();
-
 								break;
 							case ResultCode.RESULT_ERROR:
 								if (result != null)

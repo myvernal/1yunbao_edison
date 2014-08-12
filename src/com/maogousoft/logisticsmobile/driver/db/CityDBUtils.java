@@ -39,21 +39,27 @@ public class CityDBUtils {
 		StringBuffer buffer = new StringBuffer();
 		String[] cols = { "Id", "Name" };
 		try {
-			cursor = sdb.query(tableName, cols, "Id=" + arg0, null, null, null,
-					null);
-			if (cursor.moveToFirst()) {
-				buffer.append(cursor.getString(1));
-			}
-			cursor = sdb.query(tableName, cols, "Id=" + arg1, null, null, null,
-					null);
-			if (cursor.moveToFirst()) {
-				buffer.append(cursor.getString(1));
-			}
-			cursor = sdb.query(tableName, cols, "Id=" + arg2, null, null, null,
-					null);
-			if (cursor.moveToFirst()) {
-				buffer.append(cursor.getString(1));
-			}
+            if(arg0 > 0) {
+                cursor = sdb.query(tableName, cols, "Id=" + arg0, null, null, null,
+                        null);
+                if (cursor.moveToFirst()) {
+                    buffer.append(cursor.getString(1));
+                }
+            }
+            if(arg1 > 0) {
+                cursor = sdb.query(tableName, cols, "Id=" + arg1, null, null, null,
+                        null);
+                if (cursor.moveToFirst()) {
+                    buffer.append(cursor.getString(1));
+                }
+            }
+            if(arg2 > 0) {
+                cursor = sdb.query(tableName, cols, "Id=" + arg2, null, null, null,
+                        null);
+                if (cursor.moveToFirst()) {
+                    buffer.append(cursor.getString(1));
+                }
+            }
 			return buffer.toString();
 		} catch (Exception e) {
 			e.printStackTrace();

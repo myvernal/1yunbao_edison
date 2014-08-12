@@ -19,6 +19,7 @@ import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.CarInfoActivity;
+import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.CarInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.FocusLineInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
@@ -58,7 +59,6 @@ public class FocusLineInfoActivity extends BaseListActivity implements
         super.onCreate(savedInstanceState);
         mContext = FocusLineInfoActivity.this;
         initViews();
-        getListView().setOnItemClickListener(null);
     }
 
     private void initViews() {
@@ -165,6 +165,18 @@ public class FocusLineInfoActivity extends BaseListActivity implements
     @Override
     public void onClick(View v) {
         super.onClick(v);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        if(position == l.getCount() - 1) {
+            return;
+        }
+        super.onListItemClick(l, v, position, id);
+        FocusLineInfo lineInfo = (FocusLineInfo) v.getTag(R.id.common_city_selected);
+        Intent intent = new Intent(mContext, NewSourceActivity.class);
+        intent.putExtra(Constants.COMMON_KEY, lineInfo);
+        startActivity(intent);
     }
 
     @Override

@@ -7,6 +7,7 @@
     <include layout="@layout/common_title"/>
 
     <LinearLayout
+            android:id="@+id/common_city_selected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

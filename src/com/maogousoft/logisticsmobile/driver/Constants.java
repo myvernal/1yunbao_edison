@@ -281,10 +281,10 @@ public class Constants {
 	public static final String COMMON_GET_BUSINESS = "common_get_business";
 
 	// /** 修改主营路线 */
-	// public static final String DRIVER_UPDATE_LINE = "driver_update_line";
+	public static final String DRIVER_UPDATE_LINE = "driver_update_line";
 
 	/** 修改主营路线2 */
-	public static final String DRIVER_UPDATE_LINE2 = "driver_update_line_2";
+	//public static final String DRIVER_UPDATE_LINE2 = "driver_update_line_2";
 
 	/** 商户评价 */
 	public static final String ADD_VENDER_REPLY = "add_vender_reply";
@@ -300,6 +300,9 @@ public class Constants {
 
 	/** 百度key */
 	public static final String strKey = "E109ADE1D56A36882E4C245A18B532DEC2E48DAE";
+
+    /** 云检索tableID */
+    public static final String strTableId = "70609";
 
 	/** 易宝 */
 	public final static String CUSTOMER_NUMBER = "10012061548";
@@ -337,7 +340,7 @@ public class Constants {
     public static final String QUERY_DRIVER_CAR_INFO_LIST = "getPublishOptionsInfoListByDriver";
 
     /** 司机端:查询多有关注线路 */
-    public static final String QUERY_ALL_FOCUS_LINE = "get_Attention_Line";
+    public static final String QUERY_ALL_FOCUS_LINE = "query_Attention_Line";
 
     /** 司机端:更新关注线路 */
     public static final String UPDATE_FOCUS_LINE = "update_Attention_Line";
@@ -347,6 +350,8 @@ public class Constants {
 
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
+
+    public static final String COMMON_KEY = "common_key";
 
     public static final int USER_DRIVER = 2; //司机
     public static final int USER_SHIPPER = 1;//货主

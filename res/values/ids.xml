@@ -4,7 +4,7 @@
     <item name="titlebar_id_back" type="id"/>
     <item name="titlebar_id_content" type="id"/>
     <item name="titlebar_id_more" type="id"/>
-
+    <item name="focus_line_key" type="id"/>
     <!-- main -->
     <item name="main_id_radiogroup" type="id"/>
     <item name="main_id_radio_home" type="id"/>

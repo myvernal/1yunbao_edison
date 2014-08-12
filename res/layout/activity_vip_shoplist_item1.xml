@@ -31,7 +31,7 @@
                   android:textSize="15sp"
                   android:textColor="@color/font_gray2"
                   android:id="@+id/location_address"
-                  android:text="四川省成都市青白江区"/>
+                  android:text=""/>
         <ImageView android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:id="@+id/location_img"
@@ -51,10 +51,11 @@
                   android:textColor="@color/TextColorBlack"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:id="@+id/parking_spaces_num"
                   android:layout_weight="1"
                   android:textSize="15sp"
                   android:textColor="@color/font_gray2"
-                  android:text="1200"/>
+                  android:text=""/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="停车价格:"
@@ -63,10 +64,11 @@
                   android:textColor="@color/TextColorBlack"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:id="@+id/normal_price"
                   android:layout_weight="1"
                   android:textSize="15sp"
                   android:textColor="@color/font_gray2"
-                  android:text="20元/天"/>
+                  android:text=""/>
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
@@ -81,10 +83,11 @@
                   android:textColor="@color/TextColorBlack"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:id="@+id/vip_content"
                   android:layout_weight="1"
                   android:textSize="15sp"
                   android:textColor="@color/font_gray2"
-                  android:text="18元/天"/>
+                  android:text=""/>
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
@@ -99,10 +102,29 @@
                   android:textColor="@color/TextColorBlack"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
+                  android:id="@+id/campus_activities"
                   android:layout_weight="1"
                   android:textSize="15sp"
                   android:textColor="@color/font_gray2"
-                  android:text="住宿7折"/>
+                  android:text=""/>
     </LinearLayout>
 
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dp"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="联系电话:"
+                  android:textSize="15sp"
+                  android:textStyle="bold"
+                  android:textColor="@color/TextColorBlack"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/vender_phone"
+                  android:layout_weight="1"
+                  android:textSize="15sp"
+                  android:textColor="@color/font_gray2"
+                  android:text=""/>
+    </LinearLayout>
 </LinearLayout>

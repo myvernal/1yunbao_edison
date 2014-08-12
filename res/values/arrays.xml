@@ -11,12 +11,6 @@
         <item>检查更新</item>
         <item>意见反馈</item>
         <item>联系我们</item>
-        <item>路况查询</item>
-        <item>活动中心</item>
-        <item>交罚款</item>
-        <item>周公解梦</item>
-        <item>查天气</item>
-        <item>新闻咨询</item>
     </string-array>
     <string-array name="select_photo">
         <item>手机拍摄</item>

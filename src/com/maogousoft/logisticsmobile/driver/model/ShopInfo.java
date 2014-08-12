@@ -43,6 +43,7 @@ public class ShopInfo implements Serializable {
     private int read_time;// 阅读次数
     private int status;// 状态
     private int parking_spaces_num; //车位数
+    private String campus_activities;//园区活动
 	
 	public int getId() {
 		return id;
@@ -259,8 +260,6 @@ public class ShopInfo implements Serializable {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
-	private String campus_activities;//园区活动
 
     public int getParking_spaces_num() {
         return parking_spaces_num;

@@ -42,9 +42,9 @@ public class OthersActivity extends BaseActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_others);
-		((TextView) findViewById(R.id.titlebar_id_content)).setText("互动");
+		((TextView) findViewById(R.id.titlebar_id_content)).setText("工具");
 		initViews();
-		((Button) findViewById(R.id.titlebar_id_back)).setOnClickListener(this);
+        findViewById(R.id.titlebar_id_back).setVisibility(View.GONE);
 	}
 
 	@Override

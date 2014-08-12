@@ -1,8 +1,12 @@
 package com.ybxiang.driver.model;
 
-public class FocusLineInfo {
+import java.io.Serializable;
+
+public class FocusLineInfo implements Serializable {
 
     private int id;
+    // 多少条货源
+    private int count = 0;
     // 线路名称
     private String title;
     // 出发地
@@ -13,6 +17,10 @@ public class FocusLineInfo {
     private int end_province;
     private int end_city;
     private int end_district;
+    // 出发地str
+    private String start_str;
+    // 目的地str
+    private String end_str;
     // 车型
     private int car_type;
     // 车长
@@ -21,6 +29,14 @@ public class FocusLineInfo {
     private int car_way;
 
     public FocusLineInfo() {
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getId() {
@@ -109,6 +125,22 @@ public class FocusLineInfo {
 
     public void setCar_way(int car_way) {
         this.car_way = car_way;
+    }
+
+    public String getStart_str() {
+        return start_str;
+    }
+
+    public void setStart_str(String start_str) {
+        this.start_str = start_str;
+    }
+
+    public String getEnd_str() {
+        return end_str;
+    }
+
+    public void setEnd_str(String end_str) {
+        this.end_str = end_str;
     }
 
     @Override
