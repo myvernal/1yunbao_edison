@@ -19,10 +19,10 @@ import com.maogousoft.logisticsmobile.driver.adapter.NewSourceListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.FocuseLineInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.ybxiang.driver.activity.MyFriendsActivity;
+import com.ybxiang.driver.model.FocusLineInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,7 +57,7 @@ public class NewSourceActivity extends BaseListActivity implements
 
     private List<NewSourceInfo> newSourceInfos = null;// 上一页传来的
 
-    private FocuseLineInfo focuseLineInfo = new FocuseLineInfo();// 上一页传输过来的省市区
+    private FocusLineInfo focusLineInfo = new FocusLineInfo();// 上一页传输过来的省市区
 
     //请求类型
     private String queryType = Constants.QUERY_SOURCE_ORDER;
@@ -129,9 +129,8 @@ public class NewSourceActivity extends BaseListActivity implements
             setListShown(true);
 
         }
-        if (getIntent().hasExtra("focuseLineInfo")) {
-            focuseLineInfo = (FocuseLineInfo) getIntent().getSerializableExtra(
-                    "focuseLineInfo");
+        if (getIntent().hasExtra("focusLineInfo")) {
+            focusLineInfo = (FocusLineInfo) getIntent().getSerializableExtra("focuseLineInfo");
         }
         if (getIntent().hasExtra("getFriendOrderList")) {
             if (getIntent().getBooleanExtra("getFriendOrderList", false)) {
@@ -190,14 +189,14 @@ public class NewSourceActivity extends BaseListActivity implements
 
             jsonObject.put(Constants.ACTION, Constants.FOCUS_LINE);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            if (focuseLineInfo != null) {
-                params.put("start_province", focuseLineInfo.getStart_province());
-                params.put("start_city", focuseLineInfo.getStart_city());
-                params.put("start_district", focuseLineInfo.getStart_district());
+            if (focusLineInfo != null) {
+                params.put("start_province", focusLineInfo.getStart_province());
+                params.put("start_city", focusLineInfo.getStart_city());
+                params.put("start_district", focusLineInfo.getStart_district());
 
-                params.put("end_province", focuseLineInfo.getEnd_province());
-                params.put("end_city", focuseLineInfo.getEnd_city());
-                params.put("end_district", focuseLineInfo.getEnd_district());
+                params.put("end_province", focusLineInfo.getEnd_province());
+                params.put("end_city", focusLineInfo.getEnd_city());
+                params.put("end_district", focusLineInfo.getEnd_district());
             }
             jsonObject.put(Constants.JSON, params);
             showDefaultProgress();
@@ -339,8 +338,7 @@ public class NewSourceActivity extends BaseListActivity implements
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, queryType);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
-                    .toString());
+            jsonObject.put(Constants.JSON, new JSONObject().put("page", page).toString());
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     NewSourceInfo.class, new AjaxCallBack() {

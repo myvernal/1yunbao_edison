@@ -158,7 +158,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             params.put("car_length", source_id_publish_car_length.getText().toString());
             params.put("car_type", Constants.getCarTypeValues(source_id_publish_car_type.getSelectedItemPosition()));
             params.put("unit_price", source_id_publish_unit_price.getText().toString());
-            params.put("cargo_unit", ((TextView)source_id_publish_cargo_unit.getSelectedView()).getText().toString());
+            params.put("cargo_unit", Constants.getUnitTypeValues(source_id_publish_cargo_unit.getSelectedItemPosition()));
             params.put("user_bond", source_id_publish_user_bond.getText().toString() + "元");
             params.put("cargo_tip", ((TextView) source_id_publish_cargo_tip.getSelectedView()).getText().toString());
             params.put("cargo_remark", source_id_publish_cargo_remark.getText().toString());

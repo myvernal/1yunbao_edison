@@ -22,7 +22,6 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
-import com.maogousoft.logisticsmobile.driver.model.FocuseLineInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
@@ -167,92 +166,9 @@ public class SearchSourceActivity extends BaseActivity {
         super.onResume();
     }
 
-    private void fastSearch(final FocusLineInfo focusLineInfo) {
-        final JSONObject jsonObject = new JSONObject();
-        final JSONObject params = new JSONObject();
-        try {
-            // 搜索新货源
-            jsonObject.put(Constants.ACTION, Constants.QUERY_SOURCE_ORDER);
-            jsonObject.put(Constants.TOKEN, application.getToken());
-            params.put("start_province", focusLineInfo.getStart_province());
-            params.put("end_province", focusLineInfo.getStart_city());
-            params.put("start_city", focusLineInfo.getStart_district());
-            params.put("end_city", focusLineInfo.getEnd_province());
-            params.put("start_district", focusLineInfo.getEnd_city());
-            params.put("end_district", focusLineInfo.getEnd_district());
-            params.put("ship_type", 0);
-            params.put("device_type", Constants.DEVICE_TYPE);
-            jsonObject.put(Constants.JSON, params);
-            showDefaultProgress();
-            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    NewSourceInfo.class, new AjaxCallBack() {
-
-                        @Override
-                        public void receive(int code, Object result) {
-                            dismissProgress();
-                            switch (code) {
-                                case ResultCode.RESULT_OK:
-                                    if (result instanceof List) {
-                                        List<NewSourceInfo> mList = (ArrayList<NewSourceInfo>) result;
-
-                                        if (mList.size() != 0) {
-                                            Intent intent = new Intent(context, NewSourceActivity.class);
-                                            intent.putExtra("NewSourceInfos", (Serializable) mList);
-                                            intent.putExtra("focuseLineInfo", focusLineInfo);
-                                            context.startActivity(intent);
-                                        } else {
-                                            showMsg("暂无满足条件的信息，请扩大搜索范围再试。");
-                                        }
-                                    }
-                                    break;
-                                case ResultCode.RESULT_ERROR:
-                                    if (result != null)
-                                        showMsg(result.toString());
-                                    break;
-                                case ResultCode.RESULT_FAILED:
-                                    if (result != null) {
-                                        // 您当月的免费搜索次数已经用完
-                                        // if (result.equals("您当月的免费搜索次数已经用完")) {
-                                        final MyAlertDialog dialog = new MyAlertDialog(
-                                                context);
-                                        dialog.show();
-                                        dialog.setTitle("提示");
-                                        // 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
-                                        dialog.setMessage(result.toString());
-                                        dialog.setLeftButton("确定",
-                                                new OnClickListener() {
-
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        dialog.dismiss();
-
-                                                        String content = null;
-                                                        startActivity(new Intent(
-                                                                context,
-                                                                ShareActivity.class)
-                                                                .putExtra("share",
-                                                                        content));
-                                                        finish();
-                                                    }
-                                                });
-
-                                        // }
-                                    }
-                                    // showMsg(result.toString());
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void submit(int validateDateLong) {
         // 计算路线的开始ID,结束ID
-        final FocuseLineInfo focuseLineInfo = new FocuseLineInfo();
+        final FocusLineInfo focusLineInfo = new FocusLineInfo();
         if (cityselectStart.getSelectedProvince() == null
                 | cityselectEnd.getSelectedProvince() == null) {
             showMsg("请选择出发地，目的地。");
@@ -271,27 +187,27 @@ public class SearchSourceActivity extends BaseActivity {
             }
 
             params.put("start_province", cityselectStart.getSelectedProvince().getId());
-            focuseLineInfo.setStart_province(cityselectStart.getSelectedProvince().getId());
+            focusLineInfo.setStart_province(cityselectStart.getSelectedProvince().getId());
             params.put("end_province", cityselectEnd.getSelectedProvince().getId());
-            focuseLineInfo.setEnd_province(cityselectEnd.getSelectedProvince().getId());
+            focusLineInfo.setEnd_province(cityselectEnd.getSelectedProvince().getId());
             if (cityselectStart.getSelectedCity() != null) {
                 params.put("start_city", cityselectStart.getSelectedCity().getId());
-                focuseLineInfo.setStart_city(cityselectStart.getSelectedCity().getId());
+                focusLineInfo.setStart_city(cityselectStart.getSelectedCity().getId());
             }
 
             if (cityselectEnd.getSelectedCity() != null) {
                 params.put("end_city", cityselectEnd.getSelectedCity().getId());
-                focuseLineInfo.setEnd_city(cityselectEnd.getSelectedCity().getId());
+                focusLineInfo.setEnd_city(cityselectEnd.getSelectedCity().getId());
             }
 
             if (cityselectStart.getSelectedTowns() != null) {
                 params.put("start_district", cityselectStart.getSelectedTowns().getId());
-                focuseLineInfo.setStart_district(cityselectStart.getSelectedTowns().getId());
+                focusLineInfo.setStart_district(cityselectStart.getSelectedTowns().getId());
             }
 
             if (cityselectEnd.getSelectedTowns() != null) {
                 params.put("end_district", cityselectEnd.getSelectedTowns().getId());
-                focuseLineInfo.setEnd_district(cityselectEnd.getSelectedTowns().getId());
+                focusLineInfo.setEnd_district(cityselectEnd.getSelectedTowns().getId());
             }
             // 车型
             if (car_type != 43) {
@@ -323,7 +239,7 @@ public class SearchSourceActivity extends BaseActivity {
                                                     true);
                                             intent.putExtra("NewSourceInfos",
                                                     (Serializable) mList);
-                                            intent.putExtra("focuseLineInfo", focuseLineInfo);
+                                            intent.putExtra("focusLineInfo", focusLineInfo);
                                             context.startActivity(intent);
                                         } else {
                                             showMsg("暂无满足条件的信息，请扩大搜索范围再试。");
@@ -439,9 +355,9 @@ public class SearchSourceActivity extends BaseActivity {
                                                         }
                                                     }
                                                     if (focusLineInfo.getEnd_city() > 0) {
-                                                        start = dbUtils.getCityInfo(focusLineInfo.getEnd_city());
-                                                        if (focusLineInfo.getStart_district() > 0) {
-                                                            start = dbUtils.getCityInfo(focusLineInfo.getEnd_district());
+                                                        end = dbUtils.getCityInfo(focusLineInfo.getEnd_city());
+                                                        if (focusLineInfo.getEnd_district() > 0) {
+                                                            end = dbUtils.getCityInfo(focusLineInfo.getEnd_district());
                                                         }
                                                     }
                                                     focusLineInfo.setStart_str(start);

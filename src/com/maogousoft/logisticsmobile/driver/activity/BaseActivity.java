@@ -15,15 +15,28 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
+import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
+import com.maogousoft.logisticsmobile.driver.api.ApiClient;
+import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.im.KBBinder;
+import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.utils.MyProgressDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
+import com.ybxiang.driver.model.FocusLineInfo;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseActivity extends Activity implements OnClickListener {
 
@@ -216,5 +229,88 @@ public class BaseActivity extends Activity implements OnClickListener {
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
         startActivity(Intent.createChooser(intent, getTitle()));
+    }
+
+    public void fastSearch(final FocusLineInfo focusLineInfo) {
+        final JSONObject jsonObject = new JSONObject();
+        final JSONObject params = new JSONObject();
+        try {
+            // 搜索新货源
+            jsonObject.put(Constants.ACTION, Constants.QUERY_SOURCE_ORDER);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            params.put("start_province", focusLineInfo.getStart_province());
+            params.put("start_city", focusLineInfo.getStart_city());
+            params.put("start_district", focusLineInfo.getStart_district());
+            params.put("end_province", focusLineInfo.getEnd_province());
+            params.put("end_city", focusLineInfo.getEnd_city());
+            params.put("end_district", focusLineInfo.getEnd_district());
+            params.put("device_type", Constants.DEVICE_TYPE);
+            jsonObject.put(Constants.JSON, params);
+            showDefaultProgress();
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    NewSourceInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result instanceof List) {
+                                        List<NewSourceInfo> mList = (ArrayList<NewSourceInfo>) result;
+
+                                        if (mList.size() != 0) {
+                                            Intent intent = new Intent(context, NewSourceActivity.class);
+                                            intent.putExtra("isFromHomeActivity", true);
+                                            intent.putExtra("NewSourceInfos", (Serializable) mList);
+                                            intent.putExtra("focusLineInfo", focusLineInfo);
+                                            context.startActivity(intent);
+                                        } else {
+                                            showMsg("暂无满足条件的信息，请扩大搜索范围再试。");
+                                        }
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result != null) {
+                                        // 您当月的免费搜索次数已经用完
+                                        // if (result.equals("您当月的免费搜索次数已经用完")) {
+                                        final MyAlertDialog dialog = new MyAlertDialog(
+                                                context);
+                                        dialog.show();
+                                        dialog.setTitle("提示");
+                                        // 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
+                                        dialog.setMessage(result.toString());
+                                        dialog.setLeftButton("确定",
+                                                new OnClickListener() {
+
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        dialog.dismiss();
+
+                                                        String content = null;
+                                                        startActivity(new Intent(
+                                                                context,
+                                                                ShareActivity.class)
+                                                                .putExtra("share",
+                                                                        content));
+                                                        finish();
+                                                    }
+                                                });
+
+                                        // }
+                                    }
+                                    // showMsg(result.toString());
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -264,9 +264,19 @@ public class SourceDetailActivity extends BaseActivity {
         mShipType.setText(mShipType.getText() + sourceInfo.getShip_type_str());
         mSourceCarLength.setText(mSourceCarLength.getText().toString() + sourceInfo.getCar_length() + "米");
         mSourceCarType.setText(mSourceCarType.getText() + sourceInfo.getCar_type_str());
-        mSourcePrice.setText(mSourcePrice.getText().toString() + sourceInfo.getPrice() + sourceInfo.getCargo_unit_name());
+        //报价单位
+        Integer unitPrice = sourceInfo.getCargo_unit();
+        if(unitPrice != null) {
+            String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
+            for (int i = 0; i < Constants.unitTypeValues.length; i++) {
+                if (Constants.unitTypeValues[i] == unitPrice) {
+                    mSourcePrice.setText(mSourcePrice.getText().toString() + sourceInfo.getUnit_price() + "元/" + unitPriceStr[i]);
+                }
+            }
+        }
+        //
         mSourceGold.setText(mSourceGold.getText().toString() + sourceInfo.getUser_bond() + "元");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh时mm分ss秒");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
         Date date = new Date(sourceInfo.getValidate_time());
         mValidateTime.setText(mValidateTime.getText().toString() + sdf.format(date));
 

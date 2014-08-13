@@ -241,6 +241,16 @@
         <item name="android:textColor">@color/font_gray2</item>
     </style>
 
+    <style name="car_left_text_style">
+        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">left</item>
+        <item name="android:minWidth">70dp</item>
+        <item name="android:textColor">@color/TextColorBlack</item>
+    </style>
+
     <style name="info_content_text_style">
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:layout_width">wrap_content</item>

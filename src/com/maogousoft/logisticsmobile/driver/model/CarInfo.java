@@ -14,6 +14,15 @@ public class CarInfo implements Serializable{
     private int end_province; // 路线
     private int end_city; // 路线
     private int end_district; // 路线
+    private int end_province1; // 路线
+    private int end_city1; // 路线
+    private int end_district1; // 路线
+    private int end_province2; // 路线
+    private int end_city2; // 路线
+    private int end_district2; // 路线
+    private int end_province3; // 路线
+    private int end_city3; // 路线
+    private int end_district3; // 路线
     private int car_weight;// 载重
     private int car_type;// 车型
     private String plate_number = "";// 车牌号
@@ -28,6 +37,7 @@ public class CarInfo implements Serializable{
     private long pulish_date;
     private String wayStartStr;
     private String wayEndStr;
+    private String remark;//备注
 
     public CarInfo() {
         super();
@@ -216,5 +226,85 @@ public class CarInfo implements Serializable{
 
     public void setWayEndStr(String wayEndStr) {
         this.wayEndStr = wayEndStr;
+    }
+
+    public int getEnd_province1() {
+        return end_province1;
+    }
+
+    public void setEnd_province1(int end_province1) {
+        this.end_province1 = end_province1;
+    }
+
+    public int getEnd_city1() {
+        return end_city1;
+    }
+
+    public void setEnd_city1(int end_city1) {
+        this.end_city1 = end_city1;
+    }
+
+    public int getEnd_district1() {
+        return end_district1;
+    }
+
+    public void setEnd_district1(int end_district1) {
+        this.end_district1 = end_district1;
+    }
+
+    public int getEnd_province2() {
+        return end_province2;
+    }
+
+    public void setEnd_province2(int end_province2) {
+        this.end_province2 = end_province2;
+    }
+
+    public int getEnd_city2() {
+        return end_city2;
+    }
+
+    public void setEnd_city2(int end_city2) {
+        this.end_city2 = end_city2;
+    }
+
+    public int getEnd_district2() {
+        return end_district2;
+    }
+
+    public void setEnd_district2(int end_district2) {
+        this.end_district2 = end_district2;
+    }
+
+    public int getEnd_province3() {
+        return end_province3;
+    }
+
+    public void setEnd_province3(int end_province3) {
+        this.end_province3 = end_province3;
+    }
+
+    public int getEnd_city3() {
+        return end_city3;
+    }
+
+    public void setEnd_city3(int end_city3) {
+        this.end_city3 = end_city3;
+    }
+
+    public int getEnd_district3() {
+        return end_district3;
+    }
+
+    public void setEnd_district3(int end_district3) {
+        this.end_district3 = end_district3;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

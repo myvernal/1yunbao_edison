@@ -1,35 +1,23 @@
 package com.ybxiang.driver.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AbsListView;
+import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.CarInfoActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
-import com.maogousoft.logisticsmobile.driver.adapter.CarInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.FocusLineInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.CarInfo;
-import com.maogousoft.logisticsmobile.driver.model.FocuseLineInfo;
 import com.ybxiang.driver.model.FocusLineInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * 已关注路线的Adapter
@@ -118,7 +106,7 @@ public class FocusLineInfoActivity extends BaseListActivity implements
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
-                                        List<FocuseLineInfo> mList = (List<FocuseLineInfo>) result;
+                                        List<FocusLineInfo> mList = (List<FocusLineInfo>) result;
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);
@@ -173,10 +161,8 @@ public class FocusLineInfoActivity extends BaseListActivity implements
             return;
         }
         super.onListItemClick(l, v, position, id);
-        FocusLineInfo lineInfo = (FocusLineInfo) v.getTag(R.id.common_city_selected);
-        Intent intent = new Intent(mContext, NewSourceActivity.class);
-        intent.putExtra(Constants.COMMON_KEY, lineInfo);
-        startActivity(intent);
+        FocusLineInfo focusLineInfo = (FocusLineInfo) v.getTag(R.id.common_city_selected);
+        fastSearch(focusLineInfo);
     }
 
     @Override
