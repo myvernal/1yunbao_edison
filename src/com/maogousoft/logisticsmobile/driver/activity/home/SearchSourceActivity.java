@@ -407,10 +407,10 @@ public class SearchSourceActivity extends BaseActivity {
         }
     }
 
+    // 搜索全部已关注线路
     private void queryAllFocusLine() {
         final JSONObject jsonObject = new JSONObject();
         try {
-            // 搜索新货源
             jsonObject.put(Constants.ACTION, Constants.QUERY_ALL_FOCUS_LINE);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, "");

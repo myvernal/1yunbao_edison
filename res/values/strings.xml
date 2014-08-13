@@ -353,4 +353,8 @@
     <string name="business_description">本人从事货运工作多年,经验丰富,稳重负责,受到众多客户的好评!欢迎有货的朋友联系我,价格从优!</string>
 
     <string name="focus_line_count">(%s)</string>
+    <string name="car_info_publish_date">发布时间:%s</string>
+    <string name="car_info_weight">载重:%s</string>
+    <string name="car_info_car_type">车型:%s</string>
+    <string name="car_info_way" formatted="false">线路:%s->%s</string>
 </resources>

@@ -1,12 +1,18 @@
 package com.maogousoft.logisticsmobile.driver.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
+import com.ybxiang.driver.activity.CarInfoDetailActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 我的车队的adapter 1：姓名，车牌号，车型，车长 2：路线，位置，定位时间
@@ -22,16 +28,23 @@ public class MyCarInfoListAdapter extends BaseListAdapter<CarInfo> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.listitem_mycarinfo, parent,
-					false);
-		}
-		((TextView) convertView.findViewById(R.id.nameId)).setText(mList.get(position).getOwer_name());
-		((TextView) convertView.findViewById(R.id.plate_numberId)).setText(mList.get(position).getPlate_number());
-		((TextView) convertView.findViewById(R.id.car_type_strId)).setText(mList.get(position).getCar_type());
-		((TextView) convertView.findViewById(R.id.car_lengthId)).setText(String.valueOf(mList.get(position).getCar_length()));
-		((TextView) convertView.findViewById(R.id.locationId)).setText(mList.get(position).getLocation());
-		((TextView) convertView.findViewById(R.id.location_timeId)).setText(mList.get(position).getLocation_time());
-		return convertView;
-	}
+        CarInfo carInfo = mList.get(position);
+        if (convertView == null) {
+            convertView = mInflater.inflate(R.layout.listitem_mycarinfo, parent,
+                    false);
+        }
+        ((TextView) convertView.findViewById(R.id.nameId)).setText(carInfo.getOwer_name());
+        ((TextView) convertView.findViewById(R.id.plate_numberId)).setText(carInfo.getPlate_number());
+        //车型
+        int carTypeValue = carInfo.getCar_type();
+        String[] carTypeStr = mContext.getResources().getStringArray(R.array.car_types_name);
+        for (int i = 0; i < Constants.carTypeValues.length; i++) {
+            if (Constants.carTypeValues[i] == carTypeValue) {
+                ((TextView) convertView.findViewById(R.id.car_type_strId)).setText(mContext.getString(R.string.car_info_car_type, carTypeStr[i]));
+            }
+        }
+        ((TextView) convertView.findViewById(R.id.car_lengthId)).setText(String.valueOf(carInfo.getCar_length()));
+        ((TextView) convertView.findViewById(R.id.location_timeId)).setText(carInfo.getLocation_time());
+        return convertView;
+    }
 }

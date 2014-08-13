@@ -1,183 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <include layout="@layout/common_title" />
+    <include layout="@layout/common_title"/>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical" >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <TextView
-                    style="@style/info_publish_text_style"
-                    android:text="路线：" />
+                        style="@style/info_publish_text_style"
+                        android:text="路线："/>
 
                 <TextView
-                    style="@style/info_left_text_style"
-                    android:text="成都-重庆" />
+                        style="@style/info_left_text_style"
+                        android:id="@+id/car_info_detail_way"
+                        android:text=""/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <TextView
-                    style="@style/info_publish_text_style"
-                    android:text="车牌号：" />
+                        style="@style/info_publish_text_style"
+                        android:text="车牌号："/>
 
                 <TextView
-                    style="@style/info_left_text_style"
-                    android:text="川A0001" />
+                        style="@style/info_left_text_style"
+                        android:id="@+id/car_info_detail_number"
+                        android:text=""/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <TextView
-                    style="@style/info_publish_text_style"
-                    android:text="车长：" />
+                        style="@style/info_publish_text_style"
+                        android:text="车长："/>
 
                 <TextView
-                    style="@style/info_left_text_style"
-                    android:text="5.4" />
+                        style="@style/info_left_text_style"
+                        android:id="@+id/car_info_detail_car_length"
+                        android:text=""/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <TextView
-                    style="@style/info_publish_text_style"
-                    android:text="车型：" />
+                        style="@style/info_publish_text_style"
+                        android:text="车型："/>
 
                 <TextView
-                    style="@style/info_left_text_style"
-                    android:text="不限" />
+                        style="@style/info_left_text_style"
+                        android:id="@+id/car_info_detail_car_type"
+                        android:text=""/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <TextView
-                    style="@style/info_publish_text_style"
-                    android:text="载重：" />
+                        style="@style/info_publish_text_style"
+                        android:text="载重："/>
 
                 <TextView
-                    style="@style/info_left_text_style"
-                    android:text="5" />
+                        style="@style/info_left_text_style"
+                        android:id="@+id/car_info_detail_weight"
+                        android:text=""/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <TextView
-                    style="@style/info_publish_text_style"
-                    android:text="报价：" />
+                        style="@style/info_publish_text_style"
+                        android:text="报价："/>
 
                 <TextView
-                    style="@style/info_left_text_style"
-                    android:text="5.4元/吨" />
+                        style="@style/info_content_text_style"
+                        android:id="@+id/car_info_detail_price"
+                        android:layout_width="wrap_content"
+                        android:text=""/>
+
+                <TextView
+                        style="@style/info_left_text_style"
+                        android:id="@+id/car_info_detail_price_unit"
+                        android:text=""/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                 <TextView
-                    style="@style/info_publish_text_style"
-                    android:text="位置：" />
+                        style="@style/info_publish_text_style"
+                        android:text="位置："/>
 
                 <TextView
-                    style="@style/info_left_text_style"
-                    android:text="四川省成都市天府广场" />
+                        style="@style/info_left_text_style"
+                        android:id="@+id/car_info_detail_address"
+                        android:text=""/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <TextView
-                    style="@style/info_publish_text_style"
-                    android:text="联系人：" />
+                        style="@style/info_publish_text_style"
+                        android:text="联系人："/>
 
                 <TextView
-                    style="@style/info_left_text_style"
-                    android:text="向哥哥" />
+                        style="@style/info_left_text_style"
+                        android:id="@+id/car_info_detail_contact_name"
+                        android:text=""/>
             </LinearLayout>
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                 <TextView
-                    style="@style/info_publish_text_style"
-                    android:text="手机：" />
+                        style="@style/info_publish_text_style"
+                        android:text="手机："/>
 
                 <TextView
-                    style="@style/info_left_text_style"
-                    android:text="15928031311" />
+                        style="@style/info_left_text_style"
+                        android:id="@+id/car_info_detail_phone"
+                        android:text=""/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

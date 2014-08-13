@@ -206,6 +206,7 @@ public class LoginActivity extends BaseActivity {
                         case ResultCode.RESULT_OK:
                             UserInfo userInfo = (UserInfo) result;
                             // 写入用户信息
+                            application.setIsAnonymous(false);
                             application.writeUserInfo(mUserName.getText()
                                     .toString(), mPassword.getText()
                                     .toString(), userInfo.getDriver_id());

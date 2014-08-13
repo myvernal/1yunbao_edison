@@ -26,6 +26,8 @@ public class CarInfo implements Serializable{
     private String description = "";// 补充说明
     private String location_time; // 定位时间==我的车队
     private long pulish_date;
+    private String wayStartStr;
+    private String wayEndStr;
 
     public CarInfo() {
         super();
@@ -198,5 +200,21 @@ public class CarInfo implements Serializable{
 
     public void setPulish_date(long pulish_date) {
         this.pulish_date = pulish_date;
+    }
+
+    public String getWayStartStr() {
+        return wayStartStr;
+    }
+
+    public void setWayStartStr(String wayStartStr) {
+        this.wayStartStr = wayStartStr;
+    }
+
+    public String getWayEndStr() {
+        return wayEndStr;
+    }
+
+    public void setWayEndStr(String wayEndStr) {
+        this.wayEndStr = wayEndStr;
     }
 }

@@ -397,7 +397,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 		final JSONObject jsonObject = new JSONObject();
 		final JSONObject params = new JSONObject();
 		try {
-			jsonObject.put(Constants.ACTION, Constants.DRIVER_REG2);
+			jsonObject.put(Constants.ACTION, Constants.DRIVER_REG);
 			jsonObject.put(Constants.TOKEN, null);
 			params.put("phone", mPhone.getText().toString());
 			// params.put("car_phone", mShuiChePhone.getText().toString());

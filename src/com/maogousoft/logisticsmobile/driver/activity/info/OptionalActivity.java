@@ -307,7 +307,7 @@ public class OptionalActivity extends BaseActivity {
 		final JSONObject jsonObject = new JSONObject();
 		final JSONObject params = new JSONObject();
 		try {
-			jsonObject.put(Constants.ACTION, Constants.DRIVER_REG_OPTIONAL2);
+			jsonObject.put(Constants.ACTION, Constants.DRIVER_REG_OPTIONAL);
 			jsonObject.put(Constants.TOKEN, null);
 
 			if (!CheckUtils.checkIsEmpty(mShuiChePhone)) {

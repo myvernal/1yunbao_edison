@@ -1,25 +1,15 @@
 package com.ybxiang.driver.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AbsListView;
+import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.CarInfoActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.CarInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -28,6 +18,8 @@ import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class ManagerCarSourceActivity extends BaseListActivity implements
         OnClickListener, OnScrollListener {
@@ -160,9 +152,7 @@ public class ManagerCarSourceActivity extends BaseListActivity implements
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Intent intent = new Intent(context, CarInfoDetailActivity.class);
-        intent.putExtra("car_info_id", position);
-        startActivity(intent);
+
     }
 
     @Override

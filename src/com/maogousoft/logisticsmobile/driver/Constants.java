@@ -150,19 +150,15 @@ public class Constants {
 	/** 货主 注册获取验证码 **/
 	public static final String SHIPPER_REG_GETCODE = "user_reg_getcode";
 
-	// /** 司机端注册 **/
-	// public static final String DRIVER_REG = "driver_reg";
-	//
-	// /** 司机端完善资料 **/
-	// public static final String DRIVER_REG_OPTIONAL = "driver_reg_optional";
+	/** 司机端注册 **/
+	public static final String DRIVER_REG = "driver_reg";
 
-	/** 司机端注册2 **/
-	public static final String DRIVER_REG2 = "driver_reg_2";
+	/** 司机端完善资料 **/
+	public static final String DRIVER_REG_OPTIONAL = "driver_reg_optional";
+
 	/** 货主注册 **/
 	public static final String SHIPPER_REG = "user_reg";
 
-	/** 司机端完善资料 2 **/
-	public static final String DRIVER_REG_OPTIONAL2 = "driver_reg_optional_2";
 	/** 货主端完善资料 2 **/
 	public static final String SHIPPER_REG_OPTIONAL2 = "user_reg_optional";
 
@@ -280,11 +276,8 @@ public class Constants {
 	/** 账户记录 */
 	public static final String COMMON_GET_BUSINESS = "common_get_business";
 
-	// /** 修改主营路线 */
+	/** 修改主营路线 */
 	public static final String DRIVER_UPDATE_LINE = "driver_update_line";
-
-	/** 修改主营路线2 */
-	//public static final String DRIVER_UPDATE_LINE2 = "driver_update_line_2";
 
 	/** 商户评价 */
 	public static final String ADD_VENDER_REPLY = "add_vender_reply";

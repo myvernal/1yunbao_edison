@@ -17,13 +17,13 @@
         <TextView
             android:id="@+id/wayId"
             style="@style/info_left_text_style"
-            android:text="线路:" />
+            android:text="" />
 
         <TextView
             android:id="@+id/weightId"
             android:layout_below="@+id/wayId"
             style="@style/info_left_text_style"
-            android:text="载重:" />
+            android:text="" />
 
         <TextView
             android:id="@+id/typeId"
@@ -31,13 +31,13 @@
             android:layout_toRightOf="@id/weightId"
             android:layout_marginLeft="15dp"
             style="@style/info_left_text_style"
-            android:text="车型:" />
+            android:text="" />
 
         <TextView
                 android:id="@+id/createTime"
                 android:layout_below="@+id/typeId"
                 style="@style/info_left_text_style"
-                android:text="发布时间:" />
+                android:text="" />
 
     </RelativeLayout>
 

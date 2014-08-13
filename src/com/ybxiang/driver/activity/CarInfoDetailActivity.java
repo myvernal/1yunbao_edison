@@ -7,122 +7,85 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
+import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 
 /**
  * 车源详细界面
- * 
+ *
  * @author ybxiang
- * 
  */
-public class CarInfoDetailActivity extends BaseActivity{
-	private Context mContext;
-	private Button mTitleBarBack;
-	private Button mTitleBarMore;
+public class CarInfoDetailActivity extends BaseActivity {
+    private Context mContext;
+    private Button mTitleBarBack;
+    private Button mTitleBarMore;
+    private CarInfo carInfo;
+    private TextView car_info_detail_way, car_info_detail_number, car_info_detail_car_length,
+            car_info_detail_car_type, car_info_detail_weight, car_info_detail_price, car_info_detail_price_unit,
+            car_info_detail_address, car_info_detail_contact_name, car_info_detail_phone;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		mContext = CarInfoDetailActivity.this;
-		setContentView(R.layout.car_info_detail);
-		initViews();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = CarInfoDetailActivity.this;
+        setContentView(R.layout.car_info_detail);
+        initViews();
+        initData();
+    }
 
-	private void initViews() {
-		Intent fromIntent = getIntent();
-		if (fromIntent != null) {
-			switch (fromIntent.getIntExtra("car_info_id", 0)) {
+    private void initData() {
+        carInfo = (CarInfo) getIntent().getSerializableExtra(Constants.COMMON_KEY);
+        car_info_detail_way.setText(carInfo.getWayStartStr() + "->" + carInfo.getWayEndStr());
+        car_info_detail_number.setText(carInfo.getPlate_number());
+        car_info_detail_car_length.setText(carInfo.getCar_length() + "米");
+        //车型
+        int carTypeValue = carInfo.getCar_type();
+        String[] carTypeStr = mContext.getResources().getStringArray(R.array.car_types_name);
+        for(int i=0;i<Constants.carTypeValues.length;i++) {
+            if(Constants.carTypeValues[i] == carTypeValue){
+                car_info_detail_car_type.setText(carTypeStr[i]);
+            }
+        }
+        car_info_detail_weight.setText(carInfo.getCar_weight() + "吨");
+        //报价
+        int priceUnit = carInfo.getUnits();
+        String[] unitStr = mContext.getResources().getStringArray(R.array.car_price_unit);
+        for(int i=0;i<Constants.unitTypeValues.length;i++) {
+            if(Constants.unitTypeValues[i] == priceUnit){
+                car_info_detail_price.setText(carInfo.getPrice() + "元/" + unitStr[i]);
+            }
+        }
+        car_info_detail_address.setText(carInfo.getLocation());
+        car_info_detail_contact_name.setText(carInfo.getOwer_name());
+        car_info_detail_phone.setText(carInfo.getOwer_phone());
+    }
 
+    private void initViews() {
+        ((TextView) findViewById(R.id.titlebar_id_content)).setText("车源详情");
+        // 返回按钮生效
+        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
+        mTitleBarBack.setOnClickListener(this);
+        // 更多按钮隐藏
+        mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
+        mTitleBarMore.setVisibility(View.GONE);
 
-			default:
-				break;
-			}
-		}
-		((TextView)findViewById(R.id.titlebar_id_content)).setText("车源详细");
-		// 返回按钮生效
-		mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-		mTitleBarBack.setOnClickListener(this);
-		// 更多按钮隐藏
-		mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
-		mTitleBarMore.setVisibility(View.GONE);
-	}
+        car_info_detail_way = (TextView) findViewById(R.id.car_info_detail_way);
+        car_info_detail_number = (TextView) findViewById(R.id.car_info_detail_number);
+        car_info_detail_car_length = (TextView) findViewById(R.id.car_info_detail_car_length);
+        car_info_detail_car_type = (TextView) findViewById(R.id.car_info_detail_car_type);
+        car_info_detail_weight = (TextView) findViewById(R.id.car_info_detail_weight);
+        car_info_detail_price = (TextView) findViewById(R.id.car_info_detail_price);
+        car_info_detail_price_unit = (TextView) findViewById(R.id.car_info_detail_price_unit);
+        car_info_detail_address = (TextView) findViewById(R.id.car_info_detail_address);
+        car_info_detail_contact_name = (TextView) findViewById(R.id.car_info_detail_contact_name);
+        car_info_detail_phone = (TextView) findViewById(R.id.car_info_detail_phone);
+    }
 
-	// 请求指定页数的数据
-	private void getData(int page) {
-//		// try {
-//		state = ISREFRESHING;
-//		// final JSONObject jsonObject = new JSONObject();
-//		// jsonObject.put(Constants.ACTION, Constants.QUERY_FRIENDS_CHILD);
-//		// jsonObject.put(Constants.TOKEN, application.getToken());
-//		// jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
-//		// .toString());
-//		//
-//		// ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-//		// NewSourceInfo.class, new AjaxCallBack() {
-//		//
-//		// @Override
-//		// public void receive(int code, Object result) {
-//		setListShown(true);
-//		// switch (code) {
-//		// case ResultCode.RESULT_OK:
-//		List<Friends> result = new ArrayList<Friends>();
-//		Friends f1 = new Friends("陈宝珠", "1312267222");
-//		Friends f2 = new Friends("张学友", "1383774444");
-//		Friends f3 = new Friends("刘德华", "1323432432");
-//		Friends f4 = new Friends("郭富城", "1333444444");
-//		result.add(f1);
-//		result.add(f2);
-//		result.add(f3);
-//		result.add(f4);
-//		if (result instanceof List) {
-//			List<Friends> mList = (List<Friends>) result;
-//			if (mList == null || mList.isEmpty()) {
-//				load_all = true;
-//				mFootProgress.setVisibility(View.GONE);
-//				mFootMsg.setText("已加载全部");
-//			} else {
-//				if (mList.size() < 10) {
-//					load_all = true;
-//					mFootProgress.setVisibility(View.GONE);
-//					mFootMsg.setText("已加载全部");
-//				} else {
-//					load_all = false;
-//					mFootProgress.setVisibility(View.VISIBLE);
-//					mFootMsg.setText(R.string.tips_isloading);
-//				}
-//				android.util.Log.d("ybxiang", "mList==" + mList);
-//				((FriendsDetailListAdapter) mAdapter).addAll(mList);
-//				mAdapter.notifyDataSetChanged();
-//			}
-//		}
-//		// break;
-//		// case ResultCode.RESULT_ERROR:
-//		// if (result instanceof String)
-//		// showMsg(result.toString());
-//		// break;
-//		// case ResultCode.RESULT_FAILED:
-//		// if (result instanceof String)
-//		// showMsg(result.toString());
-//		// break;
-//		//
-//		// default:
-//		// break;
-//		// }
-//		if (mAdapter.isEmpty()) {
-//			setEmptyText("没有找到数据哦");
-//		}
-//		state = WAIT;
-//		// }
-//		// });
-//		// } catch (JSONException e) {
-//		// e.printStackTrace();
-//		// }
-	}
-
-	@Override
-	public void onClick(View v) {
-		super.onClick(v);
-	}
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+    }
 
 }
