@@ -292,10 +292,15 @@ public class Constants {
 	public static final int DISTANCE = 2000;
 
 	/** 百度key */
+    /**
+     * 百度帐号：llanchong
+     * 密码：1yunbao56dp
+     */
 	public static final String strKey = "E109ADE1D56A36882E4C245A18B532DEC2E48DAE";
+	public static final String BAIDU_APP_Key = "fGahmvRg6YiiqNTY72uoWE9W";
 
-    /** 云检索tableID */
-    public static final String strTableId = "70609";
+    /** 百度云检索tableID */
+    public static final String BAIDU_LBS_TABLE_ID = "70609";
 
 	/** 易宝 */
 	public final static String CUSTOMER_NUMBER = "10012061548";

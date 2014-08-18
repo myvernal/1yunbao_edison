@@ -1,13 +1,5 @@
 package com.maogousoft.logisticsmobile.driver;
 
-import java.io.File;
-import java.util.List;
-import java.util.Stack;
-
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.Application;
 import android.app.NotificationManager;
@@ -20,26 +12,28 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
 import android.text.TextUtils;
-import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
-
-import com.baidu.mapapi.BMapManager;
-import com.baidu.mapapi.MKGeneralListener;
-import com.baidu.mapapi.map.MKEvent;
+import com.baidu.mapapi.SDKInitializer;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.DriverSqliteOpenHelper;
 import com.maogousoft.logisticsmobile.driver.im.KBBinder;
 import com.maogousoft.logisticsmobile.driver.im.ServiceManager;
+import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
 import com.maogousoft.logisticsmobile.driver.model.DictInfo;
 import com.maogousoft.logisticsmobile.driver.utils.ExtendedImageDownloader;
-import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * 程序主入口
@@ -49,66 +43,37 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 public class MGApplication extends Application {
 
 	private final String sp = "user";
-
 	private final String AUTOLOGIN = "auto";
-
 	// 城市数据库地址
 	private String dbUrl;
-
 	// // 授权码
 	// private String token;
-
 	private SQLiteDatabase sdb, citySDB;
-
 	private ImageLoader mImageLoader;
-
 	// activity堆栈
 	private Stack<Activity> stack = new Stack<Activity>();
-
 	private SharedPreferences mSharedPreferences;
-
 	// 字典集合
 	private List<DictInfo> mDictList = null;
-
 	// XMPP服务
 	private ServiceManager manager;
-
 	private KBBinder mBinder;
-
-	private BMapManager mBMapManager = null;
-
 	// 通知栏对象
 	private NotificationManager mNotificationManager = null;
 	private boolean isAnonymous = false;
-    //
     private AbcInfo abcInfo = null;
 
-	@Override
+    @Override
 	public void onCreate() {
 		super.onCreate();
-		// JPushInterface.setDebugMode(true);
 		JPushInterface.init(this);
 
-		// long start=System.currentTimeMillis();
-
-		// new Thread() {
-		//
-		// @Override
-		// public void run() {
 		initImageLoader();
 		initCityDB();
 		initService();
-		// Looper.prepare();
-		initBMapManager();
-
-		LocHelper.getInstance(this).init();
-
-		// super.run();
-		// }
-		//
-		// }.start();
-
-		// System.out.println(System.currentTimeMillis()-start);
+		//LocHelper.getInstance(this).init();
+        //初始化百度sdk
+        SDKInitializer.initialize(this);
 	}
 
 	/** 初始化图片加载工具 **/
@@ -127,19 +92,6 @@ public class MGApplication extends Application {
 				.tasksProcessingOrder(QueueProcessingType.LIFO).build();
 		mImageLoader = ImageLoader.getInstance();
 		mImageLoader.init(config);
-	}
-
-	/** 初始化地图工具 **/
-	public void initBMapManager() {
-		if (mBMapManager == null) {
-			mBMapManager = new BMapManager(this);
-		}
-
-		if (!mBMapManager.init(Constants.strKey, new MyGeneralListener())) {
-			Toast.makeText(getApplicationContext(), "BMapManager  初始化错误!",
-					Toast.LENGTH_LONG).show();
-		}
-		mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}
 
 	/** 初始化城市数据库 **/
@@ -185,10 +137,6 @@ public class MGApplication extends Application {
 			initCityDB();
 		}
 		return this.citySDB;
-	}
-
-	public BMapManager getBMapManager() {
-		return this.mBMapManager;
 	}
 
 	/** 将activity压入栈内 **/
@@ -485,23 +433,6 @@ public class MGApplication extends Application {
 	/** 停止xmpp服务 **/
 	public void stopXMPPService() {
 		manager.stopService(mConnection);
-	}
-
-	// 常用事件监听，用来处理通常的网络错误，授权验证错误等
-	public static class MyGeneralListener implements MKGeneralListener {
-
-		@Override
-		public void onGetNetworkState(int iError) {
-			if (iError == MKEvent.ERROR_NETWORK_CONNECT) {
-			} else if (iError == MKEvent.ERROR_NETWORK_DATA) {
-			}
-		}
-
-		@Override
-		public void onGetPermissionState(int iError) {
-			if (iError == MKEvent.ERROR_PERMISSION_DENIED) {
-			}
-		}
 	}
 
 	/** 判断网络是否可用 **/

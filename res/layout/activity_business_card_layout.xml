@@ -133,7 +133,7 @@
 
                     <TextView
                             style="@style/home_myabc_title_style"
-                            android:drawableLeft="@drawable/ic_info_name"
+                            android:drawableLeft="@drawable/ic_info_carnum"
                             android:text="线路1："/>
 
                     <TextView
@@ -157,7 +157,7 @@
 
                     <TextView
                             style="@style/home_myabc_title_style"
-                            android:drawableLeft="@drawable/ic_info_phone"
+                            android:drawableLeft="@drawable/ic_info_carnum"
                             android:text="线路3："/>
 
                     <TextView
@@ -237,7 +237,7 @@
             </TableLayout>
 
 
-            <TableLayout style="@style/home_myabc_layout_style">
+            <TableLayout style="@style/home_myabc_layout_style" android:visibility="gone">
 
                 <TableRow android:background="@drawable/ic_info_topbg">
 

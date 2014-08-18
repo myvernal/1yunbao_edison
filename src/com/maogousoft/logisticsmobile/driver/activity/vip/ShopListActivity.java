@@ -6,10 +6,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
@@ -29,7 +25,7 @@ import java.util.List;
  * 
  * @author lenovo
  */
-public class ShopListActivity extends BaseListActivity implements OnScrollListener, BDLocationListener {
+public class ShopListActivity extends BaseListActivity implements OnScrollListener{
 
 	private Button mBack;
 	// 底部更多
@@ -46,8 +42,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	private boolean load_all = false;
 
 	private ImageButton ibSearch;
-	/** 定位相关 控制器 */
-	private LocationClient mLocClient;
 
 	private double longitude;
 	private double latitude;
@@ -62,8 +56,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 
 		initViews();
 		initListener();
-		initMap();
-		uploadLocation();
 	}
 
 	private void initViews() {
@@ -164,22 +156,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 		});
 	}
 
-	private void initMap() {
-		if (application.getBMapManager() == null) {
-			application.initBMapManager();
-		}
-		LocationClientOption option = new LocationClientOption();
-		// option.setOpenGps(true);// 打开gps
-		option.setCoorType("bd09ll"); // 设置坐标类型
-		option.setScanSpan(200); // 定位时间，毫秒 小于1秒则一次定位;大于等于1秒则定时定位
-		mLocClient = new LocationClient(this);
-		mLocClient.setLocOption(option);
-	}
-
-	private void uploadLocation() {
-		mLocClient.registerLocationListener(this);
-		mLocClient.start();
-	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
@@ -368,49 +344,4 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 		}
 	}
 
-	@Override
-	public void onReceiveLocation(BDLocation arg0) {
-		mLocClient.unRegisterLocationListener(this);
-		dismissProgress();
-		if (arg0 == null) {
-			return;
-		}
-		longitude = arg0.getLongitude();
-		latitude = arg0.getLatitude();
-
-		if (mAdapter.isEmpty()) {
-			pageIndex = 1;
-			getData(pageIndex);
-		}
-	}
-
-	@Override
-	public void onReceivePoi(BDLocation arg0) {}
-
-    protected void onPause() {
-        mLocClient.stop();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (mLocClient != null)
-            mLocClient.stop();
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
 }

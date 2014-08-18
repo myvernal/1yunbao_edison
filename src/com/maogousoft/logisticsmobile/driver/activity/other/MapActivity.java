@@ -2,28 +2,14 @@ package com.maogousoft.logisticsmobile.driver.activity.other;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-
+import android.widget.Button;
+import android.widget.RadioGroup;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.map.LocationData;
-import com.baidu.mapapi.map.MapController;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MyLocationOverlay;
-import com.baidu.mapapi.map.PoiOverlay;
-import com.baidu.mapapi.search.MKAddrInfo;
-import com.baidu.mapapi.search.MKBusLineResult;
-import com.baidu.mapapi.search.MKDrivingRouteResult;
-import com.baidu.mapapi.search.MKPoiResult;
-import com.baidu.mapapi.search.MKSearch;
-import com.baidu.mapapi.search.MKSearchListener;
-import com.baidu.mapapi.search.MKSuggestionResult;
-import com.baidu.mapapi.search.MKTransitRouteResult;
-import com.baidu.mapapi.search.MKWalkingRouteResult;
-import com.baidu.platform.comapi.basestruct.GeoPoint;
-import com.maogousoft.logisticsmobile.driver.Constants;
+import com.baidu.mapapi.map.*;
+import com.baidu.mapapi.model.LatLng;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 
@@ -32,193 +18,141 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
  * 
  * @author ashuang
  */
-public class MapActivity extends BaseActivity implements BDLocationListener {
+public class MapActivity extends BaseActivity {
 
-	private MapView mMapView;
+    // 定位相关
+    LocationClient mLocClient;
+    public MyLocationListenner myListener = new MyLocationListenner();
+    private MyLocationConfiguration.LocationMode mCurrentMode;
+    BitmapDescriptor mCurrentMarker;
 
-	/** 地图控制器(移动，放大，缩小，旋转，俯视角度) */
-	private MapController mMapController = null;
+    MapView mMapView;
+    BaiduMap mBaiduMap;
 
-	/** 定位相关 控制器 */
-	private LocationClient mLocClient;
+    // UI相关
+    RadioGroup.OnCheckedChangeListener radioButtonListener;
+    Button requestLocButton;
+    boolean isFirstLoc = true;// 是否首次定位
 
-	/** 一个显示用户当前位置的Overlay */
-	private MyLocationOverlay myLocationOverlay = null;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_demo_location);
+        requestLocButton = (Button) findViewById(R.id.button1);
+        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+        requestLocButton.setText("普通");
+        View.OnClickListener btnClickListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                switch (mCurrentMode) {
+                    case NORMAL:
+                        requestLocButton.setText("跟随");
+                        mCurrentMode = MyLocationConfiguration.LocationMode.FOLLOWING;
+                        mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(
+                                        mCurrentMode, true, mCurrentMarker));
+                        break;
+                    case COMPASS:
+                        requestLocButton.setText("普通");
+                        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+                        mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(
+                                        mCurrentMode, true, mCurrentMarker));
+                        break;
+                    case FOLLOWING:
+                        requestLocButton.setText("罗盘");
+                        mCurrentMode = MyLocationConfiguration.LocationMode.COMPASS;
+                        mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(
+                                        mCurrentMode, true, mCurrentMarker));
+                        break;
+                }
+            }
+        };
+        requestLocButton.setOnClickListener(btnClickListener);
 
-	private MKSearch mSearch = null;
+        RadioGroup group = (RadioGroup) this.findViewById(R.id.radioGroup);
+        radioButtonListener = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.defaulticon) {
+                    // 传入null则，恢复默认图标
+                    mCurrentMarker = null;
+                    mBaiduMap
+                            .setMyLocationConfigeration(new MyLocationConfiguration(
+                                    mCurrentMode, true, null));
+                }
+                if (checkedId == R.id.customicon) {
+                    // 修改为自定义marker
+                    mCurrentMarker = BitmapDescriptorFactory.fromResource(R.drawable.map_marker_blue);
+                    mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(
+                                    mCurrentMode, true, mCurrentMarker));
+                }
+            }
+        };
+        group.setOnCheckedChangeListener(radioButtonListener);
 
-	private String keyWord = "";
+        // 地图初始化
+        mMapView = (MapView) findViewById(R.id.bmapView);
+        mBaiduMap = mMapView.getMap();
+        // 开启定位图层
+        mBaiduMap.setMyLocationEnabled(true);
+        // 定位初始化
+        mLocClient = new LocationClient(this);
+        mLocClient.registerLocationListener(myListener);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);// 打开gps
+        option.setCoorType("bd09ll"); // 设置坐标类型
+        option.setScanSpan(1000);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home_other_map);
-		initData();
-		initView();
-		initMap();
-	}
+    /**
+     * 定位SDK监听函数
+     */
+    public class MyLocationListenner implements BDLocationListener {
 
-	private void initView() {
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
-		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_map_round);
-		mMapView = (MapView) findViewById(R.id.motorcade_map);
-	}
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // map view 销毁后不在处理新接收的位置
+            if (location == null || mMapView == null)
+                return;
+            MyLocationData locData = new MyLocationData.Builder()
+                    .accuracy(location.getRadius())
+                            // 此处设置开发者获取到的方向信息，顺时针0-360
+                    .direction(100).latitude(location.getLatitude())
+                    .longitude(location.getLongitude()).build();
+            mBaiduMap.setMyLocationData(locData);
+            if (isFirstLoc) {
+                isFirstLoc = false;
+                LatLng ll = new LatLng(location.getLatitude(),
+                        location.getLongitude());
+                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+                mBaiduMap.animateMapStatus(u);
+            }
+        }
 
-	private void initData() {
-		if (getIntent().hasExtra("keyWord"))
-			keyWord = getIntent().getStringExtra("keyWord");
-	}
+        public void onReceivePoi(BDLocation poiLocation) {
+        }
+    }
 
-	private void initMap() {
-		if (application.getBMapManager() == null) {
-			application.initBMapManager();
-		}
-		mMapController = mMapView.getController();
-		myLocationOverlay = new MyLocationOverlay(mMapView);
-		myLocationOverlay.enableCompass(); // 打开指南针
-		LocationClientOption option = new LocationClientOption();
-		option.setOpenGps(true);// 打开gps
-		option.setCoorType("bd09ll"); // 设置坐标类型
-		option.setScanSpan(200); // 定位时间，毫秒 小于1秒则一次定位;大于等于1秒则定时定位
-		mLocClient = new LocationClient(this);
-		mLocClient.registerLocationListener(this);
-		mLocClient.setLocOption(option);
-		mLocClient.start();
+    @Override
+    protected void onPause() {
+        mMapView.onPause();
+        super.onPause();
+    }
 
-		mMapView.getController().setZoom(16);
-		mMapView.getController().enableClick(true);
-		mMapView.setBuiltInZoomControls(true);
-		mMapView.setLongClickable(true);
-		mMapView.getOverlays().add(myLocationOverlay);
+    @Override
+    protected void onResume() {
+        mMapView.onResume();
+        super.onResume();
+    }
 
-		mSearch = new MKSearch();
-		mSearch.init(application.getBMapManager(), new MKSearchListener() {
-
-			public void onGetWalkingRouteResult(MKWalkingRouteResult arg0, int arg1) {
-				// 返回步行路线搜索结果
-			}
-
-			public void onGetTransitRouteResult(MKTransitRouteResult arg0, int arg1) {
-				// 返回公交搜索结果
-			}
-
-			public void onGetSuggestionResult(MKSuggestionResult arg0, int arg1) {
-				// 返回联想词信息搜索结果
-			}
-
-			public void onGetPoiResult(MKPoiResult result, int arg1, int arg2) {
-				/**
-				 * * POI搜索结果（范围检索、城市POI检索、周边检索） * * @param result 搜索结果 * @param
-				 * type 返回结果类型（11,12,21:poi列表 7:城市列表） * @param iError
-				 * 错误号（0表示正确返回）
-				 */
-				if (result == null) {
-					return;
-				}
-				// PoiOverlay是baidu map api提供的用于显示POI的Overlay
-				PoiOverlay poioverlay = new PoiOverlay(MapActivity.this, mMapView);
-				// 设置搜索到的POI数据
-				poioverlay.setData(result.getAllPoi());
-				// 在地图上显示PoiOverlay（将搜索到的兴趣点标注在地图上）
-				mMapView.getOverlays().add(poioverlay);
-				mMapView.refresh();
-			}
-
-			public void onGetPoiDetailSearchResult(int arg0, int arg1) {
-				// 返回poi相信信息搜索的结果
-			}
-
-			public void onGetDrivingRouteResult(MKDrivingRouteResult arg0, int arg1) {
-				/** * 驾车路线搜索结果 * * @param result 搜索结果 * @param iError 错误号 */
-
-			}
-
-			@Override
-			public void onGetBusDetailResult(MKBusLineResult arg0, int arg1) {
-				// 返回公交车详情信息搜索结果
-			}
-
-			@Override
-			public void onGetAddrResult(MKAddrInfo arg0, int arg1) {
-				/**
-				 * * 根据经纬度搜索地址信息结果 * * @param result 搜索结果 * @param iError 错误号
-				 * （0表示正确返回）
-				 */
-			}
-		});
-	}
-
-	@Override
-	protected void onPause() {
-		mMapView.onPause();
-		super.onPause();
-	}
-
-	@Override
-	protected void onResume() {
-		mMapView.onResume();
-		super.onResume();
-	}
-
-	@Override
-	public void onClick(View v) {
-		super.onClick(v);
-		if (R.id.titlebar_id_more == v.getId()) {
-			mLocClient.requestLocation();
-		}
-	}
-
-	@Override
-	protected void onDestroy() {
-		if (mLocClient != null)
-			mLocClient.stop();
-		mMapView.destroy();
-		super.onDestroy();
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		// 保存地图状态
-		mMapView.onSaveInstanceState(outState);
-	}
-
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
-		mMapView.onRestoreInstanceState(savedInstanceState);
-	}
-
-	/**
-	 * 监听函数，有新位置的时候, 更新位置标志，移动到地图中心点
-	 */
-	public void onReceiveLocation(BDLocation location) {
-		if (location != null) {
-
-			try {
-				// 位置信息
-				LocationData locData = new LocationData();
-				locData.latitude = location.getLatitude();
-				locData.longitude = location.getLongitude();
-				locData.accuracy = location.getRadius();
-				locData.direction = location.getDerect();
-				GeoPoint geoPoint = new GeoPoint((int) (locData.latitude * 1e6), (int) (locData.longitude * 1e6));
-				// 更新位置标志
-				myLocationOverlay.setData(locData);
-
-				if (!keyWord.equals(""))
-					mSearch.poiSearchNearBy(keyWord, geoPoint, Constants.DISTANCE);
-				mMapView.refresh();
-				// 移动到地图中心点
-				mMapController.animateTo(new GeoPoint((int) (locData.latitude * 1e6), (int) (locData.longitude * 1e6)));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	@Override
-	public void onReceivePoi(BDLocation arg0) {
-
-	}
+    @Override
+    protected void onDestroy() {
+        // 退出时销毁定位
+        mLocClient.stop();
+        // 关闭定位图层
+        mBaiduMap.setMyLocationEnabled(false);
+        mMapView.onDestroy();
+        mMapView = null;
+        super.onDestroy();
+    }
 }

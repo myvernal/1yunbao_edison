@@ -1,7 +1,5 @@
 package com.maogousoft.logisticsmobile.driver.activity.other;
 
-import java.util.List;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -12,25 +10,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.RouteOverlay;
-import com.baidu.mapapi.search.MKAddrInfo;
-import com.baidu.mapapi.search.MKBusLineResult;
-import com.baidu.mapapi.search.MKDrivingRouteResult;
-import com.baidu.mapapi.search.MKPlanNode;
-import com.baidu.mapapi.search.MKPoiResult;
-import com.baidu.mapapi.search.MKSearch;
-import com.baidu.mapapi.search.MKSearchListener;
-import com.baidu.mapapi.search.MKSuggestionResult;
-import com.baidu.mapapi.search.MKTransitRouteResult;
-import com.baidu.mapapi.search.MKWalkingRouteResult;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.CityListAdapter;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.CityInfo;
 import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
+
+import java.util.List;
 
 /**
  * 里程计算器
@@ -39,7 +27,7 @@ import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
  */
 public class DistanceCalcActivity extends BaseActivity implements OnItemClickListener {
 
-	private MKSearch mkSearch = null;
+	//private MKSearch mkSearch = null;
 
 	private MapView mMapView;
 
@@ -62,7 +50,6 @@ public class DistanceCalcActivity extends BaseActivity implements OnItemClickLis
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_others_calc);
 		initViews();
-		initMap();
 		initData();
 	}
 
@@ -88,19 +75,6 @@ public class DistanceCalcActivity extends BaseActivity implements OnItemClickLis
 		calc_change.setOnClickListener(this);
 
 		gridView1 = (MyGridView) findViewById(R.id.calc_gridview1);
-	}
-
-	private void initMap() {
-		if (application.getBMapManager() == null) {
-			application.initBMapManager();
-		}
-		mMapView.getController().setZoom(18);
-		mMapView.getController().enableClick(true);
-		mMapView.setBuiltInZoomControls(true);
-		mMapView.setLongClickable(true);
-
-		mkSearch = new MKSearch();
-		mkSearch.init(application.getBMapManager(), searchListener);
 	}
 
 	private void initData() {
@@ -180,11 +154,11 @@ public class DistanceCalcActivity extends BaseActivity implements OnItemClickLis
 			return;
 		}
 		mMapView.setVisibility(View.VISIBLE);
-		MKPlanNode stNode = new MKPlanNode();
-		stNode.name = bty2.getText().toString();
-		MKPlanNode enNode = new MKPlanNode();
-		enNode.name = bty4.getText().toString();
-		mkSearch.drivingSearch(bty1.getText().toString(), stNode, bty3.getText().toString(), enNode);
+//		MKPlanNode stNode = new MKPlanNode();
+//		stNode.name = bty2.getText().toString();
+//		MKPlanNode enNode = new MKPlanNode();
+//		enNode.name = bty4.getText().toString();
+//		mkSearch.drivingSearch(bty1.getText().toString(), stNode, bty3.getText().toString(), enNode);
 		showProgress("计算中...");
 	}
 
@@ -244,46 +218,46 @@ public class DistanceCalcActivity extends BaseActivity implements OnItemClickLis
 		line.setText(sb);
 	}
 
-	private MKSearchListener searchListener = new MKSearchListener() {
-
-		/** 返回驾乘路线搜索结果 */
-		public void onGetDrivingRouteResult(MKDrivingRouteResult res, int arg1) {
-			dismissProgress();
-			if (arg1 != 0 || res == null) {
-				showMsg("没有找到线路");
-				return;
-			}
-			RouteOverlay ro = new RouteOverlay(DistanceCalcActivity.this, mMapView);
-			ro.setData(res.getPlan(0).getRoute(0));
-			calc(res.getPlan(0).getDistance());
-			mMapView.getOverlays().clear();
-			mMapView.getOverlays().add(ro);
-			mMapView.refresh();
-			mMapView.getController().zoomToSpan(ro.getLatSpanE6(), ro.getLonSpanE6());
-			mMapView.getController().animateTo(res.getStart().pt);
-		}
-
-		public void onGetWalkingRouteResult(MKWalkingRouteResult arg0, int arg1) {
-		}
-
-		public void onGetTransitRouteResult(MKTransitRouteResult arg0, int arg1) {
-		}
-
-		public void onGetSuggestionResult(MKSuggestionResult arg0, int arg1) {
-		}
-
-		public void onGetPoiResult(MKPoiResult arg0, int arg1, int arg2) {
-		}
-
-		public void onGetPoiDetailSearchResult(int arg0, int arg1) {
-		}
-
-		public void onGetBusDetailResult(MKBusLineResult arg0, int arg1) {
-		}
-
-		public void onGetAddrResult(MKAddrInfo arg0, int arg1) {
-		}
-	};
+//	private MKSearchListener searchListener = new MKSearchListener() {
+//
+//		/** 返回驾乘路线搜索结果 */
+//		public void onGetDrivingRouteResult(MKDrivingRouteResult res, int arg1) {
+//			dismissProgress();
+//			if (arg1 != 0 || res == null) {
+//				showMsg("没有找到线路");
+//				return;
+//			}
+//			RouteOverlay ro = new RouteOverlay(DistanceCalcActivity.this, mMapView);
+//			ro.setData(res.getPlan(0).getRoute(0));
+//			calc(res.getPlan(0).getDistance());
+//			mMapView.getOverlays().clear();
+//			mMapView.getOverlays().add(ro);
+//			mMapView.refresh();
+//			mMapView.getController().zoomToSpan(ro.getLatSpanE6(), ro.getLonSpanE6());
+//			mMapView.getController().animateTo(res.getStart().pt);
+//		}
+//
+//		public void onGetWalkingRouteResult(MKWalkingRouteResult arg0, int arg1) {
+//		}
+//
+//		public void onGetTransitRouteResult(MKTransitRouteResult arg0, int arg1) {
+//		}
+//
+//		public void onGetSuggestionResult(MKSuggestionResult arg0, int arg1) {
+//		}
+//
+//		public void onGetPoiResult(MKPoiResult arg0, int arg1, int arg2) {
+//		}
+//
+//		public void onGetPoiDetailSearchResult(int arg0, int arg1) {
+//		}
+//
+//		public void onGetBusDetailResult(MKBusLineResult arg0, int arg1) {
+//		}
+//
+//		public void onGetAddrResult(MKAddrInfo arg0, int arg1) {
+//		}
+//	};
 
 	@Override
 	protected void onPause() {
@@ -295,24 +269,6 @@ public class DistanceCalcActivity extends BaseActivity implements OnItemClickLis
 	protected void onResume() {
 		mMapView.onResume();
 		super.onResume();
-	}
-
-	@Override
-	protected void onDestroy() {
-		mMapView.destroy();
-		super.onDestroy();
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		mMapView.onSaveInstanceState(outState);
-	}
-
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
-		mMapView.onRestoreInstanceState(savedInstanceState);
 	}
 
 	@Override

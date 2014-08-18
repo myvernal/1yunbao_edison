@@ -1,11 +1,11 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
 import android.view.View;
+import com.baidu.mapapi.SDKInitializer;
 import com.maogousoft.logisticsmobile.driver.activity.home.*;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.RegisterShipperActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
-import com.maogousoft.logisticsmobile.driver.model.AdvertInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
 import org.json.JSONException;
@@ -27,18 +27,13 @@ import android.widget.TabHost;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
-import com.maogousoft.logisticsmobile.driver.activity.home.MyBusinessCard;
-import com.maogousoft.logisticsmobile.driver.activity.info.InformationActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.LoginActivity;
-import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.umeng.update.UmengUpdateAgent;
-
-import java.util.List;
 
 /**
  * 登录之后显示的主页
@@ -47,6 +42,7 @@ import java.util.List;
  */
 public class MainActivity extends TabActivity {
 
+    private static final String TAG = "MainActivity";
     private Context mContext; // PR105
     private int userType; // PR112 账户身份
     /**
@@ -59,7 +55,12 @@ public class MainActivity extends TabActivity {
     private MGApplication application;
     private BroadcastReceiver switchMainActivityReceiver;
     private View mAnonymousLayout;
-    private View mMainContentLayout;
+    private BaiduSDKReceiver baiduSDKReceiver;
+
+    @Override
+    public CharSequence onCreateDescription() {
+        return super.onCreateDescription();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,12 @@ public class MainActivity extends TabActivity {
                 ACTION_SWITCH_MAINACTIVITY));
         getABCInfo();
         showDialogIfUserIsAnonymous();
+        //注册百度sdk广播监听者
+        IntentFilter iFilter = new IntentFilter();
+        iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
+        iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
+        baiduSDKReceiver = new BaiduSDKReceiver();
+        registerReceiver(baiduSDKReceiver, iFilter);
     }
 
     private void showDialogIfUserIsAnonymous() {
@@ -95,6 +102,8 @@ public class MainActivity extends TabActivity {
     protected void onDestroy() {
         if (switchMainActivityReceiver != null) {
             unregisterReceiver(switchMainActivityReceiver);
+            // 取消监听 SDK 广播
+            unregisterReceiver(baiduSDKReceiver);
         }
         super.onDestroy();
     }
@@ -102,7 +111,6 @@ public class MainActivity extends TabActivity {
     private void initViews() {
         application = (MGApplication) getApplication();
         mAnonymousLayout = findViewById(R.id.anonymousLayout);
-        mMainContentLayout = findViewById(R.id.main_content_layout);
         userType = application.getUserType();
         mTabHost = getTabHost();
         switch (userType) {
@@ -281,5 +289,21 @@ public class MainActivity extends TabActivity {
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
         startActivity(Intent.createChooser(intent, getTitle()));
+    }
+
+    /**
+     * 构造广播监听类，监听 SDK key 验证以及网络异常广播
+     */
+    public class BaiduSDKReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            String s = intent.getAction();
+            LogUtil.d(TAG, "action: " + s);
+            if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
+                LogUtil.d(TAG, "key 验证出错! 请在 AndroidManifest.xml 文件中检查 key 设置");
+            } else if (s
+                    .equals(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)) {
+                LogUtil.d(TAG, "网络出错");
+            }
+        }
     }
 }
