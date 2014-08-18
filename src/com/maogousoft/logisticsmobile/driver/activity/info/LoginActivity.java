@@ -10,7 +10,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import com.maogousoft.logisticsmobile.driver.Constants;
-import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
@@ -48,6 +47,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_info_login);
         initViews();
         initData();
+        setIsShowAnonymousActivity(false);
         // application.writeAutoLogin(true); // PR112 默认自动登陆
     }
 

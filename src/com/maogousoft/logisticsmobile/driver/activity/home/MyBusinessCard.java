@@ -111,19 +111,19 @@ public class MyBusinessCard extends BaseActivity {
             startActivity(new Intent(context, UpdatePwdActivity.class));
         }
 //        else if (v == mCreditContainer) {
-//            startActivity(new Intent(context, MyCreditActivity.class).putExtra(
+//            startActivity(new Intent(mContext, MyCreditActivity.class).putExtra(
 //                    "info", mAbcInfo));
 //        } else if (v == mCharge) {
-//            startActivity(new Intent(context, ChargeActivity.class));
+//            startActivity(new Intent(mContext, ChargeActivity.class));
 //        } else if (v == mAccountRecord) {
-//            startActivity(new Intent(context, AccountRecordActivity.class));
+//            startActivity(new Intent(mContext, AccountRecordActivity.class));
 //        }
         else if (v == mUpdate) {
             startActivity(new Intent(context, OptionalActivity.class).putExtra(
                     "info", mAbcInfo));
         }
 //        else if (v == mHistory) {
-//            startActivity(new Intent(context, HistroyOrderActivity.class)
+//            startActivity(new Intent(mContext, HistroyOrderActivity.class)
 //                    .putExtra("info", mAbcInfo));
 //        }
         else if (v == mChangePath) {

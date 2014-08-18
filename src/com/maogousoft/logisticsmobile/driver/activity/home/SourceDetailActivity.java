@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +25,7 @@ import com.maogousoft.logisticsmobile.driver.utils.GrabDialog;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
+import com.ybxiang.driver.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,47 +41,29 @@ import java.util.Date;
 public class SourceDetailActivity extends BaseActivity {
 
     private static final String TAG = "SourceDetailActivity";
-
     // 传递订单编号
     public static final String ORDER_ID = "order_id";
-
     public static final String ORDER_INFO = "sourceInfo";
-
     private int order_id;
-
-    private Button mBack, mPlace, mAttention, mShare;
-
+    private Button mBack, mPlace, mAttention, mPhone, mShare;
     private MyGridView mGridView;
-
     private ImageGridAdapter mAdapter;
-
     private TextView mOrderNumber, mName, mLine, mSourceName, mSourceType, mShipType, mSourceCarLength,
-            mSourceCarType, mSourcePrice, mSourceGold, mValidateTime;
-    private Button mPhone;
-
-    private RatingBar mScore, ratingbarScore1, ratingbarScore2,
-            ratingbarScore3;
-
+            mSourceCarType, mSourcePrice, mSourceGold, mValidateTime, mZhuangCheTime, mWeight, sourceOther;
+    private RatingBar mScore, ratingbarScore1, ratingbarScore2, ratingbarScore3;
     private Resources mResources;
-
     private NewSourceInfo mSourceInfo;
-
     private RelativeLayout mPingjia;
-
-    private TextView sourceOther;
-
     /**
      * 司机账户余额
      */
     private double balance;
-
     /**
      * 信息费
      */
     private double messagePrice;
-
     private boolean isFromPush = false;
-
+    private StringBuffer shareContent = new StringBuffer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +120,8 @@ public class SourceDetailActivity extends BaseActivity {
         mSourcePrice = (TextView) findViewById(R.id.source_detail_baojia);
         mSourceGold = (TextView) findViewById(R.id.source_detail_baozhengjin);
         mValidateTime = (TextView) findViewById(R.id.source_detail_youxiaoshijian);
+        mZhuangCheTime = (TextView) findViewById(R.id.source_detail_zhuangche);
+        mWeight = (TextView) findViewById(R.id.source_detail_weight);
     }
 
     // 初始化数据source_detail_phone
@@ -244,11 +230,14 @@ public class SourceDetailActivity extends BaseActivity {
             }
 
         }
+        String phone = "";
         if (!TextUtils.isEmpty(sourceInfo.getCargo_user_phone())) {
-            mPhone.setText(sourceInfo.getCargo_user_phone());
+            phone = sourceInfo.getCargo_user_phone();
+            mPhone.setText(phone);
         } else {
             if (!TextUtils.isEmpty(sourceInfo.getUser_phone())) {
-                mPhone.setText(sourceInfo.getUser_phone());
+                phone = sourceInfo.getUser_phone();
+                mPhone.setText(phone);
             } else {
                 mPhone.setText("无");
             }
@@ -256,14 +245,24 @@ public class SourceDetailActivity extends BaseActivity {
 
         // 备注：使用 Cargo_remark参数 来传递的 发货详细内容
         // webview.loadData(sourceInfo.getCargo_remark(), "text/html", "UTF-8");
-        sourceOther.setText(sourceInfo.getCargo_remark() + "\n" + sourceInfo.getCargo_tip());
-        mLine.setText(mLine.getText() + sourceInfo.getStart_province_str() + sourceInfo.getStart_city_str() + sourceInfo.getStart_district_str() +
-                "-" + sourceInfo.getEnd_province_str() + sourceInfo.getEnd_city_str() + sourceInfo.getEnd_district_str());
-        mSourceName.setText(mSourceName.getText() + sourceInfo.getCargo_desc());
-        mSourceType.setText(mSourceType.getText() + sourceInfo.getCargo_type_str());
-        mShipType.setText(mShipType.getText() + sourceInfo.getShip_type_str());
-        mSourceCarLength.setText(mSourceCarLength.getText().toString() + sourceInfo.getCar_length() + "米");
-        mSourceCarType.setText(mSourceCarType.getText() + sourceInfo.getCar_type_str());
+        String other = sourceInfo.getCargo_remark() + sourceInfo.getCargo_tip();
+        sourceOther.setText(other);
+        String way = sourceInfo.getStart_province_str() + sourceInfo.getStart_city_str() + sourceInfo.getStart_district_str() +
+                "-" + sourceInfo.getEnd_province_str() + sourceInfo.getEnd_city_str() + sourceInfo.getEnd_district_str();
+
+        mLine.setText(Html.fromHtml(mLine.getText() + Utils.textFormatGreen(way)));
+        String sourceName = sourceInfo.getCargo_desc();
+        mSourceName.setText(Html.fromHtml(mSourceName.getText() + Utils.textFormatBlue(sourceName)));
+        String sourceType = sourceInfo.getCargo_type_str();
+        mSourceType.setText(Html.fromHtml(mSourceType.getText() + Utils.textFormatBlue(sourceType)));
+        String weight = "15吨";
+        mWeight.setText(Html.fromHtml(mValidateTime.getText().toString() + Utils.textFormatBlue(weight)));
+        String shipType = sourceInfo.getShip_type_str();
+        mShipType.setText(Html.fromHtml(mShipType.getText() + Utils.textFormatBlue(shipType)));
+        String carLength = sourceInfo.getCar_length() + "米";
+        mSourceCarLength.setText(mSourceCarLength.getText().toString() + carLength);
+        String carType = sourceInfo.getCar_type_str();
+        mSourceCarType.setText(mSourceCarType.getText() + carType);
         //报价单位
         Integer unitPrice = sourceInfo.getCargo_unit();
         if(unitPrice != null) {
@@ -276,9 +275,10 @@ public class SourceDetailActivity extends BaseActivity {
         }
         //
         mSourceGold.setText(mSourceGold.getText().toString() + sourceInfo.getUser_bond() + "元");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         Date date = new Date(sourceInfo.getValidate_time());
         mValidateTime.setText(mValidateTime.getText().toString() + sdf.format(date));
+        mZhuangCheTime.setText(mZhuangCheTime.getText().toString() + sdf.format(date) + "之前");
 
         float score = Float.parseFloat(String.valueOf(sourceInfo.getScore()));
         if (score == 0) {
@@ -331,6 +331,19 @@ public class SourceDetailActivity extends BaseActivity {
         } else {
             mAttention.setText("取消关注货主");
         }
+
+        Date dateNow = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+        String time = simpleDateFormat.format(dateNow);
+        String commonInfo = getString(R.string.common_share_info);
+        shareContent.append(way).append(" ")
+                .append(weight).append(" ")
+                .append(carLength).append(" ")
+                .append(sourceType).append(" ")
+                .append(other).append(" \n")
+                .append(phone).append(" \n")
+                .append(time).append(" \n")
+                .append(commonInfo);
     }
 
     // 货源详情
@@ -602,7 +615,7 @@ public class SourceDetailActivity extends BaseActivity {
         final int id = v.getId();
         switch (id) {
             case R.id.titlebar_id_more:
-                share();
+                share(shareContent.toString());
                 break;
             case R.id.source_id_detail_attention:
                 attentionOrder();
@@ -824,6 +837,5 @@ public class SourceDetailActivity extends BaseActivity {
                 dialog.dismiss();
             }
         });
-
     }
 }

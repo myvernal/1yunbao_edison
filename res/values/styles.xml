@@ -28,6 +28,15 @@
         <item name="android:divider">@drawable/abs__list_divider_holo_light</item>
     </style>
 
+    <style name="AppSpecialTheme" parent="AppTheme">
+        <item name="android:windowAnimationStyle">@style/Animation</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:dropDownSelector">@drawable/selector_list_holo_light</item>
+        <item name="android:divider">@drawable/abs__list_divider_holo_light</item>
+    </style>
+
     <style name="MultiChoiceAdapter_DefaultSelectedItemStyle">
         <item name="selectedItemBackground">@color/mca__default_selected_item_background</item>
         <item name="itemClickInActionMode">selectItem</item>
@@ -330,6 +339,14 @@
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 
+    <style name="home_main_tips_base_style">
+        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/font_gray3</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
     <style name="home_myabc_content_style">
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:gravity">center_vertical</item>
@@ -386,7 +403,7 @@
         <item name="android:paddingRight">5dp</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
-        <item name="android:textColor">@color/font_gray2</item>
+        <item name="android:textColor">@color/TextColorBlack</item>
     </style>
 
     <style name="home_sourcedetail_cx_text_style">

@@ -24,6 +24,7 @@ public class HomeDriverActivity extends BaseHomeActivity {
 	protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_home_new_driver1);
 		super.onCreate(savedInstanceState);
+        setIsShowAnonymousActivity(false);
 		LogUtil.i("wst", "HomeActivity driver -onCreate");
 	}
 

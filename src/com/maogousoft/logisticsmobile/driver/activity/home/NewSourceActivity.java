@@ -164,7 +164,7 @@ public class NewSourceActivity extends BaseListActivity implements
                     case 1:// 关注此线路
                         doFocuse();
                         //Toast.makeText(mContext, "关注此线路成功", Toast.LENGTH_SHORT).show();
-                        // startActivity(new Intent(context,
+                        // startActivity(new Intent(mContext,
                         // SearchSourceActivity.class));
                         break;
                     case 2:

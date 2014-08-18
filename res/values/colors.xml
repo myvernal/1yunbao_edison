@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="transparent">#00000000</color>
     <color name="title_bg">#2678bd</color>
     <color name="window_bg">#e3e8ed</color>
     <color name="orange_order">#ffab33</color>

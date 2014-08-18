@@ -21,63 +21,87 @@
                     android:id="@id/source_id_order_number"
                     style="@style/home_online_order_textview_style"/>
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_xianlu"
-                      android:text="运输线路:"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_mingchen"
-                      android:text="货物名称:"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_leixing"
-                      android:text="货物类型:"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_yunshufangshi"
-                      android:text="运输方式:"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_chechang"
-                      android:text="车        长:"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_chexing"
-                      android:text="车        型:"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_baojia"
-                      android:text="报        价:"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_baozhengjin"
-                      android:text="保  证  金:"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_youxiaoshijian"
-                      android:text="有效时间:"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/home_source_detail_top_style"
-                      android:id="@+id/source_detail_buchongshuoming"
-                      android:text="补充说明:"/>
-
-            <TextView
-                    android:id="@+id/source_detail_other"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/TextColorWhite"
-                    android:layout_margin="10dp"/>
+                    android:padding="20dp"
+                    android:orientation="vertical">
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_xianlu"
+                          android:text="运输线路："/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_mingchen"
+                          android:text="货物名称："/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_leixing"
+                          android:text="货物类型：" android:visibility="gone"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_yunshufangshi"
+                          android:text="运输方式："/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_weight"
+                          android:text="体积重量："/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_chechang"
+                          android:text="车        长："
+                          android:visibility="gone"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_chexing"
+                          android:text="车        型："
+                          android:visibility="gone"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_baojia"
+                          android:text="报        价："
+                          android:visibility="gone"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_baozhengjin"
+                          android:text="保  证  金："
+                          android:visibility="gone"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_zhuangche"
+                          android:text="装车时间："/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_youxiaoshijian"
+                          android:text="有效时间："/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_buchongshuoming"
+                          android:text="货单说明："/>
+
+                <TextView
+                        android:id="@+id/source_detail_other"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/TextColorWhite"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp"/>
+
+            </LinearLayout>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -225,6 +249,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/string_home_sourcedetail_attention"/>
+
         </LinearLayout>
     </ScrollView>
 

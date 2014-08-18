@@ -21,6 +21,7 @@ public class HomeShipperActivity extends BaseHomeActivity {
 		LogUtil.i("wst", "HomeActivity Shipper -onCreate");
 		setContentView(R.layout.activity_home_new_shipper);
         super.onCreate(savedInstanceState);
+        setIsShowAnonymousActivity(false);
 	}
 
 	// 我的车队

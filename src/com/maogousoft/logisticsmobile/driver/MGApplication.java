@@ -58,8 +58,6 @@ public class MGApplication extends Application {
 	// XMPP服务
 	private ServiceManager manager;
 	private KBBinder mBinder;
-	// 通知栏对象
-	private NotificationManager mNotificationManager = null;
 	private boolean isAnonymous = false;
     private AbcInfo abcInfo = null;
 
@@ -191,7 +189,6 @@ public class MGApplication extends Application {
 			}
 		}
 		stack.clear();
-		mNotificationManager.cancelAll();
 	}
 
 	/** 结束除当前的所有activity **/
@@ -473,5 +470,14 @@ public class MGApplication extends Application {
 
     public void setAbcInfo(AbcInfo abcInfo) {
         this.abcInfo = abcInfo;
+    }
+
+    public Class preClass;
+    public Class getPreClass() {
+        return preClass;
+    }
+
+    public void setPreClass(Class preClass) {
+        this.preClass = preClass;
     }
 }

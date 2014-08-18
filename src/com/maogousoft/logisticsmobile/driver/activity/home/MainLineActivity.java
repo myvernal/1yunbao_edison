@@ -1,5 +1,12 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
+import android.widget.ImageView;
+import com.ybxiang.driver.util.SettingUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +38,8 @@ import com.maogousoft.logisticsmobile.driver.utils.TimeUtils;
  */
 public class MainLineActivity extends BaseActivity {
 	private Button mChangePath;
-	private TextView mPath1, mPath2, mPath3;
+	private TextView mPath1, mPath2, mPath3, mTip;
+    private ImageView sound_line_1, sound_line_2, sound_line_3;
 	// 个人abc信息
 	private AbcInfo mAbcInfo;
 
@@ -40,7 +48,7 @@ public class MainLineActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_line);
 		initViews();
-		initData(savedInstanceState);
+		initData();
 	}
 
 	@Override
@@ -57,10 +65,27 @@ public class MainLineActivity extends BaseActivity {
 		mPath1 = (TextView) findViewById(R.id.myabc_id_path1);
 		mPath2 = (TextView) findViewById(R.id.myabc_id_path2);
 		mPath3 = (TextView) findViewById(R.id.myabc_id_path3);
+        sound_line_1 = (ImageView) findViewById(R.id.sound_line_1);
+        sound_line_2 = (ImageView) findViewById(R.id.sound_line_2);
+        sound_line_3 = (ImageView) findViewById(R.id.sound_line_3);
+        sound_line_1.setOnClickListener(this);
+        sound_line_2.setOnClickListener(this);
+        sound_line_3.setOnClickListener(this);
+        mTip = (TextView) findViewById(R.id.main_line_tip);
 	}
 
-	private void initData(Bundle savedInstanceState) {
-
+	private void initData() {
+        //初始化语音提示按钮
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.notify_on);
+        ImageSpan imgSpan = new ImageSpan(this, b);
+        String value = getString(R.string.main_line_tip2);
+        SpannableString spanString = new SpannableString(value);
+        spanString.setSpan(imgSpan, 2, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTip.setText(spanString);
+        //初始化线路提示icon
+        initSoundNotifyIcon(SettingUtil.MAIN_LINE_1, sound_line_1);
+        initSoundNotifyIcon(SettingUtil.MAIN_LINE_2, sound_line_2);
+        initSoundNotifyIcon(SettingUtil.MAIN_LINE_3, sound_line_3);
 	}
 
 	// 获取我的abc信息
@@ -128,7 +153,45 @@ public class MainLineActivity extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
+        switch (v.getId()) {
+            case R.id.sound_line_1:
+                changeSoundNotifyIcon(SettingUtil.MAIN_LINE_1, v);
+                break;
+            case R.id.sound_line_2:
+                changeSoundNotifyIcon(SettingUtil.MAIN_LINE_2, v);
+                break;
+            case R.id.sound_line_3:
+                changeSoundNotifyIcon(SettingUtil.MAIN_LINE_3, v);
+                break;
+        }
 	}
+
+    /**
+     * 改变线路新货源通知状态
+     * @param name
+     */
+    public void changeSoundNotifyIcon(String name,View view) {
+        boolean status = SettingUtil.getInstance(context).getMainLineNotifyStatus(name);
+        SettingUtil.getInstance(context).setMainLineNotifyStatus(name, !status);
+        if(!status) {
+            ((ImageView)view).setImageResource(R.drawable.notify_on);
+        } else {
+            ((ImageView)view).setImageResource(R.drawable.notify_off);
+        }
+    }
+
+    /**
+     * 改变线路新货源通知状态
+     * @param name
+     */
+    public void initSoundNotifyIcon(String name,View view) {
+        boolean status = SettingUtil.getInstance(context).getMainLineNotifyStatus(name);
+        if(status) {
+            ((ImageView)view).setImageResource(R.drawable.notify_on);
+        } else {
+            ((ImageView)view).setImageResource(R.drawable.notify_off);
+        }
+    }
 
 	/**
 	 * 修改路线

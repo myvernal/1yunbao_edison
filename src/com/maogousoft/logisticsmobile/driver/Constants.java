@@ -357,6 +357,8 @@ public class Constants {
 
     public static final String COMMON_KEY = "common_key";
 
+    public static final int ANONYMOUS_REQUEST_CODE = 1000;
+    public static final int ANONYMOUS_RESULT_CODE = 1001;
     public static final int USER_DRIVER = 2; //司机
     public static final int USER_SHIPPER = 1;//货主
 	/**

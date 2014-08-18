@@ -54,7 +54,6 @@ public class MainActivity extends TabActivity {
     private RadioGroup mRadioGroup;
     private MGApplication application;
     private BroadcastReceiver switchMainActivityReceiver;
-    private View mAnonymousLayout;
     private BaiduSDKReceiver baiduSDKReceiver;
 
     @Override
@@ -80,22 +79,12 @@ public class MainActivity extends TabActivity {
         registerReceiver(switchMainActivityReceiver, new IntentFilter(
                 ACTION_SWITCH_MAINACTIVITY));
         getABCInfo();
-        showDialogIfUserIsAnonymous();
         //注册百度sdk广播监听者
         IntentFilter iFilter = new IntentFilter();
         iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR);
         iFilter.addAction(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR);
         baiduSDKReceiver = new BaiduSDKReceiver();
         registerReceiver(baiduSDKReceiver, iFilter);
-    }
-
-    private void showDialogIfUserIsAnonymous() {
-        if(application.isAnonymous()) {
-            //如果是匿名登陆,弹出半透明对话框
-            mAnonymousLayout.setVisibility(View.VISIBLE);
-            //其他区域不可点击
-            mAnonymousLayout.setOnClickListener(null);
-        }
     }
 
     @Override
@@ -110,7 +99,6 @@ public class MainActivity extends TabActivity {
 
     private void initViews() {
         application = (MGApplication) getApplication();
-        mAnonymousLayout = findViewById(R.id.anonymousLayout);
         userType = application.getUserType();
         mTabHost = getTabHost();
         switch (userType) {
@@ -257,31 +245,6 @@ public class MainActivity extends TabActivity {
                 break;
         }
         return true;
-    }
-
-    public void onClickLoginNow(View view) {
-        finish();
-    }
-
-    public void onClickRegisterNow(View view) {
-        int mUserType = application.getUserType();
-        switch (mUserType) {
-            // 司机
-            case Constants.USER_DRIVER:
-                startActivity(new Intent(mContext, RegisterActivity.class));
-                break;
-            // 货主
-            case Constants.USER_SHIPPER:
-                startActivity(new Intent(mContext, RegisterShipperActivity.class));
-                break;
-            default:
-                break;
-        }
-        finish();
-    }
-
-    public void onClickBackNow(View view) {
-        finish();
     }
 
     public void share() {

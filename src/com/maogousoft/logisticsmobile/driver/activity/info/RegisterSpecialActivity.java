@@ -85,6 +85,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 		initHandler();
 		//initUtils();
 		initDatas();
+        setIsShowAnonymousActivity(false);
 	}
 
 	// 初始化视图

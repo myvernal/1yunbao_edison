@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.ybxiang.driver.activity.AnonymousActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
@@ -68,6 +69,8 @@ public class BaseActivity extends Activity implements OnClickListener {
 	public InputMethodManager imm = null;
 
 	private boolean isRightKeyIntoShare = true;// 顶部条右键是否进入分享
+    private boolean isShowAnonymousActivity = true;
+    private int isFirstResume = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +85,11 @@ public class BaseActivity extends Activity implements OnClickListener {
 		mBinder = application.getBinder();
 		application.addTask(this);
 		init();
-
 	}
+
+    public void setIsShowAnonymousActivity(boolean value) {
+        isShowAnonymousActivity = value;
+    }
 
 	@Override
 	public void setContentView(int layoutResID) {
@@ -118,6 +124,9 @@ public class BaseActivity extends Activity implements OnClickListener {
 	}
 
 	public void showProgress(String message) {
+        if(isShowAnonymousActivity) {
+            return;
+        }
 		progressDialog.setMessage(message);
 		if (!progressDialog.isShowing()) {
 			progressDialog.show();
@@ -125,6 +134,9 @@ public class BaseActivity extends Activity implements OnClickListener {
 	}
 
 	public void showDefaultProgress() {
+        if(isShowAnonymousActivity) {
+            return;
+        }
 		progressDialog.setMessage(resources
 				.getString(R.string.progress_loading));
 		if (!progressDialog.isShowing()) {
@@ -133,6 +145,9 @@ public class BaseActivity extends Activity implements OnClickListener {
 	}
 
 	public void dismissProgress() {
+        if(isShowAnonymousActivity) {
+            return;
+        }
 		if (progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();
 		}
@@ -161,7 +176,6 @@ public class BaseActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onPause() {
-
 		super.onPause();
 		isShown = false;
 		MobclickAgent.onPause(this);
@@ -169,7 +183,6 @@ public class BaseActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onDestroy() {
-
 		super.onDestroy();
 		application.finishActivity(this);
 		isShown = false;
@@ -178,13 +191,27 @@ public class BaseActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onResume() {
-
 		super.onResume();
 		isShown = true;
 		MobclickAgent.onResume(this);
+        //如果是匿名登陆,并且不是登陆或者注册页面,需要显示遮罩层
+        if(isShowAnonymousActivity && isFirstResume == 0) {
+            isFirstResume++;//显示过一次就不再显示
+            startActivity(new Intent(context, AnonymousActivity.class));
+        } else if(isShowAnonymousActivity && isFirstResume > 0) {
+            finish();
+        }
 	}
 
-	public void setIsRightKeyIntoShare(boolean isRightKeyIntoShare) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Constants.ANONYMOUS_RESULT_CODE) {
+            finish();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void setIsRightKeyIntoShare(boolean isRightKeyIntoShare) {
 		this.isRightKeyIntoShare = isRightKeyIntoShare;
 	}
 
@@ -223,6 +250,17 @@ public class BaseActivity extends Activity implements OnClickListener {
 		});
 
 	}
+
+    public void share(String value) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        if(TextUtils.isEmpty(value)) {
+            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
+        } else {
+            intent.putExtra(Intent.EXTRA_TEXT, value);
+        }
+        startActivity(Intent.createChooser(intent, getTitle()));
+    }
 
     public void share() {
         Intent intent = new Intent(Intent.ACTION_SEND);

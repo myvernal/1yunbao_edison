@@ -357,4 +357,7 @@
     <string name="car_info_weight">载重:%s</string>
     <string name="car_info_car_type">车型:%s</string>
     <string name="car_info_way" formatted="false">线路:%s->%s</string>
+    <string name="common_share_info" formatted="false">该信息来自易运宝物流软件手机版,免费下载http://www.1yunbao.com/wuliu.apk\n或点击下面网址登录易运宝手机网站http://www.1yunbao.com/sj</string>
+    <string name="main_line_tip1" formatted="false">您设置的主营线路货源将会出现\n在关注货源中，同时在手机上方\n通知栏提示您。</string>
+    <string name="main_line_tip2" formatted="false">点击将可以关闭或打开货源语音提示。</string>
 </resources>

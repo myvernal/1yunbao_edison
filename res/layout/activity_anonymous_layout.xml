@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/HafTransparent"
+        android:id="@+id/anonymousLayout"
+        android:gravity="center">
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:textSize="16sp"
+              android:textColor="@color/TextColorWhite"
+              android:text="你尚未登录,暂不能使用该功能"/>
+
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            style="@style/button1_style2"
+            android:onClick="onClickLoginNow"
+            android:text="马上登陆"/>
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            style="@style/button1_style2"
+            android:onClick="onClickRegisterNow"
+            android:text="免费注册"/>
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            style="@style/button1_style2"
+            android:onClick="onClickBackNow"
+            android:text="返回查看"/>
+</LinearLayout>

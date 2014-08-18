@@ -1,58 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <include layout="@layout/common_title" />
+    <include layout="@layout/common_title"/>
 
     <TableLayout
-        style="@style/home_myabc_layout_style"
-        android:layout_height="wrap_content" >
+            style="@style/home_myabc_layout_style"
+            android:layout_height="wrap_content">
 
-        <TableRow android:background="@drawable/ic_info_centerbg" >
-
-            <TextView
-                style="@style/home_myabc_title_style"
-                android:drawableLeft="@drawable/ic_info_name"
-                android:text="线路1：" />
+        <TableRow android:background="@drawable/ic_info_centerbg">
 
             <TextView
-                android:id="@+id/myabc_id_path1"
-                style="@style/home_myabc_content_style" />
+                    style="@style/home_myabc_title_style"
+                    android:drawableLeft="@drawable/ic_info_carnum"
+                    android:text="1:"/>
+
+            <TextView
+                    android:id="@+id/myabc_id_path1"
+                    style="@style/home_myabc_content_style"/>
+
+            <ImageView
+                    android:id="@+id/sound_line_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/notify_on"/>
         </TableRow>
 
-        <TableRow android:background="@drawable/ic_info_centerbg" >
+        <TableRow android:background="@drawable/ic_info_centerbg">
 
             <TextView
-                style="@style/home_myabc_title_style"
-                android:drawableLeft="@drawable/ic_info_carnum"
-                android:text="线路2：" />
+                    style="@style/home_myabc_title_style"
+                    android:drawableLeft="@drawable/ic_info_carnum"
+                    android:text="2:"/>
 
             <TextView
-                android:id="@+id/myabc_id_path2"
-                style="@style/home_myabc_content_style" />
+                    android:id="@+id/myabc_id_path2"
+                    style="@style/home_myabc_content_style"/>
+
+            <ImageView
+                    android:id="@+id/sound_line_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/notify_on"/>
         </TableRow>
 
-        <TableRow android:background="@drawable/ic_info_centerbg" >
+        <TableRow android:background="@drawable/ic_info_centerbg">
 
             <TextView
-                style="@style/home_myabc_title_style"
-                android:drawableLeft="@drawable/ic_info_phone"
-                android:text="线路3：" />
+                    style="@style/home_myabc_title_style"
+                    android:drawableLeft="@drawable/ic_info_carnum"
+                    android:text="3:"/>
 
             <TextView
-                android:id="@+id/myabc_id_path3"
-                style="@style/home_myabc_content_style" />
+                    android:id="@+id/myabc_id_path3"
+                    style="@style/home_myabc_content_style"/>
+
+            <ImageView
+                    android:id="@+id/sound_line_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/notify_on"/>
         </TableRow>
 
         <Button
-            android:id="@+id/myabc_id_change_path"
-            style="@style/info_button_style"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:onClick="onChangePath"
-            android:text="修改" />
+                android:id="@+id/myabc_id_change_path"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:onClick="onChangePath"
+                android:text="修改"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                    style="@style/home_main_tips_base_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="@string/main_line_tip1"/>
+
+            <TextView style="@style/home_main_tips_base_style"
+                      android:id="@+id/main_line_tip"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                      android:gravity="center_horizontal"
+                      android:text="@string/main_line_tip2"/>
+
+        </LinearLayout>
     </TableLayout>
 
 </LinearLayout>
