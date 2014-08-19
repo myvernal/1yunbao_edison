@@ -29,11 +29,11 @@ public class CarInfo implements Serializable{
     private String car_length;// 车长
     private String price;// 报价
     private int units;// 报价单位
-    private String location;// 位置
-    private String ower_name = "";// 联系人
-    private String ower_phone = "";// 手机
+    private String driver_name = "";// 联系人
+    private String phone = "";// 手机
     private String description = "";// 补充说明
     private String location_time; // 定位时间==我的车队
+    private String location;// 位置
     private long pulish_date;
     private String wayStartStr;
     private String wayEndStr;
@@ -41,31 +41,6 @@ public class CarInfo implements Serializable{
 
     public CarInfo() {
         super();
-    }
-
-
-    public CarInfo(int start_province, int start_city, int start_district, int end_province,
-                   int end_city, int end_district, int car_weight, int car_type, String plate_number,
-                   String car_length, String price, int units, String location, String ower_name,
-                   String ower_phone, String description, String location_time, long pulish_date) {
-        this.start_province = start_province;
-        this.start_city = start_city;
-        this.start_district = start_district;
-        this.end_province = end_province;
-        this.end_city = end_city;
-        this.end_district = end_district;
-        this.car_weight = car_weight;
-        this.car_type = car_type;
-        this.plate_number = plate_number;
-        this.car_length = car_length;
-        this.price = price;
-        this.units = units;
-        this.location = location;
-        this.ower_name = ower_name;
-        this.ower_phone = ower_phone;
-        this.description = description;
-        this.location_time = location_time;
-        this.pulish_date = pulish_date;
     }
 
     public int getStart_province() {
@@ -170,22 +145,6 @@ public class CarInfo implements Serializable{
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getOwer_name() {
-        return ower_name;
-    }
-
-    public void setOwer_name(String ower_name) {
-        this.ower_name = ower_name;
-    }
-
-    public String getOwer_phone() {
-        return ower_phone;
-    }
-
-    public void setOwer_phone(String ower_phone) {
-        this.ower_phone = ower_phone;
     }
 
     public String getDescription() {
@@ -306,5 +265,21 @@ public class CarInfo implements Serializable{
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getDriver_name() {
+        return driver_name;
+    }
+
+    public void setDriver_name(String driver_name) {
+        this.driver_name = driver_name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

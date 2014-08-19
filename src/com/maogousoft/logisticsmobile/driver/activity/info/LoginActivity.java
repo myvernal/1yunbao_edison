@@ -43,11 +43,11 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setIsShowAnonymousActivity(false);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_login);
         initViews();
         initData();
-        setIsShowAnonymousActivity(false);
         // application.writeAutoLogin(true); // PR112 默认自动登陆
     }
 

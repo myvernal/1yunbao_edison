@@ -186,7 +186,6 @@ public class BaseActivity extends Activity implements OnClickListener {
 		super.onDestroy();
 		application.finishActivity(this);
 		isShown = false;
-
 	}
 
 	@Override
@@ -195,7 +194,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 		isShown = true;
 		MobclickAgent.onResume(this);
         //如果是匿名登陆,并且不是登陆或者注册页面,需要显示遮罩层
-        if(isShowAnonymousActivity && isFirstResume == 0) {
+        if(application.isAnonymous() && isShowAnonymousActivity && isFirstResume == 0) {
             isFirstResume++;//显示过一次就不再显示
             startActivity(new Intent(context, AnonymousActivity.class));
         } else if(isShowAnonymousActivity && isFirstResume > 0) {

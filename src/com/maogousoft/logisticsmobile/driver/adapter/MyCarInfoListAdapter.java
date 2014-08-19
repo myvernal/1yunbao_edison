@@ -33,9 +33,9 @@ public class MyCarInfoListAdapter extends BaseListAdapter<CarInfo> {
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.listitem_mycarinfo, parent, false);
         }
-        ((TextView) convertView.findViewById(R.id.nameId)).setText(carInfo.getOwer_name());
+        ((TextView) convertView.findViewById(R.id.nameId)).setText(carInfo.getDriver_name());
         ((TextView) convertView.findViewById(R.id.plate_numberId)).setText(carInfo.getPlate_number());
-        ((TextView) convertView.findViewById(R.id.phone)).setText(carInfo.getOwer_phone());
+        ((TextView) convertView.findViewById(R.id.phone)).setText(carInfo.getPhone());
         if(!TextUtils.isEmpty(carInfo.getLocation_time())) {
             Date date = new Date(carInfo.getLocation_time());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");

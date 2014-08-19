@@ -4,10 +4,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.MyCarInfoListAdapter;
+import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
+import com.maogousoft.logisticsmobile.driver.api.ApiClient;
+import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,78 +80,65 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
 
     // 请求指定页数的数据
     private void getData(int page) {
-        // try {
-        state = ISREFRESHING;
-        // final JSONObject jsonObject = new JSONObject();
-        // jsonObject.put(Constants.ACTION, Constants.QUERY_FRIENDS_GROUP);
-        // jsonObject.put(Constants.TOKEN, application.getToken());
-        // jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
-        // .toString());
-        //
-        // ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-        // NewSourceInfo.class, new AjaxCallBack() {
-        //
-        // @Override
-        // public void receive(int code, Object result) {
-        setListShown(true);
-        // switch (code) {
-        // case ResultCode.RESULT_OK:
-        List<CarInfo> result = new ArrayList<CarInfo>();
-        CarInfo carInfo1 = new CarInfo();
-        carInfo1.setOwer_name("测试司机1");
-        CarInfo carInfo2 = new CarInfo();
-        carInfo2.setOwer_name("测试司机2");
-        CarInfo carInfo3 = new CarInfo();
-        carInfo3.setOwer_name("测试司机3");
-        CarInfo carInfo4 = new CarInfo();
-        carInfo4.setOwer_name("测试司机4");
-        result.add(carInfo1);
-        result.add(carInfo2);
-        result.add(carInfo3);
-        result.add(carInfo4);
-        if (result instanceof List) {
-            List<CarInfo> mList = (List<CarInfo>) result;
-            if (mList == null || mList.isEmpty()) {
-                load_all = true;
-                mFootProgress.setVisibility(View.GONE);
-                mFootMsg.setText("已加载全部");
-            } else {
-                if (mList.size() < 10) {
-                    load_all = true;
-                    mFootProgress.setVisibility(View.GONE);
-                    mFootMsg.setText("已加载全部");
-                } else {
-                    load_all = false;
-                    mFootProgress.setVisibility(View.VISIBLE);
-                    mFootMsg.setText(R.string.tips_isloading);
-                }
-                android.util.Log.d("ybxiang", "mList==" + mList);
-                ((MyCarInfoListAdapter) mAdapter).addAll(mList);
-                mAdapter.notifyDataSetChanged();
-            }
+        try {
+            state = ISREFRESHING;
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.QUERY_DRIVER_CAR_INFO_LIST);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
+                    .toString());
+
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    CarInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            setListShown(true);
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result instanceof List) {
+                                        List<CarInfo> mList = (List<CarInfo>) result;
+                                        if (mList == null || mList.isEmpty()) {
+                                            load_all = true;
+                                            mFootProgress.setVisibility(View.GONE);
+                                            mFootMsg.setText("已加载全部");
+                                        } else {
+                                            if (mList.size() < 10) {
+                                                load_all = true;
+                                                mFootProgress.setVisibility(View.GONE);
+                                                mFootMsg.setText("已加载全部");
+                                            } else {
+                                                load_all = false;
+                                                mFootProgress.setVisibility(View.VISIBLE);
+                                                mFootMsg.setText(R.string.tips_isloading);
+                                            }
+                                            android.util.Log.d("ybxiang", "mList==" + mList);
+                                            mAdapter.addAll(mList);
+                                            mAdapter.notifyDataSetChanged();
+                                        }
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                            if (mAdapter.isEmpty()) {
+                                setEmptyText("没有找到数据哦");
+                            }
+                            state = WAIT;
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        // break;
-        // case ResultCode.RESULT_ERROR:
-        // if (result instanceof String)
-        // showMsg(result.toString());
-        // break;
-        // case ResultCode.RESULT_FAILED:
-        // if (result instanceof String)
-        // showMsg(result.toString());
-        // break;
-        //
-        // default:
-        // break;
-        // }
-        if (mAdapter.isEmpty()) {
-            setEmptyText("没有找到数据哦");
-        }
-        state = WAIT;
-        // }
-        // });
-        // } catch (JSONException e) {
-        // e.printStackTrace();
-        // }
     }
 
     @Override

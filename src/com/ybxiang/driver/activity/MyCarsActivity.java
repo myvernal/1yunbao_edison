@@ -96,31 +96,10 @@ public class MyCarsActivity extends BaseListActivity implements
                         @Override
                         public void receive(int code, Object result) {
                             setListShown(true);
-//                            switch (code) {
-//                                case ResultCode.RESULT_OK:
-//                                    if (result instanceof List) {
-//                                        List<CarInfo> mList = (List<CarInfo>) result;
-                            List<CarInfo> mList = new ArrayList<CarInfo>();
-                                    CarInfo carInfo1 = new CarInfo();
-                                        carInfo1.setOwer_name("司机1");
-                            carInfo1.setPlate_number("川A12245");
-                            carInfo1.setOwer_phone("15982034811");
-                                        CarInfo carInfo2 = new CarInfo();
-                                        carInfo2.setOwer_name("司机2");
-                            carInfo2.setPlate_number("川A12245");
-                            carInfo2.setOwer_phone("15982034811");
-                                        CarInfo carInfo3 = new CarInfo();
-                                        carInfo3.setOwer_name("司机3");
-                            carInfo3.setPlate_number("川A12245");
-                            carInfo3.setOwer_phone("15982034811");
-                                        CarInfo carInfo4 = new CarInfo();
-                                        carInfo4.setOwer_name("司机4");
-                            carInfo4.setPlate_number("川A12245");
-                            carInfo4.setOwer_phone("15982034811");
-                                        mList.add(carInfo1);
-                                        mList.add(carInfo2);
-                                        mList.add(carInfo3);
-                                        mList.add(carInfo4);
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result instanceof List) {
+                                        List<CarInfo> mList = (List<CarInfo>) result;
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);
@@ -138,20 +117,20 @@ public class MyCarsActivity extends BaseListActivity implements
                                             mAdapter.addAll(mList);
                                             mAdapter.notifyDataSetChanged();
                                         }
-//                                    }
-//                                    break;
-//                                case ResultCode.RESULT_ERROR:
-//                                    if (result instanceof String)
-//                                        showMsg(result.toString());
-//                                    break;
-//                                case ResultCode.RESULT_FAILED:
-//                                    if (result instanceof String)
-//                                        showMsg(result.toString());
-//                                    break;
-//
-//                                default:
-//                                    break;
-//                            }
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
                             if (mAdapter.isEmpty()) {
                                 setEmptyText("没有找到数据哦");
                             }

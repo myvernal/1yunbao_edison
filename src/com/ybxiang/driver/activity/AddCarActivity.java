@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
+ * 添加车辆
  * Created by aliang on 2014/8/14.
  */
 public class AddCarActivity extends BaseActivity {
@@ -123,6 +124,7 @@ public class AddCarActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     Toast.makeText(context, "添加车辆成功!", Toast.LENGTH_SHORT).show();
+                                    finish();
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     if (result instanceof String)
