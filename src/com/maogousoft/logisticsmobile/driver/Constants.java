@@ -195,8 +195,8 @@ public class Constants {
 	/** 好友組列表 **/
 	public static final String QUERY_FRIENDS_GROUP = "query_friends_group";
 	
-	/** 好友的列表 **/
-	public static final String QUERY_FRIENDS_CHILD = "query_friends_child";
+	/** 司机端:已关注的所有货主好友列表 **/
+	public static final String QUERY_FRIENDS = "query_attentionUserList";
 
 	/** 待定货源列表 **/
 	public static final String QUERY_PENDING_SOURCE_ORDER = "query_pending_source_order";

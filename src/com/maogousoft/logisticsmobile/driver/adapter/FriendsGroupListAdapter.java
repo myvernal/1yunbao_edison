@@ -25,9 +25,9 @@ public class FriendsGroupListAdapter extends BaseListAdapter<FriendsGroup> {
 			convertView=mInflater.inflate(R.layout.listitem_friends_group, parent,false);
 		}
 		TextView mFriendsTypeTextView=(TextView)convertView.findViewById(R.id.friends_type);
-		mFriendsTypeTextView.setText(mList.get(position).getGroupName());
+		mFriendsTypeTextView.setText("Edison");
 		TextView mFriendsNumberTextView=(TextView)convertView.findViewById(R.id.friends_number);
-		mFriendsNumberTextView.setText(mList.get(position).getGroupNumber());
+		mFriendsNumberTextView.setText("15982034811");
 		return convertView;
 	}
 }

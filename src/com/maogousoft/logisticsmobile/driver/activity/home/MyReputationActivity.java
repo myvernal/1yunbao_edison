@@ -32,7 +32,7 @@ public class MyReputationActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.myabc_account);
+		setContentView(R.layout.myabc_reputation);
 		initViews();
 		initData(savedInstanceState);
 	}

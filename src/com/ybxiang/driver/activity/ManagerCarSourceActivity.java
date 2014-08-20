@@ -58,8 +58,7 @@ public class ManagerCarSourceActivity extends BaseListActivity implements
         mTitleBarMore.setVisibility(View.GONE);
 
         // 数据加载中进度条
-        mFootView = getLayoutInflater().inflate(R.layout.listview_footview,
-                null);
+        mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
         mFootProgress = (ProgressBar) mFootView
                 .findViewById(android.R.id.progress);

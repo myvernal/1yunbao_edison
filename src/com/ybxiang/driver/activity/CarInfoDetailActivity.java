@@ -58,8 +58,8 @@ public class CarInfoDetailActivity extends BaseActivity {
             }
         }
         car_info_detail_address.setText(carInfo.getLocation());
-        car_info_detail_contact_name.setText(carInfo.getDriver_name());
-        car_info_detail_phone.setText(carInfo.getPhone());
+        car_info_detail_contact_name.setText(carInfo.getOwer_name());
+        car_info_detail_phone.setText(carInfo.getOwer_phone());
     }
 
     private void initViews() {

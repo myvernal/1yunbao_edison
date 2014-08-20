@@ -5,39 +5,22 @@ package com.maogousoft.logisticsmobile.driver.model;
  *
  */
 public class FriendsGroup {
-	private String groupName;
-	private String groupNumber;
+	private String name;
+    private String phone;
 
-	public FriendsGroup() {
-		super();
-	}
+    public String getName() {
+        return name;
+    }
 
-	public FriendsGroup(String groupName, String groupNumber) {
-		super();
-		this.groupName = groupName;
-		this.groupNumber = groupNumber;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getGroupName() {
-		return groupName;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
-	public String getGroupNumber() {
-		return groupNumber;
-	}
-
-	public void setGroupNumber(String groupNumber) {
-		this.groupNumber = groupNumber;
-	}
-
-	@Override
-	public String toString() {
-		return "FriendsGroup [groupName=" + groupName + ", groupNumber="
-				+ groupNumber + "]";
-	}
-
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

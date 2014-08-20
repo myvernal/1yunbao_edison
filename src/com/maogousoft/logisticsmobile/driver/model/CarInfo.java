@@ -29,6 +29,8 @@ public class CarInfo implements Serializable{
     private String car_length;// 车长
     private String price;// 报价
     private int units;// 报价单位
+    private String ower_name = "";// 联系人
+    private String ower_phone = "";// 手机
     private String driver_name = "";// 联系人
     private String phone = "";// 手机
     private String description = "";// 补充说明
@@ -281,5 +283,21 @@ public class CarInfo implements Serializable{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getOwer_name() {
+        return ower_name;
+    }
+
+    public void setOwer_name(String ower_name) {
+        this.ower_name = ower_name;
+    }
+
+    public String getOwer_phone() {
+        return ower_phone;
+    }
+
+    public void setOwer_phone(String ower_phone) {
+        this.ower_phone = ower_phone;
     }
 }

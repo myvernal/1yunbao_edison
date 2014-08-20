@@ -93,7 +93,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
         car_weight.setText(application.getAbcInfo().getCar_weight() + "");
         ower_name.setText(application.getAbcInfo().getName() + "");
         ower_phone.setText(application.getAbcInfo().getPhone() + "");
-        int value = Constants.getCarTypeValues(application.getAbcInfo().getCar_type());
+        int value = application.getAbcInfo().getCar_type();
         for (int i = 0; i < Constants.carTypeValues.length; i++) {
             if (value == Constants.carTypeValues[i]) {
                 search_car_type.setSelection(i);
