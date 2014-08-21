@@ -130,7 +130,7 @@ public class NewSourceActivity extends BaseListActivity implements
 
         }
         if (getIntent().hasExtra("focusLineInfo")) {
-            focusLineInfo = (FocusLineInfo) getIntent().getSerializableExtra("focuseLineInfo");
+            focusLineInfo = (FocusLineInfo) getIntent().getSerializableExtra("focusLineInfo");
         }
         if (getIntent().hasExtra("getFriendOrderList")) {
             if (getIntent().getBooleanExtra("getFriendOrderList", false)) {
