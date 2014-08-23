@@ -71,6 +71,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 	private boolean isRightKeyIntoShare = true;// 顶部条右键是否进入分享
     private boolean isShowAnonymousActivity = true;
     private int isFirstResume = 0;
+    public static final String TAG = "BaseActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

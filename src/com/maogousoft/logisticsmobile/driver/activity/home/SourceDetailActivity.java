@@ -667,14 +667,12 @@ public class SourceDetailActivity extends BaseActivity {
                 break;
 
             case R.id.source_detail_phone:
-
                 String phoneStr = mPhone.getText().toString();
                 if (!TextUtils.isEmpty(phoneStr) && !phoneStr.equals("无")) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
                             + phoneStr));
                     startActivity(intent);
                 }
-
                 break;
 
             default:

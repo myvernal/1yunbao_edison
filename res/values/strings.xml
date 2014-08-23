@@ -360,4 +360,5 @@
     <string name="common_share_info" formatted="false">该信息来自易运宝物流软件手机版,免费下载http://www.1yunbao.com/wuliu.apk\n或点击下面网址登录易运宝手机网站http://www.1yunbao.com/sj</string>
     <string name="main_line_tip1" formatted="false">您设置的主营线路货源将会出现\n在关注货源中，同时在手机上方\n通知栏提示您。</string>
     <string name="main_line_tip2" formatted="false">点击将可以关闭或打开货源语音提示。</string>
+    <string name="my_car_detail_tip">说明:凡对方手机安装了易运宝软件,在对方互联网畅通的情况下,即可随时对其进行免费定位.收费定位采用移动定位技术,对方手机能通信即可定位,收费0.1元/次</string>
 </resources>

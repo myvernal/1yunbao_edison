@@ -59,6 +59,7 @@
                 style="@style/info_left_text_style"
                 android:layout_marginLeft="5dp"
                 android:ellipsize="end"
+                android:singleLine="true"
                 android:text="成都青羊区北大街126号"/>
     </LinearLayout>
 

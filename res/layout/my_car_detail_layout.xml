@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/TextColorWhite">
+    <include layout="@layout/common_title"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:padding="20dip"
+                      android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+                <TextView style="@style/info_content_text_style"
+                          android:layout_gravity="top"
+                          android:text="主营线路:"/>
+
+                <TextView style="@style/info_content_text_style"
+                          android:layout_weight="1"
+                          android:id="@+id/way"
+                          android:textColor="@color/font_blue2"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dip"
+                          android:orientation="horizontal">
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left"
+                          android:layout_weight="1"
+                          android:id="@+id/plate_number"
+                          android:text="车牌:"/>
+
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left"
+                          android:layout_weight="1"
+                          android:id="@+id/car_weight"
+                          android:text="载重:"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dip"
+                          android:orientation="horizontal">
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left"
+                          android:layout_weight="1"
+                          android:id="@+id/car_length"
+                          android:text="车长:"/>
+
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left"
+                          android:layout_weight="1"
+                          android:id="@+id/car_type"
+                          android:text="车型:"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dip"
+                          android:orientation="horizontal">
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left"
+                          android:text="位置:"/>
+
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left|center_vertical"
+                          android:layout_weight="1"
+                          android:id="@+id/location_address"
+                          android:drawableLeft="@drawable/map_marker_blue"
+                          android:visibility="gone"/>
+            </LinearLayout>
+            <TextView style="@style/info_content_text_style"
+                      android:layout_marginTop="10dip"
+                      android:id="@+id/location_time"
+                      android:text="时间:"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dip"
+                          android:orientation="horizontal">
+                <TextView style="@style/button1_style2"
+                          android:gravity="center"
+                          android:layout_weight="1"
+                          android:id="@+id/free_location"
+                          android:text="免费定位"/>
+
+                <TextView style="@style/button1_style2"
+                          android:gravity="center"
+                          android:layout_weight="1"
+                          android:id="@+id/phone_location"
+                          android:text="收费定位"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dip"
+                      android:textColor="@color/font_gray3"
+                      android:text="@string/my_car_detail_tip"/>
+            <TextView style="@style/info_content_text_style"
+                      android:layout_marginTop="10dip"
+                      android:id="@+id/driver_name"
+                      android:text="联系人:"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dip"
+                          android:orientation="horizontal">
+                <TextView style="@style/info_content_text_style"
+                          android:layout_gravity="center_vertical"
+                          android:layout_weight="1"
+                          android:id="@+id/phone"
+                          android:text="手机:"/>
+
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:id="@+id/call_action"
+                           android:onClick="onCall"
+                           android:src="@drawable/ic_source_detail_phone"/>
+
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginLeft="5dp"
+                           android:id="@+id/message_action"
+                           android:onClick="onSendMessage"
+                           android:src="@drawable/ic_source_detail_phone"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="10dip"
+                          android:layout_marginBottom="10dip"
+                          android:orientation="horizontal">
+                <TextView style="@style/button1_style2"
+                          android:gravity="center"
+                          android:layout_weight="1"
+                          android:id="@+id/edit"
+                          android:text="编辑"/>
+
+                <TextView style="@style/button1_style2"
+                          android:gravity="center"
+                          android:layout_weight="1"
+                          android:id="@+id/delete"
+                          android:text="删除"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

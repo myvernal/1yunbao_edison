@@ -61,6 +61,10 @@ public class AddCarActivity extends BaseActivity {
         search_car_type = (Spinner) findViewById(R.id.search_car_type);//车型
     }
 
+    private void initData() {
+
+    }
+
     // 请求指定页数的数据
     public void addToMyCard(View view) {
         try {

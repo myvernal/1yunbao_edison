@@ -20,10 +20,9 @@ import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MyCarsActivity extends BaseListActivity implements
+public class MyCarsListActivity extends BaseListActivity implements
         OnClickListener, OnScrollListener {
     private Context mContext;
     private Button mTitleBarBack;
@@ -44,7 +43,7 @@ public class MyCarsActivity extends BaseListActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = MyCarsActivity.this;
+        mContext = MyCarsListActivity.this;
         initViews();
     }
 
@@ -77,14 +76,14 @@ public class MyCarsActivity extends BaseListActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        if (mAdapter.isEmpty()) {
+//        if (mAdapter.isEmpty()) {
             pageIndex = 1;
             getData(pageIndex);
-        }
+//        }
     }
 
     // 请求指定页数的数据
-    private void getData(int page) {
+    private void getData(final int page) {
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
@@ -114,7 +113,11 @@ public class MyCarsActivity extends BaseListActivity implements
                                                 mFootProgress.setVisibility(View.VISIBLE);
                                                 mFootMsg.setText(R.string.tips_isloading);
                                             }
-                                            mAdapter.addAll(mList);
+                                            if(page == 1) {
+                                                mAdapter.setList(mList);
+                                            } else {
+                                                mAdapter.addAll(mList);
+                                            }
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
@@ -150,35 +153,6 @@ public class MyCarsActivity extends BaseListActivity implements
                 startActivity(new Intent(context, AddCarActivity.class));
                 break;
         }
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setItems(R.array.menu_friends_operation,
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        switch (arg1) {
-                            case 0:
-                                Toast.makeText(mContext, "查看他的车源",
-                                        Toast.LENGTH_SHORT).show();
-                                break;
-                            case 1:
-                                Toast.makeText(mContext, "发送我的定位",
-                                        Toast.LENGTH_SHORT).show();
-                                break;
-
-                            default:
-                                Toast.makeText(mContext, "发送我的定位=" + arg1,
-                                        Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                    }
-
-                });
-        builder.create().show();
     }
 
     @Override

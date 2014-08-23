@@ -300,7 +300,7 @@ public class Constants {
 	public static final String BAIDU_APP_Key = "fGahmvRg6YiiqNTY72uoWE9W";
 
     /** 百度云检索tableID */
-    public static final String BAIDU_LBS_TABLE_ID = "70609";
+    public static final int BAIDU_LBS_TABLE_ID = 70609;
 
 	/** 易宝 */
 	public final static String CUSTOMER_NUMBER = "10012061548";
@@ -351,6 +351,24 @@ public class Constants {
 
     /** 货主端:我的车队查询 */
     public static final String QUERY_MY_FLEET = "query_my_fleet";
+
+    /** 货主端:我的车队详情 */
+    public static final String GET_MY_FLEET_DETAIL = "get_my_fleet_detail";
+
+    /** 货主端:删除车队车辆详情 */
+    public static final String DELETE_MY_FLEET = "delete_my_fleet";
+
+    /** 货主端:编辑车队车辆详情 */
+    public static final String EDIT_MY_FLEET = "edit_my_fleet";
+
+    /** 货主端:验证身份证 */
+    public static final String CHECK_CARD = "verifyIdCard";
+
+    /** 货主端:收费定位 */
+    public static final String PHONE_LOCATION = "phoneLoction";
+
+    /** 货主端:免费定位 */
+    public static final String FREE_LOCATION = "freeLocation";
 
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";

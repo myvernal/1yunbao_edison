@@ -59,9 +59,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	}
 
 	private void initViews() {
-
 		ibSearch = (ImageButton) findViewById(R.id.ib_search);
-
 		titlebar_id_more = (Button) findViewById(R.id.titlebar_id_more);
 		titlebar_id_more.setText("添加园区");
 		mBack = (Button) findViewById(R.id.titlebar_id_back);
@@ -81,7 +79,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	}
 
 	private void initListener() {
-
 		titlebar_id_more.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -160,9 +157,9 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-//		Intent intent = new Intent(context, ShopDetailActivity.class);
-//		intent.putExtra("ShopInfo", (ShopInfo) mAdapter.getItem(position));
-//		startActivityForResult(intent, 1000);
+		Intent intent = new Intent(context, ShopDetailActivity.class);
+		intent.putExtra("ShopInfo", (ShopInfo) mAdapter.getItem(position));
+		startActivityForResult(intent, 1000);
 	}
 
 	// 请求指定页数的数据
@@ -189,9 +186,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 						case ResultCode.RESULT_OK:
 
 							if (result instanceof List) {
-
 								List<ShopInfo> shopInfos = (List<ShopInfo>) result;
-
 								if (shopInfos == null || shopInfos.isEmpty()) {
 									load_all = true;
 									mFootProgress.setVisibility(View.GONE);
@@ -258,9 +253,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 			final JSONObject jsonObject = new JSONObject();
 			jsonObject.put(Constants.ACTION, Constants.QUERY_VENDER);
 			jsonObject.put(Constants.TOKEN, application.getToken());
-
 			// Keyword String 否 查询关键字 按商家名称和服务名称查询
-
 			jsonObject.put(Constants.JSON,
 					new JSONObject().put("keyword", keyword).put("latitude", latitude).put("longitude", longitude)
 							.toString());
@@ -271,11 +264,8 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 					setListShown(true);
 					switch (code) {
 						case ResultCode.RESULT_OK:
-
 							if (result instanceof List) {
-
 								List<ShopInfo> shopInfoList = (List<ShopInfo>) result;
-
 								if (shopInfoList == null || shopInfoList.isEmpty()) {
 									load_all = true;
 									mFootProgress.setVisibility(View.GONE);

@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @author ybxiang 管理车源界面：线路，载重，车型 车源详细界面：线路，车牌号，车长，车型，载重，报价，位置，联系人，手机
  */
 public class CarInfo implements Serializable{
+    private int id;//货车id
     private int start_province; // 路线
     private int start_city; // 路线
     private int start_district; // 路线
@@ -299,5 +300,13 @@ public class CarInfo implements Serializable{
 
     public void setOwer_phone(String ower_phone) {
         this.ower_phone = ower_phone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

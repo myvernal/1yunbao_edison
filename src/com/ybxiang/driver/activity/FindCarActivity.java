@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.maogousoft.logisticsmobile.driver.activity.CloudSearchActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -117,7 +118,8 @@ public class FindCarActivity extends BaseActivity {
 			break;
 		// 附近车源
 		case R.id.titlebar_id_more:
-			startActivity(new Intent(mContext, NearbyCarSourceActivity.class));
+//			startActivity(new Intent(mContext, NearbyCarSourceActivity.class));
+            startActivity(new Intent(mContext, CloudSearchActivity.class));
 			break;
 		case R.id.search_source__submit:
 			// 先检测是否已经完善了资料
