@@ -17,6 +17,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
@@ -102,15 +103,15 @@ public class OthersActivity extends BaseActivity implements
 			break;
 		case 3:
 			startActivity(new Intent(context, MapActivity.class).putExtra(
-					"keyWord", "旅馆"));
+                    Constants.MAP_TYPE, Constants.MAP_TYPE_HOTEL));
 			break;
 		case 4:
 			startActivity(new Intent(context, MapActivity.class).putExtra(
-					"keyWord", "加油站"));
+                    Constants.MAP_TYPE, Constants.MAP_TYPE_GAS));
 			break;
 		case 5:
 			startActivity(new Intent(context, MapActivity.class).putExtra(
-					"keyWord", "ATM"));
+                    Constants.MAP_TYPE, Constants.MAP_TYPE_BANK));
 			break;
 		case 6:
 			update();

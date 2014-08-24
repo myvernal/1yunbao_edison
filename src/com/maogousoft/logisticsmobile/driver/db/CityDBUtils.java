@@ -34,26 +34,26 @@ public class CityDBUtils {
 	}
 
 	/** 查询城市信息 **/
-	public String getCityInfo(int arg0, int arg1, int arg2) {
+	public String getCityInfo(Integer arg0, Integer arg1, Integer arg2) {
 		Cursor cursor = null;
 		StringBuffer buffer = new StringBuffer();
 		String[] cols = { "Id", "Name" };
 		try {
-            if(arg0 > 0) {
+            if(arg0 != null && arg0 > 0 ) {
                 cursor = sdb.query(tableName, cols, "Id=" + arg0, null, null, null,
                         null);
                 if (cursor.moveToFirst()) {
                     buffer.append(cursor.getString(1));
                 }
             }
-            if(arg1 > 0) {
+            if(arg1 != null && arg1 > 0) {
                 cursor = sdb.query(tableName, cols, "Id=" + arg1, null, null, null,
                         null);
                 if (cursor.moveToFirst()) {
                     buffer.append(cursor.getString(1));
                 }
             }
-            if(arg2 > 0) {
+            if(arg2 != null && arg2 > 0) {
                 cursor = sdb.query(tableName, cols, "Id=" + arg2, null, null, null,
                         null);
                 if (cursor.moveToFirst()) {

@@ -37,6 +37,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     private View edit, delete, free_location, phone_location, back;
     private CityDBUtils dbUtils;
     private long phoneNumber = 0;
+    private CarInfo carInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,15 @@ public class MyCarsDetailActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.edit:
+                if(carInfo != null) {
+                    Intent intent = new Intent(context, AddCarActivity.class);
+                    intent.putExtra(Constants.COMMON_KEY, carInfo);
+                    intent.putExtra(Constants.CAR_EDIT_TYPE, Constants.EDIT_CAR);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(context, "没有车辆数据!", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.delete:
                 deleteData();
@@ -112,7 +122,7 @@ public class MyCarsDetailActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof CarInfo) {
-                                        CarInfo carInfo = (CarInfo) result;
+                                        carInfo = (CarInfo) result;
                                         //线路
                                         String wayStart = dbUtils.getCityInfo(carInfo.getStart_province(), carInfo.getStart_city(), carInfo.getStart_district());
                                         StringBuffer sb = new StringBuffer();

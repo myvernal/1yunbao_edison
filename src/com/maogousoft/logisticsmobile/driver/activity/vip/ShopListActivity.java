@@ -6,9 +6,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
+import com.maogousoft.logisticsmobile.driver.activity.other.MapActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.ShopListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -25,7 +30,7 @@ import java.util.List;
  * 
  * @author lenovo
  */
-public class ShopListActivity extends BaseListActivity implements OnScrollListener{
+public class ShopListActivity extends BaseListActivity implements OnScrollListener, BDLocationListener{
 
 	private Button mBack;
 	// 底部更多
@@ -40,22 +45,20 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	private boolean state_idle = false;
 	// 已加载全部
 	private boolean load_all = false;
-
 	private ImageButton ibSearch;
-
 	private double longitude;
 	private double latitude;
-
 	private int shopType = -1;
-
+    private LocationClient mLocClient;
 	private Button titlebar_id_more;
+    private boolean isFirstLoc = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		initViews();
 		initListener();
+        locationAction();
 	}
 
 	private void initViews() {
@@ -85,70 +88,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 			public void onClick(View v) {
                 //进入添加物流园区的页面
                 startActivity(new Intent(context, AddActivity.class));
-//				final GrabDialog dialog = new GrabDialog(context);
-//				dialog.show();
-//				final EditText mInput = (EditText) dialog.findViewById(android.R.id.text1);
-//				dialog.setTitle("提示");
-//				dialog.setMessage("请先输入权限密码");
-//				dialog.setLeftButton("确定", new OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//
-//						dialog.dismiss();
-//
-//						if (TextUtils.isEmpty(mInput.getText().toString())) {
-//							Toast.makeText(ShopListActivity.this, "密码不能为空", Toast.LENGTH_SHORT).show();
-//							return;
-//						}
-//
-//						// mInput
-//						// 登录
-//						final String username = "11111111111";
-//						final String password = mInput.getText().toString();
-//
-//						final JSONObject jsonObject = new JSONObject();
-//						try {
-//							showDefaultProgress();
-//							jsonObject.put(Constants.ACTION, Constants.DRIVER_LOGIN);
-//							jsonObject.put(Constants.TOKEN, null);
-//							jsonObject.put(
-//									Constants.JSON,
-//									new JSONObject().put("phone", username).put("password", MD5.encode(password))
-//											.put("device_type", Constants.DEVICE_TYPE).toString());
-//							ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject, UserInfo.class,
-//									new AjaxCallBack() {
-//
-//										@Override
-//										public void receive(int code, Object result) {
-//											dismissProgress();
-//											switch (code) {
-//												case ResultCode.RESULT_OK:
-//													startActivity(new Intent(context, AddActivity.class));
-//													break;
-//
-//												default:
-//													Toast.makeText(ShopListActivity.this, "密码错误", Toast.LENGTH_SHORT)
-//															.show();
-//													break;
-//
-//											}
-//										}
-//									});
-//						} catch (JSONException e) {
-//							e.printStackTrace();
-//						}
-//
-//					}
-//				});
-//				dialog.setRightButton("取消", new OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						dialog.dismiss();
-//					}
-//				});
-
 			}
 		});
 	}
@@ -157,14 +96,17 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		Intent intent = new Intent(context, ShopDetailActivity.class);
-		intent.putExtra("ShopInfo", (ShopInfo) mAdapter.getItem(position));
-		startActivityForResult(intent, 1000);
+//		Intent intent = new Intent(context, ShopDetailActivity.class);
+//		intent.putExtra("ShopInfo", (ShopInfo) mAdapter.getItem(position));
+//		startActivityForResult(intent, 1000);
+        Intent intent = new Intent(context, MapActivity.class);
+        intent.putExtra(Constants.MAP_TYPE, Constants.MAP_TYPE_SHOP);
+        intent.putExtra(Constants.COMMON_KEY, (ShopInfo) mAdapter.getItem(position));
+        context.startActivity(intent);
 	}
 
 	// 请求指定页数的数据
 	private void getData(int page) {
-
 		if (latitude == 0 || longitude == 0) {
 			showMsg("请等待获取位置");
 			return;
@@ -334,4 +276,30 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 		}
 	}
 
+    // 定位初始化
+    private void locationAction() {
+        mLocClient = new LocationClient(this);
+        mLocClient.registerLocationListener(this);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);// 打开gps
+        option.setCoorType("bd09ll"); // 设置坐标类型
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation location) {
+        // 定位成功后不再处理新接收的位置
+        if (location == null || !isFirstLoc) {
+            return;
+        }
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+        getData(pageIndex);
+        isFirstLoc = false;
+        mLocClient.stop();
+    }
+
+    public void onReceivePoi(BDLocation poiLocation) {
+    }
 }

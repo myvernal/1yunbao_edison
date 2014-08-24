@@ -3,6 +3,7 @@ package com.maogousoft.logisticsmobile.driver.activity.vip;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.maogousoft.logisticsmobile.driver.activity.other.MapActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -193,8 +194,8 @@ public class ShopDetailActivity extends BaseListActivity implements OnScrollList
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, ShopListMapActivity.class);
-				intent.putExtra("shopInfo", shopInfo);
+				Intent intent = new Intent(context, MapActivity.class);
+				intent.putExtra(Constants.COMMON_KEY, shopInfo);
 				context.startActivity(intent);
 			}
 		});

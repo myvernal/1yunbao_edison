@@ -370,10 +370,24 @@ public class Constants {
     /** 货主端:免费定位 */
     public static final String FREE_LOCATION = "freeLocation";
 
+    /** 货主端:已发布货源 */
+    public static final String QUERY_MY_PUBLIC_ORDER = "query_My_Pulish_order";
+
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
     public static final String COMMON_KEY = "common_key";
+    public static final String CAR_EDIT_TYPE = "CAR_EDIT_TYPE";
+    public static final int ADD_CAR = 0;
+    public static final int EDIT_CAR = 1;
+
+    public static String MAP_TYPE = "MAP_TYPE";
+    public static String MAP_TYPE_DEFAULT = "default";
+    public static String MAP_TYPE_SHOP = "shop";
+    public static String MAP_TYPE_HOTEL = "旅馆"; //住宿
+    public static String MAP_TYPE_GAS = "加油站";//加油站
+    public static String MAP_TYPE_BANK = "银行";//银行
+    public static String MAP_TYPE_WAY_LINE = "里程理算";//里程计算
 
     public static final int ANONYMOUS_REQUEST_CODE = 1000;
     public static final int ANONYMOUS_RESULT_CODE = 1001;
@@ -406,5 +420,13 @@ public class Constants {
             return 34;
         }
         return unitTypeValues[position];
+    }
+
+    public static int[] shipTypeValues = new int[]{57, 58};
+    public static int getShipTypeValues(int position){
+        if(position > unitTypeValues.length) {
+            return 57;
+        }
+        return shipTypeValues[position];
     }
 }

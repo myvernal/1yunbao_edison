@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 已发布货源界面 -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="5dp">
+
+    <LinearLayout
+            android:id="@+id/top"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/right"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/source_way"
+                style="@style/car_left_text_style"
+                android:textColor="@color/orange_order"
+                android:layout_marginRight="10dp"
+                android:text=""/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom"
+            android:layout_toLeftOf="@+id/right"
+            android:layout_below="@+id/top"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+        <TextView
+                android:id="@+id/source_create_time"
+                style="@style/info_left_text_style"
+                android:text=""/>
+
+        <TextView
+                android:id="@+id/source_name"
+                style="@style/info_left_text_style"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text=""/>
+    </LinearLayout>
+
+    <ImageView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/right"
+              android:layout_centerVertical="true"
+              android:layout_alignParentRight="true"
+              android:src="@drawable/ic_share_arrow"/>
+</RelativeLayout>

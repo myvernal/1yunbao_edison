@@ -2,14 +2,13 @@ package com.maogousoft.logisticsmobile.driver.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
-import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListMapActivity;
+import com.maogousoft.logisticsmobile.driver.activity.other.MapActivity;
 import com.maogousoft.logisticsmobile.driver.model.ShopInfo;
 
 public class ShopListAdapter extends BaseListAdapter<ShopInfo> {
@@ -53,12 +52,8 @@ public class ShopListAdapter extends BaseListAdapter<ShopInfo> {
 			@Override
 			public void onClick(View v) {
 
-				Intent intent = new Intent(context, ShopListMapActivity.class);
-				intent.putExtra("shopInfo", shopInfo);
-				context.startActivity(intent);
 			}
 		});
-
 		return convertView;
 	}
 

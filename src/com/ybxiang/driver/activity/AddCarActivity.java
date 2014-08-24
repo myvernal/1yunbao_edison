@@ -1,9 +1,9 @@
 package com.ybxiang.driver.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
-import com.alibaba.fastjson.JSON;
 import com.maogousoft.logisticsmobile.driver.CitySelectView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -12,11 +12,8 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * 添加车辆
@@ -30,12 +27,15 @@ public class AddCarActivity extends BaseActivity {
     private Spinner search_car_type;
     private Button mTitleBarBack;
     private Button mTitleBarMore;
+    private int type;
+    private CarInfo carInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_to_cars);
         initViews();
+        initData();
     }
 
     // 初始化视图
@@ -62,7 +62,25 @@ public class AddCarActivity extends BaseActivity {
     }
 
     private void initData() {
-
+        type = getIntent().getIntExtra(Constants.CAR_EDIT_TYPE, Constants.ADD_CAR);
+        if(Constants.EDIT_CAR == type) {
+            ((TextView) findViewById(R.id.titlebar_id_content)).setText("编辑车辆");
+            carInfo = (CarInfo) getIntent().getSerializableExtra(Constants.COMMON_KEY);
+            mCarNum.setText(carInfo.getPlate_number() + "");
+            mCarlength.setText(carInfo.getCar_length() + "");
+            car_weight.setText(carInfo.getCar_weight() + "");
+            ower_name.setText(carInfo.getDriver_name() + "");
+            ower_phone.setText(carInfo.getPhone() + "");
+            description.setText(carInfo.getRemark() + "");
+            Integer carTypeValue = carInfo.getCar_type();
+            if(carTypeValue != null && carTypeValue>0) {
+                for (int i = 0; i < Constants.carTypeValues.length; i++) {
+                    if (Constants.carTypeValues[i] == carTypeValue) {
+                        search_car_type.setSelection(i);
+                    }
+                }
+            }
+        }
     }
 
     // 请求指定页数的数据
@@ -70,7 +88,12 @@ public class AddCarActivity extends BaseActivity {
         try {
             final JSONObject jsonObject = new JSONObject();
             JSONObject params = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.ADD_MY_FLEET);
+            if(Constants.EDIT_CAR == type) {
+                jsonObject.put(Constants.ACTION, Constants.EDIT_MY_FLEET);
+                params.put("id", carInfo.getId());
+            }else {
+                jsonObject.put(Constants.ACTION, Constants.ADD_MY_FLEET);
+            }
             jsonObject.put(Constants.TOKEN, application.getToken());
             //组装参数
             params.put("driver_name", ower_name.getText());
@@ -127,7 +150,11 @@ public class AddCarActivity extends BaseActivity {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    Toast.makeText(context, "添加车辆成功!", Toast.LENGTH_SHORT).show();
+                                    if(Constants.EDIT_CAR == type) {
+                                        Toast.makeText(context, "修改车辆成功!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(context, "添加车辆成功!", Toast.LENGTH_SHORT).show();
+                                    }
                                     finish();
                                     break;
                                 case ResultCode.RESULT_ERROR:

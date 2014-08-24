@@ -149,7 +149,7 @@
                         style="@style/info_edittext_weight_style"
                         android:id="@id/source_id_publish_car_length"
                         android:inputType="number"
-                        android:text="15"/>
+                        android:text=""/>
 
                 <TextView
                         style="@style/info_register_text_style"
@@ -193,7 +193,7 @@
                 <EditText
                         style="@style/info_edittext_weight_style"
                         android:id="@id/source_id_publish_unit_price"
-                        android:text="200"/>
+                        android:text=""/>
 
                 <TextView
                         style="@style/info_register_text_style"
@@ -224,7 +224,7 @@
                         style="@style/info_edittext_weight_style"
                         android:id="@id/source_id_publish_user_bond"
                         android:inputType="number"
-                        android:text="0"/>
+                        android:text=""/>
 
                 <TextView
                         style="@style/info_register_text_style"
@@ -279,7 +279,7 @@
                 <EditText
                         style="@style/info_edittext_weight_style"
                         android:id="@id/source_id_publish_contact_name"
-                        android:text="坑爹的"/>
+                        android:text=""/>
             </LinearLayout>
 
             <LinearLayout
@@ -299,7 +299,7 @@
                 <EditText
                         style="@style/info_edittext_weight_style"
                         android:id="@id/source_id_publish_contact_phone"
-                        android:text="99999999"/>
+                        android:text=""/>
             </LinearLayout>
 
             <!-- 车源有效时间 -->

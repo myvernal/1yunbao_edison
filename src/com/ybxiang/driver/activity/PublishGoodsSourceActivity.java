@@ -184,6 +184,10 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     Toast.makeText(mContext, "发布货源成功", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent();
+                                    intent.setClass(mContext, MySourceActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                     break;
                                 case ResultCode.RESULT_FAILED:
                                     Toast.makeText(mContext, "发布货源失败", Toast.LENGTH_SHORT).show();

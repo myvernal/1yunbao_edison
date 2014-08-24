@@ -8,10 +8,12 @@ import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.MyCarInfoListAdapter;
+import com.maogousoft.logisticsmobile.driver.adapter.MySourceInfoAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
+import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,7 +67,7 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
         mListView.addFooterView(mFootView);
 
         // 初始化MyCarInfoListAdapter的adapter
-        mAdapter = new MyCarInfoListAdapter(mContext);
+        mAdapter = new MySourceInfoAdapter(mContext);
         setListAdapter(mAdapter);
         // list未加载数据不显示
         setListShown(false);
@@ -83,13 +85,13 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.QUERY_DRIVER_CAR_INFO_LIST);
+            jsonObject.put(Constants.ACTION, Constants.QUERY_MY_PUBLIC_ORDER);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
                     .toString());
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    CarInfo.class, new AjaxCallBack() {
+                    NewSourceInfo.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
@@ -97,7 +99,7 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
-                                        List<CarInfo> mList = (List<CarInfo>) result;
+                                        List<NewSourceInfo> mList = (List<NewSourceInfo>) result;
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);
@@ -143,8 +145,7 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        //进入货源详情
-        Toast.makeText(mContext, "进入货源详情!", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

@@ -218,7 +218,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.titlebar_id_back) {
-			onBackPressed();
+			finish();
 		} else if (v.getId() == R.id.titlebar_id_more) {
 //			if (isRightKeyIntoShare) {
 //				startActivity(new Intent(context, ShareActivity.class)

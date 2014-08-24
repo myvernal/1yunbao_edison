@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/window_bg"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:orientation="vertical">
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_way"
+                          android:singleLine="true"
+                          android:ellipsize="end"
+                          android:text="运输线路："/>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              style="@style/home_source_detail_top_style"
+                              android:text="货物内容："/>
+
+                    <TextView
+                            style="@style/home_source_detail_top_style"
+                            android:id="@+id/source_detail_content"
+                            android:padding="0dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_time"
+                          android:text="发布时间："/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:text="补充说明："/>
+
+                <TextView
+                        android:id="@+id/source_detail_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/TextColorWhite"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp"/>
+
+            </LinearLayout>
+
+            <View android:layout_width="match_parent"
+                  android:layout_height="2px"
+                  android:layout_marginBottom="20dp"
+                  android:background="@color/gray_line"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        style="@style/home_source_detail_top_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="联  系  人："/>
+
+                <TextView
+                        style="@style/home_source_detail_top_style"
+                        android:id="@+id/source_detail_contact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="无"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        style="@style/home_source_detail_top_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="联系电话："/>
+
+                <TextView
+                        android:id="@+id/source_detail_phone"
+                        style="@style/home_source_detail_top_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="无"/>
+            </LinearLayout>
+
+            <com.maogousoft.logisticsmobile.driver.widget.MyGridView
+                    android:id="@id/source_id_order_gridview"
+                    style="@style/gridviewStyle"
+                    android:layout_marginLeft="@dimen/grid_space"
+                    android:layout_marginRight="@dimen/grid_space"
+                    android:numColumns="4"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="30dp"
+                          android:gravity="center"
+                          android:orientation="horizontal">
+                <Button
+                        android:id="@+id/source_detail_edit"
+                        style="@style/button1_style2"
+                        android:text="编辑"/>
+                <Button
+                        android:id="@+id/source_detail_republic"
+                        style="@style/button1_style2"
+                        android:layout_gravity="center"
+                        android:text="重发"/>
+                <Button
+                        android:id="@+id/source_detail_delete"
+                        style="@style/button1_style2"
+                        android:layout_gravity="center"
+                        android:text="删除"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -181,19 +181,22 @@ public class SourceDetailActivity extends BaseActivity {
                 });
             }
         } else if (type.equals("NewSourceActivity")) {
-            order_id = (Integer) getIntent().getIntExtra(ORDER_ID, 0);
+            order_id = getIntent().getIntExtra(ORDER_ID, 0);
             getSourceDetail(order_id);
         } else if (type.equals("UnMatchedSourceActivity")) {
-
             mPlace.setText("取消订单");
             ((TextView) findViewById(R.id.titlebar_id_content))
                     .setText("待定货源详情");
 
-            order_id = (Integer) getIntent().getIntExtra(ORDER_ID, 0);
+            order_id = getIntent().getIntExtra(ORDER_ID, 0);
             getSourceDetail(order_id);
 
+        } else {
+            mPlace.setText("取消订单");
+            ((TextView) findViewById(R.id.titlebar_id_content)).setText("已发布货源详情");
+            order_id = getIntent().getIntExtra(ORDER_ID, 0);
+            getSourceDetail(order_id);
         }
-
     }
 
     @Override
@@ -253,19 +256,45 @@ public class SourceDetailActivity extends BaseActivity {
         mLine.setText(Html.fromHtml(mLine.getText() + Utils.textFormatGreen(way)));
         String sourceName = sourceInfo.getCargo_desc();
         mSourceName.setText(Html.fromHtml(mSourceName.getText() + Utils.textFormatBlue(sourceName)));
-        String sourceType = sourceInfo.getCargo_type_str();
-        mSourceType.setText(Html.fromHtml(mSourceType.getText() + Utils.textFormatBlue(sourceType)));
+       //货物类型
+        Integer sourceType = mSourceInfo.getCargo_type();
+        if(sourceType != null && sourceType > 0) {
+            String[] sourceTypeStr = context.getResources().getStringArray(R.array.goods_types);
+            for (int i = 0; i < Constants.sourceTypeValues.length; i++) {
+                if (Constants.sourceTypeValues[i] == sourceType) {
+                    mSourceType.setText(Html.fromHtml(mSourceType.getText() + Utils.textFormatBlue(sourceTypeStr[i])));
+                }
+            }
+        }
+       //载重
         String weight = "15吨";
-        mWeight.setText(Html.fromHtml(mValidateTime.getText().toString() + Utils.textFormatBlue(weight)));
-        String shipType = sourceInfo.getShip_type_str();
-        mShipType.setText(Html.fromHtml(mShipType.getText() + Utils.textFormatBlue(shipType)));
+        mWeight.setText(Html.fromHtml(mWeight.getText().toString() + Utils.textFormatBlue(weight)));
+        //运输方式
+        Integer shipType = mSourceInfo.getShip_type();
+        if(shipType != null && shipType> 0) {
+            String[] shipTypeStr = context.getResources().getStringArray(R.array.ship_type);
+            for (int i = 0; i < Constants.shipTypeValues.length; i++) {
+                if (Constants.shipTypeValues[i] == shipType) {
+                    mShipType.setText(Html.fromHtml(mShipType.getText() + Utils.textFormatBlue(shipTypeStr[i])));
+                }
+            }
+        }
+        //车长
         String carLength = sourceInfo.getCar_length() + "米";
         mSourceCarLength.setText(mSourceCarLength.getText().toString() + carLength);
-        String carType = sourceInfo.getCar_type_str();
-        mSourceCarType.setText(mSourceCarType.getText() + carType);
+        //车型
+        Integer carTypeValue = mSourceInfo.getCar_type();
+        if(carTypeValue != null && carTypeValue>0) {
+            String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
+            for (int i = 0; i < Constants.carTypeValues.length; i++) {
+                if (Constants.carTypeValues[i] == carTypeValue) {
+                    mSourceCarType.setText(mSourceCarType.getText() + carTypeStr[i]);
+                }
+            }
+        }
         //报价单位
         Integer unitPrice = sourceInfo.getCargo_unit();
-        if(unitPrice != null) {
+        if(unitPrice != null && unitPrice>0) {
             String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
             for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                 if (Constants.unitTypeValues[i] == unitPrice) {

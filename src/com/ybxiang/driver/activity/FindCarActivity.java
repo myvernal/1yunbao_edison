@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.maogousoft.logisticsmobile.driver.activity.CloudSearchActivity;
+import com.maogousoft.logisticsmobile.driver.activity.CarCloudSearchActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,13 +17,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,7 +115,7 @@ public class FindCarActivity extends BaseActivity {
 		// 附近车源
 		case R.id.titlebar_id_more:
 //			startActivity(new Intent(mContext, NearbyCarSourceActivity.class));
-            startActivity(new Intent(mContext, CloudSearchActivity.class));
+            startActivity(new Intent(mContext, CarCloudSearchActivity.class));
 			break;
 		case R.id.search_source__submit:
 			// 先检测是否已经完善了资料

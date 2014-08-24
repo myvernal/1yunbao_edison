@@ -124,6 +124,11 @@
 	    <item>两小时内</item>
 	    <item>六小时内</item>
 	</string-array>
+    <!-- 运输类型 -->
+    <string-array name="ship_type">
+        <item>整车</item>
+        <item>零担</item>
+    </string-array>
 	<!-- 保险：险种 -->
 	<string-array name="safe_types">
 	    <item>基本险</item>
