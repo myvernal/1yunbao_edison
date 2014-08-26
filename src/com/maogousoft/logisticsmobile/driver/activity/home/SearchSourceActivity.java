@@ -122,7 +122,7 @@ public class SearchSourceActivity extends BaseActivity {
 
     private void search(int validateDateLong) {
         // 先检测是否已经完善了资料
-        if (application.checkIsRegOptional()) {
+        if (application.getUserType() == Constants.USER_SHIPPER || application.checkIsRegOptional()) {
             // 参数0代表短期货源
             submit(validateDateLong);
         } else {
