@@ -205,7 +205,7 @@ public class FindCarActivity extends BaseActivity {
 			if (selectedCarType != 0) {
 				params.put("car_type", selectedCarType);
 			}
-			if (!TextUtils.isEmpty(edtCarLength.getText().toString())) {
+			if (!TextUtils.isEmpty(edtCarLength.getText())) {
 				params.put("car_length", edtCarLength.getText().toString());
 			}
 			params.put("car_way", selectedCarWay); // add PR1.3

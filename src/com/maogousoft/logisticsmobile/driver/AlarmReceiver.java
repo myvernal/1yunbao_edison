@@ -17,6 +17,9 @@ import com.maogousoft.logisticsmobile.driver.utils.LocHelper.LocCallback;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MD5;
 
+/**
+ * 司机位置定时上报(提供给免费定位和附近车源使用)
+ */
 public class AlarmReceiver extends BroadcastReceiver {
 
 	private static final String TAG = "AlarmReceiver";
@@ -27,34 +30,22 @@ public class AlarmReceiver extends BroadcastReceiver {
 		LogUtil.i(TAG, "定位、上报位置,开始一次");
 
 		// 启动服务
-
 		LocHelper.getInstance(context).getResult(new LocCallback() {
 
 			@Override
 			public void onRecivedLoc(double lat, double lng, String addr) {
-
 				if (lat == 0 || lng == 0 || TextUtils.isEmpty(addr)) {
 					return;
 				}
-
-				// SendFood.this.lat = lat;
-				// SendFood.this.lng = lng;
-
-				// order_id int 否 订单号
-				//
-				// location String 是 位置字符串
-				// longitude double 是 经度
-				// latitude double 是 纬度
-
 				MGApplication application = (MGApplication) context.getApplicationContext();
-
 				JSONObject jsonObject = new JSONObject();
 				try {
-
-					String submitJson = new JSONObject().put("location", addr).put("longitude", lng)
+					String submitJson = new JSONObject()
+                            .put("isTimerChange", 1)
+                            .put("address", addr)
+                            .put("longitude", lng)
 							.put("latitude", lat).toString();
-
-					jsonObject.put(Constants.ACTION, Constants.SHIPPING_ORDER_UPDATE_LOCATION);
+					jsonObject.put(Constants.ACTION, Constants.DRIVER_UPDATE_LOCATION);
 					jsonObject.put(Constants.TOKEN, application.getToken());
 					jsonObject.put(Constants.JSON, submitJson);
 					ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject, null, new AjaxCallBack() {
@@ -68,9 +59,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 								case ResultCode.RESULT_ERROR:
 									LogUtil.i(TAG, "定位、上报位置失败一次");
 									if (result instanceof String) {
-
 										if (result.toString().contains("token")) {
-
 											// token异常
 											login(context);
 										}
@@ -80,7 +69,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 									LogUtil.i(TAG, "定位、上报位置失败一次");
 									if (result instanceof String) {
 										if (result.toString().contains("token")) {
-
 											// token异常
 											login(context);
 										}
@@ -101,9 +89,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 	// 登录
 	private void login(final Context ctx) {
-
 		final MGApplication application = (MGApplication) ctx.getApplicationContext();
-
 		final String username = application.getUserName();
 		final String password = application.getPassword();
 
@@ -111,8 +97,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 		try {
 			jsonObject.put(Constants.ACTION, Constants.DRIVER_LOGIN);
 			jsonObject.put(Constants.TOKEN, null);
-			jsonObject.put(Constants.JSON, new JSONObject().put("phone", username)
-					.put("password", MD5.encode(password)).put("device_type", Constants.DEVICE_TYPE).toString());
+			jsonObject.put(Constants.JSON, new JSONObject()
+                    .put("phone", username)
+					.put("password", MD5.encode(password))
+                    .put("device_type", Constants.DEVICE_TYPE).toString());
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject, UserInfo.class, new AjaxCallBack() {
 
 				@Override
@@ -120,7 +108,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 					switch (code) {
 						case ResultCode.RESULT_OK:
 							UserInfo userInfo = (UserInfo) result;
-
 							// 写入用户信息
 							application.writeUserInfo(username, password, userInfo.getDriver_id());
 							application.setToken(userInfo.getToken());

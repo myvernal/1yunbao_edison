@@ -213,8 +213,8 @@ public class Constants {
 	/** 更新在途状态 **/
 	public static final String SHIPPING_ORDER_UPDATE_STATUS = "shipping_order_update_status";
 
-	/** 更新位置 **/
-	public static final String SHIPPING_ORDER_UPDATE_LOCATION = "shipping_order_update_location";
+	/** 司机端:更新位置 **/
+	public static final String DRIVER_UPDATE_LOCATION = "driver_reg_optional";
 
 	/** 回单密码 **/
 	public static final String VALIDATE_RECEIPT_PASSWORD = "validate_receipt_password";

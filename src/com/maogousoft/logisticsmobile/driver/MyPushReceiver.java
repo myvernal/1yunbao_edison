@@ -198,10 +198,8 @@ public class MyPushReceiver extends BroadcastReceiver {
 										.put("latitude", lat).toString();
 							}
 
-							jsonObject.put(Constants.ACTION,
-									Constants.SHIPPING_ORDER_UPDATE_LOCATION);
-							jsonObject.put(Constants.TOKEN,
-									application.getToken());
+							//jsonObject.put(Constants.ACTION, Constants.SHIPPING_ORDER_UPDATE_LOCATION);
+				 			jsonObject.put(Constants.TOKEN, application.getToken());
 							jsonObject.put(Constants.JSON, submitJson);
 							ApiClient.doWithObject(Constants.DRIVER_SERVER_URL,
 									jsonObject, null, new AjaxCallBack() {
@@ -257,8 +255,7 @@ public class MyPushReceiver extends BroadcastReceiver {
 
 				break;
 			case 7:
-				mNotificationManager.notify(0,
-						getInfoCenterNotification(context, "信息中心有新的消息"));
+				mNotificationManager.notify(0, getInfoCenterNotification(context, "信息中心有新的消息"));
 				break;
 
 			// default:

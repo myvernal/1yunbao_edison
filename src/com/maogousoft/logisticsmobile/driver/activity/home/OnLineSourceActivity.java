@@ -300,8 +300,7 @@ public class OnLineSourceActivity extends BaseActivity {
 								.put("location", addr).put("longitude", lng)
 								.put("latitude", lng).toString();
 
-						jsonObject.put(Constants.ACTION,
-								Constants.SHIPPING_ORDER_UPDATE_LOCATION);
+						//jsonObject.put(Constants.ACTION, Constants.SHIPPING_ORDER_UPDATE_LOCATION);
 						jsonObject.put(Constants.TOKEN, application.getToken());
 						jsonObject.put(Constants.JSON, submitJson);
 						ApiClient.doWithObject(Constants.DRIVER_SERVER_URL,

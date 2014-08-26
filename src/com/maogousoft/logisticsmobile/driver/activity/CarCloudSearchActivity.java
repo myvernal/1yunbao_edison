@@ -219,7 +219,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         NearbySearchInfo info = new NearbySearchInfo();
         info.ak = Constants.BAIDU_APP_Key;
         info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
-        info.radius = 30000;
+        info.radius = 3000;
         info.location = location.getLatitude() + "," + location.getLongitude();
         showLocation(location);
         CloudManager.getInstance().nearbySearch(info);

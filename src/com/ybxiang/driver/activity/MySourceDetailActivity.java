@@ -70,19 +70,23 @@ public class MySourceDetailActivity extends BaseActivity {
         StringBuffer sb = new StringBuffer();
         sb.append(mSourceInfo.getCargo_desc());
         //运输方式
-        int shipType = mSourceInfo.getShip_type();
-        String[] shipTypeStr = context.getResources().getStringArray(R.array.ship_type);
-        for(int i=0;i<Constants.shipTypeValues.length;i++) {
-            if(Constants.shipTypeValues[i] == shipType){
-                sb.append("  " + shipTypeStr[i]);
+        Integer shipType = mSourceInfo.getShip_type();
+        if(shipType != null && shipType > 0) {
+            String[] shipTypeStr = context.getResources().getStringArray(R.array.ship_type);
+            for (int i = 0; i < Constants.shipTypeValues.length; i++) {
+                if (Constants.shipTypeValues[i] == shipType) {
+                    sb.append("  " + shipTypeStr[i]);
+                }
             }
         }
         //车型
-        int carTypeValue = mSourceInfo.getCar_type();
-        String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
-        for(int i=0;i<Constants.carTypeValues.length;i++) {
-            if(Constants.carTypeValues[i] == carTypeValue){
-                sb.append("  " + carTypeStr[i]);
+        Integer carTypeValue = mSourceInfo.getCar_type();
+        if(carTypeValue != null && carTypeValue > 0) {
+            String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
+            for (int i = 0; i < Constants.carTypeValues.length; i++) {
+                if (Constants.carTypeValues[i] == carTypeValue) {
+                    sb.append("  " + carTypeStr[i]);
+                }
             }
         }
         //车长
