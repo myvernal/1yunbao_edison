@@ -2,6 +2,7 @@ package com.ybxiang.driver.activity;
 
 // add this file for 发布货源
 
+import android.text.Html;
 import android.text.TextUtils;
 import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.CitySelectView;
@@ -17,7 +18,12 @@ import android.view.View.OnClickListener;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
+import com.ybxiang.driver.util.Utils;
 import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 public class PublishGoodsSourceActivity extends BaseActivity implements OnClickListener {
     private Context mContext;
@@ -31,12 +37,15 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             source_id_publish_validate_day, source_id_publish_validate_hour;
     private Spinner source_id_publish_cargo_type, source_id_publish_car_type,
             source_id_publish_cargo_unit, source_id_publish_cargo_tip;
+    private NewSourceInfo mSourceInfo;
+    private boolean isUpdateSource = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.publish_goods_source);
         initViews();
+        initData();
     }
 
     // 初始化视图
@@ -66,6 +75,54 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         source_id_publish_cargo_tip = (Spinner) findViewById(R.id.source_id_publish_cargo_tip);
         mBack.setOnClickListener(this);
         mRightButton.setOnClickListener(this);
+    }
+
+    private void initData() {
+        Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
+        if (serializable != null) {
+            mSourceInfo = (NewSourceInfo) serializable;
+            isUpdateSource = true;//标记是编辑货源
+
+            source_id_publish_cargo_desc.setText(mSourceInfo.getCargo_desc());
+            source_id_publish_car_length.setText(mSourceInfo.getCar_length() + "");
+            source_id_publish_unit_price.setText(mSourceInfo.getUnit_price() + "");
+            source_id_publish_user_bond.setText(mSourceInfo.getUser_bond());
+            source_id_publish_cargo_remark.setText(mSourceInfo.getCargo_remark());
+            source_id_publish_contact_name.setText(mSourceInfo.getUser_name());
+            source_id_publish_contact_phone.setText(mSourceInfo.getUser_phone());
+            //选择货物类型
+            Integer sourceType = mSourceInfo.getCargo_type();
+            if (sourceType != null && sourceType > 0) {
+                for (int i = 0; i < Constants.sourceTypeValues.length; i++) {
+                    if (Constants.sourceTypeValues[i] == sourceType) {
+                        source_id_publish_cargo_type.setSelection(i);
+                    }
+                }
+            }
+            //选择车型
+            Integer carType = mSourceInfo.getCar_type();
+            if (carType != null && carType > 0) {
+                for (int i = 0; i < Constants.carTypeValues.length; i++) {
+                    if (Constants.carTypeValues[i] == carType) {
+                        source_id_publish_cargo_type.setSelection(i);
+                    }
+                }
+            }
+            //选择货物单位
+            Integer unit = mSourceInfo.getCargo_unit();
+            if (unit != null && unit > 0) {
+                for (int i = 0; i < Constants.unitTypeValues.length; i++) {
+                    if (Constants.unitTypeValues[i] == unit) {
+                        source_id_publish_cargo_unit.setSelection(i);
+                    }
+                }
+            }
+            if (null != mSourceInfo.getShip_type() && mSourceInfo.getShip_type() > 0) {
+                if (mSourceInfo.getShip_type() == 58) {
+                    ((RadioButton) findViewById(R.id.car_way_part)).setChecked(true);
+                }
+            }
+        }
     }
 
     /**
@@ -123,7 +180,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
-            jsonObject.put(Constants.ACTION, Constants.PUBLISH_SOURCE);
+            jsonObject.put(Constants.ACTION, isUpdateSource?Constants.UPDATE_PUBLISH_ORDER:Constants.PUBLISH_SOURCE);
             jsonObject.put(Constants.TOKEN, application.getToken());
             params.put("start_province", cityselectStart.getSelectedProvince()
                     .getId());
@@ -171,7 +228,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             long day = Integer.valueOf(source_id_publish_validate_day.getText().toString()) * 24 * 60 * 60 * 1000;
             long hour = Integer.valueOf(source_id_publish_validate_hour.getText().toString()) * 60 * 60 * 1000;
             params.put("validate_time", day + hour);
-            params.put("loading_time", 60*60*1000);
+            params.put("loading_time", 60 * 60 * 1000);
 
             jsonObject.put(Constants.JSON, params);
             showDefaultProgress();

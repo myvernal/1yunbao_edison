@@ -3,18 +3,12 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
 import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
-import com.ybxiang.driver.activity.CheckSafeActivity;
-import com.ybxiang.driver.activity.FindCarActivity;
-import com.ybxiang.driver.activity.MyFriendsActivity;
-import com.ybxiang.driver.activity.PublishCarSourceActivity;
-import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
-import com.ybxiang.driver.activity.SpreadActivity;
+import com.ybxiang.driver.activity.*;
 
 /**
  * 专线首页 special
@@ -36,7 +30,7 @@ public class HomeSpecialActivity extends BaseActivity {
 
 	// 找车
 	public void onFindCar(View view) {
-		startActivity(new Intent(context, FindCarActivity.class));
+		startActivity(new Intent(context, SearchCarSourceActivity.class));
 	}
 
 	// 我的好友

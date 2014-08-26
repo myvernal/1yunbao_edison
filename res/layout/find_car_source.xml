@@ -55,7 +55,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:layout_margin="10dp"
                     android:orientation="horizontal">
                 <RadioButton
                         android:id="@+id/car_way_part"
@@ -101,10 +100,18 @@
                         style="@style/info_publish_text_style"
                         android:text="车长："/>
 
-                <Spinner
-                        android:id="@+id/edt_search_source_carlength"
-                        style="@style/home_publish_spinner_style"
+                <EditText
+                        android:id="@+id/edt_search_source_car_length"
+                        style="@style/info_edit_text_spe_style"
+                        android:layout_weight="1"
                         android:entries="@array/car_length_names"/>
+
+                <TextView
+                        style="@style/info_publish_text_style"
+                        android:minWidth="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="米"/>
             </LinearLayout>
             <!-- 车型：spinner.setSelection(5) -->
 
@@ -135,7 +142,8 @@
                     android:text="查找"/>
             <!-- PR1.3 begin -->
             <RelativeLayout android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp">
 
                 <TextView
                         android:layout_width="wrap_content"

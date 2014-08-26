@@ -42,6 +42,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
     private Button mTitleBarMore;
     private double longitude;//经度
     private double latitude;//纬度
+    private String address = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +133,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
                 if (lat != 0 && lng != 0 && !TextUtils.isEmpty(addr)) {
                     longitude = lng;
                     latitude = lat;
+                    address = addr;
                     LogUtil.d(TAG, addr);
                 }
             }
@@ -177,6 +179,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
             dataJson.put("description", description.getText());//补充说明
             dataJson.put("longitude", longitude);//经度
             dataJson.put("latitude", latitude);//纬度
+            dataJson.put("address", address);//位置
             dataJson.put("pulish_date", System.currentTimeMillis());//发布日期
             dataJson.put("units", unitType);
             jsonObject.put(Constants.JSON, dataJson.toString());

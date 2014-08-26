@@ -373,6 +373,15 @@ public class Constants {
     /** 货主端:已发布货源 */
     public static final String QUERY_MY_PUBLIC_ORDER = "query_My_Pulish_order";
 
+    /** 货主端:重新发布货源 */
+    public static final String REPUBLISH_ORDER = "rePulish_order";
+
+    /** 货主端:删除货源 */
+    public static final String DELETE_PUBLISH_ORDER = "delete_pulish_order";
+
+    /** 货主端:编辑已发布货源 */
+    public static final String UPDATE_PUBLISH_ORDER = "update_pulish_order";
+
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
@@ -391,8 +400,8 @@ public class Constants {
 
     public static final int ANONYMOUS_REQUEST_CODE = 1000;
     public static final int ANONYMOUS_RESULT_CODE = 1001;
-    public static final int USER_DRIVER = 2; //司机
-    public static final int USER_SHIPPER = 1;//货主
+    public static final int USER_DRIVER = 1; //司机
+    public static final int USER_SHIPPER = 0;//货主
 	/**
 	 * 通过位置获取车型车型
 	 */

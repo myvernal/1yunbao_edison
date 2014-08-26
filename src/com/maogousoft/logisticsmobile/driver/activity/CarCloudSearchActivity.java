@@ -117,8 +117,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
     public void onGetDetailSearchResult(DetailSearchResult result, int error) {
 		if (result != null) {
 			if (result.poiInfo != null) {
-				Toast.makeText(CarCloudSearchActivity.this, result.poiInfo.title,
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, result.poiInfo.title, Toast.LENGTH_SHORT).show();
 			} else {
 				Toast.makeText(CarCloudSearchActivity.this, "status:" + result.status, Toast.LENGTH_SHORT).show();
 			}

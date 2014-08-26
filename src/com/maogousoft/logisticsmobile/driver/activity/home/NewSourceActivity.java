@@ -197,6 +197,7 @@ public class NewSourceActivity extends BaseListActivity implements
                 params.put("end_province", focusLineInfo.getEnd_province());
                 params.put("end_city", focusLineInfo.getEnd_city());
                 params.put("end_district", focusLineInfo.getEnd_district());
+                params.put("type", application.getUserType());
             }
             jsonObject.put(Constants.JSON, params);
             showDefaultProgress();

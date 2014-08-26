@@ -23,7 +23,6 @@ import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
-import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.ybxiang.driver.activity.FocusLineInfoActivity;
 import com.ybxiang.driver.model.FocusLineInfo;
@@ -41,18 +40,9 @@ import java.util.List;
  */
 public class SearchSourceActivity extends BaseActivity {
 
-    private static final String LOGTAG = LogUtil
-            .makeLogTag(SearchSourceActivity.class);
-
-    private Button mBack;
-    private Button mTitleBarMore;
-
-    private Button mSubmit;
-
-    private CitySelectView cityselectStart, cityselectEnd;
-
-    private Spinner carTypeSpinner;
-    private Spinner edtCarLength;
+    private Button mBack, mTitleBarMore, mSubmit;
+    private CitySelectView citySelectStart, citySelectEnd;
+    private Spinner carTypeSpinner, edtCarLength;
     private GridView mGridView;
     private int car_type = 43; // 车型 ：
     private int ship_type = 0; // 运输方式： 0 不限 1整车 2 零担
@@ -81,8 +71,8 @@ public class SearchSourceActivity extends BaseActivity {
 
         mSubmit = (Button) findViewById(R.id.search_source__submit);
 
-        cityselectStart = (CitySelectView) findViewById(R.id.cityselect_start);
-        cityselectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
+        citySelectStart = (CitySelectView) findViewById(R.id.cityselect_start);
+        citySelectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
         mGridView = (GridView) findViewById(R.id.focus_line_gridview);
         mBack.setOnClickListener(this);
         mTitleBarMore.setOnClickListener(this);
@@ -169,8 +159,8 @@ public class SearchSourceActivity extends BaseActivity {
     private void submit(int validateDateLong) {
         // 计算路线的开始ID,结束ID
         final FocusLineInfo focusLineInfo = new FocusLineInfo();
-        if (cityselectStart.getSelectedProvince() == null
-                | cityselectEnd.getSelectedProvince() == null) {
+        if (citySelectStart.getSelectedProvince() == null
+                | citySelectEnd.getSelectedProvince() == null) {
             showMsg("请选择出发地，目的地。");
             return;
         }
@@ -186,28 +176,28 @@ public class SearchSourceActivity extends BaseActivity {
                 params.put("validateDateLong", 1);
             }
 
-            params.put("start_province", cityselectStart.getSelectedProvince().getId());
-            focusLineInfo.setStart_province(cityselectStart.getSelectedProvince().getId());
-            params.put("end_province", cityselectEnd.getSelectedProvince().getId());
-            focusLineInfo.setEnd_province(cityselectEnd.getSelectedProvince().getId());
-            if (cityselectStart.getSelectedCity() != null) {
-                params.put("start_city", cityselectStart.getSelectedCity().getId());
-                focusLineInfo.setStart_city(cityselectStart.getSelectedCity().getId());
+            params.put("start_province", citySelectStart.getSelectedProvince().getId());
+            focusLineInfo.setStart_province(citySelectStart.getSelectedProvince().getId());
+            params.put("end_province", citySelectEnd.getSelectedProvince().getId());
+            focusLineInfo.setEnd_province(citySelectEnd.getSelectedProvince().getId());
+            if (citySelectStart.getSelectedCity() != null) {
+                params.put("start_city", citySelectStart.getSelectedCity().getId());
+                focusLineInfo.setStart_city(citySelectStart.getSelectedCity().getId());
             }
 
-            if (cityselectEnd.getSelectedCity() != null) {
-                params.put("end_city", cityselectEnd.getSelectedCity().getId());
-                focusLineInfo.setEnd_city(cityselectEnd.getSelectedCity().getId());
+            if (citySelectEnd.getSelectedCity() != null) {
+                params.put("end_city", citySelectEnd.getSelectedCity().getId());
+                focusLineInfo.setEnd_city(citySelectEnd.getSelectedCity().getId());
             }
 
-            if (cityselectStart.getSelectedTowns() != null) {
-                params.put("start_district", cityselectStart.getSelectedTowns().getId());
-                focusLineInfo.setStart_district(cityselectStart.getSelectedTowns().getId());
+            if (citySelectStart.getSelectedTowns() != null) {
+                params.put("start_district", citySelectStart.getSelectedTowns().getId());
+                focusLineInfo.setStart_district(citySelectStart.getSelectedTowns().getId());
             }
 
-            if (cityselectEnd.getSelectedTowns() != null) {
-                params.put("end_district", cityselectEnd.getSelectedTowns().getId());
-                focusLineInfo.setEnd_district(cityselectEnd.getSelectedTowns().getId());
+            if (citySelectEnd.getSelectedTowns() != null) {
+                params.put("end_district", citySelectEnd.getSelectedTowns().getId());
+                focusLineInfo.setEnd_district(citySelectEnd.getSelectedTowns().getId());
             }
             // 车型
             if (car_type != 43) {
@@ -329,7 +319,7 @@ public class SearchSourceActivity extends BaseActivity {
         try {
             jsonObject.put(Constants.ACTION, Constants.QUERY_ALL_FOCUS_LINE);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, "");
+            jsonObject.put(Constants.JSON, new JSONObject().put("type", application.getUserType()));
             showDefaultProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     FocusLineInfo.class, new AjaxCallBack() {

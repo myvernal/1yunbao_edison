@@ -95,6 +95,7 @@ public class FocusLineInfoActivity extends BaseListActivity implements
             jsonObject.put(Constants.ACTION, Constants.QUERY_ALL_FOCUS_LINE);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
+                    .put("type", application.getUserType())
                     .toString());
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,

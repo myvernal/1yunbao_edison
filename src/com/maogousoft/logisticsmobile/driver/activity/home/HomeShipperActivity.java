@@ -10,7 +10,7 @@ import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.*;
 
 /**
- * 三方首页
+ * 货主首页
  * 
  * @author ybxiang
  */
@@ -46,7 +46,7 @@ public class HomeShipperActivity extends BaseHomeActivity {
 
 	// 查找车源
 	public void onFindCar(View view) {
-		startActivity(new Intent(context, FindCarActivity.class));
+		startActivity(new Intent(context, SearchCarSourceActivity.class));
 	}
 
 	// 验证保险

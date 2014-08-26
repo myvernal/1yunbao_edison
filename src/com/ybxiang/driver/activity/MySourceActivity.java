@@ -80,6 +80,12 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
     // 请求指定页数的数据
     private void getData(int page) {
         try {
@@ -115,7 +121,7 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
                                                 mFootMsg.setText(R.string.tips_isloading);
                                             }
                                             android.util.Log.d("ybxiang", "mList==" + mList);
-                                            mAdapter.addAll(mList);
+                                            mAdapter.setList(mList);
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
@@ -141,11 +147,6 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-
     }
 
     @Override
