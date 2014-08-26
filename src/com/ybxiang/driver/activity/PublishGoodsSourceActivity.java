@@ -45,7 +45,6 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.publish_goods_source);
         initViews();
-        initData();
     }
 
     // 初始化视图
@@ -75,6 +74,12 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         source_id_publish_cargo_tip = (Spinner) findViewById(R.id.source_id_publish_cargo_tip);
         mBack.setOnClickListener(this);
         mRightButton.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 
     private void initData() {
