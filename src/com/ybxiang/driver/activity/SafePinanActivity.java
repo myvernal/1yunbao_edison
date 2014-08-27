@@ -11,21 +11,20 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 
 /**
- * Created by aliang on 2014/8/10.
+ * Created by aliang on 2014/8/27.
  */
-public class SafeActivity extends BaseActivity {
-
+public class SafePinanActivity extends BaseActivity {
     private Button mTitleBarBack, mTitleBarMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.safe_layout);
+        setContentView(R.layout.safe_pingan_layout);
         initView();
     }
 
     private void initView() {
-        ((TextView) findViewById(R.id.titlebar_id_content)).setText("货运保险");
+        ((TextView) findViewById(R.id.titlebar_id_content)).setText("平安保险");
         // 返回按钮生效
         mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
         mTitleBarBack.setOnClickListener(this);
@@ -71,6 +70,5 @@ public class SafeActivity extends BaseActivity {
     public void onClickNext(View view) {
         Toast.makeText(context, "下一步", Toast.LENGTH_SHORT).show();
     }
-
 
 }

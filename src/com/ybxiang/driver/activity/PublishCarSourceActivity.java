@@ -192,6 +192,10 @@ public class PublishCarSourceActivity extends BaseActivity implements
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     Toast.makeText(context, "发布成功", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent();
+                                    intent.setClass(mContext, ManagerCarSourceActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     if (result instanceof String)

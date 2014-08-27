@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/common_title"/>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/window_bg">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:padding="10dp"
+                          android:background="@color/TextColorWhite"
+                          android:orientation="horizontal">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginLeft="10dp"
+                           android:layout_gravity="center_vertical"
+                           android:src="@drawable/safe_pingan_logo"/>
+                <View android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"/>
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginRight="10dp"
+                           android:layout_gravity="center_vertical"
+                           android:src="@drawable/safe_common_logo"/>
+            </LinearLayout>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="25dp"
+                      android:textColor="@color/TextColorWhite"
+                      android:gravity="center"
+                      android:background="@color/font_blue2"
+                      android:text="平安保险战略合作伙伴"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="left|center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="5dp"
+                          android:paddingRight="5dp">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:text="险种:"/>
+
+                <Spinner android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:entries="@array/safe_pingan_types"
+                         android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="承保范围:"/>
+
+                <TextView style="@style/safe_text_title_pingan_info_style"
+                          android:text="@string/check_pingan_tip_1"/>
+            </LinearLayout>
+
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="承保标的:"/>
+                <TextView style="@style/safe_text_title_pingan_info_style"
+                          android:text="@string/check_pingan_tip_2"/>
+            </LinearLayout>
+
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="保险责任:"/>
+                <TextView style="@style/safe_text_title_pingan_info_style"
+                          android:text="@string/check_pingan_tip_3"/>
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:paddingRight="5dp"
+                      style="@style/safe_text_title_style"
+                      android:text="免赔条款:"/>
+
+            <TextView style="@style/safe_text_title_pingan_info_style"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
+                      android:text="@string/check_pingan_tip_4"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="5dp"
+                          android:paddingRight="5dp">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:text="保险金额:"/>
+
+                <EditText android:layout_width="100dp"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:inputType="numberDecimal"
+                          android:hint="必填"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_other_style"
+                          android:text="万元(人民币)"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="5dp">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:text="费率:"/>
+
+                <EditText android:layout_width="70dp"
+                          android:layout_height="40dip"
+                          android:gravity="right|center_vertical"
+                          android:inputType="numberDecimal"
+                          android:text="0.05"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_other_style"
+                          android:text="%"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="5dp"
+                          android:paddingRight="5dp">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:text="保费:"/>
+
+                <EditText android:layout_width="100dp"
+                          android:layout_height="40dip"
+                          android:editable="false"
+                          android:gravity="center_vertical"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_other_style"
+                          android:text="元"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="@color/Red"
+                          android:text="单笔保费不低于20元"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="5dp"
+                          android:gravity="center">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="18sp"
+                          android:text="账户余额:720元"/>
+
+                <Button style="@style/button1_style2"
+                        android:onClick="onCharge"
+                        android:text="充值"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:layout_marginTop="2dp"
+                          android:layout_gravity="center"
+                          android:linksClickable="false"
+                          android:autoLink="all"
+                          android:text="查看保险协议"/>
+
+                <CheckBox android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:layout_gravity="center"
+                          android:layout_marginLeft="10dp"
+                          android:text="同意保险协议"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="2dp"
+                          android:layout_marginBottom="5dp"
+                          android:gravity="center">
+                <Button style="@style/button1_style6"
+                        android:onClick="onClickBack"
+                        android:text="返回"/>
+
+                <Button style="@style/button1_style6"
+                        android:onClick="onClickNext"
+                        android:text="下一步"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

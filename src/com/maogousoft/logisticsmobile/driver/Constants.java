@@ -121,7 +121,7 @@ public class Constants {
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
 	public static final String BASE_URL = "http://112.124.33.14:8083/service";
-	//public static final String BASE_URL = "http://192.168.1.101:8888/service";
+	//public static final String BASE_URL = "http://192.168.1.100:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -240,7 +240,7 @@ public class Constants {
 	/** 信息中心 **/
 	public static final String QUERY_MESSAGE = "query_message";
 
-	/** 个人信息 **/
+    /** 货主端:获取货主信息 */
 	public static final String GET_USER_INFO = "get_user_info";
 
 	/** 评价列表 **/
@@ -300,7 +300,7 @@ public class Constants {
 	public static final String BAIDU_APP_Key = "fGahmvRg6YiiqNTY72uoWE9W";
 
     /** 百度云检索tableID */
-    public static final int BAIDU_LBS_TABLE_ID = 70609;
+    public static final int BAIDU_LBS_TABLE_ID = 76593;
 
 	/** 易宝 */
 	public final static String CUSTOMER_NUMBER = "10012061548";

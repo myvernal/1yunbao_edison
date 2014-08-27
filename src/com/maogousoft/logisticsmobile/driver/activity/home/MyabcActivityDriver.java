@@ -39,7 +39,7 @@ import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
  * 
  * @author lenovo
  */
-public class MyabcActivity1 extends BaseActivity {
+public class MyabcActivityDriver extends BaseActivity {
 
 	private Context mContext;
 
@@ -57,8 +57,8 @@ public class MyabcActivity1 extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home_myabc1);
-		mContext = MyabcActivity1.this; // PR111
+		setContentView(R.layout.activity_home_myabc_driver);
+		mContext = MyabcActivityDriver.this; // PR111
 		initViews();
 
 	}

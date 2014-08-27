@@ -3,8 +3,6 @@ package com.maogousoft.logisticsmobile.driver.activity;
 import android.view.View;
 import com.baidu.mapapi.SDKInitializer;
 import com.maogousoft.logisticsmobile.driver.activity.home.*;
-import com.maogousoft.logisticsmobile.driver.activity.info.RegisterActivity;
-import com.maogousoft.logisticsmobile.driver.activity.info.RegisterShipperActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
@@ -129,8 +127,13 @@ public class MainActivity extends TabActivity {
         }
         mTabHost.addTab(mTabHost.newTabSpec("tool").setIndicator("工具")
                 .setContent(new Intent(this, OthersActivity.class)));
-        mTabHost.addTab(mTabHost.newTabSpec("others").setIndicator("我X")
-                .setContent(new Intent(this, MyabcActivity1.class)));
+        if(application.getUserType() == Constants.USER_DRIVER) {
+            mTabHost.addTab(mTabHost.newTabSpec("others").setIndicator("我X")
+                    .setContent(new Intent(this, MyabcActivityDriver.class)));
+        } else {
+            mTabHost.addTab(mTabHost.newTabSpec("others").setIndicator("我X")
+                    .setContent(new Intent(this, MyabcActivityUser.class)));
+        }
         // OthersActivity -->MyabcActivity;
         // PR 102 OthersActivity-->
 

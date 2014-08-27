@@ -51,7 +51,7 @@ public class HomeShipperActivity extends BaseHomeActivity {
 
 	// 验证保险
 	public void onCheckSafe(View view) {
-		startActivity(new Intent(context, SafeActivity.class));
+		startActivity(new Intent(context, CheckSafeActivity.class));
 	}
 
     // 验证证件

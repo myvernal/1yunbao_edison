@@ -34,9 +34,9 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
     private EditText source_id_publish_cargo_desc, source_id_publish_car_length,
             source_id_publish_unit_price, source_id_publish_user_bond, source_id_publish_cargo_remark,
             source_id_publish_contact_name, source_id_publish_contact_phone,
-            source_id_publish_validate_day, source_id_publish_validate_hour;
+            source_id_publish_validate_day, source_id_publish_validate_hour, source_id_publish_source_weight;
     private Spinner source_id_publish_cargo_type, source_id_publish_car_type,
-            source_id_publish_cargo_unit, source_id_publish_cargo_tip;
+            source_id_publish_cargo_unit, source_id_publish_cargo_tip, source_id_publish_source_weight_unit;
     private NewSourceInfo mSourceInfo;
     private boolean isUpdateSource = false;
 
@@ -67,11 +67,13 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         source_id_publish_contact_phone = (EditText) findViewById(R.id.source_id_publish_contact_phone);
         source_id_publish_validate_day = (EditText) findViewById(R.id.source_id_publish_validate_day);
         source_id_publish_validate_hour = (EditText) findViewById(R.id.source_id_publish_validate_hour);
+        source_id_publish_source_weight = (EditText) findViewById(R.id.source_id_publish_source_weight);
 
         source_id_publish_cargo_type = (Spinner) findViewById(R.id.source_id_publish_cargo_type);
         source_id_publish_car_type = (Spinner) findViewById(R.id.source_id_publish_car_type);
         source_id_publish_cargo_unit = (Spinner) findViewById(R.id.source_id_publish_cargo_unit);
         source_id_publish_cargo_tip = (Spinner) findViewById(R.id.source_id_publish_cargo_tip);
+        source_id_publish_source_weight_unit = (Spinner) findViewById(R.id.source_id_publish_source_weight_unit);
         mBack.setOnClickListener(this);
         mRightButton.setOnClickListener(this);
     }
@@ -217,19 +219,19 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
 
             params.put("cargo_type", Constants.getSourceTypeValues(source_id_publish_cargo_type.getSelectedItemPosition()));
             params.put("car_way", selectedCarWay);  // add PR1.3
-            params.put("car_length", source_id_publish_car_length.getText().toString());
+            params.put("car_length", source_id_publish_car_length.getText());
             params.put("car_type", Constants.getCarTypeValues(source_id_publish_car_type.getSelectedItemPosition()));
-            params.put("unit_price", source_id_publish_unit_price.getText().toString());
+            params.put("unit_price", source_id_publish_unit_price.getText());
             params.put("cargo_unit", Constants.getUnitTypeValues(source_id_publish_cargo_unit.getSelectedItemPosition()));
-            params.put("user_bond", source_id_publish_user_bond.getText().toString() + "元");
-            params.put("cargo_tip", ((TextView) source_id_publish_cargo_tip.getSelectedView()).getText().toString());
-            params.put("cargo_remark", source_id_publish_cargo_remark.getText().toString());
-            params.put("contact_name", source_id_publish_contact_name.getText().toString());
-            params.put("contact_phone", source_id_publish_contact_phone.getText().toString());
-            params.put("validate_day", source_id_publish_validate_day.getText().toString());
-            params.put("validate_hour", source_id_publish_validate_hour.getText().toString());
-            //过期字段
-            params.put("cargo_number", "1");
+            params.put("user_bond", source_id_publish_user_bond.getText() + "元");
+            params.put("cargo_tip", ((TextView) source_id_publish_cargo_tip.getSelectedView()).getText());
+            params.put("cargo_remark", source_id_publish_cargo_remark.getText());
+            params.put("contact_name", source_id_publish_contact_name.getText());
+            params.put("contact_phone", source_id_publish_contact_phone.getText());
+            params.put("validate_day", source_id_publish_validate_day.getText());
+            params.put("validate_hour", source_id_publish_validate_hour.getText());
+            //货物数量
+            params.put("cargo_number", source_id_publish_source_weight.getText());
             long day = Integer.valueOf(source_id_publish_validate_day.getText().toString()) * 24 * 60 * 60 * 1000;
             long hour = Integer.valueOf(source_id_publish_validate_hour.getText().toString()) * 60 * 60 * 1000;
             params.put("validate_time", day + hour);

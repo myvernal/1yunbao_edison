@@ -194,7 +194,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
      * @param location
      */
     private void showLocation(BDLocation location) {
-        location.setRadius(3000);
+        location.setRadius(10000);
         MyLocationData locData = new MyLocationData.Builder()
                 .accuracy(location.getRadius())
                         // 此处设置开发者获取到的方向信息，顺时针0-360
@@ -218,7 +218,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         NearbySearchInfo info = new NearbySearchInfo();
         info.ak = Constants.BAIDU_APP_Key;
         info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
-        info.radius = 3000;
+        info.radius = 10000;
         info.location = location.getLatitude() + "," + location.getLongitude();
         showLocation(location);
         CloudManager.getInstance().nearbySearch(info);

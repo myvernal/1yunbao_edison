@@ -335,6 +335,7 @@
 	<string name="contact_kehu_qq">请加客户好友后，直接QQ联系，谢谢。</string>
 	<!-- add PR111 end -->
 
+    <!--太平洋保险-->
     <string name="check_card_tip">
         说明:\n
         1.付费身份证验证是直接连接到中国全国公民身份证号码查询服务中心,根据输入的姓名和身份证号码验证其一致性\n
@@ -348,6 +349,24 @@
     <string name="safe_text_two" formatted="false">
         1.易碎品风险每次事故绝对免费RMB1000或损失金额的20%;,其余风险每次事故绝对免赔RMB1000或损失金额的10%;,二者以高为准;\n
         2.裸装货物提出锈损和刮擦责任.
+    </string>
+    <!-- 平安保险 -->
+    <string name="check_pingan_tip_1" formatted="false">
+        中国大陆(西藏除外)
+    </string>
+
+    <string name="check_pingan_tip_2" formatted="false">
+        鲜活、易碎品、危险品、贵金属、古玩首饰等不承保。
+    </string>
+    <string name="check_pingan_tip_3" formatted="false">
+        基本险+意外碰撞致液体容器破损渗漏及玷污、混杂其他货物。
+    </string>
+    <string name="check_pingan_tip_4" formatted="false">
+        1.免赔率:\n
+        （1）每次事故损失20万元（含）以内，免赔率10%；20~50万元（含），免赔率15%；50~100万元（含），免赔率20%；100~150万元（含），免赔率25%；\n
+        （2）车辆倾覆事故免赔率30%，火灾事故免赔率；40%
+        （3）在同一保单范围内第二次出险并应赔付时，追加免赔率10%；第三次出险，追加免赔率20%；最高免赔率不超过40%；\n
+        2.每次事故绝对免赔额1500或损失金额乘以免赔率，两者以高者为准。
     </string>
 
     <string name="business_description">本人从事货运工作多年,经验丰富,稳重负责,受到众多客户的好评!欢迎有货的朋友联系我,价格从优!</string>

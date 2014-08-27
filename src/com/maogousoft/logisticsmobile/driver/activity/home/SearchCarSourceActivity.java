@@ -14,6 +14,7 @@ import com.maogousoft.logisticsmobile.driver.CitySelectView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
+import com.maogousoft.logisticsmobile.driver.activity.CarCloudSearchActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
@@ -69,7 +70,7 @@ public class SearchCarSourceActivity extends BaseActivity {
         mRightButton = ((Button) findViewById(R.id.titlebar_id_more));
         mRightButton.setText("附近车源");
         carTypeSpinner = (Spinner) findViewById(R.id.search_car_type);
-        edtCarLength = (EditText) findViewById(R.id.edt_search_source_carlength);
+        edtCarLength = (EditText) findViewById(R.id.edt_search_source_car_length);
         mGridView = (GridView) findViewById(R.id.focus_line_gridview);
         mSubmit = (Button) findViewById(R.id.search_source__submit);
 
@@ -135,9 +136,10 @@ public class SearchCarSourceActivity extends BaseActivity {
                 break;
             // PR206 附近车源 begin
             case R.id.titlebar_id_more:
-                Intent nearbyCarSourceIntent = new Intent();
-                nearbyCarSourceIntent.setClass(context, NearbyCarSourceActivity.class);
-                startActivity(nearbyCarSourceIntent);
+//                Intent nearbyCarSourceIntent = new Intent();
+//                nearbyCarSourceIntent.setClass(context, NearbyCarSourceActivity.class);
+//                startActivity(nearbyCarSourceIntent);
+                startActivity(new Intent(context, CarCloudSearchActivity.class));
                 break;
             // PR206 附近车源 end
             default:
@@ -185,7 +187,7 @@ public class SearchCarSourceActivity extends BaseActivity {
             if (selectedCarType != 0) {
                 params.put("car_type", selectedCarType);
             }
-            if (!TextUtils.isEmpty(edtCarLength.getText().toString())) {
+            if (!TextUtils.isEmpty(edtCarLength.getText())) {
                 params.put("car_length", edtCarLength.getText().toString());
             }
             params.put("car_way", selectedCarWay);  // add PR1.3

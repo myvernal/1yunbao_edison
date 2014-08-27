@@ -24,10 +24,11 @@ public class FriendsGroupListAdapter extends BaseListAdapter<FriendsGroup> {
 		if (convertView==null) {
 			convertView=mInflater.inflate(R.layout.listitem_friends_group, parent,false);
 		}
+        FriendsGroup friendsGroup = mList.get(position);
 		TextView mFriendsTypeTextView=(TextView)convertView.findViewById(R.id.friends_type);
-		mFriendsTypeTextView.setText("Edison");
+		mFriendsTypeTextView.setText(friendsGroup.getName());
 		TextView mFriendsNumberTextView=(TextView)convertView.findViewById(R.id.friends_number);
-		mFriendsNumberTextView.setText("15982034811");
+		mFriendsNumberTextView.setText(friendsGroup.getPhone());
 		return convertView;
 	}
 }

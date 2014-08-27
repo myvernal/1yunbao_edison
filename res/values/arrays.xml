@@ -130,11 +130,17 @@
         <item>零担</item>
     </string-array>
 	<!-- 保险：险种 -->
-	<string-array name="safe_types">
+	<string-array name="safe_sea_types">
 	    <item>基本险</item>
 	    <item>综合险</item>
 	    <item>综合险附加被盗险</item>
 	</string-array>
+    <!-- 保险：险种 -->
+    <string-array name="safe_pingan_types">
+        <item>平安货运主险</item>
+        <item>平安货运综合险</item>
+        <item>平安货运综合险附加被盗险</item>
+    </string-array>
 	<!-- 保险：包装代码 -->
 	<string-array name="safe_bzdm_types">
 	    <item>盘卷包装</item>

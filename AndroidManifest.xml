@@ -177,7 +177,7 @@
                 android:theme="@style/AppTheme"/>
         <!-- PR203 找车end -->
         <activity
-                android:name=".activity.home.MyabcActivity"
+                android:name=".activity.home.MyabcActivityUser"
                 android:configChanges="keyboardHidden|orientation"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
@@ -189,7 +189,7 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme"/>
         <activity
-                android:name=".activity.home.MyabcActivity1"
+                android:name=".activity.home.MyabcActivityDriver"
                 android:configChanges="keyboardHidden|orientation"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
@@ -717,7 +717,7 @@
                 android:theme="@style/AppTheme"
                 android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity
-                android:name="com.ybxiang.driver.activity.SafeActivity"
+                android:name="com.ybxiang.driver.activity.SafeSeaActivity"
                 android:configChanges="keyboardHidden|orientation"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
@@ -753,6 +753,13 @@
                 android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity
                 android:name=".activity.CarCloudSearchActivity"
+                android:configChanges="keyboardHidden|orientation"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme"
+                android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+        <activity
+                android:name="com.ybxiang.driver.activity.SafePinanActivity"
                 android:configChanges="keyboardHidden|orientation"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"

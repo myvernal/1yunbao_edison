@@ -89,7 +89,7 @@ public class MyFriendsActivity extends BaseListActivity implements
             jsonObject.put(Constants.JSON, "");
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    NewSourceInfo.class, new AjaxCallBack() {
+                    FriendsGroup.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
@@ -144,14 +144,6 @@ public class MyFriendsActivity extends BaseListActivity implements
     @Override
     public void onClick(View v) {
         super.onClick(v);
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        Intent intent = new Intent(context,
-                FriendsDetailActivity.class);
-        intent.putExtra("friends_type", position);
-        startActivity(intent);
     }
 
     @Override

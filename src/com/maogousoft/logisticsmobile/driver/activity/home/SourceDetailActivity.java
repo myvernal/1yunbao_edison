@@ -598,11 +598,12 @@ public class SourceDetailActivity extends BaseActivity {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    showMsg(R.string.tips_sourcedetail_attention_success);
                                     if(mSourceInfo.getFavorite_status() == 0) {
                                         mSourceInfo.setFavorite_status(1);
+                                        showMsg(R.string.tips_sourcedetail_attention_success);
                                     }else {
                                         mSourceInfo.setFavorite_status(0);
+                                        showMsg(R.string.tips_sourcedetail_cancel_attention_success);
                                     }
                                     if(mSourceInfo.getFavorite_status() == 0) {
                                         mAttention.setText("关注货主为好友");

@@ -7,15 +7,37 @@
     <include layout="@layout/common_title"/>
 
     <ScrollView android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/window_bg">
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:orientation="vertical">
-            <ImageView android:layout_width="match_parent"
-                       android:layout_height="80dip"
-                       android:scaleType="fitXY"
-                       android:src="@drawable/top_ad_1"
-                       android:layout_marginBottom="10dp"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:padding="10dp"
+                          android:orientation="horizontal"
+                          android:background="@color/TextColorWhite">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginLeft="10dp"
+                           android:layout_gravity="center_vertical"
+                           android:src="@drawable/safe_sea_logo"/>
+                <View android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"/>
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginRight="10dp"
+                           android:layout_gravity="center_vertical"
+                           android:src="@drawable/safe_common_logo"/>
+            </LinearLayout>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="25dp"
+                      android:textColor="@color/TextColorWhite"
+                      android:gravity="center"
+                      android:background="@color/font_blue2"
+                      android:text="太平洋保险战略合作伙伴"/>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:gravity="left|center_vertical"
@@ -29,7 +51,7 @@
 
                 <Spinner android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
-                         android:entries="@array/safe_types"
+                         android:entries="@array/safe_sea_types"
                          android:layout_weight="1"/>
             </LinearLayout>
 
@@ -59,27 +81,6 @@
                           android:layout_height="wrap_content"
                           android:gravity="center_vertical"
                           android:orientation="horizontal"
-                          android:paddingLeft="5dp">
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/safe_text_title_style"
-                          android:text="费率:"/>
-
-                <EditText android:layout_width="70dp"
-                          android:layout_height="40dip"
-                          android:gravity="right|center_vertical"
-                          android:text="0.05"/>
-
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/safe_text_other_style"
-                          android:text="%"/>
-            </LinearLayout>
-
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:gravity="center_vertical"
-                          android:orientation="horizontal"
                           android:paddingLeft="5dp"
                           android:paddingRight="5dp">
                 <TextView android:layout_width="wrap_content"
@@ -96,6 +97,27 @@
                           android:layout_height="wrap_content"
                           style="@style/safe_text_other_style"
                           android:text="万元(人民币)"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal"
+                          android:paddingLeft="5dp">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:text="费率:"/>
+
+                <EditText android:layout_width="70dp"
+                          android:layout_height="40dip"
+                          android:gravity="right|center_vertical"
+                          android:text="0.05"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_other_style"
+                          android:text="%"/>
             </LinearLayout>
 
             <LinearLayout android:layout_width="match_parent"
@@ -134,20 +156,26 @@
                         android:text="充值"/>
             </LinearLayout>
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/safe_text_title_style"
-                      android:layout_marginTop="2dp"
-                      android:layout_gravity="center"
-                      android:linksClickable="false"
-                      android:autoLink="all"
-                      android:text="查看保险协议"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:orientation="horizontal">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:layout_marginTop="2dp"
+                          android:layout_gravity="center"
+                          android:linksClickable="false"
+                          android:autoLink="all"
+                          android:text="查看保险协议"/>
 
-            <CheckBox android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      style="@style/safe_text_title_style"
-                      android:layout_gravity="center"
-                      android:text="同意保险协议"/>
+                <CheckBox android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/safe_text_title_style"
+                          android:layout_gravity="center"
+                          android:layout_marginLeft="10dp"
+                          android:text="同意保险协议"/>
+            </LinearLayout>
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
