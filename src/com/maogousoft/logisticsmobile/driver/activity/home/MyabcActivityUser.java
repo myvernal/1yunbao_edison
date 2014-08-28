@@ -19,6 +19,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.HuoZhuUserInfo;
+import com.ybxiang.driver.activity.MySourceActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -102,7 +103,7 @@ public class MyabcActivityUser extends BaseActivity {
 		} else if (v == mUpdate) {
 			startActivity(new Intent(context, OptionalActivity.class).putExtra("info", userInfo));
 		} else if (v == mHistory) {
-			startActivity(new Intent(context, HistroyOrderActivity.class).putExtra("info", userInfo));
+			startActivity(new Intent(context, MySourceActivity.class));
 		} else if (v == mContactKeFu) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(mContext).setTitle(R.string.contact_kehu).setItems(R.array.contact_kehu_items, new DialogInterface.OnClickListener() {
 				@Override
@@ -170,7 +171,7 @@ public class MyabcActivityUser extends BaseActivity {
 		try {
 			jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
 			jsonObject.put(Constants.TOKEN, application.getToken());
-			jsonObject.put(Constants.JSON, "");
+			jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     HuoZhuUserInfo.class, new AjaxCallBack() {
 

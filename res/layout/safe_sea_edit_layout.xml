@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/common_title"/>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@color/window_bg">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/safe_text_title_style"
+                      android:text="基本信息"/>
+
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="投保人名称:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/insurer_name"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"/>
+
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="联系电话:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/insurer_phone"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:inputType="number"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="被保险人名称:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/insured_name"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"/>
+
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="联系电话:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:inputType="number"
+                          android:id="@+id/insured_phone"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style"
+                          android:visibility="gone">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="发票抬头:"/>
+
+                <EditText style="@style/safe_text_title_pingan_info_style"
+                          android:id="@+id/shiping_str"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/safe_text_title_style"
+                      android:text="货运信息"/>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style"
+                          android:orientation="vertical">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="标记/发票号码/运单号:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/shiping_number"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="包装及数量:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                        android:id="@+id/packet_number"
+                        android:inputType="number"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="包装代码:"/>
+
+                <Spinner
+                        style="@style/home_publish_spinner_style"
+                        android:id="@+id/package_type"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:entries="@array/safe_bzdm_types"/>
+            </LinearLayout>
+
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="货物名称及类型:"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <Spinner
+                        style="@style/home_publish_spinner_style"
+                        android:id="@+id/cargo_type1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:entries="@array/safe_sea_source_types"/>
+
+                <Spinner
+                        style="@style/home_publish_spinner_style"
+                        android:id="@+id/cargo_type2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:entries="@array/safe_sea_source_types"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="运输方式:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/ship_type"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"/>
+
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="运输工具:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/ship_tool"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="起运地:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/start_area"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"/>
+
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="目的地:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/end_area"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="车牌号:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/plate_number"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"/>
+
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="起运日期:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/start_date"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"
+                        />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="5dp"
+                          android:layout_marginBottom="5dp"
+                          android:gravity="center">
+                <Button style="@style/button1_style2"
+                        android:onClick="onClickBack"
+                        android:text="返回"/>
+
+                <Button style="@style/button1_style2"
+                        android:onClick="onClickNext"
+                        android:text="下一步"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

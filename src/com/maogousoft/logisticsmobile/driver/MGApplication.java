@@ -223,10 +223,11 @@ public class MGApplication extends Application {
 	}
 
 	/** 写入用户帐号信息 **/
-	public void writeUserInfo(String userName, String password, int driver_id) {
+	public void writeUserInfo(String userName, String password, int driver_id, int user_id) {
 		mSharedPreferences.edit().putString(Constants.XMPP_USERNAME, userName)
 				.putString(Constants.XMPP_PASSWORD, password)
-				.putString(Constants.XMPP_DRIVER_ID, "d" + driver_id).commit();
+				.putString(Constants.XMPP_DRIVER_ID, "d" + driver_id)
+                .putString(Constants.USER_ID, "" + user_id).commit();
 
 		String driverId = getDriverId();
 		if (!TextUtils.isEmpty(driverId)) {
@@ -308,15 +309,26 @@ public class MGApplication extends Application {
 	}
 
 	/** 获取保存的司机编号 **/
-	public String getDriverId() {
-		String s = "";
-		try {
-			s = mSharedPreferences.getString(Constants.XMPP_DRIVER_ID, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return s;
-	}
+    public String getDriverId() {
+        String s = "";
+        try {
+            s = mSharedPreferences.getString(Constants.XMPP_DRIVER_ID, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
+    /** 获取保存的货主编号 **/
+    public String getUserId() {
+        String s = "";
+        try {
+            s = mSharedPreferences.getString(Constants.USER_ID, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
 
 	/** 获取登录用户姓名 **/
 	public String getDriverName() {
@@ -395,8 +407,7 @@ public class MGApplication extends Application {
 		else {
 			try {
 				final JSONObject jsonObject = new JSONObject();
-				jsonObject
-						.put(Constants.ACTION, Constants.COMMON_GET_DICT_LIST);
+				jsonObject.put(Constants.ACTION, Constants.COMMON_GET_DICT_LIST);
 				jsonObject.put(Constants.TOKEN, getToken());
 				jsonObject.put(Constants.JSON, null);
 				ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,

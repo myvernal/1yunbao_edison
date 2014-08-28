@@ -168,8 +168,7 @@ public class LoadingActivity extends BaseActivity {
                                         case ResultCode.RESULT_OK:
                                             UserInfo userInfo = (UserInfo) result;
                                             application.writeUserInfo(phone,
-                                                    password,
-                                                    userInfo.getDriver_id());
+                                                    password, userInfo.getDriver_id(), userInfo.getId());
                                             application.setToken(userInfo
                                                     .getToken());
                                             application.writeInfo("name",

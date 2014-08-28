@@ -7,8 +7,11 @@ package com.maogousoft.logisticsmobile.driver.model;
  */
 public class UserInfo {
 
-	// id
+	//司机id
 	private int driver_id = -1;
+
+    //货主id
+    private int id= -1;
 
 	// 授权码
 	private String token = "";
@@ -39,4 +42,11 @@ public class UserInfo {
 		this.name = name;
 	}
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

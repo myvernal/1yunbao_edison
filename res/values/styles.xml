@@ -220,6 +220,7 @@
         <item name="android:textColor">@color/TextColorBlack</item>
         <item name="android:padding">3dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center_vertical</item>
     </style>
 
     <style name="safe_text_title_pingan_container_style">
@@ -230,6 +231,7 @@
         <item name="android:paddingTop">3dp</item>
         <item name="android:paddingLeft">5dp</item>
         <item name="android:paddingRight">5dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
     </style>
     <style name="safe_text_title_pingan_info_style">
         <item name="android:layout_width">match_parent</item>
@@ -239,6 +241,19 @@
         <item name="android:background">@color/TextColorWhite</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:padding">2dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="safe_text_title_sea_edit_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/TextColorBlack</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:background">@color/TextColorWhite</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:singleLine">true</item>
     </style>
 
     <style name="safe_text_other_style">
@@ -669,7 +684,7 @@
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">@color/font_gray3</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
-        <item name="android:minHeight">38dip</item>
+        <item name="android:layout_marginLeft">3dp</item>
     </style>
     <!-- 车辆容量，车、吨，方 -->
     <style name="home_warp_spinner_style">

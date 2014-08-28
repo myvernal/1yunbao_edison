@@ -452,7 +452,7 @@ public class RegisterActivity extends BaseActivity {
 								application.setToken(mUserInfo.getToken());
 								application.writeUserInfo(mPhone.getText()
 										.toString(), mPassword.getText()
-										.toString(), mUserInfo.getDriver_id());
+										.toString(), mUserInfo.getDriver_id(), mUserInfo.getId());
 								application.startXMPPService();
 
 								final com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog dialog = new com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog(

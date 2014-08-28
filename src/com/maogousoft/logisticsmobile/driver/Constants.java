@@ -32,6 +32,9 @@ public class Constants {
 
 	// PR112 账户类型
 	public static final String USER_TYPE = "USER_TYPE";
+
+    //货主id
+    public static final String USER_ID = "USER_ID";
 	// PREFERENCE KEYS
 
 	public static final String CALLBACK_ACTIVITY_PACKAGE_NAME = "CALLBACK_ACTIVITY_PACKAGE_NAME";
@@ -382,6 +385,9 @@ public class Constants {
     /** 货主端:编辑已发布货源 */
     public static final String UPDATE_PUBLISH_ORDER = "update_pulish_order";
 
+    /** 货主端:添加太平洋保险 */
+    public static final String SAVE_CPIC = "save_cpic";
+
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
@@ -437,5 +443,38 @@ public class Constants {
             return 57;
         }
         return shipTypeValues[position];
+    }
+
+    /**
+     * 太平洋保险险种
+     */
+    public static int[] seaSafeTypeValues = new int[]{1,2,3,4,5,6};
+    public static int getSeaSafeTypeValues(int position){
+        if(position > seaSafeTypeValues.length) {
+            return 1;
+        }
+        return seaSafeTypeValues[position];
+    }
+
+    /**
+     * 太平洋保险包装代码
+     */
+    public static int[] seaSafeBZDMTypeValues = new int[]{62,63,64,65,66,67,68,69};
+    public static int getSeaSafeBZDMTypeValues(int position){
+        if(position > seaSafeBZDMTypeValues.length) {
+            return 62;
+        }
+        return seaSafeBZDMTypeValues[position];
+    }
+
+    /**
+     * 太平洋保险货物类型
+     */
+    public static int[] seaSafeSourceTypeValues = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14};
+    public static int getSeaSafeSourceTypeValues(int position){
+        if(position > seaSafeSourceTypeValues.length) {
+            return 1;
+        }
+        return seaSafeSourceTypeValues[position];
     }
 }

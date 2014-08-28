@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="10dp"
+              android:gravity="center_vertical"
+              android:orientation="vertical"
+              android:paddingBottom="5dp"
+              android:paddingLeft="15dp"
+              android:paddingRight="15dp"
+              android:paddingTop="5dp">
+    <TextView
+            android:id="@+id/insured_name"
+            style="@style/car_left_text_style"
+            android:textSize="@dimen/font_size_large"
+            android:text="被保险人:"/>
+
+    <TextView
+            android:id="@+id/shiping_number"
+            style="@style/car_left_text_style"
+            android:textSize="@dimen/font_size_large"
+            android:text="运单号:"/>
+
+    <TextView
+            android:id="@+id/insurance_type"
+            style="@style/car_left_text_style"
+            android:textSize="@dimen/font_size_large"
+            android:text="保险种类:"/>
+
+    <TextView
+            android:id="@+id/start_date"
+            style="@style/car_left_text_style"
+            android:textSize="@dimen/font_size_large"
+            android:text="起运日期:"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="5dp"
+                  android:layout_marginBottom="5dp"
+                  android:gravity="center">
+        <Button style="@style/button1_style2"
+                android:id="@+id/edit"
+                android:text="编辑并投保"/>
+
+        <Button style="@style/button1_style2"
+                android:id="@+id/view"
+                android:text="查看电子保单"/>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="2px"
+          android:layout_marginTop="5dp"
+          android:background="@color/gray_line" />
+</LinearLayout>

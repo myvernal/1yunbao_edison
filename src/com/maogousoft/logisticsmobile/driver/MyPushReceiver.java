@@ -399,7 +399,7 @@ public class MyPushReceiver extends BroadcastReceiver {
 
 								// 写入用户信息
 								application.writeUserInfo(username, password,
-										userInfo.getDriver_id());
+										userInfo.getDriver_id(), userInfo.getId());
 								application.setToken(userInfo.getToken());
 								application.writeInfo("name",
 										userInfo.getName());

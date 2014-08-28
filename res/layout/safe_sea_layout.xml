@@ -51,6 +51,7 @@
 
                 <Spinner android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
+                         android:id="@+id/safe_type_spinner"
                          android:entries="@array/safe_sea_types"
                          android:layout_weight="1"/>
             </LinearLayout>
@@ -60,7 +61,15 @@
                       android:paddingLeft="5dp"
                       android:paddingRight="5dp"
                       android:textSize="16sp"
-                      android:text="@string/safe_text_one"/>
+                      android:id="@+id/safe_type_desc"
+                      android:text="@string/safe_text_one_1"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:paddingRight="5dp"
+                      android:textSize="16sp"
+                      android:text="@string/safe_text_one_other"/>
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -91,6 +100,8 @@
                 <EditText android:layout_width="100dp"
                           android:layout_height="wrap_content"
                           android:gravity="center_vertical"
+                          android:id="@+id/safe_all_money"
+                          android:inputType="numberDecimal"
                           android:hint="必填"/>
 
                 <TextView android:layout_width="wrap_content"
@@ -111,8 +122,10 @@
 
                 <EditText android:layout_width="70dp"
                           android:layout_height="40dip"
+                          android:id="@+id/safe_percent"
+                          android:editable="false"
                           android:gravity="right|center_vertical"
-                          android:text="0.05"/>
+                          android:text="0.03"/>
 
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
@@ -133,6 +146,9 @@
 
                 <EditText android:layout_width="100dp"
                           android:layout_height="40dip"
+                          android:id="@+id/safe_money"
+                          android:editable="false"
+                          android:text="0"
                           android:gravity="center_vertical"/>
 
                 <TextView android:layout_width="wrap_content"
@@ -148,8 +164,9 @@
                           android:gravity="center">
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
+                          android:id="@+id/user_money"
                           android:textSize="18sp"
-                          android:text="账户余额:720元"/>
+                          android:text="账户余额:0元"/>
 
                 <Button style="@style/button1_style2"
                         android:onClick="onCharge"
@@ -171,6 +188,7 @@
 
                 <CheckBox android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
+                          android:id="@+id/safe_check_box"
                           style="@style/safe_text_title_style"
                           android:layout_gravity="center"
                           android:layout_marginLeft="10dp"
@@ -183,11 +201,11 @@
                           android:layout_marginTop="2dp"
                           android:layout_marginBottom="5dp"
                           android:gravity="center">
-                <Button style="@style/button1_style6"
+                <Button style="@style/button1_style2"
                         android:onClick="onClickBack"
                         android:text="返回"/>
 
-                <Button style="@style/button1_style6"
+                <Button style="@style/button1_style2"
                         android:onClick="onClickNext"
                         android:text="下一步"/>
             </LinearLayout>

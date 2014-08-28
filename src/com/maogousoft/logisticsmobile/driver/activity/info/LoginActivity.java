@@ -209,7 +209,7 @@ public class LoginActivity extends BaseActivity {
                             application.setIsAnonymous(false);
                             application.writeUserInfo(mUserName.getText()
                                     .toString(), mPassword.getText()
-                                    .toString(), userInfo.getDriver_id());
+                                    .toString(), userInfo.getDriver_id(), userInfo.getId());
                             application.setToken(userInfo.getToken());
                             application.writeInfo("name",userInfo.getName());
                             application.startXMPPService();

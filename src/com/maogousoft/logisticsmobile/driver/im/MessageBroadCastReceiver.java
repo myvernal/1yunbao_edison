@@ -354,10 +354,9 @@ public class MessageBroadCastReceiver extends BroadcastReceiver {
 							switch (code) {
 							case ResultCode.RESULT_OK:
 								UserInfo userInfo = (UserInfo) result;
-
-								// 写入用户信息
+								// 写入司机信息
 								application.writeUserInfo(username, password,
-										userInfo.getDriver_id());
+										userInfo.getDriver_id(), userInfo.getId());
 								application.setToken(userInfo.getToken());
 								application.writeInfo("name",
 										userInfo.getName());

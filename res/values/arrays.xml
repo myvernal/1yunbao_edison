@@ -129,27 +129,47 @@
         <item>整车</item>
         <item>零担</item>
     </string-array>
-	<!-- 保险：险种 -->
+	<!-- 太平洋保险：险种 -->
 	<string-array name="safe_sea_types">
 	    <item>基本险</item>
+        <item>基本险(易碎)</item>
+        <item>基本险(鲜活)</item>
 	    <item>综合险</item>
+	    <item>综合险(易碎)</item>
 	    <item>综合险附加被盗险</item>
 	</string-array>
-    <!-- 保险：险种 -->
+    <!-- 平安保险：险种 -->
     <string-array name="safe_pingan_types">
         <item>平安货运主险</item>
         <item>平安货运综合险</item>
         <item>平安货运综合险附加被盗险</item>
     </string-array>
-	<!-- 保险：包装代码 -->
-	<string-array name="safe_bzdm_types">
-	    <item>盘卷包装</item>
-	    <item>罐装</item>
-	    <item>桶装</item>
-	    <item>裸装</item>
-	    <item>散装</item>
-	    <item>托盘</item>
-	    <item>袋装</item>
-	    <item>箱装</item>
-	</string-array>
+	<!-- 太平洋保险：包装代码 -->
+    <string-array name="safe_bzdm_types">
+        <item>盘卷包装</item>
+        <item>罐装</item>
+        <item>桶装</item>
+        <item>裸装</item>
+        <item>散装</item>
+        <item>托盘</item>
+        <item>袋装</item>
+        <item>箱装</item>
+    </string-array>
+    <!-- 太平洋保险：货物类型 -->
+    <string-array name="safe_sea_source_types">
+        <item>木材、造纸</item>
+        <item>化工品类</item>
+        <item>电子产品</item>
+        <item>机械设备类</item>
+        <item>工艺品类</item>
+        <item>非食用油</item>
+        <item>矿产类</item>
+        <item>五金类</item>
+        <item>纺织品</item>
+        <item>轻工品类</item>
+        <item>农产品、土畜产类</item>
+        <item>饲料类</item>
+        <item>动植物油脂</item>
+        <item>粮谷类</item>
+    </string-array>
 </resources>

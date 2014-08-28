@@ -160,7 +160,7 @@ public class RestartReceiver extends BroadcastReceiver {
 							UserInfo userInfo = (UserInfo) result;
 
 							// 写入用户信息
-							application.writeUserInfo(username, password, userInfo.getDriver_id());
+							application.writeUserInfo(username, password, userInfo.getDriver_id(), userInfo.getId());
 							application.setToken(userInfo.getToken());
 							application.writeInfo("name", userInfo.getName());
 							application.startXMPPService();

@@ -335,6 +335,7 @@
 	<string name="contact_kehu_qq">请加客户好友后，直接QQ联系，谢谢。</string>
 	<!-- add PR111 end -->
 
+    <string name="safe_user_money">账户余额:%.2f元</string>
     <!--太平洋保险-->
     <string name="check_card_tip">
         说明:\n
@@ -343,8 +344,17 @@
         注:由于数据通过问题,并不保证所有人都包含身份证证件照.查询成功后结果将自动保存在验证记录里.
     </string>
 
-    <string name="safe_text_one" formatted="false">
+    <string name="safe_text_one_1" formatted="false">
+        基本险费率0.03%,主要承保运输途中因活在及其他灾害事故造成的损失
+    </string>
+    <string name="safe_text_one_2" formatted="false">
+        综合险费率0.04%;,除了基本险外,还承保易碎,玩去,凹瘪,折断,开裂,渗漏以及被盗的损失
+    </string>
+    <string name="safe_text_one_3" formatted="false">
         综合附加被盗险费率0.05%;,除了综合险责任外,还承保货物被盗的损失;
+    </string>
+    <string name="safe_text_one_other" formatted="false">
+        注：详细保险条款,请查看《中国太平洋财产保险股份有限公司国内水路、陆路货物运输保险条款》
     </string>
     <string name="safe_text_two" formatted="false">
         1.易碎品风险每次事故绝对免费RMB1000或损失金额的20%;,其余风险每次事故绝对免赔RMB1000或损失金额的10%;,二者以高为准;\n
