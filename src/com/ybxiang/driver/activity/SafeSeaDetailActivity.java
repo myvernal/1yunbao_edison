@@ -1,9 +1,9 @@
 package com.ybxiang.driver.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
@@ -13,7 +13,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
-import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
+import com.maogousoft.logisticsmobile.driver.model.SafeInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,7 +28,7 @@ public class SafeSeaDetailActivity extends BaseActivity {
             plate_number, start_area, end_area;
     private TextView package_type, cargo_type1, cargo_type2;
     private TextView insurance_type,ratio,amount_covered,insurance_charge;
-    private SafeSeaInfo safeSeaInfo;
+    private SafeInfo safeInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +70,11 @@ public class SafeSeaDetailActivity extends BaseActivity {
     }
 
     private void initData() {
-        safeSeaInfo = (SafeSeaInfo) getIntent().getSerializableExtra(Constants.COMMON_KEY);
-        if(safeSeaInfo != null) {
+        safeInfo = (SafeInfo) getIntent().getSerializableExtra(Constants.COMMON_KEY);
+        if(safeInfo != null) {
             //显示保险名称
             String[] safeSeaType = getResources().getStringArray(R.array.safe_sea_types);
-            Integer safeType = Integer.valueOf(safeSeaInfo.getInsurance_type());
+            Integer safeType = Integer.valueOf(safeInfo.getInsurance_type());
             if(safeType != null && safeType>0) {
                 for (int i = 0; i < Constants.seaSafeTypeValues.length; i++) {
                     if (Constants.seaSafeTypeValues[i] == safeType) {
@@ -82,25 +82,25 @@ public class SafeSeaDetailActivity extends BaseActivity {
                     }
                 }
             }
-            ratio.setText(ratio.getText() + safeSeaInfo.getRatio() + "%");
-            amount_covered.setText(amount_covered.getText() + safeSeaInfo.getAmount_covered() +"万元(人民币)");
-            insurance_charge.setText(insurance_charge.getText() + safeSeaInfo.getInsurance_charge() + "元");
+            ratio.setText(ratio.getText().toString() + safeInfo.getRatio() + "%");
+            amount_covered.setText(amount_covered.getText().toString() + safeInfo.getAmount_covered() +"万元(人民币)");
+            insurance_charge.setText(insurance_charge.getText().toString() + safeInfo.getInsurance_charge() + "元");
 
-            start_date.setText(safeSeaInfo.getStart_date());
-            insurer_name.setText(safeSeaInfo.getInsurer_name());
-            insured_name.setText(safeSeaInfo.getInsured_name());
-            insurer_phone.setText(safeSeaInfo.getInsurer_phone());
-            insured_phone.setText(safeSeaInfo.getInsured_phone());
-            shiping_number.setText(safeSeaInfo.getShiping_number());
-            packet_number.setText(safeSeaInfo.getPacket_number());
-            ship_type.setText(safeSeaInfo.getShip_type());
-            ship_tool.setText(safeSeaInfo.getShip_tool());
-            plate_number.setText(safeSeaInfo.getPlate_number());
-            start_area.setText(safeSeaInfo.getStart_area());
-            end_area.setText(safeSeaInfo.getEnd_area());
+            start_date.setText(safeInfo.getStart_date());
+            insurer_name.setText(safeInfo.getInsurer_name());
+            insured_name.setText(safeInfo.getInsured_name());
+            insurer_phone.setText(safeInfo.getInsurer_phone());
+            insured_phone.setText(safeInfo.getInsured_phone());
+            shiping_number.setText(safeInfo.getShiping_number());
+            packet_number.setText(safeInfo.getPacket_number());
+            ship_type.setText(safeInfo.getShip_type());
+            ship_tool.setText(safeInfo.getShip_tool());
+            plate_number.setText(safeInfo.getPlate_number());
+            start_area.setText(safeInfo.getStart_area());
+            end_area.setText(safeInfo.getEnd_area());
             //显示包装代码
             String[] safeBZDMType = getResources().getStringArray(R.array.safe_bzdm_types);
-            Integer bzdmType = Integer.valueOf(safeSeaInfo.getPackage_type());
+            Integer bzdmType = Integer.valueOf(safeInfo.getPackage_type());
             if(bzdmType != null && bzdmType>0) {
                 for (int i = 0; i < Constants.seaSafeBZDMTypeValues.length; i++) {
                     if (Constants.seaSafeBZDMTypeValues[i] == bzdmType) {
@@ -110,7 +110,7 @@ public class SafeSeaDetailActivity extends BaseActivity {
             }
             //显示货运类型1
             String[] safeSourceType = getResources().getStringArray(R.array.safe_sea_source_types);
-            Integer sourceType = Integer.valueOf(safeSeaInfo.getCargo_type1());
+            Integer sourceType = Integer.valueOf(safeInfo.getCargo_type1());
             if(sourceType != null && sourceType>0) {
                 for (int i = 0; i < Constants.seaSafeSourceTypeValues.length; i++) {
                     if (Constants.seaSafeSourceTypeValues[i] == sourceType) {
@@ -121,7 +121,7 @@ public class SafeSeaDetailActivity extends BaseActivity {
 
             //显示货运类型2
             String[] safeSourceType1 = getResources().getStringArray(R.array.safe_sea_source_types);
-            Integer sourceType1 = Integer.valueOf(safeSeaInfo.getCargo_type1());
+            Integer sourceType1 = Integer.valueOf(safeInfo.getCargo_type1());
             if(sourceType1 != null && sourceType1>0) {
                 for (int i = 0; i < Constants.seaSafeSourceTypeValues.length; i++) {
                     if (Constants.seaSafeSourceTypeValues[i] == sourceType1) {
@@ -152,7 +152,28 @@ public class SafeSeaDetailActivity extends BaseActivity {
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.SAVE_CPIC);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, "");
+            jsonObject.put(Constants.JSON, new JSONObject()
+                    .put("type", Constants.SAFE_CPIC)
+                    .put("insurer_name", safeInfo.getInsurer_name())
+                    .put("insured_name", safeInfo.getInsured_name())
+                    .put("insurer_phone", safeInfo.getInsurer_phone())
+                    .put("insurer_name", safeInfo.getInsurer_name())
+                    .put("insured_phone", safeInfo.getInsured_phone())
+                    .put("shiping_number", safeInfo.getShiping_number())
+                    .put("packet_number", safeInfo.getPacket_number())
+                    .put("ship_type", safeInfo.getShip_type())
+                    .put("ship_tool", safeInfo.getShip_tool())
+                    .put("plate_number", safeInfo.getPlate_number())
+                    .put("start_date", safeInfo.getStart_date())
+                    .put("amount_covered", Double.valueOf(safeInfo.getAmount_covered()) * 10000)
+                    .put("insurance_type", safeInfo.getInsurance_type())
+                    .put("ratio", safeInfo.getRatio())
+                    .put("insurance_charge", safeInfo.getInsurance_charge())
+                    .put("start_area", safeInfo.getStart_area())
+                    .put("end_area", safeInfo.getEnd_area())
+                    .put("package_type", safeInfo.getPackage_type())
+                    .put("cargo_type1", safeInfo.getCargo_type1())
+                    .put("cargo_type2", safeInfo.getCargo_type2()).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     CarInfo.class, new AjaxCallBack() {
                         @Override
@@ -161,6 +182,8 @@ public class SafeSeaDetailActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     Toast.makeText(context, "添加保单成功!", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(context, SafeListActivity.class));
+                                    finish();
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     if (result instanceof String)

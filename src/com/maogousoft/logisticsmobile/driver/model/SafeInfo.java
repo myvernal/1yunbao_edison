@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by aliang on 2014/8/29.
  */
-public class SafeSeaInfo implements Serializable {
+public class SafeInfo implements Serializable {
 
     private String insurer_name;//保险人
     private String insured_name;//被保险人
@@ -18,10 +18,10 @@ public class SafeSeaInfo implements Serializable {
     private String ship_tool;//运输工具
     private String plate_number;//车牌号
     private String start_date;//起运日期
-    private String amount_covered;//保险金额
+    private double amount_covered;//保险金额
     private String insurance_type;//保险类型
-    private String ratio;//保险费率
-    private String insurance_charge;//保险费用
+    private double ratio;//保险费率
+    private double insurance_charge;//保险费用
     private String sign_time;//签单日期
     private String create_time;//创建日期
     private String create_user;//创建用户
@@ -120,11 +120,11 @@ public class SafeSeaInfo implements Serializable {
         this.start_date = start_date;
     }
 
-    public String getAmount_covered() {
+    public double getAmount_covered() {
         return amount_covered;
     }
 
-    public void setAmount_covered(String amount_covered) {
+    public void setAmount_covered(double amount_covered) {
         this.amount_covered = amount_covered;
     }
 
@@ -136,19 +136,19 @@ public class SafeSeaInfo implements Serializable {
         this.insurance_type = insurance_type;
     }
 
-    public String getRatio() {
+    public double getRatio() {
         return ratio;
     }
 
-    public void setRatio(String ratio) {
+    public void setRatio(double ratio) {
         this.ratio = ratio;
     }
 
-    public String getInsurance_charge() {
+    public double getInsurance_charge() {
         return insurance_charge;
     }
 
-    public void setInsurance_charge(String insurance_charge) {
+    public void setInsurance_charge(double insurance_charge) {
         this.insurance_charge = insurance_charge;
     }
 

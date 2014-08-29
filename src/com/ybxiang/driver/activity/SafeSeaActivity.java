@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.Constants;
@@ -14,9 +13,8 @@ import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
+import com.maogousoft.logisticsmobile.driver.model.SafeInfo;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 /**
  * Created by aliang on 2014/8/10.
@@ -176,15 +174,12 @@ public class SafeSeaActivity extends BaseActivity {
             startActivity(new Intent(context, ChargeActivity.class));
         } else {
             Intent intent = new Intent(context, SafeSeaEditActivity.class);
-            SafeSeaInfo safeSeaInfo = new SafeSeaInfo();
-            safeSeaInfo.setAmount_covered(safe_all_money.getText().toString());//保险金额
-            safeSeaInfo.setInsurance_type("" + Constants.getSeaSafeTypeValues(safe_type_spinner.getSelectedItemPosition()));//保险类型
-            safeSeaInfo.setRatio(safe_percent.getText().toString());//保险费率
-            safeSeaInfo.setInsurance_charge(safe_money.getText().toString());//保险费用
-            safeSeaInfo.setSign_time(System.currentTimeMillis() + "");//签单日期
-            safeSeaInfo.setCreate_time(System.currentTimeMillis() + "");//创建日期
-            safeSeaInfo.setCreate_user(application.getUserId());//创建用户
-            intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
+            SafeInfo safeInfo = new SafeInfo();
+            safeInfo.setAmount_covered(Double.valueOf(safe_all_money.getText().toString()));//保险金额
+            safeInfo.setInsurance_type("" + Constants.getSeaSafeTypeValues(safe_type_spinner.getSelectedItemPosition()));//保险类型
+            safeInfo.setRatio(Double.valueOf(safe_percent.getText().toString()));//保险费率
+            safeInfo.setInsurance_charge(Double.valueOf(safe_money.getText().toString()));//保险费用
+            intent.putExtra(Constants.COMMON_KEY, safeInfo);
             startActivity(intent);
         }
     }

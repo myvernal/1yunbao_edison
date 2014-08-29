@@ -388,6 +388,18 @@ public class Constants {
     /** 货主端:添加太平洋保险 */
     public static final String SAVE_CPIC = "save_cpic";
 
+    /** 货主端:太平洋保险获取货物名称1 */
+    public static final String GET_SAFE_SEA_CARGO_1 = "get_insurance_cargo_types";
+
+    /** 货主端:太平洋保险获取货物名称2 */
+    public static final String GET_SAFE_SEA_CARGO_2 = "get_insurance_cargo_type_second";
+
+    /** 货主端:保险记录 */
+    public static final String GET_INSURANCE_LIST = "getInsuranceList";
+
+    /** 货主端:查找车源 */
+    public static final String QUERY_CAR_SOURCE = "query_driverInfo_by_user";
+
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
@@ -408,6 +420,9 @@ public class Constants {
     public static final int ANONYMOUS_RESULT_CODE = 1001;
     public static final int USER_DRIVER = 1; //司机
     public static final int USER_SHIPPER = 0;//货主
+
+    public static final int SAFE_CPIC = 0;//太平洋保险
+//    public static final int SAFE_CPIC = 1;//平安保险
 	/**
 	 * 通过位置获取车型车型
 	 */
@@ -468,7 +483,7 @@ public class Constants {
     }
 
     /**
-     * 太平洋保险货物类型
+     * 太平洋保险货物类型1
      */
     public static int[] seaSafeSourceTypeValues = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14};
     public static int getSeaSafeSourceTypeValues(int position){
@@ -476,5 +491,16 @@ public class Constants {
             return 1;
         }
         return seaSafeSourceTypeValues[position];
+    }
+
+    /**
+     * 太平洋保险货物类型2
+     */
+    public static Integer[] seaSafeSourceType2Values = new Integer[]{};
+    public static int getSeaSafeSourceType2Values(int position){
+        if(position > seaSafeSourceType2Values.length) {
+            return 1;
+        }
+        return seaSafeSourceType2Values[position];
     }
 }

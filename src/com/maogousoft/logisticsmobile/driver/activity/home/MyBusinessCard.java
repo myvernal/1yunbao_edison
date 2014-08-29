@@ -2,8 +2,17 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 
 // PR111 货运名片
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.activity.info.*;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
@@ -44,12 +53,9 @@ public class MyBusinessCard extends BaseActivity {
     private Context mContext; // PR111
     // 返回,完善资料
     private Button mBack, mUpdate;
-
     private Button mShareCard;
-
     private TextView mName, mNumber, mPhone, mUpdatePwd;
-
-    private View mChangePath;
+    private View mChangePath, my_info_card;
     private TextView mPath1, mPath2, mPath3, mCarNum, mCarlength, mCartype,
             mCarzhaizhong;
 
@@ -89,6 +95,7 @@ public class MyBusinessCard extends BaseActivity {
         mCartype = (TextView) findViewById(R.id.myabc_id_car_type);
         mCarzhaizhong = (TextView) findViewById(R.id.myabc_id_car_zhaizhong);
 
+        my_info_card = findViewById(R.id.my_info_card);
         mShareCard.setOnClickListener(this);
         mBack.setOnClickListener(this);
         mUpdate.setOnClickListener(this);
@@ -105,7 +112,7 @@ public class MyBusinessCard extends BaseActivity {
     public void onClick(View v) {
 
         super.onClick(v);
-        if(v == mBack) {
+        if (v == mBack) {
             finish();
         } else if (v == mUpdatePwd) {
             startActivity(new Intent(context, UpdatePwdActivity.class));
@@ -131,7 +138,7 @@ public class MyBusinessCard extends BaseActivity {
             // showMsg("请等待获取线路");
             // } else {
 
-            String[] array = new String[] { "线路1", "线路2", "线路3" };
+            String[] array = new String[]{"线路1", "线路2", "线路3"};
             new com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog.Builder(
                     context).setTitle("选择需要修改的路线")
                     .setItems(array, new DialogInterface.OnClickListener() {
@@ -149,8 +156,31 @@ public class MyBusinessCard extends BaseActivity {
 
             // }
         } else if (v == mShareCard) {
-            share();
             // PR111 end
+            showCreateBusinessCardProgress("正在制作货运名片,请稍后");
+            mUpdate.setVisibility(View.GONE);
+            mChangePath.setVisibility(View.GONE);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Bitmap bitmap = Bitmap.createBitmap(my_info_card.getWidth(), my_info_card.getHeight(), Bitmap.Config.ARGB_8888);
+                    //利用bitmap生成画布
+                    Canvas canvas = new Canvas(bitmap);
+                    //把view中的内容绘制在画布上
+                    my_info_card.draw(canvas);
+                    final String path = saveBusinessCardBitmap(bitmap);
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mUpdate.setVisibility(View.VISIBLE);
+                            mChangePath.setVisibility(View.VISIBLE);
+                            dismissProgress();
+                            //分享名片
+                            shareCard(path);
+                        }
+                    });
+                }
+            }).start();
         }
     }
 
@@ -253,5 +283,36 @@ public class MyBusinessCard extends BaseActivity {
     @Override
     public void onBackPressed() {
         sendBroadcast(new Intent(MainActivity.ACTION_SWITCH_MAINACTIVITY));
+    }
+
+    /**
+     * 保存货运名片图片
+     *
+     * @param mBitmap
+     */
+    public String saveBusinessCardBitmap(Bitmap mBitmap) {
+//        File file = new File(mContext.getFilesDir().getPath() + File.separator + "businessCard.png");
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator + "businessCard.png");
+        FileOutputStream fileOutputStream = null;
+        try {
+            if (file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+            fileOutputStream = new FileOutputStream(file);
+            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+        } catch (IOException e) {
+            Toast.makeText(mContext, "在保存图片时出错：", Toast.LENGTH_SHORT).show();
+        } finally {
+            try {
+                if (fileOutputStream != null) {
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return file.getPath();
+        }
     }
 }

@@ -7,10 +7,13 @@ package com.maogousoft.logisticsmobile.driver.model;
  */
 public class DictInfo {
 
+    //
 	private int id = -1;
 
 	// 名称
-	private String name = "";
+	private String Name = "";
+
+    private int Pid = -1;
 
 	// 字典类型，car_type,cargo_type,disburden,ship_type
 	private String dict_type = "";
@@ -27,11 +30,11 @@ public class DictInfo {
 	}
 
 	public String getName() {
-		return name;
+		return Name;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.Name = name;
 	}
 
 	public String getDict_type() {
@@ -50,4 +53,11 @@ public class DictInfo {
 		this.dict_desc = dict_desc;
 	}
 
+    public int getPid() {
+        return Pid;
+    }
+
+    public void setPid(int pid) {
+        Pid = pid;
+    }
 }

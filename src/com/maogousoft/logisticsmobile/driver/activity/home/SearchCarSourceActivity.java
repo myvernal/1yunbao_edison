@@ -50,7 +50,6 @@ public class SearchCarSourceActivity extends BaseActivity {
     private EditText edtCarLength;
     private ArrayList<HashMap<String, Object>> listCarTypes = new ArrayList<HashMap<String, Object>>();// 车辆类型集合
     private int selectedCarType = 0;// 选择的车辆类型
-    private int selectedCarWay = 0;// 选择的车辆方式，PR1.3
     private CityDBUtils dbUtils;
     private BaseListAdapter mAdapter;
 
@@ -157,40 +156,31 @@ public class SearchCarSourceActivity extends BaseActivity {
         final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
-            jsonObject.put(Constants.ACTION, Constants.SEARCH_SOURCE_ORDER);
+            jsonObject.put(Constants.ACTION, Constants.QUERY_CAR_SOURCE);
             jsonObject.put(Constants.TOKEN, application.getToken());
 
-            params.put("start_province", citySelectStart.getSelectedProvince()
-                    .getId());
-            params.put("end_province", citySelectEnd.getSelectedProvince()
-                    .getId());
-
+            params.put("start_province", citySelectStart.getSelectedProvince().getId());
+            params.put("end_province", citySelectEnd.getSelectedProvince().getId());
             if (citySelectStart.getSelectedCity() != null) {
-                params.put("start_city", citySelectStart.getSelectedCity()
-                        .getId());
+                params.put("start_city", citySelectStart.getSelectedCity().getId());
             }
-
             if (citySelectEnd.getSelectedCity() != null) {
                 params.put("end_city", citySelectEnd.getSelectedCity().getId());
             }
-
             if (citySelectStart.getSelectedTowns() != null) {
-                params.put("start_district", citySelectStart.getSelectedTowns()
-                        .getId());
+                params.put("start_district", citySelectStart.getSelectedTowns().getId());
             }
-
             if (citySelectEnd.getSelectedTowns() != null) {
-                params.put("end_district", citySelectEnd.getSelectedTowns()
-                        .getId());
+                params.put("end_district", citySelectEnd.getSelectedTowns().getId());
             }
-
+            //1 空车 0 不限
             if (selectedCarType != 0) {
-                params.put("car_type", selectedCarType);
+                params.put("isEmpty", selectedCarType);
             }
             if (!TextUtils.isEmpty(edtCarLength.getText())) {
                 params.put("car_length", edtCarLength.getText().toString());
             }
-            params.put("car_way", selectedCarWay);  // add PR1.3
+            params.put("page", 1);
             params.put("device_type", Constants.DEVICE_TYPE);
             jsonObject.put(Constants.JSON, params);
             showDefaultProgress();
@@ -240,7 +230,6 @@ public class SearchCarSourceActivity extends BaseActivity {
                                                     @Override
                                                     public void onClick(View v) {
                                                         dialog.dismiss();
-
                                                         String content = null;
                                                         startActivity(new Intent(
                                                                 context,
@@ -267,30 +256,6 @@ public class SearchCarSourceActivity extends BaseActivity {
 
     }
     // add for PR1.3  begin
-
-    /**
-     * 运输方式：零担或者整车，二者必选其一
-     *
-     * @param view
-     */
-    public void onChooseCarWay(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-        if (!checked) {
-            showMsg("必须选择一种运输方式【零担，整车】");
-            return;
-        }
-        switch (view.getId()) {
-            case R.id.car_way_part:
-                // 零担
-                selectedCarWay = 0;
-                break;
-            case R.id.car_way_whole:
-                selectedCarWay = 1;
-                // 整车
-                break;
-        }
-    }
 
     // 搜索全部已关注线路
     private void queryAllFocusLine() {

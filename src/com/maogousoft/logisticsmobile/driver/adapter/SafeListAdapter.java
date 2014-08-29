@@ -8,14 +8,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
-import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
+import com.maogousoft.logisticsmobile.driver.model.SafeInfo;
 import com.ybxiang.driver.activity.SafeSeaDetailActivity;
 import com.ybxiang.driver.activity.SafeSeaEditActivity;
 
 /**
  * Created by aliang on 2014/8/29.
  */
-public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
+public class SafeListAdapter extends BaseListAdapter<SafeInfo> {
 
     private Context mContext;
 
@@ -26,7 +26,7 @@ public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final SafeSeaInfo safeSeaInfo = mList.get(position);
+        final SafeInfo safeInfo = mList.get(position);
         HoldView holdView;
         if (convertView == null) {
             holdView = new HoldView();
@@ -39,12 +39,12 @@ public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
             holdView = (HoldView) convertView.getTag();
         }
         //被保险人名称
-        holdView.insured_name.setText(holdView.insured_name.getText() + safeSeaInfo.getInsured_name());
+        holdView.insured_name.setText(holdView.insured_name.getText() + safeInfo.getInsured_name());
         //运单号
-        holdView.shiping_number.setText(holdView.shiping_number.getText() + safeSeaInfo.getShiping_number());
+        holdView.shiping_number.setText(holdView.shiping_number.getText() + safeInfo.getShiping_number());
         //显示保险名称
         String[] safeSeaType = mContext.getResources().getStringArray(R.array.safe_sea_types);
-        Integer safeType = Integer.valueOf(safeSeaInfo.getInsurance_type());
+        Integer safeType = Integer.valueOf(safeInfo.getInsurance_type());
         if(safeType != null && safeType>0) {
             for (int i = 0; i < Constants.seaSafeTypeValues.length; i++) {
                 if (Constants.seaSafeTypeValues[i] == safeType) {
@@ -53,12 +53,12 @@ public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
             }
         }
         //起运时间
-        holdView.start_date.setText(holdView.start_date.getText() + safeSeaInfo.getStart_date());
+        holdView.start_date.setText(holdView.start_date.getText() + safeInfo.getStart_date());
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, SafeSeaDetailActivity.class);
-                intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
+                intent.putExtra(Constants.COMMON_KEY, safeInfo);
                 mContext.startActivity(intent);
             }
         });
@@ -66,14 +66,14 @@ public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, SafeSeaEditActivity.class);
-                intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
+                intent.putExtra(Constants.COMMON_KEY, safeInfo);
                 mContext.startActivity(intent);
             }
         });
         convertView.findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "查看电子保单:" + safeSeaInfo.getInsured_name(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "查看电子保单:" + safeInfo.getInsured_name(), Toast.LENGTH_SHORT).show();
             }
         });
         convertView.setTag(holdView);

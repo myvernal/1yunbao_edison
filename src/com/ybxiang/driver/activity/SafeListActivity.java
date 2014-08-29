@@ -9,12 +9,11 @@ import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
-import com.maogousoft.logisticsmobile.driver.adapter.MyCarInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.SafeListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
+import com.maogousoft.logisticsmobile.driver.model.SafeInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,27 +79,18 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.QUERY_MY_FLEET);
+            jsonObject.put(Constants.ACTION, Constants.GET_INSURANCE_LIST);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("page", page).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    SafeSeaInfo.class, new AjaxCallBack() {
+                    SafeInfo.class, new AjaxCallBack() {
                         @Override
                         public void receive(int code, Object result) {
                             setListShown(true);
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
-                                        //List<SafeSeaInfo> mList = (List<SafeSeaInfo>) result;
-                                        List<SafeSeaInfo> mList = new ArrayList<SafeSeaInfo>();
-                                        SafeSeaInfo safeSeaInfo = new SafeSeaInfo();
-                                        safeSeaInfo.setInsured_name("卧槽尼玛");
-                                        safeSeaInfo.setInsurance_type("4");
-                                        safeSeaInfo.setShiping_number("12345678");
-                                        safeSeaInfo.setStart_date("2014-8-29");
-                                        safeSeaInfo.setPackage_type(69);
-                                        safeSeaInfo.setCargo_type1(14);
-                                        mList.add(safeSeaInfo);
+                                        List<SafeInfo> mList = (List<SafeInfo>) result;
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);

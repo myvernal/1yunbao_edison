@@ -77,7 +77,8 @@
                           android:layout_width="0dp"
                           android:layout_weight="1"/>
             </LinearLayout>
-            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+            <LinearLayout style="@style/safe_text_title_pingan_container_style"
+                          android:visibility="gone">
                 <TextView style="@style/safe_text_title_pingan_black_style"
                           android:text="发票抬头:"/>
 

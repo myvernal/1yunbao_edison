@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -35,6 +36,7 @@ import com.ybxiang.driver.model.FocusLineInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -134,6 +136,13 @@ public class BaseActivity extends Activity implements OnClickListener {
 		}
 	}
 
+    public void showCreateBusinessCardProgress(String message) {
+        progressDialog.setMessage(message);
+        if (!progressDialog.isShowing()) {
+            progressDialog.show();
+        }
+    }
+
 	public void showDefaultProgress() {
         if(isShowAnonymousActivity) {
             return;
@@ -146,9 +155,6 @@ public class BaseActivity extends Activity implements OnClickListener {
 	}
 
 	public void dismissProgress() {
-        if(isShowAnonymousActivity) {
-            return;
-        }
 		if (progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();
 		}
@@ -267,6 +273,23 @@ public class BaseActivity extends Activity implements OnClickListener {
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
         startActivity(Intent.createChooser(intent, getTitle()));
+    }
+
+    public void shareCard(String imgPath) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        if (imgPath == null || imgPath.equals("")) {
+            intent.setType("text/plain"); // 纯文本
+        } else {
+            File f = new File(imgPath);
+            if (f != null && f.exists() && f.isFile()) {
+                intent.setType("image/png");
+                Uri u = Uri.fromFile(f);
+                intent.putExtra(Intent.EXTRA_STREAM, u);
+            }
+        }
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(Intent.createChooser(intent, ""));
     }
 
     public void fastSearch(final FocusLineInfo focusLineInfo) {
