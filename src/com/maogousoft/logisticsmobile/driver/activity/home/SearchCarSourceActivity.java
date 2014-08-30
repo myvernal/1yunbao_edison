@@ -16,22 +16,19 @@ import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.CarCloudSearchActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
-import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.FocusLineAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
+import com.ybxiang.driver.activity.CarsListActivity;
 import com.ybxiang.driver.activity.FocusLineInfoActivity;
-import com.ybxiang.driver.activity.NearbyCarSourceActivity;
 import com.ybxiang.driver.model.FocusLineInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,7 +82,7 @@ public class SearchCarSourceActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 FocusLineInfo focusLineInfo = (FocusLineInfo) view.getTag(R.id.focus_line_key);
-                fastSearch(focusLineInfo);
+                fastSearchCar(focusLineInfo);
             }
         });
         mGridView.setAdapter(mAdapter);
@@ -147,18 +144,12 @@ public class SearchCarSourceActivity extends BaseActivity {
     }
 
     private void submit() {
-
         if (citySelectStart.getSelectedProvince() == null || citySelectEnd.getSelectedProvince() == null) {
             showMsg("请选择出发地，目的地。");
             return;
         }
-
-        final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
-            jsonObject.put(Constants.ACTION, Constants.QUERY_CAR_SOURCE);
-            jsonObject.put(Constants.TOKEN, application.getToken());
-
             params.put("start_province", citySelectStart.getSelectedProvince().getId());
             params.put("end_province", citySelectEnd.getSelectedProvince().getId());
             if (citySelectStart.getSelectedCity() != null) {
@@ -182,78 +173,14 @@ public class SearchCarSourceActivity extends BaseActivity {
             }
             params.put("page", 1);
             params.put("device_type", Constants.DEVICE_TYPE);
-            jsonObject.put(Constants.JSON, params);
-            showDefaultProgress();
-            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    NewSourceInfo.class, new AjaxCallBack() {
-
-                        @Override
-                        public void receive(int code, Object result) {
-                            dismissProgress();
-                            switch (code) {
-                                case ResultCode.RESULT_OK:
-                                    if (result instanceof List) {
-                                        List<NewSourceInfo> mList = (ArrayList<NewSourceInfo>) result;
-
-                                        if (mList.size() != 0) {
-                                            Intent intent = new Intent(context,
-                                                    NewSourceActivity.class);
-                                            intent.putExtra("isFromHomeActivity",
-                                                    true);
-                                            intent.putExtra("NewSourceInfos",
-                                                    (Serializable) mList);
-                                            context.startActivity(intent);
-                                        } else {
-                                            showMsg("暂无满足条件的信息，请扩大搜索范围再试。");
-                                        }
-                                    }
-                                    break;
-                                case ResultCode.RESULT_ERROR:
-                                    if (result != null)
-                                        showMsg(result.toString());
-
-                                    break;
-                                case ResultCode.RESULT_FAILED:
-                                    if (result != null) {
-                                        // 您当月的免费搜索次数已经用完
-
-                                        // if (result.equals("您当月的免费搜索次数已经用完")) {
-                                        final MyAlertDialog dialog = new MyAlertDialog(
-                                                context);
-                                        dialog.show();
-                                        dialog.setTitle("提示");
-                                        // 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
-                                        dialog.setMessage(result.toString());
-                                        dialog.setLeftButton("确定",
-                                                new OnClickListener() {
-
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        dialog.dismiss();
-                                                        String content = null;
-                                                        startActivity(new Intent(
-                                                                context,
-                                                                ShareActivity.class)
-                                                                .putExtra("share",
-                                                                        content));
-                                                        finish();
-                                                    }
-                                                });
-
-                                        // }
-                                    }
-                                    // showMsg(result.toString());
-                                    break;
-
-                                default:
-                                    break;
-                            }
-                        }
-                    });
-        } catch (JSONException e) {
+        }catch (JSONException e) {
             e.printStackTrace();
         }
-
+        Intent intent = new Intent(context, CarsListActivity.class);
+        intent.putExtra(Constants.COMMON_KEY, params.toString());
+        intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_CAR_SOURCE);
+        //将搜索条件传下去
+        context.startActivity(intent);
     }
     // add for PR1.3  begin
 
@@ -336,7 +263,9 @@ public class SearchCarSourceActivity extends BaseActivity {
      * 已关注路线的快捷设置
      */
     public void onFastSetting(View view) {
-        startActivity(new Intent(context, FocusLineInfoActivity.class));
+        Intent intent = new Intent(context, FocusLineInfoActivity.class);
+        intent.putExtra(Constants.COMMON_KEY, Constants.CAR_SEARCH_TYPE);
+        startActivity(intent);
     }
 
 }

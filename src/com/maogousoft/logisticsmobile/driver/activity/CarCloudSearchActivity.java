@@ -1,5 +1,6 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -28,6 +29,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
 	private static final String LTAG = "CloudSearchActivity";
 	private MapView mMapView;
 	private BaiduMap mBaiduMap;
+    private InfoWindow mInfoWindow;
     private LocationClient mLocClient;
     private boolean isFirstLoc = true;// 是否首次定位
     private Button mBack, mMore;
@@ -80,6 +82,29 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
         state = ISREFRESHING;
+        //图层点击事件
+        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            public boolean onMarkerClick(final Marker marker) {
+                Button button = new Button(getApplicationContext());
+                button.setBackgroundResource(R.drawable.popup);
+                final LatLng ll = marker.getPosition();
+                Point p = mBaiduMap.getProjection().toScreenLocation(ll);
+                p.y -= 75;
+                LatLng llInfo = mBaiduMap.getProjection().fromScreenLocation(p);
+                button.setText("更改位置");
+                InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
+                    public void onInfoWindowClick() {
+                        LatLng llNew = new LatLng(ll.latitude + 0.005,
+                                ll.longitude + 0.005);
+                        marker.setPosition(llNew);
+                        mBaiduMap.hideInfoWindow();
+                    }
+                };
+                mInfoWindow = new InfoWindow(button, llInfo, listener);
+                mBaiduMap.showInfoWindow(mInfoWindow);
+                return true;
+            }
+        });
     }
 
     private void initData() {
@@ -135,8 +160,10 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
 			LatLngBounds.Builder builder = new Builder();
 			for (CloudPoiInfo info : result.poiList) {
 				ll = new LatLng(info.latitude, info.longitude);
-				OverlayOptions oo = new MarkerOptions().icon(bd).position(ll);
-				mBaiduMap.addOverlay(oo);
+                Bundle bundle = new Bundle();
+                //封装数据
+				OverlayOptions oo = new MarkerOptions().icon(bd).position(ll).extraInfo(bundle);
+                mBaiduMap.addOverlay(oo);
 				builder.include(ll);
 			}
 			LatLngBounds bounds = builder.build();
@@ -215,13 +242,19 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         if (location == null || mMapView == null || !isFirstLoc) {
             return;
         }
-        NearbySearchInfo info = new NearbySearchInfo();
-        info.ak = Constants.BAIDU_APP_Key;
+//        NearbySearchInfo info = new NearbySearchInfo();
+//        info.ak = Constants.BAIDU_APP_Key;
+//        info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
+//        info.radius = 10000;
+//        info.location = location.getLatitude() + "," + location.getLongitude();
+//        showLocation(location);
+//        CloudManager.getInstance().nearbySearch(info);
+        LocalSearchInfo info = new LocalSearchInfo();
+        info.ak = Constants.BAIDU_CLOUD_SEARCH_Key;
         info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
-        info.radius = 10000;
-        info.location = location.getLatitude() + "," + location.getLongitude();
+        info.region = "成都市";
         showLocation(location);
-        CloudManager.getInstance().nearbySearch(info);
+        CloudManager.getInstance().localSearch(info);
         mLocClient.stop();
     }
 

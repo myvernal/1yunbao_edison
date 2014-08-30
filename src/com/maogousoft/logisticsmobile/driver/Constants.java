@@ -301,6 +301,7 @@ public class Constants {
      */
 	public static final String strKey = "E109ADE1D56A36882E4C245A18B532DEC2E48DAE";
 	public static final String BAIDU_APP_Key = "fGahmvRg6YiiqNTY72uoWE9W";
+	public static final String BAIDU_CLOUD_SEARCH_Key = "IrNE1ZluMh9OAThzil9CeXQY";
 
     /** 百度云检索tableID */
     public static final int BAIDU_LBS_TABLE_ID = 76593;
@@ -367,6 +368,9 @@ public class Constants {
     /** 货主端:验证身份证 */
     public static final String CHECK_CARD = "verifyIdCard";
 
+    /** 货主端:验证记录 */
+    public static final String CHECK_CARD_LIST = "verifyRecordList";
+
     /** 货主端:收费定位 */
     public static final String PHONE_LOCATION = "phoneLoction";
 
@@ -404,7 +408,11 @@ public class Constants {
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
     public static final String COMMON_KEY = "common_key";
+    public static final String COMMON_ACTION_KEY = "common_action_key";
+    public static final String COMMON_OBJECT_KEY = "common_object_key";
     public static final String CAR_EDIT_TYPE = "CAR_EDIT_TYPE";
+    public static final int CAR_SEARCH_TYPE = 0;
+    public static final int SOURCE_SEARCH_TYPE = 1;
     public static final int ADD_CAR = 0;
     public static final int EDIT_CAR = 1;
 
@@ -444,6 +452,9 @@ public class Constants {
         return sourceTypeValues[position];
     }
 
+    /**
+     * 报价,载重单位
+     */
     public static int[] unitTypeValues = new int[]{83,84,85};
     public static int getUnitTypeValues(int position){
         if(position > unitTypeValues.length) {
@@ -452,6 +463,9 @@ public class Constants {
         return unitTypeValues[position];
     }
 
+    /**
+     * 运输类型
+     */
     public static int[] shipTypeValues = new int[]{57, 58};
     public static int getShipTypeValues(int position){
         if(position > unitTypeValues.length) {

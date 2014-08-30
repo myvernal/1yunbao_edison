@@ -4,7 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/TextColorWhite">
+              android:background="@color/window_bg">
     <include layout="@layout/common_title"/>
     <ScrollView android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -58,6 +58,40 @@
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
+                          android:id="@+id/price_layout"
+                          android:layout_marginTop="10dip"
+                          android:orientation="horizontal"
+                          android:visibility="gone">
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left"
+                          android:textColor="@color/TextColorRed"
+                          android:text="报价:"/>
+
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left|center_vertical"
+                          android:layout_weight="1"
+                          android:textColor="@color/TextColorRed"
+                          android:id="@+id/price"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/remark_layout"
+                          android:layout_marginTop="10dip"
+                          android:orientation="horizontal"
+                          android:visibility="gone">
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left"
+                          android:text="补充说明:"/>
+
+                <TextView style="@style/info_content_text_style"
+                          android:gravity="left|center_vertical"
+                          android:layout_weight="1"
+                          android:id="@+id/remark"
+                          android:background="@color/TextColorWhite"
+                          android:text="@string/string_home_driver_credit_evaluate"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
                           android:layout_marginTop="10dip"
                           android:orientation="horizontal">
                 <TextView style="@style/info_content_text_style"
@@ -68,7 +102,7 @@
                           android:gravity="left|center_vertical"
                           android:layout_weight="1"
                           android:id="@+id/location_address"
-                          android:drawableLeft="@drawable/map_marker_blue"
+                          android:drawableLeft="@drawable/map_marker"
                           android:visibility="gone"/>
             </LinearLayout>
             <TextView style="@style/info_content_text_style"
@@ -77,6 +111,7 @@
                       android:text="时间:"/>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
+                          android:id="@+id/location_action_layout"
                           android:layout_marginTop="10dip"
                           android:orientation="horizontal">
                 <TextView style="@style/button1_style2"
@@ -95,6 +130,7 @@
                       android:layout_height="wrap_content"
                       android:layout_marginTop="10dip"
                       android:textColor="@color/font_gray3"
+                      android:id="@+id/location_action_desc"
                       android:text="@string/my_car_detail_tip"/>
             <TextView style="@style/info_content_text_style"
                       android:layout_marginTop="10dip"
@@ -125,6 +161,7 @@
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
+                          android:id="@+id/edit_action_layout"
                           android:layout_marginTop="10dip"
                           android:layout_marginBottom="10dip"
                           android:orientation="horizontal">
@@ -140,6 +177,14 @@
                           android:id="@+id/delete"
                           android:text="删除"/>
             </LinearLayout>
+            <Button style="@style/button1_style2"
+                      android:layout_gravity="center"
+                      android:layout_weight="1"
+                      android:layout_marginTop="10dip"
+                      android:id="@+id/add_my_fleet"
+                      android:visibility="gone"
+                      android:onClick="addCarToMyFleet"
+                      android:text="添加到我的车队"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

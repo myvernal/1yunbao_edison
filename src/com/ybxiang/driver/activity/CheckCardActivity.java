@@ -13,8 +13,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
-import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
-import com.ybxiang.driver.model.CardInfo;
+import com.maogousoft.logisticsmobile.driver.model.CardInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,18 +25,22 @@ public class CheckCardActivity extends BaseActivity {
     private Button mTitleBarBack, mTitleBarMore;
     private EditText check_name, check_number;
     private CheckBox checkBox;
+    private double userGold = -1;
+    private TextView user_money;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.check_card_layout);
-        initView();
+        initViews();
+        initData();
     }
 
-    private void initView() {
+    private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("证件验证");
         check_name = (EditText) findViewById(R.id.check_name);
         check_number = (EditText) findViewById(R.id.check_number);
+        user_money = (TextView) findViewById(R.id.user_money);
         // 返回按钮生效
         mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
         mTitleBarBack.setOnClickListener(this);
@@ -51,12 +54,16 @@ public class CheckCardActivity extends BaseActivity {
         checkBox = (CheckBox) findViewById(R.id.checkBox);
     }
 
+    private void initData() {
+        getBalance();
+    }
+
     @Override
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                Toast.makeText(context, "验证记录", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, CheckCardListActivity.class));
                 break;
             case R.id.check:
                 if (TextUtils.isEmpty(check_name.getText())) {
@@ -66,14 +73,25 @@ public class CheckCardActivity extends BaseActivity {
                 } else if (!checkBox.isChecked()) {
                     Toast.makeText(context, "请勾选同意服务协议.", Toast.LENGTH_SHORT).show();
                 } else {
-                    getData();
+                    if(userGold == -1) {
+                        Toast.makeText(context, "正在获取账户余额,请稍后...", Toast.LENGTH_SHORT).show();
+                    } else if(userGold < 2) {
+                        Toast.makeText(context, "账户余额不足,请充值...", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(context, ChargeActivity.class));
+                    } else {
+                        checkData();
+                    }
                 }
                 break;
         }
     }
 
-    private void getData() {
+    /**
+     * 开始验证
+     */
+    private void checkData() {
         try {
+            showSpecialProgress("正在验证,请稍后");
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.CHECK_CARD);
             jsonObject.put(Constants.TOKEN, application.getToken());
@@ -84,11 +102,14 @@ public class CheckCardActivity extends BaseActivity {
                     CardInfo.class, new AjaxCallBack() {
                         @Override
                         public void receive(int code, Object result) {
+                            dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    if (result instanceof CarInfo) {
+                                    if (result instanceof CardInfo) {
                                         CardInfo cardInfo = (CardInfo) result;
-                                        LogUtil.d(TAG, cardInfo.getMsg());
+                                        Intent intent = new Intent(context, CheckCardResultActivity.class);
+                                        intent.putExtra(Constants.COMMON_KEY, cardInfo);
+                                        startActivity(intent);
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -106,6 +127,38 @@ public class CheckCardActivity extends BaseActivity {
                         }
                     });
         } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 获取账户余额
+    private void getBalance() {
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.ACTION, Constants.GET_ACCOUNT_GOLD);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
+                    null, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    JSONObject object = (JSONObject) result;
+                                    userGold = object.optDouble("gold");
+                                    user_money.setText(String.format(getString(R.string.check_card_money), userGold));
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

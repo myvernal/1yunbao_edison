@@ -1,35 +1,34 @@
 package com.ybxiang.driver.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.*;
-import android.widget.AbsListView.OnScrollListener;
+import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
-import com.maogousoft.logisticsmobile.driver.adapter.FocusLineInfoListAdapter;
+import com.maogousoft.logisticsmobile.driver.adapter.CheckCardListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.ybxiang.driver.model.FocusLineInfo;
+import com.maogousoft.logisticsmobile.driver.model.CardInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
 /**
- * 已关注路线的Adapter
- *
- * @author ybxiang
+ * Created by aliang on 2014/8/30.
  */
-public class FocusLineInfoActivity extends BaseListActivity implements
-        OnClickListener, OnScrollListener {
+public class CheckCardListActivity extends BaseListActivity implements View.OnClickListener, AbsListView.OnScrollListener {
+
     private Context mContext;
     private Button mTitleBarBack;
-    private Button mTitleBarMore;
-    private int searchType;
+    private TextView mTitleBarContent;
     // 底部更多
     private View mFootView;
     private ProgressBar mFootProgress;
@@ -46,39 +45,33 @@ public class FocusLineInfoActivity extends BaseListActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = FocusLineInfoActivity.this;
+        mContext = this;
         initViews();
         initData();
     }
 
     private void initViews() {
-
-        ((TextView) findViewById(R.id.titlebar_id_content)).setText("已关注线路");
+        mTitleBarContent = ((TextView) findViewById(R.id.titlebar_id_content));
+        mTitleBarContent.setText("验证记录");
         // 返回按钮生效
         mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
         mTitleBarBack.setOnClickListener(this);
         // 更多按钮隐藏
-        mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
-        mTitleBarMore.setVisibility(View.GONE);
+        findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
 
         // 数据加载中进度条
-        mFootView = getLayoutInflater().inflate(R.layout.listview_footview,
-                null);
+        mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
-        mFootProgress = (ProgressBar) mFootView
-                .findViewById(android.R.id.progress);
+        mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
-
-        // 初始化FocusLineInfoListAdapter的adapter
-        mAdapter = new FocusLineInfoListAdapter(mContext);
-        setListAdapter(mAdapter);
-        // list未加载数据不显示
-        setListShown(false);
     }
 
     private void initData() {
-        searchType = getIntent().getIntExtra(Constants.COMMON_KEY, Constants.SOURCE_SEARCH_TYPE);
+        mAdapter = new CheckCardListAdapter(mContext);
+        setListAdapter(mAdapter);
+        // list未加载数据不显示
+        setListShown(false);
     }
 
     @Override
@@ -88,30 +81,25 @@ public class FocusLineInfoActivity extends BaseListActivity implements
             pageIndex = 1;
             getData(pageIndex);
         }
-        mAdapter.notifyDataSetChanged();
     }
 
     // 请求指定页数的数据
-    private void getData(int page) {
+    private void getData(final int page) {
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.QUERY_ALL_FOCUS_LINE);
+            jsonObject.put(Constants.ACTION, Constants.CHECK_CARD_LIST);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
-                    .put("type", application.getUserType())
-                    .toString());
-
+            jsonObject.put(Constants.JSON, new JSONObject().put("page", page).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    FocusLineInfo.class, new AjaxCallBack() {
-
+                    CardInfo.class, new AjaxCallBack() {
                         @Override
                         public void receive(int code, Object result) {
                             setListShown(true);
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
-                                        List<FocusLineInfo> mList = (List<FocusLineInfo>) result;
+                                        List<CardInfo> mList = (List<CardInfo>) result;
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);
@@ -126,7 +114,6 @@ public class FocusLineInfoActivity extends BaseListActivity implements
                                                 mFootProgress.setVisibility(View.VISIBLE);
                                                 mFootMsg.setText(R.string.tips_isloading);
                                             }
-                                            android.util.Log.d("ybxiang", "mList==" + mList);
                                             mAdapter.addAll(mList);
                                             mAdapter.notifyDataSetChanged();
                                         }
@@ -137,10 +124,10 @@ public class FocusLineInfoActivity extends BaseListActivity implements
                                         showMsg(result.toString());
                                     break;
                                 case ResultCode.RESULT_FAILED:
-                                    if (result instanceof String)
+                                    if (result instanceof String) {
                                         showMsg(result.toString());
+                                    }
                                     break;
-
                                 default:
                                     break;
                             }
@@ -158,25 +145,16 @@ public class FocusLineInfoActivity extends BaseListActivity implements
     @Override
     public void onClick(View v) {
         super.onClick(v);
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        if(position == l.getCount() - 1) {
-            return;
-        }
-        super.onListItemClick(l, v, position, id);
-        FocusLineInfo focusLineInfo = (FocusLineInfo) v.getTag(R.id.common_city_selected);
-        if(searchType == Constants.SOURCE_SEARCH_TYPE) {
-            fastSearchSource(focusLineInfo);
-        } else {
-            fastSearchCar(focusLineInfo);
+        switch (v.getId()) {
+            case R.id.titlebar_id_more:
+                startActivity(new Intent(context, AddCarActivity.class));
+                break;
         }
     }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (scrollState != OnScrollListener.SCROLL_STATE_IDLE) {
+        if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
             return;
         }
         if (state != WAIT) {

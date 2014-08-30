@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/window_bg">
+    <include layout="@layout/common_title"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginTop="30dp"
+                  android:orientation="vertical">
+        <ImageView android:layout_width="60dp"
+                   android:layout_height="60dp"
+                   android:id="@+id/photo"
+                   android:scaleType="fitXY"
+                   android:layout_gravity="center_horizontal"
+                   android:src="@drawable/ic_img_loading"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:minWidth="80dp"
+                      android:id="@+id/name"
+                      android:text="姓名:"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:minWidth="60dp"
+                      android:id="@+id/gender"
+                      android:gravity="center"
+                      android:text="性别:"/>
+        </LinearLayout>
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="10dp"
+                  android:textColor="@color/TextColorRed"
+                  android:textSize="12sp"
+                  android:gravity="center"
+                  android:text="@string/check_card_result_tip"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="20dp"
+                      android:layout_marginRight="5dp"
+                      android:gravity="right"
+                      android:text="验证状态:"/>
+            <TextView android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:id="@+id/result"
+                      android:textColor="@color/green"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="20dp"
+                      android:layout_marginRight="5dp"
+                      android:gravity="right"
+                      android:text="出生日期:"/>
+            <TextView android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:id="@+id/birthday"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="20dp"
+                      android:layout_marginRight="5dp"
+                      android:gravity="right"
+                      android:text="发证机关:"/>
+            <TextView android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:id="@+id/region"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginLeft="20dp"
+                      android:layout_marginRight="5dp"
+                      android:gravity="right"
+                      android:text="身份证号:"/>
+            <TextView android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:id="@+id/number"/>
+        </LinearLayout>
+
+        <Button style="@style/button1_style2"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/share"
+                android:text="分享"/>
+    </LinearLayout>
+</LinearLayout>

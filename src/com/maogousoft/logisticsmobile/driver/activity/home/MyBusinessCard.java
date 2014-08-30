@@ -3,10 +3,8 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 // PR111 货运名片
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,19 +17,12 @@ import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.View.OnClickListener;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -41,7 +32,6 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
-import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 
 /**
  * 货运名片
@@ -157,7 +147,7 @@ public class MyBusinessCard extends BaseActivity {
             // }
         } else if (v == mShareCard) {
             // PR111 end
-            showCreateBusinessCardProgress("正在制作货运名片,请稍后");
+            showSpecialProgress("正在制作货运名片,请稍后");
             mUpdate.setVisibility(View.GONE);
             mChangePath.setVisibility(View.GONE);
             new Thread(new Runnable() {

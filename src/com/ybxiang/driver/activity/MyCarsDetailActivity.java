@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
@@ -23,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,6 +41,9 @@ public class MyCarsDetailActivity extends BaseActivity {
     private CityDBUtils dbUtils;
     private long phoneNumber = 0;
     private CarInfo carInfo;
+    private View edit_action_layout, location_action_desc, location_action_layout;//我的车队详情特有
+    private View add_my_fleet, price_layout, remark_layout;//搜索货源详情特有
+    private TextView remark, price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +51,7 @@ public class MyCarsDetailActivity extends BaseActivity {
         setContentView(R.layout.my_car_detail_layout);
         initViews();
         initData();
-        getData();
+
     }
 
     private void initViews() {
@@ -69,11 +75,46 @@ public class MyCarsDetailActivity extends BaseActivity {
         free_location.setOnClickListener(this);
         phone_location = findViewById(R.id.phone_location);
         phone_location.setOnClickListener(this);
+
+        edit_action_layout = findViewById(R.id.edit_action_layout);
+        location_action_desc = findViewById(R.id.location_action_desc);
+        location_action_layout = findViewById(R.id.location_action_layout);
+        add_my_fleet = findViewById(R.id.add_my_fleet);
+        price_layout = findViewById(R.id.price_layout);
+        remark_layout = findViewById(R.id.remark_layout);
+        remark = (TextView) findViewById(R.id.remark);
+        price = (TextView) findViewById(R.id.price);
     }
 
     private void initData(){
         id = getIntent().getIntExtra(Constants.COMMON_KEY, 0);
+        Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_OBJECT_KEY);
         dbUtils = new CityDBUtils(application.getCitySDB());
+        if(serializable != null) {
+            //搜索车源详情, 直接显示
+            carInfo = (CarInfo) serializable;
+            remark.setText(carInfo.getRemark());
+            //报价
+            int priceUnits = carInfo.getUnits();
+            String[] unitsArray = context.getResources().getStringArray(R.array.car_price_unit);
+            for(int i=0;i<Constants.unitTypeValues.length;i++) {
+                if(Constants.unitTypeValues[i] == priceUnits){
+                    price.setText(carInfo.getPrice() + "/" + unitsArray[i]);
+                }
+            }
+            //显示其他数据
+            displayData(true);
+            //隐藏我的车队详情特有的控件
+            edit_action_layout.setVisibility(View.GONE);
+            location_action_desc.setVisibility(View.GONE);
+            location_action_layout.setVisibility(View.GONE);
+            //显示搜索车源详情特有的控件
+            add_my_fleet.setVisibility(View.VISIBLE);
+            price_layout.setVisibility(View.VISIBLE);
+            remark_layout.setVisibility(View.VISIBLE);
+        } else {
+            getData();
+        }
     }
 
     @Override
@@ -106,7 +147,7 @@ public class MyCarsDetailActivity extends BaseActivity {
         }
     }
 
-    // 请求数据
+    // 请求车辆数据
     private void getData() {
         try {
             showDefaultProgress();
@@ -123,46 +164,7 @@ public class MyCarsDetailActivity extends BaseActivity {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof CarInfo) {
                                         carInfo = (CarInfo) result;
-                                        //线路
-                                        String wayStart = dbUtils.getCityInfo(carInfo.getStart_province(), carInfo.getStart_city(), carInfo.getStart_district());
-                                        StringBuffer sb = new StringBuffer();
-                                        if(carInfo.getEnd_province1() > 0 || carInfo.getEnd_city1() > 0 || carInfo.getEnd_district1() > 0) {
-                                            String wayEnd1 = dbUtils.getCityInfo(carInfo.getEnd_province1(), carInfo.getEnd_city1(), carInfo.getEnd_district1());
-                                            sb.append(wayStart + "--" + wayEnd1 + "\n");
-                                        }
-                                        if(carInfo.getEnd_province2() > 0 || carInfo.getEnd_city2() > 0 || carInfo.getEnd_district2() > 0) {
-                                            String wayEnd2 = dbUtils.getCityInfo(carInfo.getEnd_province2(), carInfo.getEnd_city2(), carInfo.getEnd_district2());
-                                            sb.append(wayStart + "--" + wayEnd2 + "\n");
-                                        }
-                                        if(carInfo.getEnd_province3() > 0 || carInfo.getEnd_city3() > 0 || carInfo.getEnd_district3() > 0) {
-                                            String wayEnd3 = dbUtils.getCityInfo(carInfo.getEnd_province3(), carInfo.getEnd_city3(), carInfo.getEnd_district3());
-                                            sb.append(wayStart + "--" + wayEnd3);
-                                        }
-                                        way.setText(sb.toString());
-                                        plate_number.setText(plate_number.getText() + carInfo.getPlate_number());
-                                        driver_name.setText(driver_name.getText() + carInfo.getDriver_name());
-                                        phone.setText(phone.getText() + carInfo.getPhone());
-                                        phoneNumber = Long.valueOf(carInfo.getPhone());
-                                        car_length.setText(car_length.getText() + carInfo.getCar_length() + "米");
-                                        //车型
-                                        int carTypeValue = carInfo.getCar_type();
-                                        String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
-                                        for(int i=0;i<Constants.carTypeValues.length;i++) {
-                                            if(Constants.carTypeValues[i] == carTypeValue){
-                                                car_type.setText(car_type.getText().toString() + carTypeStr[i]);
-                                            }
-                                        }
-                                        car_weight.setText(car_weight.getText().toString() + carInfo.getCar_weight() + "吨");
-                                        if(!TextUtils.isEmpty(carInfo.getLocation())) {
-                                            location_address.setText(location_address.getText() + carInfo.getLocation());
-                                            location_address.setVisibility(View.VISIBLE);
-                                        }
-                                        if(!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
-                                            Date date = new Date(Long.valueOf(carInfo.getLocation_time()));
-                                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
-                                            String locationTime = simpleDateFormat.format(date);
-                                            location_time.setText(location_time.getText() + locationTime);
-                                        }
+                                        displayData(false);
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -182,6 +184,75 @@ public class MyCarsDetailActivity extends BaseActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 显示车源数据
+     */
+    private void displayData(boolean isFromSearch) {
+        //线路
+        String wayStart = dbUtils.getCityInfo(carInfo.getStart_province(), carInfo.getStart_city(), carInfo.getStart_district());
+        StringBuffer sb = new StringBuffer();
+        if(isFromSearch) {
+            if (carInfo.getEnd_province() > 0 || carInfo.getEnd_city() > 0 || carInfo.getEnd_district() > 0) {
+                String wayEnd = dbUtils.getCityInfo(carInfo.getEnd_province(), carInfo.getEnd_city(), carInfo.getEnd_district());
+                sb.append(wayStart + "--" + wayEnd);
+            }
+        } else {
+            if (carInfo.getEnd_province1() > 0 || carInfo.getEnd_city1() > 0 || carInfo.getEnd_district1() > 0) {
+                String wayEnd1 = dbUtils.getCityInfo(carInfo.getEnd_province1(), carInfo.getEnd_city1(), carInfo.getEnd_district1());
+                sb.append(wayStart + "--" + wayEnd1 + "\n");
+            }
+            if (carInfo.getEnd_province2() > 0 || carInfo.getEnd_city2() > 0 || carInfo.getEnd_district2() > 0) {
+                String wayEnd2 = dbUtils.getCityInfo(carInfo.getEnd_province2(), carInfo.getEnd_city2(), carInfo.getEnd_district2());
+                sb.append(wayStart + "--" + wayEnd2 + "\n");
+            }
+            if (carInfo.getEnd_province3() > 0 || carInfo.getEnd_city3() > 0 || carInfo.getEnd_district3() > 0) {
+                String wayEnd3 = dbUtils.getCityInfo(carInfo.getEnd_province3(), carInfo.getEnd_city3(), carInfo.getEnd_district3());
+                sb.append(wayStart + "--" + wayEnd3);
+            }
+        }
+        way.setText(sb.toString());
+        plate_number.setText(plate_number.getText() + carInfo.getPlate_number());
+        if(TextUtils.isEmpty(carInfo.getDriver_name())) {
+            driver_name.setText(driver_name.getText() + carInfo.getOwer_name());
+        } else {
+            driver_name.setText(driver_name.getText() + carInfo.getDriver_name());
+        }
+        if(TextUtils.isEmpty(carInfo.getPhone())) {
+            phone.setText(phone.getText() + carInfo.getOwer_phone());
+        } else {
+            phone.setText(phone.getText() + carInfo.getPhone());
+            phoneNumber = Long.parseLong(carInfo.getPhone());
+        }
+        car_length.setText(car_length.getText() + carInfo.getCar_length() + "米");
+        //车型
+        int carTypeValue = carInfo.getCar_type();
+        String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
+        for(int i=0;i<Constants.carTypeValues.length;i++) {
+            if(Constants.carTypeValues[i] == carTypeValue){
+                car_type.setText(car_type.getText().toString() + carTypeStr[i]);
+            }
+        }
+        car_weight.setText(car_weight.getText().toString() + carInfo.getCar_weight() + "吨");
+        //位置
+        if (!TextUtils.isEmpty(carInfo.getLocation())) {
+            location_address.setText(location_address.getText() + carInfo.getLocation());
+            location_address.setVisibility(View.VISIBLE);
+        } else if(!TextUtils.isEmpty(carInfo.getAddress())){
+            location_address.setText(location_address.getText() + carInfo.getAddress());
+            location_address.setVisibility(View.VISIBLE);
+        }
+        //时间
+        Date date;
+        if (!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
+            date = new Date(Long.valueOf(carInfo.getLocation_time()));
+        } else {
+            date = new Date(Long.valueOf(carInfo.getPulish_date()));
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        String locationTime = simpleDateFormat.format(date);
+        location_time.setText(location_time.getText() + locationTime);
     }
 
     // 删除数据
@@ -350,5 +421,58 @@ public class MyCarsDetailActivity extends BaseActivity {
             }
         });
         builder.create().show();
+    }
+
+    // 添加到我的车队
+    public void addCarToMyFleet(View view) {
+        try {
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.ADD_MY_FLEET);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            //组装参数
+            JSONObject params = new JSONObject();
+            params.put("driver_name", carInfo.getOwer_name());
+            params.put("phone", carInfo.getOwer_phone());
+            params.put("start_province", carInfo.getStart_province());
+            params.put("start_city", carInfo.getStart_city());
+            params.put("start_district", carInfo.getStart_district());
+            params.put("end_province1", carInfo.getEnd_province());
+            params.put("end_city1", carInfo.getEnd_city());
+            params.put("end_district1", carInfo.getEnd_district());
+            params.put("car_length", carInfo.getCar_length());
+            params.put("car_weight", carInfo.getCar_weight());
+            params.put("plate_number", carInfo.getPlate_number());
+            params.put("car_type", carInfo.getCar_type());
+            params.put("remark", carInfo.getRemark());
+            //组装参数结束
+            jsonObject.put(Constants.JSON, params.toString());
+            showDefaultProgress();
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    CarInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    Toast.makeText(context, "添加车辆成功!", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

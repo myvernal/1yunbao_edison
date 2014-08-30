@@ -37,10 +37,19 @@ public class CarInfo implements Serializable{
     private String description = "";// 补充说明
     private String location_time; // 定位时间==我的车队
     private String location;// 位置
+    private String address;//位置
     private long pulish_date;
     private String wayStartStr;
     private String wayEndStr;
     private String remark;//备注
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public CarInfo() {
         super();

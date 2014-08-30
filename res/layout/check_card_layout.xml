@@ -19,10 +19,11 @@
                           android:gravity="center">
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
+                          android:id="@+id/user_money"
                           android:background="@color/gray_online"
                           android:padding="10dp"
                           android:textSize="18sp"
-                          android:text="付费验证的费用为2物流币/次,\n您当前的余额为800.00个物流币"/>
+                          android:text="付费验证的费用为2物流币/次,\n您当前的余额为0个物流币"/>
 
                 <Button style="@style/button1_style2"
                         android:onClick="onCharge"

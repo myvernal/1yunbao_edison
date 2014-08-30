@@ -83,8 +83,8 @@ public class AddCarActivity extends BaseActivity {
         }
     }
 
-    // 请求指定页数的数据
-    public void addToMyCard(View view) {
+    // 请求数据
+    public void addToMyCar(View view) {
         try {
             final JSONObject jsonObject = new JSONObject();
             JSONObject params = new JSONObject();

@@ -25,6 +25,7 @@
 	<color name="TextColorBlue">#0066CC</color>
 	<color name="TextColorGray">#FF505050</color>
 	<color name="TextColorRed">#FFE26926</color>
+    <color name="green">#ff00dd00</color>
     <color name="Red">#FFFF0000</color>
 	<color name="BgColor">#ffd1dce9</color>
 </resources>

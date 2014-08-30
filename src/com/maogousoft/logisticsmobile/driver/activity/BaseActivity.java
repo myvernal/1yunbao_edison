@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.ybxiang.driver.activity.AnonymousActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
@@ -32,6 +33,7 @@ import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.utils.MyProgressDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
+import com.ybxiang.driver.activity.CarsListActivity;
 import com.ybxiang.driver.model.FocusLineInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -136,7 +138,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 		}
 	}
 
-    public void showCreateBusinessCardProgress(String message) {
+    public void showSpecialProgress(String message) {
         progressDialog.setMessage(message);
         if (!progressDialog.isShowing()) {
             progressDialog.show();
@@ -292,11 +294,11 @@ public class BaseActivity extends Activity implements OnClickListener {
         context.startActivity(Intent.createChooser(intent, ""));
     }
 
-    public void fastSearch(final FocusLineInfo focusLineInfo) {
+    // 快速搜索新货源
+    public void fastSearchSource(final FocusLineInfo focusLineInfo) {
         final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
-            // 搜索新货源
             jsonObject.put(Constants.ACTION, Constants.QUERY_SOURCE_ORDER);
             jsonObject.put(Constants.TOKEN, application.getToken());
             params.put("start_province", focusLineInfo.getStart_province());
@@ -373,5 +375,26 @@ public class BaseActivity extends Activity implements OnClickListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    // 快速查找车源
+    public void fastSearchCar(final FocusLineInfo focusLineInfo) {
+        JSONObject params = new JSONObject();
+        try {
+            params.put("start_province", focusLineInfo.getStart_province());
+            params.put("start_city", focusLineInfo.getStart_city());
+            params.put("start_district", focusLineInfo.getStart_district());
+            params.put("end_province", focusLineInfo.getEnd_province());
+            params.put("end_city", focusLineInfo.getEnd_city());
+            params.put("end_district", focusLineInfo.getEnd_district());
+            params.put("device_type", Constants.DEVICE_TYPE);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(context, CarsListActivity.class);
+        intent.putExtra(Constants.COMMON_KEY, params.toString());
+        intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_CAR_SOURCE);
+        //将搜索条件传下去
+        context.startActivity(intent);
     }
 }

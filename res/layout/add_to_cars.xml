@@ -220,7 +220,7 @@
                     style="@style/info_button_style"
                     android:layout_marginBottom="30dp"
                     android:layout_marginTop="10dp"
-                    android:onClick="addToMyCard"
+                    android:onClick="addToMyCar"
                     android:text="确定"/>
         </LinearLayout>
     </ScrollView>

@@ -1,10 +1,9 @@
 package com.ybxiang.driver.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
@@ -12,21 +11,25 @@ import android.widget.AbsListView.OnScrollListener;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
+import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.MyCarInfoListAdapter;
+import com.maogousoft.logisticsmobile.driver.adapter.SearchCarInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
+import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
-public class MyCarsListActivity extends BaseListActivity implements
+public class CarsListActivity extends BaseListActivity implements
         OnClickListener, OnScrollListener {
     private Context mContext;
     private Button mTitleBarBack;
     private Button mTitleBarMore;
+    private TextView mTitleBarContent;
     // 底部更多
     private View mFootView;
     private ProgressBar mFootProgress;
@@ -39,16 +42,21 @@ public class MyCarsListActivity extends BaseListActivity implements
     private boolean state_idle = false;
     // 已加载全部
     private boolean load_all = false;
+    //查询类型
+    private String queryAction = Constants.QUERY_MY_FLEET; //默认为我的车队
+    private JSONObject queryParams = new JSONObject();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = MyCarsListActivity.this;
+        mContext = CarsListActivity.this;
         initViews();
+        initData();
     }
 
     private void initViews() {
-        ((TextView) findViewById(R.id.titlebar_id_content)).setText("我的车队");
+        mTitleBarContent = ((TextView) findViewById(R.id.titlebar_id_content));
+        mTitleBarContent.setText("我的车队");
         // 返回按钮生效
         mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
         mTitleBarBack.setOnClickListener(this);
@@ -58,16 +66,33 @@ public class MyCarsListActivity extends BaseListActivity implements
         mTitleBarMore.setOnClickListener(this);
 
         // 数据加载中进度条
-        mFootView = getLayoutInflater().inflate(R.layout.listview_footview,
-                null);
+        mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
         mFootProgress = (ProgressBar) mFootView
                 .findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
+    }
 
-        // 初始化MyCarInfoListAdapter的adapter
-        mAdapter = new MyCarInfoListAdapter(mContext);
+    private void initData() {
+        //从车源搜索页面过来的
+        String params = getIntent().getStringExtra(Constants.COMMON_KEY);
+        String action = getIntent().getStringExtra(Constants.COMMON_ACTION_KEY);
+        if(!TextUtils.isEmpty(params) && !TextUtils.isEmpty(action)) {
+            try {
+                queryParams = new JSONObject(params);
+                queryAction = action;
+                // 搜索车源的adapter
+                mAdapter = new SearchCarInfoListAdapter(mContext);
+                mTitleBarContent.setText("搜索车源列表");
+                mTitleBarMore.setVisibility(View.GONE);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // 我的车队的adapter
+            mAdapter = new MyCarInfoListAdapter(mContext);
+        }
         setListAdapter(mAdapter);
         // list未加载数据不显示
         setListShown(false);
@@ -76,10 +101,10 @@ public class MyCarsListActivity extends BaseListActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-//        if (mAdapter.isEmpty()) {
+        if (mAdapter.isEmpty()) {
             pageIndex = 1;
             getData(pageIndex);
-//        }
+        }
     }
 
     // 请求指定页数的数据
@@ -87,9 +112,9 @@ public class MyCarsListActivity extends BaseListActivity implements
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.QUERY_MY_FLEET);
+            jsonObject.put(Constants.ACTION, queryAction);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject().put("page", page).toString());
+            jsonObject.put(Constants.JSON, queryParams.put("page", page).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     CarInfo.class, new AjaxCallBack() {
                         @Override
@@ -113,11 +138,7 @@ public class MyCarsListActivity extends BaseListActivity implements
                                                 mFootProgress.setVisibility(View.VISIBLE);
                                                 mFootMsg.setText(R.string.tips_isloading);
                                             }
-                                            if(page == 1) {
-                                                mAdapter.setList(mList);
-                                            } else {
-                                                mAdapter.addAll(mList);
-                                            }
+                                            mAdapter.addAll(mList);
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
@@ -127,10 +148,35 @@ public class MyCarsListActivity extends BaseListActivity implements
                                         showMsg(result.toString());
                                     break;
                                 case ResultCode.RESULT_FAILED:
-                                    if (result instanceof String)
-                                        showMsg(result.toString());
-                                    break;
+                                    if (result != null && TextUtils.equals(queryAction, Constants.QUERY_CAR_SOURCE)) {
+                                        // 您当月的免费搜索次数已经用完
+                                        // if (result.equals("您当月的免费搜索次数已经用完")) {
+                                        final MyAlertDialog dialog = new MyAlertDialog(context);
+                                        dialog.show();
+                                        dialog.setTitle("提示");
+                                        // 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
+                                        dialog.setMessage(result.toString());
+                                        dialog.setLeftButton("确定",
+                                                new OnClickListener() {
 
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        dialog.dismiss();
+                                                        String content = null;
+                                                        startActivity(new Intent(
+                                                                context,
+                                                                ShareActivity.class)
+                                                                .putExtra("share",
+                                                                        content));
+                                                        finish();
+                                                    }
+                                                });
+
+                                        // }
+                                    } else if (result instanceof String) {
+                                        showMsg(result.toString());
+                                    }
+                                    break;
                                 default:
                                     break;
                             }

@@ -93,7 +93,7 @@ public class SearchSourceActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 FocusLineInfo focusLineInfo = (FocusLineInfo) view.getTag(R.id.focus_line_key);
-                fastSearch(focusLineInfo);
+                fastSearchSource(focusLineInfo);
             }
         });
         mGridView.setAdapter(mAdapter);

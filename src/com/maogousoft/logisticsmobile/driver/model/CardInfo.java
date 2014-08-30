@@ -1,12 +1,12 @@
-package com.ybxiang.driver.model;
+package com.maogousoft.logisticsmobile.driver.model;
 
 import java.io.Serializable;
 
 /**
- * Created by aliang on 2014/8/23.
+ * Created by aliang on 2014/8/30.
  */
 public class CardInfo implements Serializable {
-    private int verifyresult;//1 正常 2身份验证不一致 3库中无此号码4身份验证一致，但是无照片
+    private int verifyresult = 3;//1 正常 2身份验证不一致 3库中无此号码4身份验证一致，但是无照片
     private String msg;//信息
     private String photo;//照片
     private String id_name;//姓名
@@ -16,6 +16,11 @@ public class CardInfo implements Serializable {
     private String id_year;//出生年
     private String id_month;//出生月
     private String id_day;//出生日
+    //验证记录中使用
+    private String create_time;//创建日期
+    private String status;//验证状态
+    private String id_card;//身份证
+    private String birthday;//生日
 
     public int getVerifyresult() {
         return verifyresult;
@@ -95,5 +100,37 @@ public class CardInfo implements Serializable {
 
     public void setId_day(String id_day) {
         this.id_day = id_day;
+    }
+
+    public String getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getId_card() {
+        return id_card;
+    }
+
+    public void setId_card(String id_card) {
+        this.id_card = id_card;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }

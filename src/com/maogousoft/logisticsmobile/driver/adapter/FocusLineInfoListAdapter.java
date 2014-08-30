@@ -60,6 +60,7 @@ public class FocusLineInfoListAdapter extends BaseListAdapter<FocusLineInfo> {
             }
         });
         convertView.setTag(R.id.common_city_selected, focusLineInfo);
+        convertView.setTag(holder);
 		return convertView;
 	}
 
