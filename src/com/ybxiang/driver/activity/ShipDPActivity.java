@@ -1,5 +1,6 @@
 package com.ybxiang.driver.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
+import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 
 /**
  * Created by aliang on 2014/8/10.
@@ -58,7 +60,7 @@ public class ShipDPActivity extends BaseActivity {
                 Toast.makeText(context, "工厂货主", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.part4:
-                Toast.makeText(context, "物流园区", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, ShopListActivity.class));
                 break;
             case R.id.part5:
                 Toast.makeText(context, "物流名片", Toast.LENGTH_SHORT).show();

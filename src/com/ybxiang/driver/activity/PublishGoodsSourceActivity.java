@@ -45,6 +45,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.publish_goods_source);
         initViews();
+        initData();
     }
 
     // 初始化视图
@@ -78,25 +79,19 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         mRightButton.setOnClickListener(this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initData();
-    }
-
     private void initData() {
         Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
         if (serializable != null) {
             mSourceInfo = (NewSourceInfo) serializable;
             isUpdateSource = true;//标记是编辑货源
 
-            source_id_publish_cargo_desc.setText(mSourceInfo.getCargo_desc());
+            source_id_publish_cargo_desc.setText(mSourceInfo.getCargo_desc() + "");
             source_id_publish_car_length.setText(mSourceInfo.getCar_length() + "");
             source_id_publish_unit_price.setText(mSourceInfo.getUnit_price() + "");
-            source_id_publish_user_bond.setText(mSourceInfo.getUser_bond());
-            source_id_publish_cargo_remark.setText(mSourceInfo.getCargo_remark());
-            source_id_publish_contact_name.setText(mSourceInfo.getUser_name());
-            source_id_publish_contact_phone.setText(mSourceInfo.getUser_phone());
+            source_id_publish_user_bond.setText(mSourceInfo.getUser_bond() + "");
+            source_id_publish_cargo_remark.setText(mSourceInfo.getCargo_remark() + "");
+            source_id_publish_contact_name.setText(mSourceInfo.getUser_name() + "");
+            source_id_publish_contact_phone.setText(mSourceInfo.getUser_phone() + "");
             //选择货物类型
             Integer sourceType = mSourceInfo.getCargo_type();
             if (sourceType != null && sourceType > 0) {
@@ -130,6 +125,8 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
                 }
             }
         }
+        source_id_publish_contact_phone.setText(application.getUserName());
+        source_id_publish_contact_name.setText(application.getDriverName());
     }
 
     /**
@@ -144,6 +141,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
                 Intent intent = new Intent();
                 intent.setClass(mContext, MySourceActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             default:
                 break;

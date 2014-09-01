@@ -2,6 +2,7 @@ package com.ybxiang.driver.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
@@ -14,6 +15,7 @@ import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.model.CardInfo;
+import com.ybxiang.driver.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -146,7 +148,8 @@ public class CheckCardActivity extends BaseActivity {
                                 case ResultCode.RESULT_OK:
                                     JSONObject object = (JSONObject) result;
                                     userGold = object.optDouble("gold");
-                                    user_money.setText(String.format(getString(R.string.check_card_money), userGold));
+                                    String gold = String.format(getString(R.string.check_card_money), userGold);
+                                    user_money.setText(gold);
                                     break;
                                 case ResultCode.RESULT_FAILED:
                                     break;

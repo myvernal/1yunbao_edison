@@ -148,6 +148,7 @@
     <!-- 分享 -->
     <string name="string_share_title">分享</string>
     <string name="string_share_tips">兄弟，快去下载个易运宝找货软件，货很多，还不收费，有很多好的货源。点http://56dp.cn/1.apk 就能下载！赚钱了，请我吃饭！</string>
+    <string name="string_share_card_tips">兄弟，快去下载个易运宝找货软件，货很多，还不收费，有很多好的货源。点http://56dp.cn/1.apk 就能下载！赚钱了，请我吃饭！</string>
     <string name="string_share_send">点击发送</string>
     <string name="string_share_please_choose">请选择您好友的手机号码</string>
     <string name="string_home_share_title_hint">请输入姓名或者手机号码查询</string>
@@ -335,7 +336,7 @@
 	<string name="contact_kehu_qq">请加客户好友后，直接QQ联系，谢谢。</string>
 	<!-- add PR111 end -->
 
-    <string name="safe_user_money">账户余额:%.2f元</string>
+    <string name="safe_user_money">账户余额:{%.2f}元</string>
     <string name="check_card_money">付费验证的费用为2物流币/次,\n您当前的余额为%s个物流币</string>
     <!--太平洋保险-->
     <string name="check_card_tip">

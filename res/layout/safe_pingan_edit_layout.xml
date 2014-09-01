@@ -23,7 +23,16 @@
                           android:text="投保人名称:"/>
 
                 <EditText style="@style/safe_text_title_sea_edit_style"
-                          android:id="@+id/insurer_name"
+                          android:id="@+id/insured_name"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="联系人:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/lianxiren_name"
                           android:layout_width="0dp"
                           android:layout_weight="1"/>
 
@@ -31,114 +40,34 @@
                           android:text="联系电话:"/>
 
                 <EditText style="@style/safe_text_title_sea_edit_style"
-                          android:id="@+id/insurer_phone"
-                          android:layout_width="0dp"
-                          android:layout_weight="1"
-                          android:inputType="number"/>
-            </LinearLayout>
-            <LinearLayout style="@style/safe_text_title_pingan_container_style">
-                <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="被保险人名称:"/>
-
-                <EditText style="@style/safe_text_title_sea_edit_style"
-                          android:id="@+id/insured_name"
+                          android:inputType="number"
+                          android:id="@+id/insured_phone"
                           android:layout_width="0dp"
                           android:layout_weight="1"/>
             </LinearLayout>
-            <LinearLayout style="@style/safe_text_title_pingan_container_style"
-                          android:visibility="gone">
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
                 <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="发票抬头:"/>
+                          android:text="地址:"/>
 
-                <EditText style="@style/safe_text_title_pingan_info_style"
-                          android:id="@+id/shiping_str"/>
+                <com.maogousoft.logisticsmobile.driver.CitySelectView
+                        android:id="@+id/citySelectView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"/>
             </LinearLayout>
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       style="@style/safe_text_title_style"
                       android:text="货运信息"/>
             <LinearLayout style="@style/safe_text_title_pingan_container_style"
-                          android:orientation="vertical">
+                          android:orientation="horizontal">
                 <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="标记/发票号码/运单号:"/>
+                          android:text="运单号:"/>
 
                 <EditText style="@style/safe_text_title_sea_edit_style"
                           android:id="@+id/shiping_number"/>
-            </LinearLayout>
-            <LinearLayout style="@style/safe_text_title_pingan_container_style">
-                <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="包装及数量:"/>
-
-                <EditText style="@style/safe_text_title_sea_edit_style"
-                        android:id="@+id/packet_number"
-                        android:hint="例如88件"/>
-            </LinearLayout>
-            <LinearLayout style="@style/safe_text_title_pingan_container_style">
-                <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="包装代码:"/>
-
-                <Spinner
-                        style="@style/home_publish_spinner_style"
-                        android:id="@+id/package_type"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:entries="@array/safe_bzdm_types"/>
-            </LinearLayout>
-
-            <LinearLayout style="@style/safe_text_title_pingan_container_style">
-                <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="货物名称及类型:"/>
-            </LinearLayout>
-            <LinearLayout style="@style/safe_text_title_pingan_container_style">
-                <Spinner
-                        style="@style/home_publish_spinner_style"
-                        android:id="@+id/cargo_type1"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:entries="@array/safe_sea_source_types"/>
-
-                <Spinner
-                        style="@style/home_publish_spinner_style"
-                        android:id="@+id/cargo_type2"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:entries="@array/safe_sea_source_types"/>
-            </LinearLayout>
-            <LinearLayout style="@style/safe_text_title_pingan_container_style">
-                <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="运输方式:"/>
-
-                <EditText style="@style/safe_text_title_sea_edit_style"
-                          android:id="@+id/ship_type"
-                          android:text="公路"
-                          android:layout_width="0dp"
-                          android:layout_weight="1"/>
-
-                <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="运输工具:"/>
-
-                <EditText style="@style/safe_text_title_sea_edit_style"
-                          android:id="@+id/ship_tool"
-                          android:text="汽车"
-                          android:layout_width="0dp"
-                          android:layout_weight="1"/>
-            </LinearLayout>
-            <LinearLayout style="@style/safe_text_title_pingan_container_style">
-                <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="起运地:"/>
-
-                <EditText style="@style/safe_text_title_sea_edit_style"
-                          android:id="@+id/start_area"
-                          android:layout_width="0dp"
-                          android:layout_weight="1"/>
-
-                <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="目的地:"/>
-
-                <EditText style="@style/safe_text_title_sea_edit_style"
-                          android:id="@+id/end_area"
-                          android:layout_width="0dp"
-                          android:layout_weight="1"/>
             </LinearLayout>
             <LinearLayout style="@style/safe_text_title_pingan_container_style">
                 <TextView style="@style/safe_text_title_pingan_black_style"
@@ -150,6 +79,26 @@
                           android:layout_weight="1"/>
 
                 <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="挂车号:"/>
+
+                <EditText style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/guache_Num"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"
+                        />
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="包装方式:"/>
+
+                <Spinner
+                        style="@style/home_publish_spinner_style"
+                        android:id="@+id/package_type"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:entries="@array/safe_bzdm_types"/>
+
+                <TextView style="@style/safe_text_title_pingan_black_style"
                           android:text="起运日期:"/>
 
                 <EditText style="@style/safe_text_title_sea_edit_style"
@@ -158,7 +107,50 @@
                           android:layout_weight="1"
                         />
             </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="起运地:"/>
 
+                <Spinner
+                        style="@style/home_publish_spinner_style"
+                        android:id="@+id/start_area"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:entries="@array/safe_bzdm_types"/>
+
+                <Spinner
+                        style="@style/home_publish_spinner_style"
+                        android:id="@+id/start_city"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:entries="@array/safe_bzdm_types"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="目的地:"/>
+
+                <Spinner
+                        style="@style/home_publish_spinner_style"
+                        android:id="@+id/end_area"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:entries="@array/safe_bzdm_types"/>
+
+                <Spinner
+                        style="@style/home_publish_spinner_style"
+                        android:id="@+id/end_city"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:entries="@array/safe_bzdm_types"/>
+            </LinearLayout>
+            <LinearLayout style="@style/safe_text_title_pingan_container_style"
+                          android:orientation="horizontal">
+                <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:text="赔款偿付地点:"/>
+
+                <TextView style="@style/safe_text_title_sea_edit_style"
+                          android:id="@+id/peichang_area"/>
+            </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:orientation="horizontal"

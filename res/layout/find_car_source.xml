@@ -104,7 +104,7 @@
                         android:id="@+id/edt_search_source_car_length"
                         style="@style/info_edit_text_spe_style"
                         android:layout_weight="1"
-                        android:entries="@array/car_length_names"/>
+                        android:inputType="numberDecimal"/>
 
                 <TextView
                         style="@style/info_publish_text_style"

@@ -10,4 +10,10 @@ public class Utils {
     public static String textFormatBlue(String value) {
         return "<font color=#0000FF>" + value + "</font>";
     }
+
+    public static String textFormatRed(String value) {
+        value = value.replace("{", "<font color=#E26926>");
+        value = value.replace("}", "</font>");
+        return value;
+    }
 }

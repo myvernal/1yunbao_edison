@@ -17,7 +17,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.DictInfo;
-import com.maogousoft.logisticsmobile.driver.model.SafeInfo;
+import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,10 +30,10 @@ public class SafeSeaEditActivity extends BaseActivity {
 
     private Button mTitleBarBack, mTitleBarMore;
     private EditText start_date, insurer_name, insured_name, insurer_phone,
-            insured_phone, shiping_number, packet_number, ship_type, ship_tool,
+            shiping_number, packet_number, ship_type, ship_tool,
             plate_number, start_area, end_area;
     private Spinner package_type, cargo_type1, cargo_type2;
-    private SafeInfo safeInfo;
+    private SafeSeaInfo safeSeaInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,6 @@ public class SafeSeaEditActivity extends BaseActivity {
         insurer_name = (EditText) findViewById(R.id.insurer_name);
         insured_name = (EditText) findViewById(R.id.insured_name);
         insurer_phone = (EditText) findViewById(R.id.insurer_phone);
-        insured_phone = (EditText) findViewById(R.id.insured_phone);
         shiping_number = (EditText) findViewById(R.id.shiping_number);
         packet_number = (EditText) findViewById(R.id.packet_number);
         ship_type = (EditText) findViewById(R.id.ship_type);
@@ -104,33 +103,32 @@ public class SafeSeaEditActivity extends BaseActivity {
     }
 
     private void initData() {
-        safeInfo = (SafeInfo) getIntent().getSerializableExtra(Constants.COMMON_KEY);
-        if (safeInfo != null) {
+        safeSeaInfo = (SafeSeaInfo) getIntent().getSerializableExtra(Constants.COMMON_KEY);
+        if (safeSeaInfo != null) {
 //            start_date.setText(safeSeaInfo.getStart_date()); //日期需要重新填写
-            insurer_name.setText(safeInfo.getInsurer_name());
-            insured_name.setText(safeInfo.getInsured_name());
-            insurer_phone.setText(safeInfo.getInsurer_phone());
-            insured_phone.setText(safeInfo.getInsured_phone());
-            shiping_number.setText(safeInfo.getShiping_number());
-            packet_number.setText(safeInfo.getPacket_number());
-            ship_type.setText(safeInfo.getShip_type());
-            ship_tool.setText(safeInfo.getShip_tool());
-            plate_number.setText(safeInfo.getPlate_number());
-            start_area.setText(safeInfo.getStart_area());
-            end_area.setText(safeInfo.getEnd_area());
+            insurer_name.setText(safeSeaInfo.getInsurer_name());
+            insured_name.setText(safeSeaInfo.getInsured_name());
+            insurer_phone.setText(safeSeaInfo.getInsurer_phone());
+            shiping_number.setText(safeSeaInfo.getShiping_number());
+            packet_number.setText(safeSeaInfo.getPacket_number());
+            ship_type.setText(safeSeaInfo.getShip_type());
+            ship_tool.setText(safeSeaInfo.getShip_tool());
+            plate_number.setText(safeSeaInfo.getPlate_number());
+            start_area.setText(safeSeaInfo.getStart_area());
+            end_area.setText(safeSeaInfo.getEnd_area());
             //显示包装代码
-            if(safeInfo.getPackage_type() > 0) {
+            if(safeSeaInfo.getPackage_type() > 0) {
                 for (int i = 0; i < Constants.seaSafeBZDMTypeValues.length; i++) {
-                    if (Constants.seaSafeBZDMTypeValues[i] == safeInfo.getPackage_type()) {
+                    if (Constants.seaSafeBZDMTypeValues[i] == safeSeaInfo.getPackage_type()) {
                         package_type.setSelection(i);
                         break;
                     }
                 }
             }
             //显示货运类型1
-            if(safeInfo.getCargo_type1() > 0) {
+            if(safeSeaInfo.getCargo_type1() > 0) {
                 for (int i = 0; i < Constants.seaSafeSourceTypeValues.length; i++) {
-                    if (Constants.seaSafeSourceTypeValues[i] == safeInfo.getCargo_type1()) {
+                    if (Constants.seaSafeSourceTypeValues[i] == safeSeaInfo.getCargo_type1()) {
                         cargo_type1.setSelection(i);
                         break;
                     }
@@ -258,30 +256,29 @@ public class SafeSeaEditActivity extends BaseActivity {
      * @param view
      */
     public void onClickNext(View view) {
-        if(TextUtils.isEmpty(start_date.getText()) || TextUtils.isEmpty(insurer_name.getText()) || TextUtils.isEmpty(insured_name.getText()) ||
-                TextUtils.isEmpty(insurer_phone.getText()) || TextUtils.isEmpty(insured_phone.getText()) || TextUtils.isEmpty(shiping_number.getText()) ||
+        if(TextUtils.isEmpty(start_date.getText()) || TextUtils.isEmpty(insurer_name.getText()) ||
+                TextUtils.isEmpty(insured_name.getText()) || TextUtils.isEmpty(shiping_number.getText()) ||
                 TextUtils.isEmpty(packet_number.getText()) || TextUtils.isEmpty(ship_type.getText()) || TextUtils.isEmpty(ship_tool.getText()) ||
                 TextUtils.isEmpty(plate_number.getText()) || TextUtils.isEmpty(start_area.getText()) || TextUtils.isEmpty(end_area.getText()) ) {
             Toast.makeText(context, "请填写所有需要填写的数据!", Toast.LENGTH_SHORT).show();
             return;
         }
-        safeInfo.setStart_date(start_date.getText().toString());
-        safeInfo.setInsurer_name(insurer_name.getText().toString());
-        safeInfo.setInsured_name(insured_name.getText().toString());
-        safeInfo.setInsurer_phone(insurer_phone.getText().toString());
-        safeInfo.setInsured_phone(insured_phone.getText().toString());
-        safeInfo.setShiping_number(shiping_number.getText().toString());
-        safeInfo.setPacket_number(packet_number.getText().toString());
-        safeInfo.setShip_type(ship_type.getText().toString());
-        safeInfo.setShip_tool(ship_tool.getText().toString());
-        safeInfo.setPlate_number(plate_number.getText().toString());
-        safeInfo.setStart_area(start_area.getText().toString());
-        safeInfo.setEnd_area(end_area.getText().toString());
-        safeInfo.setCargo_type1(Constants.getSeaSafeSourceTypeValues(cargo_type1.getSelectedItemPosition()));
-        safeInfo.setCargo_type2(Constants.getSeaSafeSourceType2Values(cargo_type2.getSelectedItemPosition()));
-        safeInfo.setPackage_type(Constants.getSeaSafeBZDMTypeValues(package_type.getSelectedItemPosition()));
+        safeSeaInfo.setStart_date(start_date.getText().toString());
+        safeSeaInfo.setInsurer_name(insurer_name.getText().toString());
+        safeSeaInfo.setInsured_name(insured_name.getText().toString());
+        safeSeaInfo.setInsurer_phone(insurer_phone.getText().toString());
+        safeSeaInfo.setShiping_number(shiping_number.getText().toString());
+        safeSeaInfo.setPacket_number(packet_number.getText().toString());
+        safeSeaInfo.setShip_type(ship_type.getText().toString());
+        safeSeaInfo.setShip_tool(ship_tool.getText().toString());
+        safeSeaInfo.setPlate_number(plate_number.getText().toString());
+        safeSeaInfo.setStart_area(start_area.getText().toString());
+        safeSeaInfo.setEnd_area(end_area.getText().toString());
+        safeSeaInfo.setCargo_type1(Constants.getSeaSafeSourceTypeValues(cargo_type1.getSelectedItemPosition()));
+        safeSeaInfo.setCargo_type2(Constants.getSeaSafeSourceType2Values(cargo_type2.getSelectedItemPosition()));
+        safeSeaInfo.setPackage_type(Constants.getSeaSafeBZDMTypeValues(package_type.getSelectedItemPosition()));
         Intent intent = new Intent(context, SafeSeaDetailActivity.class);
-        intent.putExtra(Constants.COMMON_KEY, safeInfo);
+        intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
         startActivity(intent);
     }
 }

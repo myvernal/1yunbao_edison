@@ -2,20 +2,24 @@ package com.maogousoft.logisticsmobile.driver.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
-import com.maogousoft.logisticsmobile.driver.model.SafeInfo;
+import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
 import com.ybxiang.driver.activity.SafeSeaDetailActivity;
 import com.ybxiang.driver.activity.SafeSeaEditActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by aliang on 2014/8/29.
  */
-public class SafeListAdapter extends BaseListAdapter<SafeInfo> {
+public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
 
     private Context mContext;
 
@@ -26,7 +30,7 @@ public class SafeListAdapter extends BaseListAdapter<SafeInfo> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final SafeInfo safeInfo = mList.get(position);
+        final SafeSeaInfo safeSeaInfo = mList.get(position);
         HoldView holdView;
         if (convertView == null) {
             holdView = new HoldView();
@@ -39,13 +43,13 @@ public class SafeListAdapter extends BaseListAdapter<SafeInfo> {
             holdView = (HoldView) convertView.getTag();
         }
         //被保险人名称
-        holdView.insured_name.setText(holdView.insured_name.getText() + safeInfo.getInsured_name());
+        holdView.insured_name.setText(holdView.insured_name.getText() + safeSeaInfo.getInsured_name());
         //运单号
-        holdView.shiping_number.setText(holdView.shiping_number.getText() + safeInfo.getShiping_number());
+        holdView.shiping_number.setText(holdView.shiping_number.getText() + safeSeaInfo.getShiping_number());
         //显示保险名称
         String[] safeSeaType = mContext.getResources().getStringArray(R.array.safe_sea_types);
-        Integer safeType = Integer.valueOf(safeInfo.getInsurance_type());
-        if(safeType != null && safeType>0) {
+        Integer safeType = Integer.valueOf(safeSeaInfo.getInsurance_type());
+        if(safeType != null && safeType > 0) {
             for (int i = 0; i < Constants.seaSafeTypeValues.length; i++) {
                 if (Constants.seaSafeTypeValues[i] == safeType) {
                     holdView.insurance_type.setText(holdView.insurance_type.getText() + safeSeaType[i]);
@@ -53,12 +57,16 @@ public class SafeListAdapter extends BaseListAdapter<SafeInfo> {
             }
         }
         //起运时间
-        holdView.start_date.setText(holdView.start_date.getText() + safeInfo.getStart_date());
+        if(!TextUtils.isEmpty(safeSeaInfo.getStart_date())) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date(Long.parseLong(safeSeaInfo.getStart_date()));
+            holdView.start_date.setText(holdView.start_date.getText() + simpleDateFormat.format(date));
+        }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, SafeSeaDetailActivity.class);
-                intent.putExtra(Constants.COMMON_KEY, safeInfo);
+                intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
                 mContext.startActivity(intent);
             }
         });
@@ -66,14 +74,14 @@ public class SafeListAdapter extends BaseListAdapter<SafeInfo> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, SafeSeaEditActivity.class);
-                intent.putExtra(Constants.COMMON_KEY, safeInfo);
+                intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
                 mContext.startActivity(intent);
             }
         });
         convertView.findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "查看电子保单:" + safeInfo.getInsured_name(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "查看电子保单:" + safeSeaInfo.getInsured_name(), Toast.LENGTH_SHORT).show();
             }
         });
         convertView.setTag(holdView);

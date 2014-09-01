@@ -102,6 +102,7 @@
 
                 <EditText android:layout_width="100dp"
                           android:layout_height="wrap_content"
+                          android:id="@+id/safe_all_money"
                           android:gravity="center_vertical"
                           android:inputType="numberDecimal"
                           android:hint="必填"/>
@@ -124,9 +125,11 @@
 
                 <EditText android:layout_width="70dp"
                           android:layout_height="40dip"
+                          android:id="@+id/safe_percent"
+                          android:editable="false"
                           android:gravity="right|center_vertical"
                           android:inputType="numberDecimal"
-                          android:text="0.05"/>
+                          android:text="0.03"/>
 
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
@@ -147,6 +150,7 @@
 
                 <EditText android:layout_width="100dp"
                           android:layout_height="40dip"
+                          android:id="@+id/safe_money"
                           android:editable="false"
                           android:gravity="center_vertical"/>
 
@@ -167,8 +171,9 @@
                           android:gravity="center">
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
+                          android:id="@+id/user_money"
                           android:textSize="18sp"
-                          android:text="账户余额:720元"/>
+                          android:text="账户余额:0元"/>
 
                 <Button style="@style/button1_style2"
                         android:onClick="onCharge"
@@ -191,6 +196,7 @@
                 <CheckBox android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/safe_text_title_style"
+                          android:id="@+id/safe_check_box"
                           android:layout_gravity="center"
                           android:layout_marginLeft="10dp"
                           android:text="同意保险协议"/>

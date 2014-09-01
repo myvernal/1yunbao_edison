@@ -398,6 +398,18 @@ public class Constants {
     /** 货主端:太平洋保险获取货物名称2 */
     public static final String GET_SAFE_SEA_CARGO_2 = "get_insurance_cargo_type_second";
 
+    /** 货主端:添加太平洋保险 */
+    public static final String SAVE_PINGAN = "save_pingan";
+
+    /** 货主端:平安保险获取省 */
+    public static final String GET_SAFE_PINAN_PROVINCE = "pinganStartArea";
+
+    /** 货主端:平安保险获取市 */
+    public static final String GET_SAFE_PINAN_CITY = "pinganStartCity";
+
+    /** 货主端:平安保险获取货物类型 */
+    public static final String GET_SAFE_PINAN_PACK_TYPE = "get_insurance_cargo_type_second";
+
     /** 货主端:保险记录 */
     public static final String GET_INSURANCE_LIST = "getInsuranceList";
 
@@ -516,5 +528,60 @@ public class Constants {
             return 1;
         }
         return seaSafeSourceType2Values[position];
+    }
+
+    /**
+     * 平安保险货物类型
+     */
+    public static Integer[] pinanSourceType2Values = new Integer[]{};
+    public static int getPinanSafeSourceType2Values(int position){
+        if(position > pinanSourceType2Values.length) {
+            return 1;
+        }
+        return pinanSourceType2Values[position];
+    }
+
+    /**
+     * 平安保险省(起运地)
+     */
+    public static String[] pinanStartProvinceType2Values = new String[]{};
+    public static String getPinanStartProvinceType2Values(int position){
+        if(position > pinanStartProvinceType2Values.length) {
+            return "";
+        }
+        return pinanStartProvinceType2Values[position];
+    }
+
+    /**
+     * 平安保险省(目的地)
+     */
+    public static String[] pinanEndProvinceType2Values = new String[]{};
+    public static String getPinanEndProvinceType2Values(int position){
+        if(position > pinanEndProvinceType2Values.length) {
+            return "";
+        }
+        return pinanEndProvinceType2Values[position];
+    }
+
+    /**
+     * 平安保险市(起运地)
+     */
+    public static String[] pinanStartCityType2Values = new String[]{};
+    public static String getPinanStartCityType2Values(int position){
+        if(position > pinanStartCityType2Values.length) {
+            return "";
+        }
+        return pinanStartCityType2Values[position];
+    }
+
+    /**
+     * 平安保险市(目的地)
+     */
+    public static String[] pinanEndCityType2Values = new String[]{};
+    public static String getPinanEndCityType2Values(int position){
+        if(position > pinanEndCityType2Values.length) {
+            return "";
+        }
+        return pinanEndCityType2Values[position];
     }
 }

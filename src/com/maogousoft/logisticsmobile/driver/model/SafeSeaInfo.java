@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by aliang on 2014/8/29.
  */
-public class SafeInfo implements Serializable {
+public class SafeSeaInfo implements Serializable {
 
     private String insurer_name;//保险人
     private String insured_name;//被保险人
@@ -14,8 +14,8 @@ public class SafeInfo implements Serializable {
     private String shiping_number;//标记/发票号码/运单号
     private String cargo_desc;//货物名称及类型
     private String packet_number;//货物数量
-    private String ship_type;//运输方式
-    private String ship_tool;//运输工具
+    private String ship_type = "公路";//运输方式
+    private String ship_tool = "汽车";//运输工具
     private String plate_number;//车牌号
     private String start_date;//起运日期
     private double amount_covered;//保险金额

@@ -3,6 +3,7 @@ package com.ybxiang.driver.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
@@ -13,7 +14,8 @@ import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.SafeInfo;
+import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
+import com.ybxiang.driver.util.Utils;
 import org.json.JSONObject;
 
 /**
@@ -84,7 +86,7 @@ public class SafeSeaActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(editable.length() > 0) {
-                    float allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * Float.valueOf(safe_percent.getText().toString());
+                    float allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * Float.valueOf(safe_percent.getText().toString()) / 100f;
                     safe_money.setText(allMoney + "");
                 } else {
                     safe_money.setText("0");
@@ -122,7 +124,8 @@ public class SafeSeaActivity extends BaseActivity {
                                 case ResultCode.RESULT_OK:
                                     JSONObject object = (JSONObject) result;
                                     userGold = object.optDouble("gold");
-                                    user_money.setText(String.format(getString(R.string.safe_user_money), userGold));
+                                    String gold = String.format(getString(R.string.safe_user_money), userGold);
+                                    user_money.setText(Html.fromHtml(Utils.textFormatRed(gold)));
                                     break;
                                 case ResultCode.RESULT_FAILED:
                                     break;
@@ -174,12 +177,12 @@ public class SafeSeaActivity extends BaseActivity {
             startActivity(new Intent(context, ChargeActivity.class));
         } else {
             Intent intent = new Intent(context, SafeSeaEditActivity.class);
-            SafeInfo safeInfo = new SafeInfo();
-            safeInfo.setAmount_covered(Double.valueOf(safe_all_money.getText().toString()));//保险金额
-            safeInfo.setInsurance_type("" + Constants.getSeaSafeTypeValues(safe_type_spinner.getSelectedItemPosition()));//保险类型
-            safeInfo.setRatio(Double.valueOf(safe_percent.getText().toString()));//保险费率
-            safeInfo.setInsurance_charge(Double.valueOf(safe_money.getText().toString()));//保险费用
-            intent.putExtra(Constants.COMMON_KEY, safeInfo);
+            SafeSeaInfo safeSeaInfo = new SafeSeaInfo();
+            safeSeaInfo.setAmount_covered(Double.valueOf(safe_all_money.getText().toString()));//保险金额
+            safeSeaInfo.setInsurance_type("" + Constants.getSeaSafeTypeValues(safe_type_spinner.getSelectedItemPosition()));//保险类型
+            safeSeaInfo.setRatio(Double.valueOf(safe_percent.getText().toString()));//保险费率
+            safeSeaInfo.setInsurance_charge(Double.valueOf(safe_money.getText().toString()));//保险费用
+            intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
             startActivity(intent);
         }
     }

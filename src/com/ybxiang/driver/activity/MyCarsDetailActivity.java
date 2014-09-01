@@ -15,11 +15,13 @@ import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.MapActivity;
+import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.model.LocationInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,7 +57,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     private void initViews() {
-        ((TextView)findViewById(R.id.titlebar_id_content)).setText("车辆详情");
+        ((TextView) findViewById(R.id.titlebar_id_content)).setText("车辆详情");
         back = findViewById(R.id.titlebar_id_back);
         back.setOnClickListener(this);
         driver_name = (TextView) findViewById(R.id.driver_name);
@@ -86,19 +88,19 @@ public class MyCarsDetailActivity extends BaseActivity {
         price = (TextView) findViewById(R.id.price);
     }
 
-    private void initData(){
+    private void initData() {
         id = getIntent().getIntExtra(Constants.COMMON_KEY, 0);
         Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_OBJECT_KEY);
         dbUtils = new CityDBUtils(application.getCitySDB());
-        if(serializable != null) {
+        if (serializable != null) {
             //搜索车源详情, 直接显示
             carInfo = (CarInfo) serializable;
             remark.setText(carInfo.getRemark());
             //报价
             int priceUnits = carInfo.getUnits();
             String[] unitsArray = context.getResources().getStringArray(R.array.car_price_unit);
-            for(int i=0;i<Constants.unitTypeValues.length;i++) {
-                if(Constants.unitTypeValues[i] == priceUnits){
+            for (int i = 0; i < Constants.unitTypeValues.length; i++) {
+                if (Constants.unitTypeValues[i] == priceUnits) {
                     price.setText(carInfo.getPrice() + "/" + unitsArray[i]);
                 }
             }
@@ -120,12 +122,12 @@ public class MyCarsDetailActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.titlebar_id_back:
                 finish();
                 break;
             case R.id.edit:
-                if(carInfo != null) {
+                if (carInfo != null) {
                     Intent intent = new Intent(context, AddCarActivity.class);
                     intent.putExtra(Constants.COMMON_KEY, carInfo);
                     intent.putExtra(Constants.CAR_EDIT_TYPE, Constants.EDIT_CAR);
@@ -143,6 +145,11 @@ public class MyCarsDetailActivity extends BaseActivity {
                 break;
             case R.id.phone_location:
                 showPhoneLocationDialogConfirm();
+                break;
+            case R.id.titlebar_id_more:
+                LogUtil.e(TAG, "titlebar_id_more");
+                startActivity(new Intent(context, ShareActivity.class)
+                        .putExtra("share", content));
                 break;
         }
     }
@@ -193,7 +200,7 @@ public class MyCarsDetailActivity extends BaseActivity {
         //线路
         String wayStart = dbUtils.getCityInfo(carInfo.getStart_province(), carInfo.getStart_city(), carInfo.getStart_district());
         StringBuffer sb = new StringBuffer();
-        if(isFromSearch) {
+        if (isFromSearch) {
             if (carInfo.getEnd_province() > 0 || carInfo.getEnd_city() > 0 || carInfo.getEnd_district() > 0) {
                 String wayEnd = dbUtils.getCityInfo(carInfo.getEnd_province(), carInfo.getEnd_city(), carInfo.getEnd_district());
                 sb.append(wayStart + "--" + wayEnd);
@@ -214,12 +221,12 @@ public class MyCarsDetailActivity extends BaseActivity {
         }
         way.setText(sb.toString());
         plate_number.setText(plate_number.getText() + carInfo.getPlate_number());
-        if(TextUtils.isEmpty(carInfo.getDriver_name())) {
+        if (TextUtils.isEmpty(carInfo.getDriver_name())) {
             driver_name.setText(driver_name.getText() + carInfo.getOwer_name());
         } else {
             driver_name.setText(driver_name.getText() + carInfo.getDriver_name());
         }
-        if(TextUtils.isEmpty(carInfo.getPhone())) {
+        if (TextUtils.isEmpty(carInfo.getPhone())) {
             phone.setText(phone.getText() + carInfo.getOwer_phone());
         } else {
             phone.setText(phone.getText() + carInfo.getPhone());
@@ -229,8 +236,8 @@ public class MyCarsDetailActivity extends BaseActivity {
         //车型
         int carTypeValue = carInfo.getCar_type();
         String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
-        for(int i=0;i<Constants.carTypeValues.length;i++) {
-            if(Constants.carTypeValues[i] == carTypeValue){
+        for (int i = 0; i < Constants.carTypeValues.length; i++) {
+            if (Constants.carTypeValues[i] == carTypeValue) {
                 car_type.setText(car_type.getText().toString() + carTypeStr[i]);
             }
         }
@@ -239,7 +246,7 @@ public class MyCarsDetailActivity extends BaseActivity {
         if (!TextUtils.isEmpty(carInfo.getLocation())) {
             location_address.setText(location_address.getText() + carInfo.getLocation());
             location_address.setVisibility(View.VISIBLE);
-        } else if(!TextUtils.isEmpty(carInfo.getAddress())){
+        } else if (!TextUtils.isEmpty(carInfo.getAddress())) {
             location_address.setText(location_address.getText() + carInfo.getAddress());
             location_address.setVisibility(View.VISIBLE);
         }
@@ -293,14 +300,15 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     /**
-     *  定位
-     *  @param isFreeLocation 是否是免费定位
+     * 定位
+     *
+     * @param isFreeLocation 是否是免费定位
      */
     private void location(final boolean isFreeLocation) {
         try {
             showDefaultProgress();
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, isFreeLocation? Constants.FREE_LOCATION : Constants.PHONE_LOCATION);
+            jsonObject.put(Constants.ACTION, isFreeLocation ? Constants.FREE_LOCATION : Constants.PHONE_LOCATION);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("mobile", phoneNumber).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
@@ -310,9 +318,9 @@ public class MyCarsDetailActivity extends BaseActivity {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    if(result instanceof LocationInfo) {
+                                    if (result instanceof LocationInfo) {
                                         LocationInfo info = (LocationInfo) result;
-                                        if(!info.isDone()) {
+                                        if (!info.isDone()) {
                                             location_address.setText(info.getAddress());
                                             location_address.setVisibility(View.VISIBLE);
                                             location_time.setText(location_time.getText() + info.getTimestamp());
@@ -330,7 +338,7 @@ public class MyCarsDetailActivity extends BaseActivity {
                                     break;
                                 case ResultCode.RESULT_FAILED:
                                     if (result instanceof String) {
-                                        if(isFreeLocation) {
+                                        if (isFreeLocation) {
                                             showFreeLocationDialog();
                                         } else {
                                             showPhoneLocationDialogFailed();
@@ -348,7 +356,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     public void onSendMessage(View view) {
-        if(phoneNumber <= 0) {
+        if (phoneNumber <= 0) {
             return;
         }
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumber));
@@ -356,7 +364,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     public void onCall(View view) {
-        if(phoneNumber <= 0) {
+        if (phoneNumber <= 0) {
             return;
         }
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));

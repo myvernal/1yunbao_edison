@@ -68,7 +68,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 	private Resources resources;
 
 	// 设置分享内容
-	private String content = null;
+	public String content = null;
 
 	public InputMethodManager imm = null;
 
@@ -227,12 +227,14 @@ public class BaseActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		if (v.getId() == R.id.titlebar_id_back) {
 			finish();
-		} else if (v.getId() == R.id.titlebar_id_more) {
+		}
+//        else if (v.getId() == R.id.titlebar_id_more) {
 //			if (isRightKeyIntoShare) {
+//                LogUtil.e(TAG, "titlebar_id_more");
 //				startActivity(new Intent(context, ShareActivity.class)
 //						.putExtra("share", content));
 //			}
-		}
+//		}
 	}
 
 	protected void exitAppHint() {
@@ -289,7 +291,7 @@ public class BaseActivity extends Activity implements OnClickListener {
                 intent.putExtra(Intent.EXTRA_STREAM, u);
             }
         }
-        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.string_share_tips));
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.common_share_info));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(Intent.createChooser(intent, ""));
     }

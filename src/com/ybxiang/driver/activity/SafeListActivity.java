@@ -13,11 +13,10 @@ import com.maogousoft.logisticsmobile.driver.adapter.SafeListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.SafeInfo;
+import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,14 +82,14 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("page", page).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    SafeInfo.class, new AjaxCallBack() {
+                    SafeSeaInfo.class, new AjaxCallBack() {
                         @Override
                         public void receive(int code, Object result) {
                             setListShown(true);
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
-                                        List<SafeInfo> mList = (List<SafeInfo>) result;
+                                        List<SafeSeaInfo> mList = (List<SafeSeaInfo>) result;
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);
