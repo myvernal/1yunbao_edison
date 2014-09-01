@@ -17,7 +17,7 @@ public class CardInfo implements Serializable {
     private String id_month;//出生月
     private String id_day;//出生日
     //验证记录中使用
-    private String create_time;//创建日期
+    private long create_time;//创建日期
     private String status;//验证状态
     private String id_card;//身份证
     private String birthday;//生日
@@ -102,11 +102,11 @@ public class CardInfo implements Serializable {
         this.id_day = id_day;
     }
 
-    public String getCreate_time() {
+    public long getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(String create_time) {
+    public void setCreate_time(long create_time) {
         this.create_time = create_time;
     }
 

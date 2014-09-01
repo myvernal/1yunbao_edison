@@ -6,7 +6,6 @@
 
     <include layout="@layout/common_title"/>
 
-
     <com.baidu.mapapi.map.MapView
             android:id="@+id/bmapView"
             android:layout_width="fill_parent"

@@ -42,23 +42,11 @@ public class CheckCardListAdapter extends BaseListAdapter<CardInfo> {
         holder.name.setText(cardInfo.getId_name());
         holder.number.setText(cardInfo.getId_card());
         holder.region.setText(cardInfo.getRegioninfo());
-        holder.time.setText(cardInfo.getCreate_time());
-        switch (cardInfo.getVerifyresult()) {
-            case 1:
-                holder.result.setText("一致");
-                break;
-            case 2:
-                holder.result.setText("不一致");
-                holder.result.setTextColor(0xffff0000);
-                break;
-            case 3:
-                holder.result.setText("无此号码");
-                holder.result.setTextColor(0xffff0000);
-                break;
-            case 4:
-                holder.result.setText("一致,无照片");
-                break;
-        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(cardInfo.getCreate_time());
+        String time = simpleDateFormat.format(date);
+        holder.time.setText(time);
+        holder.result.setText("一致");
         convertView.setTag(holder);
         return convertView;
     }

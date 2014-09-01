@@ -105,6 +105,10 @@ public class BaseListActivity extends BaseActivity {
 		setListShown(shown, false);
 	}
 
+    public View getProgressContainer() {
+        return mProgressContainer;
+    }
+
 	private void setListShown(boolean shown, boolean animate) {
 		ensureList();
 		if (mProgressContainer == null) {

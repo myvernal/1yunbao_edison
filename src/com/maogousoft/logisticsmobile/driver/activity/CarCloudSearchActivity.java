@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -85,13 +86,15 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         //图层点击事件
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
-                Button button = new Button(getApplicationContext());
-                button.setBackgroundResource(R.drawable.popup);
+                TextView view = new TextView(getApplicationContext());
+                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(200, 200);
+                view.setBackgroundResource(R.drawable.popup);
+                view.setLayoutParams(lp);
                 final LatLng ll = marker.getPosition();
                 Point p = mBaiduMap.getProjection().toScreenLocation(ll);
                 p.y -= 75;
                 LatLng llInfo = mBaiduMap.getProjection().fromScreenLocation(p);
-                button.setText("更改位置");
+                view.setText("详细信息");
                 InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
                     public void onInfoWindowClick() {
                         LatLng llNew = new LatLng(ll.latitude + 0.005,
@@ -100,7 +103,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
                         mBaiduMap.hideInfoWindow();
                     }
                 };
-                mInfoWindow = new InfoWindow(button, llInfo, listener);
+                mInfoWindow = new InfoWindow(view, llInfo, listener);
                 mBaiduMap.showInfoWindow(mInfoWindow);
                 return true;
             }
@@ -113,8 +116,6 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         // 初始化adapter
         mAdapter = new MyCarInfoListAdapter(context);
         setListAdapter(mAdapter);
-        // list未加载数据不显示
-        setListShown(false);
         //开始定位
         locationAction();
     }
@@ -126,14 +127,17 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
             case R.id.titlebar_id_more:
                 if(currentModel == CURRENT_MODEL_MAP) {
                     currentModel = CURRENT_MODEL_LIST;
+                    getProgressContainer().setVisibility(View.GONE);
                     mListView.setVisibility(View.VISIBLE);
                     mMapView.setVisibility(View.GONE);
                     mMore.setText("查看地图");
+                    Log.e(TAG, mListView.getVisibility() + "");
                 } else {
                     currentModel = CURRENT_MODEL_MAP;
                     mListView.setVisibility(View.GONE);
                     mMapView.setVisibility(View.VISIBLE);
                     mMore.setText("查看列表");
+                    Log.e(TAG, mListView.getVisibility() + "");
                 }
                 break;
         }
@@ -199,7 +203,6 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
                 if (mAdapter.isEmpty()) {
                     setEmptyText("没有找到数据哦");
                 }
-                setListShown(true);
                 state = WAIT;
             }
         });
@@ -211,7 +214,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true);// 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(500);
+        option.setScanSpan(100);
         mLocClient.setLocOption(option);
         mLocClient.start();
     }
@@ -239,7 +242,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
     @Override
     public void onReceiveLocation(BDLocation location) {
         // map view 销毁后不在处理新接收的位置
-        if (location == null || mMapView == null || !isFirstLoc) {
+        if (location == null || mMapView == null || !isFirstLoc || null == location.getCity()) {
             return;
         }
 //        NearbySearchInfo info = new NearbySearchInfo();
@@ -252,7 +255,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         LocalSearchInfo info = new LocalSearchInfo();
         info.ak = Constants.BAIDU_CLOUD_SEARCH_Key;
         info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
-        info.region = "成都市";
+        info.region = location.getCity();
         showLocation(location);
         CloudManager.getInstance().localSearch(info);
         mLocClient.stop();
