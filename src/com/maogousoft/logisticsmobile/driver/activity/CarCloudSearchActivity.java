@@ -4,7 +4,9 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -30,6 +32,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
 	private static final String LTAG = "CloudSearchActivity";
 	private MapView mMapView;
 	private BaiduMap mBaiduMap;
+    private RelativeLayout markerView;
     private InfoWindow mInfoWindow;
     private LocationClient mLocClient;
     private boolean isFirstLoc = true;// 是否首次定位
@@ -86,28 +89,48 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         //图层点击事件
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
-                TextView view = new TextView(getApplicationContext());
-                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(200, 200);
-                view.setBackgroundResource(R.drawable.popup);
-                view.setLayoutParams(lp);
                 final LatLng ll = marker.getPosition();
                 Point p = mBaiduMap.getProjection().toScreenLocation(ll);
                 p.y -= 75;
                 LatLng llInfo = mBaiduMap.getProjection().fromScreenLocation(p);
-                view.setText("详细信息");
                 InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
                     public void onInfoWindowClick() {
-                        LatLng llNew = new LatLng(ll.latitude + 0.005,
-                                ll.longitude + 0.005);
+                        LatLng llNew = new LatLng(ll.latitude + 0.005, ll.longitude + 0.005);
                         marker.setPosition(llNew);
                         mBaiduMap.hideInfoWindow();
                     }
                 };
-                mInfoWindow = new InfoWindow(view, llInfo, listener);
+                //RelativeLayout popupView = getMarkerView(marker);
+                TextView textView = new TextView(context);
+                String nameStr = marker.getExtraInfo().getString("name");
+                String addressStr = marker.getExtraInfo().getString("address");
+                String phoneStr = marker.getExtraInfo().getString("phone");
+                textView.setPadding(40,40,40,40);
+                textView.setText(nameStr + "\n\n" + "地址:" + addressStr + "\n\n" + "联系电话:" + phoneStr);
+                textView.setBackgroundResource(R.drawable.popup);
+                mInfoWindow = new InfoWindow(textView, llInfo, listener);
                 mBaiduMap.showInfoWindow(mInfoWindow);
                 return true;
             }
         });
+    }
+
+    private RelativeLayout getMarkerView(Marker marker) {
+        if(markerView == null) {
+            markerView = (RelativeLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.map_marker_detail_layout, null);
+        }
+        String nameStr = marker.getExtraInfo().getString("name");
+        String addressStr = marker.getExtraInfo().getString("address");
+        String phoneStr = marker.getExtraInfo().getString("phone");
+
+        TextView name = (TextView) markerView.findViewById(R.id.name);
+        TextView address = (TextView) markerView.findViewById(R.id.address);
+        TextView phone = (TextView) markerView.findViewById(R.id.phone);
+
+        name.setText(nameStr);
+        address.setText("地址:" + addressStr);
+        phone.setText("联系电话:" + phoneStr);
+        return markerView;
     }
 
     private void initData() {
@@ -165,10 +188,17 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
 			for (CloudPoiInfo info : result.poiList) {
 				ll = new LatLng(info.latitude, info.longitude);
                 Bundle bundle = new Bundle();
+                bundle.putString("name", info.title);
+                bundle.putString("address", info.address);
+                if(null != info.extras.get("phone")) {
+                    bundle.putString("phone", info.extras.get("phone").toString());
+                }
+                //tags:车牌号
+                //title:姓名
                 //封装数据
 				OverlayOptions oo = new MarkerOptions().icon(bd).position(ll).extraInfo(bundle);
                 mBaiduMap.addOverlay(oo);
-				builder.include(ll);
+                builder.include(ll);
 			}
 			LatLngBounds bounds = builder.build();
 			MapStatusUpdate u = MapStatusUpdateFactory.newLatLngBounds(bounds);

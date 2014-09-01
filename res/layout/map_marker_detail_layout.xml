@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="200dp"
+              android:layout_height="100dp"
+              android:background="@drawable/popup"
+              android:padding="10dp">
+    <TextView style="@style/mapTextStyle"
+              android:id="@+id/name"
+              android:layout_alignParentTop="true"
+              android:text="刘德华"/>
+    <TextView style="@style/mapTextStyle"
+              android:id="@+id/address"
+              android:layout_centerVertical="true"
+              android:text=""/>
+    <TextView style="@style/mapTextStyle"
+              android:id="@+id/phone"
+              android:layout_alignParentBottom="true"
+              android:text="联系电话:"/>
+</RelativeLayout>
