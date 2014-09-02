@@ -18,6 +18,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.DictInfo;
+import com.maogousoft.logisticsmobile.driver.model.PinganPackageTypeInfo;
 import com.maogousoft.logisticsmobile.driver.model.SafePinanInfo;
 import com.ybxiang.driver.model.PinanAreaInfo;
 import org.json.JSONException;
@@ -142,7 +143,7 @@ public class SafePinanEditActivity extends BaseActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!packageTypeList.isEmpty()) {
                     //保存包装方式名称
-                    safePinanInfo.setEnd_city_str(packageTypeList.get(package_type.getSelectedItemPosition()).getName());
+                    safePinanInfo.setPackage_type_str(packageTypeList.get(package_type.getSelectedItemPosition()).getDiscribe());
                 }
             }
 
@@ -176,15 +177,6 @@ public class SafePinanEditActivity extends BaseActivity {
             insured_phone.setText(safePinanInfo.getInsured_phone());
             shiping_number.setText(safePinanInfo.getShiping_number());
             plate_number.setText(safePinanInfo.getPlate_number());
-            //显示包装代码
-            if (safePinanInfo.getPackage_type() > 0) {
-                for (int i = 0; i < Constants.seaSafeBZDMTypeValues.length; i++) {
-                    if (Constants.seaSafeBZDMTypeValues[i] == safePinanInfo.getPackage_type()) {
-                        package_type.setSelection(i);
-                        break;
-                    }
-                }
-            }
         }
         //获得平安省区域
         getSafeProvinceAreaInfo();
@@ -267,9 +259,6 @@ public class SafePinanEditActivity extends BaseActivity {
         }
         if(Constants.pinanSourceType2Values.length > 0) {
             safePinanInfo.setPackage_type(Constants.getPinanSafeSourceType2Values(package_type.getSelectedItemPosition()));
-        } else {
-            //容错
-            safePinanInfo.setPackage_type(1);
         }
         safePinanInfo.setStart_area(Constants.getPinanStartProvinceType2Values(start_area.getSelectedItemPosition()));
         safePinanInfo.setStart_city(Constants.getPinanStartCityType2Values(start_city.getSelectedItemPosition()));
@@ -284,7 +273,7 @@ public class SafePinanEditActivity extends BaseActivity {
     /**
      * 获取包装类型
      */
-    List<DictInfo> packageTypeList = new ArrayList<DictInfo>();
+    List<PinganPackageTypeInfo> packageTypeList = new ArrayList<PinganPackageTypeInfo>();
     public void getSafeSourceType() {
         try {
             showDefaultProgress();
@@ -293,24 +282,33 @@ public class SafePinanEditActivity extends BaseActivity {
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, "");
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    DictInfo.class, new AjaxCallBack() {
+                    PinganPackageTypeInfo.class, new AjaxCallBack() {
                         @Override
                         public void receive(int code, Object result) {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
-                                        packageTypeList = (List<DictInfo>) result;
+                                        packageTypeList = (List<PinganPackageTypeInfo>) result;
                                         List<String> keyList = new ArrayList<String>();
-                                        List<Integer> valuesList = new ArrayList<Integer>();
-                                        for (DictInfo info : packageTypeList) {
-                                            keyList.add(info.getName());
-                                            valuesList.add(info.getId());
+                                        List<String> valuesList = new ArrayList<String>();
+                                        for (PinganPackageTypeInfo info : packageTypeList) {
+                                            keyList.add(info.getDiscribe());
+                                            valuesList.add(info.getCode());
                                         }
                                         ArrayAdapter<String> arrayEndAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, keyList);
-                                        Constants.pinanSourceType2Values = valuesList.toArray(new Integer[valuesList.size()]);
+                                        Constants.pinanSourceType2Values = valuesList.toArray(new String[valuesList.size()]);
                                         package_type.setAdapter(arrayEndAdapter);
                                         package_type.setEnabled(true);
+                                        //显示包装代码
+                                        if (!TextUtils.isEmpty(safePinanInfo.getPackage_type())) {
+                                            for (int i = 0; i < Constants.pinanSourceType2Values.length; i++) {
+                                                if (TextUtils.equals(Constants.pinanSourceType2Values[i], safePinanInfo.getPackage_type())) {
+                                                    package_type.setSelection(i);
+                                                    break;
+                                                }
+                                            }
+                                        }
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:

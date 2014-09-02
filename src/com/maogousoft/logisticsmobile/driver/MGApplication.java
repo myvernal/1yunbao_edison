@@ -22,6 +22,7 @@ import com.maogousoft.logisticsmobile.driver.im.KBBinder;
 import com.maogousoft.logisticsmobile.driver.im.ServiceManager;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
 import com.maogousoft.logisticsmobile.driver.model.DictInfo;
+import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.ExtendedImageDownloader;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -60,6 +61,7 @@ public class MGApplication extends Application {
 	private KBBinder mBinder;
 	private boolean isAnonymous = false;
     private AbcInfo abcInfo = null;
+    private UserInfo userInfo = null;
 
     @Override
 	public void onCreate() {
@@ -354,6 +356,14 @@ public class MGApplication extends Application {
 		// }
 		return mSharedPreferences.getString("token", "");
 	}
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
 
 	/** 写入自动登录标识 **/
 	public void writeAutoLogin(boolean auto) {

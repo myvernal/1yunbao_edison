@@ -28,7 +28,7 @@ public class SafePinanInfo implements Serializable {
     private String end_area_str;//目的地(省)
     private String end_city_str;//目的地(市)
     private String peichang_area;//赔款偿付地点
-    private int package_type;//包装方式
+    private String package_type;//包装方式
     private String package_type_str;//包装方式
     private double amount_covered;//保险金额
 
@@ -228,11 +228,11 @@ public class SafePinanInfo implements Serializable {
         this.peichang_area = peichang_area;
     }
 
-    public int getPackage_type() {
+    public String getPackage_type() {
         return package_type;
     }
 
-    public void setPackage_type(int package_type) {
+    public void setPackage_type(String package_type) {
         this.package_type = package_type;
     }
 

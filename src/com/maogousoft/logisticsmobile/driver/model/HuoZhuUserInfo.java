@@ -23,7 +23,7 @@ public class HuoZhuUserInfo implements Serializable {
 	private String address = "";// 地址
 	private String telcom = "";// 座机
 
-	public String getPhone() {
+    public String getPhone() {
 		return phone;
 	}
 

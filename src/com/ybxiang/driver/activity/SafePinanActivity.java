@@ -23,7 +23,7 @@ import org.json.JSONObject;
  */
 public class SafePinanActivity extends BaseActivity {
     private Button mTitleBarBack, mTitleBarMore;
-    private EditText safe_money, safe_all_money;
+    private EditText safe_percent, safe_money, safe_all_money;
     private TextView user_money;
     private CheckBox safe_check_box;
     private double userGold = -1;
@@ -47,6 +47,7 @@ public class SafePinanActivity extends BaseActivity {
         mTitleBarMore.setOnClickListener(this);
 
         safe_check_box = (CheckBox) findViewById(R.id.safe_check_box);
+        safe_percent = (EditText) findViewById(R.id.safe_percent);
         user_money = (TextView) findViewById(R.id.user_money);
         safe_all_money = (EditText) findViewById(R.id.safe_all_money);
         safe_money = (EditText) findViewById(R.id.safe_money);
@@ -62,7 +63,7 @@ public class SafePinanActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(editable.length() > 0) {
-                    float allMoney = Float.valueOf(safe_all_money.getText().toString()) * 10000 * 0.0003f;
+                    float allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * Float.valueOf(safe_percent.getText().toString()) / 100f;
                     safe_money.setText(allMoney + "");
                 } else {
                     safe_money.setText("0");
@@ -72,6 +73,7 @@ public class SafePinanActivity extends BaseActivity {
     }
 
     private void initData() {
+        safe_percent.setText(application.getUserInfo().getPa_1() + "");
         getBalance();
     }
 

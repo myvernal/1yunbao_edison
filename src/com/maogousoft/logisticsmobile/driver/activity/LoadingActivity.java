@@ -167,6 +167,7 @@ public class LoadingActivity extends BaseActivity {
                                     switch (code) {
                                         case ResultCode.RESULT_OK:
                                             UserInfo userInfo = (UserInfo) result;
+                                            application.setUserInfo(userInfo);
                                             application.writeUserInfo(phone,
                                                     password, userInfo.getDriver_id(), userInfo.getId());
                                             application.setToken(userInfo

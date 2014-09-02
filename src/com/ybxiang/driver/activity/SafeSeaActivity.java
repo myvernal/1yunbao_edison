@@ -60,15 +60,31 @@ public class SafeSeaActivity extends BaseActivity {
         safe_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i <= 2) {
-                    safe_type_desc.setText(R.string.safe_text_one_1);
-                    safe_percent.setText("0.03");
-                } else if(i <= 4) {
-                    safe_type_desc.setText(R.string.safe_text_one_2);
-                    safe_percent.setText("0.04");
-                } else if(i == 5) {
-                    safe_type_desc.setText(R.string.safe_text_one_3);
-                    safe_percent.setText("0.05");
+                switch (i){
+                    case 0:
+                        safe_type_desc.setText(R.string.safe_text_one_1);
+                        safe_percent.setText(application.getUserInfo().getTpy_1() + "");
+                        break;
+                    case 1:
+                        safe_type_desc.setText(R.string.safe_text_one_1);
+                        safe_percent.setText(application.getUserInfo().getTpy_2() + "");
+                        break;
+                    case 2:
+                        safe_type_desc.setText(R.string.safe_text_one_1);
+                        safe_percent.setText(application.getUserInfo().getTpy_3() + "");
+                        break;
+                    case 3:
+                        safe_type_desc.setText(R.string.safe_text_one_2);
+                        safe_percent.setText(application.getUserInfo().getTpy_4() + "");
+                        break;
+                    case 4:
+                        safe_type_desc.setText(R.string.safe_text_one_2);
+                        safe_percent.setText(application.getUserInfo().getTpy_5() + "");
+                        break;
+                    case 5:
+                        safe_type_desc.setText(R.string.safe_text_one_3);
+                        safe_percent.setText(application.getUserInfo().getTpy_6() + "");
+                        break;
                 }
             }
 

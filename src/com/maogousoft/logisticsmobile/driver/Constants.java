@@ -408,7 +408,7 @@ public class Constants {
     public static final String GET_SAFE_PINAN_CITY = "pinganStartCity";
 
     /** 货主端:平安保险获取货物类型 */
-    public static final String GET_SAFE_PINAN_PACK_TYPE = "get_insurance_cargo_type_second";
+    public static final String GET_SAFE_PINAN_PACK_TYPE = "get_pingan_pack_type";
 
     /** 货主端:保险记录 */
     public static final String GET_INSURANCE_LIST = "getInsuranceList";
@@ -533,10 +533,10 @@ public class Constants {
     /**
      * 平安保险货物类型
      */
-    public static Integer[] pinanSourceType2Values = new Integer[]{};
-    public static int getPinanSafeSourceType2Values(int position){
+    public static String[] pinanSourceType2Values = new String[]{};
+    public static String getPinanSafeSourceType2Values(int position){
         if(position > pinanSourceType2Values.length) {
-            return 1;
+            return "";
         }
         return pinanSourceType2Values[position];
     }

@@ -398,6 +398,7 @@ public class MyPushReceiver extends BroadcastReceiver {
 								UserInfo userInfo = (UserInfo) result;
 
 								// 写入用户信息
+                                application.setUserInfo(userInfo);
 								application.writeUserInfo(username, password,
 										userInfo.getDriver_id(), userInfo.getId());
 								application.setToken(userInfo.getToken());

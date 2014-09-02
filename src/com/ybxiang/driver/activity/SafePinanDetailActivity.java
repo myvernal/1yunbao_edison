@@ -134,7 +134,9 @@ public class SafePinanDetailActivity extends BaseActivity {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    Toast.makeText(context, "添加保单成功!", Toast.LENGTH_SHORT).show();
+                                    if (result instanceof String) {
+                                        showMsg(result.toString());
+                                    }
                                     startActivity(new Intent(context, SafeListActivity.class));
                                     finish();
                                     break;
