@@ -1,58 +1,53 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.maogousoft.logisticsmobile.driver.Constants;
-import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.CarTypeListAdapter;
-import com.maogousoft.logisticsmobile.driver.adapter.CityListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
-import com.maogousoft.logisticsmobile.driver.model.CityInfo;
 import com.maogousoft.logisticsmobile.driver.model.DictInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
-import com.maogousoft.logisticsmobile.driver.utils.MD5;
-import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 完善司机资料
@@ -62,19 +57,17 @@ import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
 public class OptionalActivity extends BaseActivity {
 
 	private Button mBack, mLogin, mRegister;
-
 	private EditText mShuiChePhone, mName, mLength, mWeight, mNumber,
 			mChezhuPhone;
-
 	private Spinner mCarType;
-
 	private CarTypeListAdapter mCarTypeAdapter;
-
 	private boolean isFormRegisterActivity;
-
 	private boolean isFormPushSourceDetail;// 是否从推送进入，并且没有完善资料，然后进入的本页面
-
 	private AbcInfo abcInfo;
+    // 保存车辆照片的list
+    private ArrayList<Uri> mCarPhotos = new ArrayList<Uri>();
+    // 保存车辆照片url的list
+    private ArrayList<String> mCarPhotosUrl = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -231,7 +224,7 @@ public class OptionalActivity extends BaseActivity {
 		switch (id) {
 
 		case R.id.info_id_register_submit:
-			submit();
+            uploadImageAndSubmit();
 			break;
 
 		default:
@@ -263,7 +256,6 @@ public class OptionalActivity extends BaseActivity {
 
 	// 提交注册
 	private void submit() {
-
 		if (CheckUtils.checkIsEmpty(mShuiChePhone)) {
 			if (!CheckUtils.checkPhone(mShuiChePhone.getText().toString())) {
 				showMsg("随车手机号码格式不正确");
@@ -489,4 +481,88 @@ public class OptionalActivity extends BaseActivity {
 		}
 	}
 
+    public void uploadImageAndSubmit() {
+        if (!mCarPhotos.isEmpty()) {
+            try {
+                for (int i = 0; i < mCarPhotos.size(); i++) {
+//                    System.out.println(mCarPhotos.get(i - 1).getPath());
+//                    params.put("photo" + i, HttpUtils.getBitmapBase64(context, mCarPhotos.get(i - 1).getPath()));
+                    new UploadImageFileTask().execute(mCarPhotos.get(i).getPath());
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            submit();
+        }
+    }
+
+    private class UploadImageFileTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            System.out.println("开启线程上传图片");
+            showDefaultProgress();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String filePath = params[0];
+            String serverResponse = null;
+            HttpClient httpClient = new DefaultHttpClient();
+            httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+            HttpPost post = new HttpPost(Constants.UPLOAD_FILE_URL);
+            File file = new File(filePath);
+            if (file != null && file.exists()) {
+                try {
+                    ContentBody body = new FileBody(file, "image/jpeg");
+                    MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+                    entity.addPart("token", new StringBody(application.getToken()));
+                    entity.addPart("file_type", new StringBody("1"));
+                    entity.addPart("file", body);
+                    post.setEntity(entity);
+                    HttpResponse response = httpClient.execute(post);
+                    serverResponse = EntityUtils.toString(response.getEntity());
+                    LogUtil.e(TAG, "上传文件结果:" + serverResponse);
+                    return serverResponse;
+                } catch (Exception e) {
+                    LogUtil.e(TAG, "上传文件出错");
+                    e.printStackTrace();
+                }
+            }
+            return serverResponse;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (!TextUtils.isEmpty(result)) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    final int status = jsonObject.optInt("status");
+                    // 上传文件成功
+                    if (status == 0) {
+                        String item = jsonObject.optString("item");
+                        String url = new JSONObject(item).getString("url");
+                        System.out.println("上传图片返回url地址：" + url);
+                        mCarPhotosUrl.add(url);
+                        if (mCarPhotosUrl.size() == mCarPhotos.size()) {
+                            // 上传所有图片完毕
+                            submit();
+                        }
+                    } else {
+                        System.out.println("上传图片失败");
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("上传图片结果为空");
+            }
+        }
+    }
 }
