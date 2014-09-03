@@ -8,12 +8,22 @@ import java.io.IOException;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.activity.info.*;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+import com.ybxiang.driver.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,8 +57,9 @@ public class MyBusinessCard extends BaseActivity {
     private TextView mName, mNumber, mPhone, mUpdatePwd;
     private View mChangePath, my_info_card;
     private TextView mPath1, mPath2, mPath3, mCarNum, mCarlength, mCartype,
-            mCarzhaizhong;
-
+            mCarzhaizhong, myself_recommendation;
+    private ImageView id_card_photo, car_photo1, car_photo2, car_photo3;
+    private DisplayImageOptions options;
     // 个人abc信息
     private AbcInfo mAbcInfo;
 
@@ -58,8 +69,7 @@ public class MyBusinessCard extends BaseActivity {
         setContentView(R.layout.activity_business_card_layout);
         mContext = this; // PR111
         initViews();
-        // 隐藏我的易运宝左边的返回按钮
-        //((Button)findViewById(R.id.titlebar_id_back)).setVisibility(View.GONE);
+        initUtils();
     }
 
     private void initViews() {
@@ -69,6 +79,11 @@ public class MyBusinessCard extends BaseActivity {
         mShareCard = (Button) findViewById(R.id.titlebar_id_more);
         mShareCard.setText("发名片");
 
+        myself_recommendation = (TextView) findViewById(R.id.myself_recommendation);
+        id_card_photo = (ImageView) findViewById(R.id.id_card_photo);
+        car_photo1 = (ImageView) findViewById(R.id.car_photo1);
+        car_photo2 = (ImageView) findViewById(R.id.car_photo2);
+        car_photo3 = (ImageView) findViewById(R.id.car_photo3);
         mBack = (Button) findViewById(R.id.titlebar_id_back);
         mUpdate = (Button) findViewById(R.id.myabc_id_update);
         mName = (TextView) findViewById(R.id.business_card_part1_name);
@@ -90,6 +105,18 @@ public class MyBusinessCard extends BaseActivity {
         mBack.setOnClickListener(this);
         mUpdate.setOnClickListener(this);
         mChangePath.setOnClickListener(this);
+    }
+
+    /**
+     * 初始化工具类 *
+     */
+    private void initUtils() {
+        options = new DisplayImageOptions.Builder().resetViewBeforeLoading()
+                .cacheOnDisc()
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)
+                .showImageForEmptyUri(R.drawable.ic_img_loading)
+                .displayer(new FadeInBitmapDisplayer(300)).build();
     }
 
     @Override
@@ -238,7 +265,26 @@ public class MyBusinessCard extends BaseActivity {
                                                     .getCar_type_str());
                                         }
                                         mCarzhaizhong.setText(mAbcInfo.getCar_weight() + "吨");
-
+                                        if(!TextUtils.isEmpty(mAbcInfo.getMyself_recommendation())) {
+                                            myself_recommendation.setText(mAbcInfo.getMyself_recommendation());
+                                        }
+                                        //显示照片
+                                        if(!TextUtils.isEmpty(mAbcInfo.getId_card_photo())) {
+                                            ImageLoader.getInstance().displayImage(mAbcInfo.getId_card_photo(), id_card_photo, options,
+                                                    new Utils.MyImageLoadingListener(context, id_card_photo));
+                                        }
+                                        if(!TextUtils.isEmpty(mAbcInfo.getCar_photo1())) {
+                                            ImageLoader.getInstance().displayImage(mAbcInfo.getCar_photo1(), car_photo1, options,
+                                                    new Utils.MyImageLoadingListener(context, car_photo1));
+                                        }
+                                        if(!TextUtils.isEmpty(mAbcInfo.getCar_photo2())) {
+                                            ImageLoader.getInstance().displayImage(mAbcInfo.getCar_photo2(), car_photo2, options,
+                                                    new Utils.MyImageLoadingListener(context, car_photo2));
+                                        }
+                                        if(!TextUtils.isEmpty(mAbcInfo.getCar_photo3())) {
+                                            ImageLoader.getInstance().displayImage(mAbcInfo.getCar_photo3(), car_photo3, options,
+                                                    new Utils.MyImageLoadingListener(context, car_photo3));
+                                        }
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -262,11 +308,9 @@ public class MyBusinessCard extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (resultCode == RESULT_OK) {
             getABCInfo();
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -305,4 +349,5 @@ public class MyBusinessCard extends BaseActivity {
             return file.getPath();
         }
     }
+
 }

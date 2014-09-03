@@ -31,6 +31,7 @@
     <string name="string_tips_type">*车型</string>
     <string name="string_tips_weight">*载重</string>
     <string name="string_tips_number">*车牌号</string>
+    <string name="string_tips_myself_recommendation">*自我推荐</string>
     <string name="string_register_line">*线路：</string>
     <string name="string_register_choice">选填</string>
     <string name="string_register_arrow">同意协议</string>

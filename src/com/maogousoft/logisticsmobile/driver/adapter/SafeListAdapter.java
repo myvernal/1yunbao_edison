@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
+import com.ybxiang.driver.activity.SafeBaodanActivity;
 import com.ybxiang.driver.activity.SafeSeaDetailActivity;
 import com.ybxiang.driver.activity.SafeSeaEditActivity;
 
@@ -81,7 +82,13 @@ public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
         convertView.findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "查看电子保单:" + safeSeaInfo.getInsured_name(), Toast.LENGTH_SHORT).show();
+                if(!TextUtils.isEmpty(safeSeaInfo.getTpy_Electronic_policy())) {
+                    Intent intent = new Intent(mContext, SafeBaodanActivity.class);
+                    intent.putExtra(Constants.COMMON_KEY, safeSeaInfo.getTpy_Electronic_policy());
+                    mContext.startActivity(intent);
+                } else {
+                    Toast.makeText(mContext, "该保险还没有上传电子保单,请稍后再查看", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         convertView.setTag(holdView);

@@ -31,6 +31,15 @@ public class SafeSeaInfo implements Serializable {
     private int cargo_type1;//货物名称及类型1
     private int cargo_type2;//货物名称及类型2
     private int type;//0 太平洋 1 平安
+    private String tpy_Electronic_policy;//太平洋电子保单
+
+    public String getTpy_Electronic_policy() {
+        return tpy_Electronic_policy;
+    }
+
+    public void setTpy_Electronic_policy(String tpy_Electronic_policy) {
+        this.tpy_Electronic_policy = tpy_Electronic_policy;
+    }
 
     public String getInsurer_name() {
         return insurer_name;

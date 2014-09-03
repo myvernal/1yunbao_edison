@@ -4,7 +4,7 @@
           android:versionCode="102"
           android:versionName="1.2">
 
-    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="20"/>
+    <uses-sdk android:minSdkVersion="8" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -802,6 +802,12 @@
                   android:theme="@style/AppTheme"
                   android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity android:name="com.ybxiang.driver.activity.CheckCardListActivity"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+        <activity android:name="com.ybxiang.driver.activity.SafeBaodanActivity"
                   android:configChanges="keyboardHidden|orientation"
                   android:launchMode="singleTask"
                   android:screenOrientation="portrait"

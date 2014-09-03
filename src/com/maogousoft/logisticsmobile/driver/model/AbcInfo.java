@@ -41,6 +41,10 @@ public class AbcInfo implements Serializable {
 
 	private String car_photo2 = "";
 
+	private String car_photo3 = "";
+
+    private String myself_recommendation = "";
+
 	private String license = "";
 
 	private String license_name = "";
@@ -88,7 +92,24 @@ public class AbcInfo implements Serializable {
 
 	private String car_phone = "";// 随车手机
 
-	public String getCar_phone() {
+
+    public String getCar_photo3() {
+        return car_photo3;
+    }
+
+    public void setCar_photo3(String car_photo3) {
+        this.car_photo3 = car_photo3;
+    }
+
+    public String getMyself_recommendation() {
+        return myself_recommendation;
+    }
+
+    public void setMyself_recommendation(String myself_recommendation) {
+        this.myself_recommendation = myself_recommendation;
+    }
+
+    public String getCar_phone() {
 		return car_phone;
 	}
 
