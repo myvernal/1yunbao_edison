@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
@@ -14,8 +15,10 @@ import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.model.HuoZhuUserInfo;
 import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
 import com.ybxiang.driver.util.Utils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -30,6 +33,8 @@ public class SafeSeaActivity extends BaseActivity {
     private TextView user_money;
     private CheckBox safe_check_box;
     private double userGold = -1;
+    private double ratio = 0.0f;
+    private HuoZhuUserInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,32 +65,7 @@ public class SafeSeaActivity extends BaseActivity {
         safe_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i){
-                    case 0:
-                        safe_type_desc.setText(R.string.safe_text_one_1);
-                        safe_percent.setText(application.getUserInfo().getTpy_1() + "");
-                        break;
-                    case 1:
-                        safe_type_desc.setText(R.string.safe_text_one_1);
-                        safe_percent.setText(application.getUserInfo().getTpy_2() + "");
-                        break;
-                    case 2:
-                        safe_type_desc.setText(R.string.safe_text_one_1);
-                        safe_percent.setText(application.getUserInfo().getTpy_3() + "");
-                        break;
-                    case 3:
-                        safe_type_desc.setText(R.string.safe_text_one_2);
-                        safe_percent.setText(application.getUserInfo().getTpy_4() + "");
-                        break;
-                    case 4:
-                        safe_type_desc.setText(R.string.safe_text_one_2);
-                        safe_percent.setText(application.getUserInfo().getTpy_5() + "");
-                        break;
-                    case 5:
-                        safe_type_desc.setText(R.string.safe_text_one_3);
-                        safe_percent.setText(application.getUserInfo().getTpy_6() + "");
-                        break;
-                }
+                changeRatioBySpinnerSelect(i);
             }
 
             @Override
@@ -102,7 +82,7 @@ public class SafeSeaActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(editable.length() > 0) {
-                    float allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * Float.valueOf(safe_percent.getText().toString()) / 100f;
+                    double allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * ratio / 100;
                     safe_money.setText(allMoney + "");
                 } else {
                     safe_money.setText("0");
@@ -112,6 +92,7 @@ public class SafeSeaActivity extends BaseActivity {
     }
 
     private void initData() {
+        getUserInfo();
         getBalance();
     }
 
@@ -122,6 +103,46 @@ public class SafeSeaActivity extends BaseActivity {
             case R.id.titlebar_id_more:
                 startActivity(new Intent(context, SafeListActivity.class));
                 break;
+        }
+    }
+
+    /**
+     * 根据险种使用不同的费率
+     * @param i
+     */
+    private void changeRatioBySpinnerSelect(int i) {
+        if(userInfo != null) {
+            switch (i) {
+                case 0:
+                    ratio = userInfo.getTpy_1();
+                    safe_type_desc.setText(getString(R.string.safe_text_one_1, ratio + "%"));
+                    break;
+                case 1:
+                    ratio = userInfo.getTpy_2();
+                    safe_type_desc.setText(getString(R.string.safe_text_one_1, ratio + "%"));
+                    break;
+                case 2:
+                    ratio = userInfo.getTpy_3();
+                    safe_type_desc.setText(getString(R.string.safe_text_one_1, ratio + "%"));
+                    break;
+                case 3:
+                    ratio = userInfo.getTpy_4();
+                    safe_type_desc.setText(getString(R.string.safe_text_one_2, ratio + "%"));
+                    break;
+                case 4:
+                    ratio = userInfo.getTpy_5();
+                    safe_type_desc.setText(getString(R.string.safe_text_one_2, ratio + "%"));
+                    break;
+                case 5:
+                    ratio = userInfo.getTpy_6();
+                    safe_type_desc.setText(getString(R.string.safe_text_one_3, ratio + "%"));
+                    break;
+            }
+            safe_percent.setText(ratio + "");
+            if(!TextUtils.isEmpty(safe_all_money.getText())) {
+                double allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * ratio / 100;
+                safe_money.setText(allMoney + "");
+            }
         }
     }
 
@@ -158,6 +179,53 @@ public class SafeSeaActivity extends BaseActivity {
         }
     }
 
+    // 获取用户信息中的费率
+    private void getUserInfo() {
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    HuoZhuUserInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result != null) {
+                                        userInfo = (HuoZhuUserInfo) result;
+                                        //选择对应的费率
+                                        changeRatioBySpinnerSelect(safe_type_spinner.getSelectedItemPosition());
+                                        if(ratio > 0) {
+                                            if(!TextUtils.isEmpty(safe_all_money.getText())) {
+                                                double allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * ratio / 100;
+                                                safe_money.setText(allMoney + "");
+                                            }
+                                        } else {
+                                            Toast.makeText(context, "获取保险费率出错,请联系客服...", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 帐号充值
      *
@@ -182,7 +250,9 @@ public class SafeSeaActivity extends BaseActivity {
      * @param view
      */
     public void onClickNext(View view) {
-        if(safe_all_money.getText().length() <= 0) {
+        if(ratio <= 0) {
+            Toast.makeText(context, "正在获取保险费率,请稍后...", Toast.LENGTH_SHORT).show();
+        } else if(safe_all_money.getText().length() <= 0) {
             Toast.makeText(context, "请填写保险金额!", Toast.LENGTH_SHORT).show();
         } else if (!safe_check_box.isChecked()) {
             Toast.makeText(context, "请勾选同意保险协议", Toast.LENGTH_SHORT).show();

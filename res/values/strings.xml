@@ -346,16 +346,16 @@
         注:由于数据通过问题,并不保证所有人都包含身份证证件照.查询成功后结果将自动保存在验证记录里.
     </string>
 
-    <string name="safe_text_one_1" formatted="false">
-        基本险费率0.03%,主要承保运输途中因活在及其他灾害事故造成的损失
+    <string name="safe_text_one_1">
+        基本险费率%s,主要承保运输途中因活在及其他灾害事故造成的损失
     </string>
-    <string name="safe_text_one_2" formatted="false">
-        综合险费率0.04%;,除了基本险外,还承保易碎,玩去,凹瘪,折断,开裂,渗漏以及被盗的损失
+    <string name="safe_text_one_2">
+        综合险费率%s,除了基本险外,还承保易碎,玩去,凹瘪,折断,开裂,渗漏以及被盗的损失
     </string>
-    <string name="safe_text_one_3" formatted="false">
-        综合附加被盗险费率0.05%;,除了综合险责任外,还承保货物被盗的损失;
+    <string name="safe_text_one_3">
+        综合附加被盗险费率%s,除了综合险责任外,还承保货物被盗的损失;
     </string>
-    <string name="safe_text_one_other" formatted="false">
+    <string name="safe_text_one_other">
         注：详细保险条款,请查看《中国太平洋财产保险股份有限公司国内水路、陆路货物运输保险条款》
     </string>
     <string name="safe_text_two" formatted="false">

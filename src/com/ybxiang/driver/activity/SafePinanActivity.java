@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
@@ -14,8 +15,10 @@ import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.model.HuoZhuUserInfo;
 import com.maogousoft.logisticsmobile.driver.model.SafePinanInfo;
 import com.ybxiang.driver.util.Utils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -27,6 +30,7 @@ public class SafePinanActivity extends BaseActivity {
     private TextView user_money;
     private CheckBox safe_check_box;
     private double userGold = -1;
+    private HuoZhuUserInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +67,7 @@ public class SafePinanActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(editable.length() > 0) {
-                    float allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * Float.valueOf(safe_percent.getText().toString()) / 100f;
+                    double allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * userInfo.getPa_1() / 100f;
                     safe_money.setText(allMoney + "");
                 } else {
                     safe_money.setText("0");
@@ -73,8 +77,8 @@ public class SafePinanActivity extends BaseActivity {
     }
 
     private void initData() {
-        safe_percent.setText(application.getUserInfo().getPa_1() + "");
         getBalance();
+        getUserInfo();
     }
 
     @Override
@@ -120,6 +124,52 @@ public class SafePinanActivity extends BaseActivity {
         }
     }
 
+    // 获取用户信息中的费率
+    private void getUserInfo() {
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    HuoZhuUserInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result != null) {
+                                        userInfo = (HuoZhuUserInfo) result;
+                                        if(userInfo.getPa_1() > 0) {
+                                            safe_percent.setText(userInfo.getPa_1() + "");
+                                            if(!TextUtils.isEmpty(safe_all_money.getText())) {
+                                                double allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * userInfo.getPa_1() / 100f;
+                                                safe_money.setText(allMoney + "");
+                                            }
+                                        } else {
+                                            Toast.makeText(context, "获取保险费率出错,请联系客服...", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 帐号充值
      *
@@ -144,7 +194,9 @@ public class SafePinanActivity extends BaseActivity {
      * @param view
      */
     public void onClickNext(View view) {
-        if(safe_all_money.getText().length() <= 0) {
+        if(Float.valueOf(safe_percent.getText().toString()) <= 0) {
+            Toast.makeText(context, "正在获取保险费率,请稍后...", Toast.LENGTH_SHORT).show();
+        } else if(safe_all_money.getText().length() <= 0) {
             Toast.makeText(context, "请填写保险金额!", Toast.LENGTH_SHORT).show();
         } else if (!safe_check_box.isChecked()) {
             Toast.makeText(context, "请勾选同意保险协议", Toast.LENGTH_SHORT).show();
