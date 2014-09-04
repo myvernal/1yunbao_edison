@@ -51,13 +51,13 @@ public class ShipDPActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.part1:
-                Toast.makeText(context, "三方物流", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, SearchThreePartyActivity.class));
                 break;
             case R.id.part2:
-                Toast.makeText(context, "零担专线", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, SearchSpecialLineActivity.class));
                 break;
             case R.id.part3:
-                Toast.makeText(context, "工厂货主", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, SearchFactoryUserActivity.class));
                 break;
             case R.id.part4:
                 startActivity(new Intent(context, ShopListActivity.class));

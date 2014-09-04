@@ -24,19 +24,16 @@
                 android:id="@+id/plate_numberId"
                 style="@style/car_left_text_style"
                 android:textColor="@color/orange_order"
-                android:layout_marginRight="10dp"
-                android:text="川A54234"/>
+                android:layout_marginRight="10dp"/>
 
         <TextView
                 android:id="@+id/nameId"
                 style="@style/car_left_text_style"
-                android:textSize="@dimen/font_size_large"
-                android:text="陈冲"/>
+                android:textSize="@dimen/font_size_large"/>
 
         <TextView
                 android:id="@+id/phone"
-                style="@style/car_left_text_style"
-                android:text="15982034811"/>
+                style="@style/car_left_text_style"/>
 
     </LinearLayout>
 
@@ -51,16 +48,14 @@
 
         <TextView
                 android:id="@+id/location_time"
-                style="@style/info_left_text_style"
-                android:text="08-14 23:15"/>
+                style="@style/info_left_text_style"/>
 
         <TextView
                 android:id="@+id/locationId"
                 style="@style/info_left_text_style"
                 android:layout_marginLeft="5dp"
                 android:ellipsize="end"
-                android:singleLine="true"
-                android:text="成都青羊区北大街126号"/>
+                android:singleLine="true"/>
     </LinearLayout>
 
     <TextView android:layout_width="wrap_content"

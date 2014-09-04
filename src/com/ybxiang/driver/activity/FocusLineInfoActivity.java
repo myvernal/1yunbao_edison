@@ -117,16 +117,11 @@ public class FocusLineInfoActivity extends BaseListActivity implements
                                             mFootProgress.setVisibility(View.GONE);
                                             mFootMsg.setText("已加载全部");
                                         } else {
-                                            if (mList.size() < 10) {
+                                            if (mList.size() < 20) {
                                                 load_all = true;
                                                 mFootProgress.setVisibility(View.GONE);
                                                 mFootMsg.setText("已加载全部");
-                                            } else {
-                                                load_all = false;
-                                                mFootProgress.setVisibility(View.VISIBLE);
-                                                mFootMsg.setText(R.string.tips_isloading);
                                             }
-                                            android.util.Log.d("ybxiang", "mList==" + mList);
                                             mAdapter.addAll(mList);
                                             mAdapter.notifyDataSetChanged();
                                         }
@@ -168,6 +163,10 @@ public class FocusLineInfoActivity extends BaseListActivity implements
         super.onListItemClick(l, v, position, id);
         FocusLineInfo focusLineInfo = (FocusLineInfo) v.getTag(R.id.common_city_selected);
         if(searchType == Constants.SOURCE_SEARCH_TYPE) {
+            //正常搜索货源
+            fastSearchSource(focusLineInfo);
+        } else if(searchType == Constants.SOURCE_SEARCH_TYPE_SPECIAL) {
+            //搜索零担货源
             fastSearchSource(focusLineInfo);
         } else {
             fastSearchCar(focusLineInfo);
@@ -198,6 +197,8 @@ public class FocusLineInfoActivity extends BaseListActivity implements
         // 如果当前没有加载数据
         if (state != ISREFRESHING && !load_all) {
             getData(++pageIndex);
+            mFootProgress.setVisibility(View.VISIBLE);
+            mFootMsg.setText(R.string.tips_isloading);
         }
     }
 }

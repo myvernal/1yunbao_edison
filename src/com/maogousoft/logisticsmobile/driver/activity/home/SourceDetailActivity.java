@@ -20,6 +20,7 @@ import com.maogousoft.logisticsmobile.driver.adapter.ImageGridAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.GrabDialog;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
@@ -54,6 +55,7 @@ public class SourceDetailActivity extends BaseActivity {
     private Resources mResources;
     private NewSourceInfo mSourceInfo;
     private RelativeLayout mPingjia;
+    private CityDBUtils dbUtils;
     /**
      * 司机账户余额
      */
@@ -119,14 +121,19 @@ public class SourceDetailActivity extends BaseActivity {
         mSourceCarType = (TextView) findViewById(R.id.source_detail_chexing);
         mSourcePrice = (TextView) findViewById(R.id.source_detail_baojia);
         mSourceGold = (TextView) findViewById(R.id.source_detail_baozhengjin);
-        mValidateTime = (TextView) findViewById(R.id.source_detail_youxiaoshijian);
+        mValidateTime = (TextView) findViewById(R.id.source_detail_yifabu);
         mZhuangCheTime = (TextView) findViewById(R.id.source_detail_zhuangche);
         mWeight = (TextView) findViewById(R.id.source_detail_weight);
+
+        //如果是货主身份,不显示好友
+        if(application.getUserType() == Constants.USER_SHIPPER) {
+            mAttention.setVisibility(View.GONE);
+        }
     }
 
     // 初始化数据source_detail_phone
     private void initData() {
-
+        dbUtils = new CityDBUtils(application.getCitySDB());
         if (getIntent().hasExtra("type")) {
             if (getIntent().getStringExtra("type").equals(
                     "MessageBroadCastReceiver")) {
@@ -150,7 +157,7 @@ public class SourceDetailActivity extends BaseActivity {
             if (application.checkIsRegOptional()) {
 
                 mPingjia.setClickable(true);
-                order_id = (Integer) getIntent().getIntExtra(ORDER_ID, 0);
+                order_id = getIntent().getIntExtra(ORDER_ID, 0);
                 getSourceDetail(order_id);
             } else {
                 final MyAlertDialog dialog = new MyAlertDialog(context);
@@ -250,8 +257,13 @@ public class SourceDetailActivity extends BaseActivity {
         // webview.loadData(sourceInfo.getCargo_remark(), "text/html", "UTF-8");
         String other = sourceInfo.getCargo_remark() + sourceInfo.getCargo_tip();
         sourceOther.setText(other);
-        String way = sourceInfo.getStart_province_str() + sourceInfo.getStart_city_str() + sourceInfo.getStart_district_str() +
-                "-" + sourceInfo.getEnd_province_str() + sourceInfo.getEnd_city_str() + sourceInfo.getEnd_district_str();
+        //线路
+        String way = "";
+        String wayStart = dbUtils.getCityInfo(sourceInfo.getStart_province(), sourceInfo.getStart_city(), sourceInfo.getStart_district());
+        if (sourceInfo.getEnd_province() > 0 || sourceInfo.getEnd_city() > 0 || sourceInfo.getEnd_district() > 0) {
+            String wayEnd = dbUtils.getCityInfo(sourceInfo.getEnd_province(), sourceInfo.getEnd_city(), sourceInfo.getEnd_district());
+            way = wayStart + "--" + wayEnd;
+        }
 
         mLine.setText(Html.fromHtml(mLine.getText() + Utils.textFormatGreen(way)));
         String sourceName = sourceInfo.getCargo_desc();
@@ -267,8 +279,17 @@ public class SourceDetailActivity extends BaseActivity {
             }
         }
        //载重
-        String weight = "15吨";
-        mWeight.setText(Html.fromHtml(mWeight.getText().toString() + Utils.textFormatBlue(weight)));
+        Integer unitType = mSourceInfo.getCargo_unit();
+        String weight = "";
+        if(unitType != null && unitType > 0) {
+            String[] priceUnit = context.getResources().getStringArray(R.array.car_price_unit);
+            for (int i = 0; i < Constants.unitTypeValues.length; i++) {
+                if (Constants.unitTypeValues[i] == unitType) {
+                    weight = mSourceInfo.getCargo_number() + priceUnit[i];
+                    mWeight.setText(Html.fromHtml(mWeight.getText().toString() + Utils.textFormatBlue(weight)));
+                }
+            }
+        }
         //运输方式
         Integer shipType = mSourceInfo.getShip_type();
         if(shipType != null && shipType> 0) {

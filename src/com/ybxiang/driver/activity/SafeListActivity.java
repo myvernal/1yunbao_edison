@@ -95,14 +95,10 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
                                             mFootProgress.setVisibility(View.GONE);
                                             mFootMsg.setText("已加载全部");
                                         } else {
-                                            if (mList.size() < 10) {
+                                            if (mList.size() < 20) {
                                                 load_all = true;
                                                 mFootProgress.setVisibility(View.GONE);
                                                 mFootMsg.setText("已加载全部");
-                                            } else {
-                                                load_all = false;
-                                                mFootProgress.setVisibility(View.VISIBLE);
-                                                mFootMsg.setText(R.string.tips_isloading);
                                             }
                                             mAdapter.addAll(mList);
                                             mAdapter.notifyDataSetChanged();
@@ -156,6 +152,8 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
         // 如果当前没有加载数据
         if (state != ISREFRESHING && !load_all) {
             getData(++pageIndex);
+            mFootProgress.setVisibility(View.VISIBLE);
+            mFootMsg.setText(R.string.tips_isloading);
         }
     }
 }

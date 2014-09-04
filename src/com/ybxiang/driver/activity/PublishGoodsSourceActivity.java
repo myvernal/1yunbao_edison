@@ -92,6 +92,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             source_id_publish_cargo_remark.setText(mSourceInfo.getCargo_remark() + "");
             source_id_publish_contact_name.setText(mSourceInfo.getUser_name() + "");
             source_id_publish_contact_phone.setText(mSourceInfo.getUser_phone() + "");
+            source_id_publish_source_weight.setText(mSourceInfo.getCargo_number() + "");
             //选择货物类型
             Integer sourceType = mSourceInfo.getCargo_type();
             if (sourceType != null && sourceType > 0) {
@@ -230,6 +231,9 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             params.put("validate_hour", source_id_publish_validate_hour.getText());
             //货物数量
             params.put("cargo_number", source_id_publish_source_weight.getText());
+            if(null != mSourceInfo) {
+                params.put("id", mSourceInfo.getId());
+            }
             long day = Integer.valueOf(source_id_publish_validate_day.getText().toString()) * 24 * 60 * 60 * 1000;
             long hour = Integer.valueOf(source_id_publish_validate_hour.getText().toString()) * 60 * 60 * 1000;
             params.put("validate_time", day + hour);

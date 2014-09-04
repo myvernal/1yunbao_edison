@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -126,9 +127,7 @@ public class BaseFragmentActivity extends FragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.titlebar_id_back) {
-			finish();
-		}
+
 	}
 
 	protected void exitAppHint() {

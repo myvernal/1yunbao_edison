@@ -218,7 +218,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
                     mFootProgress.setVisibility(View.GONE);
                     mFootMsg.setText("已加载全部");
                 } else {
-                    if (mList.size() < 10) {
+                    if (mList.size() < 20) {
                         load_all = true;
                         mFootProgress.setVisibility(View.GONE);
                         mFootMsg.setText("已加载全部");

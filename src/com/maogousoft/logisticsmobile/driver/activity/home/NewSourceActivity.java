@@ -113,8 +113,7 @@ public class NewSourceActivity extends BaseListActivity implements
         }
 
         if (getIntent().hasExtra("NewSourceInfos")) {
-            newSourceInfos = (List<NewSourceInfo>) getIntent()
-                    .getSerializableExtra("NewSourceInfos");
+            newSourceInfos = (List<NewSourceInfo>) getIntent().getSerializableExtra("NewSourceInfos");
 
             // 从 搜索货源进入，不需要显示 搜索货源按钮 modify
             // mMore.setVisibility(View.GONE);
@@ -356,19 +355,13 @@ public class NewSourceActivity extends BaseListActivity implements
                                             mFootProgress.setVisibility(View.GONE);
                                             mFootMsg.setText("已加载全部");
                                         } else {
-                                            if (mList.size() < 10) {
+                                            if (mList.size() < 20) {
                                                 load_all = true;
-                                                mFootProgress
-                                                        .setVisibility(View.GONE);
+                                                mFootProgress.setVisibility(View.GONE);
                                                 mFootMsg.setText("已加载全部");
-                                            } else {
-                                                load_all = false;
-                                                mFootProgress
-                                                        .setVisibility(View.VISIBLE);
-                                                mFootMsg.setText(R.string.tips_isloading);
                                             }
-
                                             mAdapter.addAll(sort(mList));
+                                            mAdapter.notifyDataSetChanged();
                                         }
 
                                     }
@@ -420,6 +413,8 @@ public class NewSourceActivity extends BaseListActivity implements
         // 如果当前没有加载数据
         if (state != ISREFRESHING && !load_all) {
             getData(++pageIndex);
+            mFootProgress.setVisibility(View.VISIBLE);
+            mFootMsg.setText(R.string.tips_isloading);
         }
     }
 
@@ -443,7 +438,6 @@ public class NewSourceActivity extends BaseListActivity implements
                         }
                     }
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

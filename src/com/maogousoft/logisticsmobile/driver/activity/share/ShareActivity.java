@@ -57,7 +57,7 @@ public class ShareActivity extends BaseFragmentActivity implements
 
 	private ListView mListView;
 
-	private Button mSend;
+	private Button mSend, mBack;
 
 	private MultiChoiceBaseAdapter mAdapter;
 
@@ -76,11 +76,12 @@ public class ShareActivity extends BaseFragmentActivity implements
 	}
 
 	private void initViews(Bundle savedInstanceState) {
+        mBack = (Button) findViewById(R.id.titlebar_id_back);
+        mBack.setOnClickListener(this);
 		mListView = (ListView) findViewById(android.R.id.list);
 		// PR1.3 change string_share_title to share_get_gift
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.share_get_gift);
-		findViewById(R.id.titlebar_id_back).setVisibility(View.INVISIBLE);
 		findViewById(R.id.titlebar_id_more).setVisibility(View.INVISIBLE);
 
 		tvShareHint = (TextView) findViewById(R.id.tv_sharehint);
@@ -173,7 +174,9 @@ public class ShareActivity extends BaseFragmentActivity implements
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
-		if (v == mSend) {
+        if (v == mBack) {
+            finish();
+        } else if (v == mSend) {
 			if (TextUtils.isEmpty(mContent.getText().toString())) {
 				showMsg("请填写分享内容");
 				return;

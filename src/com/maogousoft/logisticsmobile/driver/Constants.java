@@ -416,6 +416,12 @@ public class Constants {
     /** 货主端:查找车源 */
     public static final String QUERY_CAR_SOURCE = "query_driverInfo_by_user";
 
+    /** 货主端:查询三方物流 */
+    public static final String QUERY_THREE_PARTY = "three_party_logistics";
+
+    /** 货主端:查询工厂货主 */
+    public static final String QUERY_FACTORY_USER = "factory_user";
+
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
@@ -425,6 +431,7 @@ public class Constants {
     public static final String CAR_EDIT_TYPE = "CAR_EDIT_TYPE";
     public static final int CAR_SEARCH_TYPE = 0;
     public static final int SOURCE_SEARCH_TYPE = 1;
+    public static final int SOURCE_SEARCH_TYPE_SPECIAL = 2;
     public static final int ADD_CAR = 0;
     public static final int EDIT_CAR = 1;
 
@@ -470,7 +477,7 @@ public class Constants {
     public static int[] unitTypeValues = new int[]{83,84,85};
     public static int getUnitTypeValues(int position){
         if(position > unitTypeValues.length) {
-            return 34;
+            return 83;
         }
         return unitTypeValues[position];
     }

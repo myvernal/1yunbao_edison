@@ -40,6 +40,11 @@ public class SearchCarInfoListAdapter extends BaseListAdapter<CarInfo> implement
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
             String locationTime = simpleDateFormat.format(date);
             ((TextView) convertView.findViewById(R.id.location_time)).setText(locationTime);
+        } else if(carInfo.getPulish_date() > 0) {
+            Date date = new Date(Long.valueOf(carInfo.getPulish_date()));
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+            String locationTime = simpleDateFormat.format(date);
+            ((TextView) convertView.findViewById(R.id.location_time)).setText(locationTime);
         }
         ((TextView) convertView.findViewById(R.id.locationId)).setText(carInfo.getAddress());
         convertView.setTag(carInfo);

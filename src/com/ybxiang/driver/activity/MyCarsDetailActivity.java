@@ -148,8 +148,7 @@ public class MyCarsDetailActivity extends BaseActivity {
                 break;
             case R.id.titlebar_id_more:
                 LogUtil.e(TAG, "titlebar_id_more");
-                startActivity(new Intent(context, ShareActivity.class)
-                        .putExtra("share", content));
+                startActivity(new Intent(context, ShareActivity.class).putExtra("share", content));
                 break;
         }
     }
@@ -452,6 +451,16 @@ public class MyCarsDetailActivity extends BaseActivity {
             params.put("plate_number", carInfo.getPlate_number());
             params.put("car_type", carInfo.getCar_type());
             params.put("remark", carInfo.getRemark());
+//            if(TextUtils.isEmpty(carInfo.getLocation_time()) || Long.parseLong(carInfo.getLocation_time()) <= 0) {
+//                params.put("location_time", carInfo.getPulish_date());
+//            } else {
+                params.put("location_time", carInfo.getLocation_time());
+//            }
+            if(TextUtils.isEmpty(carInfo.getLocation())) {
+                params.put("location", carInfo.getAddress());
+            } else {
+                params.put("location", carInfo.getLocation());
+            }
             //组装参数结束
             jsonObject.put(Constants.JSON, params.toString());
             showDefaultProgress();

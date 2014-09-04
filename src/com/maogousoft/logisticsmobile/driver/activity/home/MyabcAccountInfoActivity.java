@@ -1,5 +1,6 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
+import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -24,7 +25,7 @@ import com.maogousoft.logisticsmobile.driver.api.ResultCode;
  */
 public class MyabcAccountInfoActivity extends BaseActivity {
 	private TextView mBalance;
-
+    private View myabc_id_charge, myabc_id_account_record, myabc_id_updatepwd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,6 +45,12 @@ public class MyabcAccountInfoActivity extends BaseActivity {
 		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
 
 		mBalance = (TextView) findViewById(R.id.myabc_id_balance);
+        myabc_id_charge = findViewById(R.id.myabc_id_charge);
+        myabc_id_charge.setOnClickListener(this);
+        myabc_id_account_record = findViewById(R.id.myabc_id_account_record);
+        myabc_id_account_record.setOnClickListener(this);
+        myabc_id_updatepwd = findViewById(R.id.myabc_id_updatepwd);
+        myabc_id_updatepwd.setOnClickListener(this);
 	}
 
 	private void initData(Bundle savedInstanceState) {
@@ -84,6 +91,20 @@ public class MyabcAccountInfoActivity extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
+        switch (v.getId()) {
+            case R.id.titlebar_id_more:
+                startActivity(new Intent(context, ShareActivity.class));
+                break;
+            case R.id.myabc_id_charge:
+                onCharge(v);
+                break;
+            case R.id.myabc_id_account_record:
+                onAccountRecord(v);
+                break;
+            case R.id.myabc_id_updatepwd:
+                onChangePasswd(v);
+                break;
+        }
 	}
 
 	/**

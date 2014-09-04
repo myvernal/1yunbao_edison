@@ -142,7 +142,7 @@
     <string name="string_home_onlinesource_chat">在线聊天</string>
     <string name="string_home_onlinesource_evaluate">评价</string>
     <!-- 新货源 -->
-    <string name="string_home_newsource_order_number">货源号:%d</string>
+    <string name="string_home_newsource_order_number">货源号:%s</string>
     <string name="string_home_newsource_order_money">保证金&lt;font color=&quot;#FF0000&quot;&gt; %s &lt;/font&gt;元</string>
     <string name="string_home_newsource_order_evaluate">发货方信誉评价</string>
     <string name="string_home_newsource_order_evaluate_new">此货被多少人查看：200</string> <!-- add PR104 -->

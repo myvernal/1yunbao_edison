@@ -19,6 +19,7 @@ import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
+import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.CarTypeListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -72,9 +73,13 @@ public class OptionalActivity extends BaseActivity {
     private String userPhoto;
     private String userPhotoUrl;
     // 保存车辆照片的list
-    private ArrayList<String> mCarPhotos = new ArrayList<String>();
+    private String mCarPhotos1;
+    private String mCarPhotos2;
+    private String mCarPhotos3;
     // 保存车辆照片url的list
-    private ArrayList<String> mCarPhotosUrl = new ArrayList<String>();
+    private String mCarPhotosUrl1;
+    private String mCarPhotosUrl2;
+    private String mCarPhotosUrl3;
     private DisplayImageOptions options;
     private ImageView id_card_photo, car_photo1, car_photo2, car_photo3;
     private static final int RESULT_CAPTURE_IMAGE_ID_PHOTO = 1001;
@@ -243,21 +248,30 @@ public class OptionalActivity extends BaseActivity {
             }
         }
 
-        if(!TextUtils.isEmpty(abcInfo.getId_card_photo())) {
+        if (TextUtils.isEmpty(abcInfo.getMyself_recommendation())) {
+            myself_recommendation.setText(R.string.business_description);
+        } else {
+            myself_recommendation.setText(abcInfo.getMyself_recommendation());
+        }
+        if (!TextUtils.isEmpty(abcInfo.getId_card_photo())) {
             ImageLoader.getInstance().displayImage(abcInfo.getId_card_photo(), id_card_photo, options,
                     new Utils.MyImageLoadingListener(context, id_card_photo));
+            userPhotoUrl = abcInfo.getId_card_photo();
         }
-        if(!TextUtils.isEmpty(abcInfo.getCar_photo1())) {
+        if (!TextUtils.isEmpty(abcInfo.getCar_photo1())) {
             ImageLoader.getInstance().displayImage(abcInfo.getCar_photo1(), car_photo1, options,
                     new Utils.MyImageLoadingListener(context, car_photo1));
+            mCarPhotosUrl1 = abcInfo.getCar_photo1();
         }
-        if(!TextUtils.isEmpty(abcInfo.getCar_photo2())) {
+        if (!TextUtils.isEmpty(abcInfo.getCar_photo2())) {
             ImageLoader.getInstance().displayImage(abcInfo.getCar_photo2(), car_photo2, options,
                     new Utils.MyImageLoadingListener(context, car_photo2));
+            mCarPhotosUrl2 = abcInfo.getCar_photo2();
         }
-        if(!TextUtils.isEmpty(abcInfo.getCar_photo3())) {
+        if (!TextUtils.isEmpty(abcInfo.getCar_photo3())) {
             ImageLoader.getInstance().displayImage(abcInfo.getCar_photo3(), car_photo3, options,
                     new Utils.MyImageLoadingListener(context, car_photo3));
+            mCarPhotosUrl3 = abcInfo.getCar_photo3();
         }
     }
 
@@ -268,6 +282,9 @@ public class OptionalActivity extends BaseActivity {
         switch (id) {
             case R.id.info_id_register_submit:
                 uploadImageAndSubmit();
+                break;
+            case R.id.titlebar_id_more:
+                startActivity(new Intent(context, ShareActivity.class));
                 break;
             case R.id.id_card_photo:
                 Intent imageCaptureIntent0 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -302,22 +319,22 @@ public class OptionalActivity extends BaseActivity {
                 case RESULT_CAPTURE_IMAGE_ID_PHOTO://拍照
                     String ID_PHOTO = Environment.getExternalStorageDirectory() + File.separator + "ID_PHOTO.jpg";
                     displayPhoto(ID_PHOTO, id_card_photo);
-                    userPhoto= ID_PHOTO;
+                    userPhoto = ID_PHOTO;
                     break;
                 case RESULT_CAPTURE_IMAGE_CAR_PHOTO1:
                     String CAR_PHOTO1 = Environment.getExternalStorageDirectory() + File.separator + "CAR_PHOTO1.jpg";
                     displayPhoto(CAR_PHOTO1, car_photo1);
-                    mCarPhotos.add(CAR_PHOTO1);
+                    mCarPhotos1 = CAR_PHOTO1;
                     break;
                 case RESULT_CAPTURE_IMAGE_CAR_PHOTO2:
                     String CAR_PHOTO2 = Environment.getExternalStorageDirectory() + File.separator + "CAR_PHOTO2.jpg";
                     displayPhoto(CAR_PHOTO2, car_photo2);
-                    mCarPhotos.add(CAR_PHOTO2);
+                    mCarPhotos2 = CAR_PHOTO2;
                     break;
                 case RESULT_CAPTURE_IMAGE_CAR_PHOTO3:
                     String CAR_PHOTO3 = Environment.getExternalStorageDirectory() + File.separator + "CAR_PHOTO3.jpg";
                     displayPhoto(CAR_PHOTO3, car_photo3);
-                    mCarPhotos.add(CAR_PHOTO3);
+                    mCarPhotos3 = CAR_PHOTO3;
                     break;
                 default:
                     break;
@@ -327,6 +344,7 @@ public class OptionalActivity extends BaseActivity {
 
     /**
      * 调整图片并显示
+     *
      * @param url
      * @param imgView
      */
@@ -374,6 +392,13 @@ public class OptionalActivity extends BaseActivity {
         }
     };
 
+    private void clearPhoto() {
+        userPhotoUrl = null;
+        mCarPhotosUrl1 = null;
+        mCarPhotosUrl2 = null;
+        mCarPhotosUrl3 = null;
+    }
+
     // 提交注册
     private void submit() {
         if (CheckUtils.checkIsEmpty(mShuiChePhone)) {
@@ -381,8 +406,7 @@ public class OptionalActivity extends BaseActivity {
                 showMsg("随车手机号码格式不正确");
                 mShuiChePhone.requestFocus();
                 mShuiChePhone.selectAll();
-                mCarPhotosUrl.clear();
-                mCarPhotosUrl = null;
+                clearPhoto();
                 return;
             }
         }
@@ -390,8 +414,7 @@ public class OptionalActivity extends BaseActivity {
         if (!CheckUtils.checkIsEmpty(mName)) {
             showMsg("司机姓名不能为空");
             mName.requestFocus();
-            mCarPhotosUrl.clear();
-            mCarPhotosUrl = null;
+            clearPhoto();
             return;
         }
 
@@ -400,8 +423,7 @@ public class OptionalActivity extends BaseActivity {
                 showMsg("车主手机号码格式不正确");
                 mChezhuPhone.requestFocus();
                 mChezhuPhone.selectAll();
-                mCarPhotosUrl.clear();
-                mCarPhotosUrl = null;
+                clearPhoto();
                 return;
             }
         }
@@ -409,22 +431,19 @@ public class OptionalActivity extends BaseActivity {
         if (!CheckUtils.checkIsEmpty(mLength)) {
             showMsg("车长不能为空");
             mLength.requestFocus();
-            mCarPhotosUrl.clear();
-            mCarPhotosUrl = null;
+            clearPhoto();
             return;
         }
         if (!CheckUtils.checkIsEmpty(mWeight)) {
             showMsg("载重量不能为空");
             mWeight.requestFocus();
-            mCarPhotosUrl.clear();
-            mCarPhotosUrl = null;
+            clearPhoto();
             return;
         }
         if (!CheckUtils.checkIsEmpty(mNumber)) {
             showMsg("车牌号不能为空");
             mNumber.requestFocus();
-            mCarPhotosUrl.clear();
-            mCarPhotosUrl = null;
+            clearPhoto();
             return;
         }
 
@@ -454,19 +473,18 @@ public class OptionalActivity extends BaseActivity {
             params.put("car_weight", mWeight.getText().toString());
             params.put("plate_number", mNumber.getText().toString());
             params.put("myself_recommendation", myself_recommendation.getText().toString());
-            if(!TextUtils.isEmpty(userPhotoUrl)) {
+            if (!TextUtils.isEmpty(userPhotoUrl)) {
                 params.put("id_card_photo", userPhotoUrl);
             }
-            for(int i=0;i<mCarPhotosUrl.size();i++){
-                if(i == 0) {
-                    params.put("car_photo1", mCarPhotosUrl.get(i));
-                } else if(i == 1) {
-                    params.put("car_photo2", mCarPhotosUrl.get(i));
-                } else if(i == 2) {
-                    params.put("car_photo3", mCarPhotosUrl.get(i));
-                }
+            if (!TextUtils.isEmpty(mCarPhotosUrl1)) {
+                params.put("car_photo1", mCarPhotosUrl1);
             }
-
+            if (!TextUtils.isEmpty(mCarPhotosUrl2)) {
+                params.put("car_photo2", mCarPhotosUrl2);
+            }
+            if (!TextUtils.isEmpty(mCarPhotosUrl3)) {
+                params.put("car_photo3", mCarPhotosUrl3);
+            }
             params.put("device_type", Constants.DEVICE_TYPE);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, params);
@@ -490,15 +508,13 @@ public class OptionalActivity extends BaseActivity {
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     if (result != null)
-                                        mCarPhotosUrl.clear();
-                                        mCarPhotosUrl = null;
-                                        showMsg(result.toString());
+                                        clearPhoto();
+                                    showMsg(result.toString());
                                     break;
                                 case ResultCode.RESULT_FAILED:
                                     if (result != null)
-                                        mCarPhotosUrl.clear();
-                                        mCarPhotosUrl = null;
-                                        showMsg(result.toString());
+                                        clearPhoto();
+                                    showMsg(result.toString());
                                     break;
                                 default:
                                     break;
@@ -621,17 +637,25 @@ public class OptionalActivity extends BaseActivity {
 
     public void uploadImageAndSubmit() {
         showSpecialProgress("正在上传资料,请稍后");
-        if (!mCarPhotos.isEmpty() || !TextUtils.isEmpty(userPhoto)) {
+        if (!TextUtils.isEmpty(mCarPhotos1) || !TextUtils.isEmpty(mCarPhotos2)
+                || !TextUtils.isEmpty(mCarPhotos3) || !TextUtils.isEmpty(userPhoto)) {
             try {
-                //头像
-                new UploadImageFileTask(true).execute(userPhoto);
+                if (!TextUtils.isEmpty(userPhoto)) {
+                    //头像
+                    new UploadImageFileTask(0).execute(userPhoto);
+                }
                 //车辆照片
-                for (int i = 0; i < mCarPhotos.size(); i++) {
+                if (!TextUtils.isEmpty(mCarPhotos1)) {
+                    new UploadImageFileTask(1).execute(mCarPhotos1);
+                }
+                if (!TextUtils.isEmpty(mCarPhotos2)) {
+                    new UploadImageFileTask(2).execute(mCarPhotos2);
+                }
+                if (!TextUtils.isEmpty(mCarPhotos3)) {
+                    new UploadImageFileTask(3).execute(mCarPhotos3);
+                }
 //                    System.out.println(mCarPhotos.get(i - 1).getPath());
 //                    params.put("photo" + i, HttpUtils.getBitmapBase64(context, mCarPhotos.get(i - 1).getPath()));
-                    new UploadImageFileTask(false).execute(mCarPhotos.get(i));
-                }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -643,10 +667,10 @@ public class OptionalActivity extends BaseActivity {
 
     private class UploadImageFileTask extends AsyncTask<String, Void, String> {
 
-        private boolean isUserPhoto = false;
+        private int type = -1;
 
-        UploadImageFileTask(boolean isUserPhoto) {
-            this.isUserPhoto = isUserPhoto;
+        UploadImageFileTask(int type) {
+            this.type = type;
         }
 
         @Override
@@ -697,13 +721,19 @@ public class OptionalActivity extends BaseActivity {
                         String item = jsonObject.optString("item");
                         String url = new JSONObject(item).getString("url");
                         LogUtil.d(TAG, "上传图片返回url地址：" + url);
-                        if(!isUserPhoto) {
-                            mCarPhotosUrl.add(url);
-                        } else {
+                        if (type == 0) {
                             userPhotoUrl = url;
+                        } else if (type == 1) {
+                            mCarPhotosUrl1 = url;
+                        } else if (type == 2) {
+                            mCarPhotosUrl2 = url;
+                        } else if (type == 3) {
+                            mCarPhotosUrl3 = url;
                         }
-                        if (mCarPhotosUrl.size() == mCarPhotos.size()
-                                && (TextUtils.isEmpty(userPhoto) || (!TextUtils.isEmpty(userPhoto) && !TextUtils.isEmpty(userPhotoUrl)))) {
+                        if ((TextUtils.isEmpty(userPhoto) || (!TextUtils.isEmpty(userPhoto) && !TextUtils.isEmpty(userPhotoUrl)))
+                                && (TextUtils.isEmpty(mCarPhotos1) || (!TextUtils.isEmpty(mCarPhotos1) && !TextUtils.isEmpty(mCarPhotosUrl1)))
+                                && (TextUtils.isEmpty(mCarPhotos2) || (!TextUtils.isEmpty(mCarPhotos2) && !TextUtils.isEmpty(mCarPhotosUrl2)))
+                                && (TextUtils.isEmpty(mCarPhotos3) || (!TextUtils.isEmpty(mCarPhotos3) && !TextUtils.isEmpty(mCarPhotosUrl3)))) {
                             // 上传所有图片完毕
                             submit();
                         }

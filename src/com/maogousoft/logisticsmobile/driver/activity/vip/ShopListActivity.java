@@ -134,16 +134,11 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 									mFootProgress.setVisibility(View.GONE);
 									mFootMsg.setText("已加载全部");
 								} else {
-									if (shopInfos.size() < 10) {
+									if (shopInfos.size() < 20) {
 										load_all = true;
 										mFootProgress.setVisibility(View.GONE);
 										mFootMsg.setText("已加载全部");
-									} else {
-										load_all = false;
-										mFootProgress.setVisibility(View.VISIBLE);
-										mFootMsg.setText(R.string.tips_isloading);
 									}
-
 									ArrayList<ShopInfo> shopInfosTemp = new ArrayList<ShopInfo>();
 
 									if (shopType != -1) {
@@ -156,6 +151,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 									} else {
 										mAdapter.addAll(shopInfos);
 									}
+                                    mAdapter.notifyDataSetChanged();
 								}
 							}
 							break;
@@ -213,7 +209,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 									mFootProgress.setVisibility(View.GONE);
 									mFootMsg.setText("已加载全部");
 								} else {
-									if (shopInfoList.size() < 10) {
+									if (shopInfoList.size() < 20) {
 										load_all = true;
 										mFootProgress.setVisibility(View.GONE);
 										mFootMsg.setText("已加载全部");
@@ -273,6 +269,8 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 		// 如果当前没有加载数据
 		if (state != ISREFRESHING && !load_all) {
 			getData(++pageIndex);
+            mFootProgress.setVisibility(View.VISIBLE);
+            mFootMsg.setText(R.string.tips_isloading);
 		}
 	}
 

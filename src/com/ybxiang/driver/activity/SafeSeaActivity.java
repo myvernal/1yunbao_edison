@@ -61,38 +61,9 @@ public class SafeSeaActivity extends BaseActivity {
         safe_percent = (EditText) findViewById(R.id.safe_percent);
         safe_type_desc = (TextView) findViewById(R.id.safe_type_desc);
         safe_type_spinner = (Spinner) findViewById(R.id.safe_type_spinner);
-        //根据险种不同,保险说明也不同,费率也不同
-        safe_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                changeRatioBySpinnerSelect(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
-        });
-        //保费由费率和保额相乘
-        safe_all_money.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(editable.length() > 0) {
-                    double allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * ratio / 100;
-                    safe_money.setText(allMoney + "");
-                } else {
-                    safe_money.setText("0");
-                }
-            }
-        });
     }
 
     private void initData() {
-        getUserInfo();
         getBalance();
     }
 
@@ -148,6 +119,7 @@ public class SafeSeaActivity extends BaseActivity {
 
     // 获取账户余额
     private void getBalance() {
+        showSpecialProgress("正在获取用户余额,请稍后");
         final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(Constants.ACTION, Constants.GET_ACCOUNT_GOLD);
@@ -172,6 +144,8 @@ public class SafeSeaActivity extends BaseActivity {
                                 default:
                                     break;
                             }
+                            //费率获取完后再获取用户费率
+                            getUserInfo();
                         }
                     });
         } catch (Exception e) {
@@ -181,6 +155,7 @@ public class SafeSeaActivity extends BaseActivity {
 
     // 获取用户信息中的费率
     private void getUserInfo() {
+        showSpecialProgress("正在获取费率,请稍后...");
         final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
@@ -191,6 +166,7 @@ public class SafeSeaActivity extends BaseActivity {
 
                         @Override
                         public void receive(int code, Object result) {
+                            dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {
@@ -205,6 +181,35 @@ public class SafeSeaActivity extends BaseActivity {
                                         } else {
                                             Toast.makeText(context, "获取保险费率出错,请联系客服...", Toast.LENGTH_SHORT).show();
                                         }
+                                        //容错,将数据放到取到费率之后来更改
+                                        //根据险种不同,保险说明也不同,费率也不同
+                                        safe_type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                                changeRatioBySpinnerSelect(i);
+                                            }
+
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> adapterView) {}
+                                        });
+                                        //保费由费率和保额相乘
+                                        safe_all_money.addTextChangedListener(new TextWatcher() {
+                                            @Override
+                                            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
+
+                                            @Override
+                                            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
+
+                                            @Override
+                                            public void afterTextChanged(Editable editable) {
+                                                if(editable.length() > 0) {
+                                                    double allMoney = (Float.valueOf(editable.toString()) * 10000) * ratio / 100;
+                                                    safe_money.setText(allMoney + "");
+                                                } else {
+                                                    safe_money.setText("0");
+                                                }
+                                            }
+                                        });
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:

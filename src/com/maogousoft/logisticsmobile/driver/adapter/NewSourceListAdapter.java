@@ -3,6 +3,7 @@ package com.maogousoft.logisticsmobile.driver.adapter;
 import java.util.ArrayList;
 
 import android.net.Uri;
+import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,12 +50,12 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 	private double messagePrice;
 
 	private Context mContext;
+    private CityDBUtils dbUtils;
 
 	public NewSourceListAdapter(Context context) {
 		super(context);
-
+        dbUtils = new CityDBUtils(application.getCitySDB());
 		mContext = context;
-
 		progressDialog = new MyProgressDialog(context);
 		progressDialog.setCancelable(true);
 		progressDialog.setCanceledOnTouchOutside(false);
@@ -96,48 +97,15 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		final NewSourceInfo sourceInfo = (NewSourceInfo) getItem(position);
 		// holder.order_grab.setOnClickListener(new ClickListener(position,
 		// sourceInfo));
-		holder.order_number.setText(String.format(mResources
-				.getString(R.string.string_home_newsource_order_number),
-				sourceInfo.getId()));
+		holder.order_number.setText(mResources.getString(R.string.string_home_newsource_order_number, sourceInfo.getId()));
 		mImageLoader.displayImage(sourceInfo.getCargo_photo1(), holder.order_image);
 		final StringBuilder title = new StringBuilder();
 
-		if (sourceInfo.getStart_province_str().equals(
-				sourceInfo.getStart_city_str())) {
-
-			// 避免直辖市，显示如 ：上海上海
-
-			title.append(CheckUtils.checkIsNull(sourceInfo.getStart_city_str()))
-					.append(CheckUtils.checkIsNull(sourceInfo
-							.getStart_district_str()));
-
-		} else {
-			title.append(
-					CheckUtils.checkIsNull(sourceInfo.getStart_province_str()))
-					.append(CheckUtils.checkIsNull(sourceInfo
-							.getStart_city_str()))
-					.append(CheckUtils.checkIsNull(sourceInfo
-							.getStart_district_str()));
-		}
-
-		title.append("-");
-
-		if (sourceInfo.getEnd_province_str().equals(
-				sourceInfo.getEnd_city_str())) {
-
-			// 避免直辖市，显示如 ：上海上海
-
-			title.append(CheckUtils.checkIsNull(sourceInfo.getEnd_city_str()))
-					.append(CheckUtils.checkIsNull(sourceInfo
-							.getEnd_district_str()));
-
-		} else {
-			title.append(
-					CheckUtils.checkIsNull(sourceInfo.getEnd_province_str()))
-					.append(CheckUtils.checkIsNull(sourceInfo.getEnd_city_str()))
-					.append(CheckUtils.checkIsNull(sourceInfo
-							.getEnd_district_str()));
-		}
+        String wayStart = dbUtils.getCityInfo(sourceInfo.getStart_province(), sourceInfo.getStart_city(), sourceInfo.getStart_district());
+        if (sourceInfo.getEnd_province() > 0 || sourceInfo.getEnd_city() > 0 || sourceInfo.getEnd_district() > 0) {
+            String wayEnd = dbUtils.getCityInfo(sourceInfo.getEnd_province(), sourceInfo.getEnd_city(), sourceInfo.getEnd_district());
+            title.append(wayStart + "--" + wayEnd);
+        }
 
 		title.append("/").append(sourceInfo.getCargo_type_str());
 

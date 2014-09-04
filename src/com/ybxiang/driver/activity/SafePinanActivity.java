@@ -67,7 +67,7 @@ public class SafePinanActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if(editable.length() > 0) {
-                    double allMoney = (Float.valueOf(safe_all_money.getText().toString()) * 10000) * userInfo.getPa_1() / 100f;
+                    double allMoney = (Float.valueOf(editable.toString()) * 10000) * userInfo.getPa_1() / 100f;
                     safe_money.setText(allMoney + "");
                 } else {
                     safe_money.setText("0");
@@ -78,7 +78,6 @@ public class SafePinanActivity extends BaseActivity {
 
     private void initData() {
         getBalance();
-        getUserInfo();
     }
 
     @Override
@@ -93,6 +92,7 @@ public class SafePinanActivity extends BaseActivity {
 
     // 获取账户余额
     private void getBalance() {
+        showSpecialProgress("正在获取用户余额,请稍后");
         final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(Constants.ACTION, Constants.GET_ACCOUNT_GOLD);
@@ -117,6 +117,8 @@ public class SafePinanActivity extends BaseActivity {
                                 default:
                                     break;
                             }
+                            //取回用户余额后,再去费率
+                            getUserInfo();
                         }
                     });
         } catch (Exception e) {
@@ -126,6 +128,7 @@ public class SafePinanActivity extends BaseActivity {
 
     // 获取用户信息中的费率
     private void getUserInfo() {
+        showSpecialProgress("正在获取费率,请稍后...");
         final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
@@ -136,6 +139,7 @@ public class SafePinanActivity extends BaseActivity {
 
                         @Override
                         public void receive(int code, Object result) {
+                            dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {

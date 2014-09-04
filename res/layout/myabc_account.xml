@@ -15,6 +15,7 @@
                 style="@style/home_myabc_title_more_style"
                 android:background="@drawable/ic_info_centerbg"
                 android:drawableLeft="@drawable/ic_info_update"
+                android:onClick="onChangePasswd"
                 android:text="@string/string_home_myabc_title_updatepwd" />
 
         <LinearLayout
@@ -45,6 +46,7 @@
                 style="@style/home_myabc_title_more_style"
                 android:background="@drawable/ic_info_bottombg"
                 android:drawableLeft="@drawable/ic_info_accountrecord"
+                android:onClick="onAccountRecord"
                 android:text="账户记录" />
 
         <TextView
@@ -52,6 +54,7 @@
                 style="@style/home_myabc_title_more_style"
                 android:background="@drawable/ic_info_bottombg"
                 android:drawableLeft="@drawable/ic_info_recharge"
+                android:onClick="onCharge"
                 android:text="@string/string_home_myabc_title_recharge" />
     </TableLayout>
 
