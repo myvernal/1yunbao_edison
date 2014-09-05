@@ -199,7 +199,7 @@ public class NewSourceActivity extends BaseListActivity implements
                 params.put("type", application.getUserType());
             }
             jsonObject.put(Constants.JSON, params);
-            showDefaultProgress();
+            showSpecialProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     null, new AjaxCallBack() {
 

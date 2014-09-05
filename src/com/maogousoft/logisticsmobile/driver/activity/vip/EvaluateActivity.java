@@ -120,7 +120,7 @@ public class EvaluateActivity extends BaseActivity {
 	}
 
 	private void submitData() {
-		showDefaultProgress();
+        showSpecialProgress();
 		final JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject.put(Constants.ACTION, Constants.ADD_VENDER_REPLY);

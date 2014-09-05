@@ -325,7 +325,7 @@ public class ShopDetailActivity extends BaseListActivity implements OnScrollList
 
 	// 获取评价列表
 	private void queryData(int page) {
-		showDefaultProgress();
+        showSpecialProgress();
 		final JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject.put(Constants.ACTION, Constants.QUERY_VENDER_REPLY);

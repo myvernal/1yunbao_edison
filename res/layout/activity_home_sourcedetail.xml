@@ -10,7 +10,7 @@
     <ScrollView
             android:id="@+id/scrollView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_xianlu"
-                          android:text="运输线路："/>
+                          android:text="线路："/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
@@ -83,8 +83,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
-                          android:id="@+id/source_detail_yifabu"
-                          android:text="已发布时间："/>
+                          android:id="@+id/source_detail_yifabu"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"

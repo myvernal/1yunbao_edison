@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by aliang on 2014/9/1.
  */
-public class SafePinanInfo implements Serializable {
+public class SafePinanInfo extends SafeSeaInfo implements Serializable {
     private String name;//保险人
     private int type = 1;//0 太平洋 1 平安
     private String insured_name;//被保险人
@@ -28,9 +28,8 @@ public class SafePinanInfo implements Serializable {
     private String end_area_str;//目的地(省)
     private String end_city_str;//目的地(市)
     private String peichang_area;//赔款偿付地点
-    private String package_type;//包装方式
     private String package_type_str;//包装方式
-    private double amount_covered;//保险金额
+    private Double amount_covered;//保险金额
 
     public String getPackage_type_str() {
         return package_type_str;
@@ -81,8 +80,6 @@ public class SafePinanInfo implements Serializable {
     public void setInsurance_charge(double insurance_charge) {
         this.insurance_charge = insurance_charge;
     }
-
-    private int packet_number = 1;//保险险种 平安保险险种只有1
 
     public String getName() {
         return name;
@@ -228,14 +225,6 @@ public class SafePinanInfo implements Serializable {
         this.peichang_area = peichang_area;
     }
 
-    public String getPackage_type() {
-        return package_type;
-    }
-
-    public void setPackage_type(String package_type) {
-        this.package_type = package_type;
-    }
-
     public double getAmount_covered() {
         return amount_covered;
     }
@@ -244,11 +233,4 @@ public class SafePinanInfo implements Serializable {
         this.amount_covered = amount_covered;
     }
 
-    public int getPacket_number() {
-        return packet_number;
-    }
-
-    public void setPacket_number(int packet_number) {
-        this.packet_number = packet_number;
-    }
 }

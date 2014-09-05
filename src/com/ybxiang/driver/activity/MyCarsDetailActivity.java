@@ -156,7 +156,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     // 请求车辆数据
     private void getData() {
         try {
-            showDefaultProgress();
+            showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.GET_MY_FLEET_DETAIL);
             jsonObject.put(Constants.TOKEN, application.getToken());
@@ -264,7 +264,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     // 删除数据
     private void deleteData() {
         try {
-            showDefaultProgress();
+            showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.DELETE_MY_FLEET);
             jsonObject.put(Constants.TOKEN, application.getToken());
@@ -305,7 +305,7 @@ public class MyCarsDetailActivity extends BaseActivity {
      */
     private void location(final boolean isFreeLocation) {
         try {
-            showDefaultProgress();
+            showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, isFreeLocation ? Constants.FREE_LOCATION : Constants.PHONE_LOCATION);
             jsonObject.put(Constants.TOKEN, application.getToken());
@@ -451,11 +451,11 @@ public class MyCarsDetailActivity extends BaseActivity {
             params.put("plate_number", carInfo.getPlate_number());
             params.put("car_type", carInfo.getCar_type());
             params.put("remark", carInfo.getRemark());
-//            if(TextUtils.isEmpty(carInfo.getLocation_time()) || Long.parseLong(carInfo.getLocation_time()) <= 0) {
-//                params.put("location_time", carInfo.getPulish_date());
-//            } else {
+            if(TextUtils.isEmpty(carInfo.getLocation_time()) || Long.parseLong(carInfo.getLocation_time()) <= 0) {
+                params.put("location_time", carInfo.getPulish_date());
+            } else {
                 params.put("location_time", carInfo.getLocation_time());
-//            }
+            }
             if(TextUtils.isEmpty(carInfo.getLocation())) {
                 params.put("location", carInfo.getAddress());
             } else {
@@ -463,7 +463,7 @@ public class MyCarsDetailActivity extends BaseActivity {
             }
             //组装参数结束
             jsonObject.put(Constants.JSON, params.toString());
-            showDefaultProgress();
+            showSpecialProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     CarInfo.class, new AjaxCallBack() {
 

@@ -105,7 +105,7 @@ public class SafePinanDetailActivity extends BaseActivity {
      */
     public void onClickNext(View view) {
         try {
-            showDefaultProgress();
+            showSpecialProgress("正在投保,请稍后");
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.SAVE_PINGAN);
             jsonObject.put(Constants.TOKEN, application.getToken());

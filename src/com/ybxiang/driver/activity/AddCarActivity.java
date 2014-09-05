@@ -141,7 +141,7 @@ public class AddCarActivity extends BaseActivity {
             params.put("remark", description.getText());
             //组装参数结束
             jsonObject.put(Constants.JSON, params.toString());
-            showDefaultProgress();
+            showSpecialProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     CarInfo.class, new AjaxCallBack() {
 

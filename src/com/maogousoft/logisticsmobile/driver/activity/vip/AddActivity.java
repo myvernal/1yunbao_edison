@@ -507,7 +507,7 @@ public class AddActivity extends BaseActivity {
 			}
 
 			jsonObject.put(Constants.JSON, params.toString());
-			showDefaultProgress();
+            showSpecialProgress();
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject, null, new AjaxCallBack() {
 
 				@Override

@@ -126,7 +126,7 @@ public class ChargeActivity extends BaseActivity implements
 			return;
 		}
 		try {
-			showDefaultProgress();
+            showSpecialProgress();
 			JSONObject params = new JSONObject();
 			params.put(Constants.ACTION, Constants.GET_ACCOUNT_GOLD);
 			params.put(Constants.TOKEN, application.getToken());
@@ -246,7 +246,7 @@ public class ChargeActivity extends BaseActivity implements
 			showProgress("生成订单中...");
 			JSONObject params = new JSONObject();
 			JSONObject json = new JSONObject();
-			json.put("uid", application.getDriverId());
+			json.put("uid", application.getUserType() == Constants.USER_SHIPPER? "u" + application.getUserId():application.getDriverId());
 			json.put("pay_platform", type);
 			json.put("pay_channel", "CH_MOBILE");
 			json.put("pay_money",

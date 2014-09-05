@@ -117,7 +117,7 @@ public class SafeSeaEditActivity extends BaseActivity {
             start_area.setText(safeSeaInfo.getStart_area());
             end_area.setText(safeSeaInfo.getEnd_area());
             //显示包装代码
-            if(safeSeaInfo.getPackage_type() > 0) {
+            if(safeSeaInfo.getPackage_type() != null) {
                 for (int i = 0; i < Constants.seaSafeBZDMTypeValues.length; i++) {
                     if (Constants.seaSafeBZDMTypeValues[i] == safeSeaInfo.getPackage_type()) {
                         package_type.setSelection(i);
@@ -166,7 +166,7 @@ public class SafeSeaEditActivity extends BaseActivity {
             cargo_type2.setAdapter(arrayAdapter);
         } else {
             try {
-                showDefaultProgress();
+                showSpecialProgress();
                 final JSONObject jsonObject = new JSONObject();
                 jsonObject.put(Constants.ACTION, Constants.GET_SAFE_SEA_CARGO_2);
                 jsonObject.put(Constants.TOKEN, application.getToken());

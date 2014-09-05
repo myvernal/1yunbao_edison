@@ -191,7 +191,6 @@ public class SearchCarSourceActivity extends BaseActivity {
             jsonObject.put(Constants.ACTION, Constants.QUERY_ALL_FOCUS_LINE);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("type", application.getUserType()));
-            showDefaultProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     FocusLineInfo.class, new AjaxCallBack() {
 

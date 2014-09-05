@@ -57,6 +57,7 @@ public class Constants {
 	public static final String XMPP_PASSWORD = "XMPP_PASSWORD";
 
 	public static final String XMPP_DRIVER_ID = "XMPP_DRIVER_ID";
+	public static final String XMPP_USER_ID = "XMPP_USER_ID";
 
 	public static final String XMPP_MESSAGE = "messageinfo";
 
@@ -422,6 +423,9 @@ public class Constants {
     /** 货主端:查询工厂货主 */
     public static final String QUERY_FACTORY_USER = "factory_user";
 
+    /** 货主端:查询零担专线 */
+    public static final String QUERY_SPECIAL_LINE = "LTL_maxicabs";
+
      /** 广告列表 */
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
@@ -449,7 +453,7 @@ public class Constants {
     public static final int USER_SHIPPER = 0;//货主
 
     public static final int SAFE_CPIC = 0;//太平洋保险
-//    public static final int SAFE_CPIC = 1;//平安保险
+    public static final int SAFE_PINGAN = 1;//平安保险
 	/**
 	 * 通过位置获取车型车型
 	 */
@@ -507,10 +511,10 @@ public class Constants {
     /**
      * 太平洋保险包装代码
      */
-    public static int[] seaSafeBZDMTypeValues = new int[]{62,63,64,65,66,67,68,69};
-    public static int getSeaSafeBZDMTypeValues(int position){
+    public static String[] seaSafeBZDMTypeValues = new String[]{"62","63","64","65","66","67","68","69"};
+    public static String getSeaSafeBZDMTypeValues(int position){
         if(position > seaSafeBZDMTypeValues.length) {
-            return 62;
+            return "62";
         }
         return seaSafeBZDMTypeValues[position];
     }

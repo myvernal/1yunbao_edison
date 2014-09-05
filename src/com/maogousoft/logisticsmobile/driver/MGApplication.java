@@ -29,6 +29,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.ybxiang.driver.util.CrashHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,8 +67,11 @@ public class MGApplication extends Application {
     @Override
 	public void onCreate() {
 		super.onCreate();
-		JPushInterface.init(this);
-
+        //全局异常捕获
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(getApplicationContext());
+        //
+        JPushInterface.init(this);
 		initImageLoader();
 		initCityDB();
 		initService();
@@ -310,7 +314,7 @@ public class MGApplication extends Application {
 		return result;
 	}
 
-	/** 获取保存的司机编号 **/
+	/** 获取保存的司机编号XMPP_ID **/
     public String getDriverId() {
         String s = "";
         try {

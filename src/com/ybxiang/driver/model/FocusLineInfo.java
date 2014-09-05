@@ -27,8 +27,45 @@ public class FocusLineInfo implements Serializable {
     private int car_length;
     // 运输方式
     private int car_way;
+    //零担专用
+    private String start_area_str;
+    private String end_area_str;
+    private String start_city_str;
+    private String end_city_str;
 
     public FocusLineInfo() {
+    }
+
+    public String getStart_area_str() {
+        return start_area_str;
+    }
+
+    public void setStart_area_str(String start_area_str) {
+        this.start_area_str = start_area_str;
+    }
+
+    public String getEnd_area_str() {
+        return end_area_str;
+    }
+
+    public void setEnd_area_str(String end_area_str) {
+        this.end_area_str = end_area_str;
+    }
+
+    public String getStart_city_str() {
+        return start_city_str;
+    }
+
+    public void setStart_city_str(String start_city_str) {
+        this.start_city_str = start_city_str;
+    }
+
+    public String getEnd_city_str() {
+        return end_city_str;
+    }
+
+    public void setEnd_city_str(String end_city_str) {
+        this.end_city_str = end_city_str;
     }
 
     public int getCount() {

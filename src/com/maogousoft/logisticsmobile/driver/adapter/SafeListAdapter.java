@@ -44,16 +44,16 @@ public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
             holdView = (HoldView) convertView.getTag();
         }
         //被保险人名称
-        holdView.insured_name.setText(holdView.insured_name.getText() + safeSeaInfo.getInsured_name());
+        holdView.insured_name.setText(mContext.getString(R.string.safe_list_item_name, safeSeaInfo.getInsured_name()));
         //运单号
-        holdView.shiping_number.setText(holdView.shiping_number.getText() + safeSeaInfo.getShiping_number());
+        holdView.shiping_number.setText(mContext.getString(R.string.safe_list_item_number, safeSeaInfo.getShiping_number()));
         //显示保险名称
         String[] safeSeaType = mContext.getResources().getStringArray(R.array.safe_sea_types);
         Integer safeType = Integer.valueOf(safeSeaInfo.getInsurance_type());
         if(safeType != null && safeType > 0) {
             for (int i = 0; i < Constants.seaSafeTypeValues.length; i++) {
                 if (Constants.seaSafeTypeValues[i] == safeType) {
-                    holdView.insurance_type.setText(holdView.insurance_type.getText() + safeSeaType[i]);
+                    holdView.insurance_type.setText(mContext.getString(R.string.safe_list_item_type, safeSeaType[i]));
                 }
             }
         }
@@ -61,7 +61,7 @@ public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
         if(!TextUtils.isEmpty(safeSeaInfo.getStart_date())) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date(Long.parseLong(safeSeaInfo.getStart_date()));
-            holdView.start_date.setText(holdView.start_date.getText() + simpleDateFormat.format(date));
+            holdView.start_date.setText(mContext.getString(R.string.safe_list_item_date, simpleDateFormat.format(date)));
         }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

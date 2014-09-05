@@ -144,6 +144,9 @@ public class SafePinanActivity extends BaseActivity {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {
                                         userInfo = (HuoZhuUserInfo) result;
+                                        if(null == userInfo.getPa_1()) {
+                                            userInfo.setPa_1(0.03);
+                                        }
                                         if(userInfo.getPa_1() > 0) {
                                             safe_percent.setText(userInfo.getPa_1() + "");
                                             if(!TextUtils.isEmpty(safe_all_money.getText())) {
@@ -212,6 +215,7 @@ public class SafePinanActivity extends BaseActivity {
         } else {
             Intent intent = new Intent(context, SafePinanEditActivity.class);
             SafePinanInfo safePinanInfo = new SafePinanInfo();
+            safePinanInfo.setType(Constants.SAFE_PINGAN);
             safePinanInfo.setAmount_covered(Double.valueOf(safe_all_money.getText().toString()));//保险金额
             safePinanInfo.setInsurance_charge(Double.valueOf(safe_money.getText().toString()));//保险费用
             intent.putExtra(Constants.COMMON_KEY, safePinanInfo);

@@ -85,28 +85,52 @@ public class SafeSeaActivity extends BaseActivity {
         if(userInfo != null) {
             switch (i) {
                 case 0:
-                    ratio = userInfo.getTpy_1();
+                    if(null != userInfo.getTpy_1()) {
+                        ratio = userInfo.getTpy_1();
+                    } else {
+                        ratio = 0.03;
+                    }
                     safe_type_desc.setText(getString(R.string.safe_text_one_1, ratio + "%"));
                     break;
                 case 1:
-                    ratio = userInfo.getTpy_2();
-                    safe_type_desc.setText(getString(R.string.safe_text_one_1, ratio + "%"));
+                    if(null != userInfo.getTpy_2()) {
+                        ratio = userInfo.getTpy_2();
+                    } else {
+                        ratio = 0.06;
+                    }
+                    safe_type_desc.setText(getString(R.string.safe_text_one_2, ratio + "%"));
                     break;
                 case 2:
-                    ratio = userInfo.getTpy_3();
-                    safe_type_desc.setText(getString(R.string.safe_text_one_1, ratio + "%"));
+                    if(null != userInfo.getTpy_3()) {
+                        ratio = userInfo.getTpy_3();
+                    } else {
+                        ratio = 0.08;
+                    }
+                    safe_type_desc.setText(getString(R.string.safe_text_one_3, ratio + "%"));
                     break;
                 case 3:
-                    ratio = userInfo.getTpy_4();
-                    safe_type_desc.setText(getString(R.string.safe_text_one_2, ratio + "%"));
+                    if(null != userInfo.getTpy_4()) {
+                        ratio = userInfo.getTpy_4();
+                    } else {
+                        ratio = 0.04;
+                    }
+                    safe_type_desc.setText(getString(R.string.safe_text_one_4, ratio + "%"));
                     break;
                 case 4:
-                    ratio = userInfo.getTpy_5();
-                    safe_type_desc.setText(getString(R.string.safe_text_one_2, ratio + "%"));
+                    if(null != userInfo.getTpy_5()) {
+                        ratio = userInfo.getTpy_5();
+                    } else {
+                        ratio = 0.12;
+                    }
+                    safe_type_desc.setText(getString(R.string.safe_text_one_5, ratio + "%"));
                     break;
                 case 5:
-                    ratio = userInfo.getTpy_6();
-                    safe_type_desc.setText(getString(R.string.safe_text_one_3, ratio + "%"));
+                    if(null != userInfo.getTpy_6()) {
+                        ratio = userInfo.getTpy_6();
+                    } else {
+                        ratio = 0.05;
+                    }
+                    safe_type_desc.setText(getString(R.string.safe_text_one_6, ratio + "%"));
                     break;
             }
             safe_percent.setText(ratio + "");
@@ -269,6 +293,7 @@ public class SafeSeaActivity extends BaseActivity {
         } else {
             Intent intent = new Intent(context, SafeSeaEditActivity.class);
             SafeSeaInfo safeSeaInfo = new SafeSeaInfo();
+            safeSeaInfo.setType(Constants.SAFE_CPIC);
             safeSeaInfo.setAmount_covered(Double.valueOf(safe_all_money.getText().toString()));//保险金额
             safeSeaInfo.setInsurance_type("" + Constants.getSeaSafeTypeValues(safe_type_spinner.getSelectedItemPosition()));//保险类型
             safeSeaInfo.setRatio(Double.valueOf(safe_percent.getText().toString()));//保险费率

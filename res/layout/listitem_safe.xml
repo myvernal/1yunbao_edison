@@ -14,25 +14,25 @@
             android:id="@+id/insured_name"
             style="@style/car_left_text_style"
             android:textSize="@dimen/font_size_large"
-            android:text="被保险人:"/>
+            android:text=""/>
 
     <TextView
             android:id="@+id/shiping_number"
             style="@style/car_left_text_style"
             android:textSize="@dimen/font_size_large"
-            android:text="运单号:"/>
+            android:text=""/>
 
     <TextView
             android:id="@+id/insurance_type"
             style="@style/car_left_text_style"
             android:textSize="@dimen/font_size_large"
-            android:text="保险种类:"/>
+            android:text=""/>
 
     <TextView
             android:id="@+id/start_date"
             style="@style/car_left_text_style"
             android:textSize="@dimen/font_size_large"
-            android:text="起运日期:"/>
+            android:text=""/>
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"

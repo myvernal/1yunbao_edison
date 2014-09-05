@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/common_title"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:padding="10dp"
+                  android:background="@color/window_bg"
+                  android:orientation="vertical">
+        <TextView style="@style/info_publish_text_style"
+                  android:id="@+id/name"
+                  android:layout_marginTop="10dp"
+                  android:gravity="left"
+                  android:text="成都街搭有限公司"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
+            <TextView style="@style/info_publish_text_style"
+                      android:minWidth="0dp"
+                      android:text="线路:"/>
+            <TextView style="@style/info_publish_text_style"
+                      android:id="@+id/way"
+                      android:layout_weight="1"
+                      android:gravity="left"
+                      android:text="成都-深圳"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
+            <TextView style="@style/info_publish_text_style"
+                      android:minWidth="0dp"
+                      android:text="电话:"/>
+            <TextView style="@style/info_publish_text_style"
+                      android:id="@+id/phone"
+                      android:textColor="@color/TextColorRed"
+                      android:text="12345678910"/>
+        </LinearLayout>
+        <RelativeLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp">
+            <TextView style="@style/info_publish_text_style"
+                      android:gravity="left|top"
+                      android:minWidth="0dp"
+                      android:id="@+id/label"
+                      android:text="描述:"/>
+            <TextView style="@style/info_publish_text_style"
+                      android:id="@+id/desc"
+                      android:layout_toRightOf="@+id/label"
+                      android:gravity="left"
+                      android:text="成都街搭有限公司"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

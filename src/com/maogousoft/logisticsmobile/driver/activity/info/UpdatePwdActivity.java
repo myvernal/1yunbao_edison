@@ -102,7 +102,7 @@ public class UpdatePwdActivity extends BaseActivity {
 	private void submit(){
 		final JSONObject jsonObject=new JSONObject();
 		try {
-			showDefaultProgress();
+            showSpecialProgress();
 			jsonObject.put(Constants.ACTION,Constants.CHANGE_PASSWORD);
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			jsonObject.put(Constants.JSON, new JSONObject().put("old_password", MD5.encode(mOldPwd.getText().toString())).put("new_password", MD5.encode(mNewPwd.getText().toString())).toString());

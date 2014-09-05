@@ -210,7 +210,7 @@ public class SearchSourceActivity extends BaseActivity {
             params.put("ship_type", ship_type); // add 运输方式
             params.put("device_type", Constants.DEVICE_TYPE);
             jsonObject.put(Constants.JSON, params);
-            showDefaultProgress();
+            showSpecialProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     NewSourceInfo.class, new AjaxCallBack() {
 

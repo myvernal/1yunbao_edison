@@ -125,7 +125,7 @@ public class IndexGridActivity extends BaseActivity implements OnItemClickListen
 
 						final JSONObject jsonObject = new JSONObject();
 						try {
-							showDefaultProgress();
+                            showSpecialProgress();
 							jsonObject.put(Constants.ACTION, Constants.DRIVER_LOGIN);
 							jsonObject.put(Constants.TOKEN, null);
 							jsonObject.put(

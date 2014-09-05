@@ -1,5 +1,6 @@
 package com.ybxiang.driver.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
@@ -9,23 +10,26 @@ import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
-import com.maogousoft.logisticsmobile.driver.adapter.SafeListAdapter;
+import com.maogousoft.logisticsmobile.driver.adapter.FactoryUserAdapter;
+import com.maogousoft.logisticsmobile.driver.adapter.SpecialLineAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.SafePinanInfo;
-import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
+import com.ybxiang.driver.model.SearchDpResultInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
 /**
- * Created by aliang on 2014/8/29.
- * 保险记录
+ * Created by aliang on 2014/9/6.
  */
-public class SafeListActivity extends BaseListActivity implements AbsListView.OnScrollListener {
+public class SearchDPListActivity extends BaseListActivity implements
+        View.OnClickListener, AbsListView.OnScrollListener {
+    private Context mContext;
     private Button mTitleBarBack;
+    private Button mTitleBarMore;
+    private TextView mTitleBarContent;
     // 底部更多
     private View mFootView;
     private ProgressBar mFootProgress;
@@ -38,20 +42,27 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
     private boolean state_idle = false;
     // 已加载全部
     private boolean load_all = false;
+    //查询类型
+    private JSONObject queryParams;
+    private String action;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
         initViews();
+        initData();
     }
 
     private void initViews() {
-        ((TextView) findViewById(R.id.titlebar_id_content)).setText("保险记录");
+        mTitleBarContent = ((TextView) findViewById(R.id.titlebar_id_content));
+        mTitleBarContent.setText("零担专线");
         // 返回按钮生效
         mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
         mTitleBarBack.setOnClickListener(this);
         // 更多按钮隐藏
-        findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
+        mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
+        mTitleBarMore.setVisibility(View.GONE);
 
         // 数据加载中进度条
         mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
@@ -59,10 +70,32 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
         mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
+    }
 
-        mAdapter = new SafeListAdapter(context);
+    private void initData() {
+        String params = getIntent().getStringExtra(Constants.COMMON_KEY);
+        action = getIntent().getStringExtra(Constants.COMMON_ACTION_KEY);
+        try {
+            queryParams = new JSONObject(params);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if(Constants.QUERY_FACTORY_USER.equals(action)) {
+            mAdapter = new FactoryUserAdapter(mContext);
+            mTitleBarContent.setText("工厂货主列表");
+        } else {
+            if(Constants.QUERY_SPECIAL_LINE.equals(action)) {
+                mTitleBarContent.setText("零担专线列表");
+            } else {
+                mTitleBarContent.setText("三方物流列表");
+            }
+            mAdapter = new SpecialLineAdapter(mContext);
+        }
         setListAdapter(mAdapter);
+        // list未加载数据不显示
         setListShown(false);
+
+
     }
 
     @Override
@@ -74,29 +107,32 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
         }
     }
 
-    // 请求指定页数的数据
-    private void getData(final int page) {
+    /**
+     * 开始查询
+     */
+    private void getData(int pageIndex) {
+        final JSONObject jsonObject = new JSONObject();
         try {
             state = ISREFRESHING;
-            final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.GET_INSURANCE_LIST);
+            jsonObject.put(Constants.ACTION, action);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject().put("page", page).toString());
+            jsonObject.put(Constants.JSON, queryParams.put("page", pageIndex).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    SafePinanInfo.class, new AjaxCallBack() {
+                    SearchDpResultInfo.class, new AjaxCallBack() {
+
                         @Override
                         public void receive(int code, Object result) {
                             setListShown(true);
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
-                                        List<SafePinanInfo> mList = (List<SafePinanInfo>) result;
+                                        List<SearchDpResultInfo> mList = (List<SearchDpResultInfo>) result;
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);
                                             mFootMsg.setText("已加载全部");
                                         } else {
-                                            if (mList.size() < 20) {
+                                            if (mList.size() < 10) {
                                                 load_all = true;
                                                 mFootProgress.setVisibility(View.GONE);
                                                 mFootMsg.setText("已加载全部");
@@ -105,28 +141,30 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
+                                    if (mAdapter.isEmpty()) {
+                                        setEmptyText("没有找到数据哦");
+                                    }
+                                    state = WAIT;
                                     break;
                                 case ResultCode.RESULT_ERROR:
-                                    if (result instanceof String)
+                                    if (result != null)
                                         showMsg(result.toString());
                                     break;
                                 case ResultCode.RESULT_FAILED:
-                                    if (result instanceof String)
+                                    if (result != null)
                                         showMsg(result.toString());
                                     break;
-
-                                default:
-                                    break;
                             }
-                            if (mAdapter.isEmpty()) {
-                                setEmptyText("没有找到数据哦");
-                            }
-                            state = WAIT;
                         }
                     });
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
     }
 
     @Override

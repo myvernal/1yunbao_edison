@@ -183,6 +183,10 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             showMsg("请选择出发地，目的地。");
             return;
         }
+        if (TextUtils.isEmpty(source_id_publish_contact_name.getText()) || TextUtils.isEmpty(source_id_publish_contact_phone.getText())) {
+            showMsg("联系人和手机号码是必填项,请重新填写");
+            return;
+        }
         final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
@@ -240,7 +244,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             params.put("loading_time", 60 * 60 * 1000);
 
             jsonObject.put(Constants.JSON, params);
-            showDefaultProgress();
+            showSpecialProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     null, new AjaxCallBack() {
 

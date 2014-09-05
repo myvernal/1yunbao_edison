@@ -3,6 +3,7 @@
 
     <string name="app_name">易运宝司机端</string>
     <string name="progress_loading">正在加载...</string>
+    <string name="progress_loading_2">正在加载,请稍后...</string>
     <string name="string_title_login">登录</string>
     <string name="string_titlebar_back">返回</string>
     <string name="string_titlebar_share">礼品</string> <!-- PR113 分享礼品 -->
@@ -351,9 +352,18 @@
         基本险费率%s,主要承保运输途中因活在及其他灾害事故造成的损失
     </string>
     <string name="safe_text_one_2">
-        综合险费率%s,除了基本险外,还承保易碎,玩去,凹瘪,折断,开裂,渗漏以及被盗的损失
+        基本险(易碎)费率%s,主要承保运输途中因活在及其他灾害事故造成的损失
     </string>
     <string name="safe_text_one_3">
+        基本险(鲜活)费率%s,主要承保运输途中因活在及其他灾害事故造成的损失
+    </string>
+    <string name="safe_text_one_4">
+        综合险费率%s,除了基本险外,还承保易碎,玩去,凹瘪,折断,开裂,渗漏以及被盗的损失
+    </string>
+    <string name="safe_text_one_5">
+        综合险(易碎)费率%s,除了基本险外,还承保易碎,玩去,凹瘪,折断,开裂,渗漏以及被盗的损失
+    </string>
+    <string name="safe_text_one_6">
         综合附加被盗险费率%s,除了综合险责任外,还承保货物被盗的损失;
     </string>
     <string name="safe_text_one_other">
@@ -394,4 +404,9 @@
     <string name="main_line_tip2" formatted="false">点击将可以关闭或打开货源语音提示。</string>
     <string name="my_car_detail_tip">说明:凡对方手机安装了易运宝软件,在对方互联网畅通的情况下,即可随时对其进行免费定位.收费定位采用移动定位技术,对方手机能通信即可定位,收费0.1元/次</string>
     <string name="check_card_result_tip">注:由于部分人员没有更新到第二代身份证,因此可能没有照片</string>
+
+    <string name="safe_list_item_name">被保险人:%s</string>
+    <string name="safe_list_item_number">运单号:%s</string>
+    <string name="safe_list_item_type">保险种类:%s</string>
+    <string name="safe_list_item_date">起运日期:%s</string>
 </resources>

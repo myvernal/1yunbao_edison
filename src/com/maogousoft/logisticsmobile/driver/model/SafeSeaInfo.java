@@ -27,7 +27,7 @@ public class SafeSeaInfo implements Serializable {
     private String create_user;//创建用户
     private String start_area;//起运地
     private String end_area;//目的地
-    private int package_type;//包装代码
+    private String package_type;//包装代码
     private int cargo_type1;//货物名称及类型1
     private int cargo_type2;//货物名称及类型2
     private int type;//0 太平洋 1 平安
@@ -201,11 +201,11 @@ public class SafeSeaInfo implements Serializable {
         this.end_area = end_area;
     }
 
-    public int getPackage_type() {
+    public String getPackage_type() {
         return package_type;
     }
 
-    public void setPackage_type(int package_type) {
+    public void setPackage_type(String package_type) {
         this.package_type = package_type;
     }
 

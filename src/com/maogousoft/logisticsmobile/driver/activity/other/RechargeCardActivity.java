@@ -77,7 +77,7 @@ public class RechargeCardActivity extends BaseActivity {
 	private void submit() {
 		final JSONObject jsonObject = new JSONObject();
 		try {
-			showDefaultProgress();
+            showSpecialProgress();
 			jsonObject.put(Constants.ACTION, Constants.DRIVER_COUPON);
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			jsonObject.put(

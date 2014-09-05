@@ -426,7 +426,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 			params.put("recommender", mRecommender.getText().toString());
 			params.put("device_type", Constants.DEVICE_TYPE);
 			jsonObject.put(Constants.JSON, params);
-			showDefaultProgress();
+            showSpecialProgress();
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
 					UserInfo.class, new AjaxCallBack() {
 

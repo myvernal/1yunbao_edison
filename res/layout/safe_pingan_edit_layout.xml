@@ -20,7 +20,7 @@
 
             <LinearLayout style="@style/safe_text_title_pingan_container_style">
                 <TextView style="@style/safe_text_title_pingan_black_style"
-                          android:text="投保人名称:"/>
+                          android:text="被保险人名称:"/>
 
                 <EditText style="@style/safe_text_title_sea_edit_style"
                           android:id="@+id/insured_name"

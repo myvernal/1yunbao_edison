@@ -211,7 +211,7 @@ public class FindCarActivity extends BaseActivity {
 			params.put("car_way", selectedCarWay); // add PR1.3
 			params.put("device_type", Constants.DEVICE_TYPE);
 			jsonObject.put(Constants.JSON, params);
-			showDefaultProgress();
+            showSpecialProgress();
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
 					NewSourceInfo.class, new AjaxCallBack() {
 

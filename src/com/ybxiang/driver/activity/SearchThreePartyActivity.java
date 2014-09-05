@@ -12,10 +12,6 @@ import com.maogousoft.logisticsmobile.driver.CitySelectView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
-import com.maogousoft.logisticsmobile.driver.api.ApiClient;
-import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.CardInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,8 +30,6 @@ public class SearchThreePartyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_three_party_layout);
         initViews();
-        initUtils();
-        initData();
     }
 
     // 初始化视图
@@ -51,14 +45,6 @@ public class SearchThreePartyActivity extends BaseActivity {
         mQuery.setOnClickListener(this);
     }
 
-    private void initUtils() {
-
-    }
-
-    private void initData() {
-
-    }
-
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -68,50 +54,24 @@ public class SearchThreePartyActivity extends BaseActivity {
                     Toast.makeText(context, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                queryData();
+                if (citySelect.getSelectedProvince() == null || citySelect.getSelectedProvince() == null) {
+                    showMsg("请选择出发地，目的地。");
+                    return;
+                }
+                try {
+                    JSONObject params = new JSONObject()
+                            .put("area", citySelect.getSelectedProvince().getName())
+                            .put("city", citySelect.getSelectedCity().getName())
+                            .put("distict", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedCity().getName())
+                            .put("searchKey", TextUtils.isEmpty(searchKey.getText()) ? "" : searchKey.getText());
+                    Intent intent = new Intent(context, SearchDPListActivity.class);
+                    intent.putExtra(Constants.COMMON_KEY, params.toString());
+                    intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_THREE_PARTY);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 break;
-        }
-    }
-
-    /**
-     * 开始查询
-     */
-    private void queryData() {
-        try {
-            showSpecialProgress("正在查询,请稍后");
-            final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.QUERY_THREE_PARTY);
-            jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject()
-                    .put("area", citySelect.getSelectedProvince().getId())
-                    .put("city", citySelect.getSelectedCity().getId())
-                    .put("distict", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedCity().getId())
-                    .put("searchKey", TextUtils.isEmpty(searchKey.getText()) ? "":searchKey.getText()).toString());
-            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    CardInfo.class, new AjaxCallBack() {
-                        @Override
-                        public void receive(int code, Object result) {
-                            dismissProgress();
-                            switch (code) {
-                                case ResultCode.RESULT_OK:
-                                    Toast.makeText(context, "没有找到数据,请扩大搜索条件", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case ResultCode.RESULT_ERROR:
-                                    if (result instanceof String)
-                                        showMsg(result.toString());
-                                    break;
-                                case ResultCode.RESULT_FAILED:
-                                    if (result instanceof String)
-                                        showMsg(result.toString());
-                                    break;
-
-                                default:
-                                    break;
-                            }
-                        }
-                    });
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 }

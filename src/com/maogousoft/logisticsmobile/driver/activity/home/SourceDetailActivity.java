@@ -277,6 +277,8 @@ public class SourceDetailActivity extends BaseActivity {
                     mSourceType.setText(Html.fromHtml(mSourceType.getText() + Utils.textFormatBlue(sourceTypeStr[i])));
                 }
             }
+        } else {
+            mSourceType.setVisibility(View.GONE);
         }
        //载重
         Integer unitType = mSourceInfo.getCargo_unit();
@@ -289,6 +291,8 @@ public class SourceDetailActivity extends BaseActivity {
                     mWeight.setText(Html.fromHtml(mWeight.getText().toString() + Utils.textFormatBlue(weight)));
                 }
             }
+        } else {
+            mWeight.setVisibility(View.GONE);
         }
         //运输方式
         Integer shipType = mSourceInfo.getShip_type();
@@ -299,19 +303,27 @@ public class SourceDetailActivity extends BaseActivity {
                     mShipType.setText(Html.fromHtml(mShipType.getText() + Utils.textFormatBlue(shipTypeStr[i])));
                 }
             }
+        } else {
+            mShipType.setVisibility(View.GONE);
         }
         //车长
         String carLength = sourceInfo.getCar_length() + "米";
-        mSourceCarLength.setText(mSourceCarLength.getText().toString() + carLength);
+        if(sourceInfo.getCar_length() > 0) {
+            mSourceCarLength.setText(Html.fromHtml(mSourceCarLength.getText().toString() + Utils.textFormatBlue(sourceInfo.getCar_length() + "米")));
+        } else {
+            mSourceCarLength.setVisibility(View.GONE);
+        }
         //车型
         Integer carTypeValue = mSourceInfo.getCar_type();
         if(carTypeValue != null && carTypeValue>0) {
             String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
             for (int i = 0; i < Constants.carTypeValues.length; i++) {
                 if (Constants.carTypeValues[i] == carTypeValue) {
-                    mSourceCarType.setText(mSourceCarType.getText() + carTypeStr[i]);
+                    mSourceCarType.setText(Html.fromHtml(mSourceCarType.getText() + Utils.textFormatBlue(carTypeStr[i])));
                 }
             }
+        } else {
+            mSourceCarType.setVisibility(View.GONE);
         }
         //报价单位
         Integer unitPrice = sourceInfo.getCargo_unit();
@@ -325,10 +337,15 @@ public class SourceDetailActivity extends BaseActivity {
         }
         //
         mSourceGold.setText(mSourceGold.getText().toString() + sourceInfo.getUser_bond() + "元");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        Date date = new Date(sourceInfo.getValidate_time());
-        mValidateTime.setText(mValidateTime.getText().toString() + sdf.format(date));
-        mZhuangCheTime.setText(mZhuangCheTime.getText().toString() + sdf.format(date) + "之前");
+        Date date = new Date();
+        String betweenTime = "刚发布";
+        if(date.getTime() > sourceInfo.getCreate_time()) {
+            long time = date.getTime() - sourceInfo.getCreate_time();
+            long hour = time / (60 * 60 * 1000);
+            long minites = (time % (60 * 60 * 1000)) / (60 * 1000);
+            betweenTime = "{" + hour + "时" + minites + "分}";
+        }
+        mValidateTime.setText(Html.fromHtml("已发布:" + Utils.textFormatRed(betweenTime)));
 
         float score = Float.parseFloat(String.valueOf(sourceInfo.getScore()));
         if (score == 0) {
@@ -403,7 +420,7 @@ public class SourceDetailActivity extends BaseActivity {
             params.put(Constants.ACTION, Constants.GET_SOURCE_ORDER_DETAIL);
             params.put(Constants.TOKEN, application.getToken());
             params.put(Constants.JSON, new JSONObject().put("order_id", order_id).toString());
-            showDefaultProgress();
+            showSpecialProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, params,
                     NewSourceInfo.class, new AjaxCallBack() {
 
@@ -609,7 +626,7 @@ public class SourceDetailActivity extends BaseActivity {
             params.put(Constants.ACTION, mSourceInfo.getFavorite_status() == 0? Constants.ATTENTION_SOURCE_USER : Constants.CANCEL_ATTENTION_SOURCE_USER);
             params.put(Constants.TOKEN, application.getToken());
             params.put(Constants.JSON,
-                    new JSONObject().put("userId", mSourceInfo.getUser_id()).toString());
+                    new JSONObject().put("userPhone", mPhone.getText().toString()));
             showDefaultProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, params, null,
                     new AjaxCallBack() {

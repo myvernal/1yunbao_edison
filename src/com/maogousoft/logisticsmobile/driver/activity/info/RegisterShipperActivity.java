@@ -257,7 +257,7 @@ public class RegisterShipperActivity extends BaseActivity {
 			params.put("company", mCompanyName.getText().toString());
 			params.put("device_type", Constants.DEVICE_TYPE);
 			jsonObject.put(Constants.JSON, params);
-			showDefaultProgress();
+            showSpecialProgress();
 			ApiClient.doWithObject(Constants.SHIPPER_SERVER_URL, jsonObject,
 					UserInfo.class, new AjaxCallBack() {
 

@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
-import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.ybxiang.driver.activity.AnonymousActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
@@ -34,6 +33,7 @@ import com.maogousoft.logisticsmobile.driver.utils.MyProgressDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.ybxiang.driver.activity.CarsListActivity;
+import com.ybxiang.driver.activity.SearchDPListActivity;
 import com.ybxiang.driver.model.FocusLineInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -140,6 +140,13 @@ public class BaseActivity extends Activity implements OnClickListener {
 
     public void showSpecialProgress(String message) {
         progressDialog.setMessage(message);
+        if (!progressDialog.isShowing()) {
+            progressDialog.show();
+        }
+    }
+
+    public void showSpecialProgress() {
+        progressDialog.setMessage(getString(R.string.progress_loading_2));
         if (!progressDialog.isShowing()) {
             progressDialog.show();
         }
@@ -311,7 +318,7 @@ public class BaseActivity extends Activity implements OnClickListener {
             params.put("end_district", focusLineInfo.getEnd_district());
             params.put("device_type", Constants.DEVICE_TYPE);
             jsonObject.put(Constants.JSON, params);
-            showDefaultProgress();
+            showSpecialProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     NewSourceInfo.class, new AjaxCallBack() {
 
@@ -396,6 +403,25 @@ public class BaseActivity extends Activity implements OnClickListener {
         Intent intent = new Intent(context, CarsListActivity.class);
         intent.putExtra(Constants.COMMON_KEY, params.toString());
         intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_CAR_SOURCE);
+        //将搜索条件传下去
+        context.startActivity(intent);
+    }
+
+    // 快速查找车源
+    public void fastSearchSpecialLine(final FocusLineInfo focusLineInfo) {
+        JSONObject params = new JSONObject();
+        try {
+            params.put("city_start", focusLineInfo.getStart_city_str());
+            params.put("city_end", focusLineInfo.getEnd_city_str());
+            params.put("area_start", focusLineInfo.getStart_area_str());
+            params.put("area_end", focusLineInfo.getEnd_area_str());
+            params.put("device_type", Constants.DEVICE_TYPE);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(context, SearchDPListActivity.class);
+        intent.putExtra(Constants.COMMON_KEY, params.toString());
+        intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_SPECIAL_LINE);
         //将搜索条件传下去
         context.startActivity(intent);
     }

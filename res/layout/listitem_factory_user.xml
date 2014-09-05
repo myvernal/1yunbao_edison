@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:padding="10dp"
+                  android:background="@color/window_bg"
+                  android:orientation="vertical">
+        <TextView style="@style/info_publish_text_style"
+                  android:id="@+id/name"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
+            <TextView style="@style/info_publish_text_style"
+                      android:minWidth="0dp"
+                      android:text="联系人:"/>
+            <TextView style="@style/info_publish_text_style"
+                      android:id="@+id/contact"
+                      android:layout_weight="1"
+                      android:gravity="left"/>
+
+            <TextView style="@style/info_publish_text_style"
+                      android:minWidth="0dp"
+                      android:text="电话:"/>
+            <TextView style="@style/info_publish_text_style"
+                      android:id="@+id/phone"
+                      android:textColor="@color/TextColorRed"/>
+        </LinearLayout>
+
+        <RelativeLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
+            <TextView style="@style/info_publish_text_style"
+                      android:gravity="left"
+                      android:id="@+id/label"
+                      android:minWidth="0dp"
+                      android:text="地址:"/>
+            <TextView style="@style/info_publish_text_style"
+                      android:gravity="left"
+                      android:layout_toRightOf="@+id/label"
+                      android:id="@+id/address"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

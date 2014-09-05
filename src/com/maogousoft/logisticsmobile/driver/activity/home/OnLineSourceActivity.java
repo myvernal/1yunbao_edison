@@ -123,7 +123,7 @@ public class OnLineSourceActivity extends BaseActivity {
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			jsonObject.put(Constants.JSON, null);
 			mRetry.setVisibility(View.GONE);
-			showDefaultProgress();
+            showSpecialProgress();
 			// mText.setVisibility(View.VISIBLE);
 			// mText.setText(R.string.progress_loading);
 			// mProgressContainer.setVisibility(View.VISIBLE);

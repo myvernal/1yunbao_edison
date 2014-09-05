@@ -676,7 +676,6 @@ public class OptionalActivity extends BaseActivity {
         @Override
         protected void onPreExecute() {
             LogUtil.d(TAG, "开启线程上传图片");
-            showDefaultProgress();
             super.onPreExecute();
         }
 

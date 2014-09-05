@@ -64,7 +64,7 @@ public class SearchSpecialLineActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 FocusLineInfo focusLineInfo = (FocusLineInfo) view.getTag(R.id.focus_line_key);
-                fastSearchCar(focusLineInfo);
+                fastSearchSpecialLine(focusLineInfo);
             }
         });
         mGridView.setAdapter(mAdapter);
@@ -87,46 +87,35 @@ public class SearchSpecialLineActivity extends BaseActivity {
                     Toast.makeText(context, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                queryData();
+                if (citySelectStart.getSelectedProvince() == null || citySelectEnd.getSelectedProvince() == null) {
+                    showMsg("请选择出发地，目的地。");
+                    return;
+                }
+                final JSONObject params = new JSONObject();
+                try {
+                    params.put("area_start", citySelectStart.getSelectedProvince().getName());
+                    params.put("area_end", citySelectEnd.getSelectedProvince().getName());
+                    params.put("city_start", citySelectStart.getSelectedCity().getName());
+                    params.put("city_end", citySelectEnd.getSelectedCity().getName());
+                    if (citySelectStart.getSelectedTowns() != null) {
+                        params.put("distict_start", citySelectStart.getSelectedTowns().getName());
+                    }
+                    if (citySelectEnd.getSelectedTowns() != null) {
+                        params.put("distict_end", citySelectEnd.getSelectedTowns().getName());
+                    }
+                    params.put("page", 1);
+                    params.put("device_type", Constants.DEVICE_TYPE);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(context, SearchDPListActivity.class);
+                intent.putExtra(Constants.COMMON_KEY, params.toString());
+                intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_SPECIAL_LINE);
+                startActivity(intent);
                 break;
         }
     }
 
-    /**
-     * 开始查询
-     */
-    private void queryData() {
-        if (citySelectStart.getSelectedProvince() == null || citySelectEnd.getSelectedProvince() == null) {
-            showMsg("请选择出发地，目的地。");
-            return;
-        }
-        final JSONObject params = new JSONObject();
-        try {
-            params.put("start_province", citySelectStart.getSelectedProvince().getId());
-            params.put("end_province", citySelectEnd.getSelectedProvince().getId());
-            if (citySelectStart.getSelectedCity() != null) {
-                params.put("start_city", citySelectStart.getSelectedCity().getId());
-            }
-            if (citySelectEnd.getSelectedCity() != null) {
-                params.put("end_city", citySelectEnd.getSelectedCity().getId());
-            }
-            if (citySelectStart.getSelectedTowns() != null) {
-                params.put("start_district", citySelectStart.getSelectedTowns().getId());
-            }
-            if (citySelectEnd.getSelectedTowns() != null) {
-                params.put("end_district", citySelectEnd.getSelectedTowns().getId());
-            }
-            params.put("page", 1);
-            params.put("device_type", Constants.DEVICE_TYPE);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Intent intent = new Intent(context, CarsListActivity.class);
-        intent.putExtra(Constants.COMMON_KEY, params.toString());
-        intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_CAR_SOURCE);
-        //将搜索条件传下去
-        context.startActivity(intent);
-    }
 
     // 搜索全部已关注线路
     private void queryAllFocusLine() {
@@ -135,13 +124,11 @@ public class SearchSpecialLineActivity extends BaseActivity {
             jsonObject.put(Constants.ACTION, Constants.QUERY_ALL_FOCUS_LINE);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("type", application.getUserType()));
-            showDefaultProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     FocusLineInfo.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
-                            dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
@@ -165,8 +152,14 @@ public class SearchSpecialLineActivity extends BaseActivity {
                                                             end = dbUtils.getCityInfo(focusLineInfo.getEnd_district());
                                                         }
                                                     }
+                                                    //显示用
                                                     focusLineInfo.setStart_str(start);
                                                     focusLineInfo.setEnd_str(end);
+                                                    //查询用
+                                                    focusLineInfo.setStart_area_str(dbUtils.getCityInfo(focusLineInfo.getStart_province()));
+                                                    focusLineInfo.setEnd_area_str(dbUtils.getCityInfo(focusLineInfo.getEnd_province()));
+                                                    focusLineInfo.setStart_city_str(dbUtils.getCityInfo(focusLineInfo.getStart_city()));
+                                                    focusLineInfo.setEnd_city_str(dbUtils.getCityInfo(focusLineInfo.getEnd_city()));
                                                 }
                                                 //刷新数据
                                                 new Handler(Looper.getMainLooper()).post(new Runnable() {

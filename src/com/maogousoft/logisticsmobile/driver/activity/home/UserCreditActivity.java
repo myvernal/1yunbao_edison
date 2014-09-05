@@ -103,7 +103,7 @@ public class UserCreditActivity extends BaseActivity {
 
 	// 获取评价列表
 	private void queryData() {
-		showDefaultProgress();
+        showSpecialProgress();
 		final JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject.put(Constants.ACTION, Constants.GET_USER_REPLY);

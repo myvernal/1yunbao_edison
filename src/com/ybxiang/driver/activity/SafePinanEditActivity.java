@@ -93,6 +93,9 @@ public class SafePinanEditActivity extends BaseActivity {
         start_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //组合赔偿地地址
+                peichang_area.setText(provinceInfoList.get(start_area.getSelectedItemPosition()).getProvince()
+                        + cityStartInfoList.get(start_city.getSelectedItemPosition()).getCity());
                 //保存起运地城市名字
                 safePinanInfo.setStart_city_str(cityStartInfoList.get(start_city.getSelectedItemPosition()).getCity());
             }
@@ -121,13 +124,9 @@ public class SafePinanEditActivity extends BaseActivity {
 
             }
         });
-        //赔偿地
         end_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //组合赔偿地地址
-                peichang_area.setText(provinceInfoList.get(end_area.getSelectedItemPosition()).getProvince()
-                    + cityEndInfoList.get(end_city.getSelectedItemPosition()).getCity());
                 //保存目的地城市名字
                 safePinanInfo.setEnd_city_str(cityEndInfoList.get(end_city.getSelectedItemPosition()).getCity());
             }
@@ -276,7 +275,7 @@ public class SafePinanEditActivity extends BaseActivity {
     List<PinganPackageTypeInfo> packageTypeList = new ArrayList<PinganPackageTypeInfo>();
     public void getSafeSourceType() {
         try {
-            showDefaultProgress();
+            showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.GET_SAFE_PINAN_PACK_TYPE);
             jsonObject.put(Constants.TOKEN, application.getToken());
@@ -336,7 +335,7 @@ public class SafePinanEditActivity extends BaseActivity {
     List<PinanAreaInfo> provinceInfoList = new ArrayList<PinanAreaInfo>();
     public void getSafeProvinceAreaInfo() {
         try {
-            showDefaultProgress();
+            showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.GET_SAFE_PINAN_PROVINCE);
             jsonObject.put(Constants.TOKEN, application.getToken());
@@ -415,7 +414,7 @@ public class SafePinanEditActivity extends BaseActivity {
             }
         } else {
             try {
-                showDefaultProgress();
+                showSpecialProgress();
                 final JSONObject jsonObject = new JSONObject();
                 jsonObject.put(Constants.ACTION, Constants.GET_SAFE_PINAN_CITY);
                 jsonObject.put(Constants.TOKEN, application.getToken());

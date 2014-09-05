@@ -2,6 +2,7 @@ package com.ybxiang.driver.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -100,8 +101,8 @@ public class SafeSeaDetailActivity extends BaseActivity {
             end_area.setText(safeSeaInfo.getEnd_area());
             //显示包装代码
             String[] safeBZDMType = getResources().getStringArray(R.array.safe_bzdm_types);
-            Integer bzdmType = Integer.valueOf(safeSeaInfo.getPackage_type());
-            if(bzdmType != null && bzdmType>0) {
+            String bzdmType = safeSeaInfo.getPackage_type();
+            if(!TextUtils.isEmpty(bzdmType)) {
                 for (int i = 0; i < Constants.seaSafeBZDMTypeValues.length; i++) {
                     if (Constants.seaSafeBZDMTypeValues[i] == bzdmType) {
                         package_type.setText(safeBZDMType[i]);
@@ -148,7 +149,7 @@ public class SafeSeaDetailActivity extends BaseActivity {
      */
     public void onClickNext(View view) {
         try {
-            showDefaultProgress();
+            showSpecialProgress("正在投保,请稍后");
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.SAVE_CPIC);
             jsonObject.put(Constants.TOKEN, application.getToken());

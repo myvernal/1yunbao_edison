@@ -104,7 +104,7 @@ public class ForgetActivity extends BaseActivity {
 			return;
 		}
 		try {
-			showDefaultProgress();
+            showSpecialProgress();
 			JSONObject json = new JSONObject();
 			json.put("phone", phone.getText().toString().trim());
 			json.put("vcode", authentication.getText().toString().trim());
