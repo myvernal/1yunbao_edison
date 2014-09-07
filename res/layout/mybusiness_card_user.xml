@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_title"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_abc_layout"
+                android:layout_margin="10dp"
+                android:orientation="vertical"
+                android:background="@color/window_bg"
+                android:paddingBottom="20dp">
+
+            <TableLayout
+                    style="@style/home_myabc_layout_style"
+                    android:layout_height="wrap_content">
+
+                <TableRow android:background="@drawable/ic_info_topbg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:layout_weight="1"
+                            android:drawableLeft="@null"
+                            android:text="物流名片"/>
+
+                    <Button
+                            android:id="@id/myabc_id_update"
+                            style="@style/info_button_wrap_style"
+                            android:layout_width="wrap_content"
+                            android:text="@string/string_home_myabc_complete"
+                            android:visibility="gone"/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_name"
+                            android:text="@string/string_home_myabc_title_name"/>
+
+                    <TextView
+                            android:id="@id/name"
+                            style="@style/home_myabc_content_style"
+                            android:text=""/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_phone"
+                            android:text="@string/string_home_myabc_title_phone"/>
+
+                    <TextView
+                            android:id="@id/phone"
+                            style="@style/home_myabc_content_style"/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_recommend"
+                            android:text="公司名称："/>
+
+                    <TextView
+                            android:id="@+id/company_name"
+                            style="@style/home_myabc_content_style"
+                            android:text=""/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_recommend"
+                            android:text="地       址："/>
+
+                    <TextView
+                            android:id="@+id/address"
+                            style="@style/home_myabc_content_style"
+                            android:text=""/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_recommend"
+                            android:text="验证数量："/>
+
+                    <TextView
+                            android:id="@+id/verify_count"
+                            style="@style/home_myabc_content_style"
+                            android:text=""/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_recommend"
+                            android:text="车队规模："/>
+
+                    <TextView
+                            android:id="@+id/fleet_count"
+                            style="@style/home_myabc_content_style"
+                            android:text=""/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_bottombg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_recommend"
+                            android:text="保险成交保费："/>
+
+                    <TextView
+                            android:id="@+id/insurance_count"
+                            style="@style/home_myabc_content_style"
+                            android:text=""/>
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                    style="@style/home_myabc_layout_style"
+                    android:layout_height="wrap_content">
+
+                <RelativeLayout
+                        android:id="@+id/myabc_id_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_info_topbg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@id/myabc_id_mycredit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:padding="8dp"
+                            android:text="历史货源"
+                            android:textColor="@color/font_gray2"
+                            android:textSize="@dimen/font_size_normal"/>
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/ic_info_right"/>
+                </RelativeLayout>
+            </TableLayout>
+
+            <TableLayout
+                    style="@style/home_myabc_layout_style"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/share_info"
+                    android:visibility="gone">
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_info_topbg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@id/myabc_id_mycredit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:padding="8dp"
+                            android:text="@string/common_share_info"
+                            android:textColor="@color/font_gray2"
+                            android:textSize="@dimen/font_size_normal"/>
+                </RelativeLayout>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

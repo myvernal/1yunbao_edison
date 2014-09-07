@@ -137,7 +137,9 @@ public class SafePinanDetailActivity extends BaseActivity {
                                     if (result instanceof String) {
                                         showMsg(result.toString());
                                     }
-                                    startActivity(new Intent(context, SafeListActivity.class));
+                                    Intent intent = new Intent(context, SafeListActivity.class);
+                                    intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_PINGAN);
+                                    startActivity(intent);
                                     finish();
                                     break;
                                 case ResultCode.RESULT_ERROR:

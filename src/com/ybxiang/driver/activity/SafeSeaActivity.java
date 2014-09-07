@@ -72,7 +72,9 @@ public class SafeSeaActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, SafeListActivity.class));
+                Intent intent = new Intent(context, SafeListActivity.class);
+                intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_CPIC);
+                startActivity(intent);
                 break;
         }
     }

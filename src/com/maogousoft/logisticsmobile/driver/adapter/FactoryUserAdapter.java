@@ -26,16 +26,31 @@ public class FactoryUserAdapter extends BaseListAdapter<SearchDpResultInfo> impl
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         SearchDpResultInfo searchDpResultInfo = mList.get(position);
+        HolderView holderView = null;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.listitem_factory_user, parent, false);
+            holderView.name = ((TextView) convertView.findViewById(R.id.name));
+            holderView.contact = ((TextView) convertView.findViewById(R.id.contact));
+            holderView.phone = ((TextView) convertView.findViewById(R.id.phone));
+            holderView.address = ((TextView) convertView.findViewById(R.id.address));
+        } else {
+            holderView = (HolderView) convertView.getTag(R.id.common_key);
         }
-        ((TextView) convertView.findViewById(R.id.name)).setText(searchDpResultInfo.getCOMPANY_NAME());
-        ((TextView) convertView.findViewById(R.id.contact)).setText(searchDpResultInfo.getNAME());
-        ((TextView) convertView.findViewById(R.id.phone)).setText(searchDpResultInfo.getPHONE());
-        ((TextView) convertView.findViewById(R.id.address)).setText(searchDpResultInfo.getADDRESS());
+        holderView.name.setText(searchDpResultInfo.getCOMPANY_NAME());
+        holderView.contact.setText(searchDpResultInfo.getNAME());
+        holderView.phone.setText(searchDpResultInfo.getPHONE());
+        holderView.address.setText(searchDpResultInfo.getADDRESS());
         convertView.setTag(searchDpResultInfo);
+        convertView.setTag(R.id.common_key, holderView);
         convertView.setOnClickListener(this);
         return convertView;
+    }
+
+    class HolderView {
+        private TextView name;
+        private TextView contact;
+        private TextView phone;
+        private TextView address;
     }
 
     @Override

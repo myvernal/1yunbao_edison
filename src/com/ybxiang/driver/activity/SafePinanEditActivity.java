@@ -173,9 +173,11 @@ public class SafePinanEditActivity extends BaseActivity {
         if (safePinanInfo != null) {
 //            start_date.setText(safePinanInfo.getStart_date()); //日期需要重新填写
             insured_name.setText(safePinanInfo.getInsured_name());
+            lianxiren_name.setText(safePinanInfo.getLianxiren_name());
             insured_phone.setText(safePinanInfo.getInsured_phone());
             shiping_number.setText(safePinanInfo.getShiping_number());
             plate_number.setText(safePinanInfo.getPlate_number());
+            guache_Num.setText(safePinanInfo.getGuache_Num());
         }
         //获得平安省区域
         getSafeProvinceAreaInfo();
@@ -188,7 +190,9 @@ public class SafePinanEditActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, SafeListActivity.class));
+                Intent intent = new Intent(context, SafeListActivity.class);
+                intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_PINGAN);
+                startActivity(intent);
                 break;
         }
     }
@@ -238,7 +242,7 @@ public class SafePinanEditActivity extends BaseActivity {
     public void onClickNext(View view) {
         if (TextUtils.isEmpty(start_date.getText()) || TextUtils.isEmpty(insured_name.getText())
                 || TextUtils.isEmpty(insured_phone.getText()) || TextUtils.isEmpty(shiping_number.getText())
-                || TextUtils.isEmpty(lianxiren_name.getText()) || TextUtils.isEmpty(guache_Num.getText())
+                || TextUtils.isEmpty(lianxiren_name.getText())
                 || null == citySelectView.getSelectedProvince() || null == citySelectView.getSelectedCity()
                 || TextUtils.isEmpty(plate_number.getText())) {
             Toast.makeText(context, "请填写所有需要填写的数据!", Toast.LENGTH_SHORT).show();

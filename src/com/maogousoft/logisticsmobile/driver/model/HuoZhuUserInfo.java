@@ -22,6 +22,9 @@ public class HuoZhuUserInfo implements Serializable {
 	private String company_name = "";	// 公司名称
 	private String address = "";// 地址
 	private String telcom = "";// 座机
+    private String insurance_count;
+    private String fleet_count;
+    private String verify_count;
 
     private Double tpy_1;//基本险 费率
     private Double tpy_2;//基本险(易碎) 费率
@@ -30,6 +33,30 @@ public class HuoZhuUserInfo implements Serializable {
     private Double tpy_5;//综合险(易碎) 费率
     private Double tpy_6;//综合险附加被盗险费率
     private Double pa_1;//平安费率
+
+    public String getInsurance_count() {
+        return insurance_count;
+    }
+
+    public void setInsurance_count(String insurance_count) {
+        this.insurance_count = insurance_count;
+    }
+
+    public String getFleet_count() {
+        return fleet_count;
+    }
+
+    public void setFleet_count(String fleet_count) {
+        this.fleet_count = fleet_count;
+    }
+
+    public String getVerify_count() {
+        return verify_count;
+    }
+
+    public void setVerify_count(String verify_count) {
+        this.verify_count = verify_count;
+    }
 
     public Double getTpy_1() {
         return tpy_1;

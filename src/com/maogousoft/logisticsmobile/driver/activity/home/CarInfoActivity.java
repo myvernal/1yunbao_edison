@@ -103,8 +103,7 @@ public class CarInfoActivity extends BaseActivity {
 		super.onClick(v);
 		if (v == mEvaluate) {
 			if (mSourceInfo != null) {
-				startActivity(new Intent(context, EvaluateActivity.class)
-						.putExtra("historyOrder", mSourceInfo));
+				startActivity(new Intent(context, EvaluateActivity.class).putExtra("historyOrder", mSourceInfo));
 			}
 		}
 	}

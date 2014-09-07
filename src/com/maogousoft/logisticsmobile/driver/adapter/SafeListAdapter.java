@@ -9,10 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.model.SafePinanInfo;
 import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
-import com.ybxiang.driver.activity.SafeBaodanActivity;
-import com.ybxiang.driver.activity.SafeSeaDetailActivity;
-import com.ybxiang.driver.activity.SafeSeaEditActivity;
+import com.ybxiang.driver.activity.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +19,7 @@ import java.util.Date;
 /**
  * Created by aliang on 2014/8/29.
  */
-public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
+public class SafeListAdapter extends BaseListAdapter<SafePinanInfo> {
 
     private Context mContext;
 
@@ -31,7 +30,7 @@ public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final SafeSeaInfo safeSeaInfo = mList.get(position);
+        final SafePinanInfo safeInfo = mList.get(position);
         HoldView holdView;
         if (convertView == null) {
             holdView = new HoldView();
@@ -44,47 +43,52 @@ public class SafeListAdapter extends BaseListAdapter<SafeSeaInfo> {
             holdView = (HoldView) convertView.getTag();
         }
         //被保险人名称
-        holdView.insured_name.setText(mContext.getString(R.string.safe_list_item_name, safeSeaInfo.getInsured_name()));
+        holdView.insured_name.setText(mContext.getString(R.string.safe_list_item_name, safeInfo.getInsured_name()));
         //运单号
-        holdView.shiping_number.setText(mContext.getString(R.string.safe_list_item_number, safeSeaInfo.getShiping_number()));
+        holdView.shiping_number.setText(mContext.getString(R.string.safe_list_item_number, safeInfo.getShiping_number()));
         //显示保险名称
-        String[] safeSeaType = mContext.getResources().getStringArray(R.array.safe_sea_types);
-        Integer safeType = Integer.valueOf(safeSeaInfo.getInsurance_type());
-        if(safeType != null && safeType > 0) {
-            for (int i = 0; i < Constants.seaSafeTypeValues.length; i++) {
-                if (Constants.seaSafeTypeValues[i] == safeType) {
-                    holdView.insurance_type.setText(mContext.getString(R.string.safe_list_item_type, safeSeaType[i]));
+        if(Constants.SAFE_CPIC == safeInfo.getType()) {
+            String[] safeSeaType = mContext.getResources().getStringArray(R.array.safe_sea_types);
+            Integer safeType = Integer.valueOf(safeInfo.getInsurance_type());
+            if (safeType != null && safeType > 0) {
+                for (int i = 0; i < Constants.seaSafeTypeValues.length; i++) {
+                    if (Constants.seaSafeTypeValues[i] == safeType) {
+                        holdView.insurance_type.setText(mContext.getString(R.string.safe_list_item_type, safeSeaType[i]));
+                    }
                 }
             }
+        } else {
+            String[] safeSeaType = mContext.getResources().getStringArray(R.array.safe_pingan_types);
+            holdView.insurance_type.setText(safeSeaType[0]);
         }
         //起运时间
-        if(!TextUtils.isEmpty(safeSeaInfo.getStart_date())) {
+        if(!TextUtils.isEmpty(safeInfo.getStart_date())) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = new Date(Long.parseLong(safeSeaInfo.getStart_date()));
+            Date date = new Date(Long.parseLong(safeInfo.getStart_date()));
             holdView.start_date.setText(mContext.getString(R.string.safe_list_item_date, simpleDateFormat.format(date)));
         }
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, SafeSeaDetailActivity.class);
-                intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
+                Intent intent = new Intent(mContext, safeInfo.getType() == Constants.SAFE_CPIC ? SafeSeaDetailActivity.class : SafePinanDetailActivity.class);
+                intent.putExtra(Constants.COMMON_KEY, safeInfo);
                 mContext.startActivity(intent);
             }
         });
         convertView.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, SafeSeaEditActivity.class);
-                intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
+                Intent intent = new Intent(mContext, safeInfo.getType() == Constants.SAFE_CPIC ? SafeSeaEditActivity.class : SafePinanEditActivity.class);
+                intent.putExtra(Constants.COMMON_KEY, safeInfo);
                 mContext.startActivity(intent);
             }
         });
         convertView.findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!TextUtils.isEmpty(safeSeaInfo.getTpy_Electronic_policy())) {
+                if(!TextUtils.isEmpty(safeInfo.getTpy_Electronic_policy())) {
                     Intent intent = new Intent(mContext, SafeBaodanActivity.class);
-                    intent.putExtra(Constants.COMMON_KEY, safeSeaInfo.getTpy_Electronic_policy());
+                    intent.putExtra(Constants.COMMON_KEY, safeInfo.getTpy_Electronic_policy());
                     mContext.startActivity(intent);
                 } else {
                     Toast.makeText(mContext, "该保险还没有上传电子保单,请稍后再查看", Toast.LENGTH_SHORT).show();

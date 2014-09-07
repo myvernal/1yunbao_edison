@@ -849,6 +849,12 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme"
                   android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+        <activity android:name=".activity.home.MyBusinessCardUser"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
     </application>
 
 </manifest>

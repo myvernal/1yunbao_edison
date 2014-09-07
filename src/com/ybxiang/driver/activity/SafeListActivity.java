@@ -14,7 +14,6 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.SafePinanInfo;
-import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,12 +31,12 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
     private TextView mFootMsg;
     // 当前模式
     private int state = WAIT;
-    // 当前页码
-    private int pageIndex = 1;
     // 滑动状态
     private boolean state_idle = false;
     // 已加载全部
     private boolean load_all = false;
+    //
+    private int action_type = Constants.SAFE_CPIC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
     }
 
     private void initViews() {
-        ((TextView) findViewById(R.id.titlebar_id_content)).setText("保险记录");
+
         // 返回按钮生效
         mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
         mTitleBarBack.setOnClickListener(this);
@@ -63,25 +62,31 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
         mAdapter = new SafeListAdapter(context);
         setListAdapter(mAdapter);
         setListShown(false);
+        //
+        action_type = getIntent().getIntExtra(Constants.COMMON_KEY, Constants.SAFE_CPIC);
+        if(Constants.SAFE_CPIC == action_type) {
+            ((TextView) findViewById(R.id.titlebar_id_content)).setText("太平洋保险记录");
+        } else {
+            ((TextView) findViewById(R.id.titlebar_id_content)).setText("平安保险记录");
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (mAdapter.isEmpty()) {
-            pageIndex = 1;
-            getData(pageIndex);
+            getData();
         }
     }
 
     // 请求指定页数的数据
-    private void getData(final int page) {
+    private void getData() {
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.GET_INSURANCE_LIST);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject().put("page", page).toString());
+            jsonObject.put(Constants.JSON, new JSONObject().put("type", action_type).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     SafePinanInfo.class, new AjaxCallBack() {
                         @Override
@@ -96,11 +101,9 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
                                             mFootProgress.setVisibility(View.GONE);
                                             mFootMsg.setText("已加载全部");
                                         } else {
-                                            if (mList.size() < 20) {
-                                                load_all = true;
-                                                mFootProgress.setVisibility(View.GONE);
-                                                mFootMsg.setText("已加载全部");
-                                            }
+                                            load_all = true;
+                                            mFootProgress.setVisibility(View.GONE);
+                                            mFootMsg.setText("已加载全部");
                                             mAdapter.addAll(mList);
                                             mAdapter.notifyDataSetChanged();
                                         }
@@ -152,9 +155,7 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
         }
         // 如果当前没有加载数据
         if (state != ISREFRESHING && !load_all) {
-            getData(++pageIndex);
-            mFootProgress.setVisibility(View.VISIBLE);
-            mFootMsg.setText(R.string.tips_isloading);
+
         }
     }
 }

@@ -139,6 +139,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         // 初始化adapter
         mAdapter = new MyCarInfoListAdapter(context);
         setListAdapter(mAdapter);
+        setListShown(false);
         //开始定位
         locationAction();
     }
@@ -212,6 +213,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
+                setListShown(true);
                 //列表数据处理
                 if (mList == null || mList.isEmpty()) {
                     load_all = true;
@@ -222,10 +224,6 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
                         load_all = true;
                         mFootProgress.setVisibility(View.GONE);
                         mFootMsg.setText("已加载全部");
-                    } else {
-                        load_all = false;
-                        mFootProgress.setVisibility(View.VISIBLE);
-                        mFootMsg.setText(R.string.tips_isloading);
                     }
                     mAdapter.addAll(mList);
                     mAdapter.notifyDataSetChanged();
@@ -286,6 +284,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         info.ak = Constants.BAIDU_CLOUD_SEARCH_Key;
         info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
         info.region = location.getCity();
+        info.pageSize = 50;
         showLocation(location);
         CloudManager.getInstance().localSearch(info);
         mLocClient.stop();
@@ -320,6 +319,9 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         if (state != ISREFRESHING && !load_all) {
             //加载更多数据
 //            getData(++pageIndex);
+            load_all = false;
+            mFootProgress.setVisibility(View.VISIBLE);
+            mFootMsg.setText(R.string.tips_isloading);
         }
     }
 

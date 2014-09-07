@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
+import com.maogousoft.logisticsmobile.driver.activity.home.MyBusinessCardUser;
 import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 
 /**
@@ -63,7 +64,7 @@ public class ShipDPActivity extends BaseActivity {
                 startActivity(new Intent(context, ShopListActivity.class));
                 break;
             case R.id.part5:
-                Toast.makeText(context, "物流名片", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, MyBusinessCardUser.class));
                 break;
 
         }

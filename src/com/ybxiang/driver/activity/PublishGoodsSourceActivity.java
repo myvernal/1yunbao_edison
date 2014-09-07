@@ -190,7 +190,8 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
-            jsonObject.put(Constants.ACTION, isUpdateSource?Constants.UPDATE_PUBLISH_ORDER:Constants.PUBLISH_SOURCE);
+//            jsonObject.put(Constants.ACTION, isUpdateSource?Constants.UPDATE_PUBLISH_ORDER:Constants.PUBLISH_SOURCE);
+            jsonObject.put(Constants.ACTION, Constants.PUBLISH_SOURCE);
             jsonObject.put(Constants.TOKEN, application.getToken());
             params.put("start_province", cityselectStart.getSelectedProvince()
                     .getId());

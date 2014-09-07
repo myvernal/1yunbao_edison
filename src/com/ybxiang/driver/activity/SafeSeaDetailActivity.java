@@ -183,8 +183,9 @@ public class SafeSeaDetailActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     Toast.makeText(context, "添加保单成功!", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(context, SafeListActivity.class));
-                                    finish();
+                                    Intent intent = new Intent(context, SafeListActivity.class);
+                                    intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_CPIC);
+                                    startActivity(intent);
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     if (result instanceof String)

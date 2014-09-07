@@ -24,16 +24,29 @@ public class SpecialLineAdapter extends BaseListAdapter<SearchDpResultInfo> impl
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         SearchDpResultInfo searchDpResultInfo = mList.get(position);
+        HolderView holderView = null;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.listitem_special_line, parent, false);
+            holderView.name = ((TextView) convertView.findViewById(R.id.name));
+            holderView.way = ((TextView) convertView.findViewById(R.id.way));
+            holderView.phone = ((TextView) convertView.findViewById(R.id.phone));
+        } else {
+            holderView = (HolderView) convertView.getTag(R.id.common_key);
         }
-        ((TextView) convertView.findViewById(R.id.name)).setText(searchDpResultInfo.getCOMPANY_NAME());
-        ((TextView) convertView.findViewById(R.id.way)).setText(searchDpResultInfo.getFROMAREA() + searchDpResultInfo.getFROMAREA1() + "--"
+        holderView.name.setText(searchDpResultInfo.getCOMPANY_NAME());
+        holderView.way.setText(searchDpResultInfo.getFROMAREA() + searchDpResultInfo.getFROMAREA1() + "--"
                 + searchDpResultInfo.getENDAREA() + searchDpResultInfo.getENDAREA1());
-        ((TextView) convertView.findViewById(R.id.phone)).setText(searchDpResultInfo.getPHONE());
+        holderView.phone.setText(searchDpResultInfo.getPHONE());
         convertView.setTag(searchDpResultInfo);
+        convertView.setTag(R.id.common_key, holderView);
         convertView.setOnClickListener(this);
         return convertView;
+    }
+
+    class HolderView {
+        private TextView name;
+        private TextView way;
+        private TextView phone;
     }
 
     @Override
