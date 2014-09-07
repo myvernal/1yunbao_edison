@@ -26,9 +26,10 @@ public class FactoryUserAdapter extends BaseListAdapter<SearchDpResultInfo> impl
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         SearchDpResultInfo searchDpResultInfo = mList.get(position);
-        HolderView holderView = null;
+        HolderView holderView;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.listitem_factory_user, parent, false);
+            holderView = new HolderView();
             holderView.name = ((TextView) convertView.findViewById(R.id.name));
             holderView.contact = ((TextView) convertView.findViewById(R.id.contact));
             holderView.phone = ((TextView) convertView.findViewById(R.id.phone));

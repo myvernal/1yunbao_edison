@@ -24,12 +24,14 @@ public class SpecialLineAdapter extends BaseListAdapter<SearchDpResultInfo> impl
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         SearchDpResultInfo searchDpResultInfo = mList.get(position);
-        HolderView holderView = null;
+        HolderView holderView;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.listitem_special_line, parent, false);
+            holderView = new HolderView();
             holderView.name = ((TextView) convertView.findViewById(R.id.name));
             holderView.way = ((TextView) convertView.findViewById(R.id.way));
             holderView.phone = ((TextView) convertView.findViewById(R.id.phone));
+            holderView.address = ((TextView) convertView.findViewById(R.id.address));
         } else {
             holderView = (HolderView) convertView.getTag(R.id.common_key);
         }
@@ -37,6 +39,7 @@ public class SpecialLineAdapter extends BaseListAdapter<SearchDpResultInfo> impl
         holderView.way.setText(searchDpResultInfo.getFROMAREA() + searchDpResultInfo.getFROMAREA1() + "--"
                 + searchDpResultInfo.getENDAREA() + searchDpResultInfo.getENDAREA1());
         holderView.phone.setText(searchDpResultInfo.getPHONE());
+        holderView.address.setText(searchDpResultInfo.getADDRESS());
         convertView.setTag(searchDpResultInfo);
         convertView.setTag(R.id.common_key, holderView);
         convertView.setOnClickListener(this);
@@ -46,6 +49,7 @@ public class SpecialLineAdapter extends BaseListAdapter<SearchDpResultInfo> impl
     class HolderView {
         private TextView name;
         private TextView way;
+        private TextView address;
         private TextView phone;
     }
 

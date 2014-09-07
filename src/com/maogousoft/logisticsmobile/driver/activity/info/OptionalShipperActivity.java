@@ -76,6 +76,7 @@ public class OptionalShipperActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_info_optional_shipper);
 		initViews();
+        setIsShowAnonymousActivity(false);
 	}
 
 	// 初始化视图

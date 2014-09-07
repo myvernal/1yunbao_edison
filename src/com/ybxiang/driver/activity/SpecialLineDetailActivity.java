@@ -43,6 +43,7 @@ public class SpecialLineDetailActivity extends BaseActivity {
                     + searchDpResultInfo.getENDAREA() + searchDpResultInfo.getENDAREA1());
             ((TextView) findViewById(R.id.phone)).setText(searchDpResultInfo.getPHONE());
             ((TextView) findViewById(R.id.desc)).setText(searchDpResultInfo.getMIAOSU());
+            ((TextView) findViewById(R.id.address)).setText(searchDpResultInfo.getADDRESS());
         }
     }
 

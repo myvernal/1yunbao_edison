@@ -29,6 +29,21 @@
                       android:text="成都-深圳"/>
         </LinearLayout>
 
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+            <TextView style="@style/info_publish_text_style"
+                      android:gravity="left"
+                      android:id="@+id/label_address"
+                      android:minWidth="0dp"
+                      android:text="地址:"/>
+            <TextView style="@style/info_publish_text_style"
+                      android:gravity="left"
+                      android:layout_toRightOf="@+id/label_address"
+                      android:id="@+id/address"/>
+        </RelativeLayout>
+
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="10dp"
