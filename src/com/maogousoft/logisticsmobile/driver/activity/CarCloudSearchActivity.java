@@ -198,7 +198,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                     carInfo.setPhone(info.extras.get("phone").toString());
                 }
                 if(info.extras.get("locationTime") != null) {
-                    carInfo.setLocation_time(info.extras.get("locationTime").toString());
+                    carInfo.setLast_position_time(info.extras.get("locationTime").toString());
                 }
                 if(info.extras.get("carId") != null) {
                     carInfo.setId(Integer.parseInt(info.extras.get("carID").toString()));

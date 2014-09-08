@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.text.TextUtils;
+import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -82,6 +85,9 @@ public class RegisterActivity extends BaseActivity {
 	// 当前选中线路1的一级城市，二级城市
 	private CityInfo currentProvinceFirst, currentCityFirst,
 			currentEndProvinceFirst, currentEndCityFirst;
+    private double longitude;//经度
+    private double latitude;//纬度
+    private String address = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -365,6 +371,25 @@ public class RegisterActivity extends BaseActivity {
 		}
 	};
 
+    /**
+     * 坐标定位
+     */
+    public void onGetLocation() {
+        LocHelper.getInstance(context).getResult(new LocHelper.LocCallback() {
+
+            @Override
+            public void onRecivedLoc(double lat, double lng, String addr) {
+
+                if (lat != 0 && lng != 0 && !TextUtils.isEmpty(addr)) {
+                    longitude = lng;
+                    latitude = lat;
+                    address = addr;
+                    LogUtil.d(TAG, addr);
+                }
+            }
+        });
+    }
+
 	// 提交注册
 	private void submit() {
 		if (!CheckUtils.checkIsEmpty(mPhone)) {
@@ -417,6 +442,10 @@ public class RegisterActivity extends BaseActivity {
 			// params.put("car_phone", mShuiChePhone.getText().toString());
 			params.put("vcode", mVerifyCode.getText().toString());
 			params.put("password", MD5.encode(mPassword.getText().toString()));
+            params.put("longitude", longitude);//经度
+            params.put("latitude", latitude);//纬度
+            params.put("address", address);//位置
+            params.put("location_time", System.currentTimeMillis());//发布日期
 			// params.put("name", mName.getText().toString());
 			// params.put("car_length", mLength.getText().toString());
 			// params.put(

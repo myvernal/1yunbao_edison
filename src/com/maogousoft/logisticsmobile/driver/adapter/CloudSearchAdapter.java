@@ -55,8 +55,8 @@ public class CloudSearchAdapter extends BaseListAdapter<CarInfo> {
         holderView.nameId.setText(carInfo.getDriver_name());
         holderView.plate_numberId.setText(carInfo.getPlate_number());
         holderView.phone.setText(carInfo.getPhone());
-        if(!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
-            Date date = new Date(Long.valueOf(carInfo.getLocation_time()));
+        if(!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
+            Date date = new Date(Long.valueOf(carInfo.getLast_position_time()));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
             String locationTime = simpleDateFormat.format(date);
             holderView.location_time.setText(locationTime);
@@ -94,7 +94,7 @@ public class CloudSearchAdapter extends BaseListAdapter<CarInfo> {
                 CarInfo carInfo = (CarInfo) view.getTag();
                 Intent intent = new Intent(mContext, MyCarsDetailActivity.class);
                 intent.putExtra(Constants.COMMON_KEY, carInfo.getId());
-                intent.putExtra(Constants.COMMON_ACTION_KEY, "search");
+                intent.putExtra(Constants.COMMON_BOOLEAN_KEY, true);
                 mContext.startActivity(intent);
             }
         });
@@ -131,6 +131,10 @@ public class CloudSearchAdapter extends BaseListAdapter<CarInfo> {
                                     if (result instanceof LocationInfo) {
                                         LocationInfo info = (LocationInfo) result;
                                         if (!info.isDone()) {
+                                            if(info.getBeginTime() != null) {
+                                                Toast.makeText(mContext, "没有找到对方地理数据", Toast.LENGTH_SHORT).show();
+                                                return;
+                                            }
                                             holderView.locationId.setText(info.getAddress());
                                             holderView.locationId.setVisibility(View.VISIBLE);
                                             //定位时间

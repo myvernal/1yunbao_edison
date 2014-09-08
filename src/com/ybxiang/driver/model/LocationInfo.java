@@ -12,7 +12,16 @@ public class LocationInfo implements Serializable {
     private String Y;
     private String result;//结果
     private String timestamp;
+    private String BeginTime;
     private boolean done = false;//是否超时
+
+    public String getBeginTime() {
+        return BeginTime;
+    }
+
+    public void setBeginTime(String beginTime) {
+        BeginTime = beginTime;
+    }
 
     public String getAddress() {
         return address;

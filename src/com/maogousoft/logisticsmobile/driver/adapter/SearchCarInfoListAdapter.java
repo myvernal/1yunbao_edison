@@ -45,8 +45,8 @@ public class SearchCarInfoListAdapter extends BaseListAdapter<CarInfo> implement
         ((TextView) convertView.findViewById(R.id.nameId)).setText(carInfo.getOwer_name());
         ((TextView) convertView.findViewById(R.id.plate_numberId)).setText(carInfo.getPlate_number());
         ((TextView) convertView.findViewById(R.id.phone)).setText(carInfo.getOwer_phone());
-        if(!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
-            Date date = new Date(Long.valueOf(carInfo.getLocation_time()));
+        if(!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
+            Date date = new Date(Long.valueOf(carInfo.getLast_position_time()));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
             String locationTime = simpleDateFormat.format(date);
             ((TextView) convertView.findViewById(R.id.location_time)).setText(locationTime);
@@ -67,7 +67,7 @@ public class SearchCarInfoListAdapter extends BaseListAdapter<CarInfo> implement
         CarInfo carInfo = (CarInfo) view.getTag();
         Intent intent = new Intent(mContext, MyCarsDetailActivity.class);
         intent.putExtra(Constants.COMMON_KEY, carInfo.getId());
-        intent.putExtra(Constants.COMMON_BOOLEAN_KEY, true);
+        intent.putExtra(Constants.COMMON_OBJECT_KEY, carInfo);
         mContext.startActivity(intent);
     }
 }

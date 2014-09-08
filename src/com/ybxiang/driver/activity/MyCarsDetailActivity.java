@@ -115,6 +115,14 @@ public class MyCarsDetailActivity extends BaseActivity {
             price_layout.setVisibility(View.VISIBLE);
             remark_layout.setVisibility(View.VISIBLE);
         } else if(getIntent().getBooleanExtra(Constants.COMMON_BOOLEAN_KEY, false)) {
+            //隐藏我的车队详情特有的控件
+            edit_action_layout.setVisibility(View.GONE);
+            location_action_desc.setVisibility(View.GONE);
+            location_action_layout.setVisibility(View.GONE);
+            //显示搜索车源详情特有的控件
+            add_my_fleet.setVisibility(View.VISIBLE);
+            price_layout.setVisibility(View.VISIBLE);
+            remark_layout.setVisibility(View.VISIBLE);
             getData(true);
         } else {
             getData(false);
@@ -261,8 +269,8 @@ public class MyCarsDetailActivity extends BaseActivity {
         }
         //时间
         Date date;
-        if (!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
-            date = new Date(Long.valueOf(carInfo.getLocation_time()));
+        if (!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
+            date = new Date(Long.valueOf(carInfo.getLast_position_time()));
         } else {
             date = new Date(Long.valueOf(carInfo.getPulish_date()));
         }
@@ -330,6 +338,10 @@ public class MyCarsDetailActivity extends BaseActivity {
                                     if (result instanceof LocationInfo) {
                                         LocationInfo info = (LocationInfo) result;
                                         if (!info.isDone()) {
+                                            if(info.getBeginTime() != null) {
+                                                Toast.makeText(context, "没有找到对方地理数据", Toast.LENGTH_SHORT).show();
+                                                return;
+                                            }
                                             location_address.setText(info.getAddress());
                                             location_address.setVisibility(View.VISIBLE);
                                             location_time.setText(location_time.getText() + info.getTimestamp());
@@ -461,10 +473,10 @@ public class MyCarsDetailActivity extends BaseActivity {
             params.put("plate_number", carInfo.getPlate_number());
             params.put("car_type", carInfo.getCar_type());
             params.put("remark", carInfo.getRemark());
-            if(TextUtils.isEmpty(carInfo.getLocation_time()) || Long.parseLong(carInfo.getLocation_time()) <= 0) {
+            if(TextUtils.isEmpty(carInfo.getLast_position_time()) || Long.parseLong(carInfo.getLast_position_time()) <= 0) {
                 params.put("location_time", carInfo.getPulish_date());
             } else {
-                params.put("location_time", carInfo.getLocation_time());
+                params.put("location_time", carInfo.getLast_position_time());
             }
             if(TextUtils.isEmpty(carInfo.getLocation())) {
                 params.put("location", carInfo.getAddress());

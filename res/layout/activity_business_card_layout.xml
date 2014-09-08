@@ -274,61 +274,29 @@
             </TableLayout>
 
 
-            <TableLayout style="@style/home_myabc_layout_style" android:visibility="gone">
+            <TableLayout
+                    style="@style/home_myabc_layout_style"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/share_info">
 
-                <TableRow android:background="@drawable/ic_info_topbg">
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_info_topbg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                     <TextView
-                            style="@style/home_myabc_title_style"
-                            android:layout_weight="1"
-                            android:text="诚信认证"/>
-
-                    <Button
-                            android:id="@+id/myabc_card_update"
-                            style="@style/info_button_wrap_style"
+                            android:id="@id/myabc_id_mycredit"
                             android:layout_width="wrap_content"
-                            android:visibility="gone"
-                            android:text="修改"/>
-                </TableRow>
-
-                <TableRow android:background="@drawable/ic_info_centerbg">
-
-                    <TextView
-                            style="@style/home_myabc_title_style"
-                            android:drawableLeft="@drawable/ic_info_recommend"
-                            android:text="身份证"/>
-
-                    <TextView
-                            android:id="@+id/myabc_id_shenfen"
-                            style="@style/home_myabc_content_style"
-                            android:text="无"/>
-                </TableRow>
-
-                <TableRow android:background="@drawable/ic_info_centerbg">
-
-                    <TextView
-                            style="@style/home_myabc_title_style"
-                            android:drawableLeft="@drawable/ic_info_recommend"
-                            android:text="驾驶证"/>
-
-                    <TextView
-                            android:id="@+id/myabc_id_jiashi"
-                            style="@style/home_myabc_content_style"
-                            android:text="无"/>
-                </TableRow>
-
-                <TableRow android:background="@drawable/ic_info_bottombg">
-
-                    <TextView
-                            style="@style/home_myabc_title_style"
-                            android:drawableLeft="@drawable/ic_info_recommend"
-                            android:text="行驶证"/>
-
-                    <TextView
-                            android:id="@+id/myabc_id_xingshi"
-                            style="@style/home_myabc_content_style"
-                            android:text="无"/>
-                </TableRow>
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:padding="8dp"
+                            android:autoLink="web"
+                            android:text="@string/common_share_info"
+                            android:textColor="@color/font_gray2"
+                            android:textSize="@dimen/font_size_normal"/>
+                </RelativeLayout>
             </TableLayout>
         </LinearLayout>
     </ScrollView>

@@ -50,8 +50,8 @@ public class MyCarInfoListAdapter extends BaseListAdapter<CarInfo> implements Vi
         holderView.nameId.setText(carInfo.getDriver_name());
         holderView.plate_numberId.setText(carInfo.getPlate_number());
         holderView.phone.setText(carInfo.getPhone());
-        if(!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
-            Date date = new Date(Long.valueOf(carInfo.getLocation_time()));
+        if(!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
+            Date date = new Date(Long.valueOf(carInfo.getLast_position_time()));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
             String locationTime = simpleDateFormat.format(date);
             holderView.location_time.setText(locationTime);

@@ -281,9 +281,10 @@ public class SourceDetailActivity extends BaseActivity {
             mSourceType.setVisibility(View.GONE);
         }
        //载重
-        Integer unitType = mSourceInfo.getCargo_unit();
+
         String weight = "";
-        if(unitType != null && unitType > 0) {
+        if(mSourceInfo.getCargo_number() != null && mSourceInfo.getCargo_number() > 0) {
+            Integer unitType = mSourceInfo.getCargo_unit();
             String[] priceUnit = context.getResources().getStringArray(R.array.car_price_unit);
             for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                 if (Constants.unitTypeValues[i] == unitType) {
@@ -334,6 +335,8 @@ public class SourceDetailActivity extends BaseActivity {
                     mSourcePrice.setText(mSourcePrice.getText().toString() + sourceInfo.getUnit_price() + "元/" + unitPriceStr[i]);
                 }
             }
+        } else {
+            mSourcePrice.setVisibility(View.GONE);
         }
         //
         mSourceGold.setText(mSourceGold.getText().toString() + sourceInfo.getUser_bond() + "元");

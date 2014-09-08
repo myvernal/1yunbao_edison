@@ -173,8 +173,8 @@ public class ManagerCarSourceActivity extends BaseListActivity implements
         // 如果当前没有加载数据
         if (state != ISREFRESHING && !load_all) {
             getData(++pageIndex);
-            mFootProgress.setVisibility(View.VISIBLE);
-            mFootMsg.setText(R.string.tips_isloading);
+//            mFootProgress.setVisibility(View.VISIBLE);
+//            mFootMsg.setText(R.string.tips_isloading);
         }
     }
 

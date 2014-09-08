@@ -35,7 +35,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
     private EditText price, mCarNum, mCarlength, car_weight, description, ower_name, dayId, hourId;
     // 当前位置，报价,
     // 车牌号，车长，载重，补充说明,姓名，手机号码,有效时间（天，小时）
-    private TextView ower_phone;
+    private EditText ower_phone;
     private Spinner search_car_type, car_price_unit;
     private CitySelectView cityselectStart, cityselectEnd; // 出发地，目的地
     private Button mTitleBarBack;
@@ -72,7 +72,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
         mCarlength = (EditText) findViewById(R.id.mCarlength); //车长
         car_weight = (EditText) findViewById(R.id.car_weight); //车重
         ower_name = (EditText) findViewById(R.id.ower_name); //联系人
-        ower_phone = (TextView) findViewById(R.id.ower_phone); //联系人手机号码
+        ower_phone = (EditText) findViewById(R.id.ower_phone); //联系人手机号码
         dayId = (EditText) findViewById(R.id.dayId); //有效日期,日
         hourId = (EditText) findViewById(R.id.hourId); //有效日期,小时
         description = (EditText) findViewById(R.id.description); //补充说明
@@ -148,7 +148,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
     public void onPublishCarSource(View view) {
         final JSONObject jsonObject = new JSONObject();
         try {
-            showProgress("正在发布...");
+            showSpecialProgress("正在发布车源,请稍后");
             jsonObject.put(Constants.ACTION, Constants.PUBLISH_DRIVER_CAR_INFO);
             jsonObject.put(Constants.TOKEN, application.getToken());
 

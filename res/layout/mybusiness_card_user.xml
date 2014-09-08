@@ -165,8 +165,7 @@
             <TableLayout
                     style="@style/home_myabc_layout_style"
                     android:layout_height="wrap_content"
-                    android:id="@+id/share_info"
-                    android:visibility="gone">
+                    android:id="@+id/share_info">
 
                 <RelativeLayout
                         android:layout_width="match_parent"
@@ -181,6 +180,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:padding="8dp"
+                            android:autoLink="web"
                             android:text="@string/common_share_info"
                             android:textColor="@color/font_gray2"
                             android:textSize="@dimen/font_size_normal"/>
