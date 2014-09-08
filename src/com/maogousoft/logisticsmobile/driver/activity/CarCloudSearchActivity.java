@@ -4,11 +4,9 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -21,13 +19,16 @@ import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.model.LatLngBounds.Builder;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
+import com.maogousoft.logisticsmobile.driver.adapter.CloudSearchAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.MyCarInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarCloudSearchActivity extends BaseListActivity implements BDLocationListener, CloudListener, AbsListView.OnScrollListener {
+public class CarCloudSearchActivity extends BaseActivity implements BDLocationListener, CloudListener {
 
 	private static final String LTAG = "CloudSearchActivity";
 	private MapView mMapView;
@@ -41,18 +42,10 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
     private int currentModel = CURRENT_MODEL_MAP;
     private static final int CURRENT_MODEL_MAP = 0;
     private static final int CURRENT_MODEL_LIST = 1;
-    // 底部更多
-    private View mFootView;
-    private ProgressBar mFootProgress;
-    private TextView mFootMsg;
-    // 当前模式
-    private int state = WAIT;
-    // 当前页码
-    private int pageIndex = 1;
-    // 滑动状态
-    private boolean state_idle = false;
-    // 已加载全部
-    private boolean load_all = false;
+    private View listContainer;
+    private BaseListAdapter mAdapter;
+    private ListView mListView;
+    private View mEmpty;
 
 	@Override
 	protected void onCreate(Bundle icicle) {
@@ -75,17 +68,9 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         mBaiduMap = mMapView.getMap();
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
-        //默认不显示列表
-        mListView.setVisibility(View.GONE);
-        // 数据加载中进度条
-        mFootView = getLayoutInflater().inflate(R.layout.listview_footview,
-                null);
-        mFootView.setClickable(false);
-        mFootProgress = (ProgressBar) mFootView
-                .findViewById(android.R.id.progress);
-        mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
-        mListView.addFooterView(mFootView);
-        state = ISREFRESHING;
+        listContainer = findViewById(R.id.listContainer);
+        mListView = (ListView) findViewById(android.R.id.list);
+        mEmpty = findViewById(android.R.id.empty);
         //图层点击事件
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
@@ -137,9 +122,8 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         CloudManager.getInstance().init(this);
         mLocClient = new LocationClient(this);
         // 初始化adapter
-        mAdapter = new MyCarInfoListAdapter(context);
-        setListAdapter(mAdapter);
-        setListShown(false);
+        mAdapter = new CloudSearchAdapter(context);
+        mListView.setAdapter(mAdapter);
         //开始定位
         locationAction();
     }
@@ -151,17 +135,18 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
             case R.id.titlebar_id_more:
                 if(currentModel == CURRENT_MODEL_MAP) {
                     currentModel = CURRENT_MODEL_LIST;
-                    getProgressContainer().setVisibility(View.GONE);
-                    mListView.setVisibility(View.VISIBLE);
+                    listContainer.setVisibility(View.VISIBLE);
                     mMapView.setVisibility(View.GONE);
+                    //列表数据处理
+                    if (mAdapter.getCount()  <= 0) {
+                        mEmpty.setVisibility(View.VISIBLE);
+                    }
                     mMore.setText("查看地图");
-                    Log.e(TAG, mListView.getVisibility() + "");
                 } else {
                     currentModel = CURRENT_MODEL_MAP;
-                    mListView.setVisibility(View.GONE);
+                    listContainer.setVisibility(View.GONE);
                     mMapView.setVisibility(View.VISIBLE);
                     mMore.setText("查看列表");
-                    Log.e(TAG, mListView.getVisibility() + "");
                 }
                 break;
         }
@@ -206,32 +191,29 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
 			mBaiduMap.animateMapStatus(u);
             for(CloudPoiInfo info : result.poiList) {
                 CarInfo carInfo = new CarInfo();
-                carInfo.setPlate_number(info.toString());
+                if(info.extras.get("plateNumber") != null) {
+                    carInfo.setPlate_number(info.extras.get("plateNumber").toString());
+                }
+                if(info.extras.get("phone") != null) {
+                    carInfo.setPhone(info.extras.get("phone").toString());
+                }
+                if(info.extras.get("locationTime") != null) {
+                    carInfo.setLocation_time(info.extras.get("locationTime").toString());
+                }
+                if(info.extras.get("carId") != null) {
+                    carInfo.setId(Integer.parseInt(info.extras.get("carID").toString()));
+                }
+                carInfo.setLocation(info.address);
+                carInfo.setDriver_name(info.title);
                 mList.add(carInfo);
             }
+            LogUtil.e(TAG, "mList.size:" + mList.size());
 		}
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                setListShown(true);
-                //列表数据处理
-                if (mList == null || mList.isEmpty()) {
-                    load_all = true;
-                    mFootProgress.setVisibility(View.GONE);
-                    mFootMsg.setText("已加载全部");
-                } else {
-                    if (mList.size() < 20) {
-                        load_all = true;
-                        mFootProgress.setVisibility(View.GONE);
-                        mFootMsg.setText("已加载全部");
-                    }
-                    mAdapter.addAll(mList);
-                    mAdapter.notifyDataSetChanged();
-                }
-                if (mAdapter.isEmpty()) {
-                    setEmptyText("没有找到数据哦");
-                }
-                state = WAIT;
+                mAdapter.addAll(mList);
+                mAdapter.notifyDataSetChanged();
             }
         });
 	}
@@ -242,7 +224,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true);// 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(100);
+        option.setScanSpan(200);
         mLocClient.setLocOption(option);
         mLocClient.start();
     }
@@ -270,6 +252,7 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
     @Override
     public void onReceiveLocation(BDLocation location) {
         // map view 销毁后不在处理新接收的位置
+        LogUtil.e(TAG, "onReceiveLocation");
         if (location == null || mMapView == null || !isFirstLoc || null == location.getCity()) {
             return;
         }
@@ -293,36 +276,6 @@ public class CarCloudSearchActivity extends BaseListActivity implements BDLocati
     @Override
     public void onReceivePoi(BDLocation location) {
 
-    }
-
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
-            return;
-        }
-        if (state != WAIT) {
-            return;
-        }
-        this.state_idle = true;
-    }
-
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem,
-                         int visibleItemCount, int totalItemCount) {
-        if (!this.state_idle) {
-            return;
-        }
-        if (firstVisibleItem == 0 || (firstVisibleItem + visibleItemCount) != totalItemCount) {
-            return;
-        }
-        // 如果当前没有加载数据
-        if (state != ISREFRESHING && !load_all) {
-            //加载更多数据
-//            getData(++pageIndex);
-            load_all = false;
-            mFootProgress.setVisibility(View.VISIBLE);
-            mFootMsg.setText(R.string.tips_isloading);
-        }
     }
 
     @Override

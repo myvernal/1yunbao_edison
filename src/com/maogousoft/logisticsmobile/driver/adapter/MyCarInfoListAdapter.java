@@ -35,27 +35,45 @@ public class MyCarInfoListAdapter extends BaseListAdapter<CarInfo> implements Vi
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
         CarInfo carInfo = mList.get(position);
+        HolderView holderView;
         if (convertView == null) {
+            holderView = new HolderView();
             convertView = mInflater.inflate(R.layout.listitem_mycarinfo, parent, false);
+            holderView.nameId = ((TextView) convertView.findViewById(R.id.nameId));
+            holderView.plate_numberId = ((TextView) convertView.findViewById(R.id.plate_numberId));
+            holderView.phone = ((TextView) convertView.findViewById(R.id.phone));
+            holderView.location_time = ((TextView) convertView.findViewById(R.id.location_time));
+            holderView.locationId = ((TextView) convertView.findViewById(R.id.locationId));
+        } else {
+            holderView = (HolderView) convertView.getTag(R.id.common_key);
         }
-        ((TextView) convertView.findViewById(R.id.nameId)).setText(carInfo.getDriver_name());
-        ((TextView) convertView.findViewById(R.id.plate_numberId)).setText(carInfo.getPlate_number());
-        ((TextView) convertView.findViewById(R.id.phone)).setText(carInfo.getPhone());
+        holderView.nameId.setText(carInfo.getDriver_name());
+        holderView.plate_numberId.setText(carInfo.getPlate_number());
+        holderView.phone.setText(carInfo.getPhone());
         if(!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
             Date date = new Date(Long.valueOf(carInfo.getLocation_time()));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
             String locationTime = simpleDateFormat.format(date);
-            ((TextView) convertView.findViewById(R.id.location_time)).setText(locationTime);
+            holderView.location_time.setText(locationTime);
         } else if(carInfo.getPulish_date() > 0) {
             Date date = new Date(Long.valueOf(carInfo.getPulish_date()));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
             String locationTime = simpleDateFormat.format(date);
-            ((TextView) convertView.findViewById(R.id.location_time)).setText(locationTime);
+            holderView.location_time.setText(locationTime);
         }
-        ((TextView) convertView.findViewById(R.id.locationId)).setText(carInfo.getLocation());
+        holderView.locationId.setText(carInfo.getLocation());
         convertView.setTag(carInfo);
+        convertView.setTag(R.id.common_key, holderView);
         convertView.setOnClickListener(this);
         return convertView;
+    }
+
+    class HolderView {
+        public TextView nameId;
+        public TextView plate_numberId;
+        public TextView phone;
+        public TextView location_time;
+        public TextView locationId;
     }
 
     @Override

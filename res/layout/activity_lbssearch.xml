@@ -12,5 +12,26 @@
             android:layout_height="fill_parent"
             android:clickable="true"/>
 
-    <include layout="@layout/common_listview"/>
+    <!--<include layout="@layout/common_listview"/>-->
+    <FrameLayout
+            android:id="@+id/listContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+        <ListView
+                android:id="@android:id/list"
+                style="@style/listViewStyle" />
+
+        <TextView
+                android:id="@android:id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="没有找到数据哦"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal"
+                android:visibility="gone" />
+    </FrameLayout>
 </LinearLayout>

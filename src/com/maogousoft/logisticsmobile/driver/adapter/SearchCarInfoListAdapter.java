@@ -1,15 +1,25 @@
 package com.maogousoft.logisticsmobile.driver.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.activity.other.MapActivity;
+import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
+import com.maogousoft.logisticsmobile.driver.api.ApiClient;
+import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.ybxiang.driver.activity.MyCarsDetailActivity;
+import com.ybxiang.driver.model.LocationInfo;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -56,7 +66,8 @@ public class SearchCarInfoListAdapter extends BaseListAdapter<CarInfo> implement
     public void onClick(View view) {
         CarInfo carInfo = (CarInfo) view.getTag();
         Intent intent = new Intent(mContext, MyCarsDetailActivity.class);
-        intent.putExtra(Constants.COMMON_OBJECT_KEY, carInfo);
+        intent.putExtra(Constants.COMMON_KEY, carInfo.getId());
+        intent.putExtra(Constants.COMMON_BOOLEAN_KEY, true);
         mContext.startActivity(intent);
     }
 }

@@ -114,8 +114,10 @@ public class MyCarsDetailActivity extends BaseActivity {
             add_my_fleet.setVisibility(View.VISIBLE);
             price_layout.setVisibility(View.VISIBLE);
             remark_layout.setVisibility(View.VISIBLE);
+        } else if(getIntent().getBooleanExtra(Constants.COMMON_BOOLEAN_KEY, false)) {
+            getData(true);
         } else {
-            getData();
+            getData(false);
         }
     }
 
@@ -154,7 +156,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     // 请求车辆数据
-    private void getData() {
+    private void getData(final boolean isFromSearch) {
         try {
             showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
@@ -170,7 +172,7 @@ public class MyCarsDetailActivity extends BaseActivity {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof CarInfo) {
                                         carInfo = (CarInfo) result;
-                                        displayData(false);
+                                        displayData(isFromSearch);
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -204,6 +206,14 @@ public class MyCarsDetailActivity extends BaseActivity {
                 String wayEnd = dbUtils.getCityInfo(carInfo.getEnd_province(), carInfo.getEnd_city(), carInfo.getEnd_district());
                 sb.append(wayStart + "--" + wayEnd);
             }
+            //隐藏我的车队详情特有的控件
+            edit_action_layout.setVisibility(View.GONE);
+            location_action_desc.setVisibility(View.GONE);
+            location_action_layout.setVisibility(View.GONE);
+            //显示搜索车源详情特有的控件
+            add_my_fleet.setVisibility(View.VISIBLE);
+            price_layout.setVisibility(View.VISIBLE);
+            remark_layout.setVisibility(View.VISIBLE);
         } else {
             if (carInfo.getEnd_province1() > 0 || carInfo.getEnd_city1() > 0 || carInfo.getEnd_district1() > 0) {
                 String wayEnd1 = dbUtils.getCityInfo(carInfo.getEnd_province1(), carInfo.getEnd_city1(), carInfo.getEnd_district1());
