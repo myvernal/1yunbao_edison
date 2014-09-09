@@ -200,7 +200,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 if(info.extras.get("locationTime") != null) {
                     carInfo.setLast_position_time(info.extras.get("locationTime").toString());
                 }
-                if(info.extras.get("carId") != null) {
+                if(info.extras.get("carID") != null) {
                     carInfo.setId(Integer.parseInt(info.extras.get("carID").toString()));
                 }
                 carInfo.setLocation(info.address);
@@ -254,6 +254,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         // map view 销毁后不在处理新接收的位置
         LogUtil.e(TAG, "onReceiveLocation");
         if (location == null || mMapView == null || !isFirstLoc || null == location.getCity()) {
+            mLocClient.start();
             return;
         }
 //        NearbySearchInfo info = new NearbySearchInfo();

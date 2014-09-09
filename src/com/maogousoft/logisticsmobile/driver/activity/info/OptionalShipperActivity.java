@@ -136,11 +136,11 @@ public class OptionalShipperActivity extends BaseActivity {
             mTelNum.setText(abcInfo.getTelcom());
             mAddress.setText(abcInfo.getAddress());
             mCompanyName.setText(abcInfo.getCompany_name());
-            mSelfDesc.setText(abcInfo.getMyself_recommendation());
-            if (!TextUtils.isEmpty(abcInfo.getCompany_photo())) {
-                ImageLoader.getInstance().displayImage(abcInfo.getCompany_photo(), id_card_photo, options,
+            mSelfDesc.setText(abcInfo.getCompany_recommendation());
+            if (!TextUtils.isEmpty(abcInfo.getCompany_logo())) {
+                ImageLoader.getInstance().displayImage(abcInfo.getCompany_logo(), id_card_photo, options,
                         new Utils.MyImageLoadingListener(context, id_card_photo));
-                userPhotoUrl = abcInfo.getCompany_photo();
+                userPhotoUrl = abcInfo.getCompany_logo();
             }
             if (!TextUtils.isEmpty(abcInfo.getCompany_photo1())) {
                 ImageLoader.getInstance().displayImage(abcInfo.getCompany_photo1(), car_photo1, options,
@@ -166,6 +166,42 @@ public class OptionalShipperActivity extends BaseActivity {
         final int id = v.getId();
         switch (id) {
             case R.id.info_id_register_submit:
+                if (!CheckUtils.checkIsEmpty(mName)) {
+                    showMsg("联系人不能为空");
+                    mName.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+                if (!CheckUtils.checkIsEmpty(mCompanyName)) {
+                    showMsg("公司名称不能为空");
+                    mCompanyName.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+                if (!CheckUtils.checkIsEmpty(mAddress)) {
+                    showMsg("公司地址不能为空");
+                    mAddress.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+                if (!CheckUtils.checkIsEmpty(mTelNum)) {
+                    showMsg("座机号码不能为空");
+                    mTelNum.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+                if (!CheckUtils.checkIsEmpty(mPhone)) {
+                    showMsg("手机号码不能为空");
+                    mPhone.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+                if (!CheckUtils.checkIsEmpty(mSelfDesc)) {
+                    showMsg("自我推荐不能为空");
+                    mSelfDesc.requestFocus();
+                    clearPhoto();
+                    return;
+                }
                 uploadImageAndSubmit();
                 break;
             case R.id.titlebar_id_more:
@@ -278,66 +314,28 @@ public class OptionalShipperActivity extends BaseActivity {
 
     // 提交注册
     private void submit() {
-        if (!CheckUtils.checkIsEmpty(mName)) {
-            showMsg("联系人不能为空");
-            mName.requestFocus();
-            clearPhoto();
-            return;
-        }
-        if (CheckUtils.checkIsEmpty(mCompanyName)) {
-            showMsg("公司名称不能为空");
-            mCompanyName.requestFocus();
-            clearPhoto();
-            return;
-        }
-        if (CheckUtils.checkIsEmpty(mAddress)) {
-            showMsg("公司地址不能为空");
-            mAddress.requestFocus();
-            clearPhoto();
-            return;
-        }
-        if (CheckUtils.checkIsEmpty(mTelNum)) {
-            showMsg("座机号码不能为空");
-            mTelNum.requestFocus();
-            clearPhoto();
-            return;
-        }
-        if (CheckUtils.checkIsEmpty(mPhone)) {
-            showMsg("手机号码不能为空");
-            mPhone.requestFocus();
-            clearPhoto();
-            return;
-        }
-        if (CheckUtils.checkIsEmpty(mSelfDesc)) {
-            showMsg("自我推荐不能为空");
-            mSelfDesc.requestFocus();
-            clearPhoto();
-            return;
-        }
-
         final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
             jsonObject.put(Constants.ACTION, Constants.SHIPPER_REG_OPTIONAL2);
             jsonObject.put(Constants.TOKEN, null);
-
-            if (CheckUtils.checkIsEmpty(mPhone)) {
-                params.put("telcom", mPhone.getText().toString());
-            }
+            params.put("phone", mPhone.getText().toString());
+            params.put("telcom", mTelNum.getText().toString());
             params.put("contact", mName.getText().toString());
-            //ex
-            params.put("myself_recommendation", mSelfDesc.getText().toString());
+            params.put("company_name", mCompanyName.getText().toString());
+            params.put("address", mAddress.getText().toString());
+            params.put("company_recommendation", mSelfDesc.getText().toString());
             if (!TextUtils.isEmpty(userPhotoUrl)) {
-                params.put("id_card_photo", userPhotoUrl);
+                params.put("company_logo", userPhotoUrl);
             }
             if (!TextUtils.isEmpty(mCarPhotosUrl1)) {
-                params.put("car_photo1", mCarPhotosUrl1);
+                params.put("company_photo1", mCarPhotosUrl1);
             }
             if (!TextUtils.isEmpty(mCarPhotosUrl2)) {
-                params.put("car_photo2", mCarPhotosUrl2);
+                params.put("company_photo2", mCarPhotosUrl2);
             }
             if (!TextUtils.isEmpty(mCarPhotosUrl3)) {
-                params.put("car_photo3", mCarPhotosUrl3);
+                params.put("company_photo3", mCarPhotosUrl3);
             }
             params.put("device_type", Constants.DEVICE_TYPE);
             jsonObject.put(Constants.TOKEN, application.getToken());

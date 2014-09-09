@@ -96,14 +96,6 @@ public class MyCarsDetailActivity extends BaseActivity {
             //搜索车源详情, 直接显示
             carInfo = (CarInfo) serializable;
             remark.setText(carInfo.getRemark());
-            //报价
-            int priceUnits = carInfo.getUnits();
-            String[] unitsArray = context.getResources().getStringArray(R.array.car_price_unit);
-            for (int i = 0; i < Constants.unitTypeValues.length; i++) {
-                if (Constants.unitTypeValues[i] == priceUnits) {
-                    price.setText(carInfo.getPrice() + "/" + unitsArray[i]);
-                }
-            }
             //显示其他数据
             displayData(true);
             //隐藏我的车队详情特有的控件
@@ -168,9 +160,14 @@ public class MyCarsDetailActivity extends BaseActivity {
         try {
             showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
+            final JSONObject params = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.GET_MY_FLEET_DETAIL);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject().put("id", id).toString());
+            if(isFromSearch) {
+                //标示符,是否是单独查询车源信息
+                params.put("isFromSearch", 1);
+            }
+            jsonObject.put(Constants.JSON, params.put("id", id).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     CarInfo.class, new AjaxCallBack() {
                         @Override
@@ -222,6 +219,18 @@ public class MyCarsDetailActivity extends BaseActivity {
             add_my_fleet.setVisibility(View.VISIBLE);
             price_layout.setVisibility(View.VISIBLE);
             remark_layout.setVisibility(View.VISIBLE);
+            //报价
+            if(!TextUtils.isEmpty(carInfo.getPrice())) {
+                int priceUnits = carInfo.getUnits();
+                String[] unitsArray = context.getResources().getStringArray(R.array.car_price_unit);
+                for (int i = 0; i < Constants.unitTypeValues.length; i++) {
+                    if (Constants.unitTypeValues[i] == priceUnits) {
+                        price.setText(carInfo.getPrice() + "元/" + unitsArray[i]);
+                    }
+                }
+            } else {
+                price_layout.setVisibility(View.GONE);
+            }
         } else {
             if (carInfo.getEnd_province1() > 0 || carInfo.getEnd_city1() > 0 || carInfo.getEnd_district1() > 0) {
                 String wayEnd1 = dbUtils.getCityInfo(carInfo.getEnd_province1(), carInfo.getEnd_city1(), carInfo.getEnd_district1());
@@ -269,11 +278,20 @@ public class MyCarsDetailActivity extends BaseActivity {
         }
         //时间
         Date date;
-        if (!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
-            date = new Date(Long.valueOf(carInfo.getLast_position_time()));
+        if(isFromSearch) {
+            if (!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
+                date = new Date(Long.valueOf(carInfo.getLast_position_time()));
+            } else {
+                date = new Date(Long.valueOf(carInfo.getPulish_date()));
+            }
         } else {
-            date = new Date(Long.valueOf(carInfo.getPulish_date()));
+            if (!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
+                date = new Date(Long.valueOf(carInfo.getLocation_time()));
+            } else {
+                date = new Date(Long.valueOf(carInfo.getPulish_date()));
+            }
         }
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         String locationTime = simpleDateFormat.format(date);
         location_time.setText(location_time.getText() + locationTime);
@@ -344,10 +362,10 @@ public class MyCarsDetailActivity extends BaseActivity {
                                             }
                                             location_address.setText(info.getAddress());
                                             location_address.setVisibility(View.VISIBLE);
-                                            location_time.setText(location_time.getText() + info.getTimestamp());
-                                            Intent intent = new Intent(context, MapActivity.class);
-                                            intent.putExtra(Constants.COMMON_KEY, info);
-                                            startActivity(intent);
+                                            location_time.setText("时间:" + info.getTimestamp());
+//                                            Intent intent = new Intent(context, MapActivity.class);
+//                                            intent.putExtra(Constants.COMMON_KEY, info);
+//                                            startActivity(intent);
                                         } else {
                                             Toast.makeText(context, "定位超时", Toast.LENGTH_SHORT).show();
                                         }

@@ -8,8 +8,8 @@ import java.io.Serializable;
 public class LocationInfo implements Serializable {
 
     private String address;//地址
-    private String X;
-    private String Y;
+    private Double longitude;
+    private Double latitude;
     private String result;//结果
     private String timestamp;
     private String BeginTime;
@@ -31,20 +31,20 @@ public class LocationInfo implements Serializable {
         this.address = address;
     }
 
-    public String getX() {
-        return X;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setX(String x) {
-        X = x;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
-    public String getY() {
-        return Y;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setY(String y) {
-        Y = y;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public String getResult() {

@@ -1,5 +1,6 @@
 package com.maogousoft.logisticsmobile.driver;
 
+import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,7 +47,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                             .put("longitude", lng)
 							.put("latitude", lat).toString();
 					jsonObject.put(Constants.ACTION, Constants.DRIVER_UPDATE_LOCATION);
-					jsonObject.put(Constants.TOKEN, application.getToken());
+                    jsonObject.put(Constants.TOKEN, application.getToken());
 					jsonObject.put(Constants.JSON, submitJson);
 					ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject, null, new AjaxCallBack() {
 

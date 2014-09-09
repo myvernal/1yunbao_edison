@@ -394,6 +394,7 @@
     </string>
 
     <string name="business_description">本人从事货运工作多年,经验丰富,稳重负责,受到众多客户的好评!欢迎有货的朋友联系我,价格从优!</string>
+    <string name="business_description_user">本公司发布货源多年,诚实守信,受到众多客户的好评!欢迎司机朋友联系我们,价格从优!</string>
 
     <string name="focus_line_count">(%s)</string>
     <string name="car_info_publish_date">发布时间:%s</string>

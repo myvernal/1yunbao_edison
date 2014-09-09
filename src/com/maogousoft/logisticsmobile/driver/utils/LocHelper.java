@@ -2,6 +2,7 @@ package com.maogousoft.logisticsmobile.driver.utils;
 
 import java.util.HashMap;
 
+import com.maogousoft.logisticsmobile.driver.MGApplication;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -218,6 +219,11 @@ public class LocHelper {
 	 * @return
 	 */
 	public static void addAlarm(Context context, long start, int intv) {
+        MGApplication application = (MGApplication) context.getApplicationContext();
+        if(application.getUserType() == Constants.USER_SHIPPER) {
+            //货主无需上报
+            return;
+        }
 
 		AlarmManager mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 

@@ -328,7 +328,6 @@ public class NewSourceActivity extends BaseListActivity implements
 
     // 请求指定页数的数据
     private void getData(int page) {
-
         if (newSourceInfos != null) {
             // 如果上一页传了list数据，那么证明是从 查找货源进入。 不需要加载新货源数据
             return;
@@ -355,7 +354,7 @@ public class NewSourceActivity extends BaseListActivity implements
                                             mFootProgress.setVisibility(View.GONE);
                                             mFootMsg.setText("已加载全部");
                                         } else {
-                                            if (mList.size() < 20) {
+                                            if (mList.size() < 10) {
                                                 load_all = true;
                                                 mFootProgress.setVisibility(View.GONE);
                                                 mFootMsg.setText("已加载全部");
@@ -363,7 +362,6 @@ public class NewSourceActivity extends BaseListActivity implements
                                             mAdapter.addAll(sort(mList));
                                             mAdapter.notifyDataSetChanged();
                                         }
-
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:

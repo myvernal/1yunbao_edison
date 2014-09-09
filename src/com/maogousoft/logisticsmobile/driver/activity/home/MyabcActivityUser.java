@@ -33,7 +33,7 @@ public class MyabcActivityUser extends BaseActivity {
     private Context mContext; // PR111
 	// 返回,完善资料
 	private Button mBack, mComplete, mUpdate, mContactKeFu;
-	private TextView mName, mRecommender, mPhone, mUpdatePwd, mBalance,
+	private TextView mName, mCompanyName, mPhone, mUpdatePwd, mBalance,
 			mCharge, mAccountRecord, mOnlineTime;
 	private RelativeLayout mHistory;
 	// 个人abc信息
@@ -62,7 +62,7 @@ public class MyabcActivityUser extends BaseActivity {
 		mComplete = (Button) findViewById(R.id.myabc_id_complete);
 		mUpdate = (Button) findViewById(R.id.myabc_id_update);
 		mName = (TextView) findViewById(R.id.myabc_id_name);
-		mRecommender = (TextView) findViewById(R.id.myabc_id_recommender);
+		mCompanyName = (TextView) findViewById(R.id.myabc_id_company_name);
 		mPhone = (TextView) findViewById(R.id.myabc_id_phone);
 		mUpdatePwd = (TextView) findViewById(R.id.myabc_id_updatepwd);
 		mBalance = (TextView) findViewById(R.id.myabc_id_balance);
@@ -186,10 +186,9 @@ public class MyabcActivityUser extends BaseActivity {
                                             mName.setText(userInfo.getName());
                                         }
                                         if (!TextUtils.isEmpty(userInfo.getCompany_name())) {
-                                            mRecommender.setText(userInfo.getCompany_name());
+                                            mCompanyName.setText(userInfo.getCompany_name());
                                         }
                                         mPhone.setText(userInfo.getPhone());
-                                        mOnlineTime.setText(userInfo.getAddress());
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:

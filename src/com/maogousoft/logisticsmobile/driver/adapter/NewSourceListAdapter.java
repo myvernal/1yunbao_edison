@@ -1,9 +1,11 @@
 package com.maogousoft.logisticsmobile.driver.adapter;
 // PR104
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.net.Uri;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
+import com.ybxiang.driver.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -176,18 +178,15 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 			}
 		});
 
-		if (sourceInfo.getValidate_time() != 0) {
-			long jiange = sourceInfo.getValidate_time()
-					- System.currentTimeMillis();
-
-			long hours = (jiange % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-			long minutes = (jiange % (1000 * 60 * 60)) / (1000 * 60);
-
-			holder.tvDjs.setText(hours + "时" + minutes + "分");
-			holder.tvDjs.setVisibility(View.VISIBLE);
-		} else {
-			holder.tvDjs.setVisibility(View.GONE);
-		}
+        Date date = new Date();
+        String betweenTime = "刚发布";
+        if(date.getTime() > sourceInfo.getCreate_time()) {
+            long time = date.getTime() - sourceInfo.getCreate_time();
+            long hour = time / (60 * 60 * 1000);
+            long minites = (time % (60 * 60 * 1000)) / (60 * 1000);
+            betweenTime = "{" + hour + "时" + minites + "分}";
+        }
+        holder.tvDjs.setText(Html.fromHtml("已发布:" + Utils.textFormatRed(betweenTime)));
         //电话号码
         holder.source_detail_phone.setText(sourceInfo.getCargo_user_phone());
         holder.source_detail_phone.setOnClickListener(new OnClickListener() {

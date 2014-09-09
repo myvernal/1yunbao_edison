@@ -629,7 +629,7 @@ public class SourceDetailActivity extends BaseActivity {
             params.put(Constants.ACTION, mSourceInfo.getFavorite_status() == 0? Constants.ATTENTION_SOURCE_USER : Constants.CANCEL_ATTENTION_SOURCE_USER);
             params.put(Constants.TOKEN, application.getToken());
             params.put(Constants.JSON,
-                    new JSONObject().put("userPhone", mPhone.getText().toString()));
+                    new JSONObject().put("userPhone", mSourceInfo.getUser_phone()));
             showDefaultProgress();
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, params, null,
                     new AjaxCallBack() {

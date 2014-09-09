@@ -4,7 +4,7 @@ package com.maogousoft.logisticsmobile.driver;
 public class Constants {
 
 	// 位置上报间隔
-	public static final int LOC_UPDATE_TIME = 60 * 60 * 1000;
+	public static final int LOC_UPDATE_TIME = 30 * 60 * 1000;
 
 	// 服务器请求参数
 	public static final String ACTION = "action";

@@ -10,20 +10,21 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalShipperActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.HuoZhuUserInfo;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.ybxiang.driver.activity.MySourceActivity;
+import com.ybxiang.driver.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,11 +39,14 @@ public class MyBusinessCardUser extends BaseActivity {
     private Context mContext; // PR111
     // 返回,完善资料
     private Button mBack, mShareCard, mUpdate;
-    private TextView insurance_count, fleet_count, verify_count, address, company_name, name, phone, telNum;
+    private TextView insurance_count, fleet_count, verify_count, address, company_name, name, phone,
+            telNum, company_recommendation;
     private RelativeLayout mHistory;
     // 个人abc信息
     private HuoZhuUserInfo userInfo;
     private View my_abc_layout;
+    private ImageView company_photo, company_photo1, company_photo2, company_photo3;
+    private DisplayImageOptions options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class MyBusinessCardUser extends BaseActivity {
         setContentView(R.layout.mybusiness_card_user);
         mContext = this; // PR111
         initViews();
+        initUtils();
     }
 
     private void initViews() {
@@ -59,6 +64,11 @@ public class MyBusinessCardUser extends BaseActivity {
         mShareCard = (Button) findViewById(R.id.titlebar_id_more);
         mShareCard.setText("发名片");
 
+        company_recommendation = (TextView) findViewById(R.id.myself_recommendation);
+        company_photo = (ImageView) findViewById(R.id.id_card_photo);
+        company_photo1 = (ImageView) findViewById(R.id.car_photo1);
+        company_photo2 = (ImageView) findViewById(R.id.car_photo2);
+        company_photo3 = (ImageView) findViewById(R.id.car_photo3);
         mUpdate = (Button) findViewById(R.id.myabc_id_update);
         my_abc_layout = findViewById(R.id.my_abc_layout);
         mBack = (Button) findViewById(R.id.titlebar_id_back);
@@ -77,6 +87,18 @@ public class MyBusinessCardUser extends BaseActivity {
         mUpdate.setOnClickListener(this);
     }
 
+    /**
+     * 初始化工具类 *
+     */
+    private void initUtils() {
+        options = new DisplayImageOptions.Builder().resetViewBeforeLoading()
+                .cacheOnDisc()
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)
+                .showImageForEmptyUri(R.drawable.ic_img_loading)
+                .displayer(new FadeInBitmapDisplayer(300)).build();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -90,9 +112,14 @@ public class MyBusinessCardUser extends BaseActivity {
         if (v == mHistory) {
             startActivity(new Intent(context, MySourceActivity.class));
         } else if (v == mUpdate) {
+            if(userInfo == null) {
+                Toast.makeText(mContext, "正在获取用户信息,请稍后", Toast.LENGTH_SHORT).show();
+                return;
+            }
             startActivity(new Intent(context, OptionalShipperActivity.class).putExtra("info", userInfo));
         } else if (v == mShareCard) {
             // PR111 end
+            mUpdate.setVisibility(View.GONE);
             showSpecialProgress("正在制作物流名片,请稍后");
             new Thread(new Runnable() {
                 @Override
@@ -107,6 +134,7 @@ public class MyBusinessCardUser extends BaseActivity {
                         @Override
                         public void run() {
                             dismissProgress();
+                            mUpdate.setVisibility(View.VISIBLE);
                             //分享名片
                             shareCard(path);
                         }
@@ -148,6 +176,27 @@ public class MyBusinessCardUser extends BaseActivity {
                                         fleet_count.setText(userInfo.getFleet_count());
                                         verify_count.setText(userInfo.getVerify_count());
                                         telNum.setText(userInfo.getTelcom());
+
+                                        if(!TextUtils.isEmpty(userInfo.getCompany_recommendation())) {
+                                            company_recommendation.setText(userInfo.getCompany_recommendation());
+                                        }
+                                        //显示照片
+                                        if(!TextUtils.isEmpty(userInfo.getCompany_logo())) {
+                                            ImageLoader.getInstance().displayImage(userInfo.getCompany_logo(), company_photo, options,
+                                                    new Utils.MyImageLoadingListener(context, company_photo));
+                                        }
+                                        if(!TextUtils.isEmpty(userInfo.getCompany_photo1())) {
+                                            ImageLoader.getInstance().displayImage(userInfo.getCompany_photo1(), company_photo1, options,
+                                                    new Utils.MyImageLoadingListener(context, company_photo1));
+                                        }
+                                        if(!TextUtils.isEmpty(userInfo.getCompany_photo2())) {
+                                            ImageLoader.getInstance().displayImage(userInfo.getCompany_photo2(), company_photo2, options,
+                                                    new Utils.MyImageLoadingListener(context, company_photo2));
+                                        }
+                                        if(!TextUtils.isEmpty(userInfo.getCompany_photo3())) {
+                                            ImageLoader.getInstance().displayImage(userInfo.getCompany_photo3(), company_photo3, options,
+                                                    new Utils.MyImageLoadingListener(context, company_photo3));
+                                        }
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:

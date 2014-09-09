@@ -96,6 +96,10 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
                                         List<SafePinanInfo> mList = (List<SafePinanInfo>) result;
+                                        for(SafePinanInfo safeInfo:mList) {
+                                            //将保险金额格式为万元为单位
+                                            safeInfo.setAmount_covered(safeInfo.getAmount_covered() / 10000.0f);
+                                        }
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);

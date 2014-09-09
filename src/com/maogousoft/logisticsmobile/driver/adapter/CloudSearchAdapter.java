@@ -55,17 +55,18 @@ public class CloudSearchAdapter extends BaseListAdapter<CarInfo> {
         holderView.nameId.setText(carInfo.getDriver_name());
         holderView.plate_numberId.setText(carInfo.getPlate_number());
         holderView.phone.setText(carInfo.getPhone());
-        if(!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
-            Date date = new Date(Long.valueOf(carInfo.getLast_position_time()));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
-            String locationTime = simpleDateFormat.format(date);
-            holderView.location_time.setText(locationTime);
-        } else if(carInfo.getPulish_date() > 0) {
-            Date date = new Date(Long.valueOf(carInfo.getPulish_date()));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
-            String locationTime = simpleDateFormat.format(date);
-            holderView.location_time.setText(locationTime);
-        }
+//        if(!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
+//            Date date = new Date(Long.valueOf(carInfo.getLast_position_time()));
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+//            String locationTime = simpleDateFormat.format(date);
+//            holderView.location_time.setText(locationTime);
+//        } else if(carInfo.getPulish_date() > 0) {
+//            Date date = new Date(Long.valueOf(carInfo.getPulish_date()));
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+//            String locationTime = simpleDateFormat.format(date);
+//            holderView.location_time.setText(locationTime);
+//        }
+        holderView.location_time.setText(carInfo.getLast_position_time());
         holderView.locationId.setText(carInfo.getLocation());
         convertView.setTag(carInfo);
         convertView.setTag(R.id.common_key, holderView);

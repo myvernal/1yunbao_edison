@@ -70,7 +70,7 @@
                             android:text="公司名称:"/>
 
                     <TextView
-                            android:id="@id/myabc_id_recommender"
+                            android:id="@+id/myabc_id_company_name"
                             style="@style/home_myabc_content_style"
                             android:text=""/>
                 </TableRow>
@@ -153,7 +153,7 @@
                 <TextView
                         android:id="@id/myabc_id_account_record"
                         style="@style/home_myabc_title_more_style"
-                        android:background="@drawable/ic_info_bottombg"
+                        android:background="@drawable/ic_info_centerbg"
                         android:drawableLeft="@drawable/ic_info_accountrecord"
                         android:text="账户记录"/>
 

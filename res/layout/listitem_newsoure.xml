@@ -96,7 +96,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignBottom="@+id/source_detail_phone"
                         android:singleLine="true"
-                        android:text="剩余:"
+                        android:text=""
                         android:textSize="14sp"/>
 
                 <TextView
