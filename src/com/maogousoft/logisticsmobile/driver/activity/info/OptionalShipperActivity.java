@@ -69,10 +69,10 @@ public class OptionalShipperActivity extends BaseActivity {
     private String mCarPhotosUrl3;
     private DisplayImageOptions options;
     private ImageView id_card_photo, car_photo1, car_photo2, car_photo3;
-    private static final int RESULT_CAPTURE_IMAGE_ID_PHOTO = 1001;
-    private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO1 = 1002;
-    private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO2 = 1003;
-    private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO3 = 1004;
+    private static final int RESULT_CAPTURE_IMAGE_COMPANY_PHOTO = 1005;
+    private static final int RESULT_CAPTURE_IMAGE_COMPANY_PHOTO1 = 1006;
+    private static final int RESULT_CAPTURE_IMAGE_COMPANY_PHOTO2 = 1007;
+    private static final int RESULT_CAPTURE_IMAGE_COMPANY_PHOTO3 = 1008;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,23 +173,23 @@ public class OptionalShipperActivity extends BaseActivity {
                 break;
             case R.id.id_card_photo:
                 Intent imageCaptureIntent0 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageCaptureIntent0.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "ID_PHOTO.jpg")));//照片存储目录
-                startActivityForResult(imageCaptureIntent0, RESULT_CAPTURE_IMAGE_ID_PHOTO);
+                imageCaptureIntent0.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "COMPANY_PHOTO.jpg")));//照片存储目录
+                startActivityForResult(imageCaptureIntent0, RESULT_CAPTURE_IMAGE_COMPANY_PHOTO);
                 break;
             case R.id.car_photo1:
                 Intent imageCaptureIntent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageCaptureIntent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "CAR_PHOTO1.jpg")));
-                startActivityForResult(imageCaptureIntent1, RESULT_CAPTURE_IMAGE_CAR_PHOTO1);
+                imageCaptureIntent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "COMPANY_PHOTO1.jpg")));
+                startActivityForResult(imageCaptureIntent1, RESULT_CAPTURE_IMAGE_COMPANY_PHOTO1);
                 break;
             case R.id.car_photo2:
                 Intent imageCaptureIntent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageCaptureIntent2.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "CAR_PHOTO2.jpg")));
-                startActivityForResult(imageCaptureIntent2, RESULT_CAPTURE_IMAGE_CAR_PHOTO2);
+                imageCaptureIntent2.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "COMPANY_PHOTO2.jpg")));
+                startActivityForResult(imageCaptureIntent2, RESULT_CAPTURE_IMAGE_COMPANY_PHOTO2);
                 break;
             case R.id.car_photo3:
                 Intent imageCaptureIntent3 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                imageCaptureIntent3.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "CAR_PHOTO3.jpg")));
-                startActivityForResult(imageCaptureIntent3, RESULT_CAPTURE_IMAGE_CAR_PHOTO3);
+                imageCaptureIntent3.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "COMPANY_PHOTO3.jpg")));
+                startActivityForResult(imageCaptureIntent3, RESULT_CAPTURE_IMAGE_COMPANY_PHOTO3);
                 break;
             default:
                 break;
@@ -201,22 +201,22 @@ public class OptionalShipperActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case RESULT_CAPTURE_IMAGE_ID_PHOTO://拍照
+                case RESULT_CAPTURE_IMAGE_COMPANY_PHOTO://拍照
                     String ID_PHOTO = Environment.getExternalStorageDirectory() + File.separator + "COMPANY_PHOTO.jpg";
                     displayPhoto(ID_PHOTO, id_card_photo);
                     userPhoto = ID_PHOTO;
                     break;
-                case RESULT_CAPTURE_IMAGE_CAR_PHOTO1:
+                case RESULT_CAPTURE_IMAGE_COMPANY_PHOTO1:
                     String CAR_PHOTO1 = Environment.getExternalStorageDirectory() + File.separator + "COMPANY_PHOTO1.jpg";
                     displayPhoto(CAR_PHOTO1, car_photo1);
                     mCarPhotos1 = CAR_PHOTO1;
                     break;
-                case RESULT_CAPTURE_IMAGE_CAR_PHOTO2:
+                case RESULT_CAPTURE_IMAGE_COMPANY_PHOTO2:
                     String CAR_PHOTO2 = Environment.getExternalStorageDirectory() + File.separator + "COMPANY_PHOTO2.jpg";
                     displayPhoto(CAR_PHOTO2, car_photo2);
                     mCarPhotos2 = CAR_PHOTO2;
                     break;
-                case RESULT_CAPTURE_IMAGE_CAR_PHOTO3:
+                case RESULT_CAPTURE_IMAGE_COMPANY_PHOTO3:
                     String CAR_PHOTO3 = Environment.getExternalStorageDirectory() + File.separator + "COMPANY_PHOTO3.jpg";
                     displayPhoto(CAR_PHOTO3, car_photo3);
                     mCarPhotos3 = CAR_PHOTO3;
@@ -325,6 +325,20 @@ public class OptionalShipperActivity extends BaseActivity {
                 params.put("telcom", mPhone.getText().toString());
             }
             params.put("contact", mName.getText().toString());
+            //ex
+            params.put("myself_recommendation", mSelfDesc.getText().toString());
+            if (!TextUtils.isEmpty(userPhotoUrl)) {
+                params.put("id_card_photo", userPhotoUrl);
+            }
+            if (!TextUtils.isEmpty(mCarPhotosUrl1)) {
+                params.put("car_photo1", mCarPhotosUrl1);
+            }
+            if (!TextUtils.isEmpty(mCarPhotosUrl2)) {
+                params.put("car_photo2", mCarPhotosUrl2);
+            }
+            if (!TextUtils.isEmpty(mCarPhotosUrl3)) {
+                params.put("car_photo3", mCarPhotosUrl3);
+            }
             params.put("device_type", Constants.DEVICE_TYPE);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, params);
