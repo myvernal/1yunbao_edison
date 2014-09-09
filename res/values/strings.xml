@@ -91,6 +91,7 @@
     <string name="string_home_myabc_title_name">姓&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;名：</string>
     <string name="string_home_myabc_title_carnum">车牌号码：</string>
     <string name="string_home_myabc_title_phone">手机号码：</string>
+    <string name="string_home_myabc_title_tel">座机号码：</string>
     <string name="string_home_myabc_title_recommend">推荐人帐号：</string>
     <string name="string_home_myabc_title_myaccount">我的账户</string>
     <string name="string_home_myabc_title_history">我的历史订单</string>

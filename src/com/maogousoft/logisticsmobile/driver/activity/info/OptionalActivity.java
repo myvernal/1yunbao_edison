@@ -94,7 +94,7 @@ public class OptionalActivity extends BaseActivity {
         setIsShowAnonymousActivity(false);
         initViews();
         initUtils();
-        initDatas();
+        initData();
     }
 
     // 初始化视图
@@ -151,7 +151,7 @@ public class OptionalActivity extends BaseActivity {
     }
 
     // 初始化数据，获取车型
-    private void initDatas() {
+    private void initData() {
         if (getIntent().hasExtra("isFormRegisterActivity")) {
             isFormRegisterActivity = getIntent().getBooleanExtra(
                     "isFormRegisterActivity", false);

@@ -29,14 +29,13 @@
                             style="@style/home_myabc_title_style"
                             android:layout_weight="1"
                             android:drawableLeft="@null"
-                            android:text="物流名片"/>
+                            android:text="易运宝物流名片"/>
 
                     <Button
                             android:id="@id/myabc_id_update"
                             style="@style/info_button_wrap_style"
                             android:layout_width="wrap_content"
-                            android:text="@string/string_home_myabc_complete"
-                            android:visibility="gone"/>
+                            android:text="修改"/>
                 </TableRow>
 
                 <TableRow android:background="@drawable/ic_info_centerbg">
@@ -50,6 +49,18 @@
                             android:id="@id/name"
                             style="@style/home_myabc_content_style"
                             android:text=""/>
+                </TableRow>
+
+                <TableRow android:background="@drawable/ic_info_centerbg">
+
+                    <TextView
+                            style="@style/home_myabc_title_style"
+                            android:drawableLeft="@drawable/ic_info_phone"
+                            android:text="@string/string_home_myabc_title_tel"/>
+
+                    <TextView
+                            android:id="@+id/telNum"
+                            style="@style/home_myabc_content_style"/>
                 </TableRow>
 
                 <TableRow android:background="@drawable/ic_info_centerbg">

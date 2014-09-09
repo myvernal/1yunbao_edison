@@ -52,8 +52,7 @@ public class MyBusinessCard extends BaseActivity {
 
     private Context mContext; // PR111
     // 返回,完善资料
-    private Button mBack, mUpdate;
-    private Button mShareCard;
+    private Button mBack, mUpdate, mShareCard;
     private TextView mName, mNumber, mPhone, mUpdatePwd;
     private View mChangePath, my_info_card;
     private TextView mPath1, mPath2, mPath3, mCarNum, mCarlength, mCartype,

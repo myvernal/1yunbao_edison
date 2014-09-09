@@ -25,6 +25,11 @@ public class HuoZhuUserInfo implements Serializable {
     private String insurance_count;
     private String fleet_count;
     private String verify_count;
+    private String company_photo = "";
+    private String company_photo1 = "";
+    private String company_photo2 = "";
+    private String company_photo3 = "";
+    private String myself_recommendation = "";
 
     private Double tpy_1;//基本险 费率
     private Double tpy_2;//基本险(易碎) 费率
@@ -33,6 +38,46 @@ public class HuoZhuUserInfo implements Serializable {
     private Double tpy_5;//综合险(易碎) 费率
     private Double tpy_6;//综合险附加被盗险费率
     private Double pa_1;//平安费率
+
+    public String getCompany_photo() {
+        return company_photo;
+    }
+
+    public void setCompany_photo(String company_photo) {
+        this.company_photo = company_photo;
+    }
+
+    public String getCompany_photo1() {
+        return company_photo1;
+    }
+
+    public void setCompany_photo1(String company_photo1) {
+        this.company_photo1 = company_photo1;
+    }
+
+    public String getCompany_photo2() {
+        return company_photo2;
+    }
+
+    public void setCompany_photo2(String company_photo2) {
+        this.company_photo2 = company_photo2;
+    }
+
+    public String getCompany_photo3() {
+        return company_photo3;
+    }
+
+    public void setCompany_photo3(String company_photo3) {
+        this.company_photo3 = company_photo3;
+    }
+
+    public String getMyself_recommendation() {
+        return myself_recommendation;
+    }
+
+    public void setMyself_recommendation(String myself_recommendation) {
+        this.myself_recommendation = myself_recommendation;
+    }
 
     public String getInsurance_count() {
         return insurance_count;

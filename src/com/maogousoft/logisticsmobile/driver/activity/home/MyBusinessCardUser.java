@@ -17,7 +17,8 @@ import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
+import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
+import com.maogousoft.logisticsmobile.driver.activity.info.OptionalShipperActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
@@ -36,12 +37,12 @@ import java.io.IOException;
 public class MyBusinessCardUser extends BaseActivity {
     private Context mContext; // PR111
     // 返回,完善资料
-    private Button mBack, mShareCard;
-    private TextView insurance_count, fleet_count, verify_count, address, company_name, name, phone;
+    private Button mBack, mShareCard, mUpdate;
+    private TextView insurance_count, fleet_count, verify_count, address, company_name, name, phone, telNum;
     private RelativeLayout mHistory;
     // 个人abc信息
     private HuoZhuUserInfo userInfo;
-    private View my_abc_layout, shareInfo;
+    private View my_abc_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class MyBusinessCardUser extends BaseActivity {
         mShareCard = (Button) findViewById(R.id.titlebar_id_more);
         mShareCard.setText("发名片");
 
+        mUpdate = (Button) findViewById(R.id.myabc_id_update);
         my_abc_layout = findViewById(R.id.my_abc_layout);
         mBack = (Button) findViewById(R.id.titlebar_id_back);
         insurance_count = (TextView) findViewById(R.id.insurance_count);
@@ -66,12 +68,13 @@ public class MyBusinessCardUser extends BaseActivity {
         company_name = (TextView) findViewById(R.id.company_name);
         name = (TextView) findViewById(R.id.name);
         phone = (TextView) findViewById(R.id.phone);
+        telNum = (TextView) findViewById(R.id.telNum);
         fleet_count = (TextView) findViewById(R.id.fleet_count);
-        shareInfo = findViewById(R.id.share_info);
         mHistory = (RelativeLayout) findViewById(R.id.myabc_id_history);
         mHistory.setClickable(true);
         mHistory.setOnClickListener(this);
         mBack.setOnClickListener(this);
+        mUpdate.setOnClickListener(this);
     }
 
     @Override
@@ -86,6 +89,8 @@ public class MyBusinessCardUser extends BaseActivity {
         super.onClick(v);
         if (v == mHistory) {
             startActivity(new Intent(context, MySourceActivity.class));
+        } else if (v == mUpdate) {
+            startActivity(new Intent(context, OptionalShipperActivity.class).putExtra("info", userInfo));
         } else if (v == mShareCard) {
             // PR111 end
             showSpecialProgress("正在制作物流名片,请稍后");
@@ -142,6 +147,7 @@ public class MyBusinessCardUser extends BaseActivity {
                                         insurance_count.setText(userInfo.getInsurance_count());
                                         fleet_count.setText(userInfo.getFleet_count());
                                         verify_count.setText(userInfo.getVerify_count());
+                                        telNum.setText(userInfo.getTelcom());
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:
