@@ -52,13 +52,15 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
     private LocationClient mLocClient;
 	private Button titlebar_id_more;
     private boolean isFirstLoc = true;
+    private JSONObject params;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initViews();
+        initData();
 		initListener();
-        locationAction();
+//        locationAction();
 	}
 
 	private void initViews() {
@@ -92,13 +94,19 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 		});
 	}
 
+    private void initData() {
+        String str = getIntent().getStringExtra(Constants.COMMON_KEY);
+        try {
+            params = new JSONObject(str);
+            getData(pageIndex);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-//		Intent intent = new Intent(context, ShopDetailActivity.class);
-//		intent.putExtra("ShopInfo", (ShopInfo) mAdapter.getItem(position));
-//		startActivityForResult(intent, 1000);
         Intent intent = new Intent(context, MapActivity.class);
         intent.putExtra(Constants.MAP_TYPE, Constants.MAP_TYPE_SHOP);
         intent.putExtra(Constants.COMMON_KEY, (ShopInfo) mAdapter.getItem(position));
@@ -107,18 +115,12 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 
 	// 请求指定页数的数据
 	private void getData(int page) {
-		if (latitude == 0 || longitude == 0) {
-			showMsg("请等待获取位置");
-			return;
-		}
 		try {
 			state = ISREFRESHING;
 			final JSONObject jsonObject = new JSONObject();
 			jsonObject.put(Constants.ACTION, Constants.QUERY_VENDER);
 			jsonObject.put(Constants.TOKEN, application.getToken());
-			jsonObject.put(Constants.JSON, new JSONObject().put("page", page)
-                    .put("latitude", latitude)
-                    .put("longitude", longitude).toString());
+			jsonObject.put(Constants.JSON, params.put("page", page));
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject, ShopInfo.class, new AjaxCallBack() {
 
 				@Override
@@ -134,7 +136,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 									mFootProgress.setVisibility(View.GONE);
 									mFootMsg.setText("已加载全部");
 								} else {
-									if (shopInfos.size() < 20) {
+									if (shopInfos.size() < 10) {
 										load_all = true;
 										mFootProgress.setVisibility(View.GONE);
 										mFootMsg.setText("已加载全部");

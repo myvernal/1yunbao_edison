@@ -6,7 +6,6 @@ import android.view.View;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
-import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.*;
 
@@ -67,7 +66,7 @@ public class HomeSpecialActivity extends BaseActivity {
 
 	// 会员特权
 	public void onVIP(View view) {
-		startActivity(new Intent(context, ShopListActivity.class));
+		startActivity(new Intent(context, SearchShopActivity.class));
 	}
 
 	// 我的推广

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseHomeActivity;
-import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.*;
 
@@ -61,7 +60,7 @@ public class HomeShipperActivity extends BaseHomeActivity {
 
 	// 会员特权
 	public void onVIP(View view) {
-		startActivity(new Intent(context, ShopListActivity.class));
+		startActivity(new Intent(context, SearchShopActivity.class));
 	}
 
 	// 物流点评

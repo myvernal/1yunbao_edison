@@ -135,20 +135,15 @@ public class CloudSearchAdapter extends BaseListAdapter<CarInfo> {
                                             if(info.getBeginTime() != null) {
                                                 Toast.makeText(mContext, "没有找到对方地理数据", Toast.LENGTH_SHORT).show();
                                                 return;
+                                            } else {
+                                                Toast.makeText(mContext, "定位成功", Toast.LENGTH_SHORT).show();
                                             }
                                             holderView.locationId.setText(info.getAddress());
                                             holderView.locationId.setVisibility(View.VISIBLE);
                                             //定位时间
                                             if(null != info.getTimestamp()) {
-                                                Date date = new Date(Long.valueOf(info.getTimestamp()));
-                                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
-                                                String locationTime = simpleDateFormat.format(date);
-                                                holderView.location_time.setText(locationTime);
+                                                holderView.location_time.setText(info.getTimestamp());
                                             }
-
-                                            Intent intent = new Intent(mContext, MapActivity.class);
-                                            intent.putExtra(Constants.COMMON_KEY, info);
-                                            mContext.startActivity(intent);
                                         } else {
                                             Toast.makeText(mContext, "定位超时", Toast.LENGTH_SHORT).show();
                                         }

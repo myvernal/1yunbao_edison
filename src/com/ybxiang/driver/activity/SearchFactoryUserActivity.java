@@ -62,7 +62,7 @@ public class SearchFactoryUserActivity extends BaseActivity {
                     JSONObject params = new JSONObject()
                             .put("area", citySelect.getSelectedProvince().getName())
                             .put("city", citySelect.getSelectedCity().getName())
-                            .put("distict", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedCity().getName())
+                            .put("distict", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedTowns().getName())
                             .put("searchKey", TextUtils.isEmpty(searchKey.getText()) ? "" : searchKey.getText());
                     Intent intent = new Intent(context, SearchDPListActivity.class);
                     intent.putExtra(Constants.COMMON_KEY, params.toString());

@@ -6,12 +6,8 @@ import android.view.View;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseHomeActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
-import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
-import com.ybxiang.driver.activity.HelpFindGoodsSourceActivity;
-import com.ybxiang.driver.activity.MyFriendsActivity;
-import com.ybxiang.driver.activity.PublishCarSourceActivity;
-import com.ybxiang.driver.activity.SpreadActivity;
+import com.ybxiang.driver.activity.*;
 
 /**
  * 司机首页
@@ -81,7 +77,7 @@ public class HomeDriverActivity extends BaseHomeActivity {
 
 	// 物流园区
 	public void onVIP(View view) {
-		startActivity(new Intent(context, ShopListActivity.class));
+		startActivity(new Intent(context, SearchShopActivity.class));
 	}
 
 	// 互动

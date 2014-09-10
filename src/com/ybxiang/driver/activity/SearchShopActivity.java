@@ -13,6 +13,7 @@ import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.vip.AddActivity;
+import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,7 +25,6 @@ public class SearchShopActivity extends BaseActivity {
     private Button mBack;
     private Button mQuery;
     private CitySelectView citySelect;
-    private EditText searchKey;
     private Button titlebar_id_more;
 
     @Override
@@ -44,7 +44,6 @@ public class SearchShopActivity extends BaseActivity {
 
         mQuery = (Button) findViewById(R.id.query);
         citySelect = (CitySelectView) findViewById(R.id.cityselect_start);
-        searchKey = (EditText) findViewById(R.id.searchKey);
         mBack.setOnClickListener(this);
         mQuery.setOnClickListener(this);
     }
@@ -75,13 +74,11 @@ public class SearchShopActivity extends BaseActivity {
                 }
                 try {
                     JSONObject params = new JSONObject()
-                            .put("area", citySelect.getSelectedProvince().getName())
-                            .put("city", citySelect.getSelectedCity().getName())
-                            .put("distict", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedCity().getName())
-                            .put("searchKey", TextUtils.isEmpty(searchKey.getText()) ? "" : searchKey.getText());
-                    Intent intent = new Intent(context, SearchDPListActivity.class);
+                            .put("province", citySelect.getSelectedProvince().getId())
+                            .put("city", citySelect.getSelectedCity() == null ? "" :citySelect.getSelectedCity().getId())
+                            .put("district", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedTowns().getId());
+                    Intent intent = new Intent(context, ShopListActivity.class);
                     intent.putExtra(Constants.COMMON_KEY, params.toString());
-                    intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_FACTORY_USER);
                     startActivity(intent);
                 } catch (JSONException e) {
                     e.printStackTrace();

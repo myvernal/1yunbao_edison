@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.MyBusinessCardUser;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
-import com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity;
 
 /**
  * Created by aliang on 2014/8/10.
@@ -66,7 +64,7 @@ public class ShipDPActivity extends BaseActivity {
                 startActivity(new Intent(context, SearchFactoryUserActivity.class));
                 break;
             case R.id.part4:
-                startActivity(new Intent(context, ShopListActivity.class));
+                startActivity(new Intent(context, SearchShopActivity.class));
                 break;
             case R.id.part5:
                 startActivity(new Intent(context, MyBusinessCardUser.class));

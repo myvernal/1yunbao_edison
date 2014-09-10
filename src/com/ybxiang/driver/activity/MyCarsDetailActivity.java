@@ -359,6 +359,8 @@ public class MyCarsDetailActivity extends BaseActivity {
                                             if(info.getBeginTime() != null) {
                                                 Toast.makeText(context, "没有找到对方地理数据", Toast.LENGTH_SHORT).show();
                                                 return;
+                                            } else {
+                                                Toast.makeText(context, "定位成功", Toast.LENGTH_SHORT).show();
                                             }
                                             location_address.setText(info.getAddress());
                                             location_address.setVisibility(View.VISIBLE);
