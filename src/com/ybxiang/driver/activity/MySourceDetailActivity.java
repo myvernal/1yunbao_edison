@@ -73,7 +73,7 @@ public class MySourceDetailActivity extends BaseActivity {
         source_detail_way.setText(source_detail_way.getText() + wayStart + "-->" + wayEnd);
         if (mSourceInfo.getCreate_time() > 0) {
             Date date = new Date(Long.valueOf(mSourceInfo.getCreate_time()));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String locationTime = simpleDateFormat.format(date);
             source_detail_time.setText(source_detail_time.getText() + locationTime);
         }

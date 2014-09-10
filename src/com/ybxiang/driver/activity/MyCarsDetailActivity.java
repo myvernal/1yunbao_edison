@@ -279,22 +279,21 @@ public class MyCarsDetailActivity extends BaseActivity {
         //时间
         Date date;
         if(isFromSearch) {
-            if (!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
-                date = new Date(Long.valueOf(carInfo.getLast_position_time()));
+            if(carInfo.getLast_position_time() != null && carInfo.getLast_position_time().contains(":")) {
+                location_time.setText(location_time.getText() + carInfo.getLast_position_time());
             } else {
-                date = new Date(Long.valueOf(carInfo.getPulish_date()));
+                if (!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
+                    date = new Date(Long.valueOf(carInfo.getLast_position_time()));
+                } else {
+                    date = new Date(Long.valueOf(carInfo.getPulish_date()));
+                }
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                String locationTime = simpleDateFormat.format(date);
+                location_time.setText(location_time.getText() + locationTime);
             }
         } else {
-            if (!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
-                date = new Date(Long.valueOf(carInfo.getLocation_time()));
-            } else {
-                date = new Date(Long.valueOf(carInfo.getPulish_date()));
-            }
+            location_time.setText(location_time.getText() + carInfo.getLocation_time());
         }
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        String locationTime = simpleDateFormat.format(date);
-        location_time.setText(location_time.getText() + locationTime);
     }
 
     // 删除数据

@@ -52,12 +52,12 @@ public class MyCarInfoListAdapter extends BaseListAdapter<CarInfo> implements Vi
         holderView.phone.setText(carInfo.getPhone());
         if(!TextUtils.isEmpty(carInfo.getLocation_time()) && Long.valueOf(carInfo.getLocation_time()) > 0) {
             Date date = new Date(Long.valueOf(carInfo.getLocation_time()));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm");
             String locationTime = simpleDateFormat.format(date);
             holderView.location_time.setText(locationTime);
         } else if(carInfo.getPulish_date() > 0) {
             Date date = new Date(Long.valueOf(carInfo.getPulish_date()));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm");
             String locationTime = simpleDateFormat.format(date);
             holderView.location_time.setText(locationTime);
         }

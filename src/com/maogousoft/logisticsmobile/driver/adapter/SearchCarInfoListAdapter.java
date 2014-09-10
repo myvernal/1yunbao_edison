@@ -45,14 +45,11 @@ public class SearchCarInfoListAdapter extends BaseListAdapter<CarInfo> implement
         ((TextView) convertView.findViewById(R.id.nameId)).setText(carInfo.getOwer_name());
         ((TextView) convertView.findViewById(R.id.plate_numberId)).setText(carInfo.getPlate_number());
         ((TextView) convertView.findViewById(R.id.phone)).setText(carInfo.getOwer_phone());
-        if(!TextUtils.isEmpty(carInfo.getLast_position_time()) && Long.valueOf(carInfo.getLast_position_time()) > 0) {
-            Date date = new Date(Long.valueOf(carInfo.getLast_position_time()));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
-            String locationTime = simpleDateFormat.format(date);
-            ((TextView) convertView.findViewById(R.id.location_time)).setText(locationTime);
+        if(!TextUtils.isEmpty(carInfo.getLast_position_time())) {
+            ((TextView) convertView.findViewById(R.id.location_time)).setText(carInfo.getLast_position_time());
         } else if(carInfo.getPulish_date() > 0) {
             Date date = new Date(Long.valueOf(carInfo.getPulish_date()));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm");
             String locationTime = simpleDateFormat.format(date);
             ((TextView) convertView.findViewById(R.id.location_time)).setText(locationTime);
         }

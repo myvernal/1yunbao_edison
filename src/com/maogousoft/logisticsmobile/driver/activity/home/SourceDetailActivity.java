@@ -403,7 +403,7 @@ public class SourceDetailActivity extends BaseActivity {
         }
 
         Date dateNow = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm");
         String time = simpleDateFormat.format(dateNow);
         String commonInfo = getString(R.string.common_share_info);
         shareContent.append(way).append(" ")

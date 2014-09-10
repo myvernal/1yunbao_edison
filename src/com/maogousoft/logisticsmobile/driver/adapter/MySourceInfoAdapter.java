@@ -40,7 +40,7 @@ public class MySourceInfoAdapter extends BaseListAdapter<NewSourceInfo> implemen
         ((TextView) convertView.findViewById(R.id.source_name)).setText(sourceInfo.getCargo_desc());
         if(sourceInfo.getCreate_time() > 0) {
             Date date = new Date(Long.valueOf(sourceInfo.getCreate_time()));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             String locationTime = simpleDateFormat.format(date);
             ((TextView) convertView.findViewById(R.id.source_create_time)).setText(locationTime);
         }
