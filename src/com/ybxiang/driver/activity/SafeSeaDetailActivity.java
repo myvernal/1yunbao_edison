@@ -104,7 +104,7 @@ public class SafeSeaDetailActivity extends BaseActivity {
             String bzdmType = safeSeaInfo.getPackage_type();
             if(!TextUtils.isEmpty(bzdmType)) {
                 for (int i = 0; i < Constants.seaSafeBZDMTypeValues.length; i++) {
-                    if (Constants.seaSafeBZDMTypeValues[i] == bzdmType) {
+                    if (Constants.seaSafeBZDMTypeValues[i].equals(bzdmType)) {
                         package_type.setText(safeBZDMType[i]);
                     }
                 }

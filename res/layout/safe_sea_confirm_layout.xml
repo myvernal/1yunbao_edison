@@ -69,11 +69,13 @@
                           android:layout_weight="1"/>
 
                 <TextView style="@style/safe_text_title_pingan_black_style"
+                          android:visibility="gone"
                           android:text="联系电话:"/>
 
                 <TextView style="@style/safe_text_title_pingan_info_style"
                           android:inputType="numberDecimal"
                           android:id="@+id/insured_phone"
+                          android:visibility="gone"
                           android:layout_width="0dp"
                           android:layout_weight="1"/>
             </LinearLayout>

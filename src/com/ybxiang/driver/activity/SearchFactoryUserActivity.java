@@ -37,9 +37,11 @@ public class SearchFactoryUserActivity extends BaseActivity {
         mBack = (Button) findViewById(R.id.titlebar_id_back);
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("工厂货主");
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
+        findViewById(R.id.label).setVisibility(View.GONE);
         mQuery = (Button) findViewById(R.id.query);
 
         citySelect = (CitySelectView) findViewById(R.id.cityselect_start);
+        citySelect.setVisibility(View.GONE);
         searchKey = (EditText) findViewById(R.id.searchKey);
         mBack.setOnClickListener(this);
         mQuery.setOnClickListener(this);
@@ -50,19 +52,11 @@ public class SearchFactoryUserActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.query:
-                if (citySelect.getSelectedProvince() == null || citySelect.getSelectedCity() == null) {
-                    Toast.makeText(context, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (citySelect.getSelectedProvince() == null || citySelect.getSelectedProvince() == null) {
-                    showMsg("请选择出发地，目的地。");
-                    return;
-                }
                 try {
                     JSONObject params = new JSONObject()
-                            .put("area", citySelect.getSelectedProvince().getName())
-                            .put("city", citySelect.getSelectedCity().getName())
-                            .put("distict", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedTowns().getName())
+//                            .put("area", citySelect.getSelectedProvince() == null ? "" : citySelect.getSelectedProvince().getName())
+//                            .put("city", citySelect.getSelectedCity() == null ? "" : citySelect.getSelectedCity().getName())
+//                            .put("distict", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedTowns().getName())
                             .put("searchKey", TextUtils.isEmpty(searchKey.getText()) ? "" : searchKey.getText());
                     Intent intent = new Intent(context, SearchDPListActivity.class);
                     intent.putExtra(Constants.COMMON_KEY, params.toString());

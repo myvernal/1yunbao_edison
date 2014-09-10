@@ -54,10 +54,6 @@ public class SearchThreePartyActivity extends BaseActivity {
                     Toast.makeText(context, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (citySelect.getSelectedProvince() == null || citySelect.getSelectedProvince() == null) {
-                    showMsg("请选择出发地，目的地。");
-                    return;
-                }
                 try {
                     JSONObject params = new JSONObject()
                             .put("area", citySelect.getSelectedProvince().getName())

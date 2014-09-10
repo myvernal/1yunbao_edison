@@ -83,26 +83,18 @@ public class SearchSpecialLineActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.query:
-                if (citySelectStart.getSelectedProvince() == null || citySelectStart.getSelectedCity() == null) {
+                if (citySelectStart.getSelectedCity() == null || citySelectEnd.getSelectedCity() == null) {
                     Toast.makeText(context, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (citySelectStart.getSelectedProvince() == null || citySelectEnd.getSelectedProvince() == null) {
-                    showMsg("请选择出发地，目的地。");
                     return;
                 }
                 final JSONObject params = new JSONObject();
                 try {
-                    params.put("area_start", citySelectStart.getSelectedProvince().getName());
-                    params.put("area_end", citySelectEnd.getSelectedProvince().getName());
-                    params.put("city_start", citySelectStart.getSelectedCity().getName());
-                    params.put("city_end", citySelectEnd.getSelectedCity().getName());
-                    if (citySelectStart.getSelectedTowns() != null) {
-                        params.put("distict_start", citySelectStart.getSelectedTowns().getName());
-                    }
-                    if (citySelectEnd.getSelectedTowns() != null) {
-                        params.put("distict_end", citySelectEnd.getSelectedTowns().getName());
-                    }
+                    params.put("area_start", citySelectStart.getSelectedProvince() == null ? "" : citySelectStart.getSelectedProvince().getName());
+                    params.put("area_end", citySelectEnd.getSelectedProvince() == null ? "" : citySelectEnd.getSelectedProvince().getName());
+                    params.put("city_start", citySelectStart.getSelectedCity() == null ? "" : citySelectStart.getSelectedCity().getName());
+                    params.put("city_end", citySelectEnd.getSelectedCity() == null ? "" : citySelectEnd.getSelectedCity().getName());
+                    params.put("distict_start", citySelectStart.getSelectedTowns() == null ? "" : citySelectStart.getSelectedTowns().getName());
+                    params.put("distict_end", citySelectEnd.getSelectedTowns() == null ? "" : citySelectEnd.getSelectedTowns().getName());
                     params.put("page", 1);
                     params.put("device_type", Constants.DEVICE_TYPE);
                 } catch (JSONException e) {

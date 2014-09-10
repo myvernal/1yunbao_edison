@@ -3,6 +3,7 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 // PR111 个人中心【我的易运宝】
 import java.util.List;
 
+import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,7 +44,7 @@ public class MyabcActivityDriver extends BaseActivity {
 
 	private Context mContext;
 
-	private Button mComplete; // 退出登录
+	private Button mComplete, mUpdate; // 退出登录
 
 	private Button mContactKeFu; // 联系客服
 
@@ -103,13 +104,14 @@ public class MyabcActivityDriver extends BaseActivity {
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_home_myabc_title);
 		// 隐藏我的易运宝左边的返回按钮
-		((Button) findViewById(R.id.titlebar_id_back)).setVisibility(View.GONE);
+		findViewById(R.id.titlebar_id_back).setVisibility(View.GONE);
 
 		mContactKeFu = (Button) findViewById(R.id.titlebar_id_more);
 		mContactKeFu.setText("联系客服");
 
 		mComplete = (Button) findViewById(R.id.myabc_id_complete);
-		mName = (TextView) findViewById(R.id.myabc_id_name);
+        mUpdate = (Button) findViewById(R.id.myabc_id_update);
+        mName = (TextView) findViewById(R.id.myabc_id_name);
 		mRecommender = (TextView) findViewById(R.id.myabc_id_recommender);
 		mPhone = (TextView) findViewById(R.id.myabc_id_phone);
 
@@ -117,6 +119,7 @@ public class MyabcActivityDriver extends BaseActivity {
 
 		mContactKeFu.setOnClickListener(this);
 		mComplete.setOnClickListener(this);
+        mUpdate.setOnClickListener(this);
 	}
 
 	@Override
@@ -132,8 +135,13 @@ public class MyabcActivityDriver extends BaseActivity {
 		if (v == mComplete) {
 			application.logout();
 			startActivity(new Intent(context, LoginActivity.class));
-
-		} else if (v == mContactKeFu) {
+		} else if(v == mUpdate) {
+            if(mAbcInfo == null) {
+                Toast.makeText(context, "正在获取账号资料,请稍后", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            startActivity(new Intent(context, OptionalActivity.class).putExtra("info", mAbcInfo));
+        } else if (v == mContactKeFu) {
 			// PR111 begin
 			// Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
 			// + "4008765156"));
@@ -175,8 +183,6 @@ public class MyabcActivityDriver extends BaseActivity {
 
 	/**
 	 * 给QQ好友发送消息
-	 * 
-	 * @param imagePath
 	 */
 	public void sendImageToQQ(String text) {
 		// 创建查询条件的intent，用于查询哪些软件的有activity支持发送
