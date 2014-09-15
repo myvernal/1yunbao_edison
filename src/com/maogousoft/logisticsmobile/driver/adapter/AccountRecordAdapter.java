@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.androidquery.AQuery;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.model.AccountRecordInfo;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.TimeUtils;
 
 /**
@@ -17,6 +18,7 @@ import com.maogousoft.logisticsmobile.driver.utils.TimeUtils;
  */
 public class AccountRecordAdapter extends BaseListAdapter<AccountRecordInfo> {
 
+    private static final String TAG = "AccountRecordAdapter";
 	private Context context;
 
 	private String phoneS = "";
@@ -29,7 +31,7 @@ public class AccountRecordAdapter extends BaseListAdapter<AccountRecordInfo> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder holder = null;
+		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.listitem_charge, parent, false);
@@ -49,6 +51,7 @@ public class AccountRecordAdapter extends BaseListAdapter<AccountRecordInfo> {
 		holder.phone.text(phoneS);
 
 		String typeStr = "";
+        LogUtil.e(TAG, "交易类型:" + c.getBusiness_type());
 		switch (c.getBusiness_type()) {
 			case AccountRecordInfo.BUSINESS_TYPE_VIOLATE:
 				typeStr = "违约扣除";
@@ -83,7 +86,9 @@ public class AccountRecordAdapter extends BaseListAdapter<AccountRecordInfo> {
 			case AccountRecordInfo.BUSINESS_TYPE_VIOLATE_PAID:
 				typeStr = "对方违约赔付";
 				break;
-
+            case AccountRecordInfo.BUSINESS_TYPE_INSURE_PAID:
+                typeStr = "购买保险扣除";
+                break;
 		}
 
 		holder.mode.text(typeStr);

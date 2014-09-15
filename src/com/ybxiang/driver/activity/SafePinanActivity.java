@@ -27,7 +27,7 @@ import org.json.JSONObject;
 public class SafePinanActivity extends BaseActivity {
     private Button mTitleBarBack, mTitleBarMore;
     private EditText safe_percent, safe_money, safe_all_money;
-    private TextView user_money;
+    private TextView user_money, desc;
     private CheckBox safe_check_box;
     private double userGold = -1;
     private HuoZhuUserInfo userInfo;
@@ -55,6 +55,8 @@ public class SafePinanActivity extends BaseActivity {
         user_money = (TextView) findViewById(R.id.user_money);
         safe_all_money = (EditText) findViewById(R.id.safe_all_money);
         safe_money = (EditText) findViewById(R.id.safe_money);
+        desc = (TextView) findViewById(R.id.desc);
+        desc.setOnClickListener(this);
 
         //保费由费率和保额相乘
         safe_all_money.addTextChangedListener(new TextWatcher() {
@@ -88,6 +90,11 @@ public class SafePinanActivity extends BaseActivity {
                 Intent intent = new Intent(context, SafeListActivity.class);
                 intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_PINGAN);
                 startActivity(intent);
+                break;
+            case R.id.desc:
+                Intent intentDesc = new Intent(context, BaoxianDescActivity.class);
+                intentDesc.putExtra(Constants.COMMON_KEY, Constants.SAFE_PINGAN);
+                startActivity(intentDesc);
                 break;
         }
     }

@@ -169,8 +169,10 @@ public class OthersActivity extends BaseActivity implements
 		UmengUpdateAgent.update(getParent());
 	}
 
-	// @Override
-	// public void onBackPressed() {
-	// sendBroadcast(new Intent(MainActivity.ACTION_SWITCH_MAINACTIVITY));
-	// }
+    @Override
+    public void onBackPressed() {
+        application.finishAllActivity();
+        Intent intent = new Intent(context, MainActivity.class);
+        startActivity(intent);
+    }
 }

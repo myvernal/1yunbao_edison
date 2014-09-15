@@ -28,7 +28,7 @@ public class SafeSeaActivity extends BaseActivity {
 
     private Button mTitleBarBack, mTitleBarMore;
     private Spinner safe_type_spinner;
-    private TextView safe_type_desc;
+    private TextView safe_type_desc, desc;
     private EditText safe_percent, safe_money, safe_all_money;
     private TextView user_money;
     private CheckBox safe_check_box;
@@ -61,6 +61,8 @@ public class SafeSeaActivity extends BaseActivity {
         safe_percent = (EditText) findViewById(R.id.safe_percent);
         safe_type_desc = (TextView) findViewById(R.id.safe_type_desc);
         safe_type_spinner = (Spinner) findViewById(R.id.safe_type_spinner);
+        desc = (TextView) findViewById(R.id.desc);//查看保险协议
+        desc.setOnClickListener(this);
     }
 
     private void initData() {
@@ -75,6 +77,11 @@ public class SafeSeaActivity extends BaseActivity {
                 Intent intent = new Intent(context, SafeListActivity.class);
                 intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_CPIC);
                 startActivity(intent);
+                break;
+            case R.id.desc:
+                Intent intentDesc = new Intent(context, BaoxianDescActivity.class);
+                intentDesc.putExtra(Constants.COMMON_KEY, Constants.SAFE_CPIC);
+                startActivity(intentDesc);
                 break;
         }
     }

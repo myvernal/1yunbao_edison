@@ -184,6 +184,7 @@
                           android:layout_gravity="center"
                           android:linksClickable="false"
                           android:autoLink="all"
+                          android:id="@+id/desc"
                           android:text="查看保险协议"/>
 
                 <CheckBox android:layout_width="wrap_content"

@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
@@ -54,6 +55,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         mTitleBarContent = (TextView) findViewById(R.id.titlebar_id_content);
         mRightButton = (Button) findViewById(R.id.titlebar_id_more);
         mBack = (Button) findViewById(R.id.titlebar_id_back);
+        mBack.setVisibility(View.GONE);
         mTitleBarContent.setText("发布货源");
         mRightButton.setText("已发布");
         cityselectStart = (CitySelectView) findViewById(R.id.cityselect_start);
@@ -270,5 +272,12 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        application.finishAllActivity();
+        Intent intent = new Intent(context, MainActivity.class);
+        startActivity(intent);
     }
 }

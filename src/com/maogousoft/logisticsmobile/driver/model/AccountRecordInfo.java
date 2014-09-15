@@ -79,7 +79,11 @@ public class AccountRecordInfo implements Serializable {
 	 */
 	public static final int BUSINESS_TYPE_VIOLATE_PAID = 12 ;
 
-	
+    /**
+     *购买保险扣除
+     */
+    public static final int BUSINESS_TYPE_INSURE_PAID = 13 ;
+
 	/**
 	 * 
 	 */

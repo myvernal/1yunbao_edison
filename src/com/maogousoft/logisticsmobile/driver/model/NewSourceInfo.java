@@ -147,7 +147,7 @@ public class NewSourceInfo implements Serializable {
 	private String user_name = "";
 
 	// 要求车长
-	private double car_length = 0;
+	private Double car_length = 0d;
 
 	private String cargo_user_name = "";// 发货时，填写的 联系人
 
@@ -155,11 +155,11 @@ public class NewSourceInfo implements Serializable {
 
     private String cargo_tip = ""; //常用短语
 
-	public double getCar_length() {
+	public Double getCar_length() {
 		return car_length;
 	}
 
-	public void setCar_length(double car_length) {
+	public void setCar_length(Double car_length) {
 		this.car_length = car_length;
 	}
 

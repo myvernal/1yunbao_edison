@@ -14,6 +14,7 @@ import com.maogousoft.logisticsmobile.driver.CitySelectView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
+import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
@@ -63,6 +64,7 @@ public class SearchSourceActivity extends BaseActivity {
     // 初始化视图
     private void initViews() {
         mBack = (Button) findViewById(R.id.titlebar_id_back);
+        mBack.setVisibility(View.GONE);
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("查找货源");
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setVisibility(View.GONE);
@@ -395,4 +397,10 @@ public class SearchSourceActivity extends BaseActivity {
         startActivity(new Intent(mContext, FocusLineInfoActivity.class));
     }
 
+    @Override
+    public void onBackPressed() {
+        application.finishAllActivity();
+        Intent intent = new Intent(context, MainActivity.class);
+        startActivity(intent);
+    }
 }

@@ -315,7 +315,9 @@ public class MyBusinessCard extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        sendBroadcast(new Intent(MainActivity.ACTION_SWITCH_MAINACTIVITY));
+        application.finishAllActivity();
+        Intent intent = new Intent(context, MainActivity.class);
+        startActivity(intent);
     }
 
     /**

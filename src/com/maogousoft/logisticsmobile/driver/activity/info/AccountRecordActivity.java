@@ -98,7 +98,7 @@ public class AccountRecordActivity extends BaseListActivity implements OnScrollL
 									mFootProgress.setVisibility(View.GONE);
 									mFootMsg.setText("已加载全部");
 								} else {
-									if (mList.size() < 20) {
+									if (mList.size() < 10) {
 										load_all = true;
 										mFootProgress.setVisibility(View.GONE);
 										mFootMsg.setText("已加载全部");

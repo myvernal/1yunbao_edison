@@ -861,6 +861,12 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme"
                   android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+        <activity android:name="com.ybxiang.driver.activity.BaoxianDescActivity"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"
+                  android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
     </application>
 
 </manifest>

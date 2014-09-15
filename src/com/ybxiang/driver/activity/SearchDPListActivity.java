@@ -70,6 +70,7 @@ public class SearchDPListActivity extends BaseListActivity implements
         mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
+        mListView.setOnScrollListener(this);
     }
 
     private void initData() {
@@ -92,10 +93,7 @@ public class SearchDPListActivity extends BaseListActivity implements
             mAdapter = new SpecialLineAdapter(mContext);
         }
         setListAdapter(mAdapter);
-        // list未加载数据不显示
         setListShown(false);
-
-
     }
 
     @Override
@@ -141,10 +139,6 @@ public class SearchDPListActivity extends BaseListActivity implements
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
-                                    if (mAdapter.isEmpty()) {
-                                        setEmptyText("没有找到数据哦");
-                                    }
-                                    state = WAIT;
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     if (result != null)
@@ -155,6 +149,10 @@ public class SearchDPListActivity extends BaseListActivity implements
                                         showMsg(result.toString());
                                     break;
                             }
+                            if (mAdapter.isEmpty()) {
+                                setEmptyText("没有找到数据哦");
+                            }
+                            state = WAIT;
                         }
                     });
         } catch (JSONException e) {

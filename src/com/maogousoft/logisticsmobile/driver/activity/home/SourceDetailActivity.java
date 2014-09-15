@@ -305,7 +305,7 @@ public class SourceDetailActivity extends BaseActivity {
         }
         //车长
         String carLength = sourceInfo.getCar_length() + "米";
-        if (sourceInfo.getCar_length() > 0) {
+        if (null != sourceInfo.getCar_length() && sourceInfo.getCar_length() > 0) {
             mSourceCarLength.setText(Html.fromHtml(mSourceCarLength.getText().toString() + Utils.textFormatBlue(sourceInfo.getCar_length() + "米")));
         } else {
             mSourceCarLength.setVisibility(View.GONE);
