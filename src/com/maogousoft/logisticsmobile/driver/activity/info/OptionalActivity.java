@@ -557,28 +557,19 @@ public class OptionalActivity extends BaseActivity {
 
                                                 StringBuffer sb = new StringBuffer();
                                                 sb.append("有新的货源,");
-                                                sb.append(newSourceInfo
-                                                        .getCargo_desc());
+                                                sb.append(newSourceInfo.getCargo_desc());
                                                 sb.append(",");
-                                                sb.append(newSourceInfo
-                                                        .getCargo_number());
-
-                                                switch (newSourceInfo
-                                                        .getCargo_unit()) {
-                                                    case 1:
-                                                        sb.append("车");
-                                                        break;
-                                                    case 2:
-                                                        sb.append("吨");
-                                                        break;
-                                                    case 3:
-                                                        sb.append("方");
-                                                        break;
+                                                sb.append(newSourceInfo.getCargo_number());
+                                                Integer unitPrice = newSourceInfo.getCargo_unit();
+                                                if(unitPrice != null && unitPrice>0) {
+                                                    String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
+                                                    for (int j = 0; j < Constants.unitTypeValues.length; j++) {
+                                                        if (Constants.unitTypeValues[i] == unitPrice) {
+                                                            sb.append(unitPriceStr[i]);
+                                                        }
+                                                    }
                                                 }
-
-                                                mNotificationManager.notify(
-                                                        i,
-                                                        getOrderNotification(
+                                                mNotificationManager.notify(i, getOrderNotification(
                                                                 context,
                                                                 sb.toString(),
                                                                 newSourceInfo, i));

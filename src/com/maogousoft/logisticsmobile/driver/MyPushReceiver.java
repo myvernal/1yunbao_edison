@@ -132,12 +132,17 @@ public class MyPushReceiver extends BroadcastReceiver {
 				sb.append(pushBean.getCargo_desc());
 				sb.append(",");
 				sb.append(pushBean.getCargo_number());
-				sb.append(pushBean.getCargo_unit_name());
+                Integer unitPrice = pushBean.getCargo_unit();
+                if(unitPrice != null && unitPrice>0) {
+                    String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
+                    for (int i = 0; i < Constants.unitTypeValues.length; i++) {
+                        if (Constants.unitTypeValues[i] == unitPrice) {
+                            sb.append(unitPriceStr[i]);
+                        }
+                    }
+                }
 
-				mNotificationManager.notify(
-						0,
-						getOrderNotification(context, sb.toString(),
-								pushBean.getId()));
+				mNotificationManager.notify(0, getOrderNotification(context, sb.toString(), pushBean.getId()));
 				break;
 			case 6:
 
@@ -311,17 +316,13 @@ public class MyPushReceiver extends BroadcastReceiver {
 	// }
 
 	// 跳入新货源详情
-	private static Notification getOrderNotification(Context context,
-			String title, int order_id) {
-		Notification notification = new Notification(R.drawable.ic_launcher,
-				title, System.currentTimeMillis());
+	private static Notification getOrderNotification(Context context, String title, int order_id) {
+		Notification notification = new Notification(R.drawable.ic_launcher, title, System.currentTimeMillis());
 		final Intent intent = new Intent(context, SourceDetailActivity.class);
 		intent.putExtra(SourceDetailActivity.ORDER_ID, order_id);
 		intent.putExtra("type", "MessageBroadCastReceiver");
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
-				intent, PendingIntent.FLAG_UPDATE_CURRENT);
-		notification.setLatestEventInfo(context, title, "点击查看货源详情",
-				pendingIntent);
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		notification.setLatestEventInfo(context, title, "点击查看货源详情", pendingIntent);
 		notification.sound = getSound(context);
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 		return notification;

@@ -146,6 +146,18 @@ public class PublishCarSourceActivity extends BaseActivity implements
      * @param view
      */
     public void onPublishCarSource(View view) {
+        if(cityselectStart.getSelectedProvince() == null) {
+            showMsg("请选择出发地");
+            return;
+        }
+        if(cityselectEnd.getSelectedProvince() == null) {
+            showMsg("请选择目的地");
+            return;
+        }
+        if(TextUtils.isEmpty(ower_phone.getText())) {
+            showMsg("请输入联系人电话");
+            return;
+        }
         final JSONObject jsonObject = new JSONObject();
         try {
             showSpecialProgress("正在发布车源,请稍后");

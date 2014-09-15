@@ -34,7 +34,7 @@
                   android:layout_width="match_parent"
                   android:layout_margin="10dp"
                   android:id="@+id/searchKey"
-                  android:hint="提示:公司名称,地址,货运类型等"/>
+                  android:hint="提示：所在区域、地址、公司名称等"/>
 
         <Button
                 style="@style/button1_style"

@@ -93,6 +93,31 @@ public class SearchCarSourceActivity extends BaseActivity {
         dbUtils = new CityDBUtils(application.getCitySDB());
     }
 
+    // add for PR1.3 begin
+    /**
+     * 运输方式：零担或者整车，二者必选其一
+     *
+     * @param view
+     */
+    public void onChooseCarWay(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        if (!checked) {
+            showMsg("必须选择一种运输方式【零担，整车】");
+            return;
+        }
+        switch (view.getId()) {
+            case R.id.car_way_part:
+                // 空车
+                selectedCarType = 1;
+                break;
+            case R.id.car_way_whole:
+                selectedCarType = 0;
+                // 不限
+                break;
+        }
+    }
+
     @Override
     public void onClick(View v) {
         super.onClick(v);

@@ -131,7 +131,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
     }
 
     /**
-     * 管理发布过的车源
+     * 管理发布过的货源
      */
     @Override
     public void onClick(View v) {
@@ -183,8 +183,8 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             showMsg("请选择出发地，目的地。");
             return;
         }
-        if (TextUtils.isEmpty(source_id_publish_contact_name.getText()) || TextUtils.isEmpty(source_id_publish_contact_phone.getText())) {
-            showMsg("联系人和手机号码是必填项,请重新填写");
+        if (TextUtils.isEmpty(source_id_publish_contact_phone.getText())) {
+            showMsg("联系人手机号码是必填项,请重新填写");
             return;
         }
         final JSONObject jsonObject = new JSONObject();
@@ -217,7 +217,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
                         .getId());
             }
 
-            if (!TextUtils.isEmpty(source_id_publish_cargo_desc.getText().toString())) {
+            if (!TextUtils.isEmpty(source_id_publish_cargo_desc.getText())) {
                 params.put("cargo_desc", source_id_publish_cargo_desc.getText().toString());
             }
 

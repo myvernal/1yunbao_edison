@@ -66,8 +66,7 @@
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_baojia"
-                          android:text="报        价："
-                          android:visibility="gone"/>
+                          android:text="运输价格："/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"

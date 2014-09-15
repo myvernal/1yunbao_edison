@@ -90,8 +90,11 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 String nameStr = marker.getExtraInfo().getString("name");
                 String addressStr = marker.getExtraInfo().getString("address");
                 String phoneStr = marker.getExtraInfo().getString("phone");
+                String locationTime = marker.getExtraInfo().getString("locationTime");
                 textView.setPadding(40,40,40,40);
-                textView.setText(nameStr + "\n\n" + "地址:" + addressStr + "\n\n" + "联系电话:" + phoneStr);
+                textView.setText(nameStr + "\n\n" + "地址:" + addressStr +
+                        "\n\n" + "时间:" + locationTime +
+                        "\n\n" + "联系电话:" + phoneStr);
                 textView.setBackgroundResource(R.drawable.popup);
                 mInfoWindow = new InfoWindow(textView, llInfo, listener);
                 mBaiduMap.showInfoWindow(mInfoWindow);
@@ -176,6 +179,9 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 Bundle bundle = new Bundle();
                 bundle.putString("name", info.title);
                 bundle.putString("address", info.address);
+                if(null != info.extras.get("locationTime")) {
+                    bundle.putString("locationTime", info.extras.get("locationTime").toString());
+                }
                 if(null != info.extras.get("phone")) {
                     bundle.putString("phone", info.extras.get("phone").toString());
                 }
