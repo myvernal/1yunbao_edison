@@ -244,9 +244,7 @@ public class SearchSourceActivity extends BaseActivity {
 
                                     break;
                                 case ResultCode.RESULT_FAILED:
-                                    if (result != null) {
                                         // 您当月的免费搜索次数已经用完
-
                                         // if (result.equals("您当月的免费搜索次数已经用完")) {
                                         final MyAlertDialog dialog = new MyAlertDialog(
                                                 context);
@@ -260,20 +258,10 @@ public class SearchSourceActivity extends BaseActivity {
                                                     @Override
                                                     public void onClick(View v) {
                                                         dialog.dismiss();
-
-                                                        String content = null;
-                                                        startActivity(new Intent(
-                                                                context,
-                                                                ShareActivity.class)
-                                                                .putExtra("share",
-                                                                        content));
+                                                        startActivity(new Intent(context,ShareActivity.class));
                                                         finish();
                                                     }
                                                 });
-
-                                        // }
-                                    }
-                                    // showMsg(result.toString());
                                     break;
 
                                 default:

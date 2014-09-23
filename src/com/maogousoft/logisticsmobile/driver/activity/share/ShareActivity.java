@@ -1,11 +1,5 @@
 package com.maogousoft.logisticsmobile.driver.activity.share;
 
-import java.util.List;
-import java.util.Set;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,14 +14,8 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseFragmentActivity;
@@ -36,9 +24,12 @@ import com.maogousoft.logisticsmobile.driver.adapter.MultiChoiceBaseAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.EvaluateInfo;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 分享给好友
@@ -79,9 +70,7 @@ public class ShareActivity extends BaseFragmentActivity implements
         mBack = (Button) findViewById(R.id.titlebar_id_back);
         mBack.setOnClickListener(this);
 		mListView = (ListView) findViewById(android.R.id.list);
-		// PR1.3 change string_share_title to share_get_gift
-		((TextView) findViewById(R.id.titlebar_id_content))
-				.setText(R.string.share_get_gift);
+		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.share_get_gift);
 		findViewById(R.id.titlebar_id_more).setVisibility(View.INVISIBLE);
 
 		tvShareHint = (TextView) findViewById(R.id.tv_sharehint);
@@ -100,16 +89,13 @@ public class ShareActivity extends BaseFragmentActivity implements
 		mSearch.addTextChangedListener(new TextWatcher() {
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before,int count) {
 				mCurFilter = !TextUtils.isEmpty(s) ? s.toString() : null;
-				getSupportLoaderManager().restartLoader(0, null,
-						ShareActivity.this);
+				getSupportLoaderManager().restartLoader(0, null, ShareActivity.this);
 			}
 
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
+			public void beforeTextChanged(CharSequence s, int start, int count,int after) {
 
 			}
 
@@ -183,28 +169,24 @@ public class ShareActivity extends BaseFragmentActivity implements
 			}
 			// 如果选中联系人为空
 			if (mAdapter.getSelectionCount() <= 0) {
-
 				String phone = mSearch.getText().toString();
 				if (!TextUtils.isEmpty(phone) && (phone.length() == 11)) {
 					String content = mContent.getText().toString();
 					showProgress("正在发送分享短信");
 					try {
 						SmsManager smsManager = SmsManager.getDefault();
-						PendingIntent sentIntent = PendingIntent.getBroadcast(
-								ShareActivity.this, 0, new Intent(), 0);
+						PendingIntent sentIntent = PendingIntent.getBroadcast(ShareActivity.this, 0, new Intent(), 0);
 						if (content.length() > 70) {
-							List<String> list = smsManager
-									.divideMessage(content);
+							List<String> list = smsManager.divideMessage(content);
 							for (String msg : list) {
-								smsManager.sendTextMessage(phone, null, msg,
-										sentIntent, null);
+								smsManager.sendTextMessage(phone, null, msg,sentIntent, null);
 							}
 						} else {
-							smsManager.sendTextMessage(phone, null, content,
-									sentIntent, null);
+							smsManager.sendTextMessage(phone, null, content,sentIntent, null);
 						}
 						dismissProgress();
 						showMsg("分享成功!");
+                        //请求接口,增加分享次数
 						addSearchSourceCount();
 					} catch (Exception e) {
 						dismissProgress();
@@ -217,16 +199,13 @@ public class ShareActivity extends BaseFragmentActivity implements
 				return;
 			}
 			Set<Long> set = mAdapter.getSelection();
-			// final StringBuilder sb = new StringBuilder();
 			String content = mContent.getText().toString();
 			showProgress("正在发送分享短信");
 			try {
 				SmsManager smsManager = SmsManager.getDefault();
-				PendingIntent sentIntent = PendingIntent.getBroadcast(
-						ShareActivity.this, 0, new Intent(), 0);
+				PendingIntent sentIntent = PendingIntent.getBroadcast(ShareActivity.this, 0, new Intent(), 0);
 				for (long s : set) {
-					String phone = ((Cursor) mAdapter.getItem((int) s))
-							.getString(2);
+					String phone = ((Cursor) mAdapter.getItem((int) s)).getString(2);
 					if (content.length() > 70) {
 						List<String> list = smsManager.divideMessage(content);
 						for (String msg : list) {
@@ -259,12 +238,10 @@ public class ShareActivity extends BaseFragmentActivity implements
 	private void getShareHint() {
 		// showDefaultProgress();
 		try {
-
 			final JSONObject jsonObject = new JSONObject();
 			jsonObject.put(Constants.ACTION, Constants.GET_SHARE_INFO);
 			jsonObject.put(Constants.TOKEN, application.getToken());
-			jsonObject.put(Constants.JSON, new JSONObject().put("page", "1")
-					.toString());
+			jsonObject.put(Constants.JSON, new JSONObject().put("page", "1").toString());
 
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
 					null, new AjaxCallBack() {
@@ -274,15 +251,10 @@ public class ShareActivity extends BaseFragmentActivity implements
 							// dismissProgress();
 							switch (code) {
 							case ResultCode.RESULT_OK:
-
 								LogUtil.i("ShareActivity", "result:" + result);
-
 								try {
-									JSONObject jsonResult = new JSONObject(
-											result.toString());
-
-									tvShareHint.setText(jsonResult.get(
-											"content").toString());
+									JSONObject jsonResult = new JSONObject(result.toString());
+									tvShareHint.setText(jsonResult.get("content").toString());
 									tvShareHint.setVisibility(View.VISIBLE);
 								} catch (JSONException e) {
 									e.printStackTrace();
@@ -310,12 +282,10 @@ public class ShareActivity extends BaseFragmentActivity implements
 	private void addSearchSourceCount() {
 		// showDefaultProgress();
 		try {
-
 			final JSONObject jsonObject = new JSONObject();
 			jsonObject.put(Constants.ACTION, Constants.ADD_SEARCH_COUNT);
 			jsonObject.put(Constants.TOKEN, application.getToken());
-			jsonObject.put(Constants.JSON, new JSONObject().put("page", "1")
-					.toString());
+			jsonObject.put(Constants.JSON, new JSONObject().put("page", "1").toString());
 
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
 					null, new AjaxCallBack() {
@@ -325,25 +295,10 @@ public class ShareActivity extends BaseFragmentActivity implements
 							// dismissProgress();
 							switch (code) {
 							case ResultCode.RESULT_OK:
-
-								LogUtil.i("ShareActivity",
-										"addSearchSourceCount result:" + result);
-								//
-								// try {
-								// JSONObject jsonResult = new JSONObject(
-								// result.toString());
-								//
-								// tvShareHint.setText(jsonResult.get(
-								// "content").toString());
-								// tvShareHint.setVisibility(View.VISIBLE);
-								// } catch (JSONException e) {
-								// e.printStackTrace();
-								// }
-
+								LogUtil.i("ShareActivity","addSearchSourceCount result:" + result);
 								if (result != null) {
 									showMsg("成功增加搜索货源可用次数");
 								}
-
 								break;
 							case ResultCode.RESULT_ERROR:
 								if (result != null)
