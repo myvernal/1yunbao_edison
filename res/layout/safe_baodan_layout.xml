@@ -10,12 +10,18 @@
         <ImageView android:layout_width="match_parent"
                    android:layout_height="match_parent"
                    android:id="@+id/image"
+                   android:visibility="gone"
                    android:scaleType="fitXY"/>
+        <WebView android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:visibility="gone"
+                 android:id="@+id/webView"/>
         <TextView android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   style="@style/info_publish_text_style"
                   android:id="@+id/loading"
                   android:gravity="center"
+                  android:background="@color/window_bg"
                   android:text="正在加载电子保单,请稍后"/>
     </RelativeLayout>
 

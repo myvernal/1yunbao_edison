@@ -1,8 +1,13 @@
 package com.ybxiang.driver.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +28,7 @@ public class SafeBaodanActivity extends BaseActivity {
 
     private View loadingView;
     private ImageView imageView;
+    private WebView webView;
     private DisplayImageOptions options;
     private String url;
     private Button mTitleBarBack;
@@ -38,6 +44,7 @@ public class SafeBaodanActivity extends BaseActivity {
     private void initViews() {
         loadingView = findViewById(R.id.loading);
         imageView = (ImageView) findViewById(R.id.image);
+        webView = (WebView) findViewById(R.id.webView);
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("电子保单");
         // 返回按钮生效
         mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
@@ -66,6 +73,7 @@ public class SafeBaodanActivity extends BaseActivity {
 
             @Override
             public void onLoadingComplete(Bitmap loadedImage) {
+                imageView.setVisibility(View.VISIBLE);
                 loadingView.setVisibility(View.GONE);
             }
 
@@ -74,6 +82,7 @@ public class SafeBaodanActivity extends BaseActivity {
 
             }
         });
+
     }
 
     @Override
