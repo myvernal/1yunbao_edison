@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class SafePinanInfo extends SafeSeaInfo implements Serializable {
     private String name;//保险人
+    private int id;//保险记录id
     private int type = 1;//0 太平洋 1 平安
     private String insured_name;//被保险人
     private String insured_phone;//被保险人电话
@@ -30,6 +31,18 @@ public class SafePinanInfo extends SafeSeaInfo implements Serializable {
     private String peichang_area;//赔款偿付地点
     private String package_type_str;//包装方式
     private Double amount_covered;//保险金额
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setAmount_covered(Double amount_covered) {
+        this.amount_covered = amount_covered;
+    }
 
     public String getPackage_type_str() {
         return package_type_str;
