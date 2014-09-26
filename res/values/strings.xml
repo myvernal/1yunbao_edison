@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">易运宝司机端</string>
+    <string name="app_name">易运宝物流</string>
     <string name="progress_loading">正在加载...</string>
     <string name="progress_loading_2">正在加载,请稍后...</string>
     <string name="string_title_login">登录</string>
