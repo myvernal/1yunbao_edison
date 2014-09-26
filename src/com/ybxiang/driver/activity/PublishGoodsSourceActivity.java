@@ -55,7 +55,6 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         mTitleBarContent = (TextView) findViewById(R.id.titlebar_id_content);
         mRightButton = (Button) findViewById(R.id.titlebar_id_more);
         mBack = (Button) findViewById(R.id.titlebar_id_back);
-        mBack.setVisibility(View.GONE);
         mTitleBarContent.setText("发布货源");
         mRightButton.setText("已发布");
         cityselectStart = (CitySelectView) findViewById(R.id.cityselect_start);
