@@ -68,6 +68,11 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
             ((TextView) findViewById(R.id.titlebar_id_content)).setText("太平洋保险记录");
         } else {
             ((TextView) findViewById(R.id.titlebar_id_content)).setText("平安保险记录");
+            TextView tipView = new TextView(context);
+            tipView.setText(R.string.pingan_tip);
+            tipView.setTextColor(getResources().getColor(R.color.TextColorRed));
+            mListView.addHeaderView(tipView);
+            //
         }
     }
 

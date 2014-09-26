@@ -375,6 +375,7 @@
         2.裸装货物提出锈损和刮擦责任.
     </string>
     <!-- 平安保险 -->
+    <string name="pingan_tip">平安保单需使用PDF阅读器打开，如无法查看，请先到手机市场下载安装adobe reader阅读软件后再点击查看</string>
     <string name="check_pingan_tip_1" formatted="false">
         中国大陆(西藏除外)
     </string>

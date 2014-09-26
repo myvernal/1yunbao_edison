@@ -88,8 +88,11 @@ public class SafeListAdapter extends BaseListAdapter<SafePinanInfo> {
             @Override
             public void onClick(View view) {
                 if (!TextUtils.isEmpty(safeInfo.getTpy_Electronic_policy()) && safeInfo.getType() == Constants.SAFE_CPIC) {
-                    Intent intent = new Intent(mContext, SafeBaodanActivity.class);
-                    intent.putExtra(Constants.COMMON_KEY, safeInfo.getTpy_Electronic_policy());
+//                    Intent intent = new Intent(mContext, SafeBaodanActivity.class);
+//                    intent.putExtra(Constants.COMMON_KEY, safeInfo.getTpy_Electronic_policy());
+//                    mContext.startActivity(intent);
+                    Toast.makeText(mContext, "正在通过浏览器下载保单,请注意查看通知栏状态", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(safeInfo.getTpy_Electronic_policy()));
                     mContext.startActivity(intent);
                 } else if (safeInfo.getType() == Constants.SAFE_PINGAN && safeInfo.getId() > 0) {
                     Toast.makeText(mContext, "正在通过浏览器下载保单,请注意查看通知栏状态", Toast.LENGTH_SHORT).show();
