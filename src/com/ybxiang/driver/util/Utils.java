@@ -54,7 +54,6 @@ public class Utils {
         @Override
         public void onLoadingFailed(FailReason failReason) {
             imageView.setImageResource(R.drawable.ic_img_loading);
-            Toast.makeText(context, "图片不存在或出现其他异常...", Toast.LENGTH_SHORT).show();
         }
 
         @Override

@@ -492,7 +492,7 @@ public class MyCarsDetailActivity extends BaseActivity {
             params.put("plate_number", carInfo.getPlate_number());
             params.put("car_type", carInfo.getCar_type());
             params.put("remark", carInfo.getRemark());
-            if(TextUtils.isEmpty(carInfo.getLast_position_time()) || Long.parseLong(carInfo.getLast_position_time()) <= 0) {
+            if(TextUtils.isEmpty(carInfo.getLast_position_time())) {
                 params.put("location_time", carInfo.getPulish_date());
             } else {
                 params.put("location_time", carInfo.getLast_position_time());

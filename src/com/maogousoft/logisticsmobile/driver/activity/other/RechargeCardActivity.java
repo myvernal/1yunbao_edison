@@ -85,6 +85,7 @@ public class RechargeCardActivity extends BaseActivity {
 					new JSONObject()
 							.put("card_no", muser.getText().toString().trim())
 							.put("card_pwd", mpwd.getText().toString().trim())
+                            .put("driver_coupon", application.getUserType())
 							.toString());
 			ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
 					null, new AjaxCallBack() {
