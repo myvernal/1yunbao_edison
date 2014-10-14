@@ -455,6 +455,13 @@ public class Constants {
 
     public static final int SAFE_CPIC = 0;//太平洋保险
     public static final int SAFE_PINGAN = 1;//平安保险
+
+    public static final int CAR_WAY_WHOLE = 57;//整车
+    public static final int CAR_WAY_PART = 58;//零担
+
+    public static final int REQUEST_CODE = 9000;
+    public static final int RESULT_CODE = 9001;
+
 	/**
 	 * 通过位置获取车型车型
 	 */

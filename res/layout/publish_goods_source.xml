@@ -118,16 +118,16 @@
                             android:id="@+id/car_way_part"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true"
                             android:onClick="onChooseCarWay"
-                            android:text="整车"/>
+                            android:text="零担" />
 
                     <RadioButton
                             android:id="@+id/car_way_whole"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checked="true"
                             android:onClick="onChooseCarWay"
-                            android:text="零担" />
+                            android:text="整车"/>
                 </RadioGroup>
             </LinearLayout>
 

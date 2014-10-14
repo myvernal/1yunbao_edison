@@ -2,36 +2,32 @@ package com.ybxiang.driver.activity;
 
 // add this file for 发布货源
 
-import android.text.Html;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.CitySelectView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
-import com.ybxiang.driver.util.Utils;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class PublishGoodsSourceActivity extends BaseActivity implements OnClickListener {
     private Context mContext;
     private Button mBack, mRightButton;
     private CitySelectView cityselectStart, cityselectEnd;
     private TextView mTitleBarContent;
-    private int selectedCarWay = 57;// 选择的车辆方式
+    private int selectedCarWay = Constants.CAR_WAY_WHOLE;// 选择的车辆方式
     private EditText source_id_publish_cargo_desc, source_id_publish_car_length,
             source_id_publish_unit_price, source_id_publish_user_bond, source_id_publish_cargo_remark,
             source_id_publish_contact_name, source_id_publish_contact_phone,
@@ -165,10 +161,10 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         switch (view.getId()) {
             case R.id.car_way_part:
                 // 零担
-                selectedCarWay = 58;
+                selectedCarWay = Constants.CAR_WAY_PART;
                 break;
             case R.id.car_way_whole:
-                selectedCarWay = 57;
+                selectedCarWay = Constants.CAR_WAY_WHOLE;
                 // 整车
                 break;
         }

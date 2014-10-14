@@ -94,17 +94,16 @@ public class CarsListActivity extends BaseListActivity implements
             mAdapter = new MyCarInfoListAdapter(mContext);
         }
         setListAdapter(mAdapter);
-        // list未加载数据不显示
-        setListShown(false);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (mAdapter.isEmpty()) {
-            pageIndex = 1;
-            getData(pageIndex);
-        }
+        // list未加载数据不显示
+        setListShown(false);
+        mAdapter.removeAll();
+        pageIndex = 1;
+        getData(pageIndex);
     }
 
     // 请求指定页数的数据
@@ -192,7 +191,8 @@ public class CarsListActivity extends BaseListActivity implements
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, AddCarActivity.class));
+                Intent intent = new Intent(context, AddCarActivity.class);
+                startActivityForResult(intent, Constants.REQUEST_CODE);
                 break;
         }
     }
