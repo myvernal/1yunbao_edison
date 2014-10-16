@@ -12,7 +12,6 @@ import android.widget.AbsListView.OnScrollListener;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
-import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.NewSourceListAdapter;
@@ -53,14 +52,11 @@ public class NewSourceActivity extends BaseListActivity implements
     // 已加载全部
     private boolean load_all = false;
 
-    private boolean isFromHomeActivity;// 是否从 主页跳转过来
-
     private List<NewSourceInfo> newSourceInfos = null;// 上一页传来的
-
     private FocusLineInfo focusLineInfo = new FocusLineInfo();// 上一页传输过来的省市区
-
     //请求类型
     private String queryType = Constants.QUERY_SOURCE_ORDER;
+    private JSONObject queryParams = new JSONObject();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,21 +73,13 @@ public class NewSourceActivity extends BaseListActivity implements
         mMore = (Button) findViewById(R.id.titlebar_id_more);
         mMore.setText("查找货源");
         setIsRightKeyIntoShare(false);
-        // mMore.setTextColor(0xffFF7F00);
-        // mMore.setCompoundDrawablesWithIntrinsicBounds(
-        // new BitmapDrawable(getResources(), BitmapFactory
-        // .decodeResource(getResources(),
-        // R.drawable.icon_newsource_search)), null, null,
-        // null);
 
         titlebar_id_content = (TextView) findViewById(R.id.titlebar_id_content);
         titlebar_id_content.setText(R.string.string_title_newsource);
         // 页脚信息
-        mFootView = getLayoutInflater().inflate(R.layout.listview_footview,
-                null);
+        mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
-        mFootProgress = (ProgressBar) mFootView
-                .findViewById(android.R.id.progress);
+        mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
 
@@ -102,31 +90,28 @@ public class NewSourceActivity extends BaseListActivity implements
         mAdapter = new NewSourceListAdapter(context);
         setListAdapter(mAdapter);
         setListShown(false);
-
     }
 
     private void initData() {
-
-        if (getIntent().hasExtra("isFromHomeActivity")) {
-            isFromHomeActivity = getIntent().getBooleanExtra(
-                    "isFromHomeActivity", false);
-        }
-
-        if (getIntent().hasExtra("NewSourceInfos")) {
-            newSourceInfos = (List<NewSourceInfo>) getIntent().getSerializableExtra("NewSourceInfos");
-
+        if (getIntent().hasExtra(Constants.COMMON_OBJECT_KEY)) {
+            String params = getIntent().getStringExtra(Constants.COMMON_KEY);
+            try {
+                queryParams = new JSONObject(params);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            newSourceInfos = (List<NewSourceInfo>) getIntent().getSerializableExtra(Constants.COMMON_OBJECT_KEY);
             // 从 搜索货源进入，不需要显示 搜索货源按钮 modify
-            // mMore.setVisibility(View.GONE);
             mMore.setText("关注此路线");
             rightButton = 1;
-
-            load_all = true;
-            mFootProgress.setVisibility(View.GONE);
-            mFootMsg.setText("已加载全部");
-
             mAdapter.addAll(sort(newSourceInfos));
             setListShown(true);
-
+            if(newSourceInfos.size() < 10) {
+                load_all = true;
+                mFootProgress.setVisibility(View.GONE);
+                mFootMsg.setText("已加载全部");
+            }
+            state = WAIT;
         }
         if (getIntent().hasExtra("focusLineInfo")) {
             focusLineInfo = (FocusLineInfo) getIntent().getSerializableExtra("focusLineInfo");
@@ -161,7 +146,7 @@ public class NewSourceActivity extends BaseListActivity implements
                         finish();
                         break;
                     case 1:// 关注此线路
-                        doFocuse();
+                        doFocus();
                         //Toast.makeText(mContext, "关注此线路成功", Toast.LENGTH_SHORT).show();
                         // startActivity(new Intent(mContext,
                         // SearchSourceActivity.class));
@@ -181,7 +166,7 @@ public class NewSourceActivity extends BaseListActivity implements
     }
 
     // 点击关注此路线
-    public void doFocuse() {
+    public void doFocus() {
         final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
@@ -306,7 +291,6 @@ public class NewSourceActivity extends BaseListActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-
         if (mAdapter.isEmpty()) {
             pageIndex = 1;
             getData(pageIndex);
@@ -315,29 +299,17 @@ public class NewSourceActivity extends BaseListActivity implements
 
     @Override
     public void onBackPressed() {
-
-        if (isFromHomeActivity) {
-            super.onBackPressed();
-        } else {
-            application.finishAllActivity();
-            Intent intent = new Intent(context, MainActivity.class);
-            startActivity(intent);
-        }
-
+        super.onBackPressed();
     }
 
     // 请求指定页数的数据
     private void getData(int page) {
-        if (newSourceInfos != null) {
-            // 如果上一页传了list数据，那么证明是从 查找货源进入。 不需要加载新货源数据
-            return;
-        }
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, queryType);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject().put("page", page).toString());
+            jsonObject.put(Constants.JSON, queryParams.put("page", page).toString());
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     NewSourceInfo.class, new AjaxCallBack() {

@@ -225,12 +225,9 @@ public class SearchSourceActivity extends BaseActivity {
                                         List<NewSourceInfo> mList = (ArrayList<NewSourceInfo>) result;
 
                                         if (mList.size() != 0) {
-                                            Intent intent = new Intent(context,
-                                                    NewSourceActivity.class);
-                                            intent.putExtra("isFromHomeActivity",
-                                                    true);
-                                            intent.putExtra("NewSourceInfos",
-                                                    (Serializable) mList);
+                                            Intent intent = new Intent(context, NewSourceActivity.class);
+                                            intent.putExtra(Constants.COMMON_KEY, params.toString());
+                                            intent.putExtra(Constants.COMMON_OBJECT_KEY, (Serializable) mList);
                                             intent.putExtra("focusLineInfo", focusLineInfo);
                                             context.startActivity(intent);
                                         } else {

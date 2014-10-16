@@ -68,10 +68,10 @@ public class CarsListActivity extends BaseListActivity implements
         // 数据加载中进度条
         mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
-        mFootProgress = (ProgressBar) mFootView
-                .findViewById(android.R.id.progress);
+        mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
+        mListView.setOnScrollListener(this);
     }
 
     private void initData() {
@@ -128,7 +128,7 @@ public class CarsListActivity extends BaseListActivity implements
                                             mFootProgress.setVisibility(View.GONE);
                                             mFootMsg.setText("已加载全部");
                                         } else {
-                                            if (mList.size() < 20) {
+                                            if (mList.size() < 10) {
                                                 load_all = true;
                                                 mFootProgress.setVisibility(View.GONE);
                                                 mFootMsg.setText("已加载全部");
