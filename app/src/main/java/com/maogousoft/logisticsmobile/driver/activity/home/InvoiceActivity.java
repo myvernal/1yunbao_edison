@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.fragment.InvoiceFragment;
@@ -23,7 +24,7 @@ public class InvoiceActivity extends BaseActivity {
     private HeaderView mHeaderView;
     private ArrayList<Fragment> fragmentList;
     private TextView view1, view2, view3;
-    private View bottomMenu1, bottomMenu2;
+    private View bottomMenu1, bottomMenu2, bottomMenu3;
     private InvoiceFragment firstFragment;
     private InvoiceFragment secondFragment;
     private InvoiceFragment thirdFragment;
@@ -56,6 +57,7 @@ public class InvoiceActivity extends BaseActivity {
 
         bottomMenu1 = findViewById(R.id.invoice_menu_1);
         bottomMenu2 = findViewById(R.id.invoice_menu_2);
+        bottomMenu3 = findViewById(R.id.invoice_menu_3);
         view1.setOnClickListener(this);
         view2.setOnClickListener(this);
         view3.setOnClickListener(this);
@@ -73,59 +75,87 @@ public class InvoiceActivity extends BaseActivity {
             case R.id.tv_guid3:
                 mPager.setCurrentItem(2);
                 break;
+        }
+    }
+
+    /**
+     * (司机)待定货单
+     * @param view
+     */
+    public void onBottomMenu1(View view) {
+        NewSourceInfo sourceInfo = firstFragment.getSelectedItem();
+        if (sourceInfo == null) {
+            showMsg("请选择货单");
+            return;
+        }
+        switch (view.getId()) {
             case R.id.menu_bottom1:
                 //删除货单(司机)
-                NewSourceInfo sourceInfo1 = firstFragment.getSelectedItem();
-                if(sourceInfo1 == null) {
-                    showMsg("请选择货单");
-                } else {
-                    showMsg("删除货单" + sourceInfo1.getId());
-                }
+                showMsg("删除货单" + sourceInfo.getId());
                 break;
             case R.id.menu_bottom2:
                 //已订货单(司机)
-                NewSourceInfo sourceInfo2 = firstFragment.getSelectedItem();
-                if(sourceInfo2 == null) {
-                    showMsg("请选择货单");
-                } else {
-                    showMsg("已定货单" + sourceInfo2.getId());
-                }
+                showMsg("已定货单" + sourceInfo.getId());
                 break;
             case R.id.menu_bottom3:
                 //邀约货单(司机)
-                NewSourceInfo sourceInfo3 = firstFragment.getSelectedItem();
-                if(sourceInfo3 == null) {
-                    showMsg("请选择货单");
-                } else {
-                    showMsg("邀约货单" + sourceInfo3.getId());
-                }
+                showMsg("邀约货单" + sourceInfo.getId());
                 break;
+        }
+    }
+
+    /**
+     * (司机)待装货单
+     * @param view
+     */
+    public void onBottomMenu2(View view) {
+        NewSourceInfo sourceInfo = secondFragment.getSelectedItem();
+        if (sourceInfo == null) {
+            showMsg("请选择货单");
+            return;
+        }
+        switch (view.getId()) {
             case R.id.menu_bottom4:
                 //装车不成功货单(司机)
-                NewSourceInfo sourceInfo4 = secondFragment.getSelectedItem();
-                if(sourceInfo4 == null) {
-                    showMsg("请选择货单");
-                } else {
-                    showMsg("装车不成功货单" + sourceInfo4.getId());
-                }
+                showMsg("装车不成功货单" + sourceInfo.getId());
                 break;
             case R.id.menu_bottom5:
                 //已装车货单(司机)
-                NewSourceInfo sourceInfo5 = secondFragment.getSelectedItem();
-                if(sourceInfo5 == null) {
-                    showMsg("请选择货单");
-                } else {
-                    showMsg("已装车货单" + sourceInfo5.getId());
-                }
+                showMsg("已装车货单" + sourceInfo.getId());
                 break;
             case R.id.menu_bottom6:
                 //订单确认货单(司机)
-                NewSourceInfo sourceInfo6 = secondFragment.getSelectedItem();
-                if(sourceInfo6 == null) {
-                    showMsg("请选择货单");
-                } else {
-                    showMsg("订单确认货单" + sourceInfo6.getId());
-                }
+                showMsg("订单确认货单" + sourceInfo.getId());
+                break;
+        }
+    }
+
+    /**
+     * (货主)待定货单
+     * @param view
+     */
+    public void onBottomMenu3(View view) {
+        NewSourceInfo sourceInfo = firstFragment.getSelectedItem();
+        if (sourceInfo == null) {
+            showMsg("请选择货单");
+            return;
+        }
+        switch (view.getId()) {
+            case R.id.menu_bottom7:
+                //装车不成功货单(司机)
+                showMsg("撤销货单" + sourceInfo.getId());
+                break;
+            case R.id.menu_bottom8:
+                //已装车货单(司机)
+                showMsg("修改货单" + sourceInfo.getId());
+                break;
+            case R.id.menu_bottom9:
+                //订单确认货单(司机)
+                showMsg("推送货单" + sourceInfo.getId());
+                break;
+            case R.id.menu_bottom10:
+                //订单确认货单(司机)
+                showMsg("导入货单" + sourceInfo.getId());
                 break;
         }
     }
@@ -136,9 +166,9 @@ public class InvoiceActivity extends BaseActivity {
     public void initViewPager() {
         mPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentList = new ArrayList<Fragment>();
-        firstFragment = InvoiceFragment.newInstance(1, application.getUserType());
-        secondFragment = InvoiceFragment.newInstance(2, application.getUserType());
-        thirdFragment = InvoiceFragment.newInstance(3,application.getUserType());
+        firstFragment = InvoiceFragment.newInstance(1);
+        secondFragment = InvoiceFragment.newInstance(2);
+        thirdFragment = InvoiceFragment.newInstance(3);
         fragmentList.add(firstFragment);
         fragmentList.add(secondFragment);
         fragmentList.add(thirdFragment);
@@ -171,12 +201,18 @@ public class InvoiceActivity extends BaseActivity {
     }
 
     private void changeStates(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 view1.setSelected(true);
                 view2.setSelected(false);
                 view3.setSelected(false);
-                bottomMenu1.setVisibility(View.VISIBLE);
+                if(application.getUserType() == Constants.USER_DRIVER) {
+                    bottomMenu1.setVisibility(View.VISIBLE);
+                    bottomMenu3.setVisibility(View.GONE);
+                } else {
+                    bottomMenu3.setVisibility(View.VISIBLE);
+                    bottomMenu1.setVisibility(View.GONE);
+                }
                 bottomMenu2.setVisibility(View.GONE);
                 break;
             case 1:
@@ -185,6 +221,7 @@ public class InvoiceActivity extends BaseActivity {
                 view3.setSelected(false);
                 bottomMenu1.setVisibility(View.GONE);
                 bottomMenu2.setVisibility(View.VISIBLE);
+                bottomMenu3.setVisibility(View.GONE);
                 break;
             case 2:
                 view1.setSelected(false);
@@ -192,6 +229,7 @@ public class InvoiceActivity extends BaseActivity {
                 view3.setSelected(true);
                 bottomMenu1.setVisibility(View.GONE);
                 bottomMenu2.setVisibility(View.GONE);
+                bottomMenu3.setVisibility(View.GONE);
                 break;
         }
     }

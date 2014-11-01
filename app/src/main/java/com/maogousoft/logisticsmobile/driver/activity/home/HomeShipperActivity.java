@@ -80,6 +80,12 @@ public class HomeShipperActivity extends BaseHomeActivity {
 		startActivity(intent);
     }
 
+    // 货单
+    public void onInvoice(View view) {
+        Intent intent = new Intent(mContext, InvoiceActivity.class);
+        startActivity(intent);
+    }
+
 	@Override
 	public void onBackPressed() {
 		exitAppHint();

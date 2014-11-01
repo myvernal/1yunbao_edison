@@ -79,6 +79,7 @@
     <string name="string_update_newpwd2">请再次输入新密码</string>
     <string name="string_update_submit">提交</string>
     <string name="string_update_title">修改密码</string>
+    <string name="string_update_pay_title">修改支付密码</string>
     <!--车辆详情-->
     <string name="string_car_detail_number">车牌号\t\t\t\t\t\t\t\t%s</string>
     <string name="string_car_detail_contact">联系人\t\t\t\t\t\t\t\t%s</string>
@@ -439,6 +440,7 @@
     <!--货单-->
     <string name="invoice_title">货单</string>
     <string name="invoice_tip_title">完成</string>
+    <string name="invoice_action_number">%s人</string>
     <!-- pay -->
     <string name="string_pay_wechat_tip">提示</string>
     <string name="string_pay_wechat_getting_prepayid">正在获取支付订单...</string>

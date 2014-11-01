@@ -140,7 +140,7 @@
                     android:drawableLeft="@drawable/radiobutton"
                     android:button="@null"
                     android:drawablePadding="5dp"
-                    android:text="提现到" />
+                    android:text="提现" />
             </RadioGroup>
 
             <View
@@ -205,13 +205,38 @@
 
                 <TextView
                     style="@style/home_motorcade_item_title_style"
-                    android:text="转账账号:" />
+                    android:text="转账卡号:" />
 
                 <EditText
                     android:id="@+id/charge_forward_account"
                     style="@style/info_edittext_style"
                     android:layout_width="150dp"
-                    android:hint="请输入账号" />
+                    android:hint="请输入转账卡号" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pay_password_layout"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/home_motorcade_item_title_style"
+                    android:text="支付密码:" />
+
+                <EditText
+                    android:id="@+id/pay_password"
+                    style="@style/info_edittext_style"
+                    android:layout_width="150dp"
+                    android:inputType="textPassword"/>
+                <TextView
+                    style="@style/home_motorcade_item_title_style"
+                    android:text="元" />
             </LinearLayout>
 
             <LinearLayout
@@ -235,6 +260,7 @@
                     android:id="@+id/charge_help_account"
                     style="@style/info_edittext_style"
                     android:layout_width="150dp"
+                    android:inputType="numberDecimal"
                     android:hint="请输入账号" />
             </LinearLayout>
 

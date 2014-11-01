@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
@@ -27,10 +28,14 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
     private CityDBUtils dbUtils;
     private int checkedPosition = -1;//用于记录被选中的RadioButton的状态，并保证只可选一个
     private RadioButton preRadioButton;//保存上一个被选中的radioButton
+    private boolean isShowRadioButton;
+    private int userType;
 
-    public InvoiceAdapter(Context context) {
+    public InvoiceAdapter(Context context, boolean isShowRadioButton, int userType) {
         super(context);
         dbUtils = new CityDBUtils(application.getCitySDB());
+        this.isShowRadioButton = isShowRadioButton;
+        this.userType = userType;
     }
 
     @Override
@@ -45,10 +50,23 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
             holder.order_money = (TextView) convertView.findViewById(R.id.source_id_order_money);
             holder.order_id = (TextView) convertView.findViewById(R.id.source_id);
             holder.radioButton = (RadioButton) convertView.findViewById(R.id.radioButton);
+
+            holder.source_detail_right_shipper = convertView.findViewById(R.id.source_detail_right_shipper);
+            holder.invoice_qd = (TextView) convertView.findViewById(R.id.invoice_qd);
+            holder.invoice_bj = (TextView) convertView.findViewById(R.id.invoice_bj);
+            holder.invoice_call = (TextView) convertView.findViewById(R.id.invoice_call);
+            if (!isShowRadioButton) {
+                holder.radioButton.setVisibility(View.GONE);
+            }
+            if(userType == Constants.USER_SHIPPER) {
+                holder.source_detail_right_shipper.setVisibility(View.VISIBLE);
+                holder.source_detail_phone.setVisibility(View.GONE);
+            }
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
         final NewSourceInfo sourceInfo = (NewSourceInfo) getItem(position);
         final StringBuilder title = new StringBuilder();
         final StringBuilder detail = new StringBuilder();
@@ -101,11 +119,11 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
         holder.radioButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                if(checkedPosition == position) {
+                if (checkedPosition == position) {
                     return;
                 }
                 //初始情况下没有被选中的radioButton
-                if(preRadioButton != null) {
+                if (preRadioButton != null) {
                     //重置之前被选中的radioButton
                     preRadioButton.setChecked(false);
                 }
@@ -121,11 +139,43 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
         } else {
             holder.radioButton.setChecked(false);
         }
+
+        if (userType == Constants.USER_SHIPPER) {
+            int num1 = sourceInfo.getVie_driver_count();
+            if (num1 > 0) {
+                holder.invoice_qd.setTextColor(mContext.getResources().getColor(R.color.common_btn_bg));
+                holder.invoice_qd.setCompoundDrawablesWithIntrinsicBounds(R.drawable.invoice_qd_h, 0, 0, 0);
+            } else {
+                holder.invoice_qd.setTextColor(mContext.getResources().getColor(R.color.TextColorGray));
+                holder.invoice_qd.setCompoundDrawablesWithIntrinsicBounds(R.drawable.invoice_qd, 0, 0, 0);
+            }
+            holder.invoice_qd.setText(mContext.getString(R.string.invoice_action_number, num1));
+
+            int num2 = sourceInfo.getOrder_vie_count();
+            if (num2 > 0) {
+                holder.invoice_bj.setTextColor(mContext.getResources().getColor(R.color.common_btn_bg));
+                holder.invoice_bj.setCompoundDrawablesWithIntrinsicBounds(R.drawable.invoice_bj_h, 0, 0, 0);
+            } else {
+                holder.invoice_bj.setTextColor(mContext.getResources().getColor(R.color.TextColorGray));
+                holder.invoice_bj.setCompoundDrawablesWithIntrinsicBounds(R.drawable.invoice_bj, 0, 0, 0);
+            }
+            holder.invoice_bj.setText(mContext.getString(R.string.invoice_action_number, num2));
+
+            int num3 = sourceInfo.getOrder_place_count();
+            if (num3 > 0) {
+                holder.invoice_call.setTextColor(mContext.getResources().getColor(R.color.common_btn_bg));
+                holder.invoice_call.setCompoundDrawablesWithIntrinsicBounds(R.drawable.invoice_call_h, 0, 0, 0);
+            } else {
+                holder.invoice_call.setTextColor(mContext.getResources().getColor(R.color.TextColorGray));
+                holder.invoice_call.setCompoundDrawablesWithIntrinsicBounds(R.drawable.invoice_call, 0, 0, 0);
+            }
+            holder.invoice_call.setText(mContext.getString(R.string.invoice_action_number, num3));
+        }
         return convertView;
     }
 
     public NewSourceInfo getSelectedSource() {
-        if(checkedPosition != -1) {
+        if (checkedPosition != -1) {
             return mList.get(checkedPosition);
         } else {
             return null;
@@ -134,7 +184,8 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
 
     class ViewHolder {
         TextView order_info, order_info_detail, order_money, order_id;
-        View source_detail_phone;
+        TextView invoice_qd, invoice_bj, invoice_call;
+        View source_detail_phone, source_detail_right_shipper;
         RadioButton radioButton;
     }
 }

@@ -17,9 +17,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.view.View;
 
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
+import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 
 /**
  * 工具类
@@ -64,19 +66,22 @@ public class BaseHelper {
 	 * @param icon
 	 *            图标
 	 */
-	public static void showDialog(Context context, String strTitle,
-			String strText, int icon) {
-		AlertDialog.Builder tDialog = new AlertDialog.Builder(context);
-		tDialog.setIcon(icon);
+	public static void showDialog(Context context, String strTitle, String strText, int icon) {
+		final MyAlertDialog tDialog = new MyAlertDialog(context);
+        tDialog.show();
 		tDialog.setTitle(strTitle);
 		tDialog.setMessage(strText);
-		tDialog.setPositiveButton(R.string.Ensure, null);
-		tDialog.show();
+        tDialog.setLeftButton(context.getString(R.string.Ensure), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tDialog.dismiss();;
+            }
+        });
 	}
 
 	/**
 	 * 打印信息
-	 * 
+	 *
 	 * @param tag
 	 *            标签
 	 * @param info
@@ -88,7 +93,7 @@ public class BaseHelper {
 
 	/**
 	 * 获取权限
-	 * 
+	 *
 	 * @param permission
 	 *            权限
 	 * @param path
@@ -108,7 +113,7 @@ public class BaseHelper {
 	// show the progress bar.
 	/**
 	 * 显示进度条
-	 * 
+	 *
 	 * @param context
 	 *            环境
 	 * @param title
@@ -137,7 +142,7 @@ public class BaseHelper {
 
 	/**
 	 * 字符串转json对象
-	 * 
+	 *
 	 * @param str
 	 * @param split
 	 * @return

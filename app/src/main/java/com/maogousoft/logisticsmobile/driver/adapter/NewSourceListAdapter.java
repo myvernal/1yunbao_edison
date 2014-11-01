@@ -43,12 +43,13 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 
     // 信息费
     private double messagePrice;
-
+    private boolean isShowBottomMenu;
     private Context mContext;
     private CityDBUtils dbUtils;
 
-    public NewSourceListAdapter(Context context) {
+    public NewSourceListAdapter(Context context, boolean isShowBottomMenu) {
         super(context);
+        this.isShowBottomMenu = isShowBottomMenu;
         dbUtils = new CityDBUtils(application.getCitySDB());
         mContext = context;
         progressDialog = new MyProgressDialog(context);
@@ -69,6 +70,10 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             holder.tvDjs = (TextView) convertView.findViewById(R.id.tv_djs);
             holder.source_qiangdan = convertView.findViewById(R.id.source_id_order_grab);
             holder.source_baojia = convertView.findViewById(R.id.source_id_order_state);
+            if(!isShowBottomMenu) {
+                holder.source_qiangdan.setVisibility(View.GONE);
+                holder.source_baojia.setVisibility(View.GONE);
+            }
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

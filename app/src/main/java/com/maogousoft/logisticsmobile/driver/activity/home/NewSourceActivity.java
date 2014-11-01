@@ -85,7 +85,7 @@ public class NewSourceActivity extends BaseListActivity implements
         mListView.setOnScrollListener(this);
         mMore.setOnClickListener(this);
 
-        mAdapter = new NewSourceListAdapter(mContext);
+        mAdapter = new NewSourceListAdapter(mContext, application.getUserType() == Constants.USER_DRIVER);
         setListAdapter(mAdapter);
         setListShown(false);
     }

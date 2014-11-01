@@ -113,12 +113,6 @@ public class NewSourceInfo implements Serializable {
 	// 押金
 	private Integer user_bond = 0;
 
-	// 已推送
-	private Integer push_drvier_count = 0;
-
-	// 已抢单司机数量
-	private Integer vie_driver_count = 0;
-
 	// 综合评分
 	private Float score = 0f;
 
@@ -154,6 +148,11 @@ public class NewSourceInfo implements Serializable {
 	private String cargo_user_phone = "";// 发货时，填写的 联系电话
 
     private String cargo_tip = ""; //常用短语
+    //货单新增:
+    private int push_drvier_count; //已推送司机数量
+    private int vie_driver_count; //已抢单司机数量
+    private int order_vie_count; //报价人数
+    private int order_place_count; //电话反馈人数
 
 	public Double getCar_length() {
 		return car_length;
@@ -537,5 +536,29 @@ public class NewSourceInfo implements Serializable {
 
     public void setCargo_tip(String cargo_tip) {
         this.cargo_tip = cargo_tip;
+    }
+
+    public void setPush_drvier_count(int push_drvier_count) {
+        this.push_drvier_count = push_drvier_count;
+    }
+
+    public void setVie_driver_count(int vie_driver_count) {
+        this.vie_driver_count = vie_driver_count;
+    }
+
+    public int getOrder_vie_count() {
+        return order_vie_count;
+    }
+
+    public void setOrder_vie_count(int order_vie_count) {
+        this.order_vie_count = order_vie_count;
+    }
+
+    public int getOrder_place_count() {
+        return order_place_count;
+    }
+
+    public void setOrder_place_count(int order_place_count) {
+        this.order_place_count = order_place_count;
     }
 }

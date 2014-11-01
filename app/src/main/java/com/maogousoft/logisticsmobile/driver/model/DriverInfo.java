@@ -91,7 +91,15 @@ public class DriverInfo implements Serializable {
 	private int end_city3;// 是 线路终止点城市3
 
 	private String car_phone = "";// 随车手机
+    private String yunbao_pay;
 
+    public String getYunbao_pay() {
+        return yunbao_pay;
+    }
+
+    public void setYunbao_pay(String yunbao_pay) {
+        this.yunbao_pay = yunbao_pay;
+    }
 
     public String getCar_photo3() {
         return car_photo3;

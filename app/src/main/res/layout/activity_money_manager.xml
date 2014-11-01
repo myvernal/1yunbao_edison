@@ -28,7 +28,7 @@
                 style="@style/settingInfoStyle"
                 android:id="@id/myabc_id_mycredit"
                 android:drawableLeft="@drawable/money_change_password"
-                android:onClick="onMyHistoryOrder"
+                android:onClick="onChangePayPwd"
                 android:text="修改支付密码" />
 
             <View
@@ -42,7 +42,7 @@
                 style="@style/settingInfoStyle"
                 android:id="@id/myabc_id_mycredit"
                 android:drawableLeft="@drawable/money_yunbao_money"
-                android:onClick="onMyHistoryOrder"
+                android:onClick="onCharge"
                 android:text="运宝余额" />
 
             <View

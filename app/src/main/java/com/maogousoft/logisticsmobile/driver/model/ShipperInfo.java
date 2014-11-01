@@ -30,6 +30,7 @@ public class ShipperInfo implements Serializable {
     private String company_photo2 = "";
     private String company_photo3 = "";
     private String company_recommendation = "";
+    private String yunbao_pay;
 
     private Double tpy_1;//基本险 费率
     private Double tpy_2;//基本险(易碎) 费率
@@ -38,6 +39,14 @@ public class ShipperInfo implements Serializable {
     private Double tpy_5;//综合险(易碎) 费率
     private Double tpy_6;//综合险附加被盗险费率
     private Double pa_1;//平安费率
+
+    public String getYunbao_pay() {
+        return yunbao_pay;
+    }
+
+    public void setYunbao_pay(String yunbao_pay) {
+        this.yunbao_pay = yunbao_pay;
+    }
 
     public String getCompany_photo1() {
         return company_photo1;

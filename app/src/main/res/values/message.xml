@@ -31,7 +31,7 @@
     <string name="tips_updatepwd_newpwd2">两次输入密码不一致!</string>
     <string name="tips_updatepwd_success">密码修改成功!</string>
     <string name="tips_updatepwd_failed">修改失败,请稍候重试!</string>
-    
+    <string name="tips_pwd_length_error">请输入至少6位密码</string>
     <string name="tips_home_vipmessage">会员特权暂未开放,请继续关注</string>
     
     <!-- 意见反馈 -->

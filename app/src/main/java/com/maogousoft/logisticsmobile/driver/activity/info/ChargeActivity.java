@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -39,6 +41,7 @@ import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CityInfo;
 import com.maogousoft.logisticsmobile.driver.pay.wx.WeChatPayUtils;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.utils.YeepayUtils;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.AlixId;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.BaseHelper;
@@ -59,7 +62,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     private static final String LOGTAG = LogUtil.makeLogTag(ChargeActivity.class);
     private AQuery gridView;
     private CityListAdapter mAdapter;
-    private EditText price;
+    private EditText price, charge_help_account, payPassword, forwardAccount;
     private RadioGroup groups;
     private String OrderId;
     private int type = ALI_PAY;
@@ -74,6 +77,9 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     private RadioGroup getMoneyGroup;//提现布局
     private View chargeHelpLayout;//代充账号布局
     private View moneyForwardLayout;//转账账号布局
+    private View payPasswordLayout;//支付密码
+
+    private int actionType = 0;//操作类型 0:充值,1:代充值,2:转账,3:提现
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +92,15 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     private void initView() {
         new AQuery(this).id(R.id.titlebar_id_content).text(R.string.string_other_recharge);
         new AQuery(this).id(R.id.titlebar_id_more).visible();
-
+        charge_help_account = (EditText) findViewById(R.id.charge_help_account);
+        charge_help_account.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         price = (EditText) findViewById(R.id.recharge_price);
         price.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        forwardAccount = (EditText) findViewById(R.id.charge_forward_account);
+        forwardAccount.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        payPassword = (EditText) findViewById(R.id.pay_password);
 
+        payPasswordLayout = findViewById(R.id.pay_password_layout);
         chargeHelpLayout = findViewById(R.id.charge_help_layout);
         moneyForwardLayout = findViewById(R.id.charge_forward_layout);
         chargePurposeGroup = (RadioGroup) findViewById(R.id.charge_purpose_group);
@@ -189,7 +200,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         if (type == WX_PAY) {
             WeChatPayUtils weChatPayUtils = new WeChatPayUtils(mContext, application);
             //微信支付单位为1分钱
-            weChatPayUtils.pay((int)(Float.parseFloat(price.getText().toString()) * 100));
+            weChatPayUtils.pay((int) (Float.parseFloat(price.getText().toString()) * 100));
         } else {
             getOrderId();
         }
@@ -200,12 +211,196 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         super.onClick(v);
         switch (v.getId()) {
             case R.id.recharge_submitbtn:
-                if (type == YIYUNBAO_PAY) {
-                    startActivity(new Intent(this, RechargeCardActivity.class));
-                } else {
-                    check();
+                switch (actionType) {
+                    case 0://充值
+                        if (type == YIYUNBAO_PAY) {
+                            startActivity(new Intent(this, RechargeCardActivity.class));
+                        } else {
+                            check();
+                        }
+                        break;
+                    case 1://代充值
+                        proxyPay();
+                        break;
+                    case 2://转账
+                        transferAccounts();
+                        break;
+                    case 3://提现
+                        withdrawDeposit();
+                        break;
                 }
                 break;
+        }
+    }
+
+    /**
+     * 代充值
+     */
+    private void proxyPay() {
+        if (!application.checkNetWork()) {
+            showMsg(R.string.network_not_connected);
+            return;
+        }
+        if (charge_help_account.length() != 11) {
+            showMsg("请输入对方的手机号");
+            charge_help_account.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(price.getText().toString().trim())) {
+            showMsg("请输入充值金额");
+            price.requestFocus();
+            return;
+        }
+        if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
+            showMsg("请输入有效的充值金额");
+            price.requestFocus();
+            return;
+        }
+        if (payPassword.length() < 6) {
+            showMsg("请输入至少6位支付密码");
+            payPassword.requestFocus();
+            return;
+        }
+        try {
+            showSpecialProgress("正在操作中,请稍后...");
+            JSONObject jsonObject = new JSONObject();
+            JSONObject params = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.PROXY_PAY_MONEY);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            params.put("phone", charge_help_account.getText());
+            params.put("pay_password", payPassword.getText());
+            params.put("money", price.getText());
+            params.put("user_type", application.getUserType());
+            jsonObject.put(Constants.JSON, params.toString());
+            ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject, null,
+                    new AjaxCallBack() {
+
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    BaseHelper.showDialog(mContext, "温馨提示", result.toString(), R.drawable.info);
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 转账
+     */
+    private void transferAccounts() {
+        if (TextUtils.isEmpty(price.getText().toString().trim())) {
+            showMsg("请输入转账金额");
+            price.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(forwardAccount.getText().toString().trim())) {
+            showMsg("请输入转账卡号");
+            forwardAccount.requestFocus();
+            return;
+        }
+        if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
+            showMsg("请输入有效的转账金额");
+            price.requestFocus();
+            return;
+        }
+        try {
+            showSpecialProgress("正在操作中,请稍后...");
+            JSONObject jsonObject = new JSONObject();
+            JSONObject params = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.TRANSFER_ACCOUNTS);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            params.put("bank_account", forwardAccount.getText());//转账卡号
+            params.put("name", price.getText());//转账对象名称
+            params.put("money", price.getText());//金额
+            params.put("bank_name", price.getText());//银行名称
+            params.put("user_type", application.getUserType());//用户类型
+            jsonObject.put(Constants.JSON, params.toString());
+            ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject, null,
+                    new AjaxCallBack() {
+
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    BaseHelper.showDialog(mContext, "温馨提示", result.toString(), R.drawable.info);
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 提现
+     */
+    private void withdrawDeposit() {
+        if (TextUtils.isEmpty(price.getText().toString().trim())) {
+            showMsg("请输入提现金额");
+            price.requestFocus();
+            return;
+        }
+        if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
+            showMsg("请输入有效的提现金额");
+            price.requestFocus();
+            return;
+        }
+        try {
+            showSpecialProgress("正在操作中,请稍后...");
+            JSONObject jsonObject = new JSONObject();
+            JSONObject params = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.WITHDRAW_DEPOSIT);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            params.put("money", price.getText());
+            params.put("user_type", application.getUserType());
+            jsonObject.put(Constants.JSON, params.toString());
+            ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject, null,
+                    new AjaxCallBack() {
+
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    BaseHelper.showDialog(mContext, "温馨提示", result.toString(), R.drawable.info);
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -225,24 +420,32 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                 type = YIYUNBAO_PAY;//易运宝
                 break;
             case R.id.purpose_radio0://为本账号充值
+                payPasswordLayout.setVisibility(View.GONE);
                 chargeHelpLayout.setVisibility(View.GONE);
                 moneyForwardLayout.setVisibility(View.GONE);
                 getMoneyGroup.setVisibility(View.GONE);
+                actionType = 0;
                 break;
             case R.id.purpose_radio1://代充值
+                payPasswordLayout.setVisibility(View.VISIBLE);
                 chargeHelpLayout.setVisibility(View.VISIBLE);
                 moneyForwardLayout.setVisibility(View.GONE);
                 getMoneyGroup.setVisibility(View.GONE);
+                actionType = 1;
                 break;
             case R.id.purpose_radio2://转账
+                payPasswordLayout.setVisibility(View.GONE);
                 moneyForwardLayout.setVisibility(View.VISIBLE);
                 chargeHelpLayout.setVisibility(View.GONE);
                 getMoneyGroup.setVisibility(View.GONE);
+                actionType = 2;
                 break;
-            case R.id.purpose_radio3://提现到
-                getMoneyGroup.setVisibility(View.VISIBLE);
+            case R.id.purpose_radio3://提现
+                //getMoneyGroup.setVisibility(View.VISIBLE);
+                payPasswordLayout.setVisibility(View.GONE);
                 chargeHelpLayout.setVisibility(View.GONE);
                 moneyForwardLayout.setVisibility(View.GONE);
+                actionType = 3;
                 break;
             case R.id.get_money_to_wx://提现到微信
                 break;

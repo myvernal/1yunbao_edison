@@ -2,6 +2,7 @@ package com.maogousoft.logisticsmobile.driver.activity.info;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,7 +13,13 @@ import com.maogousoft.logisticsmobile.driver.activity.home.HistroyOrderActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.ybxiang.driver.util.Utils;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -39,8 +46,7 @@ public class MoneyManagerActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // 获取账户余额
-        getBalance();
+        getAbcInfo();
     }
 
     // 获取账户余额
@@ -72,6 +78,80 @@ public class MoneyManagerActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // 获取我的abc信息
+    private void getAbcInfo() {
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            showDefaultProgress();
+            JSONObject params = new JSONObject();
+            if(application.getUserType() == Constants.USER_DRIVER) {
+                jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+            } else {
+                jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
+                params.put("user_id", application.getUserId());
+            }
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, params.toString());
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    application.getUserType() == Constants.USER_DRIVER ? DriverInfo.class : ShipperInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result != null) {
+                                        if (result instanceof ShipperInfo) {
+                                            ShipperInfo userInfo = (ShipperInfo) result;
+                                            if (TextUtils.isEmpty(userInfo.getYunbao_pay())) {
+                                                //支付密码为空, 设置完成后返回本页面
+                                                startActivity(new Intent(mContext, SettingPayPasswordActivity.class).putExtra(Constants.COMMON_KEY, true));
+                                                finish();
+                                            } else {
+                                                // 获取账户余额
+                                                getBalance();
+                                            }
+                                        } else if(result instanceof DriverInfo) {
+                                            DriverInfo userInfo = (DriverInfo) result;
+                                            if (TextUtils.isEmpty(userInfo.getYunbao_pay())) {
+                                                //支付密码为空, 设置完成后返回本页面
+                                                startActivity(new Intent(mContext, SettingPayPasswordActivity.class).putExtra(Constants.COMMON_KEY, true));
+                                                finish();
+                                            } else {
+                                                // 获取账户余额
+                                                getBalance();
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 修改支付密码
+     *
+     * @param view
+     */
+    public void onChangePayPwd(View view) {
+        startActivity(new Intent(mContext, SettingPayPasswordActivity.class));
     }
 
     /**

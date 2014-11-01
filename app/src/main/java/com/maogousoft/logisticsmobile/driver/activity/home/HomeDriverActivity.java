@@ -72,7 +72,6 @@ public class HomeDriverActivity extends BaseHomeActivity {
     // 货单
     public void onInvoice(View view) {
         Intent intent = new Intent(mContext, InvoiceActivity.class);
-        intent.putExtra(Constants.USER_TYPE, Constants.USER_DRIVER);
         startActivity(intent);
     }
 

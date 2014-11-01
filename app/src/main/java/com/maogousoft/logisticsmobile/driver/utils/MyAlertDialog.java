@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.maogousoft.logisticsmobile.driver.R;
@@ -25,6 +26,8 @@ public class MyAlertDialog extends AlertDialog {
 
 	private TextView mMessage;
 
+    private EditText mInput;
+
 	private Button button1, button2, button3;
 
 	@Override
@@ -34,6 +37,7 @@ public class MyAlertDialog extends AlertDialog {
 		View view = mInflater.inflate(R.layout.alert_dialog, null);
 		mTitle = (TextView) view.findViewById(android.R.id.title);
 		mMessage = (TextView) view.findViewById(android.R.id.message);
+        mInput = (EditText) view.findViewById(android.R.id.input);
 		button1 = (Button) view.findViewById(android.R.id.button1);
 		button2 = (Button) view.findViewById(android.R.id.button2);
 		button3 = (Button) view.findViewById(android.R.id.button3);
@@ -56,6 +60,14 @@ public class MyAlertDialog extends AlertDialog {
 			mMessage.setText(message);
 		}
 	}
+
+    public void displayInputView () {
+        mInput.setVisibility(View.VISIBLE);
+    }
+
+    public EditText getInputView() {
+        return mInput;
+    }
 
 	public void setLeftButton(String text, android.view.View.OnClickListener listener) {
 		if (button1 == null) {

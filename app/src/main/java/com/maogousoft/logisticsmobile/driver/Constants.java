@@ -255,6 +255,9 @@ public class Constants {
 	/** 改变密码 **/
 	public static final String CHANGE_PASSWORD = "change_password";
 
+    /** 修改支付密码 **/
+	public static final String CHANGE_PAY_PASSWORD = "change_pay_password";
+
 	/** 账户余额 **/
 	public static final String GET_ACCOUNT_GOLD = "get_account_gold";
 
@@ -284,6 +287,15 @@ public class Constants {
 
 	/** 卡密充值 */
 	public static final String DRIVER_COUPON = "driver_coupon";
+
+    /** 代充值 */
+    public static final String PROXY_PAY_MONEY = "proxy_pay_momeny";
+
+    /** 转账 */
+    public static final String TRANSFER_ACCOUNTS = "transfer_accounts";
+
+    /** 提现 */
+    public static final String WITHDRAW_DEPOSIT = "withdraw_deposit";
 
 	/** 添加商户(物流园区) */
 	public static final String ADD_VENDER = "add_vender";
