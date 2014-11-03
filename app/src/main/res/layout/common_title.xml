@@ -19,6 +19,7 @@
         android:shadowRadius="1.0"
         android:singleLine="true"
         android:textColor="@android:color/white"
+        android:text="易运宝"
         android:textSize="20.0sp" />
 
     <ImageView

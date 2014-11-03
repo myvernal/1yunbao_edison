@@ -78,6 +78,11 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
         return ((InvoiceAdapter)mAdapter).getSelectedSource();
     }
 
+    public void removeDataAndNotifyDataChange(Object object) {
+        mAdapter.getList().remove(object);
+        mAdapter.notifyDataSetChanged();
+    }
+
     // 根据条件请求指定页数的数据
     private void getData(int invoiceType, int page) {
         try {

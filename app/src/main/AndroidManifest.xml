@@ -942,7 +942,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-
+        <!--装车不成功-->
+        <activity
+            android:name=".activity.info.TruckFailedReasonActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <!--支付-->
         <activity
             android:name=".activity.info.ChargeActivity"

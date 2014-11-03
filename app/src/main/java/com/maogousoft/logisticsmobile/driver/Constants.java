@@ -413,6 +413,27 @@ public class Constants {
     /** 司机端:货单列表 */
     public static final String QUERY_PENDING_SOURCE_ORDER = "query_pending_source_order";
 
+    /** 司机端：待定货单(删除) */
+    public static final String DELETE_PENDING_ORDER = "remove_driver_panding_source_order";
+
+    /** 司机端：待定货单(已定) */
+    public static final String DONE_PENDING_ORDER = "has_been_driver_panding_source_order";
+
+    /** 司机端：货单列表数量查询*/
+    public static final String QUERY_PENDING_SOURCE_COUNT = "query_pending_source_order_count";
+
+    /** 司机端：装车不成功*/
+    public static final String TRUCK_LOADING_FAIL = "truck_loading_fail";
+
+    /** 司机端：已装车*/
+    public static final String TRUCK_LOADING_FINISH = "truck_loading_finish";
+
+    /** 货主端:撤销货单 */
+    public static final String CANCEL_ORDER = "cancel_order";
+
+    /** 货主端:接受抢单 */
+    public static final String ACCEPT_ORDER = "accept_order";
+
     /** 货主端:货单列表 */
     public static final String QUERY_ORDER = "query_order";
 

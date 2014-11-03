@@ -92,7 +92,6 @@ public class OptionalActivity extends BaseActivity {
         setContentView(R.layout.activity_info_optional);
         setIsShowAnonymousActivity(false);
         initViews();
-        initUtils();
         initData();
     }
 
@@ -133,18 +132,6 @@ public class OptionalActivity extends BaseActivity {
         mNumber.setOnFocusChangeListener(mOnFocusChangeListener);
         mName.setOnFocusChangeListener(mOnFocusChangeListener);
 
-    }
-
-    /**
-     * 初始化工具类 *
-     */
-    private void initUtils() {
-        options = new DisplayImageOptions.Builder().resetViewBeforeLoading()
-                .cacheOnDisc()
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
-                .bitmapConfig(Bitmap.Config.ARGB_8888)
-                .showImageForEmptyUri(R.drawable.ic_img_loading)
-                .displayer(new FadeInBitmapDisplayer(300)).build();
     }
 
     // 初始化数据，获取车型
@@ -343,7 +330,8 @@ public class OptionalActivity extends BaseActivity {
      * @param imgView
      */
     private void displayPhoto(final String url, final ImageView imgView) {
-        File file = new File(url);
+        imageLoader.displayImage(url, imgView);
+       /* File file = new File(url);
         if (file.exists()) {
             Bitmap bm = BitmapFactory.decodeFile(url);
             final Bitmap smallBitmap = Utils.getScaleBitmapSmall(bm);
@@ -361,7 +349,7 @@ public class OptionalActivity extends BaseActivity {
                     });
                 }
             }).start();
-        }
+        }*/
     }
 
     // 输入框失去焦点事件监听
