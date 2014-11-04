@@ -112,11 +112,14 @@
     </style>
 
     <style name="checkboxStyle">
-        <item name="android:button">@drawable/selector_checkbox</item>
+        <item name="android:drawableLeft">@drawable/selector_checkbox</item>
         <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:textColor">@color/font_gray2</item>
+        <item name="android:drawablePadding">5dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@null</item>
     </style>
 
     <style name="info_button_style">
@@ -236,7 +239,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/TextColorBlue</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:padding">3dp</item>
     </style>
 
@@ -286,7 +289,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/TextColorBlack</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:padding">3dp</item>
     </style>
 
@@ -519,7 +522,9 @@
     <style name="charge_radio_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:button">@drawable/selector_radio</item>
+        <item name="android:drawableLeft">@drawable/selector_radio</item>
+        <item name="android:background">@null</item>
+        <item name="android:button">@null</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:textColor">@color/font_gray2</item>
         <item name="android:drawablePadding">5dp</item>
@@ -564,7 +569,7 @@
         <item name="android:paddingTop">7dp</item>
         <item name="android:paddingBottom">7dp</item>
         <item name="android:focusable">false</item>
-        <item name="android:minHeight">40dip</item>
+        <item name="android:padding">10dip</item>
         <item name="android:background">@drawable/selector_common_button</item>
     </style>
 
@@ -572,6 +577,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:paddingLeft">8dp</item>
         <item name="android:paddingRight">8dp</item>
+        <item name="android:textSize">@dimen/font_size_normal</item>
     </style>
 
     <style name="button1_style3" parent="button1_style">
@@ -600,7 +606,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:paddingLeft">40dp</item>
         <item name="android:paddingRight">40dp</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">@dimen/font_size_normal</item>
     </style>
 
     <style name="button2_style">

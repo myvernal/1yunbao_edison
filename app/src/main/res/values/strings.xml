@@ -26,22 +26,22 @@
     <!-- 注册 -->
     <string name="string_title_register">注册</string>
     <string name="string_register_getverifycode">获取验证码</string>
-    <string name="string_tips_password">*密码</string>
-    <string name="string_tips_password2">*再次输入密码</string>
-    <string name="string_tips_verifycode">*手机验证码</string>
-    <string name="string_tips_length">*车长</string>
-    <string name="string_tips_type">*车型</string>
-    <string name="string_tips_weight">*载重</string>
-    <string name="string_tips_number">*车牌号</string>
-    <string name="string_tips_myself_recommendation">*自我推荐</string>
-    <string name="string_register_line">*线路：</string>
+    <string name="string_tips_password">密码</string>
+    <string name="string_tips_password2">确认密码</string>
+    <string name="string_tips_verifycode">输入验证码</string>
+    <string name="string_tips_length">车长</string>
+    <string name="string_tips_type">车型</string>
+    <string name="string_tips_weight">载重</string>
+    <string name="string_tips_number">车牌号</string>
+    <string name="string_tips_myself_recommendation">自我推荐</string>
+    <string name="string_register_line">线路：</string>
     <string name="string_register_choice">选填</string>
     <string name="string_register_arrow">同意协议</string>
     <string name="string_register_kg">吨</string>
     <string name="string_register_mi">米</string>
-    <string name="string_register_phone">*随车手机</string>
-    <string name="string_register_name">*姓名</string>
-    <string name="string_register_recommender"> 推荐人帐号</string>
+    <string name="string_register_phone">随车手机</string>
+    <string name="string_register_name">姓名</string>
+    <string name="string_register_recommender">推荐人帐号</string>
     <string name="string_register_click_skan">点击可进入查看协议</string>
     <string name="string_register_complete_title">完善资料</string>
     <!-- 选填 -->
@@ -60,12 +60,12 @@
     <string name="string_tips_optional_submit">提交</string>
     <string name="string_car_img">车辆照片</string>
     <!-- 忘记密码 -->
-    <string name="string_forget_tips">请填写您注册使用的手机号</string>
+    <string name="string_forget_tips">输入注册手机号码</string>
     <string name="string_forget_submit">提交</string>
     <string name="string_register_new_password">新密码</string>
-    <string name="string_register_new_password2">新确认密码</string>
+    <string name="string_register_new_password2">确认新密码</string>
     <string name="string_forget">找回密码</string>
-    <string name="string_forget_info">请填写注册手机号码</string>
+    <string name="string_forget_info">输入注册手机号码</string>
     <string name="string_forgot_submit">提交</string>
     <string name="string_register_wait">%s秒后可重新获取</string>
     <string name="string_register_verifycode">验证码</string>
@@ -89,7 +89,7 @@
     <string name="string_car_detail_car_weight">载重\t\t\t\t\t\t\t\t\t%s</string>
     <!-- 登录 -->
     <string name="string_info_login_auto">自动登录</string>
-    <string name="string_info_login_forget">忘记密码</string>
+    <string name="string_info_login_forget">忘记密码?</string>
     <!-- 首页 -->
     <string name="string_home_source_grab">抢单</string>
     <string name="string_home_source_cancelgrab">取消抢单</string>
@@ -311,9 +311,9 @@
     <string name="string_vip_add_park_number">车位数:</string>
 	<!-- add PR1.1 begin-->
 	<string name="user_type_not_choose">请选择身份：【司机版，货主版】</string>
-	<string name="user_driver">司机版</string>
-	<string name="user_shipper">货主版</string>
-	<string name="help_tel_tip">免费咨询热线：</string>
+	<string name="user_driver">司机</string>
+	<string name="user_shipper">货主</string>
+	<string name="help_tel_tip">咨询热线：</string>
 	<string name="help_tel">"400-876-5156"</string>
     <string name="fast_enter"><u>直接进入</u></string>
     <string name="free_register">免费注册</string>
@@ -441,6 +441,9 @@
     <string name="invoice_title">货单</string>
     <string name="invoice_tip_title">完成</string>
     <string name="invoice_action_number">%s人</string>
+    <string name="invoice_1">待订货单(%s)</string>
+    <string name="invoice_2">待装货单(%s)</string>
+    <string name="invoice_3">历史货单(%s)</string>
     <!-- pay -->
     <string name="string_pay_wechat_tip">提示</string>
     <string name="string_pay_wechat_getting_prepayid">正在获取支付订单...</string>

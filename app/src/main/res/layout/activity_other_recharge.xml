@@ -57,7 +57,7 @@
                         android:button="@null"
                         android:checked="true"
                         android:drawablePadding="5dp"
-                        android:drawableRight="@drawable/alipay" />
+                        android:drawableRight="@drawable/charge_alipay" />
 
                     <RadioButton
                         android:id="@+id/radio1"
@@ -67,7 +67,7 @@
                         android:drawableLeft="@drawable/radiobutton"
                         android:button="@null"
                         android:drawablePadding="5dp"
-                        android:drawableRight="@drawable/yeepay" />
+                        android:drawableRight="@drawable/charge_yeepay" />
 
                     <RadioButton
                         android:id="@+id/radio2"
@@ -87,7 +87,7 @@
                         android:drawableLeft="@drawable/radiobutton"
                         android:button="@null"
                         android:drawablePadding="5dp"
-                        android:drawableRight="@drawable/logo_recharge" />
+                        android:drawableRight="@drawable/charge_logo_recharge" />
                 </RadioGroup>
             </LinearLayout>
 

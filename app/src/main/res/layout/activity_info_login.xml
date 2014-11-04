@@ -1,148 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical">
 
     <!--
         <com.maogousoft.logisticsmobile.driver.widget.HeaderView android:layout_width="match_parent"
                                                              android:layout_height="wrap_content"/>
     -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/login_logo"
+        android:layout_marginTop="50dp" />
 
     <EditText
-            android:id="@id/info_id_login_phone"
-            style="@style/info_edittext_style"
-            android:layout_marginTop="30dp"
-            android:hint="@string/string_login_phone"
-            android:inputType="phone"/>
+        android:id="@id/info_id_login_phone"
+        style="@style/info_edittext_style"
+        android:drawableLeft="@drawable/login_user"
+        android:drawablePadding="10dp"
+        android:layout_marginTop="30dp"
+        android:hint="输入用户名"
+        android:inputType="phone" />
 
     <EditText
-            android:id="@id/info_id_login_password"
-            style="@style/info_edittext_style"
-            android:layout_marginTop="10dp"
-            android:hint="@string/string_login_password"
-            android:inputType="textPassword"/>
+        android:id="@id/info_id_login_password"
+        style="@style/info_edittext_style"
+        android:drawableLeft="@drawable/login_pwd"
+        android:layout_marginTop="10dp"
+        android:drawablePadding="10dp"
+        android:hint="输入密码"
+        android:inputType="textPassword" />
     <!-- add PR1.1 begin-->
     <RadioGroup
-            android:layout_width="fill_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:gravity="center"
+        android:layout_marginRight="10dp">
+
+        <RadioButton
+            android:id="@+id/driver"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:layout_marginRight="10dp">
+            android:text="@string/user_driver"
+            android:drawableLeft="@drawable/radiobutton"
+            android:drawablePadding="8dp"
+            android:background="@null"
+            android:button="@null"
+            android:textSize="16sp"
+            android:onClick="onUserTypeClicked" />
+
         <RadioButton
-                android:id="@+id/driver"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/user_driver"
-                android:onClick="onUserTypeClicked"
-                />
-        <RadioButton
-                android:id="@+id/shipper"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/user_shipper"
-                android:onClick="onUserTypeClicked"
-                android:layout_marginLeft="10dp"
-                />
+            android:id="@+id/shipper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_shipper"
+            android:drawableLeft="@drawable/radiobutton"
+            android:drawablePadding="8dp"
+            android:textSize="16sp"
+            android:background="@null"
+            android:button="@null"
+            android:onClick="onUserTypeClicked"
+            android:layout_marginLeft="10dp" />
     </RadioGroup>
     <!-- add PR1.1 end-->
     <Button
-            android:id="@id/info_id_login_loginbtn"
-            style="@style/info_button_style"
-            android:layout_marginTop="10dp"
-            android:text="@string/string_title_login"/>
+        android:id="@id/info_id_login_loginbtn"
+        style="@style/info_button_style"
+        android:text="@string/string_title_login" />
 
+    <Button
+        android:id="@+id/register"
+        style="@style/info_button_style"
+        android:background="@drawable/selector_common_btn_empty"
+        android:textColor="@color/font_gray"
+        android:layout_marginTop="5dp"
+        android:text="注册" />
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical">
 
         <CheckBox
-                android:id="@id/info_id_login_autologin"
-                style="@style/checkboxStyle"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:checked="true"
-                android:text="@string/string_info_login_auto"/>
+            android:id="@id/info_id_login_autologin"
+            style="@style/checkboxStyle"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:checked="true"
+            android:drawablePadding="10dp"
+            android:text="@string/string_info_login_auto" />
 
         <TextView
-                android:id="@id/info_id_login_forget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="0dp"
-                android:padding="5dp"
-                android:layout_centerVertical="true"
-                android:text="@string/string_info_login_forget"
-                android:textSize="@dimen/font_size_small"/>
+            android:id="@id/info_id_login_forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0dp"
+            android:padding="5dp"
+            android:layout_centerVertical="true"
+            android:text="@string/string_info_login_forget"
+            android:textSize="@dimen/font_size_small" />
     </RelativeLayout>
 
     <!-- add PR1.1 begin -->
     <LinearLayout
-            android:layout_width="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-        <LinearLayout android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:orientation="horizontal">
-
-            <Button android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/register"
-                    android:textSize="16sp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:text="@string/free_register"
-                    android:layout_gravity="bottom"
-                    style="@style/info_button_style"/>
-
-        </LinearLayout>
-
-        <LinearLayout android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:gravity="center"
-                      android:orientation="horizontal">
-
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:textSize="16sp"
-                      android:linksClickable="false"
-                      android:autoLink="all"
-                      android:id="@+id/no_login_enter"
-                      android:text="@string/fast_enter"/>
-
-        </LinearLayout>
-        <LinearLayout android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:gravity="center"
-                      android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/help_tel_tip"
-                    android:textSize="16sp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/login_call"
+                android:text="@string/help_tel_tip"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/font_size_normal" />
+
             <TextView
-                    android:id="@+id/help_tel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:text="@string/help_tel"
-                    android:autoLink="phone"
-                    android:textSize="16sp"/>
+                android:id="@+id/help_tel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/help_tel"
+                android:autoLink="phone"
+                android:textSize="@dimen/font_size_normal" />
         </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_normal"
+            android:linksClickable="false"
+            android:autoLink="all"
+            android:gravity="right"
+            android:id="@+id/no_login_enter"
+            android:text="@string/fast_enter" />
+
     </LinearLayout>
     <!-- add PR1.1 end-->
 </LinearLayout>

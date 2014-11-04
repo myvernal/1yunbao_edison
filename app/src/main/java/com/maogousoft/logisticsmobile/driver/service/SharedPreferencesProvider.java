@@ -33,4 +33,13 @@ public class SharedPreferencesProvider {
     public int getOldPhoneState() {
         return sharedPreferences.getInt(Constants.PREFERENCE_NAME_PHONE_STATE, -1);
     }
+
+    public void saveFirstUse() {
+        editor.putBoolean(Constants.FIRST_USE, false);
+        editor.commit();
+    }
+
+    public boolean getFirstUse() {
+        return sharedPreferences.getBoolean(Constants.FIRST_USE, true);
+    }
 }

@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
@@ -16,6 +17,7 @@ import com.maogousoft.logisticsmobile.driver.adapter.CommonFragmentPagerAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.model.InvoiceNumberInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
@@ -76,14 +78,14 @@ public class InvoiceActivity extends BaseActivity {
 
     private void initData() {
         //获取货单数量
-        doAction(Constants.QUERY_PENDING_SOURCE_COUNT, "", true, new ActionCallBack() {
+        doAction(Constants.QUERY_PENDING_SOURCE_COUNT, "", false, InvoiceNumberInfo.class, new ActionCallBack() {
             @Override
             public void onCallBack(Object result) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result.toString());
-                    LogUtil.d(TAG, jsonObject.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (result instanceof InvoiceNumberInfo) {
+                    InvoiceNumberInfo invoiceNumberInfo = (InvoiceNumberInfo) result;
+                    view1.setText(getString(R.string.invoice_1, invoiceNumberInfo.getPending_order_count()));
+                    view2.setText(getString(R.string.invoice_2, invoiceNumberInfo.getShipment_order_count()));
+                    view3.setText(getString(R.string.invoice_3, invoiceNumberInfo.getHistory_order_count()));
                 }
             }
         });
@@ -106,6 +108,7 @@ public class InvoiceActivity extends BaseActivity {
 
     /**
      * (司机)待定货单
+     *
      * @param view
      */
     public void onBottomMenu1(View view) throws JSONException {
@@ -144,6 +147,7 @@ public class InvoiceActivity extends BaseActivity {
 
     /**
      * (司机)待装货单
+     *
      * @param view
      */
     public void onBottomMenu2(View view) {
@@ -172,6 +176,7 @@ public class InvoiceActivity extends BaseActivity {
 
     /**
      * (货主)待定货单
+     *
      * @param view
      */
     public void onBottomMenu3(View view) throws JSONException {
@@ -209,10 +214,15 @@ public class InvoiceActivity extends BaseActivity {
 
     /**
      * 执行对应的操作
+     *
      * @param action
      * @param params
      */
     private void doAction(String action, String params, final boolean hasTip, final ActionCallBack actionCallBack) {
+        doAction(action, params, hasTip, null, actionCallBack);
+    }
+
+    private void doAction(String action, String params, final boolean hasTip, Class T, final ActionCallBack actionCallBack) {
         try {
             showProgress("正在处理");
             final JSONObject jsonObject = new JSONObject();
@@ -221,14 +231,14 @@ public class InvoiceActivity extends BaseActivity {
             jsonObject.put(Constants.JSON, params);
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    null, new AjaxCallBack() {
+                    T, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    if(hasTip) {
+                                    if (hasTip) {
                                         showMsg("操作成功");
                                     }
                                     actionCallBack.onCallBack(result);
@@ -290,7 +300,7 @@ public class InvoiceActivity extends BaseActivity {
                 view1.setSelected(true);
                 view2.setSelected(false);
                 view3.setSelected(false);
-                if(application.getUserType() == Constants.USER_DRIVER) {
+                if (application.getUserType() == Constants.USER_DRIVER) {
                     bottomMenu1.setVisibility(View.VISIBLE);
                     bottomMenu3.setVisibility(View.GONE);
                 } else {

@@ -65,10 +65,10 @@
         android:theme="@style/AppMainTheme">
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="51c939ad56240b834e01d81e"></meta-data>
+            android:value="51c939ad56240b834e01d81e" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Umeng"></meta-data>
+            android:value="Umeng" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -90,7 +90,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateVisible"></activity>
+            android:windowSoftInputMode="stateVisible" />
         <!--
         <activity
             android:name=".activity.home.HomeActivity"
@@ -316,7 +316,7 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
+            android:process=":remote" />
 
         <activity
             android:name=".activity.info.UpdatePwdActivity"
@@ -571,7 +571,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
         <!-- Required SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
 
@@ -945,6 +945,13 @@
         <!--装车不成功-->
         <activity
             android:name=".activity.info.TruckFailedReasonActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.WelcomeActivity"
             android:configChanges="keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"

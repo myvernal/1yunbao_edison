@@ -1,15 +1,5 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
-import android.view.View;
-
-import com.baidu.mapapi.SDKInitializer;
-import com.maogousoft.logisticsmobile.driver.activity.home.*;
-import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
-import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
-import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.TabActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,20 +9,32 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TabHost;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.activity.home.HomeDriverActivity;
+import com.maogousoft.logisticsmobile.driver.activity.home.HomeShipperActivity;
+import com.maogousoft.logisticsmobile.driver.activity.home.MyabcActivityDriver;
+import com.maogousoft.logisticsmobile.driver.activity.home.MyabcActivityShipper;
+import com.maogousoft.logisticsmobile.driver.activity.home.SearchSourceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.LoginActivity;
+import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.umeng.update.UmengUpdateAgent;
+import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 登录之后显示的主页
@@ -50,7 +52,6 @@ public class MainActivity extends TabActivity {
     public static final String ACTION_SWITCH_MAINACTIVITY = "com.maogousoft.logisticsmobile.driver.activity.MainActivity";
 
     private TabHost mTabHost;
-    private RadioGroup mRadioGroup;
     private MGApplication application;
     private BroadcastReceiver switchMainActivityReceiver;
     private BaiduSDKReceiver baiduSDKReceiver;
@@ -72,11 +73,10 @@ public class MainActivity extends TabActivity {
 
             @Override
             public void onReceive(Context arg0, Intent arg1) {
-                mRadioGroup.check(R.id.main_id_radio_home);
+                //回到首页
             }
         };
-        registerReceiver(switchMainActivityReceiver, new IntentFilter(
-                ACTION_SWITCH_MAINACTIVITY));
+        registerReceiver(switchMainActivityReceiver, new IntentFilter(ACTION_SWITCH_MAINACTIVITY));
         getABCInfo();
         //注册百度sdk广播监听者
         IntentFilter iFilter = new IntentFilter();
@@ -135,39 +135,6 @@ public class MainActivity extends TabActivity {
             mTabHost.addTab(mTabHost.newTabSpec("others").setIndicator("我X")
                     .setContent(new Intent(this, MyabcActivityShipper.class)));
         }
-        // OthersActivity -->MyabcActivity;
-        // PR 102 OthersActivity-->
-
-        mRadioGroup = (RadioGroup) findViewById(R.id.main_id_radiogroup);
-        mRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.main_id_radio_home:
-                        mTabHost.setCurrentTab(0);
-                        break;
-                    case R.id.main_id_radio_share:
-                        //mTabHost.setCurrentTab(1);
-                        share();
-                        break;
-                    case R.id.main_id_radio_search:
-                        mTabHost.setCurrentTab(1);
-                        break;
-                    case R.id.main_id_radio_publish:
-                        mTabHost.setCurrentTab(1);
-                        break;
-                    case R.id.main_id_radio_tool:
-                        mTabHost.setCurrentTab(2);
-                        break;
-                    case R.id.main_id_radio_other:
-                        mTabHost.setCurrentTab(3);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
         UmengUpdateAgent.setUpdateOnlyWifi(false);
         UmengUpdateAgent.setOnDownloadListener(null);
         UmengUpdateAgent.update(this);

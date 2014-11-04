@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -119,9 +120,19 @@ public class TruckFailedReasonActivity extends BaseActivity {
     }
 
     public void onPhotoCam(View view) {
-        Intent imageCaptureIntent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        imageCaptureIntent1.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "responsible.jpg")));
-        startActivityForResult(imageCaptureIntent1, RESULT_CAPTURE_IMAGE_CAR_PHOTO1);
+        Intent imageCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(mCarPhotos1 == null) {
+            imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "responsible1.jpg")));
+            startActivityForResult(imageCaptureIntent, RESULT_CAPTURE_IMAGE_CAR_PHOTO1);
+        } else if(mCarPhotos2 == null) {
+            imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "responsible2.jpg")));
+            startActivityForResult(imageCaptureIntent, RESULT_CAPTURE_IMAGE_CAR_PHOTO2);
+        } else if(mCarPhotos3 == null) {
+            imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "responsible3.jpg")));
+            startActivityForResult(imageCaptureIntent, RESULT_CAPTURE_IMAGE_CAR_PHOTO3);
+        } else {
+            showMsg("最多支持3张照片");
+        }
     }
 
     public void onSubmit(View view) {
@@ -141,7 +152,17 @@ public class TruckFailedReasonActivity extends BaseActivity {
             params.put("order_id", sourceInfo.getId());
             params.put("responsible_people", responsibleCause);
             params.put("evidence_material", moreReason.getText());
-            params.put("evicdence_pic", mCarPhotosUrl1);//图片链接
+            StringBuilder stringBuilder = new StringBuilder();
+            if(!TextUtils.isEmpty(mCarPhotosUrl1)) {
+                stringBuilder.append(mCarPhotosUrl1);
+            }
+            if(!TextUtils.isEmpty(mCarPhotosUrl2)){
+                stringBuilder.append("@").append(mCarPhotosUrl2);
+            }
+            if(!TextUtils.isEmpty(mCarPhotosUrl3)) {
+                stringBuilder.append("@").append(mCarPhotosUrl3);
+            }
+            params.put("evicdence_pic", stringBuilder.toString());//图片链接
             jsonObject.put(Constants.JSON, params.toString());
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
@@ -153,6 +174,7 @@ public class TruckFailedReasonActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     showMsg("操作成功");
+                                    finish();
                                     break;
                                 default:
                                     showMsg(result.toString());
@@ -193,20 +215,20 @@ public class TruckFailedReasonActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case RESULT_CAPTURE_IMAGE_CAR_PHOTO1:
-                    String CAR_PHOTO1 = Environment.getExternalStorageDirectory() + File.separator + "responsible.jpg";
+                    String CAR_PHOTO1 = Environment.getExternalStorageDirectory() + File.separator + "responsible1.jpg";
                     displayPhoto(CAR_PHOTO1, photo1);
                     mCarPhotos1 = CAR_PHOTO1;
                     break;
-                /*case RESULT_CAPTURE_IMAGE_CAR_PHOTO2:
-                    String CAR_PHOTO2 = Environment.getExternalStorageDirectory() + File.separator + "CAR_PHOTO2.jpg";
+                case RESULT_CAPTURE_IMAGE_CAR_PHOTO2:
+                    String CAR_PHOTO2 = Environment.getExternalStorageDirectory() + File.separator + "responsible2.jpg";
                     displayPhoto(CAR_PHOTO2, photo2);
                     mCarPhotos2 = CAR_PHOTO2;
                     break;
                 case RESULT_CAPTURE_IMAGE_CAR_PHOTO3:
-                    String CAR_PHOTO3 = Environment.getExternalStorageDirectory() + File.separator + "CAR_PHOTO3.jpg";
+                    String CAR_PHOTO3 = Environment.getExternalStorageDirectory() + File.separator + "responsible3.jpg";
                     displayPhoto(CAR_PHOTO3, photo3);
                     mCarPhotos3 = CAR_PHOTO3;
-                    break;*/
+                    break;
                 default:
                     break;
             }

@@ -128,7 +128,6 @@ public class RegisterActivity extends BaseActivity {
 
         mCheckBox = (CheckBox) findViewById(R.id.info_id_login_autologin);
 
-        mRecommender.setBackgroundResource(R.drawable.login_input);
         mLogin.setOnClickListener(this);
         mRegister.setOnClickListener(this);
         mGetVerifyCode.setOnClickListener(this);

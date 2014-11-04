@@ -20,8 +20,9 @@
                 android:id="@id/info_id_register_phone"
                 style="@style/info_edittext_style"
                 android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="*注册手机"
+                android:drawableLeft="@drawable/login_phone"
+                android:drawablePadding="5dp"
+                android:hint="输入注册手机号码"
                 android:inputType="phone" />
 
             <LinearLayout
@@ -37,6 +38,8 @@
                     style="@style/info_edittext_style"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:drawableLeft="@drawable/login_number"
+                    android:drawablePadding="5dp"
                     android:hint="@string/string_tips_verifycode" />
 
                 <Button
@@ -50,6 +53,8 @@
                 android:id="@id/info_id_register_password"
                 style="@style/info_edittext_style"
                 android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/login_pwd"
+                android:drawablePadding="5dp"
                 android:hint="@string/string_tips_password"
                 android:inputType="textPassword" />
 
@@ -57,16 +62,18 @@
                 android:id="@id/info_id_register_password2"
                 style="@style/info_edittext_style"
                 android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/login_pwd"
+                android:drawablePadding="5dp"
                 android:hint="@string/string_tips_password2"
                 android:inputType="textPassword" />
 
             <EditText
                 android:id="@id/info_id_register_recommender"
                 style="@style/info_edittext_style"
-                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:hint="　推荐人帐号"
-                android:padding="5dp" />
+                android:drawableLeft="@drawable/login_user"
+                android:drawablePadding="5dp"
+                android:hint="推荐人帐号" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -92,8 +99,9 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ic_button_gray_small"
+                    android:background="@drawable/selector_common_btn_empty"
                     android:singleLine="true"
+                    android:padding="5dp"
                     android:text="@string/string_province"
                     android:textColor="#828384"
                     android:textSize="@dimen/font_size_normal" />
@@ -103,8 +111,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/ic_button_gray_small"
+                    android:background="@drawable/selector_common_btn_empty"
                     android:singleLine="true"
+                    android:padding="5dp"
                     android:text="@string/string_city"
                     android:textColor="#828384"
                     android:textSize="@dimen/font_size_normal" />
@@ -125,8 +134,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ic_button_gray_small"
+                    android:background="@drawable/selector_common_btn_empty"
                     android:singleLine="true"
+                    android:padding="5dp"
                     android:text="@string/string_province"
                     android:textColor="#828384"
                     android:textSize="@dimen/font_size_normal" />
@@ -137,8 +147,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ic_button_gray_small"
+                    android:background="@drawable/selector_common_btn_empty"
                     android:singleLine="true"
+                    android:padding="5dp"
                     android:text="@string/string_city"
                     android:textColor="#828384"
                     android:textSize="@dimen/font_size_normal" />

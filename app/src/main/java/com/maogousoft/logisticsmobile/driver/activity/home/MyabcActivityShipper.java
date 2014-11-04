@@ -14,11 +14,17 @@ import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.*;
+import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.ybxiang.driver.activity.CarsListActivity;
+import com.ybxiang.driver.activity.CheckCardActivity;
 import com.ybxiang.driver.activity.MySourceActivity;
+import com.ybxiang.driver.util.Utils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,10 +36,9 @@ import org.json.JSONObject;
 public class MyabcActivityShipper extends BaseActivity {
 
 	// 返回,完善资料
-	private Button mComplete, mUpdate, mContactKeFu;
-	private TextView mName, mCompanyName, mPhone, mUpdatePwd, mBalance,
-			mCharge, mAccountRecord, mOnlineTime;
-	private RelativeLayout mHistory;
+	private Button mComplete, mContactKeFu;
+	private TextView mName, mCompanyName, mPhone;
+    private ImageView mPhoto;
 	// 个人abc信息
 	private ShipperInfo userInfo;
 
@@ -47,37 +52,22 @@ public class MyabcActivityShipper extends BaseActivity {
             finish();
         }
 		initViews();
-		getBalance();
 	}
 
 	private void initViews() {
-		((TextView) findViewById(R.id.titlebar_id_content))
-				.setText(R.string.string_home_myabc_title);
+		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_home_myabc_title);
 
 		setIsRightKeyIntoShare(false);
 		mContactKeFu = (Button) findViewById(R.id.titlebar_id_more);
 		mContactKeFu.setText("联系客服");
 
-
-		mComplete = (Button) findViewById(R.id.myabc_id_complete);
-		mUpdate = (Button) findViewById(R.id.myabc_id_update);
+        mComplete = (Button) findViewById(R.id.myabc_id_complete);
 		mName = (TextView) findViewById(R.id.myabc_id_name);
 		mCompanyName = (TextView) findViewById(R.id.myabc_id_company_name);
 		mPhone = (TextView) findViewById(R.id.myabc_id_phone);
-		mUpdatePwd = (TextView) findViewById(R.id.myabc_id_updatepwd);
-		mBalance = (TextView) findViewById(R.id.myabc_id_balance);
-		mCharge = (TextView) findViewById(R.id.myabc_id_charge);
-		mAccountRecord = (TextView) findViewById(R.id.myabc_id_account_record);
-		mOnlineTime = (TextView) findViewById(R.id.myabc_id_onlinetime);
-		mHistory = (RelativeLayout) findViewById(R.id.myabc_id_history);
-		mHistory.setClickable(true);
+        mPhoto = (ImageView) findViewById(R.id.account_photo);
 		mContactKeFu.setOnClickListener(this);
-		mComplete.setOnClickListener(this);
-		mHistory.setOnClickListener(this);
-		mUpdatePwd.setOnClickListener(this);
-		mCharge.setOnClickListener(this);
-		mAccountRecord.setOnClickListener(this);
-		mUpdate.setOnClickListener(this);
+        mComplete.setOnClickListener(this);
 	}
 
 	@Override
@@ -88,9 +78,8 @@ public class MyabcActivityShipper extends BaseActivity {
 
 	@Override
 	public void onClick(View v) {
-
 		super.onClick(v);
-		if (v == mUpdatePwd) {
+		/*if (v == mUpdatePwd) {
 			startActivity(new Intent(mContext, UpdatePwdActivity.class));
 		} else if (v == mComplete) {
 			application.logout();
@@ -103,7 +92,11 @@ public class MyabcActivityShipper extends BaseActivity {
 			startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", userInfo));
 		} else if (v == mHistory) {
 			startActivity(new Intent(mContext, MySourceActivity.class));
-		} else if (v == mContactKeFu) {
+		} else */
+        if (v == mComplete) {
+            application.logout();
+            startActivity(new Intent(mContext, LoginActivity.class));
+        } else if (v == mContactKeFu) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(mContext).setTitle(R.string.contact_kehu).setItems(R.array.contact_kehu_items, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -129,37 +122,50 @@ public class MyabcActivityShipper extends BaseActivity {
 		}
 	}
 
-	// 获取账户余额
-	private void getBalance() {
-		final JSONObject jsonObject = new JSONObject();
-		try {
-			jsonObject.put(Constants.ACTION, Constants.GET_ACCOUNT_GOLD);
-			jsonObject.put(Constants.TOKEN, application.getToken());
-			ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
-					null, new AjaxCallBack() {
+    // 我的车队
+    public void onMyCars(View view) {
+        Intent intent = new Intent(mContext, CarsListActivity.class);
+        intent.putExtra(Constants.MY_CARS_SEARCH, true);
+        startActivity(intent);
+    }
 
-						@Override
-						public void receive(int code, Object result) {
-							switch (code) {
-							case ResultCode.RESULT_OK:
-								JSONObject object = (JSONObject) result;
-								mBalance.setText(String
-										.format(getString(R.string.string_home_myabc_balance), object.optDouble("gold")));
-								break;
-							case ResultCode.RESULT_FAILED:
-								break;
-							case ResultCode.RESULT_ERROR:
-								break;
+    // 验证证件
+    public void onCheckCard(View view) {
+        startActivity(new Intent(mContext, CheckCardActivity.class));
+    }
 
-							default:
-								break;
-							}
-						}
-					});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    // 历史货源
+    public void onOldSource(View view) {
+        startActivity(new Intent(mContext, MySourceActivity.class));
+    }
+
+    /**
+     * 我的账号
+     *
+     * @param view
+     */
+    public void onMyAccountInfo(View view) {
+        startActivity(new Intent(mContext, MyabcAccountInfoActivity.class));
+    }
+
+    // 实用工具
+    public void onInteraction(View view) {
+        startActivity(new Intent(mContext, OthersActivity.class));
+    }
+
+    // 财务管理
+    public void onMoneyManager(View view) {
+        startActivity(new Intent(mContext, MoneyManagerActivity.class));
+    }
+
+    /**
+     * 我的信誉
+     *
+     * @param view
+     */
+    public void onMyReputation(View view) {
+        startActivity(new Intent(mContext, MyReputationActivity.class));
+    }
 
 	// 获取我的abc信息
 	private void getABCInfo() {
@@ -188,6 +194,8 @@ public class MyabcActivityShipper extends BaseActivity {
                                             mCompanyName.setText(userInfo.getCompany_name());
                                         }
                                         mPhone.setText(userInfo.getPhone());
+                                        ImageLoader.getInstance().displayImage(userInfo.getCompany_logo(), mPhoto, options,
+                                                new Utils.MyImageLoadingListener(mContext, mPhoto));
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:

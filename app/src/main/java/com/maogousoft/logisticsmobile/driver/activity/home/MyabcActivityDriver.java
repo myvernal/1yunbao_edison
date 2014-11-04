@@ -334,7 +334,7 @@ public class MyabcActivityDriver extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
-				mIsRing.setText("是");
+				mIsRing.setText(getString(R.string.string_is_ring, "是"));
 				application.writeIsRingNewSource(true);
 			}
 		});
@@ -343,7 +343,7 @@ public class MyabcActivityDriver extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
-				mIsRing.setText("否");
+				mIsRing.setText(getString(R.string.string_is_ring, "否"));
 				application.writeIsRingNewSource(false);
 			}
 		});

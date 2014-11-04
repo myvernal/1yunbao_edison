@@ -30,6 +30,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
+import com.maogousoft.logisticsmobile.driver.service.SharedPreferencesProvider;
 import com.maogousoft.logisticsmobile.driver.utils.MD5;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 
@@ -203,7 +204,13 @@ public class LoadingActivity extends BaseActivity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(mContext, LoginActivity.class));
+                //第一次进入，进入引导页
+                boolean isFirstUse = SharedPreferencesProvider.getInstance(mContext).getFirstUse();
+                if(isFirstUse) {
+                    startActivity(new Intent(mContext, WelcomeActivity.class));
+                } else {
+                    startActivity(new Intent(mContext, LoginActivity.class));
+                }
                 finish();
             }
         }, 2000);

@@ -35,7 +35,6 @@
                     android:id="@id/main_id_radio_home"
                     style="@style/main_radio_style"
                     android:checked="true"
-                    android:drawableTop="@drawable/selector_home_home"
                     android:text="@string/string_main_home"/>
 
             <RadioButton

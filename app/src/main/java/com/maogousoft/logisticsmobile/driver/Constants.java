@@ -43,6 +43,8 @@ public class Constants {
 
 	public static final String PREFERENCE_NAME_PHONE_STATE = "phone_state";
 
+	public static final String FIRST_USE = "first_use";
+
 	// PR112 账户类型
 	public static final String USER_TYPE = "USER_TYPE";
 
