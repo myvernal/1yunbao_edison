@@ -77,8 +77,14 @@ public class InvoiceActivity extends BaseActivity {
     }
 
     private void initData() {
+        String action;
+        if(application.getUserType() == Constants.USER_DRIVER) {
+            action = Constants.QUERY_PENDING_SOURCE_COUNT;
+        } else {
+            action = Constants.QUERY_ORDER_COUNT;
+        }
         //获取货单数量
-        doAction(Constants.QUERY_PENDING_SOURCE_COUNT, "", false, InvoiceNumberInfo.class, new ActionCallBack() {
+        doAction(action, "", false, InvoiceNumberInfo.class, new ActionCallBack() {
             @Override
             public void onCallBack(Object result) {
                 if (result instanceof InvoiceNumberInfo) {

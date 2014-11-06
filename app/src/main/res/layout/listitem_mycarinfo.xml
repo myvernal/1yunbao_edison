@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 我的车队界面 -->
 
+<!--
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,4 +66,127 @@
               android:layout_centerVertical="true"
               android:layout_alignParentRight="true"
               android:text=">>"/>
-</RelativeLayout>
+</RelativeLayout>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:background="@color/TextColorWhite"
+    android:padding="3dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TextColorWhite"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/car_info_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/TextColorBlack"
+            android:drawableLeft="@drawable/source_line"
+            android:drawablePadding="3dp"
+            android:gravity="left|top"
+            android:textSize="16sp" />
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/car_info_desc"
+                style="@style/home_source_order_info_style"
+                android:drawableLeft="@drawable/source_detail"
+                android:drawablePadding="3dp"
+                android:textSize="@dimen/font_size_normal"
+                android:textColor="@color/font_gray3"
+                android:layout_toLeftOf="@id/source_detail_phone" />
+
+            <TextView
+                android:id="@+id/car_info_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/car_resource_state"
+                android:drawablePadding="3dp"
+                android:textColor="@color/common_btn_bg"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/car_info_desc"
+                android:textSize="@dimen/font_size_normal"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/car_info_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/source_coins"
+                android:drawablePadding="3dp"
+                android:textColor="@color/common_btn_bg"
+                android:layout_toRightOf="@+id/car_info_state"
+                android:layout_below="@id/car_info_desc"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/font_size_normal"
+                android:singleLine="true" />
+
+            <ImageView
+                android:id="@+id/car_info_phone"
+                style="@style/button_source_detail_phone"
+                android:layout_width="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5dp"
+                android:layout_height="40dp"
+                android:background="@drawable/selector_common_btn_empty"
+                android:src="@drawable/phone_img" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_layout"
+        android:background="@color/TextColorWhite"
+        android:paddingLeft="5dp"
+        android:paddingTop="2dp"
+        android:paddingRight="5dp"
+        android:gravity="center">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="1px" />
+
+        <TextView
+            android:id="@+id/car_info_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:padding="5dp"
+            android:drawableLeft="@drawable/selector_car_resource_notify"
+            android:textColor="@color/font_gray3"
+            android:text="货源推送"
+            android:textSize="@dimen/font_size_normal" />
+
+        <TextView
+            android:id="@+id/car_info_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:padding="5dp"
+            android:layout_marginLeft="35dp"
+            android:drawableLeft="@drawable/selector_car_resource_add"
+            android:textColor="@color/font_gray3"
+            android:text="车队"
+            android:textSize="@dimen/font_size_normal" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="1px" />
+
+    </LinearLayout>
+</LinearLayout>

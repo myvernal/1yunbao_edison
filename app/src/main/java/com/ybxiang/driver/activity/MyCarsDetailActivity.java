@@ -235,15 +235,15 @@ public class MyCarsDetailActivity extends BaseActivity {
         } else {
             if (carInfo.getEnd_province1() > 0 || carInfo.getEnd_city1() > 0 || carInfo.getEnd_district1() > 0) {
                 String wayEnd1 = dbUtils.getCityInfo(carInfo.getEnd_province1(), carInfo.getEnd_city1(), carInfo.getEnd_district1());
-                sb.append(wayStart + "--" + wayEnd1 + "\n");
+                sb.append(wayStart + "--" + wayEnd1);
             }
             if (carInfo.getEnd_province2() > 0 || carInfo.getEnd_city2() > 0 || carInfo.getEnd_district2() > 0) {
                 String wayEnd2 = dbUtils.getCityInfo(carInfo.getEnd_province2(), carInfo.getEnd_city2(), carInfo.getEnd_district2());
-                sb.append(wayStart + "--" + wayEnd2 + "\n");
+                sb.append("\n" + wayStart + "--" + wayEnd2);
             }
             if (carInfo.getEnd_province3() > 0 || carInfo.getEnd_city3() > 0 || carInfo.getEnd_district3() > 0) {
                 String wayEnd3 = dbUtils.getCityInfo(carInfo.getEnd_province3(), carInfo.getEnd_city3(), carInfo.getEnd_district3());
-                sb.append(wayStart + "--" + wayEnd3);
+                sb.append("\n" + wayStart + "--" + wayEnd3);
             }
         }
         way.setText(sb.toString());

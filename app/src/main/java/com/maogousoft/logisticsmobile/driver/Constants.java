@@ -430,6 +430,9 @@ public class Constants {
     /** 司机端：已装车*/
     public static final String TRUCK_LOADING_FINISH = "truck_loading_finish";
 
+    /** 货主端：货单列表数量查询*/
+    public static final String QUERY_ORDER_COUNT = "query_order_count";
+
     /** 货主端:撤销货单 */
     public static final String CANCEL_ORDER = "cancel_order";
 

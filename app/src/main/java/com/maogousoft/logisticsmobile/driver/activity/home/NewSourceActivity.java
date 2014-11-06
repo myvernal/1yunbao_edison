@@ -303,7 +303,7 @@ public class NewSourceActivity extends BaseListActivity implements
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        if (position < mAdapter.getList().size()) {
+        if (position <= mAdapter.getList().size()) {
 
             // 先检测是否已经完善了资料
             if (!application.checkIsRegOptional() && application.getUserType() == Constants.USER_DRIVER) {

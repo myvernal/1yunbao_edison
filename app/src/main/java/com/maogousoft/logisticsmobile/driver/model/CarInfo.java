@@ -45,6 +45,33 @@ public class CarInfo implements Serializable{
     private String remark;//备注
     private String latitude;
     private String longitude;
+    private String bond;//保证金
+    private int status;//车辆状态，0找货中，1运货中
+    private String is_add_myfeet;//是否已经添加到我的车队,Y是 N否
+
+    public String getBond() {
+        return bond;
+    }
+
+    public void setBond(String bond) {
+        this.bond = bond;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getIs_add_myfeet() {
+        return is_add_myfeet;
+    }
+
+    public void setIs_add_myfeet(String is_add_myfeet) {
+        this.is_add_myfeet = is_add_myfeet;
+    }
 
     public String getLatitude() {
         return latitude;

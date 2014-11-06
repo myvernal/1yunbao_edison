@@ -44,14 +44,12 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
     // 信息费
     private double messagePrice;
     private boolean isShowBottomMenu;
-    private Context mContext;
     private CityDBUtils dbUtils;
 
     public NewSourceListAdapter(Context context, boolean isShowBottomMenu) {
         super(context);
         this.isShowBottomMenu = isShowBottomMenu;
         dbUtils = new CityDBUtils(application.getCitySDB());
-        mContext = context;
         progressDialog = new MyProgressDialog(context);
         progressDialog.setCancelable(true);
         progressDialog.setCanceledOnTouchOutside(false);

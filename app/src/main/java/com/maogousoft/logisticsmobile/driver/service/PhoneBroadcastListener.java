@@ -66,13 +66,12 @@ public class PhoneBroadcastListener  extends BroadcastReceiver {
             }
             //当通话状态发生改变
             if( oldState == CALL_TYPE_RING && currentState == CALL_TYPE_CALLING ){
-                LogUtil.d(TAG, "接听");
+                LogUtil.e(TAG, "接听");
             } else if( oldState == CALL_TYPE_CALLING && currentState == CALL_TYPE_IDEL ){
-                LogUtil.d(TAG, "挂断" );
+                LogUtil.e(TAG, "挂断" );
             } if( oldState == CALL_TYPE_IDEL && currentState == CALL_TYPE_CALLING ){
-                LogUtil.d(TAG, "拨号" );
+                LogUtil.e(TAG, "拨号" );
             }
-
             SharedPreferencesProvider.getInstance(mContext).saveOldPhoneState( currentState);
         }
     }

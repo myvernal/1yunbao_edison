@@ -449,4 +449,7 @@
     <string name="string_pay_wechat_getting_prepayid">正在获取支付订单...</string>
     <string name="string_pay_wechat_pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>
     <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
+    <!--车辆信息-->
+    <string name="car_info_wait">找货中</string>
+    <string name="car_info_doing">运货中</string>
 </resources>
