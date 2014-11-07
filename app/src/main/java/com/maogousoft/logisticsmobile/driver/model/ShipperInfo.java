@@ -31,6 +31,10 @@ public class ShipperInfo implements Serializable {
     private String company_photo3 = "";
     private String company_recommendation = "";
     private String yunbao_pay;
+    private float score = 0;
+    private float score1 = 0;
+    private float score2 = 0;
+    private float score3 = 0;
 
     private Double tpy_1;//基本险 费率
     private Double tpy_2;//基本险(易碎) 费率
@@ -39,6 +43,38 @@ public class ShipperInfo implements Serializable {
     private Double tpy_5;//综合险(易碎) 费率
     private Double tpy_6;//综合险附加被盗险费率
     private Double pa_1;//平安费率
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
+    }
+
+    public float getScore1() {
+        return score1;
+    }
+
+    public void setScore1(float score1) {
+        this.score1 = score1;
+    }
+
+    public float getScore2() {
+        return score2;
+    }
+
+    public void setScore2(float score2) {
+        this.score2 = score2;
+    }
+
+    public float getScore3() {
+        return score3;
+    }
+
+    public void setScore3(float score3) {
+        this.score3 = score3;
+    }
 
     public String getYunbao_pay() {
         return yunbao_pay;

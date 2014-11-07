@@ -33,6 +33,7 @@
 
             <TextView
                 style="@style/settingAccountInfoStyle"
+                android:id="@+id/nameTip"
                 android:layout_width="wrap_content"
                 android:text="@string/string_home_myabc_title_name_driver" />
 

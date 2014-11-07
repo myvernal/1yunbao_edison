@@ -28,8 +28,6 @@ import com.ybxiang.driver.util.Utils;
  * @author ybxiang
  */
 public class MyabcCarInfoActivity extends BaseActivity {
-	// 返回,完善资料
-	private Button mBack, mUpdate;
 	private TextView mName, mPhone, mCarNum, mCarlength, mCartype, mCarzhaizhong;
     private ImageView mPhoto;
 	// 个人abc信息
@@ -40,7 +38,6 @@ public class MyabcCarInfoActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.car_info);
 		initViews();
-		initData(savedInstanceState);
 	}
 
 	@Override
@@ -54,7 +51,6 @@ public class MyabcCarInfoActivity extends BaseActivity {
         findViewById(R.id.titlebar_id_more).setVisibility(View.VISIBLE);
 
         mPhoto = (ImageView) findViewById(R.id.account_photo);
-        mUpdate = (Button) findViewById(R.id.myabc_id_update);
 		mCarNum = (TextView) findViewById(R.id.myabc_id_car_num);
 		mCarlength = (TextView) findViewById(R.id.myabc_id_car_length111);
 		mCartype = (TextView) findViewById(R.id.myabc_id_car_type);
@@ -62,10 +58,6 @@ public class MyabcCarInfoActivity extends BaseActivity {
         mName = (TextView) findViewById(R.id.myabc_id_name);
         mPhone = (TextView) findViewById(R.id.myabc_id_phone);
     }
-
-	private void initData(Bundle savedInstanceState) {
-
-	}
 
 	// 获取我的abc信息
 	private void getABCInfo() {

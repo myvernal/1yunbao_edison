@@ -109,7 +109,7 @@
     <string name="string_home_myabc_title_carnum">车牌号码：</string>
     <string name="string_home_myabc_title_phone">手机号码：</string>
     <string name="string_home_myabc_title_car_number">身份证号：</string>
-    <string name="string_home_myabc_title_account_name">易运宝账号：</string>
+    <string name="string_home_myabc_title_account_name">运宝账号：</string>
     <string name="string_home_myabc_title_tel">座机号码：</string>
     <string name="string_home_myabc_title_recommend">推荐人帐号：</string>
     <string name="string_home_myabc_title_myaccount">我的账户</string>
@@ -163,6 +163,14 @@
     <string name="string_home_onlinesource_contact">联系货主</string>
     <string name="string_home_onlinesource_chat">在线聊天</string>
     <string name="string_home_onlinesource_evaluate">评价</string>
+    <string name="jiashizheng">驾驶证号\t\t\t%s</string>
+    <string name="lianxiren">联系人\t\t\t\t%s</string>
+    <string name="lianxidianhua">联系电话\t\t\t%s</string>
+    <string name="jiatingdianhua">家庭电话\t\t\t%s</string>
+    <string name="yinhangmingcheng">银行名称\t\t\t%s</string>
+    <string name="shoukuankahao">收款卡号\t\t\t%s</string>
+    <string name="address">现住地址\t\t\t%s</string>
+    <!---->
     <!-- 新货源 -->
     <string name="source_number">今日共有%s条货源</string>
     <string name="string_home_newsource_order_number">货源号:%s</string>

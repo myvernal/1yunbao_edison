@@ -40,7 +40,7 @@ public class MyabcActivityShipper extends BaseActivity {
 	private TextView mName, mCompanyName, mPhone;
     private ImageView mPhoto;
 	// 个人abc信息
-	private ShipperInfo userInfo;
+	private ShipperInfo shipperInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class MyabcActivityShipper extends BaseActivity {
 		} else if (v == mAccountRecord) {
 			startActivity(new Intent(mContext, AccountRecordActivity.class));
 		} else if (v == mUpdate) {
-			startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", userInfo));
+			startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", shipperInfo));
 		} else if (v == mHistory) {
 			startActivity(new Intent(mContext, MySourceActivity.class));
 		} else */
@@ -164,7 +164,10 @@ public class MyabcActivityShipper extends BaseActivity {
      * @param view
      */
     public void onMyReputation(View view) {
-        startActivity(new Intent(mContext, MyReputationActivity.class));
+        //startActivity(new Intent(mContext, MyReputationActivity.class));
+        startActivity(new Intent(mContext, UserCreditActivity.class)
+                .putExtra(Constants.IS_MY_REPUTATION, true)
+                .putExtra(Constants.COMMON_KEY, shipperInfo));
     }
 
 	// 获取我的abc信息
@@ -185,16 +188,16 @@ public class MyabcActivityShipper extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {
-                                        userInfo = (ShipperInfo) result;
+                                        shipperInfo = (ShipperInfo) result;
 
-                                        if (!TextUtils.isEmpty(userInfo.getName())) {
-                                            mName.setText(userInfo.getName());
+                                        if (!TextUtils.isEmpty(shipperInfo.getName())) {
+                                            mName.setText(shipperInfo.getName());
                                         }
-                                        if (!TextUtils.isEmpty(userInfo.getCompany_name())) {
-                                            mCompanyName.setText(userInfo.getCompany_name());
+                                        if (!TextUtils.isEmpty(shipperInfo.getCompany_name())) {
+                                            mCompanyName.setText(shipperInfo.getCompany_name());
                                         }
-                                        mPhone.setText(userInfo.getPhone());
-                                        ImageLoader.getInstance().displayImage(userInfo.getCompany_logo(), mPhoto, options,
+                                        mPhone.setText(shipperInfo.getPhone());
+                                        ImageLoader.getInstance().displayImage(shipperInfo.getCompany_logo(), mPhoto, options,
                                                 new Utils.MyImageLoadingListener(mContext, mPhoto));
                                     }
                                     break;

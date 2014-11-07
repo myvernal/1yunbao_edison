@@ -129,7 +129,10 @@ public class MyabcActivityDriver extends BaseActivity {
 	 * @param view
 	 */
 	public void onMyReputation(View view) {
-		startActivity(new Intent(mContext, MyReputationActivity.class));
+		//startActivity(new Intent(mContext, MyReputationActivity.class));
+        startActivity(new Intent(mContext, UserCreditActivity.class)
+                .putExtra(Constants.IS_MY_REPUTATION, true)
+                .putExtra(Constants.COMMON_KEY, mDriverInfo));
 	}
 
 	private void initViews() {

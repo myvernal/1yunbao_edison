@@ -1,117 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/window_bg"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_bg"
+    android:orientation="vertical">
 
-    <com.maogousoft.logisticsmobile.driver.widget.HeaderView android:layout_width="match_parent"
-                                                             android:layout_height="wrap_content"/>
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/window_bg">
-
-            <EditText
-                    android:id="@id/info_id_register_name"
-                    style="@style/info_edittext_style"
-                    android:layout_marginTop="10dp"
-                    android:hint="*联系人"/>
-
-            <EditText
-                    android:id="@+id/info_id_register_company_name"
-                    style="@style/info_edittext_style"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:hint="*公司名称"/>
-
-            <EditText
-                    android:id="@+id/info_id_register_company_address"
-                    style="@style/info_edittext_style"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:hint="*公司地址"/>
-
-            <EditText
-                    android:id="@+id/info_id_register_telNum"
-                    style="@style/info_edittext_style"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:hint="*座机号码"
-                    android:inputType="phone"/>
-
-            <EditText
-                    android:id="@+id/info_id_register_phone"
-                    style="@style/info_edittext_style"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:hint="*手机号码"
-                    android:inputType="phone"/>
-
-            <EditText
-                    android:id="@+id/myself_recommendation"
-                    style="@style/info_edittext_style"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/string_tips_myself_recommendation"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="@color/window_bg">
 
             <LinearLayout
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-                <TextView style="@style/info_register_text_style"
-                          android:text="公司Logo:"
-                        />
-                <ImageView android:layout_width="70dp"
-                           android:layout_height="70dp"
-                           android:id="@+id/id_card_photo"
-                           android:scaleType="fitXY"
-                           android:src="@drawable/ic_img_loading"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="联系人:\t\t" />
+
+                <EditText
+                    android:id="@id/info_id_register_name"
+                    style="@style/info_edittext_style"
+                    android:hint="请输入联系人" />
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="公司名称:" />
+
+                <EditText
+                    android:id="@+id/info_id_register_company_name"
+                    style="@style/info_edittext_style"
+                    android:ems="10"
+                    android:hint="请输入公司名称" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="公司地址:" />
+
+                <EditText
+                    android:id="@+id/info_id_register_company_address"
+                    style="@style/info_edittext_style"
+                    android:ems="10"
+                    android:hint="请输入公司地址" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="座机号码:" />
+
+                <EditText
+                    android:id="@+id/info_id_register_telNum"
+                    style="@style/info_edittext_style"
+                    android:ems="10"
+                    android:hint="请输入座机号码"
+                    android:inputType="phone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="手机号码:" />
+
+                <EditText
+                    android:id="@+id/info_id_register_phone"
+                    style="@style/info_edittext_style"
+                    android:ems="10"
+                    android:hint="请输入手机号码"
+                    android:inputType="phone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="自我推荐:" />
+
+                <EditText
+                    android:id="@+id/myself_recommendation"
+                    style="@style/info_edittext_style"
+                    android:hint="请输入自我推荐" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="公司Logo:" />
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/id_card_photo"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-                <TextView style="@style/info_register_text_style"
-                          android:text="公司照片:"
-                        />
-                <ImageView android:layout_width="70dp"
-                           android:layout_height="70dp"
-                           android:id="@+id/car_photo1"
-                           android:scaleType="fitXY"
-                           android:src="@drawable/ic_img_loading"/>
-                <ImageView android:layout_width="70dp"
-                           android:layout_height="70dp"
-                           android:layout_marginLeft="15dp"
-                           android:layout_marginRight="15dp"
-                           android:id="@+id/car_photo2"
-                           android:scaleType="fitXY"
-                           android:src="@drawable/ic_img_loading"/>
-                <ImageView android:layout_width="70dp"
-                           android:layout_height="70dp"
-                           android:id="@+id/car_photo3"
-                           android:scaleType="fitXY"
-                           android:src="@drawable/ic_img_loading"/>
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_img_loading" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/info_register_text_style"
+                    android:text="公司照片:" />
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/car_photo1"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_img_loading" />
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:id="@+id/car_photo2"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_img_loading" />
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/car_photo3"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_img_loading" />
             </LinearLayout>
 
             <Button
-                    android:id="@id/info_id_register_submit"
-                    style="@style/info_button_style"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/string_tips_optional_submit"/>
+                android:id="@id/info_id_register_submit"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/string_tips_optional_submit" />
         </LinearLayout>
     </ScrollView>
 

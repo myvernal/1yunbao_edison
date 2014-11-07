@@ -15,29 +15,66 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/info_id_register_shuiche_phone"
-                style="@style/info_edittext_style"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="随车手机"
-                android:inputType="phone" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@id/info_id_register_name"
-                style="@style/info_edittext_style"
-                android:layout_marginTop="10dp"
-                android:hint="*司机姓名" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="随车手机:" />
 
-            <EditText
-                android:id="@+id/info_id_register_chezhu_phone"
-                style="@style/info_edittext_style"
+                <EditText
+                    android:id="@+id/info_id_register_shuiche_phone"
+                    style="@style/info_edittext_style"
+                    android:ems="10"
+                    android:hint="随车手机"
+                    android:inputType="phone" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="车主电话"
-                android:inputType="phone" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="司机姓名:" />
+
+                <EditText
+                    android:id="@id/info_id_register_name"
+                    style="@style/info_edittext_style"
+                    android:hint="司机姓名" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="车主电话:" />
+
+                <EditText
+                    android:id="@+id/info_id_register_chezhu_phone"
+                    style="@style/info_edittext_style"
+                    android:ems="10"
+                    android:hint="车主电话"
+                    android:inputType="phone" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,6 +82,12 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="车长:" />
 
                 <EditText
                     android:id="@id/info_id_register_length"
@@ -57,6 +100,12 @@
                 <TextView
                     style="@style/info_register_text_style"
                     android:text="@string/string_register_mi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="载重:" />
 
                 <EditText
                     android:id="@id/info_id_register_weight"
@@ -74,14 +123,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/info_register_text_style"
-                    android:text="@string/string_tips_type" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="载重:" />
 
                 <Spinner
                     android:id="@id/info_id_register_type"
@@ -89,23 +138,45 @@
                     android:layout_marginLeft="5dp" />
             </LinearLayout>
 
-            <EditText
-                android:id="@id/info_id_register_number"
-                style="@style/info_edittext_style"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="@string/string_tips_number" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/myself_recommendation"
-                style="@style/info_edittext_style"
-                android:layout_marginTop="10dp"
-                android:hint="@string/string_tips_myself_recommendation" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="车牌号:" />
+
+                <EditText
+                    android:id="@id/info_id_register_number"
+                    style="@style/info_edittext_style"
+                    android:hint="@string/string_tips_number" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="自我推荐:" />
+
+                <EditText
+                    android:id="@+id/myself_recommendation"
+                    style="@style/info_edittext_style"
+                    android:hint="@string/string_tips_myself_recommendation" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -124,8 +195,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 

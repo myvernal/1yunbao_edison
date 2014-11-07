@@ -530,6 +530,7 @@ public class Constants {
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
     public static final String COMMON_KEY = "common_key";
+    public static final String IS_MY_REPUTATION = "IS_MY_REPUTATION";
 
     public static final String COMMON_BOOLEAN_KEY = "common_boolean_key";
     public static final String COMMON_ACTION_KEY = "common_action_key";

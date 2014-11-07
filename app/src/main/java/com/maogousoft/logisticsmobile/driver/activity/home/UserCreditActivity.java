@@ -41,7 +41,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     private EditText commentContent;
     private float user_score;
     private View shipperInfoLayout;
-    private TextView tvName, tvCompanyName, tvAddr, tvPhone, tvAccountName;
+    private TextView nameTip,tvName, tvCompanyName, tvAddr, tvPhone, tvAccountName;
     private ImageView mPhoto;
     private ShipperInfo shipperInfo;
     private DriverInfo driverInfo;
@@ -76,6 +76,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
 
         mPhoto = (ImageView) findViewById(R.id.account_photo);
         tvName = (TextView) findViewById(R.id.tv_name);
+        nameTip = (TextView) findViewById(R.id.nameTip);
         tvCompanyName = (TextView) findViewById(R.id.tv_company_name);
         tvAddr = (TextView) findViewById(R.id.tv_addr);
         tvPhone = (TextView) findViewById(R.id.tv_phone);
@@ -99,44 +100,66 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     // 初始化数据
     private void initData() {
         orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
-        Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
-        if (serializable instanceof DriverInfo) {
-            //司机信誉
-            driverInfo = (DriverInfo) serializable;
-            ((TextView) findViewById(R.id.titlebar_id_content)).setText("司机信誉");
-
-            tvName.setText(driverInfo.getName());
-            tvPhone.setText(driverInfo.getPhone());
-            tvAccountName.setText(driverInfo.getName());
-            credit_score.setRating(driverInfo.getScore());
-            credit_score1.setRating(driverInfo.getScroe1());
-            credit_score2.setRating(driverInfo.getScroe2());
-            credit_score3.setRating(driverInfo.getScroe3());
-            ImageLoader.getInstance().displayImage(driverInfo.getId_card_photo(), mPhoto, options,
-                    new Utils.MyImageLoadingListener(mContext, mPhoto));
-            shipperInfoLayout.setVisibility(View.GONE);
+        boolean isMyReputation = getIntent().getBooleanExtra(Constants.IS_MY_REPUTATION, false);
+        if (isMyReputation) {
+            Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
+            //我的信誉
+            ((TextView) findViewById(R.id.titlebar_id_content)).setText("我的信誉");
+            if(application.getUserType() == Constants.USER_DRIVER) {
+                //司机信誉
+                driverInfo = (DriverInfo) serializable;
+                shipperInfoLayout.setVisibility(View.GONE);
+                displayDriverData();
+            } else {
+                //货主信誉
+                shipperInfo = (ShipperInfo) serializable;
+                tvCompanyName.setText(tvCompanyName.getText() + shipperInfo.getCompany_name());
+                tvAddr.setText(tvAddr.getText() + shipperInfo.getAddress());
+                displayShipperData();
+            }
         } else {
-            //货主信誉
+            //查看对方信誉
             ((TextView) findViewById(R.id.titlebar_id_content)).setText("货主信誉");
-
             userId = getIntent().getIntExtra("user_id", 0);
             user_score = getIntent().getFloatExtra("user_score", 0);
             credit_score.setRating(user_score == 0 ? 5 : user_score);
             float user_score1 = getIntent().getIntExtra("user_score1", 0);
             credit_score1.setRating(user_score1 == 0 ? 5 : user_score1);
-
             float user_score2 = getIntent().getIntExtra("user_score2", 0);
             credit_score2.setRating(user_score2 == 0 ? 5 : user_score2);
-
             float user_score3 = getIntent().getIntExtra("user_score3", 0);
             credit_score3.setRating(user_score3 == 0 ? 5 : user_score3);
-
             queryShipperInfo(userId);
         }
         //请求评论数据
         queryData();
         //获取点赞数
         getPraiseCount();
+    }
+
+    private void displayDriverData() {
+        tvName.setText(driverInfo.getName());
+        tvPhone.setText(driverInfo.getPhone());
+        tvAccountName.setText(driverInfo.getPhone());
+        credit_score.setRating(driverInfo.getScore() == 0 ? 5 : driverInfo.getScore());
+        credit_score1.setRating(driverInfo.getScroe1() == 0 ? 5 : driverInfo.getScroe1());
+        credit_score2.setRating(driverInfo.getScroe2() == 0 ? 5 : driverInfo.getScroe2());
+        credit_score3.setRating(driverInfo.getScroe3() == 0 ? 5 : driverInfo.getScroe3());
+        ImageLoader.getInstance().displayImage(driverInfo.getId_card_photo(), mPhoto, options,
+                new Utils.MyImageLoadingListener(mContext, mPhoto));
+    }
+
+    private void displayShipperData() {
+        nameTip.setText(getString(R.string.string_home_myabc_title_name));
+        tvName.setText(shipperInfo.getName());
+        tvPhone.setText(shipperInfo.getPhone());
+        tvAccountName.setText(shipperInfo.getPhone());
+        credit_score.setRating(shipperInfo.getScore() == 0 ? 5 : shipperInfo.getScore());
+        credit_score1.setRating(shipperInfo.getScore1() == 0 ? 5 : shipperInfo.getScore1());
+        credit_score2.setRating(shipperInfo.getScore2() == 0 ? 5 : shipperInfo.getScore2());
+        credit_score3.setRating(shipperInfo.getScore3() == 0 ? 5 : shipperInfo.getScore3());
+        ImageLoader.getInstance().displayImage(shipperInfo.getCompany_logo(), mPhoto, options,
+                new Utils.MyImageLoadingListener(mContext, mPhoto));
     }
 
     // 获取评论列表
@@ -194,7 +217,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
                                     shipperInfo = (ShipperInfo) result;
                                     tvName.setText(shipperInfo.getName());
                                     tvPhone.setText(shipperInfo.getPhone());
-                                    tvAccountName.setText(shipperInfo.getName());
+                                    tvAccountName.setText(shipperInfo.getPhone());
                                     tvCompanyName.setText(tvCompanyName.getText() + shipperInfo.getCompany_name());
                                     tvAddr.setText(tvAddr.getText() + shipperInfo.getAddress());
                                     ImageLoader.getInstance().displayImage(shipperInfo.getCompany_logo(), mPhoto, options,

@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <View
@@ -27,7 +27,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/driver_layout"
                 android:background="@color/TextColorWhite"
+                android:onClick="onEdit"
                 android:padding="10dp">
 
                 <ImageView
@@ -71,7 +73,8 @@
 
                     <TextView
                         android:id="@+id/myabc_account_card_number"
-                        style="@style/settingAccountInfoStyle" />
+                        style="@style/settingAccountInfoStyle"
+                        android:text="无"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -88,10 +91,123 @@
                         android:text="@string/string_home_myabc_title_account_name" />
 
                     <TextView
-                        android:id="@+id/myabc_account_name"
-                        style="@style/settingAccountInfoStyle" />
+                        android:id="@+id/myabc_account_name_dirver"
+                        style="@style/settingAccountInfoStyle"
+                        android:text="无"/>
                 </LinearLayout>
             </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:id="@+id/shipper_layout">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/TextColorWhite"
+                    android:onClick="onEdit"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/account_logo_photo"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_launcher" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/company_name_layout"
+                        android:layout_toRightOf="@+id/account_logo_photo"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/settingAccountInfoStyle"
+                            android:layout_width="wrap_content"
+                            android:text="公司名称：" />
+
+                        <TextView
+                            android:id="@+id/myabc_id_company_name"
+                            style="@style/settingAccountInfoStyle"
+                            android:text="无" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/company_name_layout"
+                        android:layout_toRightOf="@+id/account_logo_photo"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/settingAccountInfoStyle"
+                            android:layout_width="wrap_content"
+                            android:text="@string/string_home_myabc_title_account_name" />
+
+                        <TextView
+                            android:id="@+id/myabc_account_name_shipper"
+                            style="@style/settingAccountInfoStyle"
+                            android:text="无"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/TextColorWhite"
+                    android:onClick="onEdit"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/account_other_photo"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_launcher" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/zhizhao_layout"
+                        android:layout_toRightOf="@+id/account_other_photo"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/settingAccountInfoStyle"
+                            android:layout_width="wrap_content"
+                            android:text="营业执照：" />
+
+                        <TextView
+                            android:id="@+id/myabc_id_zhizhao"
+                            style="@style/settingAccountInfoStyle"
+                            android:text="无" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/zhizhao_layout"
+                        android:layout_toRightOf="@+id/account_other_photo"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/settingAccountInfoStyle"
+                            android:layout_width="wrap_content"
+                            android:text="法人代表：" />
+
+                        <TextView
+                            android:id="@+id/myabc_id_daibiao"
+                            style="@style/settingAccountInfoStyle"
+                            android:text="无"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -100,10 +216,18 @@
             <!-- 驾驶证号 -->
             <TextView
                 style="@style/settingInfoStyle"
-                android:id="@id/myabc_id_mycredit"
+                android:id="@+id/myabc_id_jsz"
                 android:drawableLeft="@drawable/account_jsz"
-                android:onClick="onMainLine"
-                android:text="驾驶证号" />
+                android:onClick="onEdit"
+                android:text="驾驶证号\t\t\t" />
+
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@+id/myabc_id_contact"
+                android:visibility="gone"
+                android:drawableLeft="@drawable/setting_account"
+                android:onClick="onEdit"
+                android:text="联系人\t\t\t" />
 
             <View
                 android:layout_width="match_parent"
@@ -114,10 +238,10 @@
             <!-- 联系电话 -->
             <TextView
                 style="@style/settingInfoStyle"
-                android:id="@id/myabc_id_mycredit"
+                android:id="@+id/myabc_id_contact_phone"
                 android:drawableLeft="@drawable/account_phone"
-                android:onClick="onCarInfo"
-                android:text="联系电话" />
+                android:onClick="onEdit"
+                android:text="联系电话\t\t\t" />
 
             <View
                 android:layout_width="match_parent"
@@ -128,10 +252,10 @@
             <!-- 家庭电话 -->
             <TextView
                 style="@style/settingInfoStyle"
-                android:id="@id/myabc_id_mycredit"
+                android:id="@+id/myabc_id_contact_home_phone"
                 android:drawableLeft="@drawable/account_phone2"
-                android:onClick="onCarInfo"
-                android:text="家庭电话" />
+                android:onClick="onEdit"
+                android:text="家庭电话\t\t\t" />
 
             <View
                 android:layout_width="match_parent"
@@ -141,10 +265,10 @@
             <!-- 转账卡开户银行 -->
             <TextView
                 style="@style/settingInfoStyle"
-                android:id="@id/myabc_id_mycredit"
+                android:id="@+id/myabc_id_bank_name"
                 android:drawableLeft="@drawable/account_credit_card"
-                android:onClick="onCarInfo"
-                android:text="转账卡开户银行" />
+                android:onClick="onEdit"
+                android:text="银行名称\t\t\t" />
 
             <View
                 android:layout_width="match_parent"
@@ -156,10 +280,10 @@
             <!-- 转账卡开户银行 -->
             <TextView
                 style="@style/settingInfoStyle"
-                android:id="@id/myabc_id_mycredit"
+                android:id="@+id/myabc_id_bank_number"
                 android:drawableLeft="@drawable/account_credit_card"
-                android:onClick="onCarInfo"
-                android:text="收款卡号" />
+                android:onClick="onEdit"
+                android:text="收款卡号\t\t\t" />
 
             <View
                 android:layout_width="match_parent"
@@ -169,10 +293,10 @@
             <!-- 现住地址 -->
             <TextView
                 style="@style/settingInfoStyle"
-                android:id="@id/myabc_id_mycredit"
+                android:id="@+id/myabc_id_address"
                 android:drawableLeft="@drawable/account_location"
-                android:onClick="onCarInfo"
-                android:text="现住地址" />
+                android:onClick="onEdit"
+                android:text="现住地址\t\t\t" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -181,7 +305,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
-                android:text="@string/account_info_open"/>
+                android:text="@string/account_info_open" />
         </LinearLayout>
     </ScrollView>
 
