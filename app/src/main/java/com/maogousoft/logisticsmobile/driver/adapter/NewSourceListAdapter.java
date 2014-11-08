@@ -128,6 +128,9 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             public void onClick(View view) {
                 String phoneStr = sourceInfo.getCargo_user_phone();
                 if (!TextUtils.isEmpty(phoneStr)) {
+                    //设置货主电话号码
+                    Constants.CALL_NUMBER_SOURCE_ORDER_ID = sourceInfo.getId();
+                    Constants.CALL_NUMBER_SOURCE = phoneStr;
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneStr));
                     mContext.startActivity(intent);
                 }

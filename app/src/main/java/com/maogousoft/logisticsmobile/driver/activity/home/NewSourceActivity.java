@@ -3,8 +3,11 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
@@ -343,17 +346,129 @@ public class NewSourceActivity extends BaseListActivity implements
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Constants.CALL_NUMBER_SOURCE = "";
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (mAdapter.isEmpty()) {
             pageIndex = 1;
             getData(pageIndex);
         }
+        //如果是拨打的货主电话，弹出反馈页面
+        if(application.getUserType() == Constants.USER_DRIVER
+                && TextUtils.equals(Constants.CALL_NUMBER_SOURCE, Constants.CALL_NUMBER)
+                && !TextUtils.isEmpty(Constants.CALL_NUMBER_SOURCE)) {
+            Constants.CALL_NUMBER = "";
+            Constants.CALL_NUMBER_SOURCE = "";
+
+            // 创建PopupWindow对象
+            if(popupWindow == null) {
+                // 引入窗口配置文件
+                View view = LayoutInflater.from(mContext).inflate(R.layout.view_source_contact_feedback_layout, null, false);
+                popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                // 需要设置一下此参数，点击外边可消失
+                popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                //设置点击窗口外边窗口消失
+                popupWindow.setOutsideTouchable(true);
+                // 设置此参数获得焦点，否则无法点击
+                popupWindow.setFocusable(true);
+                view.findViewById(R.id.error_type1).setOnClickListener(popupWindowListener);
+                view.findViewById(R.id.error_type2).setOnClickListener(popupWindowListener);
+                view.findViewById(R.id.error_type3).setOnClickListener(popupWindowListener);
+                view.findViewById(R.id.qiangdan).setOnClickListener(popupWindowListener);
+            }
+            // 显示窗口
+            popupWindow.showAtLocation(mListView, Gravity.CENTER, 0, 0);
+        }
+    }
+    private PopupWindow popupWindow = null;
+    private OnClickListener popupWindowListener = new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(popupWindow.isShowing()) {
+                // 隐藏窗口，如果设置了点击窗口外小时即不需要此方式隐藏
+                popupWindow.dismiss();
+            }
+            switch (view.getId()) {
+                case R.id.error_type1:
+                    callFeedBack(Constants.CALL_NUMBER_SOURCE_ORDER_ID, 1);//信息有误
+                    break;
+                case R.id.error_type2:
+                    callFeedBack(Constants.CALL_NUMBER_SOURCE_ORDER_ID, 3);//没有谈好
+                    break;
+                case R.id.error_type3:
+                    callFeedBack(Constants.CALL_NUMBER_SOURCE_ORDER_ID, 2);//货已订出
+                    break;
+                case R.id.qiangdan:
+                    placeOrder(Constants.CALL_NUMBER_SOURCE_ORDER_ID);
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 电话结果反馈
+     * @param orderId
+     * @param type
+     */
+    private void callFeedBack(Integer orderId, int type) {
+        try {
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.DRIVER_PHONE_FEEDBACK);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, new JSONObject().put("order_id", orderId).put("error_type", type).toString());
+
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    null, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            showMsg(result.toString());
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    /**
+     * 抢单
+     */
+    public void placeOrder(Integer orderId) {
+        final JSONObject params = new JSONObject();
+        try {
+            params.put(Constants.ACTION, Constants.PLACE_SOURCE_ORDER);
+            params.put(Constants.TOKEN, application.getToken());
+            params.put(Constants.JSON, new JSONObject().put("order_id", orderId).toString());
+            showProgress(getString(R.string.tips_sourcedetail_qiang));
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, params, null,
+                    new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    showMsg(R.string.tips_sourcedetail_qiang_success);
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    showMsg(result.toString());
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     // 请求指定页数的数据

@@ -16,7 +16,10 @@ public class Constants {
 
 	// 位置上报间隔
 	public static final int LOC_UPDATE_TIME = 30 * 60 * 1000;
-
+    // 拨打的货主电话
+    public static String CALL_NUMBER = "";
+    public static String CALL_NUMBER_SOURCE = "";
+    public static Integer CALL_NUMBER_SOURCE_ORDER_ID = null;
 	// 服务器请求参数
 	public static final String ACTION = "action";
 
@@ -260,6 +263,9 @@ public class Constants {
     /** 修改支付密码 **/
 	public static final String CHANGE_PAY_PASSWORD = "change_pay_password";
 
+    /** 推送货源 */
+    public static final String PUSH_ORDER = "push_order";
+
 	/** 账户余额 **/
 	public static final String GET_ACCOUNT_GOLD = "get_account_gold";
 
@@ -429,6 +435,12 @@ public class Constants {
 
     /** 司机端：已装车*/
     public static final String TRUCK_LOADING_FINISH = "truck_loading_finish";
+
+    /** 司机端：司机端接受签约邀请 */
+    public static final String ACCEPT_CONTRACT_INVITE = "accept_contract_invite";
+
+    /** 司机端：司机电话反馈 */
+    public static final String DRIVER_PHONE_FEEDBACK = "driver_phone_feedback";
 
     /** 货主端：货单列表数量查询*/
     public static final String QUERY_ORDER_COUNT = "query_order_count";

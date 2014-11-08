@@ -1,78 +1,64 @@
 package com.maogousoft.logisticsmobile.driver.service;
 
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 
 /**
  * Created by aliang on 2015/4/14.
  */
-public class PhoneBroadcastListener  extends BroadcastReceiver {
+public class PhoneBroadcastListener extends BroadcastReceiver {
 
     private static final String TAG = "PhoneBroadcastListener";
-    /**
-     * 手机没有通话，在一般的状态值
-     */
-    public static final int CALL_TYPE_IDEL = 0;
-    /**
-     * 手机通话状态值
-     */
-    public static final int CALL_TYPE_CALLING = 1;
-    /**
-     * 手机响铃状态值
-     */
-    public static final int CALL_TYPE_RING = 2;
 
-    /**
-     * 当前手机通话状态值
-     */
-    private int currentState = CALL_TYPE_IDEL ;
-    /**
-     * 手机原来的通话状态值
-     */
-    private int oldState = CALL_TYPE_IDEL ;
-
-    private PhoneListener listener;
-    private Context mContext;
-
-    @Override//当发生监听的事件，系统会调用这个方法
+    @Override
     public void onReceive(Context context, Intent intent) {
-        mContext = context;
-        //进行细节上的监控，我们需要操作TelephonyManager，为它设置监听器，他就给我们反馈
-        //拿到系统的TelephonyManager
-        TelephonyManager tpManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        listener = new PhoneListener();//创建监听器
-        tpManager.listen( listener, PhoneStateListener.LISTEN_CALL_STATE);//设置监听器
-    }
-    private class PhoneListener extends PhoneStateListener {
-        @Override//当电话状态发生改变的时候，系统会调用这个方法
-        public void onCallStateChanged(int state, String incomingNumber) {
-            //首先取得当前的状态值
-            oldState = SharedPreferencesProvider.getInstance(mContext).getOldPhoneState();
-
-            switch( state ){
-                case TelephonyManager.CALL_STATE_IDLE :
-                    currentState = CALL_TYPE_IDEL;
-                    break;
-                case TelephonyManager.CALL_STATE_OFFHOOK :
-                    currentState = CALL_TYPE_CALLING;
-                    break;
-                case TelephonyManager.CALL_STATE_RINGING :
-                    currentState = CALL_TYPE_RING;
-                    break;
-            }
-            //当通话状态发生改变
-            if( oldState == CALL_TYPE_RING && currentState == CALL_TYPE_CALLING ){
-                LogUtil.e(TAG, "接听");
-            } else if( oldState == CALL_TYPE_CALLING && currentState == CALL_TYPE_IDEL ){
-                LogUtil.e(TAG, "挂断" );
-            } if( oldState == CALL_TYPE_IDEL && currentState == CALL_TYPE_CALLING ){
-                LogUtil.e(TAG, "拨号" );
-            }
-            SharedPreferencesProvider.getInstance(mContext).saveOldPhoneState( currentState);
+        System.out.println("action" + intent.getAction());
+        //如果是去电
+        if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
+            String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+            Constants.CALL_NUMBER = phoneNumber;
+            LogUtil.e(TAG, "call OUT:" + phoneNumber);
+        } else {
+            //查了下android文档，貌似没有专门用于接收来电的action,所以，非去电即来电.
+            //如果我们想要监听电话的拨打状况，需要这么几步 :
+            /* 第一：获取电话服务管理器TelephonyManager manager = this.getSystemService(TELEPHONY_SERVICE);
+            * 第二：通过TelephonyManager注册我们要监听的电话状态改变事件。manager.listen(new MyPhoneStateListener(),
+                    * PhoneStateListener.LISTEN_CALL_STATE);这里的PhoneStateListener.LISTEN_CALL_STATE就是我们想要
+                    * 监听的状态改变事件，初次之外，还有很多其他事件哦。
+            * 第三步：通过extends PhoneStateListener来定制自己的规则。将其对象传递给第二步作为参数。
+            * 第四步：这一步很重要，那就是给应用添加权限。android.permission.READ_PHONE_STATE
+            */
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
+            tm.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
+            //设置一个监听器
         }
     }
+
+    PhoneStateListener listener = new PhoneStateListener() {
+
+        @Override
+        public void onCallStateChanged(int state, String incomingNumber) {
+            //注意，方法必须写在super方法后面，否则incomingNumber无法获取到值。
+            super.onCallStateChanged(state, incomingNumber);
+            switch (state) {
+                case TelephonyManager.CALL_STATE_IDLE:
+                    LogUtil.e(TAG, "挂断");
+                    break;
+                case TelephonyManager.CALL_STATE_OFFHOOK:
+                    LogUtil.e(TAG, "接听");
+                    break;
+                case TelephonyManager.CALL_STATE_RINGING:
+                    LogUtil.e(TAG, "响铃:来电号码" + incomingNumber);
+                    //输出来电号码
+                    break;
+            }
+        }
+    };
 }
