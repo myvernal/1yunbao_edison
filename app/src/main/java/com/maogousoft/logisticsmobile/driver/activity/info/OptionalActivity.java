@@ -61,8 +61,8 @@ import java.util.List;
  */
 public class OptionalActivity extends BaseActivity {
     private Button mLogin, mRegister;
-    private EditText mShuiChePhone, mName, mLength, mWeight, mNumber,
-            mChezhuPhone, myself_recommendation;
+    private EditText mShuiChePhone, mName, mLength, mWeight, mNumber, info_id_register_id_card,
+            mChezhuPhone, myself_recommendation, optional_linkman, optional_frame_number, optional_bank, optional_bank_account;
     private Spinner mCarType;
     private CarTypeListAdapter mCarTypeAdapter;
     private boolean isFormRegisterActivity;
@@ -97,8 +97,7 @@ public class OptionalActivity extends BaseActivity {
 
     // 初始化视图
     private void initViews() {
-        ((TextView) findViewById(R.id.titlebar_id_content))
-                .setText(R.string.string_register_complete_title);
+        ((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_register_complete_title);
 
         mLogin = (Button) findViewById(R.id.titlebar_id_more);
         mRegister = (Button) findViewById(R.id.info_id_register_submit);
@@ -110,6 +109,11 @@ public class OptionalActivity extends BaseActivity {
         mWeight = (EditText) findViewById(R.id.info_id_register_weight);
         mNumber = (EditText) findViewById(R.id.info_id_register_number);
         myself_recommendation = (EditText) findViewById(R.id.myself_recommendation);
+        info_id_register_id_card = (EditText) findViewById(R.id.info_id_register_id_card);
+        optional_linkman = (EditText) findViewById(R.id.optional_linkman);
+        optional_frame_number = (EditText) findViewById(R.id.optional_frame_number);
+        optional_bank = (EditText) findViewById(R.id.optional_bank);
+        optional_bank_account = (EditText) findViewById(R.id.optional_bank_account);
 
         mCarType = (Spinner) findViewById(R.id.info_id_register_type);
         // mSkan.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -131,7 +135,6 @@ public class OptionalActivity extends BaseActivity {
         mWeight.setOnFocusChangeListener(mOnFocusChangeListener);
         mNumber.setOnFocusChangeListener(mOnFocusChangeListener);
         mName.setOnFocusChangeListener(mOnFocusChangeListener);
-
     }
 
     // 初始化数据，获取车型
@@ -455,6 +458,12 @@ public class OptionalActivity extends BaseActivity {
             params.put("car_weight", mWeight.getText().toString());
             params.put("plate_number", mNumber.getText().toString());
             params.put("myself_recommendation", myself_recommendation.getText().toString());
+            params.put("id_card", info_id_register_id_card.getText().toString());
+            params.put("optional_linkman", optional_linkman.getText().toString());
+            params.put("optional_linkman", optional_linkman.getText().toString());
+            params.put("optional_frame_number", optional_frame_number.getText().toString());
+            params.put("optional_bank", optional_bank.getText().toString());
+            params.put("optional_bank_account", optional_bank_account.getText().toString());
             if (!TextUtils.isEmpty(userPhotoUrl)) {
                 params.put("id_card_photo", userPhotoUrl);
             }

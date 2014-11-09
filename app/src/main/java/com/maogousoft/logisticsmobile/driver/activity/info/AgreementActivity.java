@@ -82,7 +82,7 @@ public class AgreementActivity extends BaseActivity {
          */
     public void initViewPager() {
         mPager = (ViewPager) findViewById(R.id.viewpager);
-        fragmentList = new ArrayList<>();
+        fragmentList = new ArrayList<Fragment>();
         //0初始合同 1 签约完成合同 3 待结算 4结算合同
         firstFragment = AgreementFragment.newInstance(3);
         secondFragment = AgreementFragment.newInstance(4);
@@ -97,7 +97,6 @@ public class AgreementActivity extends BaseActivity {
         mPager.setOnPageChangeListener(new MyOnPageChangeListener());//页面变化时的监听器
         mPager.setOffscreenPageLimit(3);
     }
-
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 

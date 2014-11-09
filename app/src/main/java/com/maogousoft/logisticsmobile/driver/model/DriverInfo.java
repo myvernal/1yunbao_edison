@@ -92,6 +92,51 @@ public class DriverInfo implements Serializable {
 
 	private String car_phone = "";// 随车手机
     private String yunbao_pay;
+    private String linkman;//联系人
+    private String frame_number;//车架号
+    private String bank;//开户银行名称
+    private String bank_account;//银行账号
+    private String business_address;//办公地址
+
+    public String getLinkman() {
+        return linkman;
+    }
+
+    public void setLinkman(String linkman) {
+        this.linkman = linkman;
+    }
+
+    public String getFrame_number() {
+        return frame_number;
+    }
+
+    public void setFrame_number(String frame_number) {
+        this.frame_number = frame_number;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    public String getBank_account() {
+        return bank_account;
+    }
+
+    public void setBank_account(String bank_account) {
+        this.bank_account = bank_account;
+    }
+
+    public String getBusiness_address() {
+        return business_address;
+    }
+
+    public void setBusiness_address(String business_address) {
+        this.business_address = business_address;
+    }
 
     public String getYunbao_pay() {
         return yunbao_pay;

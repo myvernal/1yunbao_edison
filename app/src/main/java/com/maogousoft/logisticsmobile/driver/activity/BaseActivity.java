@@ -84,9 +84,6 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		LogUtil.i("wst", "baseactivity-onCreate");
-
 		application = (MGApplication) getApplication();
 		imageLoader = application.getImageLoader();
 		sdb = application.getDB();

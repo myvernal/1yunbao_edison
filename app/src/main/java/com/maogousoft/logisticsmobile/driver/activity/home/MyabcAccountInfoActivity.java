@@ -111,12 +111,12 @@ public class MyabcAccountInfoActivity extends BaseActivity {
                                         myabc_id_name.setText(mDriverInfo.getName());
                                         myabc_account_card_number.setText(mDriverInfo.getId_card());
                                         myabc_account_name_dirver.setText(mDriverInfo.getPhone());
-                                        myabc_id_jsz.setText(mDriverInfo.getLicense());
+                                        myabc_id_jsz.setText(getString(R.string.jiashizheng, mDriverInfo.getLicense()));
                                         myabc_id_contact_phone.setText(getString(R.string.lianxidianhua, mDriverInfo.getPhone()));
                                         myabc_id_contact_home_phone.setText(getString(R.string.jiatingdianhua, mDriverInfo.getPhone()));
-                                        myabc_id_bank_name.setText(getString(R.string.yinhangmingcheng, mDriverInfo.getPhone()));
-                                        myabc_id_bank_number.setText(getString(R.string.shoukuankahao, mDriverInfo.getPhone()));
-                                        myabc_id_address.setText(getString(R.string.address, mDriverInfo.getPhone()));
+                                        myabc_id_bank_name.setText(getString(R.string.yinhangmingcheng, mDriverInfo.getBank()));
+                                        myabc_id_bank_number.setText(getString(R.string.shoukuankahao, mDriverInfo.getBank_account()));
+                                        myabc_id_address.setText(getString(R.string.address, mDriverInfo.getBusiness_address()));
                                         ImageLoader.getInstance().displayImage(mDriverInfo.getId_card_photo(), account_photo, options,
                                                 new Utils.MyImageLoadingListener(mContext, account_photo));
                                     }
@@ -163,8 +163,8 @@ public class MyabcAccountInfoActivity extends BaseActivity {
                                         myabc_id_contact.setText(getString(R.string.lianxiren, mShipperInfo.getName()));
                                         myabc_id_contact_phone.setText(getString(R.string.lianxidianhua, mShipperInfo.getPhone()));
                                         myabc_id_contact_home_phone.setText(getString(R.string.jiatingdianhua, mShipperInfo.getTelcom()));
-                                        myabc_id_bank_name.setText(getString(R.string.yinhangmingcheng, mShipperInfo.getPhone()));
-                                        myabc_id_bank_number.setText(getString(R.string.shoukuankahao, mShipperInfo.getPhone()));
+                                        myabc_id_bank_name.setText(getString(R.string.yinhangmingcheng, mShipperInfo.getBank()));
+                                        myabc_id_bank_number.setText(getString(R.string.shoukuankahao, mShipperInfo.getBank_account()));
                                         myabc_id_address.setText(getString(R.string.address, mShipperInfo.getAddress()));
                                         ImageLoader.getInstance().displayImage(mShipperInfo.getCompany_logo(), account_logo_photo, options,
                                                 new Utils.MyImageLoadingListener(mContext, account_logo_photo));

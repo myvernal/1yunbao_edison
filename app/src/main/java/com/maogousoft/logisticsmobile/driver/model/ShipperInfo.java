@@ -44,6 +44,34 @@ public class ShipperInfo implements Serializable {
     private Double tpy_6;//综合险附加被盗险费率
     private Double pa_1;//平安费率
 
+    private String bank;//开户银行名称
+    private String bank_account;//银行账号
+    private String account_name;//账号姓名
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    public String getBank_account() {
+        return bank_account;
+    }
+
+    public void setBank_account(String bank_account) {
+        this.bank_account = bank_account;
+    }
+
+    public String getAccount_name() {
+        return account_name;
+    }
+
+    public void setAccount_name(String account_name) {
+        this.account_name = account_name;
+    }
+
     public float getScore() {
         return score;
     }

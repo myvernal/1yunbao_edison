@@ -53,7 +53,7 @@ import java.io.File;
  */
 public class OptionalShipperActivity extends BaseActivity {
     private Button mLogin, mRegister;
-    private EditText mName, mPhone, mTelNum, mAddress, mCompanyName, mSelfDesc;
+    private EditText mName, mPhone, mTelNum, mAddress, mCompanyName, mSelfDesc, optional_linkman, optional_frame_number, optional_bank, optional_bank_account;;
     private ShipperInfo abcInfo;
     // 公司LOGO
     private String userPhoto;
@@ -97,6 +97,10 @@ public class OptionalShipperActivity extends BaseActivity {
         mSelfDesc = (EditText) findViewById(R.id.myself_recommendation);
         mPhone = (EditText) findViewById(R.id.info_id_register_phone);
         mName = (EditText) findViewById(R.id.info_id_register_name);
+        optional_linkman = (EditText) findViewById(R.id.optional_linkman);
+        optional_frame_number = (EditText) findViewById(R.id.optional_frame_number);
+        optional_bank = (EditText) findViewById(R.id.optional_bank);
+        optional_bank_account = (EditText) findViewById(R.id.optional_bank_account);
         id_card_photo = (ImageView) findViewById(R.id.id_card_photo);
         car_photo1 = (ImageView) findViewById(R.id.car_photo1);
         car_photo2 = (ImageView) findViewById(R.id.car_photo2);
@@ -323,6 +327,10 @@ public class OptionalShipperActivity extends BaseActivity {
             params.put("company_name", mCompanyName.getText().toString());
             params.put("address", mAddress.getText().toString());
             params.put("company_recommendation", mSelfDesc.getText().toString());
+            params.put("optional_linkman", optional_linkman.getText().toString());
+            params.put("optional_frame_number", optional_frame_number.getText().toString());
+            params.put("optional_bank", optional_bank.getText().toString());
+            params.put("optional_bank_account", optional_bank_account.getText().toString());
             if (!TextUtils.isEmpty(userPhotoUrl)) {
                 params.put("company_logo", userPhotoUrl);
             }

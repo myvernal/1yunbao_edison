@@ -66,6 +66,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:text="身份证号:" />
+
+                <EditText
+                    android:id="@+id/info_id_register_id_card"
+                    style="@style/info_edittext_style"
+                    android:ems="10"
+                    android:hint="请输入身份证号"
+                    android:inputType="phone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="车主电话:" />
 
                 <EditText
@@ -154,6 +174,79 @@
                     android:id="@id/info_id_register_number"
                     style="@style/info_edittext_style"
                     android:hint="@string/string_tips_number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="联系人:" />
+
+                <EditText
+                    android:id="@+id/optional_linkman"
+                    style="@style/info_edittext_style"
+                    android:hint="请输入联系人" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="车架号:" />
+
+                <EditText
+                    android:id="@+id/optional_frame_number"
+                    style="@style/info_edittext_style"
+                    android:hint="请输入车架号" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="开户银行:" />
+
+                <EditText
+                    android:id="@+id/optional_bank"
+                    style="@style/info_edittext_style"
+                    android:hint="请输入开户银行" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="银行账号:" />
+
+                <EditText
+                    android:id="@+id/optional_bank_account"
+                    style="@style/info_edittext_style"
+                    android:inputType="phone"
+                    android:hint="请输入银行账号" />
             </LinearLayout>
 
             <LinearLayout
