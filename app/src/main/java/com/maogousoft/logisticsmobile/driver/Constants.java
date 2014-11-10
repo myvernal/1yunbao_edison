@@ -146,8 +146,8 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
-    public static final String BASE_URL = "http://1yunbao.com:8083/service";
-	//public static final String BASE_URL = "http://192.168.1.110:8080/service";
+    //public static final String BASE_URL = "http://1yunbao.com:8083/service";
+	public static final String BASE_URL = "http://192.168.2.189:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -248,8 +248,8 @@ public class Constants {
 	/** 回单密码 **/
 	public static final String VALIDATE_RECEIPT_PASSWORD = "validate_receipt_password";
 
-	/** 我的ABC **/
-	public static final String DRIVER_PROFILE = "driver_profile";
+	/** 获取司机信息 **/
+	public static final String GET_DRIVER_INFO = "get_driver_info";
 
 	/** 获取字典数据 **/
 	public static final String COMMON_GET_DICT_LIST = "common_get_dict_list";

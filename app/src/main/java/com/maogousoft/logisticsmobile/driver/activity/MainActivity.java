@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RadioGroup;
 import android.widget.TabHost;
 
 import com.baidu.mapapi.SDKInitializer;
@@ -148,14 +147,14 @@ public class MainActivity extends TabActivity {
         try {
             Class clz;
             if(Constants.USER_DRIVER == application.getUserType()) {
-                jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+                jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_INFO);
                 clz = DriverInfo.class;
             } else {
                 jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
                 clz = ShipperInfo.class;
             }
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, "");
+            jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     clz, new AjaxCallBack() {
 

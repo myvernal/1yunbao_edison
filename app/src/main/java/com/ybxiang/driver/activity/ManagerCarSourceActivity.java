@@ -56,8 +56,7 @@ public class ManagerCarSourceActivity extends BaseListActivity implements
         // 数据加载中进度条
         mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
-        mFootProgress = (ProgressBar) mFootView
-                .findViewById(android.R.id.progress);
+        mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
 

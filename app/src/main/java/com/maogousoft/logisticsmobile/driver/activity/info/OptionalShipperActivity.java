@@ -53,8 +53,8 @@ import java.io.File;
  */
 public class OptionalShipperActivity extends BaseActivity {
     private Button mLogin, mRegister;
-    private EditText mName, mPhone, mTelNum, mAddress, mCompanyName, mSelfDesc, optional_linkman, optional_frame_number, optional_bank, optional_bank_account;;
-    private ShipperInfo abcInfo;
+    private EditText mName, mPhone, mTelNum, mAddress, mCompanyName, mSelfDesc, optional_account_name, optional_bank, optional_bank_account;
+    private ShipperInfo shipperInfo;
     // 公司LOGO
     private String userPhoto;
     private String userPhotoUrl;
@@ -97,8 +97,7 @@ public class OptionalShipperActivity extends BaseActivity {
         mSelfDesc = (EditText) findViewById(R.id.myself_recommendation);
         mPhone = (EditText) findViewById(R.id.info_id_register_phone);
         mName = (EditText) findViewById(R.id.info_id_register_name);
-        optional_linkman = (EditText) findViewById(R.id.optional_linkman);
-        optional_frame_number = (EditText) findViewById(R.id.optional_frame_number);
+        optional_account_name = (EditText) findViewById(R.id.optional_account_name);
         optional_bank = (EditText) findViewById(R.id.optional_bank);
         optional_bank_account = (EditText) findViewById(R.id.optional_bank_account);
         id_card_photo = (ImageView) findViewById(R.id.id_card_photo);
@@ -132,32 +131,35 @@ public class OptionalShipperActivity extends BaseActivity {
 
     private void initData() {
         if (getIntent().hasExtra("info")) {
-            abcInfo = (ShipperInfo) getIntent().getSerializableExtra("info");
-            mName.setText(abcInfo.getName());
-            mPhone.setText(abcInfo.getPhone());
-            mTelNum.setText(abcInfo.getTelcom());
-            mAddress.setText(abcInfo.getAddress());
-            mCompanyName.setText(abcInfo.getCompany_name());
-            mSelfDesc.setText(abcInfo.getCompany_recommendation());
-            if (!TextUtils.isEmpty(abcInfo.getCompany_logo())) {
-                ImageLoader.getInstance().displayImage(abcInfo.getCompany_logo(), id_card_photo, options,
+            shipperInfo = (ShipperInfo) getIntent().getSerializableExtra("info");
+            mName.setText(shipperInfo.getName());
+            mPhone.setText(shipperInfo.getPhone());
+            mTelNum.setText(shipperInfo.getTelcom());
+            mAddress.setText(shipperInfo.getAddress());
+            mCompanyName.setText(shipperInfo.getCompany_name());
+            mSelfDesc.setText(shipperInfo.getCompany_recommendation());
+            optional_account_name.setText(shipperInfo.getAccount_name());
+            optional_bank.setText(shipperInfo.getBank());
+            optional_bank_account.setText(shipperInfo.getBank_account());
+            if (!TextUtils.isEmpty(shipperInfo.getCompany_logo())) {
+                ImageLoader.getInstance().displayImage(shipperInfo.getCompany_logo(), id_card_photo, options,
                         new Utils.MyImageLoadingListener(mContext, id_card_photo));
-                userPhotoUrl = abcInfo.getCompany_logo();
+                userPhotoUrl = shipperInfo.getCompany_logo();
             }
-            if (!TextUtils.isEmpty(abcInfo.getCompany_photo1())) {
-                ImageLoader.getInstance().displayImage(abcInfo.getCompany_photo1(), car_photo1, options,
+            if (!TextUtils.isEmpty(shipperInfo.getCompany_photo1())) {
+                ImageLoader.getInstance().displayImage(shipperInfo.getCompany_photo1(), car_photo1, options,
                         new Utils.MyImageLoadingListener(mContext, car_photo1));
-                mCarPhotosUrl1 = abcInfo.getCompany_photo1();
+                mCarPhotosUrl1 = shipperInfo.getCompany_photo1();
             }
-            if (!TextUtils.isEmpty(abcInfo.getCompany_photo2())) {
-                ImageLoader.getInstance().displayImage(abcInfo.getCompany_photo2(), car_photo2, options,
+            if (!TextUtils.isEmpty(shipperInfo.getCompany_photo2())) {
+                ImageLoader.getInstance().displayImage(shipperInfo.getCompany_photo2(), car_photo2, options,
                         new Utils.MyImageLoadingListener(mContext, car_photo2));
-                mCarPhotosUrl2 = abcInfo.getCompany_photo2();
+                mCarPhotosUrl2 = shipperInfo.getCompany_photo2();
             }
-            if (!TextUtils.isEmpty(abcInfo.getCompany_photo3())) {
-                ImageLoader.getInstance().displayImage(abcInfo.getCompany_photo3(), car_photo3, options,
+            if (!TextUtils.isEmpty(shipperInfo.getCompany_photo3())) {
+                ImageLoader.getInstance().displayImage(shipperInfo.getCompany_photo3(), car_photo3, options,
                         new Utils.MyImageLoadingListener(mContext, car_photo3));
-                mCarPhotosUrl3 = abcInfo.getCompany_photo3();
+                mCarPhotosUrl3 = shipperInfo.getCompany_photo3();
             }
         }
     }
@@ -174,6 +176,14 @@ public class OptionalShipperActivity extends BaseActivity {
                     clearPhoto();
                     return;
                 }
+
+                if (!CheckUtils.checkIsBankCard(optional_bank_account)) {
+                    showMsg("请输入正确的银行卡号");
+                    mName.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+
                 if (!CheckUtils.checkIsEmpty(mCompanyName)) {
                     showMsg("公司名称不能为空");
                     mCompanyName.requestFocus();
@@ -327,10 +337,9 @@ public class OptionalShipperActivity extends BaseActivity {
             params.put("company_name", mCompanyName.getText().toString());
             params.put("address", mAddress.getText().toString());
             params.put("company_recommendation", mSelfDesc.getText().toString());
-            params.put("optional_linkman", optional_linkman.getText().toString());
-            params.put("optional_frame_number", optional_frame_number.getText().toString());
-            params.put("optional_bank", optional_bank.getText().toString());
-            params.put("optional_bank_account", optional_bank_account.getText().toString());
+            params.put("account_name", optional_account_name.getText().toString());
+            params.put("bank", optional_bank.getText().toString());
+            params.put("bank_account", optional_bank_account.getText().toString());
             if (!TextUtils.isEmpty(userPhotoUrl)) {
                 params.put("company_logo", userPhotoUrl);
             }

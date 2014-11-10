@@ -95,8 +95,17 @@ public class DriverInfo implements Serializable {
     private String linkman;//联系人
     private String frame_number;//车架号
     private String bank;//开户银行名称
+    private String account_name;//账户名称
     private String bank_account;//银行账号
     private String business_address;//办公地址
+
+    public String getAccount_name() {
+        return account_name;
+    }
+
+    public void setAccount_name(String account_name) {
+        this.account_name = account_name;
+    }
 
     public String getLinkman() {
         return linkman;

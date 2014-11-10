@@ -24,7 +24,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="随车手机:" />
@@ -45,7 +45,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="司机姓名:" />
@@ -63,7 +63,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="身份证号:" />
@@ -83,7 +83,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="车主电话:" />
@@ -104,7 +104,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="车长:" />
@@ -137,6 +137,7 @@
 
                 <TextView
                     style="@style/info_register_text_style"
+                    android:minWidth="10dp"
                     android:text="@string/string_register_kg" />
             </LinearLayout>
 
@@ -147,10 +148,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="载重:" />
+                    android:text="车型:" />
 
                 <Spinner
                     android:id="@id/info_id_register_type"
@@ -165,7 +166,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="车牌号:" />
@@ -183,7 +184,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="联系人:" />
@@ -201,10 +202,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="车架号:" />
+                    android:text="车架编号:" />
 
                 <EditText
                     android:id="@+id/optional_frame_number"
@@ -219,7 +220,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="开户银行:" />
@@ -237,7 +238,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="银行账号:" />
@@ -256,7 +257,25 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="账户姓名:" />
+
+                <EditText
+                    android:id="@+id/optional_account_name"
+                    style="@style/info_edittext_style"
+                    android:hint="请输入账户姓名" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="自我推荐:" />
@@ -275,6 +294,7 @@
 
                 <TextView
                     style="@style/info_register_text_style"
+                    android:layout_width="60dp"
                     android:text="头像照片:" />
 
                 <ImageView
@@ -293,6 +313,7 @@
 
                 <TextView
                     style="@style/info_register_text_style"
+                    android:layout_width="60dp"
                     android:text="车辆照片:" />
 
                 <ImageView

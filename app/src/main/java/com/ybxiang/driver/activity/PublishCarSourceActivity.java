@@ -44,6 +44,10 @@ public class PublishCarSourceActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.driver_home_publish_car_source);
+        if(application.getUserType() == Constants.USER_SHIPPER) {
+            startActivity(new Intent(mContext, PublishGoodsSourceActivity.class));
+            finish();
+        }
         initViews();
         onGetLocation();
     }
@@ -225,9 +229,9 @@ public class PublishCarSourceActivity extends BaseActivity implements
     private void getABCInfo() {
         final JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+            jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_INFO);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, "");
+            jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     DriverInfo.class, new AjaxCallBack() {
 

@@ -16,7 +16,6 @@ import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
-import com.maogousoft.logisticsmobile.driver.utils.MD5;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,15 +70,13 @@ public class SettingPayPasswordActivity extends BaseActivity {
         final JSONObject jsonObject = new JSONObject();
         try {
             showDefaultProgress();
-            JSONObject params = new JSONObject();
             if (application.getUserType() == Constants.USER_DRIVER) {
-                jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+                jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_INFO);
             } else {
                 jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
-                params.put("user_id", application.getUserId());
             }
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, params.toString());
+            jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     application.getUserType() == Constants.USER_DRIVER ? DriverInfo.class : ShipperInfo.class, new AjaxCallBack() {
 

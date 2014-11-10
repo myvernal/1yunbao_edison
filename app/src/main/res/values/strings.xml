@@ -163,7 +163,7 @@
     <string name="string_home_onlinesource_contact">联系货主</string>
     <string name="string_home_onlinesource_chat">在线聊天</string>
     <string name="string_home_onlinesource_evaluate">评价</string>
-    <string name="jiashizheng">驾驶证号\t\t\t%s</string>
+    <string name="chejiahao">车架编号\t\t\t%s</string>
     <string name="lianxiren">联系人\t\t\t\t%s</string>
     <string name="lianxidianhua">联系电话\t\t\t%s</string>
     <string name="jiatingdianhua">家庭电话\t\t\t%s</string>

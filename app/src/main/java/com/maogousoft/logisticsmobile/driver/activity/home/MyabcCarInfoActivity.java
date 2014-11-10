@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -66,9 +65,9 @@ public class MyabcCarInfoActivity extends BaseActivity {
 		// }
 		final JSONObject jsonObject = new JSONObject();
 		try {
-			jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+			jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_INFO);
 			jsonObject.put(Constants.TOKEN, application.getToken());
-			jsonObject.put(Constants.JSON, "");
+			jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
 					DriverInfo.class, new AjaxCallBack() {
 

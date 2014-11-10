@@ -213,13 +213,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:background="@color/common_line_color" />
-            <!-- 驾驶证号 -->
+            <!-- 车架号 -->
             <TextView
                 style="@style/settingInfoStyle"
-                android:id="@+id/myabc_id_jsz"
+                android:id="@+id/myabc_id_cjh"
                 android:drawableLeft="@drawable/account_jsz"
                 android:onClick="onEdit"
-                android:text="驾驶证号\t\t\t" />
+                android:text="车架号\t\t\t" />
 
             <TextView
                 style="@style/settingInfoStyle"

@@ -330,7 +330,7 @@
                 <TextView
                     style="@style/home_motorcade_item_title_style"
                     android:layout_width="100dp"
-                    android:text="金\t\t\t\t额:" />
+                    android:text="金\t\t额:" />
 
                 <EditText
                     android:id="@+id/recharge_price"

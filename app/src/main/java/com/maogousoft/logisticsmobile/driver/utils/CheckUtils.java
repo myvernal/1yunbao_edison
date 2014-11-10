@@ -20,6 +20,13 @@ public class CheckUtils {
 		return false;
 	}
 
+    public static boolean checkIsBankCard(EditText text) {
+        if (text.length() <= 19 && text.length() >= 16) {
+            return true;
+        }
+        return false;
+    }
+
 	public static String checkIsNull(String value) {
 		if (!TextUtils.isEmpty(value) && !value.equalsIgnoreCase("null")) {
 			return value;

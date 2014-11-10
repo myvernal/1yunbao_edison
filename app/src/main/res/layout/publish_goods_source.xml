@@ -1,377 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.maogousoft.logisticsmobile.driver.widget.HeaderView android:layout_width="match_parent"
-                                                             android:layout_height="wrap_content"/>
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:padding="10dp"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/public_car_begin"
+                android:gravity="center_vertical"
+                android:text="出发地"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal" />
+
+            <com.maogousoft.logisticsmobile.driver.CitySelectView
+                android:id="@+id/cityselect_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="*出发地"
-                    android:textColor="@color/font_gray2"
-                    android:textSize="@dimen/font_size_normal"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/public_car_end"
+                android:gravity="center_vertical"
+                android:text="目的地"
+                android:textColor="@color/font_gray2"
+                android:textSize="@dimen/font_size_normal" />
 
             <com.maogousoft.logisticsmobile.driver.CitySelectView
-                    android:id="@+id/cityselect_start"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="*目的地"
-                    android:textColor="@color/font_gray2"
-                    android:textSize="@dimen/font_size_normal"/>
-
-            <com.maogousoft.logisticsmobile.driver.CitySelectView
-                    android:id="@+id/cityselect_end"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"/>
+                android:id="@+id/cityselect_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
             <!-- 货物名称 -->
 
             <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="货物名称："/>
+                    style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/source_name"
+                    android:text="货物名称：" />
 
                 <EditText
-                        android:id="@id/source_id_publish_cargo_desc"
-                        style="@style/info_edittext_weight_style"
-                        android:hint="请输入货物名称"/>
+                    android:id="@id/source_id_publish_cargo_desc"
+                    style="@style/info_edittext_weight_style"
+                    android:hint="请输入货物名称" />
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical"
-                        android:text="货物类型："/>
+                    style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/source_type"
+                    android:gravity="center_vertical"
+                    android:text="货物类型：" />
 
                 <Spinner
-                        android:id="@id/source_id_publish_cargo_type"
-                        style="@style/home_publish_spinner_style"
-                        android:entries="@array/goods_types"/>
+                    android:id="@id/source_id_publish_cargo_type"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/goods_types" />
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="运输方式："/>
-
-                <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:orientation="horizontal">
-
-                    <RadioButton
-                            android:id="@+id/car_way_part"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="onChooseCarWay"
-                            android:text="零担" />
-
-                    <RadioButton
-                            android:id="@+id/car_way_whole"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:onClick="onChooseCarWay"
-                            android:text="整车"/>
-                </RadioGroup>
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="车长："/>
+                    style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/public_car_lengh"
+                    android:text="车长：" />
 
                 <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:id="@id/source_id_publish_car_length"
-                        android:inputType="number"
-                        android:text=""/>
+                    style="@style/info_edittext_weight_style"
+                    android:id="@id/source_id_publish_car_length"
+                    android:inputType="number"
+                    android:text="" />
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:text="米"/>
+                    style="@style/info_register_text_style"
+                    android:text="米" />
             </LinearLayout>
             <!-- 车型：spinner.setSelection(5) -->
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="车型："/>
+                    style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/public_car_type"
+                    android:text="车型：" />
 
                 <Spinner
-                        android:id="@id/source_id_publish_car_type"
-                        style="@style/home_publish_spinner_style"
-                        android:entries="@array/car_types_name"/>
+                    android:id="@id/source_id_publish_car_type"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/car_types_name" />
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="数量："/>
+                    style="@style/info_publish_text_style"
+                    android:text="数量：" />
 
                 <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:id="@+id/source_id_publish_source_weight"
-                        android:inputType="number"
-                        android:text=""/>
+                    style="@style/info_edittext_weight_style"
+                    android:id="@+id/source_id_publish_source_weight"
+                    android:inputType="number"
+                    android:text="" />
 
                 <Spinner
-                        android:id="@+id/source_id_publish_source_weight_unit"
-                        style="@style/home_publish_spinner_style"
-                        android:entries="@array/car_price_unit"/>
+                    android:id="@+id/source_id_publish_source_weight_unit"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/car_price_unit" />
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="报价："/>
+                    style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/public_car_baojia"
+                    android:text="报价：" />
 
                 <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:id="@id/source_id_publish_unit_price"
-                        android:text=""/>
+                    style="@style/info_edittext_weight_style"
+                    android:id="@id/source_id_publish_unit_price"
+                    android:text="" />
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:text="元"/>
+                    style="@style/info_register_text_style"
+                    android:text="元" />
 
                 <Spinner
-                        android:id="@id/source_id_publish_cargo_unit"
-                        style="@style/home_warp_spinner_style"
-                        android:entries="@array/car_price_unit"/>
+                    android:id="@id/source_id_publish_cargo_unit"
+                    style="@style/home_warp_spinner_style"
+                    android:entries="@array/car_price_unit" />
             </LinearLayout>
             <!-- 保证金 -->
 
             <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="保证金："/>
+                    style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/search_baozhengjin"
+                    android:text="保证金：" />
 
                 <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:id="@id/source_id_publish_user_bond"
-                        android:inputType="number"
-                        android:text=""/>
+                    style="@style/info_edittext_weight_style"
+                    android:id="@id/source_id_publish_user_bond"
+                    android:inputType="number"
+                    android:text="" />
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:text="元"/>
+                    style="@style/info_register_text_style"
+                    android:text="元" />
             </LinearLayout>
             <!-- 常用语句 -->
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_margin="10dp"
-                    android:gravity="clip_vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="常用语句"/>
+                    style="@style/info_publish_text_style"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@drawable/source_tip"
+                    android:text="常用语句" />
 
                 <Spinner
-                        android:id="@id/source_id_publish_cargo_tip"
-                        style="@style/home_publish_spinner_style"
-                        android:entries="@array/goods_comments_names"/>
+                    android:id="@id/source_id_publish_cargo_tip"
+                    style="@style/home_publish_spinner_style"
+                    android:entries="@array/goods_comments_names" />
             </LinearLayout>
 
             <EditText
-                    android:id="@id/source_id_publish_cargo_remark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:ems="10"
-                    android:gravity="top"
-                    android:hint="补充说明"
-                    android:minLines="5"/>
+                android:id="@id/source_id_publish_cargo_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:gravity="left|top"
+                android:hint="补充说明"
+                android:visibility="gone"
+                android:lines="5" />
 
             <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="联系人："/>
+                    style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/public_car_contact"
+                    android:text="联系人：" />
 
                 <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:id="@id/source_id_publish_contact_name"
-                        android:text=""/>
+                    style="@style/info_edittext_weight_style"
+                    android:id="@id/source_id_publish_contact_name"
+                    android:text="" />
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="手机号码："/>
+                    style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/public_car_phone"
+                    android:text="手机号码：" />
 
                 <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:id="@id/source_id_publish_contact_phone"
-                        android:text=""/>
+                    style="@style/info_edittext_weight_style"
+                    android:id="@id/source_id_publish_contact_phone"
+                    android:text="" />
             </LinearLayout>
 
             <!-- 车源有效时间 -->
 
             <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="有效时间："/>
+                    style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/public_car_validate"
+                    android:text="有效时间：" />
 
                 <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:inputType="number"
-                        android:id="@id/source_id_publish_validate_day"
-                        android:text="0"/>
+                    style="@style/info_edittext_weight_style"
+                    android:inputType="number"
+                    android:id="@id/source_id_publish_validate_day"
+                    android:text="0" />
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:text="天"/>
+                    style="@style/info_register_text_style"
+                    android:text="天" />
 
                 <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:inputType="number"
-                        android:id="@id/source_id_publish_validate_hour"
-                        android:text="8"/>
+                    style="@style/info_edittext_weight_style"
+                    android:inputType="number"
+                    android:id="@id/source_id_publish_validate_hour"
+                    android:text="8" />
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:text="小时"/>
+                    style="@style/info_register_text_style"
+                    android:text="小时" />
             </LinearLayout>
 
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/car_way_part"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/radiobutton"
+                    android:drawablePadding="10dp"
+                    android:button="@null"
+                    android:background="@null"
+                    android:onClick="onChooseCarWay"
+                    android:text="零担" />
+
+                <RadioButton
+                    android:id="@+id/car_way_whole"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/radiobutton"
+                    android:drawablePadding="10dp"
+                    android:button="@null"
+                    android:background="@null"
+                    android:checked="true"
+                    android:onClick="onChooseCarWay"
+                    android:text="整车" />
+            </RadioGroup>
+
             <Button
-                    android:id="@id/source_id_publish_commit"
-                    style="@style/info_button_style"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="30dp"
-                    android:onClick="onPublishSource"
-                    android:text="发布货源"/>
+                android:id="@id/source_id_publish_commit"
+                style="@style/info_button_style"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:onClick="onPublishSource"
+                android:text="发布货源" />
         </LinearLayout>
     </ScrollView>
 

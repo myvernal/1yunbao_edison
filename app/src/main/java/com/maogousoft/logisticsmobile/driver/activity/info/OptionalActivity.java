@@ -62,7 +62,7 @@ import java.util.List;
 public class OptionalActivity extends BaseActivity {
     private Button mLogin, mRegister;
     private EditText mShuiChePhone, mName, mLength, mWeight, mNumber, info_id_register_id_card,
-            mChezhuPhone, myself_recommendation, optional_linkman, optional_frame_number, optional_bank, optional_bank_account;
+            mChezhuPhone, myself_recommendation, optional_linkman, optional_frame_number, optional_bank, optional_bank_account, optional_account_name;
     private Spinner mCarType;
     private CarTypeListAdapter mCarTypeAdapter;
     private boolean isFormRegisterActivity;
@@ -114,6 +114,7 @@ public class OptionalActivity extends BaseActivity {
         optional_frame_number = (EditText) findViewById(R.id.optional_frame_number);
         optional_bank = (EditText) findViewById(R.id.optional_bank);
         optional_bank_account = (EditText) findViewById(R.id.optional_bank_account);
+        optional_account_name = (EditText) findViewById(R.id.optional_account_name);
 
         mCarType = (Spinner) findViewById(R.id.info_id_register_type);
         // mSkan.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -209,7 +210,12 @@ public class OptionalActivity extends BaseActivity {
         if (getIntent().hasExtra("info")) {
             driverInfo = (DriverInfo) getIntent().getSerializableExtra("info");
             if (driverInfo != null) {
-
+                info_id_register_id_card.setText(driverInfo.getId_card());
+                optional_account_name.setText(driverInfo.getAccount_name());
+                optional_linkman.setText(driverInfo.getLinkman());
+                optional_bank_account.setText(driverInfo.getBank_account());
+                optional_bank.setText(driverInfo.getBank());
+                optional_frame_number.setText(driverInfo.getFrame_number());
                 mShuiChePhone.setText(driverInfo.getCar_phone());
 
                 // 没有车主phone，需要后台给
@@ -265,6 +271,54 @@ public class OptionalActivity extends BaseActivity {
         final int id = v.getId();
         switch (id) {
             case R.id.info_id_register_submit:
+                if (CheckUtils.checkIsEmpty(mShuiChePhone)) {
+                    if (!CheckUtils.checkPhone(mShuiChePhone.getText().toString())) {
+                        showMsg("随车手机号码格式不正确");
+                        mShuiChePhone.requestFocus();
+                        mShuiChePhone.selectAll();
+                        clearPhoto();
+                        return;
+                    }
+                }
+                if (!CheckUtils.checkIsEmpty(mName)) {
+                    showMsg("司机姓名不能为空");
+                    mName.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+                if (!CheckUtils.checkIsBankCard(optional_bank_account)) {
+                    showMsg("请输入正确的银行卡号");
+                    mName.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+                if (CheckUtils.checkIsEmpty(mChezhuPhone)) {
+                    if (!CheckUtils.checkPhone(mChezhuPhone.getText().toString())) {
+                        showMsg("车主手机号码格式不正确");
+                        mChezhuPhone.requestFocus();
+                        mChezhuPhone.selectAll();
+                        clearPhoto();
+                        return;
+                    }
+                }
+                if (!CheckUtils.checkIsEmpty(mLength)) {
+                    showMsg("车长不能为空");
+                    mLength.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+                if (!CheckUtils.checkIsEmpty(mWeight)) {
+                    showMsg("载重量不能为空");
+                    mWeight.requestFocus();
+                    clearPhoto();
+                    return;
+                }
+                if (!CheckUtils.checkIsEmpty(mNumber)) {
+                    showMsg("车牌号不能为空");
+                    mNumber.requestFocus();
+                    clearPhoto();
+                    return;
+                }
                 uploadImageAndSubmit();
                 break;
             case R.id.titlebar_id_more:
@@ -386,52 +440,6 @@ public class OptionalActivity extends BaseActivity {
 
     // 提交注册
     private void submit() {
-        if (CheckUtils.checkIsEmpty(mShuiChePhone)) {
-            if (!CheckUtils.checkPhone(mShuiChePhone.getText().toString())) {
-                showMsg("随车手机号码格式不正确");
-                mShuiChePhone.requestFocus();
-                mShuiChePhone.selectAll();
-                clearPhoto();
-                return;
-            }
-        }
-
-        if (!CheckUtils.checkIsEmpty(mName)) {
-            showMsg("司机姓名不能为空");
-            mName.requestFocus();
-            clearPhoto();
-            return;
-        }
-
-        if (CheckUtils.checkIsEmpty(mChezhuPhone)) {
-            if (!CheckUtils.checkPhone(mChezhuPhone.getText().toString())) {
-                showMsg("车主手机号码格式不正确");
-                mChezhuPhone.requestFocus();
-                mChezhuPhone.selectAll();
-                clearPhoto();
-                return;
-            }
-        }
-
-        if (!CheckUtils.checkIsEmpty(mLength)) {
-            showMsg("车长不能为空");
-            mLength.requestFocus();
-            clearPhoto();
-            return;
-        }
-        if (!CheckUtils.checkIsEmpty(mWeight)) {
-            showMsg("载重量不能为空");
-            mWeight.requestFocus();
-            clearPhoto();
-            return;
-        }
-        if (!CheckUtils.checkIsEmpty(mNumber)) {
-            showMsg("车牌号不能为空");
-            mNumber.requestFocus();
-            clearPhoto();
-            return;
-        }
-
         final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
@@ -459,11 +467,11 @@ public class OptionalActivity extends BaseActivity {
             params.put("plate_number", mNumber.getText().toString());
             params.put("myself_recommendation", myself_recommendation.getText().toString());
             params.put("id_card", info_id_register_id_card.getText().toString());
-            params.put("optional_linkman", optional_linkman.getText().toString());
-            params.put("optional_linkman", optional_linkman.getText().toString());
-            params.put("optional_frame_number", optional_frame_number.getText().toString());
-            params.put("optional_bank", optional_bank.getText().toString());
-            params.put("optional_bank_account", optional_bank_account.getText().toString());
+            params.put("linkman", optional_linkman.getText().toString());
+            params.put("account_name", optional_account_name.getText().toString());
+            params.put("frame_number", optional_frame_number.getText().toString());
+            params.put("bank", optional_bank.getText().toString());
+            params.put("bank_account", optional_bank_account.getText().toString());
             if (!TextUtils.isEmpty(userPhotoUrl)) {
                 params.put("id_card_photo", userPhotoUrl);
             }
@@ -497,13 +505,9 @@ public class OptionalActivity extends BaseActivity {
                                     application.writeIsRegOptional(true);
                                     break;
                                 case ResultCode.RESULT_ERROR:
-                                    if (result != null)
-                                        clearPhoto();
                                     showMsg(result.toString());
                                     break;
                                 case ResultCode.RESULT_FAILED:
-                                    if (result != null)
-                                        clearPhoto();
                                     showMsg(result.toString());
                                     break;
                                 default:

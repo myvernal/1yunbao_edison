@@ -113,7 +113,7 @@ public class MySourceDetailActivity extends BaseActivity {
         //保证金
 //        sb.append("  " + mSourceInfo.getUser_bond() + "元");
         source_detail_content.setText(source_detail_content.getText() + sb.toString());
-        source_detail_tip.setText(mSourceInfo.getCargo_tip() + "\n" + mSourceInfo.getCargo_remark());
+        source_detail_tip.setText(mSourceInfo.getCargo_tip() + mSourceInfo.getCargo_remark());
         source_detail_contact.setText(mSourceInfo.getCargo_user_name());
         source_detail_phone.setText(mSourceInfo.getCargo_user_phone());
     }

@@ -53,11 +53,9 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setVisibility(View.GONE);
         // 数据加载中进度条
-        mFootView = getLayoutInflater().inflate(R.layout.listview_footview,
-                null);
+        mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
-        mFootProgress = (ProgressBar) mFootView
-                .findViewById(android.R.id.progress);
+        mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
 

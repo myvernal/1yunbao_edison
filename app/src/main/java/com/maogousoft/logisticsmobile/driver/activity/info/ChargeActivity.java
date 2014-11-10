@@ -239,7 +239,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             return;
         }
         if (charge_help_account.length() != 11) {
-            showMsg("请输入对方的手机号");
+            showMsg("请输入11位正确的手机号");
             charge_help_account.requestFocus();
             return;
         }
@@ -462,14 +462,14 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         try {
             Class clz;
             if(Constants.USER_DRIVER == application.getUserType()) {
-                jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+                jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_INFO);
                 clz = DriverInfo.class;
             } else {
                 jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
                 clz = ShipperInfo.class;
             }
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, "");
+            jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     clz, new AjaxCallBack() {
 

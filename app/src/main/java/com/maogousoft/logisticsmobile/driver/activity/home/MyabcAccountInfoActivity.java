@@ -2,7 +2,6 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
     private View driver_layout, shipper_layout;
     /*司机特有信息*/
     private ImageView account_photo;
-    private TextView myabc_id_name, myabc_account_card_number, myabc_account_name_dirver, myabc_id_jsz;
+    private TextView myabc_id_name, myabc_account_card_number, myabc_account_name_dirver, myabc_id_cjh;
     /*货主特有信息*/
     private ImageView account_logo_photo, account_other_photo;
     private TextView myabc_id_company_name, myabc_account_name_shipper, myabc_id_zhizhao, myabc_id_contact, myabc_id_daibiao;
@@ -72,7 +71,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
         myabc_id_contact = (TextView) findViewById(R.id.myabc_id_contact);
         myabc_id_zhizhao = (TextView) findViewById(R.id.myabc_id_zhizhao);
         myabc_id_daibiao = (TextView) findViewById(R.id.myabc_id_daibiao);
-        myabc_id_jsz = (TextView) findViewById(R.id.myabc_id_jsz);
+        myabc_id_cjh = (TextView) findViewById(R.id.myabc_id_cjh);
         myabc_id_contact_phone = (TextView) findViewById(R.id.myabc_id_contact_phone);
         myabc_id_contact_home_phone = (TextView) findViewById(R.id.myabc_id_contact_home_phone);
         myabc_id_bank_name = (TextView) findViewById(R.id.myabc_id_bank_name);
@@ -86,7 +85,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
         } else {
             getShipperInfo();
             driver_layout.setVisibility(View.GONE);
-            myabc_id_jsz.setVisibility(View.GONE);
+            myabc_id_cjh.setVisibility(View.GONE);
             shipper_layout.setVisibility(View.VISIBLE);
             myabc_id_contact.setVisibility(View.VISIBLE);
         }
@@ -96,9 +95,9 @@ public class MyabcAccountInfoActivity extends BaseActivity {
     private void getDriverInfo() {
         final JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+            jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_INFO);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, "");
+            jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     DriverInfo.class, new AjaxCallBack() {
 
@@ -111,7 +110,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
                                         myabc_id_name.setText(mDriverInfo.getName());
                                         myabc_account_card_number.setText(mDriverInfo.getId_card());
                                         myabc_account_name_dirver.setText(mDriverInfo.getPhone());
-                                        myabc_id_jsz.setText(getString(R.string.jiashizheng, mDriverInfo.getLicense()));
+                                        myabc_id_cjh.setText(getString(R.string.chejiahao, mDriverInfo.getFrame_number()));
                                         myabc_id_contact_phone.setText(getString(R.string.lianxidianhua, mDriverInfo.getPhone()));
                                         myabc_id_contact_home_phone.setText(getString(R.string.jiatingdianhua, mDriverInfo.getPhone()));
                                         myabc_id_bank_name.setText(getString(R.string.yinhangmingcheng, mDriverInfo.getBank()));
