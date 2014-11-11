@@ -160,6 +160,7 @@
     <string name="sourcedetail_validtime">有效时间:%s</string>
     <string name="string_home_unmatched_title">待定货源</string>
     <string name="string_unmatched_nums">目前有&lt;font color=&quot;#ffab33&quot;&gt;%d&lt;/font&gt;位司机抢单</string>
+
     <string name="string_home_onlinesource_contact">联系货主</string>
     <string name="string_home_onlinesource_chat">在线聊天</string>
     <string name="string_home_onlinesource_evaluate">评价</string>
@@ -448,6 +449,11 @@
     <!--合同-->
     <string name="agreement_title">合同管理</string>
     <string name="agreement_edit_tip">编制合同</string>
+    <string name="agreement_carrier_name">姓名：%s</string>
+    <string name="agreement_carrier_phone">电话：%s</string>
+    <string name="agreement_carrier_price">报价：%.2f元</string>
+    <string name="agreement_shipper">公路运输货物服务协议&lt;font color=&quot;#ffab33&quot;&gt;(物流公司、厂家使用)&lt;/font&gt;</string>
+    <string name="agreement_third">公路运输货物配载服务合同&lt;font color=&quot;#ffab33&quot;&gt;(信息中介使用)&lt;/font&gt;</string>
     <!--货单-->
     <string name="invoice_title">货单</string>
     <string name="invoice_tip_title">完成</string>

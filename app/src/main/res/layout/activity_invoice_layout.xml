@@ -135,7 +135,7 @@
             android:background="@null"
             android:padding="0dp"
             android:onClick="onBottomMenu3"
-            android:src="@drawable/invoice_failed" />
+            android:src="@drawable/invoice_cancel" />
 
         <ImageView
             android:id="@+id/menu_bottom8"
@@ -143,7 +143,7 @@
             android:background="@null"
             android:padding="0dp"
             android:onClick="onBottomMenu3"
-            android:src="@drawable/invoice_success" />
+            android:src="@drawable/invoice_edit" />
 
         <ImageView
             android:id="@+id/menu_bottom9"
@@ -151,7 +151,7 @@
             android:background="@null"
             android:padding="0dp"
             android:onClick="onBottomMenu3"
-            android:src="@drawable/invoice_confirm" />
+            android:src="@drawable/invoice_push" />
 
         <ImageView
             android:id="@+id/menu_bottom10"
@@ -159,6 +159,6 @@
             android:background="@null"
             android:padding="0dp"
             android:onClick="onBottomMenu3"
-            android:src="@drawable/invoice_confirm_disable" />
+            android:src="@drawable/invoice_import" />
     </LinearLayout>
 </LinearLayout>

@@ -146,8 +146,8 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
-    //public static final String BASE_URL = "http://1yunbao.com:8083/service";
-	public static final String BASE_URL = "http://192.168.2.189:8080/service";
+    public static final String BASE_URL = "http://1yunbao.com:8083/service";
+	//public static final String BASE_URL = "http://192.168.2.189:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -450,6 +450,9 @@ public class Constants {
 
     /** 货主端：货单列表数量查询*/
     public static final String QUERY_ORDER_COUNT = "query_order_count";
+
+    /** 货主端:获取承运方列表 */
+    public static final String GET_CARRIER_LIST = "getCarrier_list";
 
     /** 货主端:撤销货单 */
     public static final String CANCEL_ORDER = "cancel_order";

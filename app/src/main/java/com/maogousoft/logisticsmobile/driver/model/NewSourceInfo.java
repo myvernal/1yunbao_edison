@@ -154,6 +154,25 @@ public class NewSourceInfo implements Serializable {
     private int order_vie_count; //报价人数
     private int order_place_count; //电话反馈人数
 
+    private String is_able_confim_contract;//是否有邀约
+    private String is_has_invite;//是否可以订单确认
+
+    public String getIs_has_invite() {
+        return is_has_invite;
+    }
+
+    public void setIs_has_invite(String is_has_invite) {
+        this.is_has_invite = is_has_invite;
+    }
+
+    public String getIs_able_confim_contract() {
+        return is_able_confim_contract;
+    }
+
+    public void setIs_able_confim_contract(String is_able_confim_contract) {
+        this.is_able_confim_contract = is_able_confim_contract;
+    }
+
 	public Double getCar_length() {
 		return car_length;
 	}

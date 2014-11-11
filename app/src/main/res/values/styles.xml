@@ -812,4 +812,14 @@
         <item name="android:background">@drawable/shape_invoice_menu_bg_selector</item>
         <item name="android:textSize">@dimen/invoice_menu_title_size</item>
     </style>
+
+    <style name="CarrierItemStyle">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:id">@+id/radioButton</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:drawableLeft">@drawable/radiobutton</item>
+    </style>
 </resources>
