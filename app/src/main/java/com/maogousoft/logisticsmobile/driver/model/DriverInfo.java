@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class DriverInfo implements Serializable {
 
+    private int id = -1;
+
 	// 手机号码
 	private String phone = "";
 
@@ -72,7 +74,7 @@ public class DriverInfo implements Serializable {
 	private float scroe2 = 0;
 
 	private float scroe3 = 0;
-
+    private long regist_time;//注册时间
 	private int car_type;// 车型
 	private String car_type_str = "";// 车型描述
 	private double car_length;// 车长
@@ -98,6 +100,22 @@ public class DriverInfo implements Serializable {
     private String account_name;//账户名称
     private String bank_account;//银行账号
     private String business_address;//办公地址
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public long getRegist_time() {
+        return regist_time;
+    }
+
+    public void setRegist_time(long regist_time) {
+        this.regist_time = regist_time;
+    }
 
     public String getAccount_name() {
         return account_name;

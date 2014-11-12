@@ -14,6 +14,15 @@ public class CarrierInfo implements Serializable {
     private String is_grab_single_car;//抢单车
     private String is_phone_car;//电话车
     private String is_price_car;//报价车
+    private String path;//合同地址
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     public String getIs_grab_single_car() {
         return is_grab_single_car;

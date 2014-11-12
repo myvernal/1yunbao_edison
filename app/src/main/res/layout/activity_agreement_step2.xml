@@ -102,6 +102,7 @@
                 android:id="@+id/next"
                 style="@style/info_button_style"
                 android:layout_margin="10dp"
+                android:onClick="onNext"
                 android:text="确认" />
         </LinearLayout>
     </ScrollView>

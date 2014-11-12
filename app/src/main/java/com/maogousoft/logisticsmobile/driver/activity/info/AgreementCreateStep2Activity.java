@@ -1,10 +1,10 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -16,29 +16,29 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarrierInfo;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by aliang on 2014/11/11.
  */
-public class AgreementCarrierListActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
+public class AgreementCreateStep2Activity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
 
-    private static final String TAG = "AgreementImportActivity";
+    private static final String TAG = "AgreementCreateStep2Activity";
     private LinearLayout qiandanLayout, priceLayout, phoneLayout;
     private RadioButton preCheckedRadio;
     private RadioButton currentCheckedRadio;
+    private int orderId;
+    private int agreementType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agreement_carrier_layout);
+        setContentView(R.layout.activity_agreement_step2);
         HeaderView mHeaderView = (HeaderView) findViewById(R.id.headerView);
         mHeaderView.setTitle(R.string.agreement_edit_tip);
 
@@ -53,12 +53,11 @@ public class AgreementCarrierListActivity extends BaseActivity implements Compou
     }
 
     private void initData() {
-        Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
-        if (serializable instanceof NewSourceInfo) {
-            NewSourceInfo sourceInfo = (NewSourceInfo) serializable;
-            getData(sourceInfo.getId());
+        orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
+        agreementType = getIntent().getIntExtra(Constants.AGREEMENT_TYPE, -1);
+        if (orderId > 0 && agreementType > 0) {
+            getData(orderId);
         } else {
-            showMsg("货单错误!");
             finish();
         }
     }
@@ -145,5 +144,18 @@ public class AgreementCarrierListActivity extends BaseActivity implements Compou
         } else {
             currentCheckedRadio = null;
         }
+    }
+
+    public void onNext(View view) {
+        if(currentCheckedRadio == null) {
+            showMsg("请选择承运人");
+            return;
+        }
+        CarrierInfo carrierInfo = (CarrierInfo) currentCheckedRadio.getTag();
+        startActivity(new Intent(mContext, AgreementCreateStep3Activity.class)
+                .putExtra(Constants.ORDER_ID, orderId)
+                .putExtra(Constants.AGREEMENT_TYPE, agreementType)
+                .putExtra(Constants.USER_ID, carrierInfo.getDriver_id()));
+        finish();
     }
 }

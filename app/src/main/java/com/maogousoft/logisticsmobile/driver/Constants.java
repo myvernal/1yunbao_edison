@@ -55,7 +55,6 @@ public class Constants {
     public static final String USER_ID = "USER_ID";
 
     public static final String INVOICE_TYPE = "INVOICE_TYPE";
-
     public static final String INVOICE_USER_TYPE = "INVOICE_USER_TYPE";
 	// PREFERENCE KEYS
 
@@ -147,7 +146,7 @@ public class Constants {
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
     public static final String BASE_URL = "http://1yunbao.com:8083/service";
-	//public static final String BASE_URL = "http://192.168.2.189:8080/service";
+	//public static final String BASE_URL = "http://192.168.1.110:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -454,6 +453,9 @@ public class Constants {
     /** 货主端:获取承运方列表 */
     public static final String GET_CARRIER_LIST = "getCarrier_list";
 
+    /** 货主端:导入合同数据 */
+    public static final String CONTRACT_IMPORT_PREVIEW = "contract_import_preview";
+
     /** 货主端:撤销货单 */
     public static final String CANCEL_ORDER = "cancel_order";
 
@@ -552,6 +554,8 @@ public class Constants {
 
     public static final String COMMON_KEY = "common_key";
     public static final String IS_MY_REPUTATION = "IS_MY_REPUTATION";
+    public static final String IS_CAR_REPUTATION = "IS_CAR_REPUTATION";
+    public static final String AGREEMENT_TYPE = "AGREEMENT_TYPE";
 
     public static final String COMMON_BOOLEAN_KEY = "common_boolean_key";
     public static final String COMMON_ACTION_KEY = "common_action_key";

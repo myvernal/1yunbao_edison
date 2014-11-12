@@ -84,9 +84,9 @@
     <string name="string_car_detail_number">车牌号\t\t\t\t\t\t\t\t%s</string>
     <string name="string_car_detail_contact">联系人\t\t\t\t\t\t\t\t%s</string>
     <string name="string_car_detail_card_num">车架号\t\t\t\t\t\t\t\t%s</string>
-    <string name="string_car_detail_car_length">车长\t\t\t\t\t\t\t\t\t%s</string>
+    <string name="string_car_detail_car_length">车长\t\t\t\t\t\t\t\t\t%s米</string>
     <string name="string_car_detail_car_type">车型\t\t\t\t\t\t\t\t\t%s</string>
-    <string name="string_car_detail_car_weight">载重\t\t\t\t\t\t\t\t\t%s</string>
+    <string name="string_car_detail_car_weight">载重\t\t\t\t\t\t\t\t\t%s吨</string>
     <!-- 登录 -->
     <string name="string_info_login_auto">自动登录</string>
     <string name="string_info_login_forget">忘记密码?</string>
@@ -452,8 +452,9 @@
     <string name="agreement_carrier_name">姓名：%s</string>
     <string name="agreement_carrier_phone">电话：%s</string>
     <string name="agreement_carrier_price">报价：%.2f元</string>
-    <string name="agreement_shipper">公路运输货物服务协议&lt;font color=&quot;#ffab33&quot;&gt;(物流公司、厂家使用)&lt;/font&gt;</string>
-    <string name="agreement_third">公路运输货物配载服务合同&lt;font color=&quot;#ffab33&quot;&gt;(信息中介使用)&lt;/font&gt;</string>
+    <string name="agreement_shipper">公路运输货物服务协议&lt;font color=&quot;#0C9D56&quot;&gt;(物流公司、厂家使用)&lt;/font&gt;</string>
+    <string name="agreement_third">公路运输货物配载服务合同&lt;font color=&quot;#0C9D56&quot;&gt;(信息中介使用)&lt;/font&gt;</string>
+    <string name="agreement_tip">\t\t点击【确认】后合同立即生效，平台将冻结你的保证金500元以及管理费100元，直到本次交易结束，为了确保你的财产安全，如果本次签约属于你本人自愿的行为，请在下面框中输入你的运宝支付密码，然后点【确认】键</string>
     <!--货单-->
     <string name="invoice_title">货单</string>
     <string name="invoice_tip_title">完成</string>
@@ -461,6 +462,7 @@
     <string name="invoice_1">待订货单(%s)</string>
     <string name="invoice_2">待装货单(%s)</string>
     <string name="invoice_3">历史货单(%s)</string>
+
     <!-- pay -->
     <string name="string_pay_wechat_tip">提示</string>
     <string name="string_pay_wechat_getting_prepayid">正在获取支付订单...</string>
@@ -469,4 +471,6 @@
     <!--车辆信息-->
     <string name="car_info_wait">找货中</string>
     <string name="car_info_doing">运货中</string>
+    <string name="car_info_wait_f">车状态\t\t找货中</string>
+    <string name="car_info_doing_f">车状态\t\t运货中</string>
 </resources>

@@ -48,6 +48,15 @@ public class CarInfo implements Serializable{
     private String bond;//保证金
     private int status;//车辆状态，0找货中，1运货中
     private String is_add_myfeet;//是否已经添加到我的车队,Y是 N否
+    private DriverInfo driverInfo;//返回driver信息
+
+    public DriverInfo getDriverInfo() {
+        return driverInfo;
+    }
+
+    public void setDriverInfo(DriverInfo driverInfo) {
+        this.driverInfo = driverInfo;
+    }
 
     public String getBond() {
         return bond;

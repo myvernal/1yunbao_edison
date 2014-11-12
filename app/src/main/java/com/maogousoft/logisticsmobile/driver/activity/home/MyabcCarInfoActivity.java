@@ -27,7 +27,8 @@ import com.ybxiang.driver.util.Utils;
  * @author ybxiang
  */
 public class MyabcCarInfoActivity extends BaseActivity {
-	private TextView mName, mPhone, mCarNum, mCarlength, mCartype, mCarzhaizhong;
+	private TextView mName, mPhone, mCarNum, mCarlength, mCartype, mCarzhaizhong,
+            myabc_id_car_contact, myabc_id_car_card_number;
     private ImageView mPhoto;
 	// 个人abc信息
 	private DriverInfo mDriverInfo;
@@ -56,6 +57,9 @@ public class MyabcCarInfoActivity extends BaseActivity {
 		mCarzhaizhong = (TextView) findViewById(R.id.myabc_id_car_zhaizhong);
         mName = (TextView) findViewById(R.id.myabc_id_name);
         mPhone = (TextView) findViewById(R.id.myabc_id_phone);
+
+        myabc_id_car_contact = (TextView) findViewById(R.id.myabc_id_car_contact);
+        myabc_id_car_card_number = (TextView) findViewById(R.id.myabc_id_car_card_number);
     }
 
 	// 获取我的abc信息
@@ -80,15 +84,24 @@ public class MyabcCarInfoActivity extends BaseActivity {
 									if (!TextUtils.isEmpty(mDriverInfo.getPlate_number())) {
 										mCarNum.setText(getString(R.string.string_car_detail_number, mDriverInfo.getPlate_number()));
 									}
-									mCarlength.setText(getString(R.string.string_car_detail_car_length, mDriverInfo.getCar_length() + "米"));
-									if (!TextUtils.isEmpty(mDriverInfo.getCar_type_str())) {
-										mCartype.setText(getString(R.string.string_car_detail_car_type, mDriverInfo.getCar_type_str()));
-									}
-									mCarzhaizhong.setText(getString(R.string.string_car_detail_car_weight, mDriverInfo.getCar_weight() + "吨"));
+									mCarlength.setText(getString(R.string.string_car_detail_car_length, mDriverInfo.getCar_length()));
+									mCarzhaizhong.setText(getString(R.string.string_car_detail_car_weight, mDriverInfo.getCar_weight()));
                                     ImageLoader.getInstance().displayImage(mDriverInfo.getId_card_photo(), mPhoto, options,
                                             new Utils.MyImageLoadingListener(mContext, mPhoto));
                                     mName.setText(mDriverInfo.getName());
                                     mPhone.setText(mDriverInfo.getPhone());
+
+                                    myabc_id_car_contact.setText(getString(R.string.string_car_detail_contact, mDriverInfo.getLinkman()));
+                                    myabc_id_car_card_number.setText(getString(R.string.string_car_detail_card_num, mDriverInfo.getFrame_number()));
+                                    //车型
+                                    int carTypeValue = mDriverInfo.getCar_type();
+                                    String[] carTypeStr = getResources().getStringArray(R.array.car_types_name);
+                                    for (int i = 0; i < Constants.carTypeValues.length; i++) {
+                                        if (Constants.carTypeValues[i] == carTypeValue) {
+                                            mCartype.setText(getString(R.string.string_car_detail_car_type, carTypeStr[i]));
+                                            break;
+                                        }
+                                    }
                                 }
 								break;
 							case ResultCode.RESULT_ERROR:

@@ -12,7 +12,8 @@ import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.fragment.InvoiceFragment;
-import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCarrierListActivity;
+import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep1Activity;
+import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep2Activity;
 import com.maogousoft.logisticsmobile.driver.activity.info.TruckFailedReasonActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.CommonFragmentPagerAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
@@ -21,7 +22,6 @@ import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.InvoiceNumberInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
-import com.ybxiang.driver.activity.MySourceDetailActivity;
 import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
 
 import org.json.JSONException;
@@ -183,13 +183,7 @@ public class InvoiceActivity extends BaseActivity {
                 break;
             case R.id.menu_bottom5:
                 //已装车货单(通用)
-                doAction(Constants.TRUCK_LOADING_FINISH, params.toString(), true, new ActionCallBack() {
-                    @Override
-                    public void onCallBack(Object result) {
-                        showMsg(result.toString());
-                        //firstFragment.removeDataAndNotifyDataChange(sourceInfo);
-                    }
-                });
+                doAction(Constants.TRUCK_LOADING_FINISH, params.toString(), true, null);
                 break;
             case R.id.menu_bottom6:
                 //订单确认货单(通用)
@@ -237,16 +231,11 @@ public class InvoiceActivity extends BaseActivity {
                 break;
             case R.id.menu_bottom9:
                 //推送货单(货主)
-                doAction(Constants.PUSH_ORDER, params.toString(), true, new ActionCallBack() {
-                    @Override
-                    public void onCallBack(Object result) {
-                        showMsg("推送请求已发送");
-                    }
-                });
+                doAction(Constants.PUSH_ORDER, params.toString(), true, null);
                 break;
             case R.id.menu_bottom10:
                 //导入合同(货主)
-                startActivity(new Intent(mContext, AgreementCarrierListActivity.class).putExtra(Constants.COMMON_KEY, sourceInfo));
+                startActivity(new Intent(mContext, AgreementCreateStep1Activity.class).putExtra(Constants.ORDER_ID, sourceInfo.getId()));
                 break;
         }
     }
@@ -278,9 +267,11 @@ public class InvoiceActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (hasTip) {
-                                        showMsg("操作成功");
+                                        showMsg("请求已发送");
                                     }
-                                    actionCallBack.onCallBack(result);
+                                    if(actionCallBack != null) {
+                                        actionCallBack.onCallBack(result);
+                                    }
                                     break;
                                 default:
                                     showMsg(result.toString());

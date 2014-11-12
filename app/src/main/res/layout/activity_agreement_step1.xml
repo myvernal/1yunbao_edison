@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:id="@+id/headerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -15,7 +16,6 @@
         android:id="@+id/select_agreement_type"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:visibility="gone"
         android:padding="15dp">
 
         <RadioGroup
@@ -31,8 +31,9 @@
                 android:id="@+id/agreement_shipper"
                 android:drawableLeft="@drawable/radiobutton"
                 android:button="@null"
+                android:checked="true"
                 android:background="@null"
-                android:textSize="@dimen/font_size_litter"
+                android:textSize="@dimen/font_size_normal"
                 android:text="@string/agreement_shipper" />
 
             <RadioButton
@@ -43,7 +44,7 @@
                 android:layout_marginTop="10dp"
                 android:button="@null"
                 android:background="@null"
-                android:textSize="@dimen/font_size_litter"
+                android:textSize="@dimen/font_size_normal"
                 android:text="@string/agreement_third" />
         </RadioGroup>
 
@@ -51,6 +52,7 @@
             android:id="@+id/next"
             style="@style/info_button_style"
             android:layout_margin="10dp"
+            android:onClick="onNext"
             android:text="确认" />
     </LinearLayout>
 </LinearLayout>

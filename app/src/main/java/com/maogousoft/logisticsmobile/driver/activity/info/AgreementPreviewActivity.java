@@ -68,6 +68,8 @@ public class AgreementPreviewActivity extends BaseActivity {
         mWebView.requestFocusFromTouch();
         mWebView.setWebChromeClient(webChromeClient);
         mWebView.setWebViewClient(webViewClient);
+        //这样就可以使用window.javatojs来调用它的方法
+        mWebView.addJavascriptInterface(new JavaScriptInterface(), "contractJs");
         /*mWebView.addJavascriptInterface(new Object() {
             public void clickOnAndroid() {
                 mHandler.post(new Runnable() {
@@ -260,4 +262,12 @@ public class AgreementPreviewActivity extends BaseActivity {
             super.onRequestFocus(view);
         }
     }
+
+    final class JavaScriptInterface {
+
+        public void closeHtml() {
+            mWebView.loadUrl("javascript: closeHtml()");
+        }
+    }
+
 }

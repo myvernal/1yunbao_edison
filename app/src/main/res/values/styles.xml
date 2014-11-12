@@ -832,7 +832,7 @@
     <style name="CarResourceCheckStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">8dp</item>
+        <item name="android:padding">9dp</item>
         <item name="android:layout_margin">5dp</item>
         <item name="android:background">@drawable/shape_car_resource_check_bg</item>
         <item name="android:textColor">@color/common_btn_bg</item>

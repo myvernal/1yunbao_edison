@@ -51,7 +51,7 @@ public class AgreementFragment extends BaseListFragment implements AbsListView.O
         //0初始合同 1 签约完成合同 3 待结算 4结算合同
         AgreementFragment newFragment = new AgreementFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(Constants.INVOICE_TYPE, agreementType);
+        bundle.putInt(Constants.AGREEMENT_TYPE, agreementType);
         newFragment.setArguments(bundle);
         //bundle还可以在每个标签里传送数据
         return newFragment;
@@ -61,7 +61,7 @@ public class AgreementFragment extends BaseListFragment implements AbsListView.O
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         Bundle args = getArguments();
-        agreementType = args.getInt(Constants.INVOICE_TYPE, 0);
+        agreementType = args.getInt(Constants.AGREEMENT_TYPE, 0);
         // 页脚信息
         mFootView = LayoutInflater.from(mContext).inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);

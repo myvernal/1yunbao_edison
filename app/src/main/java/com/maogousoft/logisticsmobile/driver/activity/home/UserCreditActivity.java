@@ -101,6 +101,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     private void initData() {
         orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
         boolean isMyReputation = getIntent().getBooleanExtra(Constants.IS_MY_REPUTATION, false);
+        boolean isCarReputation = getIntent().getBooleanExtra(Constants.IS_CAR_REPUTATION, false);
         if (isMyReputation) {
             Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
             //我的信誉
@@ -117,6 +118,14 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
                 tvAddr.setText(tvAddr.getText() + shipperInfo.getAddress());
                 displayShipperData();
             }
+        } else if (isCarReputation) {
+            Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
+            //司机信誉
+            driverInfo = (DriverInfo) serializable;
+            userId = driverInfo.getId();
+            ((TextView) findViewById(R.id.titlebar_id_content)).setText(driverInfo.getName());
+            shipperInfoLayout.setVisibility(View.GONE);
+            displayDriverData();
         } else {
             //查看对方信誉
             ((TextView) findViewById(R.id.titlebar_id_content)).setText("货主信誉");
