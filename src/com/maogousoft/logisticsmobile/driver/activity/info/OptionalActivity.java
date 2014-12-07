@@ -241,36 +241,34 @@ public class OptionalActivity extends BaseActivity {
                         }
                     }
                 }
-
                 mNumber.setText(abcInfo.getPlate_number());
 
+                if (TextUtils.isEmpty(abcInfo.getMyself_recommendation())) {
+                    myself_recommendation.setText(R.string.business_description);
+                } else {
+                    myself_recommendation.setText(abcInfo.getMyself_recommendation());
+                }
+                if (!TextUtils.isEmpty(abcInfo.getId_card_photo())) {
+                    ImageLoader.getInstance().displayImage(abcInfo.getId_card_photo(), id_card_photo, options,
+                            new Utils.MyImageLoadingListener(context, id_card_photo));
+                    userPhotoUrl = abcInfo.getId_card_photo();
+                }
+                if (!TextUtils.isEmpty(abcInfo.getCar_photo1())) {
+                    ImageLoader.getInstance().displayImage(abcInfo.getCar_photo1(), car_photo1, options,
+                            new Utils.MyImageLoadingListener(context, car_photo1));
+                    mCarPhotosUrl1 = abcInfo.getCar_photo1();
+                }
+                if (!TextUtils.isEmpty(abcInfo.getCar_photo2())) {
+                    ImageLoader.getInstance().displayImage(abcInfo.getCar_photo2(), car_photo2, options,
+                            new Utils.MyImageLoadingListener(context, car_photo2));
+                    mCarPhotosUrl2 = abcInfo.getCar_photo2();
+                }
+                if (!TextUtils.isEmpty(abcInfo.getCar_photo3())) {
+                    ImageLoader.getInstance().displayImage(abcInfo.getCar_photo3(), car_photo3, options,
+                            new Utils.MyImageLoadingListener(context, car_photo3));
+                    mCarPhotosUrl3 = abcInfo.getCar_photo3();
+                }
             }
-        }
-
-        if (TextUtils.isEmpty(abcInfo.getMyself_recommendation())) {
-            myself_recommendation.setText(R.string.business_description);
-        } else {
-            myself_recommendation.setText(abcInfo.getMyself_recommendation());
-        }
-        if (!TextUtils.isEmpty(abcInfo.getId_card_photo())) {
-            ImageLoader.getInstance().displayImage(abcInfo.getId_card_photo(), id_card_photo, options,
-                    new Utils.MyImageLoadingListener(context, id_card_photo));
-            userPhotoUrl = abcInfo.getId_card_photo();
-        }
-        if (!TextUtils.isEmpty(abcInfo.getCar_photo1())) {
-            ImageLoader.getInstance().displayImage(abcInfo.getCar_photo1(), car_photo1, options,
-                    new Utils.MyImageLoadingListener(context, car_photo1));
-            mCarPhotosUrl1 = abcInfo.getCar_photo1();
-        }
-        if (!TextUtils.isEmpty(abcInfo.getCar_photo2())) {
-            ImageLoader.getInstance().displayImage(abcInfo.getCar_photo2(), car_photo2, options,
-                    new Utils.MyImageLoadingListener(context, car_photo2));
-            mCarPhotosUrl2 = abcInfo.getCar_photo2();
-        }
-        if (!TextUtils.isEmpty(abcInfo.getCar_photo3())) {
-            ImageLoader.getInstance().displayImage(abcInfo.getCar_photo3(), car_photo3, options,
-                    new Utils.MyImageLoadingListener(context, car_photo3));
-            mCarPhotosUrl3 = abcInfo.getCar_photo3();
         }
     }
 

@@ -24,9 +24,30 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="libs" level="project" />
+    <orderEntry type="module-library">
+      <library name="libs">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/alipay_msp.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/android-query-0.22.10.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/android-support-v4.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/asmack-issue15.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/baidumapapi_v3_1_0.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/fastjson-1.1.27-android.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/httpmime-4.1.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/image-load.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/jpush-sdk-release1.3.8.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/locSDK_3.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/umeng_sdk.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/YeepayApkPlugin_2.0.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/libs/image-load.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
 
