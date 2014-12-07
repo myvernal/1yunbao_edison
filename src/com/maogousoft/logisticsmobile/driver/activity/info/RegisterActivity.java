@@ -497,12 +497,8 @@ public class RegisterActivity extends BaseActivity {
                                                 @Override
                                                 public void onClick(View v) {
                                                     dialog.dismiss();
-                                                    Intent intent = new Intent(
-                                                            context,
-                                                            OptionalActivity.class);
-                                                    intent.putExtra(
-                                                            "isFormRegisterActivity",
-                                                            true);
+                                                    Intent intent = new Intent(context, OptionalActivity.class);
+                                                    intent.putExtra("isFormRegisterActivity", true);
                                                     startActivity(intent);
                                                     finish();
                                                 }
@@ -513,9 +509,7 @@ public class RegisterActivity extends BaseActivity {
                                                 @Override
                                                 public void onClick(View v) {
                                                     dialog.dismiss();
-                                                    startActivity(new Intent(
-                                                            context,
-                                                            MainActivity.class));
+                                                    startActivity(new Intent(context, MainActivity.class));
                                                     // 第一次进入，获取 所有 新货源
                                                     getNewSourceData(1);
                                                     finish();

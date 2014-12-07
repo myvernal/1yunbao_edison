@@ -153,13 +153,11 @@ public class OptionalActivity extends BaseActivity {
     // 初始化数据，获取车型
     private void initData() {
         if (getIntent().hasExtra("isFormRegisterActivity")) {
-            isFormRegisterActivity = getIntent().getBooleanExtra(
-                    "isFormRegisterActivity", false);
+            isFormRegisterActivity = getIntent().getBooleanExtra("isFormRegisterActivity", false);
         }
 
         if (getIntent().hasExtra("isFormPushSourceDetail")) {
-            isFormPushSourceDetail = getIntent().getBooleanExtra(
-                    "isFormPushSourceDetail", false);
+            isFormPushSourceDetail = getIntent().getBooleanExtra("isFormPushSourceDetail", false);
         }
 
         mCarTypeAdapter = new CarTypeListAdapter(context);
@@ -498,8 +496,7 @@ public class OptionalActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (isFormRegisterActivity) {
-                                        startActivity(new Intent(context,
-                                                MainActivity.class));
+                                        startActivity(new Intent(context, MainActivity.class));
                                         // 第一次进入，获取 所有 新货源
                                         getNewSourceData(1);
                                     }

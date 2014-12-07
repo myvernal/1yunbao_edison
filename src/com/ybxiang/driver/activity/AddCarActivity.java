@@ -2,6 +2,7 @@ package com.ybxiang.driver.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.CitySelectView;
@@ -86,6 +87,18 @@ public class AddCarActivity extends BaseActivity {
     // 请求数据
     public void addToMyCar(View view) {
         try {
+            if(TextUtils.isEmpty(ower_name.getText())) {
+                Toast.makeText(context, "司机姓名不能为空", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(TextUtils.isEmpty(ower_phone.getText())) {
+                Toast.makeText(context, "手机号码不能为空", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(TextUtils.isEmpty(mCarNum.getText())) {
+                Toast.makeText(context, "车牌号码不能为空", Toast.LENGTH_SHORT).show();
+                return;
+            }
             final JSONObject jsonObject = new JSONObject();
             JSONObject params = new JSONObject();
             if(Constants.EDIT_CAR == type) {
