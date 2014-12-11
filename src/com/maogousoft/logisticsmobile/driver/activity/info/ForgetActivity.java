@@ -51,6 +51,7 @@ public class ForgetActivity extends BaseActivity {
 		setContentView(R.layout.activity_info_forget);
 		initViews();
 		initHandler();
+        setIsShowAnonymousActivity(false);
 	}
 
 	private void initViews() {

@@ -44,6 +44,7 @@ public class OthersActivity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_others);
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("工具");
+        findViewById(R.id.titlebar_id_more).setOnClickListener(this);
 		initViews();
         findViewById(R.id.titlebar_id_back).setVisibility(View.GONE);
 	}
@@ -51,6 +52,11 @@ public class OthersActivity extends BaseActivity implements
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
+        switch (v.getId()) {
+            case R.id.titlebar_id_more:
+                startActivity(new Intent(context, ShareActivity.class));
+                break;
+        }
 	}
 
 	// 初始化视图
