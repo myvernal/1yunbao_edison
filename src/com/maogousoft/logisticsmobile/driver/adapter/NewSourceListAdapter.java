@@ -111,7 +111,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 
 		title.append("/").append(sourceInfo.getCargo_type_str());
 
-		if (sourceInfo.getCargo_number() != 0) {
+		if (sourceInfo.getCargo_number() != null && sourceInfo.getCargo_number() != 0) {
 			title.append("/")
 					.append(sourceInfo.getCargo_desc())
 					.append(sourceInfo.getCargo_number())
@@ -125,7 +125,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 
 		}
 
-		if (sourceInfo.getCar_length() != 0
+		if (sourceInfo.getCar_length() != null && sourceInfo.getCar_length() != 0
 				&& sourceInfo.getCar_length() != 0.0) {
 			title.append("/");
 			title.append(sourceInfo.getCar_length() + "米");
