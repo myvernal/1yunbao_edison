@@ -46,7 +46,28 @@ public class CheckCardListAdapter extends BaseListAdapter<CardInfo> {
         Date date = new Date(cardInfo.getCreate_time());
         String time = simpleDateFormat.format(date);
         holder.time.setText(time);
-        holder.result.setText("一致");
+        switch (cardInfo.getVerifyresult()) {
+            case 0:
+                holder.result.setText("验证失败");
+                holder.result.setTextColor(0xffff0000);
+                break;
+            case 1:
+                holder.result.setText("一致");
+                holder.result.setTextColor(0xff00dd00);
+                break;
+            case 2:
+                holder.result.setText("身份验证不一致");
+                holder.result.setTextColor(0xffff0000);
+                break;
+            case 3:
+                holder.result.setText("库中无此号码");
+                holder.result.setTextColor(0xffff0000);
+                break;
+            case 4:
+                holder.result.setText("身份验证一致，无照片");
+                holder.result.setTextColor(0xff00dd00);
+                break;
+        }
         convertView.setTag(holder);
         return convertView;
     }

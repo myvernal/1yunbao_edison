@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/common_title"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <EditText
+                    android:id="@+id/forget_company_phone"
+                    style="@style/info_edittext_style"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:hint="@string/string_register_shipper_phone"
+                    android:inputType="phone"
+                    android:maxLength="11">
+
+                <requestFocus/>
+            </EditText>
+
+            <EditText
+                    android:id="@+id/forget_company_name"
+                    style="@style/info_edittext_style"
+                    android:layout_marginTop="10dp"
+                    android:singleLine="true"
+                    android:hint="@string/string_register_company_name"/>
+
+            <Button
+                    android:id="@+id/forget_submitbtn"
+                    style="@style/button1_style"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/string_forgot_submit"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

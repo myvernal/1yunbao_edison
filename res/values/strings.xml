@@ -69,6 +69,9 @@
     <string name="string_register_wait">%s秒后可重新获取</string>
     <string name="string_register_verifycode">验证码</string>
 
+    <string name="string_register_shipper_phone">请填写注册手机号</string>
+    <string name="string_register_company_name">请填写注册公司名</string>
+
     <!-- 修改密码 -->
     <string name="string_update_oldpwd">请输入初始密码</string>
     <string name="string_update_newpwd">请输入新密码</string>
@@ -98,6 +101,7 @@
     <string name="string_home_myabc_title_history1">历史订单</string>
     <string name="string_home_myabc_title_share">分享</string>
     <string name="string_home_myabc_title_updatepwd">密码修改</string>
+    <string name="string_home_myabc_title_forgetpwd">忘记密码</string>
     <string name="string_home_myabc_title_over">账户余额</string>
     <string name="string_home_myabc_title_recharge">帐号充值</string>
     <string name="string_home_myabc_title_ranking">排名</string>

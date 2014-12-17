@@ -124,7 +124,7 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	public static final String BASE_URL = "http://www.1yunbao.com/service";
-	//public static final String BASE_URL = "http://112.124.33.14:8083/service";
+//	public static final String BASE_URL = "http://112.124.33.14:8083/service";
 	//public static final String BASE_URL = "http://192.168.1.100:8080/service";
     /**
      1yunbao.com:8083/admin
@@ -163,7 +163,10 @@ public class Constants {
 	/** 货主注册 **/
 	public static final String SHIPPER_REG = "user_reg";
 
-	/** 货主端完善资料 2 **/
+    /** 货主找回密码 **/
+    public static final String SHIPPER_FORGET_PASSWORD = "forgetPWD";
+
+    /** 货主端完善资料 2 **/
 	public static final String SHIPPER_REG_OPTIONAL2 = "user_reg_optional";
 
 	/** 诚信认证 **/

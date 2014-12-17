@@ -259,6 +259,12 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme"/>
         <activity
+                android:name=".activity.info.ForgetShipperActivity"
+                android:configChanges="keyboardHidden|orientation"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme"/>
+        <activity
                 android:name=".activity.share.ShareActivity"
                 android:configChanges="keyboardHidden|orientation"
                 android:launchMode="singleTask"

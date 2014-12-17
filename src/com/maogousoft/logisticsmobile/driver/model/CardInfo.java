@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by aliang on 2014/8/30.
  */
 public class CardInfo implements Serializable {
-    private int verifyresult = 3;//1 正常 2身份验证不一致 3库中无此号码4身份验证一致，但是无照片
+    private int verifyresult = 3;//0失败 1 正常 2身份验证不一致 3库中无此号码4身份验证一致，但是无照片
     private String msg;//信息
     private String photo;//照片
     private String id_name;//姓名

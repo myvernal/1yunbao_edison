@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
@@ -205,16 +206,25 @@ public class SourceDetailActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-
         if (isFromPush) {
-
             application.finishAllActivity();
 
             Intent intent = new Intent(context, NewSourceActivity.class);
+            //从推送进入的,按返回后进入关注货源列表
+            intent.putExtra("QUERY_MAIN_LINE_ORDER", true);
             startActivity(intent);
-
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
         }
     }
 

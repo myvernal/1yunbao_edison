@@ -167,7 +167,22 @@ public class LoginActivity extends BaseActivity {
                 submit(loginType);
                 break;
             case R.id.info_id_login_forget:
-                startActivity(new Intent(context, ForgetActivity.class));
+                if (!mUserTypeChecked) {
+                    showMsg(R.string.user_type_not_choose);
+                    return;
+                }
+                switch (mUserType) {
+                    // 司机
+                    case Constants.USER_DRIVER:
+                        startActivity(new Intent(context, ForgetActivity.class));
+                        break;
+                    // 货主
+                    case Constants.USER_SHIPPER:
+                        startActivity(new Intent(context, ForgetShipperActivity.class));
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case R.id.no_login_enter:
                 if (!mUserTypeChecked) {

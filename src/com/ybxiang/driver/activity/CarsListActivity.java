@@ -100,9 +100,11 @@ public class CarsListActivity extends BaseListActivity implements
     protected void onResume() {
         super.onResume();
         // list未加载数据不显示
+        // 重新刷新数据
         setListShown(false);
         mAdapter.removeAll();
         pageIndex = 1;
+        load_all = false;
         getData(pageIndex);
     }
 

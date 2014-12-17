@@ -48,6 +48,10 @@ public class CheckCardResultActivity extends BaseActivity implements View.OnClic
         name.setText(name.getText() + cardInfo.getId_name());
         gender.setText(gender.getText() + cardInfo.getGender());
         switch (cardInfo.getVerifyresult()) {
+            case 0:
+                result.setText("验证失败");
+                result.setTextColor(0xffff0000);
+                break;
             case 1:
                 result.setText("一致");
                 break;
@@ -60,7 +64,7 @@ public class CheckCardResultActivity extends BaseActivity implements View.OnClic
                 result.setTextColor(0xffff0000);
                 break;
             case 4:
-                result.setText("身份验证一致，但是无照片");
+                result.setText("身份验证一致，无照片");
                 break;
         }
         birthday.setText(cardInfo.getId_year() + "年" + cardInfo.getId_month() + "月" + cardInfo.getId_day() + "日");
