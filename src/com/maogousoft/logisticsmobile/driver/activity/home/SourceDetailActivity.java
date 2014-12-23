@@ -282,6 +282,7 @@ public class SourceDetailActivity extends BaseActivity {
             for (int i = 0; i < Constants.sourceTypeValues.length; i++) {
                 if (Constants.sourceTypeValues[i] == sourceType) {
                     mSourceType.setText(Html.fromHtml(mSourceType.getText() + Utils.textFormatBlue(sourceTypeStr[i])));
+                    break;
                 }
             }
         } else {
@@ -296,6 +297,7 @@ public class SourceDetailActivity extends BaseActivity {
                 if (Constants.unitTypeValues[i] == unitType) {
                     weight = mSourceInfo.getCargo_number() + priceUnit[i];
                     mWeight.setText(Html.fromHtml(mWeight.getText().toString() + Utils.textFormatBlue(weight)));
+                    break;
                 }
             }
         } else {
@@ -308,6 +310,7 @@ public class SourceDetailActivity extends BaseActivity {
             for (int i = 0; i < Constants.shipTypeValues.length; i++) {
                 if (Constants.shipTypeValues[i] == shipType) {
                     mShipType.setText(Html.fromHtml(mShipType.getText() + Utils.textFormatBlue(shipTypeStr[i])));
+                    break;
                 }
             }
         } else {
@@ -327,6 +330,7 @@ public class SourceDetailActivity extends BaseActivity {
             for (int i = 0; i < Constants.carTypeValues.length; i++) {
                 if (Constants.carTypeValues[i] == carTypeValue) {
                     mSourceCarType.setText(Html.fromHtml(mSourceCarType.getText() + Utils.textFormatBlue(carTypeStr[i])));
+                    break;
                 }
             }
         } else {
@@ -339,6 +343,7 @@ public class SourceDetailActivity extends BaseActivity {
             for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                 if (Constants.unitTypeValues[i] == unitPrice) {
                     mSourcePrice.setText(Html.fromHtml(mSourcePrice.getText().toString() + Utils.textFormatBlue(sourceInfo.getUnit_price() + "元/" + unitPriceStr[i])));
+                    break;
                 }
             }
         } else {
