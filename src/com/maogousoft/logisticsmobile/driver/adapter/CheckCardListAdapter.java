@@ -56,11 +56,13 @@ public class CheckCardListAdapter extends BaseListAdapter<CardInfo> {
                 holder.result.setTextColor(0xff00dd00);
                 break;
             case 2:
-                holder.result.setText("身份验证不一致");
+//                holder.result.setText("身份验证不一致");
+                holder.result.setText("不一致");
                 holder.result.setTextColor(0xffff0000);
                 break;
             case 3:
-                holder.result.setText("库中无此号码");
+//                holder.result.setText("库中无此号码");
+                holder.result.setText("不一致");
                 holder.result.setTextColor(0xffff0000);
                 break;
             case 4:

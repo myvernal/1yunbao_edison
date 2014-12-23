@@ -250,16 +250,7 @@ public class NewSourceActivity extends BaseListActivity implements
         if (position < mAdapter.getList().size()) {
 
             // 先检测是否已经完善了资料
-            if (application.checkIsRegOptional()) {
-                final Intent intent = new Intent(context,
-                        SourceDetailActivity.class);
-                intent.putExtra(
-                        SourceDetailActivity.ORDER_ID,
-                        ((NewSourceListAdapter) mAdapter).getList().get(position).getId());
-                intent.putExtra("type", "NewSourceActivity");
-                startActivityForResult(intent, 1000);
-            } else {
-
+            if (!application.checkIsRegOptional() && application.getUserType() == Constants.USER_DRIVER) {
                 final MyAlertDialog dialog = new MyAlertDialog(context);
                 dialog.show();
                 dialog.setTitle("提示");
@@ -269,8 +260,7 @@ public class NewSourceActivity extends BaseListActivity implements
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        Intent intent = new Intent(context,
-                                OptionalActivity.class);
+                        Intent intent = new Intent(context, OptionalActivity.class);
                         intent.putExtra("isFormRegisterActivity", false);
                         startActivity(intent);
                         finish();
@@ -283,8 +273,13 @@ public class NewSourceActivity extends BaseListActivity implements
                         dialog.dismiss();
                     }
                 });
+            } else {
+                final Intent intent = new Intent(context, SourceDetailActivity.class);
+                intent.putExtra(SourceDetailActivity.ORDER_ID,
+                        ((NewSourceListAdapter) mAdapter).getList().get(position).getId());
+                intent.putExtra("type", "NewSourceActivity");
+                startActivityForResult(intent, 1000);
             }
-
         }
     }
 

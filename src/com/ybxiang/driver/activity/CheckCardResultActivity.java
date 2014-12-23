@@ -56,11 +56,13 @@ public class CheckCardResultActivity extends BaseActivity implements View.OnClic
                 result.setText("一致");
                 break;
             case 2:
-                result.setText("身份验证不一致");
+//                result.setText("身份验证不一致");
+                result.setText("不一致");
                 result.setTextColor(0xffff0000);
                 break;
             case 3:
-                result.setText("库中无此号码");
+//                result.setText("库中无此号码");
+                result.setText("不一致");
                 result.setTextColor(0xffff0000);
                 break;
             case 4:
