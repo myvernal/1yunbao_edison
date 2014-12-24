@@ -3,8 +3,13 @@ package com.maogousoft.logisticsmobile.driver.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.content.Context;
+import android.text.Html;
 import android.text.TextUtils;
 import android.widget.EditText;
+import com.maogousoft.logisticsmobile.driver.Constants;
+import com.maogousoft.logisticsmobile.driver.R;
+import com.ybxiang.driver.util.Utils;
 
 public class CheckUtils {
 
@@ -39,20 +44,19 @@ public class CheckUtils {
 	/**
 	 * 获取货物单位
 	 * 
-	 * @param value
+	 * @param unitType
 	 * @return
 	 */
-	public static String getCargoUnitName(Integer value) {
-		if (value == null) {
-			return "";
-		} else if (value == 1) {
-			return "车";
-		} else if (value == 2) {
-			return "吨";
-		} else if (value == 3) {
-			return "方";
-		}
-		return "";
+	public static String getCargoUnitName(Context context, Integer unitType) {
+        String unitStr = "";
+        String[] priceUnit = context.getResources().getStringArray(R.array.car_price_unit);
+        for (int i = 0; i < Constants.unitTypeValues.length; i++) {
+            if (Constants.unitTypeValues[i] == unitType) {
+                unitStr =  priceUnit[i];
+                break;
+            }
+        }
+        return unitStr;
 	}
 
 	/** 屏蔽 **/

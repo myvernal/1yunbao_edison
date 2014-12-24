@@ -42,7 +42,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 				JSONObject jsonObject = new JSONObject();
 				try {
 					String submitJson = new JSONObject()
-                            .put("isTimerChange", 1)
+                            .put("isTimerChange", 1)//1为定时上报,0为资料完善
                             .put("address", addr)
                             .put("longitude", lng)
 							.put("latitude", lat).toString();

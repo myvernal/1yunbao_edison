@@ -120,8 +120,7 @@ public class UnMatchedSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 					.append("/")
 					.append(sourceInfo.getCargo_desc())
 					.append(sourceInfo.getCargo_number())
-					.append(CheckUtils.getCargoUnitName(sourceInfo
-							.getCargo_unit()));
+					.append(CheckUtils.getCargoUnitName(mContext, sourceInfo.getCargo_unit()));
 			holder.order_number.setText(String.format(
 					mResources.getString(R.string.sourcedetail_number),
 					sourceInfo.getId()));

@@ -115,8 +115,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 			title.append("/")
 					.append(sourceInfo.getCargo_desc())
 					.append(sourceInfo.getCargo_number())
-					.append(CheckUtils.getCargoUnitName(sourceInfo
-							.getCargo_unit()));
+					.append(CheckUtils.getCargoUnitName(mContext, sourceInfo.getCargo_unit()));
 		}
 
 		if (!TextUtils.isEmpty(sourceInfo.getCar_type_str())) {

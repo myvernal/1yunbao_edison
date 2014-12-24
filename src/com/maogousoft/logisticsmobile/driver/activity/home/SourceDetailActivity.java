@@ -338,7 +338,7 @@ public class SourceDetailActivity extends BaseActivity {
         }
         //报价单位
         Integer unitPrice = sourceInfo.getCargo_unit();
-        if (unitPrice != null && unitPrice > 0) {
+        if (unitPrice != null && unitPrice > 0 && sourceInfo.getUnit_price() > 0) {
             String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
             for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                 if (Constants.unitTypeValues[i] == unitPrice) {
