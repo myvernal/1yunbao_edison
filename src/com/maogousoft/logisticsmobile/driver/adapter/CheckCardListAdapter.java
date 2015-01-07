@@ -2,6 +2,7 @@ package com.maogousoft.logisticsmobile.driver.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -46,29 +47,24 @@ public class CheckCardListAdapter extends BaseListAdapter<CardInfo> {
         Date date = new Date(cardInfo.getCreate_time());
         String time = simpleDateFormat.format(date);
         holder.time.setText(time);
-        switch (cardInfo.getVerifyresult()) {
-            case 0:
-                holder.result.setText("验证失败");
-                holder.result.setTextColor(0xffff0000);
-                break;
-            case 1:
-                holder.result.setText("一致");
-                holder.result.setTextColor(0xff00dd00);
-                break;
-            case 2:
+        if (TextUtils.equals("0", cardInfo.getStatus())) {
+            holder.result.setText("验证失败");
+            holder.result.setTextColor(0xffff0000);
+        } else if (TextUtils.equals("1", cardInfo.getStatus())) {
+            holder.result.setText("一致");
+            holder.result.setTextColor(0xff00dd00);
+        } else if (TextUtils.equals("2", cardInfo.getStatus())) {
 //                holder.result.setText("身份验证不一致");
-                holder.result.setText("不一致");
-                holder.result.setTextColor(0xffff0000);
-                break;
-            case 3:
+            holder.result.setText("不一致");
+            holder.result.setTextColor(0xffff0000);
+        } else if (TextUtils.equals("3", cardInfo.getStatus())) {
 //                holder.result.setText("库中无此号码");
-                holder.result.setText("不一致");
-                holder.result.setTextColor(0xffff0000);
-                break;
-            case 4:
-                holder.result.setText("身份验证一致，无照片");
-                holder.result.setTextColor(0xff00dd00);
-                break;
+            holder.result.setText("不一致");
+            holder.result.setTextColor(0xffff0000);
+        } else if (TextUtils.equals("4", cardInfo.getStatus())) {
+//            holder.result.setText("身份验证一致，无照片");
+            holder.result.setText("一致");
+            holder.result.setTextColor(0xff00dd00);
         }
         convertView.setTag(holder);
         return convertView;

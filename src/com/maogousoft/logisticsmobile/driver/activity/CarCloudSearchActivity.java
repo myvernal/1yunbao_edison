@@ -4,6 +4,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.CloudSearchAdapter;
-import com.maogousoft.logisticsmobile.driver.adapter.MyCarInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 
@@ -66,7 +66,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         mBack.setOnClickListener(this);
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
-        // 开启定位图层
+        // 在没有获取到位置的时候默认不显示定位图层
         mBaiduMap.setMyLocationEnabled(true);
         listContainer = findViewById(R.id.listContainer);
         mListView = (ListView) findViewById(android.R.id.list);
@@ -230,7 +230,8 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true);// 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(200);
+        option.setScanSpan(2000);
+        option.disableCache(true);
         mLocClient.setLocOption(option);
         mLocClient.start();
     }
@@ -259,8 +260,9 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     public void onReceiveLocation(BDLocation location) {
         // map view 销毁后不在处理新接收的位置
         LogUtil.e(TAG, "onReceiveLocation");
-        if (location == null || mMapView == null || !isFirstLoc || null == location.getCity()) {
-            mLocClient.start();
+        if(location == null || TextUtils.isEmpty(location.getCity())) {
+            //定位失败重新定位一次
+            mLocClient.requestLocation();
             return;
         }
 //        NearbySearchInfo info = new NearbySearchInfo();
@@ -287,22 +289,22 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mMapView.onDestroy();
         mLocClient.stop();
         CloudManager.getInstance().destroy();
+        super.onDestroy();
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
         mMapView.onPause();
+        super.onPause();
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
         mMapView.onResume();
+        super.onResume();
     }
 }
 
