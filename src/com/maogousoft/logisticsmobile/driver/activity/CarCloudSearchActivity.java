@@ -33,7 +33,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
 	private static final String LTAG = "CloudSearchActivity";
 	private MapView mMapView;
 	private BaiduMap mBaiduMap;
-    private RelativeLayout markerView;
+    private LinearLayout markerView;
     private InfoWindow mInfoWindow;
     private LocationClient mLocClient;
     private boolean isFirstLoc = true;// 是否首次定位
@@ -76,7 +76,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
             public boolean onMarkerClick(final Marker marker) {
                 final LatLng ll = marker.getPosition();
                 Point p = mBaiduMap.getProjection().toScreenLocation(ll);
-                p.y -= 75;
+                p.y -= 40;
                 LatLng llInfo = mBaiduMap.getProjection().fromScreenLocation(p);
                 InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
                     public void onInfoWindowClick() {
@@ -85,8 +85,8 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                         mBaiduMap.hideInfoWindow();
                     }
                 };
-                //RelativeLayout popupView = getMarkerView(marker);
-                TextView textView = new TextView(context);
+
+                /*TextView textView = new TextView(context);
                 String nameStr = marker.getExtraInfo().getString("name");
                 String addressStr = marker.getExtraInfo().getString("address");
                 String phoneStr = marker.getExtraInfo().getString("phone");
@@ -95,29 +95,31 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 textView.setText(nameStr + "\n\n" + "地址:" + addressStr +
                         "\n\n" + "时间:" + locationTime +
                         "\n\n" + "联系电话:" + phoneStr);
-                textView.setBackgroundResource(R.drawable.popup);
-                mInfoWindow = new InfoWindow(textView, llInfo, listener);
+                textView.setBackgroundResource(R.drawable.map_bg);*/
+                View popupView = getMarkerView(marker);
+                mInfoWindow = new InfoWindow(popupView, llInfo, listener);
                 mBaiduMap.showInfoWindow(mInfoWindow);
                 return true;
             }
         });
     }
 
-    private RelativeLayout getMarkerView(Marker marker) {
+    private LinearLayout getMarkerView(Marker marker) {
         if(markerView == null) {
-            markerView = (RelativeLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.map_marker_detail_layout, null);
+            markerView = (LinearLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.map_marker_detail_layout, null);
         }
-        String nameStr = marker.getExtraInfo().getString("name");
+        final String nameStr = marker.getExtraInfo().getString("name");
         String addressStr = marker.getExtraInfo().getString("address");
         String phoneStr = marker.getExtraInfo().getString("phone");
 
-        TextView name = (TextView) markerView.findViewById(R.id.name);
-        TextView address = (TextView) markerView.findViewById(R.id.address);
-        TextView phone = (TextView) markerView.findViewById(R.id.phone);
-
-        name.setText(nameStr);
-        address.setText("地址:" + addressStr);
-        phone.setText("联系电话:" + phoneStr);
+        TextView description = (TextView) markerView.findViewById(R.id.description);
+        TextView line = (TextView) markerView.findViewById(R.id.line);
+        markerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, nameStr, Toast.LENGTH_SHORT).show();
+            }
+        });
         return markerView;
     }
 
@@ -171,7 +173,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
 		if (result != null && result.poiList != null && result.poiList.size() > 0) {
 			Log.d(LTAG, "onGetSearchResult, result length: " + result.poiList.size());
 			mBaiduMap.clear();
-			BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(R.drawable.icon_gcoding);
+			BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(R.drawable.map_marker_text);
 			LatLng ll;
 			LatLngBounds.Builder builder = new Builder();
 			for (CloudPoiInfo info : result.poiList) {

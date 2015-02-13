@@ -65,7 +65,8 @@ public class OthersActivity extends BaseActivity implements
 
 		List<Map<String, Object>> mList = new ArrayList<Map<String, Object>>();
 		String[] arrays = getResources().getStringArray(R.array.others);
-		int[] icons = { R.drawable.selector_others_calc,
+		int[] icons = {
+				R.drawable.ic_other_hytq,
 				R.drawable.selector_others_help,
 				R.drawable.selector_others_charge,
 				R.drawable.selector_others_stay,
@@ -74,12 +75,7 @@ public class OthersActivity extends BaseActivity implements
 				R.drawable.selector_others_update,
 				R.drawable.selector_others_advice,
 				R.drawable.selector_others_contact,
-				R.drawable.selector_others_contact,
-				R.drawable.selector_others_contact,
-				R.drawable.selector_others_contact,
-				R.drawable.selector_others_contact,
-				R.drawable.selector_others_contact,
-				R.drawable.selector_others_contact };
+				R.drawable.selector_others_calc};
 		final int lenght = arrays.length;
 		for (int i = 0; i < lenght; i++) {
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -99,7 +95,8 @@ public class OthersActivity extends BaseActivity implements
 			long id) {
 		switch (position) {
 		case 0:
-			startActivity(new Intent(context, DistanceCalcActivity.class));
+			//TODO 会员特权!
+			startActivity(new Intent(context, HelpActivity.class));
 			break;
 		case 1:
 			startActivity(new Intent(context, HelpActivity.class));
@@ -127,6 +124,9 @@ public class OthersActivity extends BaseActivity implements
 			break;
 		case 8:
 			startActivity(new Intent(context, AboutActivity.class));
+			break;
+		case 9:
+			startActivity(new Intent(context, DistanceCalcActivity.class));
 			break;
 		default:
 			break;

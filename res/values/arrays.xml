@@ -2,7 +2,7 @@
 <resources>
 
     <string-array name="others">
-        <item>里程计算器</item>
+        <item>会员特权</item>
         <item>帮助中心</item>
         <item>账户充值</item>
         <item>附近住宿</item>
@@ -11,6 +11,7 @@
         <item>检查更新</item>
         <item>意见反馈</item>
         <item>联系我们</item>
+        <item>里程计算器</item>
     </string-array>
     <string-array name="select_photo">
         <item>手机拍摄</item>
