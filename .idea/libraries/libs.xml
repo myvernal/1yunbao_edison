@@ -15,8 +15,6 @@
       <root url="jar://$PROJECT_DIR$/libs/baidumapapi_v3_1_0.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/libs/image-load.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

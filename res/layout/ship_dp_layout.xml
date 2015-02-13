@@ -14,7 +14,7 @@
                   android:gravity="center">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  android:drawableTop="@drawable/dp_sfwl"
                   style="@style/dp_style"
                   android:id="@+id/part1"
                   android:text="三方物流"/>
@@ -22,7 +22,7 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginLeft="40dp"
-                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  android:drawableTop="@drawable/dp_ldzx"
                   style="@style/dp_style"
                   android:id="@+id/part2"
                   android:text="零担专线"/>
@@ -35,7 +35,7 @@
                   android:gravity="center">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  android:drawableTop="@drawable/dp_gchz"
                   style="@style/dp_style"
                   android:id="@+id/part3"
                   android:text="工厂货主"/>
@@ -43,7 +43,7 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginLeft="40dp"
-                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  android:drawableTop="@drawable/dp_wlyq"
                   style="@style/dp_style"
                   android:id="@+id/part4"
                   android:text="物流园区"/>
@@ -56,7 +56,7 @@
                   android:gravity="center">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  android:drawableTop="@drawable/dp_wlmp"
                   style="@style/dp_style"
                   android:id="@+id/part5"
                   android:text="物流名片"/>
@@ -64,9 +64,8 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_marginLeft="40dp"
-                  android:drawableTop="@drawable/ic_other_oil_normal"
+                  android:drawableTop="@drawable/dp_ldzx"
                   style="@style/dp_style"
-                  android:visibility="invisible"
-                  android:text="零担专线"/>
+                  android:visibility="invisible"/>
     </LinearLayout>
 </LinearLayout>
