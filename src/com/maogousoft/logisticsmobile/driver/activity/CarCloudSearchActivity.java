@@ -44,7 +44,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     private int currentModel = CURRENT_MODEL_MAP;
     private static final int CURRENT_MODEL_MAP = 0;
     private static final int CURRENT_MODEL_LIST = 1;
-    private View listContainer;
+    private View listContainer, mapContainer;
     private BaseListAdapter mAdapter;
     private ListView mListView;
     private View mEmpty;
@@ -72,6 +72,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         // 在没有获取到位置的时候默认不显示定位图层
         mBaiduMap.setMyLocationEnabled(true);
         listContainer = findViewById(R.id.listContainer);
+        mapContainer = findViewById(R.id.mapContainer);
         mListView = (ListView) findViewById(android.R.id.list);
         mEmpty = findViewById(android.R.id.empty);
         //图层点击事件
@@ -144,7 +145,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 if(currentModel == CURRENT_MODEL_MAP) {
                     currentModel = CURRENT_MODEL_LIST;
                     listContainer.setVisibility(View.VISIBLE);
-                    mMapView.setVisibility(View.GONE);
+                    mapContainer.setVisibility(View.GONE);
                     //列表数据处理
                     if (mAdapter.getCount()  <= 0) {
                         mEmpty.setVisibility(View.VISIBLE);
@@ -153,7 +154,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 } else {
                     currentModel = CURRENT_MODEL_MAP;
                     listContainer.setVisibility(View.GONE);
-                    mMapView.setVisibility(View.VISIBLE);
+                    mapContainer.setVisibility(View.VISIBLE);
                     mMore.setText("查看列表");
                 }
                 break;

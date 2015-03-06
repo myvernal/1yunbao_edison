@@ -67,30 +67,22 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.listitem_newsoure, parent,
-					false);
+			convertView = mInflater.inflate(R.layout.listitem_newsoure, parent, false);
 			holder = new ViewHolder();
-            holder.source_detail_phone = (Button) convertView
-                    .findViewById(R.id.source_detail_phone);
-			holder.order_image = (ImageView) convertView
-					.findViewById(R.id.source_id_order_image);
-			holder.order_number = (TextView) convertView
-					.findViewById(R.id.source_id_order_number);
-			holder.order_info = (TextView) convertView
-					.findViewById(R.id.source_id_order_info);
-			holder.order_money = (TextView) convertView
-					.findViewById(R.id.source_id_order_money);
+            holder.source_detail_phone = (Button) convertView.findViewById(R.id.source_detail_phone);
+			holder.order_image = (ImageView) convertView.findViewById(R.id.source_id_order_image);
+			holder.order_number = (TextView) convertView.findViewById(R.id.source_id_order_number);
+			holder.order_info = (TextView) convertView.findViewById(R.id.source_id_order_info);
+            holder.order_info_detail = (TextView) convertView.findViewById(R.id.source_id_order_info_detail);
+			holder.order_money = (TextView) convertView.findViewById(R.id.source_id_order_money);
 			//PR104 begin
 //			holder.order_star = (RatingBar) convertView
 //					.findViewById(R.id.source_id_order_star);
 //			holder.order_star.setIsIndicator(true);
 			//PR104 end
-			holder.order_imagetips = convertView
-					.findViewById(R.id.source_id_order_imagetips);
-			holder.order_grab = (Button) convertView
-					.findViewById(R.id.source_id_order_grab);
-			holder.order_state = (Button) convertView
-					.findViewById(R.id.source_id_order_state);
+			holder.order_imagetips = convertView.findViewById(R.id.source_id_order_imagetips);
+			holder.order_grab = (Button) convertView.findViewById(R.id.source_id_order_grab);
+			holder.order_state = (Button) convertView.findViewById(R.id.source_id_order_state);
 			holder.tvDjs = (TextView) convertView.findViewById(R.id.tv_djs);
 			convertView.setTag(holder);
 		} else {
@@ -102,6 +94,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		holder.order_number.setText(mResources.getString(R.string.string_home_newsource_order_number, sourceInfo.getId()));
 		mImageLoader.displayImage(sourceInfo.getCargo_photo1(), holder.order_image);
 		final StringBuilder title = new StringBuilder();
+		final StringBuilder detail = new StringBuilder();
 
         String wayStart = dbUtils.getCityInfo(sourceInfo.getStart_province(), sourceInfo.getStart_city(), sourceInfo.getStart_district());
         if (sourceInfo.getEnd_province() > 0 || sourceInfo.getEnd_city() > 0 || sourceInfo.getEnd_district() > 0) {
@@ -109,30 +102,31 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             title.append(wayStart + "--" + wayEnd);
         }
 
-		title.append("/").append(sourceInfo.getCargo_type_str());
+        detail.append(sourceInfo.getCargo_type_str());
 
 		if (sourceInfo.getCargo_number() != null && sourceInfo.getCargo_number() != 0) {
-			title.append("/")
+            detail.append("/")
 					.append(sourceInfo.getCargo_desc())
 					.append(sourceInfo.getCargo_number())
 					.append(CheckUtils.getCargoUnitName(mContext, sourceInfo.getCargo_unit()));
 		}
 
 		if (!TextUtils.isEmpty(sourceInfo.getCar_type_str())) {
-			title.append("/");
-			title.append(sourceInfo.getCar_type_str());
+            detail.append("/");
+            detail.append(sourceInfo.getCar_type_str());
 
 		}
 
 		if (sourceInfo.getCar_length() != null && sourceInfo.getCar_length() != 0
 				&& sourceInfo.getCar_length() != 0.0) {
-			title.append("/");
-			title.append(sourceInfo.getCar_length() + "米");
+            detail.append("/");
+            detail.append(sourceInfo.getCar_length() + "米");
 		}
 
 		// title.append(TimeUtils.getDetailTime(sourceInfo.getValidate_time()));
 
 		holder.order_info.setText(title.toString());
+		holder.order_info_detail.setText(detail.toString());
 		holder.order_money.setText(Html.fromHtml(String.format(mResources
 				.getString(R.string.string_home_newsource_order_money),
 				sourceInfo.getUser_bond())));
@@ -254,7 +248,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 
 		ImageView order_image;
 
-		TextView order_number, order_info, order_money;
+		TextView order_number, order_info, order_info_detail, order_money;
 
 		Button order_state;
 

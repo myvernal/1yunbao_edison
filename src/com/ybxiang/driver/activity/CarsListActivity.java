@@ -11,6 +11,8 @@ import android.widget.AbsListView.OnScrollListener;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
+import com.maogousoft.logisticsmobile.driver.activity.CarCloudSearchActivity;
+import com.maogousoft.logisticsmobile.driver.activity.home.SearchCarSourceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.MyCarInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.SearchCarInfoListAdapter;
@@ -32,7 +34,7 @@ public class CarsListActivity extends BaseListActivity implements
     private Button mTitleBarMore;
     private TextView mTitleBarContent;
     // 底部更多
-    private View mFootView;
+    private View mFootView, mHeaderView;
     private ProgressBar mFootProgress;
     private TextView mFootMsg;
     // 当前模式
@@ -56,6 +58,7 @@ public class CarsListActivity extends BaseListActivity implements
     }
 
     private void initViews() {
+
         mTitleBarContent = ((TextView) findViewById(R.id.titlebar_id_content));
         mTitleBarContent.setText("我的车队");
         // 返回按钮生效
@@ -68,10 +71,13 @@ public class CarsListActivity extends BaseListActivity implements
 
         // 数据加载中进度条
         mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
+        mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
         mFootView.setClickable(false);
         mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
+        mListView.addHeaderView(mHeaderView);
+        mHeaderView.setOnClickListener(this);
         mListView.setOnScrollListener(this);
     }
 
@@ -197,6 +203,11 @@ public class CarsListActivity extends BaseListActivity implements
             case R.id.titlebar_id_more:
                 Intent intent = new Intent(context, AddCarActivity.class);
                 startActivityForResult(intent, Constants.REQUEST_CODE);
+                break;
+            case R.id.search:
+                Intent searchIntent = new Intent(context, SearchCarSourceActivity.class);
+                searchIntent.putExtra(Constants.MY_CARS_SEARCH, true);
+                startActivity(searchIntent);
                 break;
         }
     }

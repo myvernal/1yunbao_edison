@@ -40,7 +40,7 @@ public class NewSourceActivity extends BaseListActivity implements
     private Button mBack, mMore;
     private int rightButton = 0;// 0显示查找货源，1显示关注此线路,2不显示此button
     // 底部更多
-    private View mFootView;
+    private View mFootView, mHeaderView;
     private ProgressBar mFootProgress;
     private TextView mFootMsg, titlebar_id_content;
     // 当前模式
@@ -78,10 +78,13 @@ public class NewSourceActivity extends BaseListActivity implements
         titlebar_id_content.setText(R.string.string_title_newsource);
         // 页脚信息
         mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
+        mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
+        mHeaderView.setOnClickListener(this);
         mFootView.setClickable(false);
         mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
+        mListView.addHeaderView(mHeaderView);
 
         mListView.setOnScrollListener(this);
         mBack.setOnClickListener(this);
@@ -160,6 +163,9 @@ public class NewSourceActivity extends BaseListActivity implements
                     default:
                         break;
                 }
+                break;
+            case R.id.search:
+                Toast.makeText(mContext, "search", Toast.LENGTH_SHORT).show();
                 break;
         }
         super.onClick(v);

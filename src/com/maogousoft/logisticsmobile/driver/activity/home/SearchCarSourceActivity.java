@@ -49,6 +49,7 @@ public class SearchCarSourceActivity extends BaseActivity {
     private int selectedCarType = 0;// 选择的车辆类型
     private CityDBUtils dbUtils;
     private BaseListAdapter mAdapter;
+    private boolean isMyCarsFilter = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,8 @@ public class SearchCarSourceActivity extends BaseActivity {
     // 初始化数据，获取车型
     private void initData() {
         dbUtils = new CityDBUtils(application.getCitySDB());
+        //TODO 是否是我的车队搜索过滤
+        isMyCarsFilter = getIntent().getBooleanExtra(Constants.MY_CARS_SEARCH, false);
     }
 
     // add for PR1.3 begin
@@ -123,7 +126,6 @@ public class SearchCarSourceActivity extends BaseActivity {
         super.onClick(v);
         final int id = v.getId();
         switch (id) {
-
             case R.id.search_source__submit:
                 // 先检测是否已经完善了资料
                 if (application.checkIsRegOptional()) {
@@ -160,7 +162,10 @@ public class SearchCarSourceActivity extends BaseActivity {
 //                Intent nearbyCarSourceIntent = new Intent();
 //                nearbyCarSourceIntent.setClass(context, NearbyCarSourceActivity.class);
 //                startActivity(nearbyCarSourceIntent);
-                startActivity(new Intent(context, CarCloudSearchActivity.class));
+                Intent intent = new Intent(context, CarCloudSearchActivity.class);
+                //TODO 是我的车队搜索
+                intent.putExtra(Constants.MY_CARS_SEARCH, isMyCarsFilter);
+                startActivity(intent);
                 break;
             // PR206 附近车源 end
             default:

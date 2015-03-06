@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:background="@color/gray_online"
+                android:id="@+id/search"
+                android:layout_height="60dp">
+    <TextView android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:drawableLeft="@drawable/icon_newsource_search"
+              android:background="@drawable/map_bg"
+              android:gravity="center_vertical"
+              android:hint="搜索"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerVertical="true"
+              android:layout_alignParentRight="true"
+              android:layout_marginRight="40dp"
+              android:textColor="@color/TextColorRed"
+              android:text="你共有500辆车"/>
+</RelativeLayout>

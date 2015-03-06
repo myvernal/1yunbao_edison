@@ -4,6 +4,7 @@
               android:layout_height="wrap_content"
               android:descendantFocusability="blocksDescendants"
               android:gravity="center_vertical"
+              android:background="@color/BgColor"
               android:orientation="vertical">
 
     <LinearLayout
@@ -15,6 +16,7 @@
         <TextView
                 android:id="@id/source_id_order_number"
                 style="@style/home_online_order_textview_style"
+                android:visibility="gone"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"/>
 
@@ -35,7 +37,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
         <RelativeLayout
                 android:layout_width="0dp"
@@ -78,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
+                    android:visibility="gone"
                     android:layout_below="@+id/part1"
                     android:layout_toRightOf="@id/source_id_order_grab">
 
@@ -120,29 +126,42 @@
                         android:text="无"/>
             </RelativeLayout>
 
-            <LinearLayout android:layout_width="match_parent"
+            <RelativeLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
+                          android:paddingTop="5dp"
+                          android:paddingBottom="5dp"
+                          android:paddingLeft="10dp"
+                          android:paddingRight="5dp"
                           android:orientation="horizontal"
                           android:id="@+id/part1"
-                          android:layout_marginTop="5dp">
+                          android:background="@color/TextColorWhite">
 
                 <TextView
                         android:id="@id/source_id_order_info"
                         style="@style/home_source_order_info_style"
-                        android:layout_alignLeft="@id/source_id_order_grab"
-                        android:layout_below="@id/source_id_order_grab"
+                        android:layout_toLeftOf="@+id/img"
+                        android:textColor="@color/font_blue2"
+                        android:layout_weight="1"/>
+
+                <TextView
+                        android:id="@+id/source_id_order_info_detail"
+                        style="@style/home_source_order_info_style"
+                        android:layout_toLeftOf="@+id/img"
+                        android:layout_below="@id/source_id_order_info"
                         android:layout_weight="1"/>
 
                 <ImageView
+                        android:id="@+id/img"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="30dp"
-                        android:paddingRight="30dp"
-                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
                         android:contentDescription="@null"
                         android:src="@drawable/ic_info_right"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <RelativeLayout
                     android:layout_width="match_parent"

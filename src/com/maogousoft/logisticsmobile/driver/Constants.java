@@ -441,6 +441,7 @@ public class Constants {
     public static final String COMMON_ACTION_KEY = "common_action_key";
     public static final String COMMON_OBJECT_KEY = "common_object_key";
     public static final String CAR_EDIT_TYPE = "CAR_EDIT_TYPE";
+    public static final String MY_CARS_SEARCH = "MY_CARS_SEARCH";
     public static final int CAR_SEARCH_TYPE = 0;
     public static final int SOURCE_SEARCH_TYPE = 1;
     public static final int SOURCE_SEARCH_TYPE_SPECIAL = 2;
