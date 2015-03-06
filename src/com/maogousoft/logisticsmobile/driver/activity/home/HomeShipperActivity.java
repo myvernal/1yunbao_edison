@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseHomeActivity;
+import com.maogousoft.logisticsmobile.driver.activity.CarCloudSearchActivity;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.*;
 
@@ -45,7 +46,7 @@ public class HomeShipperActivity extends BaseHomeActivity {
 
 	// 查找车源
 	public void onFindCar(View view) {
-		startActivity(new Intent(context, SearchCarSourceActivity.class));
+		startActivity(new Intent(context, CarCloudSearchActivity.class));
 	}
 
 	// 验证保险

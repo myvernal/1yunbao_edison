@@ -18,6 +18,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
+import com.maogousoft.logisticsmobile.driver.model.CarInfoList;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,14 +118,15 @@ public class CarsListActivity extends BaseListActivity implements
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, queryParams.put("page", page).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    CarInfo.class, new AjaxCallBack() {
+                    CarInfoList.class, new AjaxCallBack() {
                         @Override
                         public void receive(int code, Object result) {
                             setListShown(true);
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    if (result instanceof List) {
-                                        List<CarInfo> mList = (List<CarInfo>) result;
+                                    if (result instanceof CarInfoList) {
+                                        CarInfoList carInfoList = (CarInfoList) result;
+                                        List<CarInfo> mList = carInfoList.getList();
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);

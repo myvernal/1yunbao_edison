@@ -1,5 +1,6 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,7 @@ import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.model.LatLngBounds.Builder;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.activity.home.SearchCarSourceActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.CloudSearchAdapter;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
@@ -57,6 +59,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
 
     private void initViews() {
         // 地图初始化
+        findViewById(R.id.search).setOnClickListener(this);
         mMapView = (MapView) findViewById(R.id.bmapView);
         mTitle = (TextView)findViewById(R.id.titlebar_id_content);
         mTitle.setText("附近车源");
@@ -153,6 +156,9 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                     mMapView.setVisibility(View.VISIBLE);
                     mMore.setText("查看列表");
                 }
+                break;
+            case R.id.search:
+                startActivity(new Intent(context, SearchCarSourceActivity.class));
                 break;
         }
     }

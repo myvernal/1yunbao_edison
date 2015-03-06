@@ -6,12 +6,30 @@
 
     <include layout="@layout/common_title"/>
 
-    <com.baidu.mapapi.map.MapView
-            android:id="@+id/bmapView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:clickable="true"/>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent">
 
+        <com.baidu.mapapi.map.MapView
+                android:id="@+id/bmapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="15dp"
+                      android:id="@+id/search"
+                      android:gravity="center"
+                      android:background="@drawable/map_bg">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:textSize="16sp"
+                      android:drawableLeft="@drawable/icon_newsource_search"
+                      android:hint="搜索"/>
+        </LinearLayout>
+
+    </FrameLayout>
     <!--<include layout="@layout/common_listview"/>-->
     <FrameLayout
             android:id="@+id/listContainer"
@@ -21,7 +39,7 @@
 
         <ListView
                 android:id="@android:id/list"
-                style="@style/listViewStyle" />
+                style="@style/listViewStyle"/>
 
         <TextView
                 android:id="@android:id/empty"
@@ -32,6 +50,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/font_gray2"
                 android:textSize="@dimen/font_size_normal"
-                android:visibility="gone" />
+                android:visibility="gone"/>
     </FrameLayout>
 </LinearLayout>

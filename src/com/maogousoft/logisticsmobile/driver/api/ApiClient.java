@@ -15,6 +15,7 @@ import com.maogousoft.logisticsmobile.driver.utils.HttpUtils;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 
 public class ApiClient<T> {
+	private static final String TAG = "ApiClient";
 
 	// 最大线程数
 	public static final int MAX_THREAD = 5;
@@ -54,10 +55,10 @@ public class ApiClient<T> {
 		protected String doInBackground(Void... p) {
 			try {
 				final String result = HttpUtils.getUrlData(url, params);
-				LogUtil.e("result", result);
+				LogUtil.e(TAG, result);
 				return result;
 			} catch (AppException e) {
-				android.util.Log.d("ybxiang","e=="+e.toString());
+				LogUtil.e(TAG, "e==" + e.toString());
 				e.printStackTrace();
 				return null;
 			}
