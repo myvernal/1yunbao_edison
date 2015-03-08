@@ -367,8 +367,11 @@ public class Constants {
     /** 货主端:车队添加车辆 */
     public static final String ADD_MY_FLEET = "add_my_fleet";
 
+//    /** 货主端:我的车队查询 */
+//    public static final String QUERY_MY_FLEET = "query_my_fleet";
+
     /** 货主端:我的车队查询 */
-    public static final String QUERY_MY_FLEET = "query_my_fleet";
+    public static final String QUERY_MY_FLEET = "query_my_fleet_new";
 
     /** 货主端:我的车队详情 */
     public static final String GET_MY_FLEET_DETAIL = "get_my_fleet_detail";
