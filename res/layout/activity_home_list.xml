@@ -35,7 +35,12 @@
                 android:layout_marginRight="10dp"/>
 
     </LinearLayout>
-
+    <LinearLayout
+            android:id="@+id/home_list_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+    </LinearLayout>
     <include layout="@layout/common_listview"/>
 
 </LinearLayout>

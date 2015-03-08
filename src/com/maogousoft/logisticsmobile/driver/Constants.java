@@ -275,11 +275,17 @@ public class Constants {
 	/** 卡密充值 */
 	public static final String DRIVER_COUPON = "driver_coupon";
 
-	/** 添加商户 */
+	/** 添加商户(物流园区) */
 	public static final String ADD_VENDER = "add_vender";
 
-	/** 附近商户列表 **/
+	/** 附近商户列表(物流园区) **/
 	public static final String QUERY_VENDER = "query_vender";
+
+    /** 添加商户 */
+	public static final String ADD_VENDER_OLD = "add_memberPrivilege";
+
+	/** 附近商户列表 **/
+	public static final String QUERY_VENDER_OLD = "query_memberPrivilege";
 
 	/** 获取商户评价 **/
 	public static final String QUERY_VENDER_REPLY = "query_vender_reply";
@@ -440,6 +446,7 @@ public class Constants {
     public static final String COMMON_BOOLEAN_KEY = "common_boolean_key";
     public static final String COMMON_ACTION_KEY = "common_action_key";
     public static final String COMMON_OBJECT_KEY = "common_object_key";
+    public static final String QUERY_CAR_INFO_FROM_MAP = "QUERY_CAR_INFO_FROM_MAP";
     public static final String CAR_EDIT_TYPE = "CAR_EDIT_TYPE";
     public static final String MY_CARS_SEARCH = "MY_CARS_SEARCH";
     public static final int CAR_SEARCH_TYPE = 0;

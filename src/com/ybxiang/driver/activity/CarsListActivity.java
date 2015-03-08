@@ -71,13 +71,10 @@ public class CarsListActivity extends BaseListActivity implements
 
         // 数据加载中进度条
         mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
-        mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
         mFootView.setClickable(false);
         mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
-        mListView.addHeaderView(mHeaderView);
-        mHeaderView.setOnClickListener(this);
         mListView.setOnScrollListener(this);
     }
 
@@ -99,6 +96,9 @@ public class CarsListActivity extends BaseListActivity implements
         } else {
             // 我的车队的adapter
             mAdapter = new MyCarInfoListAdapter(mContext);
+            mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
+            mHeaderView.setOnClickListener(this);
+            mListView.addHeaderView(mHeaderView);
         }
         setListAdapter(mAdapter);
     }
@@ -145,6 +145,10 @@ public class CarsListActivity extends BaseListActivity implements
                                             }
                                             mAdapter.addAll(mList);
                                             mAdapter.notifyDataSetChanged();
+                                        }
+                                        //如果是我的车队,显示共有多少辆车
+                                        if(queryAction.equals(Constants.QUERY_MY_FLEET)) {
+                                            ((TextView) mHeaderView.findViewById(R.id.number)).setText(getString(R.string.string_car_number, carInfoList.getTotalRow()));
                                         }
                                     }
                                     break;

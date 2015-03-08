@@ -26,6 +26,8 @@ import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.CloudSearchAdapter;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+import com.ybxiang.driver.activity.CarInfoDetailActivity;
+import com.ybxiang.driver.activity.MyCarsDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +89,11 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                         LatLng llNew = new LatLng(ll.latitude + 0.005, ll.longitude + 0.005);
                         marker.setPosition(llNew);
                         mBaiduMap.hideInfoWindow();
+                        //点击弹出的信息框,进入车辆详情
+                        Intent intent = new Intent(context, MyCarsDetailActivity.class);
+                        intent.putExtra(Constants.COMMON_KEY, Integer.parseInt(marker.getExtraInfo().getString("carID")));
+                        intent.putExtra(Constants.QUERY_CAR_INFO_FROM_MAP, true);
+                        startActivity(intent);
                     }
                 };
 
@@ -193,6 +200,10 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 }
                 if(null != info.extras.get("phone")) {
                     bundle.putString("phone", info.extras.get("phone").toString());
+                }
+                //车源ID
+                if(null != info.extras.get("carID")) {
+                    bundle.putString("carID", info.extras.get("carID").toString());
                 }
                 //tags:车牌号
                 //title:姓名

@@ -1,32 +1,30 @@
 package com.maogousoft.logisticsmobile.driver.activity.other;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
+import com.maogousoft.logisticsmobile.driver.activity.vender.VenderShopListActivity;
 import com.umeng.update.UmengDownloadListener;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 其它
@@ -95,8 +93,7 @@ public class OthersActivity extends BaseActivity implements
 			long id) {
 		switch (position) {
 		case 0:
-			//TODO 会员特权!
-			startActivity(new Intent(context, HelpActivity.class));
+			startActivity(new Intent(context, VenderShopListActivity.class));
 			break;
 		case 1:
 			startActivity(new Intent(context, HelpActivity.class));

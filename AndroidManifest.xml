@@ -464,6 +464,7 @@
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme"/>
+        <!--物流园区相关-->
         <activity
                 android:name=".activity.vip.AddActivity"
                 android:configChanges="keyboardHidden|orientation"
@@ -494,6 +495,37 @@
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme"/>
+        <!--商户相关-->
+        <activity android:name=".activity.vender.VenderAddActivity"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.vender.VenderEvaluateActivity"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.vender.VenderIndexGridActivity"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.vender.VenderShopDetailActivity"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.vender.VenderShopListActivity"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"/>
+        <activity android:name=".activity.vender.VenderShopListMapActivity"
+                  android:configChanges="keyboardHidden|orientation"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme"/>
         <!-- 推送相关 -->
 
 

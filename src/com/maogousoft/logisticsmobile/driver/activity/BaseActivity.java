@@ -335,6 +335,7 @@ public class BaseActivity extends Activity implements OnClickListener {
                                             intent.putExtra("isFromHomeActivity", true);
                                             intent.putExtra("NewSourceInfos", (Serializable) mList);
                                             intent.putExtra("focusLineInfo", focusLineInfo);
+                                            intent.putExtra("params", params.toString());
                                             context.startActivity(intent);
                                         } else {
                                             showMsg("暂无满足条件的信息，请扩大搜索范围再试。");

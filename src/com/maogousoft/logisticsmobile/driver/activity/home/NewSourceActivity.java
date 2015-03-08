@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
@@ -43,6 +44,7 @@ public class NewSourceActivity extends BaseListActivity implements
     private View mFootView, mHeaderView;
     private ProgressBar mFootProgress;
     private TextView mFootMsg, titlebar_id_content;
+    private String params;//路线快捷搜索的信息
     // 当前模式
     private int state = WAIT;
     // 当前页码
@@ -104,6 +106,8 @@ public class NewSourceActivity extends BaseListActivity implements
                 e.printStackTrace();
             }
             newSourceInfos = (List<NewSourceInfo>) getIntent().getSerializableExtra(Constants.COMMON_OBJECT_KEY);
+            //显示今日货源数量
+            changeSourceNumber(newSourceInfos.size());
             // 从 搜索货源进入，不需要显示 搜索货源按钮 modify
             mMore.setText("关注此路线");
             rightButton = 1;
@@ -118,6 +122,7 @@ public class NewSourceActivity extends BaseListActivity implements
         }
         if (getIntent().hasExtra("focusLineInfo")) {
             focusLineInfo = (FocusLineInfo) getIntent().getSerializableExtra("focusLineInfo");
+            params = getIntent().getStringExtra("params");
         }
         if (getIntent().hasExtra("getFriendOrderList")) {
             if (getIntent().getBooleanExtra("getFriendOrderList", false)) {
@@ -165,7 +170,7 @@ public class NewSourceActivity extends BaseListActivity implements
                 }
                 break;
             case R.id.search:
-                Toast.makeText(mContext, "search", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context, SearchSourceActivity.class));
                 break;
         }
         super.onClick(v);
@@ -304,13 +309,18 @@ public class NewSourceActivity extends BaseListActivity implements
     }
 
     // 请求指定页数的数据
-    private void getData(int page) {
+    private void getData(final int page) {
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, queryType);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, queryParams.put("page", page).toString());
+            if(TextUtils.isEmpty(params)) {
+                jsonObject.put(Constants.JSON, queryParams.put("page", page).toString());
+            } else {
+                JSONObject json = new JSONObject(params);
+                jsonObject.put(Constants.JSON, json.put("page", page).toString());
+            }
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     NewSourceInfo.class, new AjaxCallBack() {
@@ -335,6 +345,10 @@ public class NewSourceActivity extends BaseListActivity implements
                                             mAdapter.addAll(sort(mList));
                                             mAdapter.notifyDataSetChanged();
                                         }
+                                        if(page == 1) {
+                                            //显示今日货源数量,适用于线路查询,好友货源等
+                                            changeSourceNumber(mList.size());
+                                        }
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -358,6 +372,10 @@ public class NewSourceActivity extends BaseListActivity implements
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void changeSourceNumber(int size) {
+        ((TextView) mHeaderView.findViewById(R.id.number)).setText(getString(R.string.source_number, size * 6));
     }
 
     @Override

@@ -46,6 +46,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     private View edit_action_layout, location_action_desc, location_action_layout;//我的车队详情特有
     private View add_my_fleet, price_layout, remark_layout;//搜索货源详情特有
     private TextView remark, price;
+    private boolean isSearchFromMap = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +117,10 @@ public class MyCarsDetailActivity extends BaseActivity {
             price_layout.setVisibility(View.VISIBLE);
             remark_layout.setVisibility(View.VISIBLE);
             getData(true);
-        } else {
+        } else if(getIntent().getBooleanExtra(Constants.QUERY_CAR_INFO_FROM_MAP, false)) {
+            isSearchFromMap = true;
+            getData(true);
+        }else {
             getData(false);
         }
     }
@@ -213,8 +217,11 @@ public class MyCarsDetailActivity extends BaseActivity {
             }
             //隐藏我的车队详情特有的控件
             edit_action_layout.setVisibility(View.GONE);
-            location_action_desc.setVisibility(View.GONE);
-            location_action_layout.setVisibility(View.GONE);
+            //如果是从地图上搜索的,可以显示
+            if(!isSearchFromMap) {
+                location_action_desc.setVisibility(View.GONE);
+                location_action_layout.setVisibility(View.GONE);
+            }
             //显示搜索车源详情特有的控件
             add_my_fleet.setVisibility(View.VISIBLE);
             price_layout.setVisibility(View.VISIBLE);
