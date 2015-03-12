@@ -16,12 +16,11 @@
                   android:orientation="vertical">
         <TextView style="@style/mapTextStyle"
                   android:id="@+id/description"
-                  android:text="川A12345  13米高栏车 载重10吨"/>
+                  android:text="数据加载中..."/>
         <TextView style="@style/mapTextStyle"
                   android:id="@+id/line"
                   android:layout_marginTop="5dp"
-                  android:textColor="@color/font_gray3"
-                  android:text="北京-成都"/>
+                  android:textColor="@color/font_gray3"/>
     </LinearLayout>
 
 </LinearLayout>

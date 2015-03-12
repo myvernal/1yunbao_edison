@@ -16,6 +16,49 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:id="@+id/my_fleet_search_condition"
+                          android:visibility="gone">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp">
+
+                    <TextView
+                            style="@style/info_publish_text_style"
+                            android:text="手机："/>
+
+                    <EditText
+                            android:id="@+id/edt_search_source_phone"
+                            style="@style/info_edit_text_spe_style"
+                            android:layout_weight="1"
+                            android:inputType="numberDecimal"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp">
+
+                    <TextView
+                            style="@style/info_publish_text_style"
+                            android:text="车牌："/>
+
+                    <EditText
+                            android:id="@+id/edt_search_source_car_number"
+                            style="@style/info_edit_text_spe_style"
+                            android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -54,6 +97,7 @@
             <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/radioGroup"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
                 <RadioButton
@@ -71,21 +115,26 @@
                         android:checked="true"/>
             </RadioGroup>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="当前位置"
-                    android:textColor="@color/font_gray2"
-                    android:textSize="@dimen/font_size_normal"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:id="@+id/current_location">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="当前位置"
+                        android:textColor="@color/font_gray2"
+                        android:textSize="@dimen/font_size_normal"/>
 
-            <com.maogousoft.logisticsmobile.driver.CitySelectView
-                    android:id="@+id/cityselect_current"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"/>
+                <com.maogousoft.logisticsmobile.driver.CitySelectView
+                        android:id="@+id/cityselect_current"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"/>
+            </LinearLayout>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -141,35 +190,41 @@
                     android:layout_margin="10dp"
                     android:text="查找"/>
             <!-- PR1.3 begin -->
-            <RelativeLayout android:layout_width="match_parent"
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/focus_line_view"
+                          android:orientation="vertical">
+
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp">
+                            style="@style/home_myabc_title_base_style"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:text="已关注线路"/>
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/home_myabc_title_base_style"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:text="已关注线路"/>
+                    <Button
+                            style="@style/button1_style2"
+                            android:layout_marginBottom="10dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="5dp"
+                            android:onClick="onFastSetting"
+                            android:text="快捷设置"/>
 
-                <Button
-                        style="@style/button1_style2"
-                        android:layout_marginBottom="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="5dp"
-                        android:onClick="onFastSetting"
-                        android:text="快捷设置"/>
+                </RelativeLayout>
 
-            </RelativeLayout>
-
-            <GridView
-                    android:id="@+id/focus_line_gridview"
-                    style="@style/gridviewStyle"
-                    android:listSelector="@android:color/transparent"
-                    android:numColumns="2"
-                    android:padding="@dimen/grid_space"
-                    android:verticalSpacing="@dimen/grid_space" />
+                <GridView
+                        android:id="@+id/focus_line_gridview"
+                        style="@style/gridviewStyle"
+                        android:listSelector="@android:color/transparent"
+                        android:numColumns="2"
+                        android:padding="@dimen/grid_space"
+                        android:verticalSpacing="@dimen/grid_space"/>
+            </LinearLayout>
             <!-- PR1.3 end -->
         </LinearLayout>
     </ScrollView>

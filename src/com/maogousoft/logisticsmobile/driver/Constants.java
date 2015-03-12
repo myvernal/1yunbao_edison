@@ -125,7 +125,7 @@ public class Constants {
 	// "http://www.1yunbao.com/service/driver";
 	public static final String BASE_URL = "http://www.1yunbao.com/service";
 //	public static final String BASE_URL = "http://112.124.33.14:8083/service";
-//	public static final String BASE_URL = "http://192.168.1.113:8080/service";
+//	public static final String BASE_URL = "http://192.168.2.188:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -202,7 +202,10 @@ public class Constants {
 
 	/** 新货源列表 **/
 	public static final String QUERY_SOURCE_ORDER = "query_source_order";
-	
+
+	/** 货源总数 **/
+	public static final String QUERY_SOURCE_ORDER_COUNT = "query_source_order_count";
+
 	/** 好友組列表 **/
 	public static final String QUERY_FRIENDS_GROUP = "query_friends_group";
 	
@@ -452,6 +455,7 @@ public class Constants {
     public static final String QUERY_CAR_INFO_FROM_MAP = "QUERY_CAR_INFO_FROM_MAP";
     public static final String CAR_EDIT_TYPE = "CAR_EDIT_TYPE";
     public static final String MY_CARS_SEARCH = "MY_CARS_SEARCH";
+    public static final String CLOUD_CARS_SEARCH = "CLOUD_CARS_SEARCH";
     public static final int CAR_SEARCH_TYPE = 0;
     public static final int SOURCE_SEARCH_TYPE = 1;
     public static final int SOURCE_SEARCH_TYPE_SPECIAL = 2;

@@ -16,6 +16,5 @@
               android:layout_centerVertical="true"
               android:layout_alignParentRight="true"
               android:layout_marginRight="40dp"
-              android:textColor="@color/TextColorRed"
-              android:text="你共有500辆车"/>
+              android:textColor="@color/TextColorRed"/>
 </RelativeLayout>

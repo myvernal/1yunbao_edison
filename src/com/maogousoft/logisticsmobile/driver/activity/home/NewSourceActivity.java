@@ -20,12 +20,14 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
+import com.maogousoft.logisticsmobile.driver.model.SourceCount;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.ybxiang.driver.activity.MyFriendsActivity;
 import com.ybxiang.driver.model.FocusLineInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,8 +108,6 @@ public class NewSourceActivity extends BaseListActivity implements
                 e.printStackTrace();
             }
             newSourceInfos = (List<NewSourceInfo>) getIntent().getSerializableExtra(Constants.COMMON_OBJECT_KEY);
-            //显示今日货源数量
-            changeSourceNumber(newSourceInfos.size());
             // 从 搜索货源进入，不需要显示 搜索货源按钮 modify
             mMore.setText("关注此路线");
             rightButton = 1;
@@ -252,7 +252,41 @@ public class NewSourceActivity extends BaseListActivity implements
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
+    private void queryAllSourceSize() {
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            // 搜索货源总数
+            jsonObject.put(Constants.ACTION, Constants.QUERY_SOURCE_ORDER_COUNT);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    SourceCount.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    //显示货源总数
+                                    SourceCount sourceCount = (SourceCount) result;
+                                    changeSourceNumber(sourceCount.getCount());
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -301,6 +335,8 @@ public class NewSourceActivity extends BaseListActivity implements
             pageIndex = 1;
             getData(pageIndex);
         }
+        //查询今日货源数量
+        queryAllSourceSize();
     }
 
     @Override
@@ -344,10 +380,6 @@ public class NewSourceActivity extends BaseListActivity implements
                                             }
                                             mAdapter.addAll(sort(mList));
                                             mAdapter.notifyDataSetChanged();
-                                        }
-                                        if(page == 1) {
-                                            //显示今日货源数量,适用于线路查询,好友货源等
-                                            changeSourceNumber(mList.size());
                                         }
                                     }
                                     break;

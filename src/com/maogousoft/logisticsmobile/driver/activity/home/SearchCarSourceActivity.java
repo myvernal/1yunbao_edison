@@ -41,7 +41,10 @@ import java.util.List;
  */
 public class SearchCarSourceActivity extends BaseActivity {
     private Button mBack, mSubmit, mRightButton;
+    private TextView headerTitle;
     private CitySelectView citySelectStart, citySelectEnd;
+    private View myFleetSearch, current_location;
+    private View radioGroup, focus_line_view;
     private GridView mGridView;
     private Spinner carTypeSpinner;
     private EditText edtCarLength;
@@ -63,13 +66,18 @@ public class SearchCarSourceActivity extends BaseActivity {
     // 初始化视图
     private void initViews() {
         mBack = (Button) findViewById(R.id.titlebar_id_back);
-        ((TextView) findViewById(R.id.titlebar_id_content)).setText("查找车源");
+        headerTitle = (TextView) findViewById(R.id.titlebar_id_content);
+        headerTitle.setText("查找车源");
         mRightButton = ((Button) findViewById(R.id.titlebar_id_more));
         mRightButton.setText("附近车源");
         carTypeSpinner = (Spinner) findViewById(R.id.search_car_type);
         edtCarLength = (EditText) findViewById(R.id.edt_search_source_car_length);
         mGridView = (GridView) findViewById(R.id.focus_line_gridview);
+        current_location = findViewById(R.id.current_location);
+        radioGroup = findViewById(R.id.radioGroup);
+        focus_line_view = findViewById(R.id.focus_line_view);
         mSubmit = (Button) findViewById(R.id.search_source__submit);
+        myFleetSearch = findViewById(R.id.my_fleet_search_condition);
 
         citySelectStart = (CitySelectView) findViewById(R.id.cityselect_start);
         citySelectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
@@ -94,6 +102,13 @@ public class SearchCarSourceActivity extends BaseActivity {
         dbUtils = new CityDBUtils(application.getCitySDB());
         //TODO 是否是我的车队搜索过滤
         isMyCarsFilter = getIntent().getBooleanExtra(Constants.MY_CARS_SEARCH, false);
+        if(isMyCarsFilter) {
+            headerTitle.setText("车队车源搜索");
+            myFleetSearch.setVisibility(View.VISIBLE);
+            focus_line_view.setVisibility(View.GONE);
+            radioGroup.setVisibility(View.GONE);
+            current_location.setVisibility(View.GONE);
+        }
     }
 
     // add for PR1.3 begin

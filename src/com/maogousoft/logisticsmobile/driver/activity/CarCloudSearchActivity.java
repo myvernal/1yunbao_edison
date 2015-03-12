@@ -24,10 +24,16 @@ import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.home.SearchCarSourceActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.CloudSearchAdapter;
+import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
+import com.maogousoft.logisticsmobile.driver.api.ApiClient;
+import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
+import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.CarInfoDetailActivity;
 import com.ybxiang.driver.activity.MyCarsDetailActivity;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +86,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         //图层点击事件
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
-                final LatLng ll = marker.getPosition();
+                /*final LatLng ll = marker.getPosition();
                 Point p = mBaiduMap.getProjection().toScreenLocation(ll);
                 p.y -= 40;
                 LatLng llInfo = mBaiduMap.getProjection().fromScreenLocation(p);
@@ -96,42 +102,99 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                         startActivity(intent);
                     }
                 };
-
-                /*TextView textView = new TextView(context);
-                String nameStr = marker.getExtraInfo().getString("name");
-                String addressStr = marker.getExtraInfo().getString("address");
-                String phoneStr = marker.getExtraInfo().getString("phone");
-                String locationTime = marker.getExtraInfo().getString("locationTime");
-                textView.setPadding(40,40,40,40);
-                textView.setText(nameStr + "\n\n" + "地址:" + addressStr +
-                        "\n\n" + "时间:" + locationTime +
-                        "\n\n" + "联系电话:" + phoneStr);
-                textView.setBackgroundResource(R.drawable.map_bg);*/
                 View popupView = getMarkerView(marker);
                 mInfoWindow = new InfoWindow(popupView, llInfo, listener);
-                mBaiduMap.showInfoWindow(mInfoWindow);
+                mBaiduMap.showInfoWindow(mInfoWindow);*/
+
+
+                queryCarInfo(marker);
                 return true;
             }
         });
     }
 
-    private LinearLayout getMarkerView(Marker marker) {
+    private LinearLayout getMarkerView(Marker marker, String carDescription) {
         if(markerView == null) {
             markerView = (LinearLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.map_marker_detail_layout, null);
         }
-        final String nameStr = marker.getExtraInfo().getString("name");
-        String addressStr = marker.getExtraInfo().getString("address");
-        String phoneStr = marker.getExtraInfo().getString("phone");
-
         TextView description = (TextView) markerView.findViewById(R.id.description);
+        description.setText(carDescription);
         TextView line = (TextView) markerView.findViewById(R.id.line);
-        markerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, nameStr, Toast.LENGTH_SHORT).show();
-            }
-        });
+        String lineStr = marker.getExtraInfo().getString("line");
+        line.setText(TextUtils.isEmpty(lineStr) || lineStr.length() < 3 ? "暂无线路信息" : lineStr);
         return markerView;
+    }
+
+    //查询车辆详细信息
+    private void queryCarInfo(final Marker marker) {
+        final JSONObject jsonObject = new JSONObject();
+        final JSONObject params = new JSONObject();
+        try {
+            // 搜索新货源
+            jsonObject.put(Constants.ACTION, Constants.GET_MY_FLEET_DETAIL);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            params.put("id", marker.getExtraInfo().getString("carID"));
+            jsonObject.put(Constants.JSON, params);
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    CarInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    CarInfo carInfo = (CarInfo) result;
+                                    final StringBuilder carInfoDescription = new StringBuilder();
+                                    carInfoDescription.append(carInfo.getPlate_number())
+                                            .append("\r\r")
+                                            .append(carInfo.getCar_length() + "米");
+                                    //车型
+                                    int carTypeValue = carInfo.getCar_type();
+                                    String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
+                                    for(int i=0;i<Constants.carTypeValues.length;i++) {
+                                        if(Constants.carTypeValues[i] == carTypeValue){
+                                            carInfoDescription.append(carTypeStr[i]);
+                                            break;
+                                        }
+                                    }
+                                    carInfoDescription.append("\r\r").append("载" + carInfo.getCar_weight() + "吨");
+
+                                    //显示车源详细信息
+                                    final LatLng ll = marker.getPosition();
+                                    Point p = mBaiduMap.getProjection().toScreenLocation(ll);
+                                    p.y -= 40;
+                                    LatLng llInfo = mBaiduMap.getProjection().fromScreenLocation(p);
+                                    InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
+                                        public void onInfoWindowClick() {
+                                            LatLng llNew = new LatLng(ll.latitude + 0.005, ll.longitude + 0.005);
+                                            marker.setPosition(llNew);
+                                            mBaiduMap.hideInfoWindow();
+                                            //点击弹出的信息框,进入车辆详情
+                                            Intent intent = new Intent(context, MyCarsDetailActivity.class);
+                                            intent.putExtra(Constants.COMMON_KEY, Integer.parseInt(marker.getExtraInfo().getString("carID")));
+                                            intent.putExtra(Constants.QUERY_CAR_INFO_FROM_MAP, true);
+                                            startActivity(intent);
+                                        }
+                                    };
+                                    View popupView = getMarkerView(marker, carInfoDescription.toString());
+                                    mInfoWindow = new InfoWindow(popupView, llInfo, listener);
+                                    mBaiduMap.showInfoWindow(mInfoWindow);
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result != null)
+                                        showMsg(result.toString());
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initData() {
@@ -166,7 +229,9 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 }
                 break;
             case R.id.search:
-                startActivity(new Intent(context, SearchCarSourceActivity.class));
+                Intent intent = new Intent(context, SearchCarSourceActivity.class);
+                intent.putExtra(Constants.CLOUD_CARS_SEARCH, true);
+                startActivity(intent);
                 break;
         }
     }
@@ -204,6 +269,10 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 //车源ID
                 if(null != info.extras.get("carID")) {
                     bundle.putString("carID", info.extras.get("carID").toString());
+                }
+                //车源线路
+                if(null != info.extras.get("line")) {
+                    bundle.putString("line", info.extras.get("line").toString());
                 }
                 //tags:车牌号
                 //title:姓名
