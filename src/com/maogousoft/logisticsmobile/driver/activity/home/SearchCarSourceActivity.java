@@ -47,7 +47,7 @@ public class SearchCarSourceActivity extends BaseActivity {
     private View radioGroup, focus_line_view;
     private GridView mGridView;
     private Spinner carTypeSpinner;
-    private EditText edtCarLength;
+    private EditText edtCarLength, edt_search_source_phone, edt_search_source_car_number;
     private ArrayList<HashMap<String, Object>> listCarTypes = new ArrayList<HashMap<String, Object>>();// 车辆类型集合
     private int selectedCarType = 0;// 选择的车辆类型
     private CityDBUtils dbUtils;
@@ -78,7 +78,8 @@ public class SearchCarSourceActivity extends BaseActivity {
         focus_line_view = findViewById(R.id.focus_line_view);
         mSubmit = (Button) findViewById(R.id.search_source__submit);
         myFleetSearch = findViewById(R.id.my_fleet_search_condition);
-
+        edt_search_source_phone = (EditText) findViewById(R.id.edt_search_source_phone);
+        edt_search_source_car_number = (EditText) findViewById(R.id.edt_search_source_car_number);
         citySelectStart = (CitySelectView) findViewById(R.id.cityselect_start);
         citySelectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
 
@@ -209,9 +210,14 @@ public class SearchCarSourceActivity extends BaseActivity {
             if (citySelectEnd.getSelectedTowns() != null) {
                 params.put("end_district", citySelectEnd.getSelectedTowns().getId());
             }
-            //1 空车 0 不限
-            if (selectedCarType != 0) {
-                params.put("isEmpty", selectedCarType);
+            if(isMyCarsFilter) {
+                params.put("phone", edt_search_source_phone.getText());
+                params.put("car_number", edt_search_source_car_number.getText());
+            } else {
+                //1 空车 0 不限
+                if (selectedCarType != 0) {
+                    params.put("isEmpty", selectedCarType);
+                }
             }
             if (!TextUtils.isEmpty(edtCarLength.getText())) {
                 params.put("car_length", edtCarLength.getText().toString());
@@ -223,9 +229,15 @@ public class SearchCarSourceActivity extends BaseActivity {
         }
         Intent intent = new Intent(context, CarsListActivity.class);
         intent.putExtra(Constants.COMMON_KEY, params.toString());
-        intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_CAR_SOURCE);
+        intent.putExtra(Constants.MY_CARS_SEARCH, isMyCarsFilter);
+        if(isMyCarsFilter) {
+            intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_MY_FLEET_SEARCH);
+        } else {
+            intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_CAR_SOURCE);
+        }
         //将搜索条件传下去
         context.startActivity(intent);
+        finish();
     }
     // add for PR1.3  begin
 

@@ -58,7 +58,6 @@ public class CarsListActivity extends BaseListActivity implements
     }
 
     private void initViews() {
-
         mTitleBarContent = ((TextView) findViewById(R.id.titlebar_id_content));
         mTitleBarContent.setText("我的车队");
         // 返回按钮生效
@@ -78,18 +77,32 @@ public class CarsListActivity extends BaseListActivity implements
         mListView.setOnScrollListener(this);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+    }
+
     private void initData() {
         //从车源搜索页面过来的
         String params = getIntent().getStringExtra(Constants.COMMON_KEY);
         String action = getIntent().getStringExtra(Constants.COMMON_ACTION_KEY);
+        boolean isMyCarsFilter = getIntent().getBooleanExtra(Constants.MY_CARS_SEARCH, false);
         if(!TextUtils.isEmpty(params) && !TextUtils.isEmpty(action)) {
             try {
                 queryParams = new JSONObject(params);
                 queryAction = action;
-                // 搜索车源的adapter
-                mAdapter = new SearchCarInfoListAdapter(mContext);
-                mTitleBarContent.setText("搜索车源列表");
-                mTitleBarMore.setVisibility(View.GONE);
+                if(isMyCarsFilter) {
+                    // 我的车队的adapter
+                    mAdapter = new MyCarInfoListAdapter(mContext);
+                    mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
+                    mHeaderView.setOnClickListener(this);
+                    mListView.addHeaderView(mHeaderView);
+                } else {
+                    // 搜索车源的adapter
+                    mAdapter = new SearchCarInfoListAdapter(mContext);
+                    mTitleBarContent.setText("搜索车源列表");
+                    mTitleBarMore.setVisibility(View.GONE);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
