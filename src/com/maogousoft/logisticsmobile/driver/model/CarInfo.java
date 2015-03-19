@@ -43,6 +43,24 @@ public class CarInfo implements Serializable{
     private String wayStartStr;
     private String wayEndStr;
     private String remark;//备注
+    private String latitude;
+    private String longitude;
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 
     public String getLast_position_time() {
         return last_position_time;

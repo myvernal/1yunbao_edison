@@ -27,7 +27,9 @@ public class HomeShipperActivity extends BaseHomeActivity {
 
 	// 我的车队
 	public void onMyCars(View view) {
-		startActivity(new Intent(context, CarsListActivity.class));
+        Intent intent = new Intent(context, CarsListActivity.class);
+        intent.putExtra(Constants.MY_CARS_SEARCH, true);
+		startActivity(intent);
 	}
 
 	// 我要推广

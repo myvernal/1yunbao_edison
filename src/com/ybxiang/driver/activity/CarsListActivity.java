@@ -25,6 +25,8 @@ import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarsListActivity extends BaseListActivity implements
@@ -48,6 +50,7 @@ public class CarsListActivity extends BaseListActivity implements
     //查询类型
     private String queryAction = Constants.QUERY_MY_FLEET; //默认为我的车队
     private JSONObject queryParams = new JSONObject();
+    private boolean isMyCarsFilter = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class CarsListActivity extends BaseListActivity implements
         //从车源搜索页面过来的
         String params = intent.getStringExtra(Constants.COMMON_KEY);
         String action = intent.getStringExtra(Constants.COMMON_ACTION_KEY);
-        boolean isMyCarsFilter = intent.getBooleanExtra(Constants.MY_CARS_SEARCH, false);
+        isMyCarsFilter = intent.getBooleanExtra(Constants.MY_CARS_SEARCH, false);
         if(!TextUtils.isEmpty(params) && !TextUtils.isEmpty(action)) {
             try {
                 queryParams = new JSONObject(params);
@@ -106,7 +109,9 @@ public class CarsListActivity extends BaseListActivity implements
                     // 搜索车源的adapter
                     mAdapter = new SearchCarInfoListAdapter(mContext);
                     mTitleBarContent.setText("搜索车源列表");
-                    mTitleBarMore.setVisibility(View.GONE);
+                    if(Constants.QUERY_CAR_SOURCE.equals(action)) {
+                        mTitleBarMore.setText("地图显示");
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -142,7 +147,7 @@ public class CarsListActivity extends BaseListActivity implements
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, queryParams.put("page", page).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    CarInfoList.class, new AjaxCallBack() {
+                    isMyCarsFilter ? CarInfoList.class : CarInfo.class, new AjaxCallBack() {
                         @Override
                         public void receive(int code, Object result) {
                             setListShown(true);
@@ -167,6 +172,22 @@ public class CarsListActivity extends BaseListActivity implements
                                         //如果是我的车队,显示共有多少辆车
                                         if(queryAction.equals(Constants.QUERY_MY_FLEET)) {
                                             ((TextView) mHeaderView.findViewById(R.id.number)).setText(getString(R.string.string_car_number, carInfoList.getTotalRow()));
+                                        }
+                                    }
+                                    if (result instanceof ArrayList) {
+                                        List<CarInfo> mList = (List<CarInfo>) result;
+                                        if (mList == null || mList.isEmpty()) {
+                                            load_all = true;
+                                            mFootProgress.setVisibility(View.GONE);
+                                            mFootMsg.setText("已加载全部");
+                                        } else {
+                                            if (mList.size() < 10) {
+                                                load_all = true;
+                                                mFootProgress.setVisibility(View.GONE);
+                                                mFootMsg.setText("已加载全部");
+                                            }
+                                            mAdapter.addAll(mList);
+                                            mAdapter.notifyDataSetChanged();
                                         }
                                     }
                                     break;
@@ -223,11 +244,22 @@ public class CarsListActivity extends BaseListActivity implements
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                Intent intent = new Intent(context, AddCarActivity.class);
-                startActivityForResult(intent, Constants.REQUEST_CODE);
+                if(Constants.QUERY_CAR_SOURCE.equals(queryAction)) {
+                    Intent intent = new Intent(context, CarCloudSearchActivity.class);
+                    //地图显示车辆信息
+                    if(mAdapter.getCount() > 0) {
+                        intent.putExtra(Constants.COMMON_KEY, (Serializable) mAdapter.getList());
+                    }
+                    intent.putExtra(Constants.MY_CARS_SEARCH, true);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, AddCarActivity.class);
+                    startActivityForResult(intent, Constants.REQUEST_CODE);
+                }
                 break;
             case R.id.search:
                 Intent searchIntent = new Intent(context, SearchCarSourceActivity.class);
+                searchIntent.putExtra(Constants.COMMON_KEY, (java.io.Serializable) mAdapter.getList());
                 searchIntent.putExtra(Constants.MY_CARS_SEARCH, true);
                 startActivity(searchIntent);
                 break;

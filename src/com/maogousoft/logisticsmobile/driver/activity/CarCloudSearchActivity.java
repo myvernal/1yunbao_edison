@@ -27,6 +27,7 @@ import com.maogousoft.logisticsmobile.driver.adapter.CloudSearchAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
@@ -35,6 +36,7 @@ import com.ybxiang.driver.activity.MyCarsDetailActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -246,6 +248,65 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
 		}
 	}
 
+    public void locationMyCars(List<CarInfo> list) {
+        //添加列表数据
+        if (list != null && !list.isEmpty()) {
+            Log.d(LTAG, "locationMyCars, result length: " + list.size());
+            mBaiduMap.clear();
+            BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(R.drawable.map_marker_text);
+            LatLng ll;
+            LatLngBounds.Builder builder = new Builder();
+            for (CarInfo carInfo : list) {
+                if(TextUtils.isEmpty(carInfo.getLatitude()) || TextUtils.isEmpty(carInfo.getLongitude())) {
+                    continue;
+                }
+                ll = new LatLng(Double.valueOf(carInfo.getLatitude()), Double.valueOf(carInfo.getLongitude()));
+                Bundle bundle = new Bundle();
+                bundle.putString("name", carInfo.getOwer_name());
+                bundle.putString("address", carInfo.getLocation());
+                if(null != carInfo.getLocation_time()) {
+                    bundle.putString("locationTime", carInfo.getLocation_time());
+                }
+                if(null != carInfo.getPhone()) {
+                    bundle.putString("phone", carInfo.getPhone());
+                }
+                //车源ID
+                if(0 != carInfo.getId()) {
+                    bundle.putString("carID", carInfo.getId() + "");
+                }
+                //车源线路
+                CityDBUtils dbUtils = new CityDBUtils(application.getCitySDB());
+                StringBuffer sb = new StringBuffer();
+                if(carInfo.getStart_province() > 0) {
+                    String wayStart = dbUtils.getCityInfo(carInfo.getStart_province(), carInfo.getStart_city(), carInfo.getStart_district());
+                    if (carInfo.getEnd_province1() > 0 || carInfo.getEnd_city1() > 0 || carInfo.getEnd_district1() > 0) {
+                        String wayEnd1 = dbUtils.getCityInfo(carInfo.getEnd_province1(), carInfo.getEnd_city1(), carInfo.getEnd_district1());
+                        sb.append(wayStart + "--" + wayEnd1 + "\n");
+                    }
+                    if (carInfo.getEnd_province2() > 0 || carInfo.getEnd_city2() > 0 || carInfo.getEnd_district2() > 0) {
+                        String wayEnd2 = dbUtils.getCityInfo(carInfo.getEnd_province2(), carInfo.getEnd_city2(), carInfo.getEnd_district2());
+                        sb.append(wayStart + "--" + wayEnd2 + "\n");
+                    }
+                    if (carInfo.getEnd_province3() > 0 || carInfo.getEnd_city3() > 0 || carInfo.getEnd_district3() > 0) {
+                        String wayEnd3 = dbUtils.getCityInfo(carInfo.getEnd_province3(), carInfo.getEnd_city3(), carInfo.getEnd_district3());
+                        sb.append(wayStart + "--" + wayEnd3);
+                    }
+                    bundle.putString("line", sb.toString());
+                }
+                //tags:车牌号
+                //title:姓名
+                //封装数据
+                OverlayOptions oo = new MarkerOptions().icon(bd).position(ll).extraInfo(bundle);
+                mBaiduMap.addOverlay(oo);
+                builder.include(ll);
+            }
+            LatLngBounds bounds = builder.build();
+            MapStatusUpdate u = MapStatusUpdateFactory.newLatLngBounds(bounds);
+            mBaiduMap.animateMapStatus(u);
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
 	public void onGetSearchResult(CloudSearchResult result, int error) {
         //添加列表数据
         final List<CarInfo> mList = new ArrayList<CarInfo>();
@@ -361,14 +422,23 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
 //        info.location = location.getLatitude() + "," + location.getLongitude();
 //        showLocation(location);
 //        CloudManager.getInstance().nearbySearch(info);
-        LocalSearchInfo info = new LocalSearchInfo();
-        info.ak = Constants.BAIDU_CLOUD_SEARCH_Key;
-        info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
-        info.region = location.getCity();
-        info.pageSize = 50;
-        showLocation(location);
-        CloudManager.getInstance().localSearch(info);
-        mLocClient.stop();
+        Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
+        boolean isCarLocation = getIntent().getBooleanExtra(Constants.MY_CARS_SEARCH, false);
+        if(serializable instanceof ArrayList && isCarLocation) {
+            List<CarInfo> list = (List<CarInfo>) serializable;
+            mAdapter.addAll(list);
+            locationMyCars(list);
+            showLocation(location);
+        } else {
+            LocalSearchInfo info = new LocalSearchInfo();
+            info.ak = Constants.BAIDU_CLOUD_SEARCH_Key;
+            info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
+            info.region = location.getCity();
+            info.pageSize = 50;
+            showLocation(location);
+            CloudManager.getInstance().localSearch(info);
+            mLocClient.stop();
+        }
     }
 
     @Override

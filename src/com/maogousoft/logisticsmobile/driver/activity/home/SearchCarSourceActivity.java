@@ -29,6 +29,7 @@ import com.ybxiang.driver.model.FocusLineInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -178,8 +179,16 @@ public class SearchCarSourceActivity extends BaseActivity {
 //                Intent nearbyCarSourceIntent = new Intent();
 //                nearbyCarSourceIntent.setClass(context, NearbyCarSourceActivity.class);
 //                startActivity(nearbyCarSourceIntent);
+                //我的车队
+
                 Intent intent = new Intent(context, CarCloudSearchActivity.class);
                 //TODO 是我的车队搜索
+                if(isMyCarsFilter) {
+                    Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
+                    if(serializable != null) {
+                        intent.putExtra(Constants.COMMON_KEY, serializable);
+                    }
+                }
                 intent.putExtra(Constants.MY_CARS_SEARCH, isMyCarsFilter);
                 startActivity(intent);
                 break;
