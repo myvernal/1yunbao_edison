@@ -125,7 +125,7 @@ public class Constants {
 	// "http://www.1yunbao.com/service/driver";
 	public static final String BASE_URL = "http://www.1yunbao.com/service";
 //	public static final String BASE_URL = "http://112.124.33.14:8083/service";
-//	public static final String BASE_URL = "http://192.168.2.188:8080/service";
+	//public static final String BASE_URL = "http://192.168.2.188:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -452,6 +452,8 @@ public class Constants {
     public static final String COMMON_BOOLEAN_KEY = "common_boolean_key";
     public static final String COMMON_ACTION_KEY = "common_action_key";
     public static final String COMMON_OBJECT_KEY = "common_object_key";
+    public static final String SEARCH_SOURCE = "search_source";
+    public static final String SEARCH_SOURCE_DEFAULT = "search_source_default";
     public static final String QUERY_CAR_INFO_FROM_MAP = "QUERY_CAR_INFO_FROM_MAP";
     public static final String CAR_EDIT_TYPE = "CAR_EDIT_TYPE";
     public static final String MY_CARS_SEARCH = "MY_CARS_SEARCH";

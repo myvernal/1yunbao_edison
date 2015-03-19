@@ -190,14 +190,18 @@ public class SearchCarSourceActivity extends BaseActivity {
     }
 
     private void submit() {
-        if (citySelectStart.getSelectedProvince() == null || citySelectEnd.getSelectedProvince() == null) {
+        if (!isMyCarsFilter && (citySelectStart.getSelectedProvince() == null || citySelectEnd.getSelectedProvince() == null)) {
             showMsg("请选择出发地，目的地。");
             return;
         }
         final JSONObject params = new JSONObject();
         try {
-            params.put("start_province", citySelectStart.getSelectedProvince().getId());
-            params.put("end_province", citySelectEnd.getSelectedProvince().getId());
+            if(citySelectStart.getSelectedProvince() != null) {
+                params.put("start_province", citySelectStart.getSelectedProvince().getId());
+            }
+            if(citySelectEnd.getSelectedProvince() != null) {
+                params.put("end_province", citySelectEnd.getSelectedProvince().getId());
+            }
             if (citySelectStart.getSelectedCity() != null) {
                 params.put("start_city", citySelectStart.getSelectedCity().getId());
             }
@@ -211,8 +215,12 @@ public class SearchCarSourceActivity extends BaseActivity {
                 params.put("end_district", citySelectEnd.getSelectedTowns().getId());
             }
             if(isMyCarsFilter) {
-                params.put("phone", edt_search_source_phone.getText());
-                params.put("car_number", edt_search_source_car_number.getText());
+                if(!TextUtils.isEmpty(edt_search_source_phone.getText())) {
+                    params.put("phone", edt_search_source_phone.getText());
+                }
+                if(!TextUtils.isEmpty(edt_search_source_car_number.getText())) {
+                    params.put("car_number", edt_search_source_car_number.getText());
+                }
             } else {
                 //1 空车 0 不限
                 if (selectedCarType != 0) {
@@ -231,7 +239,7 @@ public class SearchCarSourceActivity extends BaseActivity {
         intent.putExtra(Constants.COMMON_KEY, params.toString());
         intent.putExtra(Constants.MY_CARS_SEARCH, isMyCarsFilter);
         if(isMyCarsFilter) {
-            intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_MY_FLEET_SEARCH);
+            intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_MY_FLEET);
         } else {
             intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_CAR_SOURCE);
         }

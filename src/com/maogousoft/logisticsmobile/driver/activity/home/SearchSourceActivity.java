@@ -230,6 +230,7 @@ public class SearchSourceActivity extends BaseActivity {
                                             Intent intent = new Intent(context, NewSourceActivity.class);
                                             intent.putExtra(Constants.COMMON_KEY, params.toString());
                                             intent.putExtra(Constants.COMMON_OBJECT_KEY, (Serializable) mList);
+                                            intent.putExtra(Constants.SEARCH_SOURCE, true);
                                             intent.putExtra("focusLineInfo", focusLineInfo);
                                             context.startActivity(intent);
                                         } else {

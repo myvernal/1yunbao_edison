@@ -54,7 +54,7 @@ public class CarsListActivity extends BaseListActivity implements
         super.onCreate(savedInstanceState);
         mContext = CarsListActivity.this;
         initViews();
-        initData();
+        initData(getIntent());
     }
 
     private void initViews() {
@@ -80,13 +80,14 @@ public class CarsListActivity extends BaseListActivity implements
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        initData(intent);
     }
 
-    private void initData() {
+    private void initData(Intent intent) {
         //从车源搜索页面过来的
-        String params = getIntent().getStringExtra(Constants.COMMON_KEY);
-        String action = getIntent().getStringExtra(Constants.COMMON_ACTION_KEY);
-        boolean isMyCarsFilter = getIntent().getBooleanExtra(Constants.MY_CARS_SEARCH, false);
+        String params = intent.getStringExtra(Constants.COMMON_KEY);
+        String action = intent.getStringExtra(Constants.COMMON_ACTION_KEY);
+        boolean isMyCarsFilter = intent.getBooleanExtra(Constants.MY_CARS_SEARCH, false);
         if(!TextUtils.isEmpty(params) && !TextUtils.isEmpty(action)) {
             try {
                 queryParams = new JSONObject(params);
@@ -94,9 +95,13 @@ public class CarsListActivity extends BaseListActivity implements
                 if(isMyCarsFilter) {
                     // 我的车队的adapter
                     mAdapter = new MyCarInfoListAdapter(mContext);
-                    mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
-                    mHeaderView.setOnClickListener(this);
-                    mListView.addHeaderView(mHeaderView);
+                    if(mListView.getHeaderViewsCount() <= 0) {
+                        mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
+                        mHeaderView.setOnClickListener(this);
+                        mListView.addHeaderView(mHeaderView);
+                    } else {
+                        mListView.removeHeaderView(mHeaderView);
+                    }
                 } else {
                     // 搜索车源的adapter
                     mAdapter = new SearchCarInfoListAdapter(mContext);

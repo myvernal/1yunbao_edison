@@ -82,13 +82,11 @@ public class NewSourceActivity extends BaseListActivity implements
         titlebar_id_content.setText(R.string.string_title_newsource);
         // 页脚信息
         mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
-        mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
-        mHeaderView.setOnClickListener(this);
+
         mFootView.setClickable(false);
         mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
-        mListView.addHeaderView(mHeaderView);
 
         mListView.setOnScrollListener(this);
         mBack.setOnClickListener(this);
@@ -107,6 +105,7 @@ public class NewSourceActivity extends BaseListActivity implements
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             newSourceInfos = (List<NewSourceInfo>) getIntent().getSerializableExtra(Constants.COMMON_OBJECT_KEY);
             // 从 搜索货源进入，不需要显示 搜索货源按钮 modify
             mMore.setText("关注此路线");
@@ -139,6 +138,12 @@ public class NewSourceActivity extends BaseListActivity implements
                 titlebar_id_content.setText("关注货源");
                 rightButton = 3;
             }
+        }
+        if(getIntent().getBooleanExtra(Constants.SEARCH_SOURCE, false)) {
+            //从搜索过来的货源需要显示总货源数
+            mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
+            mHeaderView.setOnClickListener(this);
+            mListView.addHeaderView(mHeaderView);
         }
     }
 

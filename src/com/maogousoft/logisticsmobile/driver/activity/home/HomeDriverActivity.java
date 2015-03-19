@@ -3,6 +3,7 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseHomeActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
@@ -26,7 +27,10 @@ public class HomeDriverActivity extends BaseHomeActivity {
 
 	// 查找货源
 	public void onSearchSource(View view) {
-		startActivity(new Intent(context, SearchSourceActivity.class));
+//		startActivity(new Intent(context, SearchSourceActivity.class));
+		Intent intent = new Intent(context, NewSourceActivity.class);
+		intent.putExtra(Constants.SEARCH_SOURCE, true);
+		startActivity(intent);
 	}
 
 	// 帮我找货
