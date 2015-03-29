@@ -6,6 +6,7 @@ import android.view.View;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseHomeActivity;
+import com.maogousoft.logisticsmobile.driver.activity.ShakeActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.ybxiang.driver.activity.*;
@@ -22,12 +23,10 @@ public class HomeDriverActivity extends BaseHomeActivity {
         setContentView(R.layout.activity_home_new_driver1);
 		super.onCreate(savedInstanceState);
         setIsShowAnonymousActivity(false);
-		LogUtil.i("wst", "HomeActivity driver -onCreate");
 	}
 
 	// 查找货源
 	public void onSearchSource(View view) {
-//		startActivity(new Intent(context, SearchSourceActivity.class));
 		Intent intent = new Intent(context, NewSourceActivity.class);
 		intent.putExtra(Constants.SEARCH_SOURCE, true);
 		startActivity(intent);
@@ -52,9 +51,10 @@ public class HomeDriverActivity extends BaseHomeActivity {
 
 	// 好友货源
 	public void onFriendsSource(View view) {
-		Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+		/*Intent intentNewSource = new Intent(context, NewSourceActivity.class);
 		intentNewSource.putExtra("getFriendOrderList", true);
-		startActivity(intentNewSource);
+		startActivity(intentNewSource);*/
+        startActivity(new Intent(context, ShakeActivity.class));
 	}
 
     // 关注货源
