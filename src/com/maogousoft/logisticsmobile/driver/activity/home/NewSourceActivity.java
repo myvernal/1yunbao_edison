@@ -67,7 +67,6 @@ public class NewSourceActivity extends BaseListActivity implements
         super.onCreate(savedInstanceState);
         mContext = NewSourceActivity.this;// PR104
         initViews();
-
         initData();
         // onFeedback();// PR1.4 test
     }
@@ -141,10 +140,16 @@ public class NewSourceActivity extends BaseListActivity implements
         }
         if(getIntent().getBooleanExtra(Constants.SEARCH_SOURCE, false)) {
             //从搜索过来的货源需要显示总货源数
-            mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
-            mHeaderView.setOnClickListener(this);
-            mListView.addHeaderView(mHeaderView);
+            addHeaderSearchView();
         }
+    }
+
+    private void addHeaderSearchView() {
+        mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
+        mHeaderView.setOnClickListener(this);
+        mListView.addHeaderView(mHeaderView);
+        //查询今日货源数量
+        queryAllSourceSize();
     }
 
     @Override
@@ -340,8 +345,6 @@ public class NewSourceActivity extends BaseListActivity implements
             pageIndex = 1;
             getData(pageIndex);
         }
-        //查询今日货源数量
-        queryAllSourceSize();
     }
 
     @Override
@@ -412,7 +415,9 @@ public class NewSourceActivity extends BaseListActivity implements
     }
 
     private void changeSourceNumber(int size) {
-        ((TextView) mHeaderView.findViewById(R.id.number)).setText(getString(R.string.source_number, size * 6));
+        if(mHeaderView != null) {
+            ((TextView) mHeaderView.findViewById(R.id.number)).setText(getString(R.string.source_number, size * 6));
+        }
     }
 
     @Override

@@ -40,9 +40,9 @@ public class HttpUtils {
 					builder.append(key).append("=").append(URLEncoder.encode(params.get(key).toString(), "UTF-8")).append("&");
 				}
 				builder.deleteCharAt(builder.length() - 1);
+                LogUtil.e("url", builder.toString());
 				byte[] entitydata = builder.toString().getBytes();
 				URL _url = new URL(url);
-				LogUtil.e("url", builder.toString());
 				HttpURLConnection connection = (HttpURLConnection) _url.openConnection();
 				connection.setRequestMethod("POST");
 				connection.setConnectTimeout(TIME_OUT);

@@ -113,6 +113,18 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 return true;
             }
         });
+        //设定中心点坐标
+
+        LatLng cenpt = new LatLng(0, 0);
+        //定义地图状态
+        MapStatus mMapStatus = new MapStatus.Builder()
+                .target(cenpt)
+                .zoom(18)
+                .build();
+        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
+        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        //改变地图状态
+        mBaiduMap.setMapStatus(mMapStatusUpdate);
     }
 
     private LinearLayout getMarkerView(Marker marker, String carDescription) {
@@ -365,6 +377,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
             }
             LogUtil.e(TAG, "mList.size:" + mList.size());
 		}
+        mLocClient.stop();
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
@@ -449,7 +462,6 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     @Override
     protected void onDestroy() {
         mMapView.onDestroy();
-        mLocClient.stop();
         CloudManager.getInstance().destroy();
         super.onDestroy();
     }
@@ -457,6 +469,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     @Override
     protected void onPause() {
         mMapView.onPause();
+        mLocClient.stop();
         super.onPause();
     }
 
