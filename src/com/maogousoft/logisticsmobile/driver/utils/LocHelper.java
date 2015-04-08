@@ -184,7 +184,6 @@ public class LocHelper {
 				LogUtil.i(TAG, "定位结果地址为null");
 				getAddr(location.getLatitude(), location.getLongitude());
 			} else {
-
 				if (resultCallback != null) {
 					resultCallback.onRecivedLoc(location.getLatitude(), location.getLongitude(), location.getAddrStr());
 				}
@@ -200,12 +199,9 @@ public class LocHelper {
 	// 设置相关参数
 	private void setLocationOption() {
 		LocationClientOption option = new LocationClientOption();
-		option.setCoorType("bd09ll");		// 设置坐标类型
-		option.setServiceName("driver");
-		option.setAddrType("all");
-		option.setPriority(LocationClientOption.NetWorkFirst);      // 设置网络优先
-		option.disableCache(true);
-		option.setScanSpan(500);
+        option.setOpenGps(true);// 打开gps
+		option.setCoorType("bd09ll");// 设置坐标类型
+		option.setScanSpan(1000);
 		mLocationClient.setLocOption(option);
 	}
 
@@ -213,9 +209,8 @@ public class LocHelper {
 	 * 添加定时上报闹钟
 	 * 
 	 * @param context 上下文
-	 * @param startTime 开始时间
-	 * @param endTime 结束时间
-	 * @param intervalTime 上报间隔
+	 * @param start 开始时间
+	 * @param intv 上报间隔
 	 * @return
 	 */
 	public static void addAlarm(Context context, long start, int intv) {
@@ -242,7 +237,6 @@ public class LocHelper {
 
 			@Override
 			protected void onPostExecute(HashMap<String, Object> result) {
-
 				if (result != null) {
 					String addr = (String) result.get("addr");
 					LogUtil.e(TAG, "geocoder，获取到的数据地址是：" + addr);
@@ -251,11 +245,12 @@ public class LocHelper {
 						resultCallback.onRecivedLoc(lat, lng, addr);
 					}
 				} else {
-
 					if (resultCallback != null) {
 						resultCallback.onRecivedLoc(0, 0, null);
 					}
 				}
+                //释放资源
+                release();
 				super.onPostExecute(result);
 			}
 
@@ -284,7 +279,6 @@ public class LocHelper {
 					String addr = jObject.getJSONObject("result").getString("formatted_address");
 					hmResult.put("addr", addr);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				return hmResult;

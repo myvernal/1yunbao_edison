@@ -2,6 +2,7 @@ package com.maogousoft.logisticsmobile.driver.activity;
 
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -29,20 +30,21 @@ import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
+import com.maogousoft.logisticsmobile.driver.utils.HttpUtils;
+import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
-import com.ybxiang.driver.activity.CarInfoDetailActivity;
 import com.ybxiang.driver.activity.MyCarsDetailActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CarCloudSearchActivity extends BaseActivity implements BDLocationListener, CloudListener {
 
-	private static final String LTAG = "CloudSearchActivity";
+	private static final String LTAG = "CarCloudSearchActivity";
 	private MapView mMapView;
 	private BaiduMap mBaiduMap;
     private LinearLayout markerView;
@@ -190,8 +192,11 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                                         }
                                     };
                                     View popupView = getMarkerView(marker, carInfoDescription.toString());
-                                    mInfoWindow = new InfoWindow(popupView, llInfo, listener);
-                                    mBaiduMap.showInfoWindow(mInfoWindow);
+                                    BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromView(popupView);
+                                    if(bitmapDescriptor != null) {
+                                        mInfoWindow = new InfoWindow(bitmapDescriptor, llInfo, -40, listener);
+                                        mBaiduMap.showInfoWindow(mInfoWindow);
+                                    }
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     if (result != null)
@@ -354,6 +359,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 mBaiduMap.addOverlay(oo);
                 builder.include(ll);
 			}
+            mLocClient.stop();
 			LatLngBounds bounds = builder.build();
 			MapStatusUpdate u = MapStatusUpdateFactory.newLatLngBounds(bounds);
 			mBaiduMap.animateMapStatus(u);
@@ -377,7 +383,6 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
             }
             LogUtil.e(TAG, "mList.size:" + mList.size());
 		}
-        mLocClient.stop();
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
@@ -393,8 +398,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true);// 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(2000);
-        option.disableCache(true);
+        option.setScanSpan(1000);
         mLocClient.setLocOption(option);
         mLocClient.start();
     }
@@ -420,43 +424,115 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     }
 
     @Override
-    public void onReceiveLocation(BDLocation location) {
+    public void onReceiveLocation(final BDLocation location) {
         // map view 销毁后不在处理新接收的位置
         LogUtil.e(TAG, "onReceiveLocation");
-        if(location == null || TextUtils.isEmpty(location.getCity())) {
+        if(location == null ) {
             //定位失败重新定位一次
             mLocClient.requestLocation();
+            LogUtil.e(TAG, "location:" + location);
             return;
         }
-//        NearbySearchInfo info = new NearbySearchInfo();
-//        info.ak = Constants.BAIDU_APP_Key;
-//        info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
-//        info.radius = 10000;
-//        info.location = location.getLatitude() + "," + location.getLongitude();
-//        showLocation(location);
-//        CloudManager.getInstance().nearbySearch(info);
+        /*else if(TextUtils.isEmpty(location.getCity())) {
+            getAddress(location.getLatitude(), location.getLongitude(), new LocHelper.LocCallback() {
+                @Override
+                public void onRecivedLoc(double lat, double lng, String addr) {
+                    //获取到文字地址
+                    //TODO
+                }
+            });
+        }*/
         Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
         boolean isCarLocation = getIntent().getBooleanExtra(Constants.MY_CARS_SEARCH, false);
         if(serializable instanceof ArrayList && isCarLocation) {
             List<CarInfo> list = (List<CarInfo>) serializable;
             mAdapter.addAll(list);
+            showLocation(location);
             locationMyCars(list);
-            showLocation(location);
         } else {
-            LocalSearchInfo info = new LocalSearchInfo();
-            info.ak = Constants.BAIDU_CLOUD_SEARCH_Key;
-            info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
-            info.region = location.getCity();
-            info.pageSize = 50;
-            showLocation(location);
-            CloudManager.getInstance().localSearch(info);
-            mLocClient.stop();
+            if(TextUtils.isEmpty(location.getCity())) {
+                getAddress(location.getLatitude(), location.getLongitude(), new LocHelper.LocCallback() {
+                    @Override
+                    public void onRecivedLoc(double lat, double lng, String addr) {
+                        //获取到城市地名
+                        searchLbsData(location, addr);
+                    }
+                });
+            } else {
+                searchLbsData(location, location.getCity());
+            }
         }
+        mLocClient.stop();
     }
 
-    @Override
-    public void onReceivePoi(BDLocation location) {
+    private void searchLbsData(BDLocation location, String region) {
+        LocalSearchInfo info = new LocalSearchInfo();
+        info.ak = Constants.BAIDU_CLOUD_SEARCH_Key;
+        info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
+        info.region = region;
+        info.pageSize = 50;
+        showLocation(location);
+        CloudManager.getInstance().localSearch(info);
+    }
 
+    /**
+     * 通过经纬度,查询地址
+     * @param lat
+     * @param lng
+     */
+    public void getAddress(final double lat, final double lng, final LocHelper.LocCallback resultCallback) {
+        new AsyncTask<BDLocation, Object, HashMap<String, Object>>() {
+
+            @Override
+            protected void onPostExecute(HashMap<String, Object> result) {
+                if (result != null) {
+                    String addr = (String) result.get("addr");
+                    String city = (String) result.get("city");
+                    LogUtil.e(TAG, "geocoder，获取到的城市:" + city);
+
+                    if (resultCallback != null) {
+                        resultCallback.onRecivedLoc(lat, lng, city);
+                    }
+                } else {
+                    if (resultCallback != null) {
+                        resultCallback.onRecivedLoc(0, 0, null);
+                    }
+                }
+                super.onPostExecute(result);
+            }
+
+            @Override
+            protected HashMap<String, Object> doInBackground(BDLocation... params) {
+
+                String url = "http://api.map.baidu.com/geocoder?" + "location=" + lat + "," + lng + "&output=json&key="
+                        + Constants.strKey;
+
+                // 时效宝 百度key b66fbb5a289082fa86ef1a7df81ab57f
+
+                String returnStr = HttpUtils.getURLData(url);
+
+                HashMap<String, Object> hmResult = null;
+
+                JSONObject jObject;
+                try {
+                    jObject = new JSONObject(returnStr);
+
+                    if (!jObject.getString("status").equalsIgnoreCase("OK")) {
+                        LogUtil.e(TAG, "geocoder，没有获取到数据");
+                        return null;
+                    }
+
+                    hmResult = new HashMap<String, Object>();
+                    String addr = jObject.getJSONObject("result").getString("formatted_address");
+                    String city = jObject.getJSONObject("result").getJSONObject("addressComponent").getString("city");
+                    hmResult.put("addr", addr);
+                    hmResult.put("city", city);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return hmResult;
+            }
+        }.execute();
     }
 
     @Override

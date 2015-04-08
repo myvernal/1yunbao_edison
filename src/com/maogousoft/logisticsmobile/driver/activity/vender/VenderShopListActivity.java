@@ -482,14 +482,8 @@ public class VenderShopListActivity extends BaseListActivity implements OnScroll
 	}
 
 	@Override
-	public void onReceivePoi(BDLocation arg0) {
-
-	}
-
-	@Override
 	protected void onResume() {
 		radioNear.setChecked(true);
-
 		super.onResume();
 	}
 

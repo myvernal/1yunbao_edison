@@ -118,6 +118,8 @@ public class MyCarsDetailActivity extends BaseActivity {
             remark_layout.setVisibility(View.VISIBLE);
             getData(true);
         } else if(getIntent().getBooleanExtra(Constants.QUERY_CAR_INFO_FROM_MAP, false)) {
+            //TODO
+            //需要判断是否是直接从我的车队查看的车源,以此判断是否显示编辑按钮
             isSearchFromMap = true;
             getData(true);
         }else {
@@ -167,10 +169,10 @@ public class MyCarsDetailActivity extends BaseActivity {
             final JSONObject params = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.GET_MY_FLEET_DETAIL);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            if(isFromSearch) {
+            /*if(isFromSearch) {
                 //标示符,是否是单独查询车源信息
                 params.put("isFromSearch", 1);
-            }
+            }*/
             jsonObject.put(Constants.JSON, params.put("id", id).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     CarInfo.class, new AjaxCallBack() {
