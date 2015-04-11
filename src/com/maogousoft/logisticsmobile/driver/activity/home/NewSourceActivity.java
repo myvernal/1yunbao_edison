@@ -416,7 +416,7 @@ public class NewSourceActivity extends BaseListActivity implements
 
     private void changeSourceNumber(int size) {
         if(mHeaderView != null) {
-            ((TextView) mHeaderView.findViewById(R.id.number)).setText(getString(R.string.source_number, size * 6));
+            ((TextView) mHeaderView.findViewById(R.id.number)).setText(getString(R.string.source_number, size * 16));
         }
     }
 

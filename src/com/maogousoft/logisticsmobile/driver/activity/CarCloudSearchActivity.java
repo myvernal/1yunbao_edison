@@ -44,15 +44,15 @@ import java.util.List;
 
 public class CarCloudSearchActivity extends BaseActivity implements BDLocationListener, CloudListener {
 
-	private static final String LTAG = "CarCloudSearchActivity";
-	private MapView mMapView;
-	private BaiduMap mBaiduMap;
+    private static final String LTAG = "CarCloudSearchActivity";
+    private MapView mMapView;
+    private BaiduMap mBaiduMap;
     private LinearLayout markerView;
     private InfoWindow mInfoWindow;
     private LocationClient mLocClient;
     private boolean isFirstLoc = true;// 是否首次定位
     private Button mBack, mMore;
-    private TextView mTitle;
+    private TextView mTitle, mNext;
     private int currentModel = CURRENT_MODEL_MAP;
     private static final int CURRENT_MODEL_MAP = 0;
     private static final int CURRENT_MODEL_LIST = 1;
@@ -60,20 +60,25 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     private BaseListAdapter mAdapter;
     private ListView mListView;
     private View mEmpty;
+    private boolean isMyCarLocation = false;
+    private LocalSearchInfo info;
+    private int pageIndex = 1;
 
-	@Override
-	protected void onCreate(Bundle icicle) {
-		super.onCreate(icicle);
-		setContentView(R.layout.activity_lbssearch);
+    @Override
+    protected void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        setContentView(R.layout.activity_lbssearch);
         initViews();
         initData();
-	}
+    }
 
     private void initViews() {
         // 地图初始化
         findViewById(R.id.search).setOnClickListener(this);
+        mNext = (TextView) findViewById(R.id.next);
+        mNext.setOnClickListener(this);
         mMapView = (MapView) findViewById(R.id.bmapView);
-        mTitle = (TextView)findViewById(R.id.titlebar_id_content);
+        mTitle = (TextView) findViewById(R.id.titlebar_id_content);
         mTitle.setText("附近车源");
         mMore = (Button) findViewById(R.id.titlebar_id_more);
         mMore.setText("查看列表");
@@ -90,27 +95,6 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         //图层点击事件
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
-                /*final LatLng ll = marker.getPosition();
-                Point p = mBaiduMap.getProjection().toScreenLocation(ll);
-                p.y -= 40;
-                LatLng llInfo = mBaiduMap.getProjection().fromScreenLocation(p);
-                InfoWindow.OnInfoWindowClickListener listener = new InfoWindow.OnInfoWindowClickListener() {
-                    public void onInfoWindowClick() {
-                        LatLng llNew = new LatLng(ll.latitude + 0.005, ll.longitude + 0.005);
-                        marker.setPosition(llNew);
-                        mBaiduMap.hideInfoWindow();
-                        //点击弹出的信息框,进入车辆详情
-                        Intent intent = new Intent(context, MyCarsDetailActivity.class);
-                        intent.putExtra(Constants.COMMON_KEY, Integer.parseInt(marker.getExtraInfo().getString("carID")));
-                        intent.putExtra(Constants.QUERY_CAR_INFO_FROM_MAP, true);
-                        startActivity(intent);
-                    }
-                };
-                View popupView = getMarkerView(marker);
-                mInfoWindow = new InfoWindow(popupView, llInfo, listener);
-                mBaiduMap.showInfoWindow(mInfoWindow);*/
-
-
                 queryCarInfo(marker);
                 return true;
             }
@@ -130,9 +114,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     }
 
     private LinearLayout getMarkerView(Marker marker, String carDescription) {
-        if(markerView == null) {
-            markerView = (LinearLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.map_marker_detail_layout, null);
-        }
+        markerView = (LinearLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.map_marker_detail_layout, null);
         TextView description = (TextView) markerView.findViewById(R.id.description);
         description.setText(carDescription);
         TextView line = (TextView) markerView.findViewById(R.id.line);
@@ -166,8 +148,8 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                                     //车型
                                     int carTypeValue = carInfo.getCar_type();
                                     String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
-                                    for(int i=0;i<Constants.carTypeValues.length;i++) {
-                                        if(Constants.carTypeValues[i] == carTypeValue){
+                                    for (int i = 0; i < Constants.carTypeValues.length; i++) {
+                                        if (Constants.carTypeValues[i] == carTypeValue) {
                                             carInfoDescription.append(carTypeStr[i]);
                                             break;
                                         }
@@ -193,7 +175,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                                     };
                                     View popupView = getMarkerView(marker, carInfoDescription.toString());
                                     BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromView(popupView);
-                                    if(bitmapDescriptor != null) {
+                                    if (bitmapDescriptor != null) {
                                         mInfoWindow = new InfoWindow(bitmapDescriptor, llInfo, -40, listener);
                                         mBaiduMap.showInfoWindow(mInfoWindow);
                                     }
@@ -231,12 +213,12 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                if(currentModel == CURRENT_MODEL_MAP) {
+                if (currentModel == CURRENT_MODEL_MAP) {
                     currentModel = CURRENT_MODEL_LIST;
                     listContainer.setVisibility(View.VISIBLE);
                     mapContainer.setVisibility(View.GONE);
                     //列表数据处理
-                    if (mAdapter.getCount()  <= 0) {
+                    if (mAdapter.getCount() <= 0) {
                         mEmpty.setVisibility(View.VISIBLE);
                     }
                     mMore.setText("查看地图");
@@ -252,18 +234,21 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 intent.putExtra(Constants.CLOUD_CARS_SEARCH, true);
                 startActivity(intent);
                 break;
+            case R.id.next:
+                searchLbsDataMore();
+                break;
         }
     }
 
     public void onGetDetailSearchResult(DetailSearchResult result, int error) {
-		if (result != null) {
-			if (result.poiInfo != null) {
-				Toast.makeText(context, result.poiInfo.title, Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(CarCloudSearchActivity.this, "status:" + result.status, Toast.LENGTH_SHORT).show();
-			}
-		}
-	}
+        if (result != null) {
+            if (result.poiInfo != null) {
+                Toast.makeText(context, result.poiInfo.title, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(CarCloudSearchActivity.this, "status:" + result.status, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     public void locationMyCars(List<CarInfo> list) {
         //添加列表数据
@@ -274,27 +259,27 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
             LatLng ll;
             LatLngBounds.Builder builder = new Builder();
             for (CarInfo carInfo : list) {
-                if(TextUtils.isEmpty(carInfo.getLatitude()) || TextUtils.isEmpty(carInfo.getLongitude())) {
+                if (TextUtils.isEmpty(carInfo.getLatitude()) || TextUtils.isEmpty(carInfo.getLongitude())) {
                     continue;
                 }
                 ll = new LatLng(Double.valueOf(carInfo.getLatitude()), Double.valueOf(carInfo.getLongitude()));
                 Bundle bundle = new Bundle();
                 bundle.putString("name", carInfo.getOwer_name());
                 bundle.putString("address", carInfo.getLocation());
-                if(null != carInfo.getLocation_time()) {
+                if (null != carInfo.getLocation_time()) {
                     bundle.putString("locationTime", carInfo.getLocation_time());
                 }
-                if(null != carInfo.getPhone()) {
+                if (null != carInfo.getPhone()) {
                     bundle.putString("phone", carInfo.getPhone());
                 }
                 //车源ID
-                if(0 != carInfo.getId()) {
+                if (0 != carInfo.getId()) {
                     bundle.putString("carID", carInfo.getId() + "");
                 }
                 //车源线路
                 CityDBUtils dbUtils = new CityDBUtils(application.getCitySDB());
                 StringBuffer sb = new StringBuffer();
-                if(carInfo.getStart_province() > 0) {
+                if (carInfo.getStart_province() > 0) {
                     String wayStart = dbUtils.getCityInfo(carInfo.getStart_province(), carInfo.getStart_city(), carInfo.getStart_district());
                     if (carInfo.getEnd_province1() > 0 || carInfo.getEnd_city1() > 0 || carInfo.getEnd_district1() > 0) {
                         String wayEnd1 = dbUtils.getCityInfo(carInfo.getEnd_province1(), carInfo.getEnd_city1(), carInfo.getEnd_district1());
@@ -324,57 +309,63 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         mAdapter.notifyDataSetChanged();
     }
 
-	public void onGetSearchResult(CloudSearchResult result, int error) {
+    public void onGetSearchResult(CloudSearchResult result, int error) {
         //添加列表数据
         final List<CarInfo> mList = new ArrayList<CarInfo>();
-		if (result != null && result.poiList != null && result.poiList.size() > 0) {
-			Log.d(LTAG, "onGetSearchResult, result length: " + result.poiList.size());
-			mBaiduMap.clear();
-			BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(R.drawable.map_marker_text);
-			LatLng ll;
-			LatLngBounds.Builder builder = new Builder();
-			for (CloudPoiInfo info : result.poiList) {
-				ll = new LatLng(info.latitude, info.longitude);
+        if (result != null && result.poiList != null && result.poiList.size() > 0) {
+            Log.d(LTAG, "onGetSearchResult, result length: " + result.poiList.size());
+            if (result.poiList.size() < 50) {
+                //加载了全部,继续循环从第一页开始
+                pageIndex = 1;
+            } else {
+                pageIndex++;
+            }
+            mBaiduMap.clear();
+            BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(R.drawable.map_marker_text);
+            LatLng ll;
+            LatLngBounds.Builder builder = new Builder();
+            for (CloudPoiInfo info : result.poiList) {
+                ll = new LatLng(info.latitude, info.longitude);
                 Bundle bundle = new Bundle();
                 bundle.putString("name", info.title);
                 bundle.putString("address", info.address);
-                if(null != info.extras.get("locationTime")) {
+                if (null != info.extras.get("locationTime")) {
                     bundle.putString("locationTime", info.extras.get("locationTime").toString());
                 }
-                if(null != info.extras.get("phone")) {
+                if (null != info.extras.get("phone")) {
                     bundle.putString("phone", info.extras.get("phone").toString());
                 }
                 //车源ID
-                if(null != info.extras.get("carID")) {
+                if (null != info.extras.get("carID")) {
                     bundle.putString("carID", info.extras.get("carID").toString());
                 }
                 //车源线路
-                if(null != info.extras.get("line")) {
+                if (null != info.extras.get("line")) {
                     bundle.putString("line", info.extras.get("line").toString());
                 }
                 //tags:车牌号
                 //title:姓名
                 //封装数据
-				OverlayOptions oo = new MarkerOptions().icon(bd).position(ll).extraInfo(bundle);
+                OverlayOptions oo = new MarkerOptions().icon(bd).position(ll).extraInfo(bundle);
                 mBaiduMap.addOverlay(oo);
                 builder.include(ll);
-			}
+            }
             mLocClient.stop();
-			LatLngBounds bounds = builder.build();
-			MapStatusUpdate u = MapStatusUpdateFactory.newLatLngBounds(bounds);
-			mBaiduMap.animateMapStatus(u);
-            for(CloudPoiInfo info : result.poiList) {
+            LatLngBounds bounds = builder.build();
+            MapStatusUpdate u = MapStatusUpdateFactory.newLatLngBounds(bounds);
+            mBaiduMap.animateMapStatus(u);
+            for (CloudPoiInfo info : result.poiList) {
                 CarInfo carInfo = new CarInfo();
-                if(info.extras.get("plateNumber") != null) {
+                if (info.extras.get("plateNumber") != null) {
                     carInfo.setPlate_number(info.extras.get("plateNumber").toString());
                 }
-                if(info.extras.get("phone") != null) {
+                if (info.extras.get("phone") != null) {
                     carInfo.setPhone(info.extras.get("phone").toString());
                 }
-                if(info.extras.get("locationTime") != null) {
+                if (info.extras.get("locationTime") != null) {
                     carInfo.setLast_position_time(info.extras.get("locationTime").toString());
                 }
-                if(info.extras.get("carID") != null) {
+                if (info.extras.get("carID") != null) {
                     carInfo.setId(Integer.parseInt(info.extras.get("carID").toString()));
                 }
                 carInfo.setLocation(info.address);
@@ -382,15 +373,20 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 mList.add(carInfo);
             }
             LogUtil.e(TAG, "mList.size:" + mList.size());
-		}
+        } else {
+            //加载了全部,继续循环从第一页开始
+            pageIndex = 1;
+        }
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
+                mAdapter.removeAll();
                 mAdapter.addAll(mList);
                 mAdapter.notifyDataSetChanged();
+                mNext.setVisibility(View.VISIBLE);
             }
         });
-	}
+    }
 
     // 定位初始化
     private void locationAction() {
@@ -405,6 +401,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
 
     /**
      * 显示我的位置
+     *
      * @param location
      */
     private void showLocation(BDLocation location) {
@@ -427,7 +424,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     public void onReceiveLocation(final BDLocation location) {
         // map view 销毁后不在处理新接收的位置
         LogUtil.e(TAG, "onReceiveLocation");
-        if(location == null ) {
+        if (location == null) {
             //定位失败重新定位一次
             mLocClient.requestLocation();
             LogUtil.e(TAG, "location:" + location);
@@ -443,14 +440,14 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
             });
         }*/
         Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
-        boolean isCarLocation = getIntent().getBooleanExtra(Constants.MY_CARS_SEARCH, false);
-        if(serializable instanceof ArrayList && isCarLocation) {
+        isMyCarLocation = getIntent().getBooleanExtra(Constants.MY_CARS_SEARCH, false);
+        if (serializable instanceof ArrayList && isMyCarLocation) {
             List<CarInfo> list = (List<CarInfo>) serializable;
             mAdapter.addAll(list);
             showLocation(location);
             locationMyCars(list);
         } else {
-            if(TextUtils.isEmpty(location.getCity())) {
+            if (TextUtils.isEmpty(location.getCity())) {
                 getAddress(location.getLatitude(), location.getLongitude(), new LocHelper.LocCallback() {
                     @Override
                     public void onRecivedLoc(double lat, double lng, String addr) {
@@ -466,17 +463,29 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     }
 
     private void searchLbsData(BDLocation location, String region) {
-        LocalSearchInfo info = new LocalSearchInfo();
+        if (info == null) {
+            info = new LocalSearchInfo();
+        }
         info.ak = Constants.BAIDU_CLOUD_SEARCH_Key;
         info.geoTableId = Constants.BAIDU_LBS_TABLE_ID;
+        info.pageIndex = pageIndex;
         info.region = region;
         info.pageSize = 50;
+        info.sortby = "sort_num:-1";
         showLocation(location);
         CloudManager.getInstance().localSearch(info);
     }
 
+    private void searchLbsDataMore() {
+        if (info != null) {
+            info.pageIndex = pageIndex;
+            CloudManager.getInstance().localSearch(info);
+        }
+    }
+
     /**
      * 通过经纬度,查询地址
+     *
      * @param lat
      * @param lng
      */

@@ -41,7 +41,7 @@ public class MyCarsDetailActivity extends BaseActivity {
             car_type, location_address, location_time;
     private View edit, delete, free_location, phone_location, back;
     private CityDBUtils dbUtils;
-    private long phoneNumber = 0;
+    private String phoneNumber = "";
     private CarInfo carInfo;
     private View edit_action_layout, location_action_desc, location_action_layout;//我的车队详情特有
     private View add_my_fleet, price_layout, remark_layout;//搜索货源详情特有
@@ -263,9 +263,10 @@ public class MyCarsDetailActivity extends BaseActivity {
         }
         if (TextUtils.isEmpty(carInfo.getPhone())) {
             phone.setText(phone.getText() + carInfo.getOwer_phone());
+            phoneNumber = carInfo.getOwer_phone();
         } else {
             phone.setText(phone.getText() + carInfo.getPhone());
-            phoneNumber = Long.parseLong(carInfo.getPhone());
+            phoneNumber = carInfo.getPhone();
         }
         car_length.setText(car_length.getText() + carInfo.getCar_length() + "米");
         //车型
@@ -405,7 +406,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     public void onSendMessage(View view) {
-        if (phoneNumber <= 0) {
+        if (phoneNumber != null &&!phoneNumber.isEmpty()) {
             return;
         }
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumber));
@@ -413,7 +414,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     public void onCall(View view) {
-        if (phoneNumber <= 0) {
+        if (phoneNumber != null &&!phoneNumber.isEmpty()) {
             return;
         }
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
