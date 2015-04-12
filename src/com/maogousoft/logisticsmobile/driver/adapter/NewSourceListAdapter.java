@@ -1,43 +1,33 @@
 package com.maogousoft.logisticsmobile.driver.adapter;
 // PR104
-import java.util.ArrayList;
-import java.util.Date;
-
-import android.net.Uri;
-import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
-import com.ybxiang.driver.util.Utils;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
-import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.ImagePagerActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.RenZhengActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.GrabDialog;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.utils.MyProgressDialog;
-import com.maogousoft.logisticsmobile.driver.utils.TimeUtils;
+import com.ybxiang.driver.util.Utils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Date;
 
 /**
  * 新货源数据适配器
@@ -70,29 +60,16 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 			convertView = mInflater.inflate(R.layout.listitem_newsoure, parent, false);
 			holder = new ViewHolder();
             holder.source_detail_phone = (Button) convertView.findViewById(R.id.source_detail_phone);
-			holder.order_image = (ImageView) convertView.findViewById(R.id.source_id_order_image);
-			holder.order_number = (TextView) convertView.findViewById(R.id.source_id_order_number);
 			holder.order_info = (TextView) convertView.findViewById(R.id.source_id_order_info);
             holder.order_info_detail = (TextView) convertView.findViewById(R.id.source_id_order_info_detail);
 			holder.order_money = (TextView) convertView.findViewById(R.id.source_id_order_money);
-			//PR104 begin
-//			holder.order_star = (RatingBar) convertView
-//					.findViewById(R.id.source_id_order_star);
-//			holder.order_star.setIsIndicator(true);
-			//PR104 end
-			holder.order_imagetips = convertView.findViewById(R.id.source_id_order_imagetips);
-			holder.order_grab = (Button) convertView.findViewById(R.id.source_id_order_grab);
-			holder.order_state = (Button) convertView.findViewById(R.id.source_id_order_state);
+			holder.order_grab = (TextView) convertView.findViewById(R.id.source_id_order_grab);
 			holder.tvDjs = (TextView) convertView.findViewById(R.id.tv_djs);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		final NewSourceInfo sourceInfo = (NewSourceInfo) getItem(position);
-		// holder.order_grab.setOnClickListener(new ClickListener(position,
-		// sourceInfo));
-		holder.order_number.setText(mResources.getString(R.string.string_home_newsource_order_number, sourceInfo.getId()));
-		mImageLoader.displayImage(sourceInfo.getCargo_photo1(), holder.order_image);
 		final StringBuilder title = new StringBuilder();
 		final StringBuilder detail = new StringBuilder();
 
@@ -123,53 +100,11 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             detail.append(sourceInfo.getCar_length() + "米");
 		}
 
-		// title.append(TimeUtils.getDetailTime(sourceInfo.getValidate_time()));
-
 		holder.order_info.setText(title.toString());
 		holder.order_info_detail.setText(detail.toString());
 		holder.order_money.setText(Html.fromHtml(String.format(mResources
 				.getString(R.string.string_home_newsource_order_money),
 				sourceInfo.getUser_bond())));
-		// PR104 begin
-//		if (sourceInfo.getScore() == null || sourceInfo.getScore() == 0) {
-//			holder.order_star.setRating(5);
-//		} else {
-//			holder.order_star.setRating(sourceInfo.getScore());
-//		}
-		// PR104 end
-		// 已关注
-		if (sourceInfo.getFavorite_status() == 1) {
-			holder.order_state.setText("已关注");
-			//holder.order_state.setVisibility(View.VISIBLE);
-			// holder.order_state.setTextColor(Color.RED);
-			// holder.order_state.setBackgroundResource(R.drawable.ic_button_gray_normal);
-		} else {
-			holder.order_state.setVisibility(View.GONE);
-			// holder.order_state.setText(sourceInfo.getRead_status() == 0 ?
-			// "未读" : "已读");
-			// holder.order_state.setTextColor(mResources.getColor(android.R.color.white));
-			// holder.order_state.setBackgroundResource(R.drawable.ic_button_blue_normal);
-		}
-
-		holder.order_imagetips.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				ArrayList<String> list = new ArrayList<String>();
-				if (!TextUtils.isEmpty(sourceInfo.getCargo_photo1())) {
-					list.add(sourceInfo.getCargo_photo1());
-				}
-				if (!TextUtils.isEmpty(sourceInfo.getCargo_photo2())) {
-					list.add(sourceInfo.getCargo_photo2());
-				}
-				if (!TextUtils.isEmpty(sourceInfo.getCargo_photo3())) {
-					list.add(sourceInfo.getCargo_photo3());
-				}
-				mContext.startActivity(new Intent(mContext,
-						ImagePagerActivity.class).putStringArrayListExtra(
-						"images", list));
-			}
-		});
 
         Date date = new Date();
         String betweenTime = "刚发布";
@@ -179,9 +114,14 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             long minites = (time % (60 * 60 * 1000)) / (60 * 1000);
             betweenTime = "{" + hour + "时" + minites + "分}";
         }
-        holder.tvDjs.setText(Html.fromHtml("已发布:" + Utils.textFormatRed(betweenTime)));
+        holder.tvDjs.setText(Html.fromHtml("发布时间:" + Utils.textFormatRed(betweenTime) + "前"));
         //电话号码
-        holder.source_detail_phone.setText(sourceInfo.getCargo_user_phone());
+        String phone = sourceInfo.getCargo_user_phone() + "";
+        if(!TextUtils.isEmpty(phone)){
+            String rep = phone.substring(3, 7);
+            holder.source_detail_phone.setText(phone.replace(rep, "xxxx"));
+        }
+
         holder.source_detail_phone.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,8 +133,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             }
         });
 
-		holder.order_grab.setOnClickListener(new ClickListener(position,
-				sourceInfo, mContext));
+		holder.order_grab.setOnClickListener(new ClickListener(position, sourceInfo, mContext));
 
 		return convertView;
 	}
@@ -246,17 +185,10 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 
 	static class ViewHolder {
 
-		ImageView order_image;
 
-		TextView order_number, order_info, order_info_detail, order_money;
+		TextView order_info, order_info_detail, order_money, order_grab;
 
-		Button order_state;
-
-		// RatingBar order_star; PR104
-
-		View order_imagetips;
-
-		Button order_grab, source_detail_phone;
+		Button source_detail_phone;
 
 		TextView tvDjs;
 	}
