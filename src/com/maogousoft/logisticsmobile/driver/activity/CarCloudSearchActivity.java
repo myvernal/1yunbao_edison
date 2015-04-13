@@ -547,20 +547,19 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     @Override
     protected void onDestroy() {
         mMapView.onDestroy();
-        CloudManager.getInstance().destroy();
         super.onDestroy();
     }
 
     @Override
     protected void onPause() {
-        mMapView.onPause();
+        //mMapView.onPause();
         mLocClient.stop();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        mMapView.onResume();
+        //mMapView.onResume();
         super.onResume();
     }
 }
