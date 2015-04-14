@@ -125,7 +125,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
         holder.source_detail_phone.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneStr = ((Button)view).getText().toString();
+                String phoneStr = sourceInfo.getCargo_user_phone();
                 if (!TextUtils.isEmpty(phoneStr) && !phoneStr.equals("无")) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneStr));
                     mContext.startActivity(intent);

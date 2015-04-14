@@ -30,6 +30,8 @@ public class Constants {
 
 	public static final String SHARED_PREFERENCE_NAME = "client_preferences";
 
+	public static final String PREFERENCE_NAME_PHONE_STATE = "phone_state";
+
 	// PR112 账户类型
 	public static final String USER_TYPE = "USER_TYPE";
 

@@ -53,7 +53,7 @@
                           android:layout_toRightOf="@id/shape1"
                           android:layout_alignBottom="@id/shape1"
                           android:gravity="center"
-                          android:text="好友货源"/><!--找货摇一摇-->
+                          android:text="找货摇一摇"/><!--找货摇一摇-->
             </RelativeLayout>
             <!-- 查找货源 -->
             <RelativeLayout

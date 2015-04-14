@@ -51,10 +51,10 @@ public class HomeDriverActivity extends BaseHomeActivity {
 
 	// 好友货源
 	public void onFriendsSource(View view) {
-		Intent intentNewSource = new Intent(context, NewSourceActivity.class);
-		intentNewSource.putExtra("getFriendOrderList", true);
-		startActivity(intentNewSource);
-        //startActivity(new Intent(context, ShakeActivity.class));
+//		Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+//		intentNewSource.putExtra("getFriendOrderList", true);
+//		startActivity(intentNewSource);
+        startActivity(new Intent(context, ShakeActivity.class));
 	}
 
     // 关注货源
