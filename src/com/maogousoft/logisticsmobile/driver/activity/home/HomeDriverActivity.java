@@ -3,6 +3,7 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseHomeActivity;
@@ -21,6 +22,8 @@ public class HomeDriverActivity extends BaseHomeActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_home_new_driver1);
+        findViewById(R.id.titlebar_id_back).setVisibility(View.GONE);
+        ((TextView)findViewById(R.id.titlebar_id_content)).setText("易运宝");
 		super.onCreate(savedInstanceState);
         setIsShowAnonymousActivity(false);
 	}
@@ -51,11 +54,15 @@ public class HomeDriverActivity extends BaseHomeActivity {
 
 	// 好友货源
 	public void onFriendsSource(View view) {
-//		Intent intentNewSource = new Intent(context, NewSourceActivity.class);
-//		intentNewSource.putExtra("getFriendOrderList", true);
-//		startActivity(intentNewSource);
-        startActivity(new Intent(context, ShakeActivity.class));
+		Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+		intentNewSource.putExtra("getFriendOrderList", true);
+		startActivity(intentNewSource);
 	}
+
+    //摇一摇
+    public void onShakeSearch(View view) {
+        startActivity(new Intent(context, ShakeActivity.class));
+    }
 
     // 关注货源
     public void onFocusSource(View view) {

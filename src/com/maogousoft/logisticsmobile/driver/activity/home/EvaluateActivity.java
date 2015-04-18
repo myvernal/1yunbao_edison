@@ -53,7 +53,7 @@ public class EvaluateActivity extends BaseActivity {
 	}
 
 	private void initViews() {
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_home_onlinesource_evaluate);
 		mOrderNumber = (TextView) findViewById(R.id.source_id_order_number);

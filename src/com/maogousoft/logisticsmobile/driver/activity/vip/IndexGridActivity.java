@@ -46,7 +46,6 @@ import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
  */
 public class IndexGridActivity extends BaseActivity implements OnItemClickListener {
 
-	private Button mBack;
 	private GridView mGridView;
 	private Button titlebar_id_more;
 
@@ -69,9 +68,8 @@ public class IndexGridActivity extends BaseActivity implements OnItemClickListen
 		radioNear = (RadioButton) findViewById(R.id.radio_near);
 		radioCategory = (RadioButton) findViewById(R.id.radio_category);
 
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("会员特权");
-		mBack.setOnClickListener(this);
 
 		titlebar_id_more = (Button) findViewById(R.id.titlebar_id_more);
 		titlebar_id_more.setText("添加商户");

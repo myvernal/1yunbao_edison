@@ -747,7 +747,7 @@
 
     <style name="home_test_font">
         <item name="android:textSize">@dimen/home_font_text_size</item>
-        <item name="android:textColor">@drawable/button_font_style</item>
+        <item name="android:textColor">@color/TextColorWhite</item>
     </style>
 
     <style name="dp_style">

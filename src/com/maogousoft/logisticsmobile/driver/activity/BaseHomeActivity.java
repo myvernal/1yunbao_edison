@@ -1,12 +1,15 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.activity.home.MyabcActivityDriver;
+import com.maogousoft.logisticsmobile.driver.activity.home.MyabcActivityShipper;
 import com.maogousoft.logisticsmobile.driver.adapter.AdImageAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -25,7 +28,7 @@ import java.util.List;
  * Created by EdisonZhao on 14-8-11.
  * Email:zhaoliangyu@sobey.com
  */
-public class BaseHomeActivity extends  BaseActivity{
+public class BaseHomeActivity extends  BaseActivity {
 
     private static final String TAG = "BaseHomeActivity";
     private OneGallery gallery;
@@ -39,8 +42,8 @@ public class BaseHomeActivity extends  BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mImageLoader = ((MGApplication)getApplication()).getImageLoader();
-        adUrlArray = new String[]{""+ R.drawable.top_ad_1, ""+ R.drawable.top_ad_2, ""+ R.drawable.top_ad_3};
+        mImageLoader = ((MGApplication) getApplication()).getImageLoader();
+        adUrlArray = new String[]{"" + R.drawable.top_ad_1, "" + R.drawable.top_ad_2, "" + R.drawable.top_ad_3};
         initViews();
         getAdvertList();
     }
@@ -81,6 +84,24 @@ public class BaseHomeActivity extends  BaseActivity{
 
             }
         });
+    }
+
+    /**
+     * 车主我的设置
+     * @param view
+     */
+    public void onSettingDriver(View view) {
+        Intent intent = new Intent(this,MyabcActivityDriver.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 货主我的设置
+     * @param view
+     */
+    public void onSettingShipper(View view) {
+        Intent intent = new Intent(this,MyabcActivityShipper.class);
+        startActivity(intent);
     }
 
     // 获取我的广告信息

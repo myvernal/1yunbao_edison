@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.maogousoft.logisticsmobile.driver.R;
 
@@ -12,9 +13,9 @@ import com.maogousoft.logisticsmobile.driver.R;
  */
 public class OneGalleryBottomView extends LinearLayout {
     private Context mContext;
-    private View adBottomOne;
-    private View adBottomTwo;
-    private View adBottomThree;
+    private ImageView adBottomOne;
+    private ImageView adBottomTwo;
+    private ImageView adBottomThree;
 
     public OneGalleryBottomView(Context context) {
         super(context);
@@ -31,27 +32,27 @@ public class OneGalleryBottomView extends LinearLayout {
     private void initView() {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.top_ad_view_layout, this, true);
-        adBottomOne = view.findViewById(R.id.ad_bottom_one);
-        adBottomTwo = view.findViewById(R.id.ad_bottom_two);
-        adBottomThree = view.findViewById(R.id.ad_bottom_three);
+        adBottomOne = (ImageView) view.findViewById(R.id.ad_bottom_one);
+        adBottomTwo = (ImageView) view.findViewById(R.id.ad_bottom_two);
+        adBottomThree = (ImageView) view.findViewById(R.id.ad_bottom_three);
     }
 
     public void setHighLight(int position) {
         switch (position) {
             case 0:
-                adBottomOne.setBackgroundColor(getResources().getColor(R.color.TextColorRed));
-                adBottomTwo.setBackgroundColor(getResources().getColor(R.color.font_gray3));
-                adBottomThree.setBackgroundColor(getResources().getColor(R.color.font_gray3));
+                adBottomOne.setImageResource(R.drawable.ad_focused_true);
+                adBottomTwo.setImageResource(R.drawable.ad_focused_false);
+                adBottomThree.setImageResource(R.drawable.ad_focused_false);
                 break;
             case 1:
-                adBottomOne.setBackgroundColor(getResources().getColor(R.color.font_gray3));
-                adBottomTwo.setBackgroundColor(getResources().getColor(R.color.TextColorRed));
-                adBottomThree.setBackgroundColor(getResources().getColor(R.color.font_gray3));
+                adBottomOne.setImageResource(R.drawable.ad_focused_false);
+                adBottomTwo.setImageResource(R.drawable.ad_focused_true);
+                adBottomThree.setImageResource(R.drawable.ad_focused_false);
                 break;
             case 2:
-                adBottomOne.setBackgroundColor(getResources().getColor(R.color.font_gray3));
-                adBottomTwo.setBackgroundColor(getResources().getColor(R.color.font_gray3));
-                adBottomThree.setBackgroundColor(getResources().getColor(R.color.TextColorRed));
+                adBottomOne.setImageResource(R.drawable.ad_focused_false);
+                adBottomTwo.setImageResource(R.drawable.ad_focused_false);
+                adBottomThree.setImageResource(R.drawable.ad_focused_true);
                 break;
         }
     }

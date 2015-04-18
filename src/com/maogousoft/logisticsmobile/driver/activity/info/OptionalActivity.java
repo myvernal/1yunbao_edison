@@ -60,8 +60,7 @@ import java.util.List;
  * @author lenovo
  */
 public class OptionalActivity extends BaseActivity {
-
-    private Button mBack, mLogin, mRegister;
+    private Button mLogin, mRegister;
     private EditText mShuiChePhone, mName, mLength, mWeight, mNumber,
             mChezhuPhone, myself_recommendation;
     private Spinner mCarType;
@@ -101,7 +100,7 @@ public class OptionalActivity extends BaseActivity {
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content))
                 .setText(R.string.string_register_complete_title);
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mLogin = (Button) findViewById(R.id.titlebar_id_more);
         mRegister = (Button) findViewById(R.id.info_id_register_submit);
 
@@ -120,8 +119,6 @@ public class OptionalActivity extends BaseActivity {
         car_photo1 = (ImageView) findViewById(R.id.car_photo1);
         car_photo2 = (ImageView) findViewById(R.id.car_photo2);
         car_photo3 = (ImageView) findViewById(R.id.car_photo3);
-
-        mBack.setOnClickListener(this);
         mLogin.setOnClickListener(this);
         mRegister.setOnClickListener(this);
         id_card_photo.setOnClickListener(this);

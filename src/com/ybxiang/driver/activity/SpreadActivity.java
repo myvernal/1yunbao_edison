@@ -32,7 +32,6 @@ public class SpreadActivity extends BaseActivity implements
 		mContactKeFu = (Button) findViewById(R.id.titlebar_id_more);
 		mContactKeFu.setText("客服");
 		mContactKeFu.setOnClickListener(this);
-		((Button) findViewById(R.id.titlebar_id_back)).setOnClickListener(this);
 	}
 
 	@Override

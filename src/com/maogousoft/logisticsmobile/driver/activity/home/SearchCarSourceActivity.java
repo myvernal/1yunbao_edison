@@ -41,7 +41,7 @@ import java.util.List;
  * @author ybxiang
  */
 public class SearchCarSourceActivity extends BaseActivity {
-    private Button mBack, mSubmit, mRightButton;
+    private Button mSubmit, mRightButton;
     private TextView headerTitle;
     private CitySelectView citySelectStart, citySelectEnd;
     private View myFleetSearch, current_location;
@@ -66,7 +66,7 @@ public class SearchCarSourceActivity extends BaseActivity {
 
     // 初始化视图
     private void initViews() {
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         headerTitle = (TextView) findViewById(R.id.titlebar_id_content);
         headerTitle.setText("查找车源");
         mRightButton = ((Button) findViewById(R.id.titlebar_id_more));
@@ -83,8 +83,6 @@ public class SearchCarSourceActivity extends BaseActivity {
         edt_search_source_car_number = (EditText) findViewById(R.id.edt_search_source_car_number);
         citySelectStart = (CitySelectView) findViewById(R.id.cityselect_start);
         citySelectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
-
-        mBack.setOnClickListener(this);
         mSubmit.setOnClickListener(this);
         mRightButton.setOnClickListener(this);
         //关注线路

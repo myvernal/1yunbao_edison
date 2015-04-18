@@ -26,7 +26,6 @@ public class AddCarActivity extends BaseActivity {
     private CitySelectView cityselectStart; // 出发地
     private CitySelectView cityselectEnd1, cityselectEnd2, cityselectEnd3; // 目的地
     private Spinner search_car_type;
-    private Button mTitleBarBack;
     private Button mTitleBarMore;
     private int type;
     private CarInfo carInfo;
@@ -42,12 +41,10 @@ public class AddCarActivity extends BaseActivity {
     // 初始化视图
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("添加车辆");
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setVisibility(View.GONE);
 
-        mTitleBarMore.setOnClickListener(this);
-        mTitleBarBack.setOnClickListener(this);
         cityselectStart = (CitySelectView) findViewById(R.id.cityselect_start);
         cityselectEnd1 = (CitySelectView) findViewById(R.id.cityselect_end1);
         cityselectEnd2 = (CitySelectView) findViewById(R.id.cityselect_end2);

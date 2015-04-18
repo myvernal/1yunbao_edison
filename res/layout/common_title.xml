@@ -1,69 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 头部相对布局 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="48.0dp"
-    android:background="@color/title_bg" >
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/title_bg">
 
     <TextView
-        android:id="@id/titlebar_id_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:ellipsize="end"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="96.0dip"
-        android:paddingRight="96.0dip"
-        android:shadowColor="#4c000000"
-        android:shadowDx="0.0"
-        android:shadowDy="1.0"
-        android:shadowRadius="1.0"
-        android:singleLine="true"
-        android:textColor="@android:color/white"
-        android:textSize="20.0sp" />
+            android:id="@id/titlebar_id_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingLeft="96.0dip"
+            android:paddingRight="96.0dip"
+            android:shadowColor="#4c000000"
+            android:shadowDx="0.0"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="20.0sp"/>
 
-    <Button
-        android:id="@id/titlebar_id_back"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="4.0dip"
-        android:layout_marginRight="4.0dip"
-        android:background="@drawable/selector_titlebar_back"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:maxWidth="100.0dip"
-        android:minWidth="66.0dip"
-        android:shadowColor="#4c000000"
-        android:shadowDx="0.0"
-        android:shadowDy="1.0"
-        android:shadowRadius="1.0"
-        android:singleLine="true"
-        android:text="@string/string_titlebar_back"
-        android:textColor="@drawable/selector_titlebar_textview"
-        android:textSize="@dimen/font_size_small" />
+    <ImageView
+            android:id="@id/titlebar_id_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/header_back"/>
 
-    <Button
-        android:id="@id/titlebar_id_more"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="4.0dip"
-        android:layout_marginRight="6.0dip"
-        android:background="@drawable/top_button_right"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:maxWidth="110.0dip"
-        android:shadowColor="#4c000000"
-        android:shadowDx="0.0"
-        android:shadowDy="1.0"
-        android:shadowRadius="1.0"
-        android:singleLine="true"
-        android:textColor="#80ffff00"
-        android:textSize="@dimen/font_size_small"
-        android:visibility="visible"
-        android:text="@string/string_titlebar_share" />
+    <RelativeLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
 
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="45dp"
+                  android:id="@id/titlebar_id_tip"
+                  android:gravity="center_vertical"
+                  android:textSize="16sp"
+                  android:textColor="@color/TextColorWhite"
+                  android:paddingRight="10dp"
+                  android:visibility="gone"
+                  android:text="设置线路"/>
+
+        <Button
+                android:id="@id/titlebar_id_more"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:background="@drawable/header_more"/>
+    </RelativeLayout>
 </RelativeLayout>

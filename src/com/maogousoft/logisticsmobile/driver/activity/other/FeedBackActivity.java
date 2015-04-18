@@ -34,7 +34,7 @@ public class FeedBackActivity extends BaseActivity {
 	}
 	
 	private void initViews(){
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView)findViewById(R.id.titlebar_id_content)).setText(R.string.string_others_feedback_title);
 		mContent=(EditText)findViewById(android.R.id.edit);
 		mSubmit=(Button)findViewById(android.R.id.button1);

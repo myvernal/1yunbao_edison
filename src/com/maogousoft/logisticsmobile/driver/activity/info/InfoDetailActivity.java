@@ -28,7 +28,7 @@ public class InfoDetailActivity extends BaseActivity {
 	}
 
 	private void initViews() {
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_info_title);
 		mTitle = (TextView) findViewById(R.id.notify_title);
 		mType = (TextView) findViewById(R.id.notify_type);

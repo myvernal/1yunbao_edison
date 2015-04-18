@@ -79,9 +79,6 @@ public class VenderAddActivity extends BaseActivity {
 
 	private final String CAR = "car";
 
-	// 返回，跳过，提交
-	private Button mBack;
-
 	// 身份证，驾驶证，行驶证
 	private Button mCarFlag;
 
@@ -123,7 +120,7 @@ public class VenderAddActivity extends BaseActivity {
 
 	// 初始化视图
 	private void initViews() {
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_vip_add_shop);
 
 		mName = (EditText) findViewById(R.id.vip_id_add_name);
@@ -179,7 +176,6 @@ public class VenderAddActivity extends BaseActivity {
 
 		mCarCamera.setOnClickListener(this);
 		mCarGallery.setOnClickListener(this);
-		mBack.setOnClickListener(this);
 		mSubmit.setOnClickListener(this);
 		mCarFlag.setOnClickListener(this);
 		mLBS.setOnClickListener(this);

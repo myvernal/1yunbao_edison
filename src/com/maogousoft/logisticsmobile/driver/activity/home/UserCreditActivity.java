@@ -49,7 +49,7 @@ public class UserCreditActivity extends BaseActivity {
 
 	// 初始化视图
 	private void initViews() {
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("货主信誉");
 		mListView = (ListView) findViewById(android.R.id.list);
 		mScore = (RatingBar) findViewById(R.id.credit_score);

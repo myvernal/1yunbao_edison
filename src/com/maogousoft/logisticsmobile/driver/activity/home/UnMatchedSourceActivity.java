@@ -28,8 +28,6 @@ import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
  */
 public class UnMatchedSourceActivity extends BaseListActivity {
 
-	private Button mBack;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,15 +36,13 @@ public class UnMatchedSourceActivity extends BaseListActivity {
 
 	// 初始化视图
 	private void initViews() {
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_home_unmatched_title);
 
 		mAdapter = new UnMatchedSourceListAdapter(context);
 		setListAdapter(mAdapter);
 		setListShown(false);
-
-		mBack.setOnClickListener(this);
 	}
 
 	@Override

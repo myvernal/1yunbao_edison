@@ -51,8 +51,6 @@ public class NearbyCarSourceActivity extends BaseActivity {
 
 	private static final String LOGTAG = LogUtil
 			.makeLogTag(SearchSourceActivity.class);
-
-	private Button mBack;
 	private Button mMore;
 
 	private Button mSubmit;
@@ -83,7 +81,7 @@ public class NearbyCarSourceActivity extends BaseActivity {
 
 	// 初始化视图
 	private void initViews() {
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("附件车源");
 		mMore = (Button) findViewById(R.id.titlebar_id_more);
 
@@ -97,7 +95,6 @@ public class NearbyCarSourceActivity extends BaseActivity {
 		cityselectStart = (CitySelectView) findViewById(R.id.cityselect_start);
 		cityselectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
 		mMore.setOnClickListener(this);
-		mBack.setOnClickListener(this);
 		mSubmit.setOnClickListener(this);
 
 	}

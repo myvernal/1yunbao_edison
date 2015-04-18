@@ -38,7 +38,6 @@ public class PublishCarSourceActivity extends BaseActivity implements
     private EditText ower_phone;
     private Spinner search_car_type, car_price_unit;
     private CitySelectView cityselectStart, cityselectEnd; // 出发地，目的地
-    private Button mTitleBarBack;
     private Button mTitleBarMore;
     private double longitude;//经度
     private double latitude;//纬度
@@ -58,12 +57,11 @@ public class PublishCarSourceActivity extends BaseActivity implements
         mTitleBarContent = (TextView) findViewById(R.id.titlebar_id_content);
         mTitleBarContent.setText(R.string.menu_publish_car_source);
 
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setText("已发布");
 
         mTitleBarMore.setOnClickListener(this);
-        mTitleBarBack.setOnClickListener(this);
         cityselectStart = (CitySelectView) findViewById(R.id.cityselect_start);
         cityselectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
 

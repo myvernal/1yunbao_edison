@@ -42,8 +42,7 @@ import java.util.List;
  * @author lenovo
  */
 public class SearchSourceActivity extends BaseActivity {
-
-    private Button mBack, mTitleBarMore, mSubmit;
+    private Button mTitleBarMore, mSubmit;
     private CitySelectView citySelectStart, citySelectEnd;
     private Spinner carTypeSpinner, edtCarLength;
     private GridView mGridView;
@@ -65,8 +64,7 @@ public class SearchSourceActivity extends BaseActivity {
 
     // 初始化视图
     private void initViews() {
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
-        mBack.setVisibility(View.GONE);
+
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("查找货源");
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setVisibility(View.GONE);
@@ -78,7 +76,6 @@ public class SearchSourceActivity extends BaseActivity {
         citySelectStart = (CitySelectView) findViewById(R.id.cityselect_start);
         citySelectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
         mGridView = (GridView) findViewById(R.id.focus_line_gridview);
-        mBack.setOnClickListener(this);
         mTitleBarMore.setOnClickListener(this);
         mSubmit.setOnClickListener(this);
         // 获取车型

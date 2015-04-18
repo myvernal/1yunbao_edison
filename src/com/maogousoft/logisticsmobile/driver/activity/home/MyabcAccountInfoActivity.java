@@ -42,7 +42,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
 
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("我的账户");
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 
 		mBalance = (TextView) findViewById(R.id.myabc_id_balance);
         myabc_id_charge = findViewById(R.id.myabc_id_charge);

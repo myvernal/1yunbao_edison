@@ -39,11 +39,10 @@ public class ForgetShipperActivity extends BaseActivity {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_info_forget_title);
         companyPhone = (EditText) findViewById(R.id.forget_company_phone);
         companyName = (EditText) findViewById(R.id.forget_company_name);
-        Button mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         Button mSubmit = (Button) findViewById(R.id.forget_submitbtn);
         Button mShare = (Button) findViewById(R.id.titlebar_id_more);
 
-        mBack.setOnClickListener(this);
         mSubmit.setOnClickListener(this);
         mShare.setOnClickListener(this);
     }
@@ -54,9 +53,6 @@ public class ForgetShipperActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.forget_submitbtn:
                 submit();
-                break;
-            case R.id.titlebar_id_back:
-                finish();
                 break;
             case R.id.titlebar_id_more:
                 startActivity(new Intent(context, ShareActivity.class));

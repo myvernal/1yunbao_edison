@@ -21,7 +21,7 @@ import java.io.*;
 public class BaoxianDescActivity extends BaseActivity {
 
     private WebView webView;
-    private Button mTitleBarBack, mTitleBarMore;
+    private Button mTitleBarMore;
     private final String mimetype = "text/html";
     private final String encoding = "utf-8";
 
@@ -34,13 +34,11 @@ public class BaoxianDescActivity extends BaseActivity {
     }
 
     private void initViews() {
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setVisibility(View.GONE);
         webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setDefaultTextEncodingName("UTF-8");
-
-        mTitleBarBack.setOnClickListener(this);
     }
 
     @Override

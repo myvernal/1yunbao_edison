@@ -20,7 +20,6 @@ public class ShipDPActivity extends BaseActivity {
     private View part3;
     private View part4;
     private View part5;
-    private Button mTitleBarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +32,7 @@ public class ShipDPActivity extends BaseActivity {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("物流点评(56dp.com)");
         findViewById(R.id.titlebar_id_more).setOnClickListener(this);
         // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         part1 = findViewById(R.id.part1);
         part2 = findViewById(R.id.part2);
         part3 = findViewById(R.id.part3);

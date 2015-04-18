@@ -5,167 +5,171 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.maogousoft.logisticsmobile.driver.widget.OneGallery android:id="@+id/top_ad"
-                                                             android:layout_width="fill_parent"
-                                                             android:layout_height="70dip"
-                                                             android:animationCache="false"
-                                                             android:drawingCacheQuality="high"
-                                                             android:fadingEdge="none"
-                                                             android:fadingEdgeLength="0dp"
-                                                             android:soundEffectsEnabled="false"
-                                                             android:unselectedAlpha="1.1"/>
-    <com.maogousoft.logisticsmobile.driver.widget.OneGalleryBottomView
-            android:id="@+id/top_ad_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView android:layout_width="match_parent"
+                                                             android:layout_height="wrap_content"/>
 
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="@dimen/home_ad_height">
+        <com.maogousoft.logisticsmobile.driver.widget.OneGallery android:id="@+id/top_ad"
+                                                                 android:layout_width="match_parent"
+                                                                 android:layout_height="match_parent"
+                                                                 android:animationCache="false"
+                                                                 android:drawingCacheQuality="high"
+                                                                 android:fadingEdge="none"
+                                                                 android:fadingEdgeLength="0dp"
+                                                                 android:soundEffectsEnabled="false"
+                                                                 android:unselectedAlpha="1.1"/>
+        <com.maogousoft.logisticsmobile.driver.widget.OneGalleryBottomView
+                android:id="@+id/top_ad_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:paddingBottom="5dp"
-                  android:paddingLeft="5dp"
-                  android:paddingRight="5dp"
-                  android:paddingTop="5dp"
-                  android:background="#E3E8EC"
-                  android:layout_weight="2"
-                  android:orientation="horizontal">
+                  android:orientation="vertical"
+                  android:layout_weight="5">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="2"
+                      android:padding="@dimen/home_drawable_space"
+                      android:orientation="horizontal">
 
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-            <!-- 好友货源 -->
-            <RelativeLayout android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:background="@drawable/driver_shape1"
-                            android:onClick="onFriendsSource">
-                <ImageView android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:id="@+id/shape1"
-                           android:src="@drawable/ic_home_friend_source"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/home_test_font"
-                          android:layout_toRightOf="@id/shape1"
-                          android:layout_alignBottom="@id/shape1"
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:layout_height="match_parent"
+                          android:background="@drawable/driver_shape1"
+                          android:onClick="onFocusSource"
                           android:gravity="center"
-                          android:text="找货摇一摇"/><!--找货摇一摇-->
-            </RelativeLayout>
-            <!-- 查找货源 -->
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="2"
-                    android:background="@drawable/driver_shape2"
-                    android:onClick="onSearchSource"
-                    android:gravity="center">
+                          android:orientation="vertical">
                 <ImageView android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:layout_centerHorizontal="true"
-                           android:id="@+id/shape2"
-                           android:src="@drawable/ic_home_search_source"/>
+                           android:layout_marginBottom="@dimen/home_drawable_padding"
+                           android:src="@drawable/driver_index_1"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_test_font"
-                          android:layout_below="@id/shape2"
-                          android:layout_centerHorizontal="true"
-                          android:text="查找货源"/>
-            </RelativeLayout>
-            <!-- 发布车源 -->
-            <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="2"
-                    android:background="@drawable/driver_shape3"
-                    android:onClick="onPublishCar"
-                    android:gravity="center">
+                          android:gravity="center"
+                          android:text="关注货源"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:layout_height="match_parent"
+                          android:layout_marginLeft="@dimen/home_drawable_space"
+                          android:background="@drawable/driver_shape2"
+                          android:onClick="onSearchSource"
+                          android:gravity="center"
+                          android:orientation="vertical">
                 <ImageView android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:layout_centerHorizontal="true"
-                           android:id="@+id/shape3"
-                           android:src="@drawable/ic_home_publish_car"/>
+                           android:layout_marginBottom="@dimen/home_drawable_padding"
+                           android:src="@drawable/driver_index_2"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_test_font"
-                          android:layout_below="@id/shape3"
-                          android:layout_centerHorizontal="true"
-                          android:text="发布车源"/>
-            </RelativeLayout>
+                          android:gravity="center"
+                          android:text="搜索货源"/>
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginLeft="@dimen/home_drawable_space"
+                        android:layout_marginRight="@dimen/home_drawable_space"
+                        android:onClick="onShakeSearch"
+                        android:background="@drawable/driver_shape3">
 
-            <!-- 关注货源 -->
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2"
-                    android:background="@drawable/driver_shape4"
-                    android:onClick="onFocusSource"
-                    android:gravity="center">
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:id="@+id/driver_img_3"
+                       android:src="@drawable/driver_index_3"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/driver_txt_3"
+                      style="@style/home_test_font"
+                      android:layout_toRightOf="@+id/driver_img_3"
+                      android:layout_alignBottom="@+id/driver_img_3"
+                      android:text="摇一摇"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      style="@style/home_test_font"
+                      android:textSize="@dimen/home_font_small_text_size"
+                      android:layout_toRightOf="@+id/driver_txt_3"
+                      android:layout_marginLeft="@dimen/home_drawable_space"
+                      android:layout_alignBottom="@+id/driver_img_3"
+                      android:text="找货"/>
+        </RelativeLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="2"
+                      android:padding="@dimen/home_drawable_space"
+                      android:orientation="horizontal">
+
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:layout_height="match_parent"
+                          android:background="@drawable/driver_shape4"
+                          android:onClick="onPublishCar"
+                          android:gravity="center"
+                          android:orientation="vertical">
                 <ImageView android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:layout_centerHorizontal="true"
-                           android:id="@+id/shape4"
-                           android:src="@drawable/ic_home_like_source"/>
+                           android:layout_marginBottom="@dimen/home_drawable_padding"
+                           android:src="@drawable/driver_index_4"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_test_font"
-                          android:layout_below="@id/shape4"
-                          android:layout_centerHorizontal="true"
-                          android:text="关注货源"/>
-            </RelativeLayout>
-            <!-- 货运名片 -->
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="2"
-                    android:background="@drawable/driver_shape5"
-                    android:onClick="onCard"
-                    android:gravity="center">
-                <ImageView android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:layout_centerHorizontal="true"
-                           android:id="@+id/shape5"
-                           android:src="@drawable/ic_home_driver_card"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/home_test_font"
-                          android:layout_below="@id/shape5"
-                          android:layout_centerHorizontal="true"
-                          android:text="货运名片"/>
-            </RelativeLayout>
-            <!-- 物流园区 -->
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/driver_shape6"
-                    android:onClick="onVIP"
-                    android:gravity="center">
-                <ImageView android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:id="@+id/shape6"
-                           android:src="@drawable/ic_home_park"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/home_test_font"
-                          android:layout_toRightOf="@id/shape6"
-                          android:layout_alignBottom="@id/shape6"
-                          android:text="物流园区"/>
-            </RelativeLayout>
+                          android:gravity="center"
+                          android:text="车源发布"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:layout_marginLeft="@dimen/home_drawable_space"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical">
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_weight="1"
+                              android:layout_height="0dp"
+                              android:background="@drawable/driver_shape5"
+                              android:gravity="center"
+                              android:orientation="horizontal">
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_marginRight="@dimen/home_drawable_space"
+                               android:src="@drawable/driver_index_5"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              style="@style/home_test_font"
+                              android:gravity="center"
+                              android:text="货单"/>
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_weight="1"
+                              android:layout_height="0dp"
+                              android:layout_marginTop="@dimen/home_drawable_space"
+                              android:background="@drawable/driver_shape6"
+                              android:gravity="center"
+                              android:onClick="onSettingDriver"
+                              android:orientation="horizontal">
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_marginRight="@dimen/home_drawable_space"
+                               android:src="@drawable/driver_index_6"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              style="@style/home_test_font"
+                              android:gravity="center"
+                              android:text="我的"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

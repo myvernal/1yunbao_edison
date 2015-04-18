@@ -59,7 +59,7 @@ public class MainLineActivity extends BaseActivity {
 
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("主营路线");
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 
 		mChangePath = (Button) findViewById(R.id.myabc_id_change_path);
 		mPath1 = (TextView) findViewById(R.id.myabc_id_path1);

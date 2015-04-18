@@ -44,8 +44,7 @@ public class CheckCardActivity extends BaseActivity {
         check_number = (EditText) findViewById(R.id.check_number);
         user_money = (TextView) findViewById(R.id.user_money);
         // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         // 更多按钮隐藏
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setText("验证记录");

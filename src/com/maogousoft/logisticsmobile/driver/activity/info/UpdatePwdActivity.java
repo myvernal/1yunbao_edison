@@ -39,7 +39,7 @@ public class UpdatePwdActivity extends BaseActivity {
 
 	// 初始化视图
 	private void initViews() {
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView)findViewById(R.id.titlebar_id_content)).setText(R.string.string_update_title);
 		mOldPwd = (EditText) findViewById(R.id.info_id_update_oldpwd);
 		mNewPwd = (EditText) findViewById(R.id.info_id_update_newpwd);

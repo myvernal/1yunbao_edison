@@ -33,7 +33,7 @@ public class MapActivity extends BaseActivity implements BDLocationListener, OnG
     private MapView mMapView;
     private BaiduMap mBaiduMap;
     private boolean isFirstLoc = true;// 是否首次定位
-    private View mBack, mMore;
+    private View mMore;
     private TextView mTitle;
     private String mMapType;
     private BDLocation location;
@@ -54,8 +54,7 @@ public class MapActivity extends BaseActivity implements BDLocationListener, OnG
         mTitle = (TextView)findViewById(R.id.titlebar_id_content);
         mMore = findViewById(R.id.titlebar_id_more);
         mMore.setVisibility(View.GONE);
-        mBack = findViewById(R.id.titlebar_id_back);
-        mBack.setOnClickListener(this);
+
     }
 
     private void initData() {
@@ -90,11 +89,6 @@ public class MapActivity extends BaseActivity implements BDLocationListener, OnG
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        switch (v.getId()) {
-            case R.id.titlebar_id_back:
-                finish();
-                break;
-        }
     }
 
     /**

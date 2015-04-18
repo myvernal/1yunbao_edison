@@ -28,11 +28,11 @@ import org.json.JSONObject;
  * 
  * @author lenovo
  */
-public class MyabcActivityUser extends BaseActivity {
+public class MyabcActivityShipper extends BaseActivity {
 
     private Context mContext; // PR111
 	// 返回,完善资料
-	private Button mBack, mComplete, mUpdate, mContactKeFu;
+	private Button mComplete, mUpdate, mContactKeFu;
 	private TextView mName, mCompanyName, mPhone, mUpdatePwd, mBalance,
 			mCharge, mAccountRecord, mOnlineTime;
 	private RelativeLayout mHistory;
@@ -43,11 +43,9 @@ public class MyabcActivityUser extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_myabc_user);
-		mContext = MyabcActivityUser.this; // PR111
+		mContext = MyabcActivityShipper.this; // PR111
 		initViews();
 		getBalance();
-		// 隐藏我的易运宝左边的返回按钮
-		findViewById(R.id.titlebar_id_back).setVisibility(View.GONE);
 	}
 
 	private void initViews() {
@@ -58,7 +56,7 @@ public class MyabcActivityUser extends BaseActivity {
 		mContactKeFu = (Button) findViewById(R.id.titlebar_id_more);
 		mContactKeFu.setText("联系客服");
 
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		mComplete = (Button) findViewById(R.id.myabc_id_complete);
 		mUpdate = (Button) findViewById(R.id.myabc_id_update);
 		mName = (TextView) findViewById(R.id.myabc_id_name);
@@ -74,7 +72,6 @@ public class MyabcActivityUser extends BaseActivity {
 		mContactKeFu.setOnClickListener(this);
 		mComplete.setOnClickListener(this);
 		mHistory.setOnClickListener(this);
-		mBack.setOnClickListener(this);
 		mUpdatePwd.setOnClickListener(this);
 		mCharge.setOnClickListener(this);
 		mAccountRecord.setOnClickListener(this);

@@ -30,7 +30,7 @@ import java.util.*;
  * Created by aliang on 2014/9/1.
  */
 public class SafePinanEditActivity extends BaseActivity {
-    private Button mTitleBarBack, mTitleBarMore;
+    private Button mTitleBarMore;
     private EditText start_date, insured_name, insured_phone, shiping_number, plate_number, guache_Num, lianxiren_name;
     private TextView peichang_area;
     private Spinner package_type, start_area, start_city, end_area, end_city;
@@ -48,8 +48,7 @@ public class SafePinanEditActivity extends BaseActivity {
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("中国平安国内公路货运险");
         // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         // 更多按钮隐藏
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setText("保险记录");

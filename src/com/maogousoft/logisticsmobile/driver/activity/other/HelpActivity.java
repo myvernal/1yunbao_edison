@@ -26,7 +26,7 @@ public class HelpActivity extends BaseActivity {
 	}
 
 	private void initViews() {
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("帮助中心");
 
 		webview = (WebView) findViewById(R.id.webview);

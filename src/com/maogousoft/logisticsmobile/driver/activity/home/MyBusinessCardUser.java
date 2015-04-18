@@ -38,7 +38,7 @@ import java.io.IOException;
 public class MyBusinessCardUser extends BaseActivity {
     private Context mContext; // PR111
     // 返回,完善资料
-    private Button mBack, mShareCard, mUpdate;
+    private Button mShareCard, mUpdate;
     private TextView insurance_count, fleet_count, verify_count, address, company_name, name, phone,
             telNum, company_recommendation;
     private RelativeLayout mHistory;
@@ -71,7 +71,7 @@ public class MyBusinessCardUser extends BaseActivity {
         company_photo3 = (ImageView) findViewById(R.id.car_photo3);
         mUpdate = (Button) findViewById(R.id.myabc_id_update);
         my_abc_layout = findViewById(R.id.my_abc_layout);
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         insurance_count = (TextView) findViewById(R.id.insurance_count);
         address = (TextView) findViewById(R.id.address);
         verify_count = (TextView) findViewById(R.id.verify_count);
@@ -83,7 +83,6 @@ public class MyBusinessCardUser extends BaseActivity {
         mHistory = (RelativeLayout) findViewById(R.id.myabc_id_history);
         mHistory.setClickable(true);
         mHistory.setOnClickListener(this);
-        mBack.setOnClickListener(this);
         mUpdate.setOnClickListener(this);
     }
 

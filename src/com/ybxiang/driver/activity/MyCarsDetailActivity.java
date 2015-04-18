@@ -39,7 +39,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     private int id;
     private TextView driver_name, phone, way, plate_number, car_weight, car_length,
             car_type, location_address, location_time;
-    private View edit, delete, free_location, phone_location, back;
+    private View edit, delete, free_location, phone_location;
     private CityDBUtils dbUtils;
     private String phoneNumber = "";
     private CarInfo carInfo;
@@ -59,8 +59,7 @@ public class MyCarsDetailActivity extends BaseActivity {
 
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("车辆详情");
-        back = findViewById(R.id.titlebar_id_back);
-        back.setOnClickListener(this);
+
         driver_name = (TextView) findViewById(R.id.driver_name);
         phone = (TextView) findViewById(R.id.phone);
         way = (TextView) findViewById(R.id.way);
@@ -131,9 +130,6 @@ public class MyCarsDetailActivity extends BaseActivity {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
-            case R.id.titlebar_id_back:
-                finish();
-                break;
             case R.id.edit:
                 if (carInfo != null) {
                     Intent intent = new Intent(context, AddCarActivity.class);

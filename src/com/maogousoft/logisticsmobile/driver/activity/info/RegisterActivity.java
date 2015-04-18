@@ -62,8 +62,7 @@ public class RegisterActivity extends BaseActivity {
     private static final int MAX = 60;
 
     private int current = MAX;
-
-    private Button mBack, mLogin, mRegister, mGetVerifyCode;
+    private Button mLogin, mRegister, mGetVerifyCode;
 
     private EditText mPhone, mVerifyCode, mPassword, mPassword2, mRecommender;
 
@@ -104,7 +103,7 @@ public class RegisterActivity extends BaseActivity {
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content))
                 .setText(R.string.string_title_register);
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mLogin = (Button) findViewById(R.id.titlebar_id_more);
         mRegister = (Button) findViewById(R.id.info_id_register_submit);
         mSelectProvinceFirst = (Button) findViewById(R.id.info_id_register_select_province);
@@ -130,8 +129,6 @@ public class RegisterActivity extends BaseActivity {
         mCheckBox = (CheckBox) findViewById(R.id.info_id_login_autologin);
 
         mRecommender.setBackgroundResource(R.drawable.login_input);
-
-        mBack.setOnClickListener(this);
         mLogin.setOnClickListener(this);
         mRegister.setOnClickListener(this);
         mGetVerifyCode.setOnClickListener(this);

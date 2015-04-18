@@ -21,7 +21,7 @@ public class AboutActivity extends BaseActivity {
 	}
 	
 	private void initViews(){
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView)findViewById(R.id.titlebar_id_content)).setText(R.string.string_other_about_title);
 	}
 }

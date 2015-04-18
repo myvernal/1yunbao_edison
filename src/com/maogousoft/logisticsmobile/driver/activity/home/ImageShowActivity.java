@@ -1,6 +1,7 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -19,8 +20,6 @@ public class ImageShowActivity extends BaseActivity {
 
 	private GestureImageView mGestureImageView;
 
-	private Button mBack;
-
 	private String imageUrl;
 
 	private DisplayImageOptions options;
@@ -37,12 +36,10 @@ public class ImageShowActivity extends BaseActivity {
 		options = new DisplayImageOptions.Builder().cacheInMemory()
 				.cacheOnDisc().displayer(new FadeInBitmapDisplayer(300))
 				.build();
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_home_imageshow_title);
 		mGestureImageView = (GestureImageView) findViewById(R.id.image);
-
-		mBack.setOnClickListener(this);
 	}
 
 	private void initData() {

@@ -27,7 +27,6 @@ import java.util.List;
 public class CheckCardListActivity extends BaseListActivity implements View.OnClickListener, AbsListView.OnScrollListener {
 
     private Context mContext;
-    private Button mTitleBarBack;
     private TextView mTitleBarContent;
     // 底部更多
     private View mFootView;
@@ -54,8 +53,7 @@ public class CheckCardListActivity extends BaseListActivity implements View.OnCl
         mTitleBarContent = ((TextView) findViewById(R.id.titlebar_id_content));
         mTitleBarContent.setText("验证记录");
         // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         // 更多按钮隐藏
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
 

@@ -62,12 +62,11 @@ public class ForgetActivity extends BaseActivity {
         authentication = (EditText) findViewById(R.id.forget_authentication);
         password1 = (EditText) findViewById(R.id.forget_password1);
         password2 = (EditText) findViewById(R.id.forget_password2);
-        Button mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         Button mShare = (Button) findViewById(R.id.titlebar_id_more);
         Button mSubmit = (Button) findViewById(R.id.forget_submitbtn);
         mAuth = (Button) findViewById(R.id.forget_authentication_bty);
 
-        mBack.setOnClickListener(this);
         mSubmit.setOnClickListener(this);
         mShare.setOnClickListener(this);
         mAuth.setOnClickListener(this);
@@ -92,9 +91,6 @@ public class ForgetActivity extends BaseActivity {
     public void onClick(View v) {
         super.onClick(v);
         switch (v.getId()) {
-            case R.id.titlebar_id_back:
-                finish();
-                break;
             case R.id.forget_authentication_bty:
                 authentication();
                 break;

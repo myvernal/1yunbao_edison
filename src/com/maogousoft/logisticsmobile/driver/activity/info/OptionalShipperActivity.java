@@ -52,8 +52,7 @@ import java.io.File;
  * @author ybxiang
  */
 public class OptionalShipperActivity extends BaseActivity {
-
-    private Button mBack, mLogin, mRegister;
+    private Button mLogin, mRegister;
     private EditText mName, mPhone, mTelNum, mAddress, mCompanyName, mSelfDesc;
     private HuoZhuUserInfo abcInfo;
     // 公司LOGO
@@ -88,7 +87,7 @@ public class OptionalShipperActivity extends BaseActivity {
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content))
                 .setText(R.string.string_register_complete_title);
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mLogin = (Button) findViewById(R.id.titlebar_id_more);
         mRegister = (Button) findViewById(R.id.info_id_register_submit);
 
@@ -103,7 +102,6 @@ public class OptionalShipperActivity extends BaseActivity {
         car_photo2 = (ImageView) findViewById(R.id.car_photo2);
         car_photo3 = (ImageView) findViewById(R.id.car_photo3);
 
-        mBack.setOnClickListener(this);
         mLogin.setOnClickListener(this);
         mRegister.setOnClickListener(this);
         id_card_photo.setOnClickListener(this);

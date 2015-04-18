@@ -39,7 +39,7 @@ public class VenderShopListMapActivity extends BaseActivity {
 	}
 
 	private void initView() {
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		mMapView = (MapView) findViewById(R.id.motorcade_map_vip);
 	}
 

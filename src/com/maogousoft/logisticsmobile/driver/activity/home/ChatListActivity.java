@@ -49,8 +49,6 @@ public class ChatListActivity extends BaseActivity {
 	// 选择照片的requstCode
 	private final int CAMERA_CODE = 1000, GALLERY_CODE = 1001;
 	private final String[] proj = { MediaStore.Images.Media.DATA };
-
-	private Button mBack;
 	private Button mSend;
 	private RecordButton mPress;
 	private ImageButton mKeyboard, mImage;
@@ -97,7 +95,7 @@ public class ChatListActivity extends BaseActivity {
 
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_home_chat_title);
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		mPress = (RecordButton) findViewById(R.id.home_id_chat_press);
 		mSend = (Button) findViewById(R.id.home_id_chat_send);
 		mKeyboard = (ImageButton) findViewById(R.id.home_id_chat_keyboard);
@@ -107,7 +105,6 @@ public class ChatListActivity extends BaseActivity {
 		mListView = (ListView) findViewById(android.R.id.list);
 		mListView.setOnScrollListener(new PauseOnScrollListener(true, false));
 
-		mBack.setOnClickListener(this);
 		mSend.setOnClickListener(this);
 		mKeyboard.setOnClickListener(this);
 		mImage.setOnClickListener(this);

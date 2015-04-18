@@ -33,7 +33,6 @@ import com.maogousoft.logisticsmobile.driver.model.ShopInfo;
 
 public class EvaluateActivity extends BaseActivity {
 
-	private Button mBack;
 	private ShopInfo shopInfo;
 
 	private RatingBar ratingBar, ratingBar1, ratingBar2, ratingBar3;
@@ -53,7 +52,7 @@ public class EvaluateActivity extends BaseActivity {
 
 	public void initView() {
 		setContentView(R.layout.activity_vip_evaluate);
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("点评");
 		
 		
@@ -78,14 +77,6 @@ public class EvaluateActivity extends BaseActivity {
 	}
 
 	public void initListener() {
-		mBack.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				onBackPressed();
-			}
-		});
-
 		btnSubmit.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -93,7 +84,6 @@ public class EvaluateActivity extends BaseActivity {
 				submitData();
 			}
 		});
-
 	}
 
 	public void initData() {

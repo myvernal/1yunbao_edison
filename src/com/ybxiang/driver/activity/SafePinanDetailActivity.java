@@ -41,8 +41,7 @@ public class SafePinanDetailActivity extends BaseActivity {
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("中国平安国内公路货运险确认订单");
         // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         // 更多按钮隐藏
         // 更多按钮隐藏
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);

@@ -47,8 +47,8 @@ public class ShareActivity extends BaseFragmentActivity implements
 	private EditText mContent;
 
 	private ListView mListView;
-
-	private Button mSend, mBack;
+    private View mBack;
+	private Button mSend;
 
 	private MultiChoiceBaseAdapter mAdapter;
 
@@ -67,8 +67,7 @@ public class ShareActivity extends BaseFragmentActivity implements
 	}
 
 	private void initViews(Bundle savedInstanceState) {
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
-        mBack.setOnClickListener(this);
+
 		mListView = (ListView) findViewById(android.R.id.list);
 		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.share_get_gift);
 		findViewById(R.id.titlebar_id_more).setVisibility(View.INVISIBLE);
@@ -107,8 +106,6 @@ public class ShareActivity extends BaseFragmentActivity implements
 		mSend.setOnClickListener(this);
 		if (getIntent().hasExtra("share")) {
 			isHasContent = true;
-			findViewById(R.id.titlebar_id_back).setVisibility(View.VISIBLE);
-			findViewById(R.id.titlebar_id_back).setOnClickListener(this);
 		}
 	}
 

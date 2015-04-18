@@ -40,7 +40,7 @@ public class NewSourceActivity extends BaseListActivity implements
         OnScrollListener {
 
     private Context mContext;// PR104
-    private Button mBack, mMore;
+    private Button mMore;
     private int rightButton = 0;// 0显示查找货源，1显示关注此线路,2不显示此button
     // 底部更多
     private View mFootView, mHeaderView;
@@ -72,7 +72,7 @@ public class NewSourceActivity extends BaseListActivity implements
     }
 
     private void initViews() {
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mMore = (Button) findViewById(R.id.titlebar_id_more);
         mMore.setText("查找货源");
         setIsRightKeyIntoShare(false);
@@ -88,7 +88,6 @@ public class NewSourceActivity extends BaseListActivity implements
         mListView.addFooterView(mFootView);
 
         mListView.setOnScrollListener(this);
-        mBack.setOnClickListener(this);
         mMore.setOnClickListener(this);
 
         mAdapter = new NewSourceListAdapter(context);

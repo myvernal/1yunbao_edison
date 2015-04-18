@@ -35,7 +35,7 @@ public class ShakeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shake_layout);
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("摇一摇");
-        findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
         //drawerSet ();//设置  drawer监听    切换 按钮的方向
         mVibrator = (Vibrator) getApplication().getSystemService(VIBRATOR_SERVICE);
         mImgUp = (RelativeLayout) findViewById(R.id.shakeImgUp);

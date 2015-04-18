@@ -28,7 +28,6 @@ import java.util.List;
  */
 public class SearchSpecialLineActivity extends BaseActivity {
 
-    private Button mBack;
     private Button mQuery;
     private CitySelectView citySelectStart;
     private CitySelectView citySelectEnd;
@@ -47,7 +46,7 @@ public class SearchSpecialLineActivity extends BaseActivity {
 
     // 初始化视图
     private void initViews() {
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("零担专线");
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
         mQuery = (Button) findViewById(R.id.query);
@@ -55,7 +54,6 @@ public class SearchSpecialLineActivity extends BaseActivity {
         citySelectStart = (CitySelectView) findViewById(R.id.cityselect_start);
         citySelectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
         mGridView = (GridView) findViewById(R.id.focus_line_gridview);
-        mBack.setOnClickListener(this);
         mQuery.setOnClickListener(this);
 
         //关注线路

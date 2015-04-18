@@ -59,9 +59,8 @@ public class RenZhengActivity extends BaseActivity {
 
 	private final String CARD = "card", LICENSE = "license",
 			REGISTRATION = "registration", CAR = "car";
-
 	// 返回，跳过，提交
-	private Button mBack, mDump, mSubmit;
+	private Button mDump, mSubmit;
 
 	// 身份证，驾驶证，行驶证
 	private Button mCardFlag, mLicenseFlag, mRegistrationFlag, mCarFlag;
@@ -97,7 +96,7 @@ public class RenZhengActivity extends BaseActivity {
 
 	// 初始化视图
 	private void initViews() {
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("诚信认证");
 
 		mCardName = (EditText) findViewById(R.id.info_id_optional_card_name);
@@ -167,7 +166,6 @@ public class RenZhengActivity extends BaseActivity {
 		mRegistrationGallery.setOnClickListener(this);
 		mCarCamera.setOnClickListener(this);
 		mCarGallery.setOnClickListener(this);
-		mBack.setOnClickListener(this);
 		mDump.setOnClickListener(this);
 		mSubmit.setOnClickListener(this);
 

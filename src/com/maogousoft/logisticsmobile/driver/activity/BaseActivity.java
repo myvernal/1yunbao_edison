@@ -232,9 +232,6 @@ public class BaseActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.titlebar_id_back) {
-			finish();
-		}
 //        else if (v.getId() == R.id.titlebar_id_more) {
 //			if (isRightKeyIntoShare) {
 //                LogUtil.e(TAG, "titlebar_id_more");

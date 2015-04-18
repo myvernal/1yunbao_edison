@@ -44,7 +44,6 @@ public class OthersActivity extends BaseActivity implements
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("工具");
         findViewById(R.id.titlebar_id_more).setOnClickListener(this);
 		initViews();
-        findViewById(R.id.titlebar_id_back).setVisibility(View.GONE);
 	}
 
 	@Override

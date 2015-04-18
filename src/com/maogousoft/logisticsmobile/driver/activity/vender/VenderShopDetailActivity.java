@@ -45,8 +45,6 @@ import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
  */
 public class VenderShopDetailActivity extends BaseListActivity implements OnScrollListener {
 
-	private Button mBack;
-
 	private ListView mListView;
 
 	private RatingBar mScore;
@@ -112,7 +110,7 @@ public class VenderShopDetailActivity extends BaseListActivity implements OnScro
 
 	// 初始化视图
 	private void initViews() {
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("商户信息");
 		mListView = (ListView) findViewById(android.R.id.list);
 
@@ -123,7 +121,6 @@ public class VenderShopDetailActivity extends BaseListActivity implements OnScro
 		mListView.addFooterView(mFootView);
 
 		mListView.setOnScrollListener(this);
-		mBack.setOnClickListener(this);
 
 		tvType = (TextView) findViewById(R.id.tv_type);
 		tvName = (TextView) findViewById(R.id.tv_name);

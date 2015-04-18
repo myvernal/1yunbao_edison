@@ -2,6 +2,7 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 
 import java.util.List;
 
+import android.view.View;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,7 +29,6 @@ import com.maogousoft.logisticsmobile.driver.model.EvaluateInfo;
  */
 public class MyCreditActivity extends BaseActivity {
 
-	private Button mBack;
 	private ListView mListView;
 
 	private TextView mName, mPhone, mCarNumber;
@@ -47,7 +47,7 @@ public class MyCreditActivity extends BaseActivity {
 
 	// 初始化视图
 	private void initViews() {
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_home_driver_credit_title);
 		mListView = (ListView) findViewById(android.R.id.list);
@@ -63,8 +63,6 @@ public class MyCreditActivity extends BaseActivity {
 		mScore1.setIsIndicator(true);
 		mScore2.setIsIndicator(true);
 		mScore3.setIsIndicator(true);
-
-		mBack.setOnClickListener(this);
 	}
 
 	// 初始化数据

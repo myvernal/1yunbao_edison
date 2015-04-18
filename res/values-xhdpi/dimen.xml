@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="home_font_text_size">20sp</dimen>
+    <dimen name="home_font_small_text_size">16sp</dimen>
+
+    <dimen name="home_drawable_padding">10dp</dimen>
+    <dimen name="home_drawable_space">10dp</dimen>
+    <dimen name="home_ad_height">130dp</dimen>
 </resources>

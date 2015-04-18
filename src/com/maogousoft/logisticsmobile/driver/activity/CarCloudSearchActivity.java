@@ -51,7 +51,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     private InfoWindow mInfoWindow;
     private LocationClient mLocClient;
     private boolean isFirstLoc = true;// 是否首次定位
-    private Button mBack, mMore;
+    private TextView mMore;
     private TextView mTitle, mNext;
     private int currentModel = CURRENT_MODEL_MAP;
     private static final int CURRENT_MODEL_MAP = 0;
@@ -82,8 +82,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         mTitle.setText("附近车源");
         mMore = (Button) findViewById(R.id.titlebar_id_more);
         mMore.setText("查看列表");
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
-        mBack.setOnClickListener(this);
+
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
         // 在没有获取到位置的时候默认不显示定位图层

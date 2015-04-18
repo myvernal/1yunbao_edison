@@ -29,7 +29,7 @@ public class MySourceDetailActivity extends BaseActivity {
     private static final String TAG = "MySourceDetailActivity";
     private CityDBUtils dbUtils;
     private NewSourceInfo mSourceInfo;
-    private Button mBack, mShare, source_detail_edit, source_detail_republic, source_detail_delete;
+    private Button mShare, source_detail_edit, source_detail_republic, source_detail_delete;
     private TextView source_detail_way, source_detail_content, source_detail_time, source_detail_tip,
             source_detail_contact, source_detail_phone;
 
@@ -45,8 +45,7 @@ public class MySourceDetailActivity extends BaseActivity {
     // 初始化视图
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("已发布货源详情");
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
-        mBack.setOnClickListener(this);
+
         mShare = (Button) findViewById(R.id.titlebar_id_more);
         mShare.setText("分享");
         mShare.setOnClickListener(this);
@@ -125,9 +124,6 @@ public class MySourceDetailActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.titlebar_id_more:
                 share();
-                break;
-            case R.id.titlebar_id_back:
-                finish();
                 break;
             case R.id.source_detail_edit:
                 Intent intent = new Intent(context, PublishGoodsSourceActivity.class);

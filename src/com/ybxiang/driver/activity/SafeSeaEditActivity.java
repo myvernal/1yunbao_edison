@@ -28,7 +28,7 @@ import java.util.*;
  */
 public class SafeSeaEditActivity extends BaseActivity {
 
-    private Button mTitleBarBack, mTitleBarMore;
+    private Button mTitleBarMore;
     private EditText start_date, insurer_name, insured_name, insurer_phone,
             shiping_number, packet_number, ship_type, ship_tool,
             plate_number, start_area, end_area;
@@ -46,8 +46,7 @@ public class SafeSeaEditActivity extends BaseActivity {
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("中国太平洋保险国内货运险");
         // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         // 更多按钮隐藏
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setText("保险记录");

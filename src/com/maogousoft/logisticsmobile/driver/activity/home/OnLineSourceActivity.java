@@ -41,9 +41,9 @@ public class OnLineSourceActivity extends BaseActivity {
 
 	private TextView mNumber, mFrom, mSend, mLine;
 	private TextView mHuoZhuName, mHuoZhuTelcom, mHuoZhuPhone;
-
+    private View mBack;
 	// 返回,联系人,聊天,评价
-	private Button mBack, mTouShu, mChat, mLocation;
+	private Button mTouShu, mChat, mLocation;
 
 	private Button btn_huozhu_telcom, btn_huozhu_phone;
 
@@ -68,7 +68,7 @@ public class OnLineSourceActivity extends BaseActivity {
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_title_online_source);
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 
 		btn_huozhu_telcom = (Button) findViewById(R.id.btn_huozhu_telcom);
 		btn_huozhu_phone = (Button) findViewById(R.id.btn_huozhu_phone);
@@ -98,7 +98,6 @@ public class OnLineSourceActivity extends BaseActivity {
 		chk5 = (CheckBox) findViewById(R.id.chk5);
 		chk6 = (CheckBox) findViewById(R.id.chk6);
 
-		mBack.setOnClickListener(this);
 		btn_huozhu_telcom.setOnClickListener(this);
 		btn_huozhu_phone.setOnClickListener(this);
 		mTouShu.setOnClickListener(this);

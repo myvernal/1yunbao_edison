@@ -38,7 +38,7 @@ public class CarInfoActivity extends BaseActivity {
 
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("车辆信息");
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 
 		mCompanyName = (TextView) findViewById(R.id.source_id_detail_company_name);
 		mNum = (TextView) findViewById(R.id.source_id_detail_num);

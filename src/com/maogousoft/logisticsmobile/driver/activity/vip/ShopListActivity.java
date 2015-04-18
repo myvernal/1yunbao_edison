@@ -32,7 +32,6 @@ import java.util.List;
  */
 public class ShopListActivity extends BaseListActivity implements OnScrollListener, BDLocationListener{
 
-	private Button mBack;
 	// 底部更多
 	private View mFootView;
 	private ProgressBar mFootProgress;
@@ -67,7 +66,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 		ibSearch = (ImageButton) findViewById(R.id.ib_search);
 		titlebar_id_more = (Button) findViewById(R.id.titlebar_id_more);
 		titlebar_id_more.setText("添加园区");
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("物流园区");
 		mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
 		mFootView.setClickable(false);
@@ -76,7 +75,6 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 		mListView.addFooterView(mFootView);
 
 		mListView.setOnScrollListener(this);
-		mBack.setOnClickListener(this);
 
 		mAdapter = new ShopListAdapter(context);
 		setListAdapter(mAdapter);

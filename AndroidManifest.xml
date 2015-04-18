@@ -177,7 +177,7 @@
                 android:theme="@style/AppTheme"/>
         <!-- PR203 找车end -->
         <activity
-                android:name=".activity.home.MyabcActivityUser"
+                android:name=".activity.home.MyabcActivityShipper"
                 android:configChanges="keyboardHidden|orientation"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"

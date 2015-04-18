@@ -31,7 +31,6 @@ public class SafeBaodanActivity extends BaseActivity {
     private WebView webView;
     private DisplayImageOptions options;
     private String url;
-    private Button mTitleBarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,7 @@ public class SafeBaodanActivity extends BaseActivity {
         webView = (WebView) findViewById(R.id.webView);
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("电子保单");
         // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         // 更多按钮隐藏
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
     }

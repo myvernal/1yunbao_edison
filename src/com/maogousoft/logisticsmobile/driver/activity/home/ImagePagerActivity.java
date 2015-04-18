@@ -4,7 +4,9 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maogousoft.logisticsmobile.driver.R;
@@ -17,8 +19,6 @@ import com.maogousoft.logisticsmobile.driver.adapter.ImagePagerAdapter;
  * @author admin
  */
 public class ImagePagerActivity extends BaseFragmentActivity {
-
-	private Button mBack;
 
 	private ViewPager mViewPager;
 
@@ -36,11 +36,9 @@ public class ImagePagerActivity extends BaseFragmentActivity {
 
 	// 初始化视图控件
 	private void initViews() {
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("图片详情");
 		mViewPager = (ViewPager) findViewById(R.id.home_imagepager_viewpager);
-
-		mBack.setOnClickListener(this);
 	}
 
 	private void initData() {

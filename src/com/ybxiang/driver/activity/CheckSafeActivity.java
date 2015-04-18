@@ -17,7 +17,7 @@ public class CheckSafeActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.check_safe);
 		findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("货运保险");
 
         mSeaBtn = findViewById(R.id.safeSeaBtn);

@@ -30,7 +30,7 @@ public class CheckCardResultActivity extends BaseActivity implements View.OnClic
     private void initView() {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("验证结果");
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
-        findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 
         name = (TextView) findViewById(R.id.name);
         gender = (TextView) findViewById(R.id.gender);

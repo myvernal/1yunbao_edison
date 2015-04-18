@@ -22,7 +22,7 @@ public class FactoryUserDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.factory_user_detail);
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("工厂货主详情");
-        findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
 
         initData();

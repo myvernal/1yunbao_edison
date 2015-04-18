@@ -103,9 +103,6 @@ public class MyabcActivityDriver extends BaseActivity {
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_home_myabc_title);
-		// 隐藏我的易运宝左边的返回按钮
-		findViewById(R.id.titlebar_id_back).setVisibility(View.GONE);
-
 		mContactKeFu = (Button) findViewById(R.id.titlebar_id_more);
 		mContactKeFu.setText("联系客服");
 

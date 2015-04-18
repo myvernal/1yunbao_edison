@@ -55,7 +55,7 @@ public class DistanceCalcActivity extends BaseActivity implements OnItemClickLis
 
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_calc_title);
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		search=(Button)findViewById(R.id.titlebar_id_more);
 		search.setText("搜索");
 		search.setOnClickListener(this);
@@ -106,9 +106,6 @@ public class DistanceCalcActivity extends BaseActivity implements OnItemClickLis
 			break;
 		case R.id.calc_change:
 			change();
-			break;
-		case R.id.titlebar_id_back:
-			finish();
 			break;
 		}
 	}

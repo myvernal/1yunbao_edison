@@ -32,7 +32,6 @@ import com.maogousoft.logisticsmobile.driver.model.ShopInfo;
 
 public class VenderEvaluateActivity extends BaseActivity {
 
-	private Button mBack;
 	private ShopInfo shopInfo;
 
 	private RatingBar ratingBar, ratingBar1, ratingBar2, ratingBar3;
@@ -52,11 +51,8 @@ public class VenderEvaluateActivity extends BaseActivity {
 
 	public void initView() {
 		setContentView(R.layout.activity_vip_evaluate);
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
-		((TextView) findViewById(R.id.titlebar_id_content)).setText("点评");
-		
-		
 
+		((TextView) findViewById(R.id.titlebar_id_content)).setText("点评");
 		ratingBar = (RatingBar) findViewById(R.id.evaluate_id_score);
 		ratingBar.setIsIndicator(true);
 
@@ -77,14 +73,6 @@ public class VenderEvaluateActivity extends BaseActivity {
 	}
 
 	public void initListener() {
-		mBack.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				onBackPressed();
-			}
-		});
-
 		btnSubmit.setOnClickListener(new OnClickListener() {
 
 			@Override

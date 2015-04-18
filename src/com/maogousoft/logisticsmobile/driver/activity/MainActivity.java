@@ -1,6 +1,7 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
 import android.view.View;
+import android.widget.TextView;
 import com.baidu.mapapi.SDKInitializer;
 import com.maogousoft.logisticsmobile.driver.activity.home.*;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
@@ -132,7 +133,7 @@ public class MainActivity extends TabActivity {
                     .setContent(new Intent(this, MyabcActivityDriver.class)));
         } else {
             mTabHost.addTab(mTabHost.newTabSpec("others").setIndicator("我X")
-                    .setContent(new Intent(this, MyabcActivityUser.class)));
+                    .setContent(new Intent(this, MyabcActivityShipper.class)));
         }
         // OthersActivity -->MyabcActivity;
         // PR 102 OthersActivity-->

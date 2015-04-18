@@ -36,7 +36,7 @@ public class RechargeCardActivity extends BaseActivity {
 
 	// 初始化视图
 	private void initViews() {
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_other_recharge_card);
 		muser = (EditText) findViewById(R.id.other_recharge_card_user);

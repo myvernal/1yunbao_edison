@@ -30,7 +30,6 @@ import com.maogousoft.logisticsmobile.driver.model.AccountRecordInfo;
  */
 public class AccountRecordActivity extends BaseListActivity implements OnScrollListener {
 
-	private Button mBack;
 	// 底部更多
 	private View mFootView;
 	private ProgressBar mFootProgress;
@@ -51,7 +50,7 @@ public class AccountRecordActivity extends BaseListActivity implements OnScrollL
 	}
 
 	private void initViews() {
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("账户记录");
 		mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
 		mFootView.setClickable(false);
@@ -60,7 +59,6 @@ public class AccountRecordActivity extends BaseListActivity implements OnScrollL
 		mListView.addFooterView(mFootView);
 
 		mListView.setOnScrollListener(this);
-		mBack.setOnClickListener(this);
 
 		mAdapter = new AccountRecordAdapter(context);
 		setListAdapter(mAdapter);

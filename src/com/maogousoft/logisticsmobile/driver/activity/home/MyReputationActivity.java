@@ -45,7 +45,7 @@ public class MyReputationActivity extends BaseActivity {
 
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("我的信誉");
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		// 信誉记录
 		mCreditRatingbar = (RatingBar) findViewById(R.id.myabc_id_ratingbar);
 		mCreditRatingbar.setIsIndicator(true);

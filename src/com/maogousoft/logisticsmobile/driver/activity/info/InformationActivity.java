@@ -37,7 +37,6 @@ public class InformationActivity extends BaseListActivity {
 
 	// 初始化视图
 	private void initViews() {
-		findViewById(R.id.titlebar_id_back).setVisibility(View.GONE);
 		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_main_search);
 		mListView.setDivider(null);
 		mListView.setSelector(android.R.color.transparent);

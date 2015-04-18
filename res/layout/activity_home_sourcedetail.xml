@@ -5,7 +5,8 @@
               android:background="@color/window_bg"
               android:orientation="vertical">
 
-    <include layout="@layout/common_title"/>
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView android:layout_width="match_parent"
+                                                             android:layout_height="wrap_content"/>
 
     <ScrollView
             android:id="@+id/scrollView1"

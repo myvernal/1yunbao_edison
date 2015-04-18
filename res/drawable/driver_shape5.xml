@@ -3,8 +3,8 @@
     android:shape="rectangle" >
 
     <!-- 填充的颜色 -->
-    <solid android:color="#0084a8" />
-
+    <solid android:color="@color/driver_index5_bg" />
+    <corners android:radius="10dip"/>
     <!-- padding：Button里面的文字与Button边界的间隔 -->
     <padding
         android:bottom="10dp"

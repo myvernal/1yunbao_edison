@@ -2,7 +2,8 @@
 <resources>
 
     <color name="transparent">#00000000</color>
-    <color name="title_bg">#2678bd</color>
+    <color name="title_bg">#FE5722</color>
+    <color name="yellow">#FEC107</color>
     <color name="window_bg">#e3e8ed</color>
     <color name="orange_order">#ffab33</color>
     <color name="font_gray">#333333</color>
@@ -28,4 +29,11 @@
     <color name="green">#ff00dd00</color>
     <color name="Red">#FFFF0000</color>
 	<color name="BgColor">#ffd1dce9</color>
+
+    <color name="driver_index1_bg">#FFB518</color>
+    <color name="driver_index2_bg">#BCD710</color>
+    <color name="driver_index3_bg">#FF6865</color>
+    <color name="driver_index4_bg">#4FD600</color>
+    <color name="driver_index5_bg">#61ACFF</color>
+    <color name="driver_index6_bg">#398DFF</color>
 </resources>

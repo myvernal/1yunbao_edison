@@ -51,7 +51,6 @@ import com.maogousoft.logisticsmobile.driver.utils.MD5;
  */
 public class VenderShopListActivity extends BaseListActivity implements OnScrollListener, BDLocationListener {
 
-	private Button mBack;
 	// 底部更多
 	private View mFootView;
 	private ProgressBar mFootProgress;
@@ -110,7 +109,7 @@ public class VenderShopListActivity extends BaseListActivity implements OnScroll
 		titlebar_id_more = (Button) findViewById(R.id.titlebar_id_more);
 		titlebar_id_more.setText("添加商户");
 
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("商户列表");
 		mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
 		mFootView.setClickable(false);
@@ -119,7 +118,6 @@ public class VenderShopListActivity extends BaseListActivity implements OnScroll
 		mListView.addFooterView(mFootView);
 
 		mListView.setOnScrollListener(this);
-		mBack.setOnClickListener(this);
 
 		mAdapter = new ShopListAdapter(context);
 		setListAdapter(mAdapter);

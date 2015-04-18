@@ -23,7 +23,7 @@ public class SpecialLineDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.special_line_detail);
-        findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
         initData();
     }

@@ -19,7 +19,6 @@ import com.maogousoft.logisticsmobile.driver.model.CarInfo;
  */
 public class CarInfoDetailActivity extends BaseActivity {
     private Context mContext;
-    private Button mTitleBarBack;
     private Button mTitleBarMore;
     private CarInfo carInfo;
     private TextView car_info_detail_way, car_info_detail_number, car_info_detail_car_length,
@@ -65,8 +64,7 @@ public class CarInfoDetailActivity extends BaseActivity {
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("车源详情");
         // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         // 更多按钮隐藏
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setVisibility(View.GONE);

@@ -24,7 +24,7 @@ import java.io.Serializable;
 
 public class PublishGoodsSourceActivity extends BaseActivity implements OnClickListener {
     private Context mContext;
-    private Button mBack, mRightButton;
+    private Button mRightButton;
     private CitySelectView cityselectStart, cityselectEnd;
     private TextView mTitleBarContent;
     private int selectedCarWay = Constants.CAR_WAY_WHOLE;// 选择的车辆方式
@@ -50,7 +50,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         mContext = PublishGoodsSourceActivity.this;
         mTitleBarContent = (TextView) findViewById(R.id.titlebar_id_content);
         mRightButton = (Button) findViewById(R.id.titlebar_id_more);
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mTitleBarContent.setText("发布货源");
         mRightButton.setText("已发布");
         cityselectStart = (CitySelectView) findViewById(R.id.cityselect_start);
@@ -72,7 +72,6 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         source_id_publish_cargo_unit = (Spinner) findViewById(R.id.source_id_publish_cargo_unit);
         source_id_publish_cargo_tip = (Spinner) findViewById(R.id.source_id_publish_cargo_tip);
         source_id_publish_source_weight_unit = (Spinner) findViewById(R.id.source_id_publish_source_weight_unit);
-        mBack.setOnClickListener(this);
         mRightButton.setOnClickListener(this);
     }
 

@@ -52,7 +52,7 @@ public class MyBusinessCard extends BaseActivity {
 
     private Context mContext; // PR111
     // 返回,完善资料
-    private Button mBack, mUpdate, mShareCard;
+    private Button mUpdate, mShareCard;
     private TextView mName, mNumber, mPhone, mUpdatePwd;
     private View mChangePath, my_info_card;
     private TextView mPath1, mPath2, mPath3, mCarNum, mCarlength, mCartype,
@@ -83,7 +83,7 @@ public class MyBusinessCard extends BaseActivity {
         car_photo1 = (ImageView) findViewById(R.id.car_photo1);
         car_photo2 = (ImageView) findViewById(R.id.car_photo2);
         car_photo3 = (ImageView) findViewById(R.id.car_photo3);
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mUpdate = (Button) findViewById(R.id.myabc_id_update);
         mName = (TextView) findViewById(R.id.business_card_part1_name);
         mNumber = (TextView) findViewById(R.id.business_card_part1_number);
@@ -101,7 +101,6 @@ public class MyBusinessCard extends BaseActivity {
 
         my_info_card = findViewById(R.id.my_info_card);
         mShareCard.setOnClickListener(this);
-        mBack.setOnClickListener(this);
         mUpdate.setOnClickListener(this);
         mChangePath.setOnClickListener(this);
     }
@@ -128,9 +127,7 @@ public class MyBusinessCard extends BaseActivity {
     public void onClick(View v) {
 
         super.onClick(v);
-        if (v == mBack) {
-            finish();
-        } else if (v == mUpdatePwd) {
+        if (v == mUpdatePwd) {
             startActivity(new Intent(context, UpdatePwdActivity.class));
         }
 //        else if (v == mCreditContainer) {

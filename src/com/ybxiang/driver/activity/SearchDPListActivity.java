@@ -27,7 +27,6 @@ import java.util.List;
 public class SearchDPListActivity extends BaseListActivity implements
         View.OnClickListener, AbsListView.OnScrollListener {
     private Context mContext;
-    private Button mTitleBarBack;
     private Button mTitleBarMore;
     private TextView mTitleBarContent;
     // 底部更多
@@ -57,9 +56,7 @@ public class SearchDPListActivity extends BaseListActivity implements
     private void initViews() {
         mTitleBarContent = ((TextView) findViewById(R.id.titlebar_id_content));
         mTitleBarContent.setText("零担专线");
-        // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         // 更多按钮隐藏
         mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
         mTitleBarMore.setVisibility(View.GONE);

@@ -36,7 +36,7 @@ public class HistroyOrderActivity extends BaseListActivity {
 
 	// 初始化视图
 	private void initViews() {
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("历史订单");
 
 		mAdapter = new CompleteOrderListAdapter(context);

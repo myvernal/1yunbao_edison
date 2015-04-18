@@ -53,7 +53,7 @@ public class MyabcCarInfoActivity extends BaseActivity {
 
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("车辆信息");
-		findViewById(R.id.titlebar_id_back).setOnClickListener(this);
+
 
 		mUpdate = (Button) findViewById(R.id.myabc_id_update);
 

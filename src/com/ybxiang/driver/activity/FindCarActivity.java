@@ -48,8 +48,6 @@ public class FindCarActivity extends BaseActivity {
 
 	private static final String LOGTAG = LogUtil
 			.makeLogTag(SearchSourceActivity.class);
-
-	private Button mBack;
 	private Button mMore;
 
 	private Button mSubmit;
@@ -80,7 +78,7 @@ public class FindCarActivity extends BaseActivity {
 
 	// 初始化视图
 	private void initViews() {
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("查找车源");
 		mMore = (Button) findViewById(R.id.titlebar_id_more);
 		mMore.setText("附近车源");
@@ -89,7 +87,6 @@ public class FindCarActivity extends BaseActivity {
 		cityselectStart = (CitySelectView) findViewById(R.id.cityselect_start);
 		cityselectEnd = (CitySelectView) findViewById(R.id.cityselect_end);
 		mMore.setOnClickListener(this);
-		mBack.setOnClickListener(this);
 		mSubmit.setOnClickListener(this);
 
 	}
@@ -108,10 +105,6 @@ public class FindCarActivity extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		// 返回
-		case R.id.titlebar_id_back:
-			onBackPressed();
-			break;
 		// 附近车源
 		case R.id.titlebar_id_more:
 //			startActivity(new Intent(mContext, NearbyCarSourceActivity.class));

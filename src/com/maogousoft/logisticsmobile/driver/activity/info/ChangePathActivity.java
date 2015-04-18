@@ -32,8 +32,7 @@ import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
  * @author lenovo
  */
 public class ChangePathActivity extends BaseActivity {
-
-	private Button mBack, mSubmit;
+	private Button mSubmit;
 
 	private TextView tvPath1, tvPath2, tvPath3;
 
@@ -86,7 +85,7 @@ public class ChangePathActivity extends BaseActivity {
 	// 初始化视图
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("修改线路");
-		mBack = (Button) findViewById(R.id.titlebar_id_back);
+
 		mSubmit = (Button) findViewById(R.id.info_id_register_submit);
 
 		tvPath1 = (TextView) findViewById(R.id.tv_path1);
@@ -120,8 +119,6 @@ public class ChangePathActivity extends BaseActivity {
 
 		mGridViewThird = (MyGridView) findViewById(R.id.info_id_register_city_third);
 		mGridViewThird2 = (MyGridView) findViewById(R.id.info_id_register_endcity_third);
-
-		mBack.setOnClickListener(this);
 		mSubmit.setOnClickListener(this);
 		mSelectProvinceFirst.setOnClickListener(this);
 		mSelectCityFirst.setOnClickListener(this);

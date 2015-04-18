@@ -20,7 +20,6 @@ import org.json.JSONObject;
  */
 public class SearchThreePartyActivity extends BaseActivity {
 
-    private Button mBack;
     private Button mQuery;
     private CitySelectView citySelect;
     private EditText searchKey;
@@ -34,14 +33,13 @@ public class SearchThreePartyActivity extends BaseActivity {
 
     // 初始化视图
     private void initViews() {
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("三方物流");
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
         mQuery = (Button) findViewById(R.id.query);
 
         citySelect = (CitySelectView) findViewById(R.id.cityselect_start);
         searchKey = (EditText) findViewById(R.id.searchKey);
-        mBack.setOnClickListener(this);
         mQuery.setOnClickListener(this);
     }
 

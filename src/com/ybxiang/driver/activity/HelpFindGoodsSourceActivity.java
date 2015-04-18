@@ -24,8 +24,7 @@ public class HelpFindGoodsSourceActivity extends BaseActivity implements
 		setContentView(R.layout.activity_home_help_find_goods_source);
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("帮我找货");
 		// 隐藏右边"礼品"标题
-		((Button) findViewById(R.id.titlebar_id_more)).setVisibility(View.GONE);
-		((Button) findViewById(R.id.titlebar_id_back)).setOnClickListener(this);
+		(findViewById(R.id.titlebar_id_more)).setVisibility(View.GONE);
 	}
 
 	@Override

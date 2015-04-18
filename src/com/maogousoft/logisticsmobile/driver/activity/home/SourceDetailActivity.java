@@ -47,7 +47,7 @@ public class SourceDetailActivity extends BaseActivity {
     public static final String ORDER_ID = "order_id";
     public static final String ORDER_INFO = "sourceInfo";
     private int order_id;
-    private Button mBack, mPlace, mAttention, mPhone, mShare;
+    private Button mPlace, mAttention, mPhone, mShare;
     private MyGridView mGridView;
     private ImageGridAdapter mAdapter;
     private TextView mOrderNumber, mName, mLine, mSourceName, mSourceType, mShipType, mSourceCarLength,
@@ -80,7 +80,7 @@ public class SourceDetailActivity extends BaseActivity {
     private void initViews() {
         ((TextView) findViewById(R.id.titlebar_id_content))
                 .setText(R.string.string_home_sourcedetail_title);
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         mPlace = (Button) findViewById(R.id.source_id_detail_place);
         mShare = (Button) findViewById(R.id.titlebar_id_more);
         mShare.setText("分享");
@@ -105,8 +105,6 @@ public class SourceDetailActivity extends BaseActivity {
         ratingbarScore3.setIsIndicator(true);
 
         sourceOther = (TextView) findViewById(R.id.source_detail_other);
-
-        mBack.setOnClickListener(this);
         mPlace.setOnClickListener(this);
         mAttention.setOnClickListener(this);
         mPingjia.setOnClickListener(this);

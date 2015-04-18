@@ -24,7 +24,6 @@ import java.util.List;
  * 保险记录
  */
 public class SafeListActivity extends BaseListActivity implements AbsListView.OnScrollListener {
-    private Button mTitleBarBack;
     // 底部更多
     private View mFootView;
     private ProgressBar mFootProgress;
@@ -47,8 +46,7 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
     private void initViews() {
 
         // 返回按钮生效
-        mTitleBarBack = (Button) findViewById(R.id.titlebar_id_back);
-        mTitleBarBack.setOnClickListener(this);
+
         // 更多按钮隐藏
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
 

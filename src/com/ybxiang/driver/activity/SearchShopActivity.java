@@ -37,14 +37,13 @@ public class SearchShopActivity extends BaseActivity {
 
     // 初始化视图
     private void initViews() {
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("物流园区");
         titlebar_id_more = (Button) findViewById(R.id.titlebar_id_more);
         titlebar_id_more.setText("添加园区");
 
         mQuery = (Button) findViewById(R.id.query);
         citySelect = (CitySelectView) findViewById(R.id.cityselect_start);
-        mBack.setOnClickListener(this);
         mQuery.setOnClickListener(this);
     }
 

@@ -34,7 +34,7 @@ public class SearchFactoryUserActivity extends BaseActivity {
 
     // 初始化视图
     private void initViews() {
-        mBack = (Button) findViewById(R.id.titlebar_id_back);
+
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("工厂货主");
         findViewById(R.id.titlebar_id_more).setVisibility(View.GONE);
         findViewById(R.id.label).setVisibility(View.GONE);
@@ -43,7 +43,6 @@ public class SearchFactoryUserActivity extends BaseActivity {
         citySelect = (CitySelectView) findViewById(R.id.cityselect_start);
         citySelect.setVisibility(View.GONE);
         searchKey = (EditText) findViewById(R.id.searchKey);
-        mBack.setOnClickListener(this);
         mQuery.setOnClickListener(this);
     }
 
