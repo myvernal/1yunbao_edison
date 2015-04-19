@@ -235,13 +235,12 @@ public class SourceDetailActivity extends BaseActivity {
         mOrderNumber.setVisibility(View.GONE);
 
         if (!TextUtils.isEmpty(sourceInfo.getCargo_user_name())) {
-            mName.setText(sourceInfo.getCargo_user_name());
+            mName.setText(mName.getText() + sourceInfo.getCargo_user_name());
         } else {
-
             if (!TextUtils.isEmpty(sourceInfo.getUser_name())) {
-                mName.setText(sourceInfo.getUser_name());
+                mName.setText(mName.getText() + sourceInfo.getUser_name());
             } else {
-                mName.setText("无");
+                mName.setText(mName.getText() + "无");
             }
 
         }
@@ -270,16 +269,16 @@ public class SourceDetailActivity extends BaseActivity {
             way = wayStart + "--" + wayEnd;
         }
 
-        mLine.setText(Html.fromHtml(mLine.getText() + Utils.textFormatGreen(way)));
+        mLine.setText(mLine.getText() + way);
         String sourceName = sourceInfo.getCargo_desc();
-        mSourceName.setText(Html.fromHtml(mSourceName.getText() + Utils.textFormatBlue(sourceName)));
+        mSourceName.setText(mSourceName.getText() + sourceName);
         //货物类型
         Integer sourceType = mSourceInfo.getCargo_type();
         if (sourceType != null && sourceType > 0) {
             String[] sourceTypeStr = context.getResources().getStringArray(R.array.goods_types);
             for (int i = 0; i < Constants.sourceTypeValues.length; i++) {
                 if (Constants.sourceTypeValues[i] == sourceType) {
-                    mSourceType.setText(Html.fromHtml(mSourceType.getText() + Utils.textFormatBlue(sourceTypeStr[i])));
+                    mSourceType.setText(mSourceType.getText() + Utils.textFormatBlue(sourceTypeStr[i]));
                     break;
                 }
             }
@@ -294,7 +293,7 @@ public class SourceDetailActivity extends BaseActivity {
             for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                 if (Constants.unitTypeValues[i] == unitType) {
                     weight = mSourceInfo.getCargo_number() + priceUnit[i];
-                    mWeight.setText(Html.fromHtml(mWeight.getText().toString() + Utils.textFormatBlue(weight)));
+                    mWeight.setText(mWeight.getText().toString() + weight);
                     break;
                 }
             }
@@ -340,24 +339,18 @@ public class SourceDetailActivity extends BaseActivity {
             String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
             for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                 if (Constants.unitTypeValues[i] == unitPrice) {
-                    mSourcePrice.setText(Html.fromHtml(mSourcePrice.getText().toString() + Utils.textFormatBlue(sourceInfo.getUnit_price() + "元/" + unitPriceStr[i])));
+                    mSourcePrice.setText(Html.fromHtml(mSourcePrice.getText().toString() + Utils.textFormatRed(sourceInfo.getUnit_price() + "元/" + unitPriceStr[i])));
                     break;
                 }
             }
-        } else {
+        }/* else {
             mSourcePrice.setVisibility(View.GONE);
-        }
+        }*/
         //
         mSourceGold.setText(mSourceGold.getText().toString() + sourceInfo.getUser_bond() + "元");
-        Date date = new Date();
-        String betweenTime = "刚发布";
-        if (date.getTime() > sourceInfo.getCreate_time()) {
-            long time = date.getTime() - sourceInfo.getCreate_time();
-            long hour = time / (60 * 60 * 1000);
-            long minites = (time % (60 * 60 * 1000)) / (60 * 1000);
-            betweenTime = "{" + hour + "时" + minites + "分}";
-        }
-        mValidateTime.setText(Html.fromHtml("已发布:" + Utils.textFormatRed(betweenTime)));
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        String createTime = format.format(new Date(sourceInfo.getCreate_time()));
+        mValidateTime.setText(mValidateTime.getText() + createTime);
 
         float score = Float.parseFloat(String.valueOf(sourceInfo.getScore()));
         if (score == 0) {

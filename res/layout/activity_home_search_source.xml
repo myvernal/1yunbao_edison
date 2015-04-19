@@ -16,16 +16,18 @@
                 android:layout_height="wrap_content"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:padding="10dp"
                 android:orientation="vertical">
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:text="*出发地"
+                    android:text="出发地"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/search_line_begin"
                     android:textColor="@color/font_gray2"
-                    android:textSize="@dimen/font_size_normal"/>
+                    android:textSize="@dimen/font_size_small"/>
 
             <com.maogousoft.logisticsmobile.driver.CitySelectView
                     android:id="@+id/cityselect_start"
@@ -38,11 +40,12 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="2dp"
-                    android:text="*目的地"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/search_line_end"
+                    android:text="目的地"
                     android:textColor="@color/font_gray2"
-                    android:textSize="@dimen/font_size_normal"/>
+                    android:textSize="@dimen/font_size_small"/>
 
             <com.maogousoft.logisticsmobile.driver.CitySelectView
                     android:id="@+id/cityselect_end"
@@ -57,20 +60,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp">
 
                 <TextView
                         style="@style/info_register_text_style"
                         android:layout_gravity="center_vertical"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/search_car_type"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
+                        android:textSize="@dimen/font_size_small"
                         android:text="车型"/>
 
                 <Spinner
                         android:id="@+id/search_car_type"
                         style="@style/home_publish_spinner_style"
+                        android:layout_width="100dp"
                         android:entries="@array/car_types_name"/>
             </LinearLayout>
 
@@ -79,15 +83,15 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp">
 
                 <TextView
                         style="@style/info_register_text_style"
                         android:layout_gravity="center_vertical"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/search_chechang"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"
+                        android:textSize="@dimen/font_size_small"
                         android:text="车长"/>
 
                 <Spinner
@@ -96,6 +100,41 @@
                         android:entries="@array/car_length_names"/>
             </LinearLayout>
             <!-- PR1.3 begin -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
+
+                <TextView
+                        style="@style/info_register_text_style"
+                        android:layout_gravity="center_vertical"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/search_baozhengjin"
+                        android:layout_marginRight="10dp"
+                        android:textSize="@dimen/font_size_small"
+                        android:text="保证金"/>
+
+                <EditText
+                        android:id="@+id/edt_search_source_min_baozhengjin"
+                        android:textSize="@dimen/font_size_small"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="@dimen/font_size_small"
+                        android:text="元\t一"/>
+                <EditText
+                        android:id="@+id/edt_search_source_max_baozhengjin"
+                        android:textSize="@dimen/font_size_small"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="@dimen/font_size_small"
+                          android:text="元"/>
+            </LinearLayout>
 
             <RadioGroup
                     android:layout_width="fill_parent"
@@ -106,24 +145,41 @@
 
                 <RadioButton
                         android:id="@+id/car_way_part"
+                        android:drawableLeft="@drawable/selector_radio"
+                        android:drawablePadding="5dp"
+                        android:button="@null"
+                        android:background="@null"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="onChooseCarWay"
+                        android:textSize="@dimen/font_size_small"
                         android:text="@string/car_way_part"/>
 
                 <RadioButton
                         android:id="@+id/car_way_whole"
+                        android:drawableLeft="@drawable/selector_radio"
+                        android:drawablePadding="5dp"
+                        android:button="@null"
+                        android:background="@null"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="onChooseCarWay"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:textSize="@dimen/font_size_small"
                         android:text="@string/car_way_whole"/>
 
                 <RadioButton
                         android:id="@+id/car_way_all"
+                        android:drawableLeft="@drawable/selector_radio"
+                        android:drawablePadding="5dp"
+                        android:button="@null"
+                        android:background="@null"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:onClick="onChooseCarWay"
+                        android:textSize="@dimen/font_size_small"
                         android:text="不限"/>
             </RadioGroup>
             <!-- PR1.3 end -->
@@ -152,6 +208,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="5dp"
                         android:onClick="onFastSetting"
+                        android:textSize="@dimen/font_size_small"
                         android:text="快捷设置"/>
 
             </RelativeLayout>

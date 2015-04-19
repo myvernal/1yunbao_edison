@@ -80,8 +80,8 @@
 
     <style name="ratingbar_style" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingbar</item>
-        <item name="android:minHeight">16dp</item>
-        <item name="android:maxHeight">16dp</item>
+        <item name="android:minHeight">13dp</item>
+        <item name="android:maxHeight">13dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:isIndicator">false</item>
@@ -90,8 +90,8 @@
 
     <style name="ratingbar_big_style" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingbar_big</item>
-        <item name="android:minHeight">19dp</item>
-        <item name="android:maxHeight">19dp</item>
+        <item name="android:minHeight">13dp</item>
+        <item name="android:maxHeight">13dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:isIndicator">false</item>
@@ -122,25 +122,25 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:minHeight">40dp</item>
-        <item name="android:background">@drawable/selector_blue_button</item>
+        <item name="android:background">@drawable/selector_common_button</item>
     </style>
 
     <style name="info_button_wrap_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:minWidth">100dp</item>
         <item name="android:minHeight">40dp</item>
-        <item name="android:background">@drawable/selector_blue_button</item>
+        <item name="android:background">@drawable/selector_common_button</item>
     </style>
 
     <style name="info_edittext_style">
@@ -265,7 +265,7 @@
     </style>
 
     <style name="info_text_style">
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
@@ -273,17 +273,16 @@
     </style>
     <!-- 发布车源信息 排版靠右 -->
     <style name="info_publish_text_style">
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:gravity">right</item>
-        <item name="android:minWidth">70dp</item>
+        <item name="android:drawablePadding">5dp</item>
         <item name="android:textColor">@color/font_gray2</item>
     </style>
     <!-- 车源管理列表 排版靠左 -->
     <style name="info_left_text_style">
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
@@ -320,7 +319,7 @@
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>
         <item name="android:minHeight">40dp</item>
-        <item name="android:background">@drawable/selector_blue_button</item>
+        <item name="android:background">@drawable/selector_common_button</item>
     </style>
 
     <style name="home_imagebutton_style">
@@ -356,7 +355,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">2</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/font_gray3</item>
     </style>
 
@@ -373,7 +372,7 @@
     </style>
 
     <style name="home_myabc_title_base_style">
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:padding">8dp</item>
         <item name="android:textColor">@color/font_gray2</item>
         <item name="android:minHeight">44dp</item>
@@ -382,7 +381,7 @@
     </style>
 
     <style name="home_main_tips_base_style">
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:padding">8dp</item>
         <item name="android:textColor">@color/font_gray3</item>
         <item name="android:gravity">center_vertical</item>
@@ -390,7 +389,7 @@
     </style>
 
     <style name="home_myabc_content_style">
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">@color/font_gray2</item>
@@ -435,16 +434,14 @@
         <item name="android:paddingTop">3dp</item>
         <item name="android:paddingBottom">3dp</item>
         <item name="android:paddingRight">5dp</item>
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:textColor">@color/font_gray2</item>
     </style>
 
     <style name="home_source_detail_top_style">
-        <item name="android:paddingTop">3dp</item>
-        <item name="android:paddingBottom">3dp</item>
-        <item name="android:paddingRight">5dp</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:textColor">@color/TextColorBlack</item>
     </style>
 
@@ -542,7 +539,7 @@
         <item name="android:paddingBottom">7dp</item>
         <item name="android:focusable">false</item>
         <item name="android:minHeight">40dip</item>
-        <item name="android:background">@drawable/selector_blue_button</item>
+        <item name="android:background">@drawable/selector_common_button</item>
     </style>
 
     <style name="button1_style2" parent="button1_style">
@@ -683,7 +680,7 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">@color/font_gray3</item>
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:layout_marginLeft">3dp</item>
     </style>
     <!-- 车辆容量，车、吨，方 -->

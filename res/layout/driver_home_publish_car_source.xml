@@ -14,16 +14,12 @@
         <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:padding="10dp"
                 android:orientation="vertical">
 
             <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:visibility="gone">
@@ -88,8 +84,9 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/public_car_begin"
+                        android:gravity="center_vertical"
                         android:text="@string/start_position"
                         android:textColor="@color/font_gray2"
                         android:textSize="@dimen/font_size_normal"/>
@@ -98,15 +95,15 @@
                         android:id="@+id/cityselect_start"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"/>
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="*目的地"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/public_car_end"
+                        android:gravity="center_vertical"
+                        android:text="@string/end_position"
                         android:textColor="@color/font_gray2"
                         android:textSize="@dimen/font_size_normal"/>
 
@@ -114,8 +111,6 @@
                         android:id="@+id/cityselect_end"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"/>
             </LinearLayout>
 
@@ -131,7 +126,8 @@
 
                 <TextView
                         style="@style/info_publish_text_style"
-                        android:text="报价："/>
+                        android:drawableLeft="@drawable/public_car_baojia"
+                        android:text="报价\t\t\t\t"/>
 
                 <EditText
                         android:id="@+id/price"
@@ -163,7 +159,8 @@
 
                 <TextView
                         style="@style/info_publish_text_style"
-                        android:text="车牌号："/>
+                        android:drawableLeft="@drawable/public_car_plate"
+                        android:text="车牌号\t\t\t\t"/>
 
                 <EditText
                         android:id="@+id/mCarNum"
@@ -183,7 +180,8 @@
 
                 <TextView
                         style="@style/info_publish_text_style"
-                        android:text="车长："/>
+                        android:drawableLeft="@drawable/public_car_lengh"
+                        android:text="车长\t\t\t\t"/>
 
                 <EditText
                         android:id="@+id/mCarlength"
@@ -207,7 +205,8 @@
 
                 <TextView
                         style="@style/info_publish_text_style"
-                        android:text="车型："/>
+                        android:drawableLeft="@drawable/public_car_type"
+                        android:text="车型\t\t\t\t"/>
 
                 <Spinner
                         android:id="@+id/search_car_type"
@@ -227,7 +226,8 @@
 
                 <TextView
                         style="@style/info_publish_text_style"
-                        android:text="载重："/>
+                        android:drawableLeft="@drawable/public_car_weight"
+                        android:text="载重\t\t\t\t"/>
 
                 <EditText
                         android:id="@+id/car_weight"
@@ -254,7 +254,8 @@
 
                 <TextView
                         style="@style/info_publish_text_style"
-                        android:text="联系人："/>
+                        android:drawableLeft="@drawable/public_car_contact"
+                        android:text="联系人\t\t\t\t"/>
 
                 <EditText
                         style="@style/info_edittext_weight_style"
@@ -274,7 +275,8 @@
 
                 <TextView
                         style="@style/info_publish_text_style"
-                        android:text="手机号码："/>
+                        android:drawableLeft="@drawable/public_car_phone"
+                        android:text="手机\t\t\t\t"/>
 
                 <EditText
                         style="@style/info_edittext_weight_style"
@@ -295,7 +297,8 @@
 
                 <TextView
                         style="@style/info_publish_text_style"
-                        android:text="有效时间："/>
+                        android:drawableLeft="@drawable/public_car_validate"
+                        android:text="有效期\t\t\t\t"/>
 
                 <EditText
                         android:id="@+id/dayId"
@@ -325,6 +328,7 @@
                     android:layout_margin="10dp"
                     android:ems="10"
                     android:gravity="top"
+                    android:visibility="gone"
                     android:hint="补充说明"
                     android:minLines="5">
             </EditText>

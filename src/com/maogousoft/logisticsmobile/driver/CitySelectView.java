@@ -71,7 +71,9 @@ public class CitySelectView extends LinearLayout {
 
 	public CitySelectView(final Context context, AttributeSet attrs) {
 		super(context, attrs);
-
+        if(isInEditMode()) {
+            return;
+        }
 		ctx = context;
 		View view = ((LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(

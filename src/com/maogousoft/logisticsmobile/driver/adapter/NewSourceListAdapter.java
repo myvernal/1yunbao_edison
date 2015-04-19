@@ -59,7 +59,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		if (convertView == null) {
 			convertView = mInflater.inflate(R.layout.listitem_newsoure, parent, false);
 			holder = new ViewHolder();
-            holder.source_detail_phone = (Button) convertView.findViewById(R.id.source_detail_phone);
+            holder.source_detail_phone = convertView.findViewById(R.id.source_detail_phone);
 			holder.order_info = (TextView) convertView.findViewById(R.id.source_id_order_info);
             holder.order_info_detail = (TextView) convertView.findViewById(R.id.source_id_order_info_detail);
 			holder.order_money = (TextView) convertView.findViewById(R.id.source_id_order_money);
@@ -105,6 +105,9 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		holder.order_money.setText(Html.fromHtml(String.format(mResources
 				.getString(R.string.string_home_newsource_order_money),
 				sourceInfo.getUser_bond())));
+        holder.order_money.setText(Html.fromHtml(String.format(mResources
+				.getString(R.string.string_home_newsource_order_money),
+				sourceInfo.getUser_bond())));
 
         Date date = new Date();
         String betweenTime = "刚发布";
@@ -112,21 +115,15 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             long time = date.getTime() - sourceInfo.getCreate_time();
             long hour = time / (60 * 60 * 1000);
             long minites = (time % (60 * 60 * 1000)) / (60 * 1000);
-            betweenTime = "{" + hour + "时" + minites + "分}";
+            betweenTime = hour + "时" + minites + "分";
         }
-        holder.tvDjs.setText(Html.fromHtml("发布时间:" + Utils.textFormatRed(betweenTime) + "前"));
+        holder.tvDjs.setText(betweenTime + "前");
         //电话号码
-        String phone = sourceInfo.getCargo_user_phone() + "";
-        if(!TextUtils.isEmpty(phone)){
-            String rep = phone.substring(3, 7);
-            holder.source_detail_phone.setText(phone.replace(rep, "xxxx"));
-        }
-
         holder.source_detail_phone.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 String phoneStr = sourceInfo.getCargo_user_phone();
-                if (!TextUtils.isEmpty(phoneStr) && !phoneStr.equals("无")) {
+                if (!TextUtils.isEmpty(phoneStr)) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneStr));
                     mContext.startActivity(intent);
                 }
@@ -188,7 +185,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 
 		TextView order_info, order_info_detail, order_money, order_grab;
 
-		Button source_detail_phone;
+		View source_detail_phone;
 
 		TextView tvDjs;
 	}

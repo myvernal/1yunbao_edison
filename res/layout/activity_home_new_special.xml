@@ -87,7 +87,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="3dp"
             android:layout_weight="1"
-            android:background="@drawable/shape7"
+            android:background="@drawable/source_photo_btn_bg"
             android:onClick="onPublishGoods"
             android:text="发货" />
         <!-- 发车 -->
@@ -137,7 +137,7 @@
                 android:layout_height="0dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="2.00"
-                android:background="@drawable/shape7"
+                android:background="@drawable/source_photo_btn_bg"
                 android:onClick="onCheckSafe"
                 android:text="验证保险" />
             <!-- 互动 -->

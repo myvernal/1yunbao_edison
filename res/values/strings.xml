@@ -151,7 +151,7 @@
     <!-- 新货源 -->
     <string name="source_number">今日共有%s条货源</string>
     <string name="string_home_newsource_order_number">货源号:%s</string>
-    <string name="string_home_newsource_order_money">保证金:&lt;font color=&quot;#95ccec&quot;&gt; %s &lt;/font&gt;元</string>
+    <string name="string_home_newsource_order_money">保证金:&lt;font color=&quot;#FE5722&quot;&gt; %s &lt;/font&gt;元</string>
     <string name="string_home_newsource_order_evaluate">发货方信誉评价</string>
     <string name="string_home_newsource_order_evaluate_new">此货被多少人查看：200</string> <!-- add PR104 -->
     <!-- 分享 -->
@@ -333,8 +333,8 @@
 	<string name="current_location">当前位置</string>
 	<string name="upload_location">点击上报</string>
 	<string name="source_requirement">货源要求</string>
-	<string name="start_position">*出发地</string>
-	<string name="end_position">*目的地</string>
+	<string name="start_position">出发地</string>
+	<string name="end_position">目的地</string>
 	<string name="car_way_all">零整不限</string>
 	<string name="publish_success">发布成功</string>
 	<string name="recomment_content">推广好处多多，一定</string>

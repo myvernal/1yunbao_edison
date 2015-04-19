@@ -30,10 +30,15 @@
     <color name="Red">#FFFF0000</color>
 	<color name="BgColor">#ffd1dce9</color>
 
+    <color name="btn_stoke_color">#AEDDC7</color>
     <color name="driver_index1_bg">#FFB518</color>
     <color name="driver_index2_bg">#BCD710</color>
     <color name="driver_index3_bg">#FF6865</color>
     <color name="driver_index4_bg">#4FD600</color>
     <color name="driver_index5_bg">#61ACFF</color>
     <color name="driver_index6_bg">#398DFF</color>
+
+    <color name="source_phone_pressed_color">#FEC107</color>
+    <color name="common_btn_bg">#0C9D56</color>
+    <color name="common_btn_bg_pressed">#53B313</color>
 </resources>

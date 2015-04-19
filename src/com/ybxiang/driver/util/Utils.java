@@ -31,9 +31,13 @@ public class Utils {
     }
 
     public static String textFormatRed(String value) {
-        value = value.replace("{", "<font color=#E26926>");
+        value = value.replace("{", "<font color=#FE5722>");
         value = value.replace("}", "</font>");
         return value;
+    }
+
+    public static String textFormatBold(String value) {
+        return "<b>" + value + "</b>";
     }
 
     public static class MyImageLoadingListener implements ImageLoadingListener {

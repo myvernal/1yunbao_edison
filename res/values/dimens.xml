@@ -3,8 +3,8 @@
 
     <dimen name="font_size_litter">12.0sp</dimen>
     <dimen name="font_size_small">14.0sp</dimen>
-    <dimen name="font_size_normal">16.0sp</dimen>
-    <dimen name="font_size_large">18.0sp</dimen>
+    <dimen name="font_size_normal">14.0sp</dimen>
+    <dimen name="font_size_large">16.0sp</dimen>
     <dimen name="grid_space">10dp</dimen>
     <dimen name="max_chat_img_size">200dp</dimen>
     <dimen name="home_font_text_size">16sp</dimen>

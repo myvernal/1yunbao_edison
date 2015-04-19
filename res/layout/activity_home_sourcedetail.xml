@@ -20,116 +20,157 @@
 
             <TextView
                     android:id="@id/source_id_order_number"
-                    style="@style/home_online_order_textview_style"/>
+                    style="@style/home_online_order_textview_style"
+                    android:visibility="gone"/>
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
                     android:orientation="vertical">
 
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
+                          android:drawableLeft="@drawable/source_detail_line"
+                          android:drawablePadding="5dp"
                           android:id="@+id/source_detail_xianlu"
-                          android:text="线路："/>
+                          android:text="线路\t\t"/>
+                <View android:layout_width="match_parent"
+                      android:layout_height="15dp"
+                      android:background="@color/mca__default_selected_item_background"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_mingchen"
-                          android:text="货物名称："/>
+                          android:text="货物名称\t\t"/>
+                <View android:layout_width="match_parent"
+                      android:layout_height="1px"
+                      android:background="@color/mca__default_selected_item_background"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_leixing"
-                          android:text="货物类型：" android:visibility="gone"/>
+                          android:text="货物类型\t\t" android:visibility="gone"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_yunshufangshi"
-                          android:text="运输方式："/>
+                          android:text="运输方式\t\t" android:visibility="gone"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_weight"
-                          android:text="体积重量："/>
+                          android:text="体积重量\t\t"/>
+                <View android:layout_width="match_parent"
+                      android:layout_height="1px"
+                      android:background="@color/mca__default_selected_item_background"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_chechang"
-                          android:text="所需车长："/>
+                          android:text="所需车长\t\t" android:visibility="gone"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_chexing"
-                          android:text="车辆类型："/>
+                          android:text="车辆类型\t\t" android:visibility="gone"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_baojia"
-                          android:text="运输价格："/>
+                          android:text="参考运费\t\t"/>
+                <View android:layout_width="match_parent"
+                      android:layout_height="1px"
+                      android:background="@color/mca__default_selected_item_background"/>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/home_source_detail_top_style"
+                          android:id="@+id/source_detail_yifabu"
+                          android:text="发布时间\t\t"/>
+                <View android:layout_width="match_parent"
+                      android:layout_height="1px"
+                      android:background="@color/mca__default_selected_item_background"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_baozhengjin"
-                          android:text="保  证  金："
-                          android:visibility="gone"/>
+                          android:text="保  证  金\t\t"/>
+                <View android:layout_width="match_parent"
+                      android:layout_height="1px"
+                      android:background="@color/mca__default_selected_item_background"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
                           android:id="@+id/source_detail_zhuangche"
                           android:visibility="gone"
-                          android:text="装车时间："/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/home_source_detail_top_style"
-                          android:id="@+id/source_detail_yifabu"/>
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/home_source_detail_top_style"
-                          android:id="@+id/source_detail_buchongshuoming"
-                          android:text="货单说明："/>
+                          android:text="装车时间\t\t"/>
 
-                <TextView
-                        android:id="@+id/source_detail_other"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/TextColorWhite"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginLeft="30dp"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:orientation="horizontal"
+                              android:padding="10dp">
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:padding="0dp"
+                              style="@style/home_source_detail_top_style"
+                              android:id="@+id/source_detail_buchongshuoming"
+                              android:text="货单说明\t\t"/>
 
+                    <TextView
+                            android:id="@+id/source_detail_other"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <View android:layout_width="match_parent"
+                  android:layout_height="15dp"
+                  android:background="@color/mca__default_selected_item_background"/>
+
+            <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:padding="10dp">
+
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
+                           android:id="@+id/source_detail_shipper_photo"
+                           android:layout_marginRight="45dp"
+                           android:src="@drawable/ic_launcher"/>
 
                 <TextView
                         style="@style/home_sourcedetail_title_style"
+                        android:id="@+id/source_detail_shipper"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="联系人："/>
+                        android:layout_toRightOf="@+id/source_detail_shipper_photo"
+                        android:text="发货方\t\t"/>
 
                 <TextView
+                        style="@style/home_sourcedetail_title_style"
                         android:id="@+id/source_detail_name"
-                        style="@style/home_myabc_content_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="无"/>
-            </LinearLayout>
+                        android:layout_below="@+id/source_detail_shipper"
+                        android:layout_toRightOf="@+id/source_detail_shipper_photo"
+                        android:text="联系人\t\t"/>
+            </RelativeLayout>
+
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:background="@color/mca__default_selected_item_background"/>
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:visibility="gone">
 
                 <TextView
                         style="@style/home_sourcedetail_title_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="联系货主："/>
+                        android:text="联系货主\t\t"/>
 
                 <Button
                         android:id="@+id/source_detail_phone"
@@ -139,6 +180,10 @@
                         android:drawableLeft="@drawable/ic_source_detail_phone"
                         android:text="无"/>
             </LinearLayout>
+
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:background="@color/mca__default_selected_item_background"/>
 
             <com.maogousoft.logisticsmobile.driver.widget.MyGridView
                     android:id="@id/source_id_order_gridview"
@@ -165,7 +210,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="货主信誉评价："/>
+                        android:text="货主信誉评价\t\t"/>
 
                 <RatingBar
                         android:id="@id/source_id_detail_score"
@@ -182,56 +227,80 @@
                         android:contentDescription="@null"
                         android:src="@drawable/ic_share_arrow"/>
             </RelativeLayout>
-
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:background="@color/mca__default_selected_item_background"/>
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp">
 
-                <LinearLayout style="@style/home_sourcedetail_layout_style">
+                <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="履约诚信度\t\t\t"/>
 
-                    <TextView
-                            style="@style/home_sourcedetail_cx_text_style"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="履约诚信度"/>
+                <RatingBar
+                        android:id="@+id/ratingbar_score1"
+                        style="@style/ratingbar_style"
+                        android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:background="@color/mca__default_selected_item_background"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp">
 
-                    <RatingBar
-                            android:id="@+id/ratingbar_score1"
-                            style="@style/home_sourcedetail_ratingbar_style"/>
-                </LinearLayout>
+                <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="信息真实度\t\t\t"/>
 
-                <LinearLayout
-                        style="@style/home_sourcedetail_layout_style"
-                        android:layout_marginLeft="5dp">
+                <RatingBar
+                        android:id="@+id/ratingbar_score2"
+                        style="@style/ratingbar_style"
+                        android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:background="@color/mca__default_selected_item_background"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp">
 
-                    <TextView
-                            style="@style/home_sourcedetail_cx_text_style"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="信息真实度"/>
+                <TextView
+                        style="@style/home_sourcedetail_title_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="付款及时率\t\t\t"/>
 
-                    <RatingBar
-                            android:id="@+id/ratingbar_score2"
-                            style="@style/home_sourcedetail_ratingbar_style"/>
-                </LinearLayout>
-
-                <LinearLayout
-                        style="@style/home_sourcedetail_layout_style"
-                        android:layout_marginLeft="5dp">
-
-                    <TextView
-                            style="@style/home_sourcedetail_cx_text_style"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="付款及时率"/>
-
-                    <RatingBar
-                            android:id="@+id/ratingbar_score3"
-                            style="@style/home_sourcedetail_ratingbar_style"/>
-                </LinearLayout>
+                <RatingBar
+                        android:id="@+id/ratingbar_score3"
+                        style="@style/ratingbar_style"
+                        android:layout_gravity="center_vertical"/>
             </LinearLayout>
 
             <Button
@@ -244,6 +313,7 @@
             <Button
                     android:id="@id/source_id_detail_attention"
                     style="@style/info_button_style"
+                    android:visibility="gone"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/string_home_sourcedetail_attention"/>
