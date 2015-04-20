@@ -37,7 +37,7 @@
                           android:text="线路\t\t"/>
                 <View android:layout_width="match_parent"
                       android:layout_height="15dp"
-                      android:background="@color/mca__default_selected_item_background"/>
+                      android:background="@color/common_line_color"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
@@ -45,7 +45,7 @@
                           android:text="货物名称\t\t"/>
                 <View android:layout_width="match_parent"
                       android:layout_height="1px"
-                      android:background="@color/mca__default_selected_item_background"/>
+                      android:background="@color/common_line_color"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
@@ -63,7 +63,7 @@
                           android:text="体积重量\t\t"/>
                 <View android:layout_width="match_parent"
                       android:layout_height="1px"
-                      android:background="@color/mca__default_selected_item_background"/>
+                      android:background="@color/common_line_color"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
@@ -81,7 +81,7 @@
                           android:text="参考运费\t\t"/>
                 <View android:layout_width="match_parent"
                       android:layout_height="1px"
-                      android:background="@color/mca__default_selected_item_background"/>
+                      android:background="@color/common_line_color"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
@@ -89,7 +89,7 @@
                           android:text="发布时间\t\t"/>
                 <View android:layout_width="match_parent"
                       android:layout_height="1px"
-                      android:background="@color/mca__default_selected_item_background"/>
+                      android:background="@color/common_line_color"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
@@ -97,7 +97,7 @@
                           android:text="保  证  金\t\t"/>
                 <View android:layout_width="match_parent"
                       android:layout_height="1px"
-                      android:background="@color/mca__default_selected_item_background"/>
+                      android:background="@color/common_line_color"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           style="@style/home_source_detail_top_style"
@@ -125,7 +125,7 @@
 
             <View android:layout_width="match_parent"
                   android:layout_height="15dp"
-                  android:background="@color/mca__default_selected_item_background"/>
+                  android:background="@color/common_line_color"/>
 
             <RelativeLayout
                     android:layout_width="match_parent"
@@ -158,7 +158,7 @@
 
             <View android:layout_width="match_parent"
                   android:layout_height="1px"
-                  android:background="@color/mca__default_selected_item_background"/>
+                  android:background="@color/common_line_color"/>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -183,7 +183,7 @@
 
             <View android:layout_width="match_parent"
                   android:layout_height="1px"
-                  android:background="@color/mca__default_selected_item_background"/>
+                  android:background="@color/common_line_color"/>
 
             <com.maogousoft.logisticsmobile.driver.widget.MyGridView
                     android:id="@id/source_id_order_gridview"
@@ -229,7 +229,7 @@
             </RelativeLayout>
             <View android:layout_width="match_parent"
                   android:layout_height="1px"
-                  android:background="@color/mca__default_selected_item_background"/>
+                  android:background="@color/common_line_color"/>
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -254,7 +254,7 @@
             </LinearLayout>
             <View android:layout_width="match_parent"
                   android:layout_height="1px"
-                  android:background="@color/mca__default_selected_item_background"/>
+                  android:background="@color/common_line_color"/>
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -279,7 +279,7 @@
             </LinearLayout>
             <View android:layout_width="match_parent"
                   android:layout_height="1px"
-                  android:background="@color/mca__default_selected_item_background"/>
+                  android:background="@color/common_line_color"/>
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

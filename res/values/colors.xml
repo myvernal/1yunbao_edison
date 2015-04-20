@@ -4,7 +4,7 @@
     <color name="transparent">#00000000</color>
     <color name="title_bg">#FE5722</color>
     <color name="yellow">#FEC107</color>
-    <color name="window_bg">#e3e8ed</color>
+    <color name="window_bg">#ffffff</color>
     <color name="orange_order">#ffab33</color>
     <color name="font_gray">#333333</color>
     <color name="font_gray2">#444444</color>
@@ -14,7 +14,7 @@
     <color name="gray_line">#d5d5d5</color>
     <color name="gray_online">#d9d9d9</color>
     <color name="share_blue">#50a1bc</color>
-    <color name="mca__default_selected_item_background">#1000</color>
+    <color name="common_line_color">#EDEDED</color>
     <color name="timestampline">#ffe5e1de</color>
     <color name="font_value">#ff888271</color>
     <color name="font_blue">#95ccec</color>
@@ -41,4 +41,7 @@
     <color name="source_phone_pressed_color">#FEC107</color>
     <color name="common_btn_bg">#0C9D56</color>
     <color name="common_btn_bg_pressed">#53B313</color>
+
+    <drawable name="common_text_view_bg">#ffffff</drawable>
+    <drawable name="common_text_view_bg_pressed">#EDEDED</drawable>
 </resources>

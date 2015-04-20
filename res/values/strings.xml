@@ -92,7 +92,8 @@
     <string name="string_home_business_card">货运名片</string>
     <string name="string_home_myabc_title">个人中心</string><!-- 我的易运宝  变成 个人中心 -->
     <string name="string_home_myabc_title_info">个人资料</string>
-    <string name="string_home_myabc_title_name">姓&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;名：</string>
+    <string name="string_is_ring">铃声提醒(%s)</string>
+    <string name="string_home_myabc_title_name">姓\t\t\t名：</string>
     <string name="string_home_myabc_title_carnum">车牌号码：</string>
     <string name="string_home_myabc_title_phone">手机号码：</string>
     <string name="string_home_myabc_title_tel">座机号码：</string>

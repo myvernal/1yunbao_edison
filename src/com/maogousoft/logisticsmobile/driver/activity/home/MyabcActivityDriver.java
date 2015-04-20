@@ -4,6 +4,8 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 import java.util.List;
 
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
+import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
+import com.ybxiang.driver.activity.SearchShopActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,16 +44,10 @@ import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
  */
 public class MyabcActivityDriver extends BaseActivity {
 
-	private Context mContext;
-
 	private Button mComplete, mUpdate; // 退出登录
-
 	private Button mContactKeFu; // 联系客服
-
 	private TextView mName, mRecommender, mPhone;// 姓名，手机号，推荐人账号
-
 	private TextView mIsRing; // 铃声的有，无
-
 	// 个人abc信息
 	private AbcInfo mAbcInfo;
 
@@ -59,9 +55,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_myabc_driver);
-		mContext = MyabcActivityDriver.this; // PR111
 		initViews();
-
 	}
 
 	/**
@@ -90,6 +84,35 @@ public class MyabcActivityDriver extends BaseActivity {
 	public void onMyAccountInfo(View view) {
 		startActivity(new Intent(context, MyabcAccountInfoActivity.class));
 	}
+
+    // 好友货源
+    public void onFriendsSource(View view) {
+        Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+        intentNewSource.putExtra("getFriendOrderList", true);
+        startActivity(intentNewSource);
+    }
+
+    // 关注货源
+    public void onFocusSource(View view) {
+        Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+        intentNewSource.putExtra("QUERY_MAIN_LINE_ORDER", true);
+        startActivity(intentNewSource);
+    }
+
+    //货运名片
+    public void onCard(View view) {
+        startActivity(new Intent(context, MyBusinessCard.class));
+    }
+
+    // 物流园区
+    public void onVIP(View view) {
+        startActivity(new Intent(context, SearchShopActivity.class));
+    }
+
+    // 实用工具
+    public void onInteraction(View view) {
+        startActivity(new Intent(context, OthersActivity.class));
+    }
 
 	/**
 	 * 我的信誉
@@ -127,7 +150,7 @@ public class MyabcActivityDriver extends BaseActivity {
 
 	@Override
 	public void onClick(View v) {
-		((BaseActivity) mContext).setIsRightKeyIntoShare(false);
+		((BaseActivity) context).setIsRightKeyIntoShare(false);
 		super.onClick(v);
 		if (v == mComplete) {
 			application.logout();
@@ -143,7 +166,7 @@ public class MyabcActivityDriver extends BaseActivity {
 			// Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
 			// + "4008765156"));
 			// startActivity(intent);
-			AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
+			AlertDialog.Builder builder = new AlertDialog.Builder(context)
 					.setTitle(R.string.contact_kehu).setItems(
 							R.array.contact_kehu_items,
 							new DialogInterface.OnClickListener() {
@@ -161,7 +184,7 @@ public class MyabcActivityDriver extends BaseActivity {
 										break;
 									// 发QQ
 									case 1:
-										Toast.makeText(mContext,
+										Toast.makeText(context,
 												R.string.contact_kehu_qq,
 												Toast.LENGTH_LONG).show();
 										// sendImageToQQ("hello");
@@ -244,11 +267,10 @@ public class MyabcActivityDriver extends BaseActivity {
 									mPhone.setText(mAbcInfo.getPhone());
 
 									if (application.checkIsRingNewSource()) {
-										mIsRing.setText("是");
+										mIsRing.setText(getString(R.string.string_is_ring, "是"));
 									} else {
-										mIsRing.setText("否");
+										mIsRing.setText(getString(R.string.string_is_ring, "否"));
 									}
-
 								}
 								break;
 							case ResultCode.RESULT_ERROR:

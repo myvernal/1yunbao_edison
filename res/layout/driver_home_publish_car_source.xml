@@ -125,9 +125,9 @@
                     android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/public_car_baojia"
-                        android:text="报价\t\t\t\t"/>
+                        android:text="报价"/>
 
                 <EditText
                         android:id="@+id/price"
@@ -158,9 +158,9 @@
                     android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/public_car_plate"
-                        android:text="车牌号\t\t\t\t"/>
+                        android:text="车牌号"/>
 
                 <EditText
                         android:id="@+id/mCarNum"
@@ -179,9 +179,9 @@
                     android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/public_car_lengh"
-                        android:text="车长\t\t\t\t"/>
+                        android:text="车长"/>
 
                 <EditText
                         android:id="@+id/mCarlength"
@@ -204,9 +204,9 @@
                     android:layout_marginTop="10dp">
 
                 <TextView
-                        style="@style/info_publish_text_style"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/public_car_type"
-                        android:text="车型\t\t\t\t"/>
+                        android:text="车型"/>
 
                 <Spinner
                         android:id="@+id/search_car_type"
@@ -225,9 +225,9 @@
                     android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/public_car_weight"
-                        android:text="载重\t\t\t\t"/>
+                        android:text="载重"/>
 
                 <EditText
                         android:id="@+id/car_weight"
@@ -253,9 +253,9 @@
                     android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/public_car_contact"
-                        android:text="联系人\t\t\t\t"/>
+                        android:text="联系人"/>
 
                 <EditText
                         style="@style/info_edittext_weight_style"
@@ -274,9 +274,9 @@
                     android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/public_car_phone"
-                        android:text="手机\t\t\t\t"/>
+                        android:text="手机"/>
 
                 <EditText
                         style="@style/info_edittext_weight_style"
@@ -296,9 +296,9 @@
                     android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/public_car_validate"
-                        android:text="有效期\t\t\t\t"/>
+                        android:text="有效期"/>
 
                 <EditText
                         android:id="@+id/dayId"
@@ -326,7 +326,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:ems="10"
                     android:gravity="top"
                     android:visibility="gone"
                     android:hint="补充说明"

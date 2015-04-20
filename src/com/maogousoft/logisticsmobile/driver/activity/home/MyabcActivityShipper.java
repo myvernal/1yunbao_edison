@@ -30,7 +30,6 @@ import org.json.JSONObject;
  */
 public class MyabcActivityShipper extends BaseActivity {
 
-    private Context mContext; // PR111
 	// 返回,完善资料
 	private Button mComplete, mUpdate, mContactKeFu;
 	private TextView mName, mCompanyName, mPhone, mUpdatePwd, mBalance,
@@ -43,7 +42,11 @@ public class MyabcActivityShipper extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_myabc_user);
-		mContext = MyabcActivityShipper.this; // PR111
+        if(application.getUserType() == Constants.USER_DRIVER) {
+            //如果当前是车主,则跳转到车主信息页面
+            startActivity(new Intent(context, MyabcActivityDriver.class));
+            finish();
+        }
 		initViews();
 		getBalance();
 	}
@@ -102,7 +105,7 @@ public class MyabcActivityShipper extends BaseActivity {
 		} else if (v == mHistory) {
 			startActivity(new Intent(context, MySourceActivity.class));
 		} else if (v == mContactKeFu) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(mContext).setTitle(R.string.contact_kehu).setItems(R.array.contact_kehu_items, new DialogInterface.OnClickListener() {
+			AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(R.string.contact_kehu).setItems(R.array.contact_kehu_items, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
@@ -113,7 +116,7 @@ public class MyabcActivityShipper extends BaseActivity {
 						break;
 				    // 发QQ
 					case 1:
-						Toast.makeText(mContext, R.string.contact_kehu_qq, Toast.LENGTH_LONG).show();
+						Toast.makeText(context, R.string.contact_kehu_qq, Toast.LENGTH_LONG).show();
 						break;
 
 					default:

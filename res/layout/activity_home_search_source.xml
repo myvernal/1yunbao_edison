@@ -63,12 +63,8 @@
                     android:layout_marginTop="10dp">
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:layout_gravity="center_vertical"
-                        android:drawablePadding="5dp"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/search_car_type"
-                        android:layout_marginRight="10dp"
-                        android:textSize="@dimen/font_size_small"
                         android:text="车型"/>
 
                 <Spinner
@@ -86,12 +82,8 @@
                     android:layout_marginTop="10dp">
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:layout_gravity="center_vertical"
-                        android:drawablePadding="5dp"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/search_chechang"
-                        android:layout_marginRight="10dp"
-                        android:textSize="@dimen/font_size_small"
                         android:text="车长"/>
 
                 <Spinner
@@ -108,28 +100,20 @@
                     android:layout_marginTop="10dp">
 
                 <TextView
-                        style="@style/info_register_text_style"
-                        android:layout_gravity="center_vertical"
-                        android:drawablePadding="5dp"
+                        style="@style/info_publish_edit_text_style_long"
                         android:drawableLeft="@drawable/search_baozhengjin"
-                        android:layout_marginRight="10dp"
-                        android:textSize="@dimen/font_size_small"
                         android:text="保证金"/>
 
                 <EditText
                         android:id="@+id/edt_search_source_min_baozhengjin"
-                        android:textSize="@dimen/font_size_small"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"/>
+                        style="@style/info_edittext_weight_style"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:textSize="@dimen/font_size_small"
-                        android:text="元\t一"/>
+                          android:text="元\t一"/>
                 <EditText
                         android:id="@+id/edt_search_source_max_baozhengjin"
-                        android:textSize="@dimen/font_size_small"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"/>
+                        style="@style/info_edittext_weight_style"/>
                 <TextView android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:textSize="@dimen/font_size_small"
@@ -219,7 +203,7 @@
                     android:listSelector="@android:color/transparent"
                     android:numColumns="2"
                     android:padding="@dimen/grid_space"
-                    android:verticalSpacing="@dimen/grid_space" />
+                    android:verticalSpacing="@dimen/grid_space"/>
 
         </LinearLayout>
     </ScrollView>

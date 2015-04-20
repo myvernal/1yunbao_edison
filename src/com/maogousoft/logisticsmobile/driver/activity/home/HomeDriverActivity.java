@@ -81,21 +81,6 @@ public class HomeDriverActivity extends BaseHomeActivity {
 		startActivity(new Intent(context, SpreadActivity.class));
 	}
 
-    //货运名片
-    public void onCard(View view) {
-        startActivity(new Intent(context, MyBusinessCard.class));
-    }
-
-	// 物流园区
-	public void onVIP(View view) {
-		startActivity(new Intent(context, SearchShopActivity.class));
-	}
-
-	// 互动
-	public void onInteraction(View view) {
-		startActivity(new Intent(context, OthersActivity.class));
-	}
-
 	@Override
 	public void onBackPressed() {
 		exitAppHint();

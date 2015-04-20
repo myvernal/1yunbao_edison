@@ -38,7 +38,7 @@
     </style>
 
     <style name="MultiChoiceAdapter_DefaultSelectedItemStyle">
-        <item name="selectedItemBackground">@color/mca__default_selected_item_background</item>
+        <item name="selectedItemBackground">@color/common_line_color</item>
         <item name="itemClickInActionMode">selectItem</item>
     </style>
 
@@ -151,6 +151,7 @@
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:padding">8dp</item>
         <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/select_edit_bg</item>
     </style>
 
     <style name="info_edit_text_spe_style">
@@ -161,6 +162,7 @@
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:padding">8dp</item>
         <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/select_edit_bg</item>
     </style>
 
     <style name="info_edittext_goods_weight_style">
@@ -168,6 +170,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/select_edit_bg</item>
     </style>
     <!-- 所发布车源时的抓取信息输入框 -->
     <style name="info_edittext_weight_style">
@@ -176,6 +179,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/select_edit_bg</item>
     </style>
 
     <style name="share_phone_edittext_style">
@@ -184,6 +188,7 @@
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:padding">8dp</item>
         <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/select_edit_bg</item>
     </style>
 
     <style name="info_textview_style">
@@ -198,12 +203,32 @@
     </style>
 
     <style name="info_register_text_style">
-        <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:minWidth">30dp</item>
         <item name="android:textColor">@color/font_gray2</item>
+    </style>
+
+    <style name="info_publish_edit_text_style">
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:minWidth">60dp</item>
+        <item name="android:textColor">@color/font_gray2</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
+    <style name="info_publish_edit_text_style_long">
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:minWidth">80dp</item>
+        <item name="android:textColor">@color/font_gray2</item>
+        <item name="android:drawablePadding">5dp</item>
     </style>
 
     <style name="safe_text_title_style">
@@ -758,5 +783,30 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/TextColorBlack</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="settingInfoStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableRight">@drawable/ic_share_arrow</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@color/font_gray2</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="android:clickable">true</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:background">@drawable/selector_common_text_view</item>
+    </style>
+
+    <style name="settingAccountInfoStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="android:textColor">@color/font_gray2</item>
+    </style>
+
+    <style name="commonBottomViewStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
     </style>
 </resources>

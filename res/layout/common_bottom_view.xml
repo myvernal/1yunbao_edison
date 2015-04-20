@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:background="@color/common_line_color"/>
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="50dp">
+        <ImageView style="@style/commonBottomViewStyle"
+                   android:id="@+id/bottom_home"
+                   android:src="@drawable/selector_setting_home"/>
+        <ImageView style="@style/commonBottomViewStyle"
+                   android:id="@+id/bottom_publish"
+                   android:src="@drawable/selector_setting_publish"/>
+        <ImageView style="@style/commonBottomViewStyle"
+                   android:id="@+id/bottom_pager"
+                   android:src="@drawable/selector_setting_pager"/>
+        <ImageView style="@style/commonBottomViewStyle"
+                   android:id="@+id/bottom_mine"
+                   android:src="@drawable/selector_setting_mine"/>
+    </LinearLayout>
+</merge>

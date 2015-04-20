@@ -47,25 +47,25 @@
             <RadioButton
                     android:id="@id/main_id_radio_search"
                     style="@style/main_radio_style"
-                    android:drawableTop="@drawable/selector_home_search"
+                    android:drawableTop="@drawable/selector_setting_home"
                     android:text="@string/string_main_search"/>
 
             <RadioButton
                     android:id="@id/main_id_radio_publish"
                     style="@style/main_radio_style"
-                    android:drawableTop="@drawable/selector_home_publish"
+                    android:drawableTop="@drawable/selector_setting_publish"
                     android:text="@string/string_main_publish"/>
 
             <RadioButton
                     android:id="@id/main_id_radio_tool"
                     style="@style/main_radio_style"
-                    android:drawableTop="@drawable/selector_home_other"
+                    android:drawableTop="@drawable/selector_setting_pager"
                     android:text="@string/string_main_tool"/>
 
             <RadioButton
                     android:id="@id/main_id_radio_other"
                     style="@style/main_radio_style"
-                    android:drawableTop="@drawable/selector_home_account"
+                    android:drawableTop="@drawable/selector_setting_mine"
                     android:text="@string/string_main_other"/>
         </RadioGroup>
     </LinearLayout>
