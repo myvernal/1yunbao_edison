@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/fastjson-1.1.27-android.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="24ee7ff19cce098b34c33c4e5806fd12d0c2bf23">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/fastjson-1.1.27-android-1c789675f65f24a43c96d023dbedcfbac3a6bf69.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/jpush-sdk-release1.3.8.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="cbb7c4c301e515ba07a181354e0e2461b74fcd14">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/jpush-sdk-release1.3.8-041f29b23772ea04ca7acb759491c505f41f7b7f.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/asmack-issue15.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="efe50d580dfd40a54ec9eee4f2c1b315056c5bd8">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/asmack-issue15-7c5beb5333fe26b6f0f063cd2ea6cfb8afdb0f66.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/android-sdk-macosx/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-d1fc6c084e4320db765248c304738769c8b45868.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/alipay_msp.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="cea297259e69635a6448449a6852f4c6161a07c9">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/alipay_msp-9cc64b7b63e5b5a925158dedb3ddfca106d3575f.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/android-query-0.22.10.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="88b045f063c11cca7f0b246b9a5cf0b7704a8882">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/android-query-0.22.10-4aa23623bb24459c3778977f4b777a4dc594beaf.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/image-load.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2f56b5ca4ff23d2277fd8e66319f07806a914d2f">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/image-load-d60593013623ef575d4b355aa810b7476ca222e0.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/httpmime-4.1.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/httpmime-4.1.3-adacc9c03c06bb896fab23bc2e9c3214332515ed.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/BaiduLBS_Android.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="868c060abfa9778e598e631f93f94037edbe8996">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/BaiduLBS_Android-f7540e9d08b60484648b71338566d23e6548cace.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/umeng_sdk.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b377667d371adee5dab1b6c2464980a18a59ad82">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/umeng_sdk-c876b5e224b121ff3ce027e2ff83a36b33896f4e.jar" />
+    </item>
+    <item
+        jar="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/libs/YeepayApkPlugin_2.0.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b9b183e9c38eec413af3594c8ec12714875bca02">
+        <dex dex="/Users/zhaoliangsakai/developer/WorkingCopies/1yunbao_edison_gradle/app/build/intermediates/pre-dexed/debug/YeepayApkPlugin_2.0.1-97bd4824ff6c22c62d3a5fa61a7546a5b1fcbff2.jar" />
+    </item>
+
+</items>
