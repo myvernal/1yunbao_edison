@@ -47,7 +47,6 @@ Icon
 .idea/workspace.xml
 .idea/compiler.xml
 .idea/encodings.xml
-.idea/*.xml
 1yunbao.iml
 *.apk
 *.bin
