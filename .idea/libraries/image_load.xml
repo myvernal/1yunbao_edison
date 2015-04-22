@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="image-load">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/image-load.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

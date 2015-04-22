@@ -39,7 +39,6 @@ Icon
 # ignore folder
 /bin/
 /gen/
-/.idea/
 /build/
 /app/build/
 
