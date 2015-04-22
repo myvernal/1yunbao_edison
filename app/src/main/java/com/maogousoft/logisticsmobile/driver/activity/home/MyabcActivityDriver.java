@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
-import com.maogousoft.logisticsmobile.driver.activity.other.PdfActivity;
 import com.ybxiang.driver.activity.SearchShopActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -312,11 +311,6 @@ public class MyabcActivityDriver extends BaseActivity {
 		startActivity(new Intent(context, HistroyOrderActivity.class).putExtra(
 				"info", mAbcInfo));
 	}
-
-    //TEST
-    public void onPdf(View view) {
-        startActivity(new Intent(context, PdfActivity.class));
-    }
 
 	/**
 	 * 是否有声音
