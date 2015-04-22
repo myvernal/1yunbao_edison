@@ -151,7 +151,7 @@
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
                     android:drawableLeft="@drawable/setting_driver_frends"
-                    android:onClick="onCard"
+                    android:onClick="onPdf"
                     android:text="财务管理"/>
             <View android:layout_width="match_parent"
                   android:layout_height="15dp"

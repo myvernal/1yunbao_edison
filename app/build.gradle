@@ -38,4 +38,6 @@ dependencies {
     compile files('libs/image-load.jar')
     compile files('libs/jpush-sdk-release1.3.8.jar')
     compile files('libs/umeng_sdk.jar')
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.joanzapata.pdfview:android-pdfview:1.0.+@aar'
 }

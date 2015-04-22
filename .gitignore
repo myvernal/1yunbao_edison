@@ -26,7 +26,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -39,10 +40,15 @@ Icon
 /bin/
 /gen/
 /.idea/
+/build/
+/app/build/
+
 
 .idea/workspace.xml
 .idea/compiler.xml
 .idea/encodings.xml
+.idea/*.xml
 1yunbao.iml
 *.apk
-*.apk
+*.bin
+*.class
