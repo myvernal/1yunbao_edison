@@ -37,6 +37,8 @@ Icon
 .Trashes
 
 # ignore folder
+/.gradle/2.2.1/taskArtifacts/
+/.idea/
 /bin/
 /gen/
 /build/
@@ -52,3 +54,6 @@ Icon
 *.class
 
 local.properties
+app/app.iml
+.gradle/2.2.1/taskArtifacts/
+app/manifest-merger-release-report.txt

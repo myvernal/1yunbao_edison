@@ -402,7 +402,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     public void onSendMessage(View view) {
-        if (phoneNumber != null &&!phoneNumber.isEmpty()) {
+        if (phoneNumber == null || TextUtils.isEmpty(phoneNumber)) {
             return;
         }
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumber));
@@ -410,7 +410,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     public void onCall(View view) {
-        if (phoneNumber != null &&!phoneNumber.isEmpty()) {
+        if (phoneNumber == null || TextUtils.isEmpty(phoneNumber)) {
             return;
         }
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));

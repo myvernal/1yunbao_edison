@@ -2,102 +2,81 @@
 <items version="2" >
 
     <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/umeng_sdk.jar"
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\android-support-v4.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="b377667d371adee5dab1b6c2464980a18a59ad82">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/umeng_sdk-dfbcd5a673f8ed18db8db6990f7b4b27a768b43a.jar" />
+        revision="19.1.0"
+        sha1="612846c9857077a039b533718f72db3bc041d389">
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\android-support-v4-4ad668769e8fbe7ac8cfc09ec1151e92a2fc8faf.jar" />
     </item>
     <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/pdfViewer.jar"
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\fastjson-1.1.27-android.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="a53b4c813e4237286bd10f0c334c46e894970666">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/pdfViewer-4840389c5e90aa78cca0ecc690b25fdc10554cd0.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/alipay_msp.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="cea297259e69635a6448449a6852f4c6161a07c9">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/alipay_msp-57609ef613a5b6d4bb72d196ade682fb9600a22b.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/BaiduLBS_Android.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="868c060abfa9778e598e631f93f94037edbe8996">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/BaiduLBS_Android-c9b0a7e6eef7eb5f8fc6b4b7261a90858451d418.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/android-query-0.22.10.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="88b045f063c11cca7f0b246b9a5cf0b7704a8882">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/android-query-0.22.10-d91862810736175276aac55657fe9b6d8cf69ede.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/image-load.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2f56b5ca4ff23d2277fd8e66319f07806a914d2f">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/image-load-1bebe124c0843a89bcc15b9c819ae0dddb1f8991.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/android-sdk-macosx/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-d1fc6c084e4320db765248c304738769c8b45868.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/exploded-aar/com.joanzapata.pdfview/android-pdfview/1.0.2/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="50897ff6c212a72aa3780027e0bf5fc363f366a0">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/classes-89b213be6fca62b160f716c0098e7ead2d55d62f.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/YeepayApkPlugin_2.0.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b9b183e9c38eec413af3594c8ec12714875bca02">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/YeepayApkPlugin_2.0.1-5c6bdc28663391f3957401c5f3ed7ec1f59be339.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/fastjson-1.1.27-android.jar"
-        jumboMode="false"
-        revision="21.1.2"
+        revision="19.1.0"
         sha1="24ee7ff19cce098b34c33c4e5806fd12d0c2bf23">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/fastjson-1.1.27-android-5c4cbc12990ba2abed0a5fb871ac556a9da434d6.jar" />
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\fastjson-1.1.27-android-749bd10c5673f48e6e3bcfbc266c9221b4a6ff05.jar" />
     </item>
     <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/exploded-aar/com.actionbarsherlock/actionbarsherlock/4.4.0/classes.jar"
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\httpmime-4.1.3.jar"
         jumboMode="false"
-        revision="21.1.2"
-        sha1="af64527b748983a75de9c0756e9768b56b240a49">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/classes-2095059b17c8d98737e91b7ace34c90cccff03b5.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/asmack-issue15.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="efe50d580dfd40a54ec9eee4f2c1b315056c5bd8">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/asmack-issue15-59af8ba8a942ccc621f9e45cdce75393b60061cb.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/jpush-sdk-release1.3.8.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="cbb7c4c301e515ba07a181354e0e2461b74fcd14">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/jpush-sdk-release1.3.8-99b5d735eae15318c31ef60deb26122a15d29fce.jar" />
-    </item>
-    <item
-        jar="/Users/zhaoliangsakai/developer/1yunbao_edison/app/libs/httpmime-4.1.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
+        revision="19.1.0"
         sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
-        <dex dex="/Users/zhaoliangsakai/developer/1yunbao_edison/app/build/intermediates/pre-dexed/debug/httpmime-4.1.3-58ba45a61c0751c3c949ed3ab3e22af858114f83.jar" />
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\httpmime-4.1.3-58afba38b8787333dff27b406b172f7cca98a4e0.jar" />
+    </item>
+    <item
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\BaiduLBS_Android.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="868c060abfa9778e598e631f93f94037edbe8996">
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\BaiduLBS_Android-d5df9d426e05cf11a5864eff68730632fe8b4b70.jar" />
+    </item>
+    <item
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\android-query-0.22.10.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="88b045f063c11cca7f0b246b9a5cf0b7704a8882">
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\android-query-0.22.10-a57d0eff0b6dfc3357650dce95f4aa24f780cc2e.jar" />
+    </item>
+    <item
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\asmack-issue15.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="efe50d580dfd40a54ec9eee4f2c1b315056c5bd8">
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\asmack-issue15-9c31ab85d0f0b4ef2aab3d9c213ed947b2929e85.jar" />
+    </item>
+    <item
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\image-load.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="2f56b5ca4ff23d2277fd8e66319f07806a914d2f">
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\image-load-a6d2b294b9bbf9e54702d86585c39bb5045b05fa.jar" />
+    </item>
+    <item
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\jpush-sdk-release1.3.8.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="cbb7c4c301e515ba07a181354e0e2461b74fcd14">
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\jpush-sdk-release1.3.8-7f7c14ec24d3b652bfbe0bd111099c400da61742.jar" />
+    </item>
+    <item
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\YeepayApkPlugin_2.0.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="b9b183e9c38eec413af3594c8ec12714875bca02">
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\YeepayApkPlugin_2.0.1-1dbe18c71727303c49ed91118d35b21af32a6b9b.jar" />
+    </item>
+    <item
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\umeng_sdk.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="b377667d371adee5dab1b6c2464980a18a59ad82">
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\umeng_sdk-881772a929ecf13c975644e6eb86b25b965d29b3.jar" />
+    </item>
+    <item
+        jar="F:\github\1yunbao\1yunbao_edison\app\libs\alipay_msp.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="cea297259e69635a6448449a6852f4c6161a07c9">
+        <dex dex="F:\github\1yunbao\1yunbao_edison\app\build\intermediates\pre-dexed\debug\alipay_msp-5c123782e1a7e196bf3d3968441dcc3407f5a1de.jar" />
     </item>
 
 </items>
