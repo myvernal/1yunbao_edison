@@ -249,14 +249,10 @@ public class SourceDetailActivity extends BaseActivity {
         }
         String phone = "";
         if (!TextUtils.isEmpty(sourceInfo.getCargo_user_phone())) {
-            phone = sourceInfo.getCargo_user_phone();
-            mPhone.setText(phone);
-        } else {
-            if (!TextUtils.isEmpty(sourceInfo.getUser_phone())) {
-                phone = sourceInfo.getUser_phone();
-                mPhone.setText(phone);
-            } else {
-                mPhone.setText("无");
+            phone = sourceInfo.getCargo_user_phone() + "";
+            if(!TextUtils.isEmpty(phone)){
+                String rep = phone.substring(3, 7);
+                mPhone.setText(phone.replace(rep, "xxxx"));
             }
         }
 
@@ -749,7 +745,7 @@ public class SourceDetailActivity extends BaseActivity {
                 break;
 
             case R.id.source_detail_phone:
-                String phoneStr = mPhone.getText().toString();
+                String phoneStr = mSourceInfo.getCargo_user_phone();
                 if (!TextUtils.isEmpty(phoneStr) && !phoneStr.equals("无")) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
                             + phoneStr));

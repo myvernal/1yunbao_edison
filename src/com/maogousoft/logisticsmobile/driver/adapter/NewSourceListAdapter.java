@@ -116,11 +116,10 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
         }
         holder.tvDjs.setText(Html.fromHtml("发布时间:" + Utils.textFormatRed(betweenTime) + "前"));
         //电话号码
-        String phone = sourceInfo.getCargo_user_phone() + "";
+        /*String phone = sourceInfo.getCargo_user_phone() + "";
         if(!TextUtils.isEmpty(phone)){
-            String rep = phone.substring(3, 7);
-            holder.source_detail_phone.setText(phone.replace(rep, "xxxx"));
-        }
+            holder.source_detail_phone.setText(phone);
+        }*/
 
         holder.source_detail_phone.setOnClickListener(new OnClickListener() {
             @Override
