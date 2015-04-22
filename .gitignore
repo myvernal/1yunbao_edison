@@ -52,3 +52,5 @@ Icon
 *.apk
 *.bin
 *.class
+
+local.properties
