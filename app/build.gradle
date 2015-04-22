@@ -2,12 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "21.1.2"
+    buildToolsVersion "19.1.0"
 
     defaultConfig {
         applicationId "com.maogousoft.logisticsmobile.driver"
         minSdkVersion 8
-        targetSdkVersion 8
     }
 
     buildTypes {
@@ -27,7 +26,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
+    compile files('libs/android-support-v4.jar')
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/YeepayApkPlugin_2.0.1.jar')
     compile files('libs/alipay_msp.jar')
@@ -38,6 +37,4 @@ dependencies {
     compile files('libs/image-load.jar')
     compile files('libs/jpush-sdk-release1.3.8.jar')
     compile files('libs/umeng_sdk.jar')
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
-    compile 'com.joanzapata.pdfview:android-pdfview:1.0.+@aar'
 }
