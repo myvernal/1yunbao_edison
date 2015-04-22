@@ -18,8 +18,6 @@
 
         <include
             android:id="@id/source_id_order_imagetips"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/source_id_order_number"
             layout="@layout/common_imagetips" />
 
         <TextView
