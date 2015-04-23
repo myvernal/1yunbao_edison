@@ -660,14 +660,6 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <!-- PR109 end -->
-        <!-- PR206 附近车源 begin -->
-        <activity
-            android:name="com.ybxiang.driver.activity.NearbyCarSourceActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <!-- PR206 附近车源 end -->
         <!-- PR208 发布货源begin -->
         <activity
             android:name="com.ybxiang.driver.activity.PublishGoodsSourceActivity"
