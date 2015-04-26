@@ -57,3 +57,5 @@ local.properties
 app/app.iml
 .gradle/2.2.1/taskArtifacts/
 app/manifest-merger-release-report.txt
+*.bin
+*.lock
