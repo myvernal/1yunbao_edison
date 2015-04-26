@@ -137,22 +137,22 @@ public class OptionalShipperActivity extends BaseActivity {
             mSelfDesc.setText(abcInfo.getCompany_recommendation());
             if (!TextUtils.isEmpty(abcInfo.getCompany_logo())) {
                 ImageLoader.getInstance().displayImage(abcInfo.getCompany_logo(), id_card_photo, options,
-                        new Utils.MyImageLoadingListener(context, id_card_photo));
+                        new Utils.MyImageLoadingListener(mContext, id_card_photo));
                 userPhotoUrl = abcInfo.getCompany_logo();
             }
             if (!TextUtils.isEmpty(abcInfo.getCompany_photo1())) {
                 ImageLoader.getInstance().displayImage(abcInfo.getCompany_photo1(), car_photo1, options,
-                        new Utils.MyImageLoadingListener(context, car_photo1));
+                        new Utils.MyImageLoadingListener(mContext, car_photo1));
                 mCarPhotosUrl1 = abcInfo.getCompany_photo1();
             }
             if (!TextUtils.isEmpty(abcInfo.getCompany_photo2())) {
                 ImageLoader.getInstance().displayImage(abcInfo.getCompany_photo2(), car_photo2, options,
-                        new Utils.MyImageLoadingListener(context, car_photo2));
+                        new Utils.MyImageLoadingListener(mContext, car_photo2));
                 mCarPhotosUrl2 = abcInfo.getCompany_photo2();
             }
             if (!TextUtils.isEmpty(abcInfo.getCompany_photo3())) {
                 ImageLoader.getInstance().displayImage(abcInfo.getCompany_photo3(), car_photo3, options,
-                        new Utils.MyImageLoadingListener(context, car_photo3));
+                        new Utils.MyImageLoadingListener(mContext, car_photo3));
                 mCarPhotosUrl3 = abcInfo.getCompany_photo3();
             }
         }
@@ -203,7 +203,7 @@ public class OptionalShipperActivity extends BaseActivity {
                 uploadImageAndSubmit();
                 break;
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, ShareActivity.class));
+                startActivity(new Intent(mContext, ShareActivity.class));
                 break;
             case R.id.id_card_photo:
                 Intent imageCaptureIntent0 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

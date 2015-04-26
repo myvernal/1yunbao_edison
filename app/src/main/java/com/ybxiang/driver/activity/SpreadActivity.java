@@ -1,7 +1,6 @@
 package com.ybxiang.driver.activity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,14 +16,12 @@ import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 
 public class SpreadActivity extends BaseActivity implements
 		android.view.View.OnClickListener {
-	private Context mContext;
 	private Button mContactKeFu;
 	private TextView mPubishGoodsText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mContext = SpreadActivity.this;
 		setContentView(R.layout.spread_goods_source);
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("我要推广");
 		mPubishGoodsText = (TextView) findViewById(R.id.publish_goods_succeed);
@@ -80,7 +77,7 @@ public class SpreadActivity extends BaseActivity implements
 	
 	// 我要推广
 	public void onSpread(View view) {
-		final MyAlertDialog dialog = new MyAlertDialog(context);
+		final MyAlertDialog dialog = new MyAlertDialog(mContext);
 		dialog.show();
 		dialog.setTitle("提示");
 		dialog.setMessage("使用此功能会扣除X个物流币");

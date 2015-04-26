@@ -1,6 +1,5 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,8 +23,6 @@ import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
-import com.maogousoft.logisticsmobile.driver.model.SourceCount;
-import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.ybxiang.driver.activity.FocusLineInfoActivity;
 import com.ybxiang.driver.model.FocusLineInfo;
@@ -48,14 +45,12 @@ public class SearchSourceActivity extends BaseActivity {
     private GridView mGridView;
     private int car_type = 43; // 车型 ：
     private int ship_type = 0; // 运输方式： 0 不限 1整车 2 零担
-    private Context mContext;
     private CityDBUtils dbUtils;
     private BaseListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
         setContentView(R.layout.activity_home_search_source);
         initViews();
         dbUtils = new CityDBUtils(application.getCitySDB());
@@ -127,7 +122,7 @@ public class SearchSourceActivity extends BaseActivity {
             // 参数0代表短期货源
             submit(validateDateLong);
         } else {
-            final MyAlertDialog dialog = new MyAlertDialog(context);
+            final MyAlertDialog dialog = new MyAlertDialog(mContext);
             dialog.show();
             dialog.setTitle("提示");
             dialog.setMessage("请完善信息，否则无法提供适合你车型、线路的货源。");
@@ -136,7 +131,7 @@ public class SearchSourceActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    Intent intent = new Intent(context, OptionalActivity.class);
+                    Intent intent = new Intent(mContext, OptionalActivity.class);
                     intent.putExtra("isFormRegisterActivity", false);
                     startActivity(intent);
                     finish();
@@ -224,12 +219,12 @@ public class SearchSourceActivity extends BaseActivity {
                                         List<NewSourceInfo> mList = (ArrayList<NewSourceInfo>) result;
 
                                         if (mList.size() != 0) {
-                                            Intent intent = new Intent(context, NewSourceActivity.class);
+                                            Intent intent = new Intent(mContext, NewSourceActivity.class);
                                             intent.putExtra(Constants.COMMON_KEY, params.toString());
                                             intent.putExtra(Constants.COMMON_OBJECT_KEY, (Serializable) mList);
                                             intent.putExtra(Constants.SEARCH_SOURCE, true);
                                             intent.putExtra("focusLineInfo", focusLineInfo);
-                                            context.startActivity(intent);
+                                            mContext.startActivity(intent);
                                         } else {
                                             showMsg("暂无满足条件的信息，请扩大搜索范围再试。");
                                         }
@@ -243,7 +238,7 @@ public class SearchSourceActivity extends BaseActivity {
                                 case ResultCode.RESULT_FAILED:
                                         // 您当月的免费搜索次数已经用完
                                         // if (result.equals("您当月的免费搜索次数已经用完")) {
-                                        final MyAlertDialog dialog = new MyAlertDialog(context);
+                                        final MyAlertDialog dialog = new MyAlertDialog(mContext);
                                         dialog.show();
                                         dialog.setTitle("提示");
                                         // 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
@@ -254,7 +249,7 @@ public class SearchSourceActivity extends BaseActivity {
                                                     @Override
                                                     public void onClick(View v) {
                                                         dialog.dismiss();
-                                                        startActivity(new Intent(context,ShareActivity.class));
+                                                        startActivity(new Intent(mContext,ShareActivity.class));
                                                         finish();
                                                     }
                                                 });
@@ -384,7 +379,7 @@ public class SearchSourceActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         application.finishAllActivity();
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(mContext, MainActivity.class);
         startActivity(intent);
     }
 }

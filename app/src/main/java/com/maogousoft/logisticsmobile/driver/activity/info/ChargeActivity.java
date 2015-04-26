@@ -99,7 +99,7 @@ public class ChargeActivity extends BaseActivity implements
 
 		gridView = new AQuery(this).id(R.id.recharge_gridview);
 		gridView.itemClicked(this);
-		mAdapter = new CityListAdapter(context);
+		mAdapter = new CityListAdapter(mContext);
 		gridView.adapter(mAdapter);
 	}
 
@@ -209,7 +209,7 @@ public class ChargeActivity extends BaseActivity implements
 			break;
 		case R.id.titlebar_id_more:
 			String content = null;
-			startActivity(new Intent(context, ShareActivity.class).putExtra(
+			startActivity(new Intent(mContext, ShareActivity.class).putExtra(
 					"share", content));
 		}
 	}

@@ -43,8 +43,6 @@ import java.util.Date;
 public class SourceDetailActivity extends BaseActivity {
 
     private static final String TAG = "SourceDetailActivity";
-    // 传递订单编号
-    public static final String ORDER_ID = "order_id";
     public static final String ORDER_INFO = "sourceInfo";
     private int order_id;
     private Button mPlace, mAttention, mPhone, mShare;
@@ -144,7 +142,7 @@ public class SourceDetailActivity extends BaseActivity {
             LogUtil.i(TAG, "进入新货源详情，来自 新货源列表进入");
         }
 
-        mAdapter = new ImageGridAdapter(context);
+        mAdapter = new ImageGridAdapter(mContext);
         mGridView.setAdapter(mAdapter);
 
         String type = getIntent().getStringExtra("type");
@@ -153,10 +151,10 @@ public class SourceDetailActivity extends BaseActivity {
             // 如果是点击推送，进入详情， 先检测是否已经完善了资料
             if (application.checkIsRegOptional()) {
                 mPingjia.setClickable(true);
-                order_id = getIntent().getIntExtra(ORDER_ID, 0);
+                order_id = getIntent().getIntExtra(Constants.ORDER_ID, 0);
                 getSourceDetail(order_id);
             } else {
-                final MyAlertDialog dialog = new MyAlertDialog(context);
+                final MyAlertDialog dialog = new MyAlertDialog(mContext);
                 dialog.show();
                 dialog.setTitle("提示");
                 dialog.setMessage("请完善信息，否则无法提供适合你车型、线路的货源。");
@@ -165,7 +163,7 @@ public class SourceDetailActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        Intent intent = new Intent(context,
+                        Intent intent = new Intent(mContext,
                                 OptionalActivity.class);
                         intent.putExtra("isFormRegisterActivity", false);
 
@@ -184,20 +182,20 @@ public class SourceDetailActivity extends BaseActivity {
                 });
             }
         } else if (type.equals("NewSourceActivity")) {
-            order_id = getIntent().getIntExtra(ORDER_ID, 0);
+            order_id = getIntent().getIntExtra(Constants.ORDER_ID, 0);
             getSourceDetail(order_id);
         } else if (type.equals("UnMatchedSourceActivity")) {
             mPlace.setText("取消订单");
             ((TextView) findViewById(R.id.titlebar_id_content))
                     .setText("待定货源详情");
 
-            order_id = getIntent().getIntExtra(ORDER_ID, 0);
+            order_id = getIntent().getIntExtra(Constants.ORDER_ID, 0);
             getSourceDetail(order_id);
 
         } else {
             mPlace.setText("取消订单");
             ((TextView) findViewById(R.id.titlebar_id_content)).setText("已发布货源详情");
-            order_id = getIntent().getIntExtra(ORDER_ID, 0);
+            order_id = getIntent().getIntExtra(Constants.ORDER_ID, 0);
             getSourceDetail(order_id);
         }
     }
@@ -207,7 +205,7 @@ public class SourceDetailActivity extends BaseActivity {
         if (isFromPush) {
             application.finishAllActivity();
 
-            Intent intent = new Intent(context, NewSourceActivity.class);
+            Intent intent = new Intent(mContext, NewSourceActivity.class);
             //从推送进入的,按返回后进入关注货源列表
             intent.putExtra("QUERY_MAIN_LINE_ORDER", true);
             startActivity(intent);
@@ -275,7 +273,7 @@ public class SourceDetailActivity extends BaseActivity {
         //货物类型
         Integer sourceType = mSourceInfo.getCargo_type();
         if (sourceType != null && sourceType > 0) {
-            String[] sourceTypeStr = context.getResources().getStringArray(R.array.goods_types);
+            String[] sourceTypeStr = mContext.getResources().getStringArray(R.array.goods_types);
             for (int i = 0; i < Constants.sourceTypeValues.length; i++) {
                 if (Constants.sourceTypeValues[i] == sourceType) {
                     mSourceType.setText(mSourceType.getText() + Utils.textFormatBlue(sourceTypeStr[i]));
@@ -289,7 +287,7 @@ public class SourceDetailActivity extends BaseActivity {
         String weight = "";
         if (mSourceInfo.getCargo_number() != null && mSourceInfo.getCargo_number() > 0) {
             Integer unitType = mSourceInfo.getCargo_unit();
-            String[] priceUnit = context.getResources().getStringArray(R.array.car_price_unit);
+            String[] priceUnit = mContext.getResources().getStringArray(R.array.car_price_unit);
             for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                 if (Constants.unitTypeValues[i] == unitType) {
                     weight = mSourceInfo.getCargo_number() + priceUnit[i];
@@ -303,7 +301,7 @@ public class SourceDetailActivity extends BaseActivity {
         //运输方式
         Integer shipType = mSourceInfo.getShip_type();
         if (shipType != null && shipType > 0) {
-            String[] shipTypeStr = context.getResources().getStringArray(R.array.ship_type);
+            String[] shipTypeStr = mContext.getResources().getStringArray(R.array.ship_type);
             for (int i = 0; i < Constants.shipTypeValues.length; i++) {
                 if (Constants.shipTypeValues[i] == shipType) {
                     mShipType.setText(Html.fromHtml(mShipType.getText() + Utils.textFormatBlue(shipTypeStr[i])));
@@ -323,7 +321,7 @@ public class SourceDetailActivity extends BaseActivity {
         //车型
         Integer carTypeValue = mSourceInfo.getCar_type();
         if (carTypeValue != null && carTypeValue > 0) {
-            String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
+            String[] carTypeStr = mContext.getResources().getStringArray(R.array.car_types_name);
             for (int i = 0; i < Constants.carTypeValues.length; i++) {
                 if (Constants.carTypeValues[i] == carTypeValue) {
                     mSourceCarType.setText(Html.fromHtml(mSourceCarType.getText() + Utils.textFormatBlue(carTypeStr[i])));
@@ -336,7 +334,7 @@ public class SourceDetailActivity extends BaseActivity {
         //报价单位
         Integer unitPrice = sourceInfo.getCargo_unit();
         if (unitPrice != null && unitPrice > 0 && sourceInfo.getUnit_price() > 0) {
-            String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
+            String[] unitPriceStr = mContext.getResources().getStringArray(R.array.car_price_unit);
             for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                 if (Constants.unitTypeValues[i] == unitPrice) {
                     mSourcePrice.setText(Html.fromHtml(mSourcePrice.getText().toString() + Utils.textFormatRed(sourceInfo.getUnit_price() + "元/" + unitPriceStr[i])));
@@ -391,7 +389,7 @@ public class SourceDetailActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                startActivity(new Intent(context, ImagePagerActivity.class)
+                startActivity(new Intent(mContext, ImagePagerActivity.class)
                         .putStringArrayListExtra("images", list));
             }
         });
@@ -469,7 +467,7 @@ public class SourceDetailActivity extends BaseActivity {
             }
         }
 
-        final GrabDialog dialog = new GrabDialog(context);
+        final GrabDialog dialog = new GrabDialog(mContext);
         dialog.show();
         final EditText mInput = (EditText) dialog
                 .findViewById(android.R.id.text1);
@@ -510,7 +508,7 @@ public class SourceDetailActivity extends BaseActivity {
                                 mSourceInfo.getUser_bond()));
                     } else if (TextUtils.isEmpty(mInput2.getText())
                             || Integer.parseInt(mInput2.getText().toString()) < 0) {
-                        Toast.makeText(context, "自报价：必须大于0元哦",
+                        Toast.makeText(mContext, "自报价：必须大于0元哦",
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         dialog.dismiss();
@@ -544,7 +542,7 @@ public class SourceDetailActivity extends BaseActivity {
                                                         dismissProgress();
 
                                                         final MyAlertDialog dialogCharg = new MyAlertDialog(
-                                                                context);
+                                                                mContext);
                                                         dialogCharg.show();
                                                         dialogCharg.setTitle("提示");
                                                         dialogCharg.setMessage("需要金额"
@@ -703,7 +701,7 @@ public class SourceDetailActivity extends BaseActivity {
                         cancelOrder();
                     }
                 } else {
-                    final MyAlertDialog dialog = new MyAlertDialog(context);
+                    final MyAlertDialog dialog = new MyAlertDialog(mContext);
                     dialog.show();
                     dialog.setTitle("提示");
                     dialog.setMessage("为确保诚信交易，你必须提供相关证件方可得到货主的认可。");
@@ -712,7 +710,7 @@ public class SourceDetailActivity extends BaseActivity {
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            Intent intent = new Intent(context,
+                            Intent intent = new Intent(mContext,
                                     RenZhengActivity.class);
                             startActivity(intent);
                         }
@@ -729,7 +727,7 @@ public class SourceDetailActivity extends BaseActivity {
                 break;
             case R.id.source_id_pj:
 
-                startActivity(new Intent(context, UserCreditActivity.class)
+                startActivity(new Intent(mContext, UserCreditActivity.class)
                         .putExtra("user_id", mSourceInfo.getUser_id())
                         .putExtra("user_score", mSourceInfo.getScore())
                         .putExtra("user_phone", mSourceInfo.getUser_phone())
@@ -788,7 +786,7 @@ public class SourceDetailActivity extends BaseActivity {
                                     // 已经承接了其他货单，不能再抢单了
                                     if (result.toString().contains("已经承接了其他货单")) {
                                         final MyAlertDialog dialog = new MyAlertDialog(
-                                                context);
+                                                mContext);
                                         dialog.show();
                                         dialog.setTitle("温馨提示");
                                         dialog.setMessage("你仍处于在途货运中，输入回单密码确认货运完成后方可再次抢单。（到货时请向收货方或发货方索取回单密码）");
@@ -808,7 +806,7 @@ public class SourceDetailActivity extends BaseActivity {
                                 case ResultCode.RESULT_FAILED:
                                     if (result.toString().contains("已经承接了其他货单")) {
                                         final MyAlertDialog dialog = new MyAlertDialog(
-                                                context);
+                                                mContext);
                                         dialog.show();
                                         dialog.setTitle("温馨提示");
                                         dialog.setMessage("你仍处于在途货运中，输入回单密码确认货运完成后方可再次抢单。（到货时请向收货方或发货方索取回单密码）");

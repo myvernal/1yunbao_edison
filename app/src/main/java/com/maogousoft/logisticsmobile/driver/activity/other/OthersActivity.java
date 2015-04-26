@@ -51,7 +51,7 @@ public class OthersActivity extends BaseActivity implements
 		super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, ShareActivity.class));
+                startActivity(new Intent(mContext, ShareActivity.class));
                 break;
         }
 	}
@@ -80,7 +80,7 @@ public class OthersActivity extends BaseActivity implements
 			map.put("title", arrays[i]);
 			mList.add(map);
 		}
-		mAdapter = new SimpleAdapter(context, mList, R.layout.griditem_others,
+		mAdapter = new SimpleAdapter(mContext, mList, R.layout.griditem_others,
 				new String[] { "icon", "title" }, new int[] {
 						R.id.other_id_item_icon, R.id.other_id_item_title });
 		mGridView.setAdapter(mAdapter);
@@ -92,37 +92,37 @@ public class OthersActivity extends BaseActivity implements
 			long id) {
 		switch (position) {
 		case 0:
-			startActivity(new Intent(context, VenderShopListActivity.class));
+			startActivity(new Intent(mContext, VenderShopListActivity.class));
 			break;
 		case 1:
-			startActivity(new Intent(context, HelpActivity.class));
+			startActivity(new Intent(mContext, HelpActivity.class));
 			break;
 		case 2:
-			startActivity(new Intent(context, ChargeActivity.class));
+			startActivity(new Intent(mContext, ChargeActivity.class));
 			break;
 		case 3:
-			startActivity(new Intent(context, MapActivity.class).putExtra(
+			startActivity(new Intent(mContext, MapActivity.class).putExtra(
                     Constants.MAP_TYPE, Constants.MAP_TYPE_HOTEL));
 			break;
 		case 4:
-			startActivity(new Intent(context, MapActivity.class).putExtra(
+			startActivity(new Intent(mContext, MapActivity.class).putExtra(
                     Constants.MAP_TYPE, Constants.MAP_TYPE_GAS));
 			break;
 		case 5:
-			startActivity(new Intent(context, MapActivity.class).putExtra(
+			startActivity(new Intent(mContext, MapActivity.class).putExtra(
                     Constants.MAP_TYPE, Constants.MAP_TYPE_BANK));
 			break;
 		case 6:
 			update();
 			break;
 		case 7:
-			startActivity(new Intent(context, FeedBackActivity.class));
+			startActivity(new Intent(mContext, FeedBackActivity.class));
 			break;
 		case 8:
-			startActivity(new Intent(context, AboutActivity.class));
+			startActivity(new Intent(mContext, AboutActivity.class));
 			break;
 		case 9:
-			startActivity(new Intent(context, DistanceCalcActivity.class));
+			startActivity(new Intent(mContext, DistanceCalcActivity.class));
 			break;
 		default:
 			break;
@@ -174,7 +174,7 @@ public class OthersActivity extends BaseActivity implements
     @Override
     public void onBackPressed() {
         application.finishAllActivity();
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(mContext, MainActivity.class);
         startActivity(intent);
     }
 }

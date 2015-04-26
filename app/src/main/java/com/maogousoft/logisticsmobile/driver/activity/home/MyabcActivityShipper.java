@@ -2,7 +2,6 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 // PR111 个人中心【我的易运宝】
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -44,7 +43,7 @@ public class MyabcActivityShipper extends BaseActivity {
 		setContentView(R.layout.activity_home_myabc_user);
         if(application.getUserType() == Constants.USER_DRIVER) {
             //如果当前是车主,则跳转到车主信息页面
-            startActivity(new Intent(context, MyabcActivityDriver.class));
+            startActivity(new Intent(mContext, MyabcActivityDriver.class));
             finish();
         }
 		initViews();
@@ -92,20 +91,20 @@ public class MyabcActivityShipper extends BaseActivity {
 
 		super.onClick(v);
 		if (v == mUpdatePwd) {
-			startActivity(new Intent(context, UpdatePwdActivity.class));
+			startActivity(new Intent(mContext, UpdatePwdActivity.class));
 		} else if (v == mComplete) {
 			application.logout();
-			startActivity(new Intent(context, LoginActivity.class));
+			startActivity(new Intent(mContext, LoginActivity.class));
 		} else if (v == mCharge) {
-			startActivity(new Intent(context, ChargeActivity.class));
+			startActivity(new Intent(mContext, ChargeActivity.class));
 		} else if (v == mAccountRecord) {
-			startActivity(new Intent(context, AccountRecordActivity.class));
+			startActivity(new Intent(mContext, AccountRecordActivity.class));
 		} else if (v == mUpdate) {
-			startActivity(new Intent(context, OptionalActivity.class).putExtra("info", userInfo));
+			startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", userInfo));
 		} else if (v == mHistory) {
-			startActivity(new Intent(context, MySourceActivity.class));
+			startActivity(new Intent(mContext, MySourceActivity.class));
 		} else if (v == mContactKeFu) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(context).setTitle(R.string.contact_kehu).setItems(R.array.contact_kehu_items, new DialogInterface.OnClickListener() {
+			AlertDialog.Builder builder = new AlertDialog.Builder(mContext).setTitle(R.string.contact_kehu).setItems(R.array.contact_kehu_items, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					switch (which) {
@@ -116,7 +115,7 @@ public class MyabcActivityShipper extends BaseActivity {
 						break;
 				    // 发QQ
 					case 1:
-						Toast.makeText(context, R.string.contact_kehu_qq, Toast.LENGTH_LONG).show();
+						Toast.makeText(mContext, R.string.contact_kehu_qq, Toast.LENGTH_LONG).show();
 						break;
 
 					default:

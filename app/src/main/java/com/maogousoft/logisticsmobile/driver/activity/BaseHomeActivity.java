@@ -51,7 +51,7 @@ public class BaseHomeActivity extends  BaseActivity {
     private void initViews() {
         gallery = (OneGallery) findViewById(R.id.top_ad);
         oneGalleryBottomView = (OneGalleryBottomView) findViewById(R.id.top_ad_bottom);
-        initGallery(context);
+        initGallery(mContext);
     }
 
     private void initGallery(final Context context) {

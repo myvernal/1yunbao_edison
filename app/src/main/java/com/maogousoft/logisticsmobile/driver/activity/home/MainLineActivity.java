@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,9 +26,6 @@ import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
-import com.maogousoft.logisticsmobile.driver.model.HistoryOrder;
-import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
-import com.maogousoft.logisticsmobile.driver.utils.TimeUtils;
 
 /**
  * 主营路线
@@ -171,8 +167,8 @@ public class MainLineActivity extends BaseActivity {
      * @param name
      */
     public void changeSoundNotifyIcon(String name,View view) {
-        boolean status = SettingUtil.getInstance(context).getMainLineNotifyStatus(name);
-        SettingUtil.getInstance(context).setMainLineNotifyStatus(name, !status);
+        boolean status = SettingUtil.getInstance(mContext).getMainLineNotifyStatus(name);
+        SettingUtil.getInstance(mContext).setMainLineNotifyStatus(name, !status);
         if(!status) {
             ((ImageView)view).setImageResource(R.drawable.notify_on);
         } else {
@@ -185,7 +181,7 @@ public class MainLineActivity extends BaseActivity {
      * @param name
      */
     public void initSoundNotifyIcon(String name,View view) {
-        boolean status = SettingUtil.getInstance(context).getMainLineNotifyStatus(name);
+        boolean status = SettingUtil.getInstance(mContext).getMainLineNotifyStatus(name);
         if(status) {
             ((ImageView)view).setImageResource(R.drawable.notify_on);
         } else {
@@ -201,13 +197,13 @@ public class MainLineActivity extends BaseActivity {
 	public void onChangePath(View view) {
 		String[] array = new String[] { "线路1", "线路2", "线路3" };
 		new com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog.Builder(
-				context).setTitle("选择需要修改的路线")
+                mContext).setTitle("选择需要修改的路线")
 				.setItems(array, new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 
-						Intent intent = new Intent(context,
+						Intent intent = new Intent(mContext,
 								ChangePathActivity.class);
 						// intent.putExtra("info", mAbcInfo);
 						intent.putExtra("path", which);

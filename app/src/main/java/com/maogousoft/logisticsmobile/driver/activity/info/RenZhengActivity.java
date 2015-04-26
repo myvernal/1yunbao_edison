@@ -2,15 +2,10 @@ package com.maogousoft.logisticsmobile.driver.activity.info;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -24,18 +19,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.ImagePagerActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.FileCache;
 import com.maogousoft.logisticsmobile.driver.utils.HttpUtils;
@@ -176,7 +168,7 @@ public class RenZhengActivity extends BaseActivity {
 	}
 
 	private void initUtils() {
-		mFileCache = new FileCache(context);
+		mFileCache = new FileCache(mContext);
 	}
 
 	// 初始化data
@@ -241,7 +233,7 @@ public class RenZhengActivity extends BaseActivity {
 			if (getIntent().hasExtra("info")) {
 				finish();
 			} else {
-				startActivity(new Intent(context, MainActivity.class));
+				startActivity(new Intent(mContext, MainActivity.class));
 				finish();
 			}
 		} else if (v == mSubmit) {
@@ -253,7 +245,7 @@ public class RenZhengActivity extends BaseActivity {
 			final ArrayList<String> list = new ArrayList<String>();
 			if (mCardOut != null && !TextUtils.isEmpty(mCardOut.getPath())) {
 				list.add(mCardOut.getPath());
-				startActivity(new Intent(context, ImagePagerActivity.class)
+				startActivity(new Intent(mContext, ImagePagerActivity.class)
 						.putStringArrayListExtra("images", list));
 			}
 
@@ -262,7 +254,7 @@ public class RenZhengActivity extends BaseActivity {
 			if (mLicenseOut != null
 					&& !TextUtils.isEmpty(mLicenseOut.getPath())) {
 				list.add(mLicenseOut.getPath());
-				startActivity(new Intent(context, ImagePagerActivity.class)
+				startActivity(new Intent(mContext, ImagePagerActivity.class)
 						.putStringArrayListExtra("images", list));
 			}
 		} else if (v == mRegistrationFlag) {
@@ -270,7 +262,7 @@ public class RenZhengActivity extends BaseActivity {
 			if (mRegistrationOut != null
 					&& !TextUtils.isEmpty(mRegistrationOut.getPath())) {
 				list.add(mRegistrationOut.getPath());
-				startActivity(new Intent(context, ImagePagerActivity.class)
+				startActivity(new Intent(mContext, ImagePagerActivity.class)
 						.putStringArrayListExtra("images", list));
 			}
 		} else if (v == mCarFlag) {
@@ -281,7 +273,7 @@ public class RenZhengActivity extends BaseActivity {
 					list.add(mCarPhotos.get(i).getPath());
 				}
 			}
-			startActivity(new Intent(context, ImagePagerActivity.class)
+			startActivity(new Intent(mContext, ImagePagerActivity.class)
 					.putStringArrayListExtra("images", list));
 		}
 	}
@@ -388,7 +380,7 @@ public class RenZhengActivity extends BaseActivity {
 			params.put("id_card_name", mCardName.getText().toString());
 			if (mCardOut != null) {
 				params.put("id_card_photo",
-						HttpUtils.getBitmapBase64(context, mCardOut.getPath()));
+						HttpUtils.getBitmapBase64(mContext, mCardOut.getPath()));
 			}
 			params.put("registration", mRegistrationNumber.getText().toString());
 			params.put("registration_name", mRegistrationName.getText()
@@ -396,7 +388,7 @@ public class RenZhengActivity extends BaseActivity {
 			if (mRegistrationOut != null) {
 				params.put(
 						"registration_photo",
-						HttpUtils.getBitmapBase64(context,
+						HttpUtils.getBitmapBase64(mContext,
 								mRegistrationOut.getPath()));
 			}
 			params.put("license", mLicenseNumber.getText().toString());
@@ -404,7 +396,7 @@ public class RenZhengActivity extends BaseActivity {
 			if (mLicenseOut != null) {
 				params.put(
 						"license_photo",
-						HttpUtils.getBitmapBase64(context,
+						HttpUtils.getBitmapBase64(mContext,
 								mLicenseOut.getPath()));
 			}
 			if (!mCarPhotos.isEmpty()) {
@@ -412,7 +404,7 @@ public class RenZhengActivity extends BaseActivity {
 					for (int i = 1; i <= mCarPhotos.size(); i++) {
 						System.out.println(mCarPhotos.get(i - 1).getPath());
 						params.put("car_photo" + i, HttpUtils.getBitmapBase64(
-								context, mCarPhotos.get(i - 1).getPath()));
+                                mContext, mCarPhotos.get(i - 1).getPath()));
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

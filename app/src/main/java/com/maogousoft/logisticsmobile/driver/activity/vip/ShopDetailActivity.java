@@ -33,7 +33,6 @@ import com.maogousoft.logisticsmobile.driver.adapter.ShopDetailListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.EvaluateInfo;
 import com.maogousoft.logisticsmobile.driver.model.ShopEvaluate;
 import com.maogousoft.logisticsmobile.driver.model.ShopInfo;
 import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
@@ -191,9 +190,9 @@ public class ShopDetailActivity extends BaseListActivity implements OnScrollList
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, MapActivity.class);
+				Intent intent = new Intent(mContext, MapActivity.class);
 				intent.putExtra(Constants.COMMON_KEY, shopInfo);
-				context.startActivity(intent);
+				mContext.startActivity(intent);
 			}
 		});
 	}
@@ -212,7 +211,7 @@ public class ShopDetailActivity extends BaseListActivity implements OnScrollList
 			return;
 		}
 
-		mImageAdapter = new ImageGridAdapter(context);
+		mImageAdapter = new ImageGridAdapter(mContext);
 		mGridView.setAdapter(mImageAdapter);
 		final ArrayList<String> listImageUrl = new ArrayList<String>();
 		if (!TextUtils.isEmpty(shopInfo.getPhoto1()) && !shopInfo.getPhoto1().equals("")) {
@@ -228,7 +227,7 @@ public class ShopDetailActivity extends BaseListActivity implements OnScrollList
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				startActivity(new Intent(context, ImagePagerActivity.class).putStringArrayListExtra("images", listImageUrl));
+				startActivity(new Intent(mContext, ImagePagerActivity.class).putStringArrayListExtra("images", listImageUrl));
 			}
 		});
 		mImageAdapter.setList(listImageUrl);
@@ -306,7 +305,7 @@ public class ShopDetailActivity extends BaseListActivity implements OnScrollList
 			btnAddr.setText("无地址信息");
 		}
 
-		mVipShopDetailAdapter = new ShopDetailListAdapter(context);
+		mVipShopDetailAdapter = new ShopDetailListAdapter(mContext);
 		mListView.setAdapter(mVipShopDetailAdapter);
 
 	}

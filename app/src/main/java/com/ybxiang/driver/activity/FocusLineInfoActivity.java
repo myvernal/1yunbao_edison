@@ -26,7 +26,6 @@ import java.util.List;
  */
 public class FocusLineInfoActivity extends BaseListActivity implements
         OnClickListener, OnScrollListener {
-    private Context mContext;
     private Button mTitleBarMore;
     private int searchType;
     // 底部更多
@@ -45,7 +44,6 @@ public class FocusLineInfoActivity extends BaseListActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = FocusLineInfoActivity.this;
         initViews();
         initData();
     }

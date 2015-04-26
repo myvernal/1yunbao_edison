@@ -139,8 +139,8 @@ public class RegisterSpecialActivity extends BaseActivity {
 //	/** 初始化工具类 **/
 //	private void initUtils() {
 //		mDBUtils = new CityDBUtils(application.getCitySDB());
-//		mAdapterFirst = new CityListAdapter(context);
-//		mAdapterFirst2 = new CityListAdapter(context);
+//		mAdapterFirst = new CityListAdapter(mContext);
+//		mAdapterFirst2 = new CityListAdapter(mContext);
 //
 //		mGridViewFirst.setAdapter(mAdapterFirst);
 //		mGridViewFirst2.setAdapter(mAdapterFirst2);
@@ -321,7 +321,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 //			mAdapterFirst2.setList(mList4);
 //			break;
 		case R.id.info_id_register_skan_remark:
-			new AlertDialog.Builder(context)
+			new AlertDialog.Builder(mContext)
 					.setTitle("易运宝平台服务使用协议")
 					.setMessage(R.string.tips_reg)
 					.setPositiveButton("确定",
@@ -441,7 +441,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 								application.startXMPPService();
 
 								final com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog dialog = new com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog(
-										context);
+                                        mContext);
 								dialog.show();
 								dialog.setTitle("提示");
 								dialog.setMessage("注册成功");
@@ -452,7 +452,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 											public void onClick(View v) {
 												dialog.dismiss();
 												Intent intent = new Intent(
-														context,
+                                                        mContext,
 														OptionalActivity.class);
 												intent.putExtra(
 														"isFormRegisterActivity",
@@ -468,7 +468,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 											public void onClick(View v) {
 												dialog.dismiss();
 												startActivity(new Intent(
-														context,
+                                                        mContext,
 														MainActivity.class));
 												// 第一次进入，获取 所有 新货源
 												getNewSourceData(1);
@@ -577,7 +577,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 									List<NewSourceInfo> mList = (List<NewSourceInfo>) result;
 
 									if (mList != null) {
-										NotificationManager mNotificationManager = (NotificationManager) context
+										NotificationManager mNotificationManager = (NotificationManager) mContext
 												.getSystemService(Context.NOTIFICATION_SERVICE);
 
 										for (int i = 0; i < mList.size(); i++) {
@@ -608,7 +608,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 											mNotificationManager.notify(
 													i,
 													getOrderNotification(
-															context,
+                                                            mContext,
 															sb.toString(),
 															newSourceInfo, i));
 										}
@@ -639,7 +639,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 		notification.setLatestEventInfo(context, title, "点击查看订单详情",
 				pendingIntent);
 		// notification.sound = Uri.parse("android.resource://"
-		// + context.getPackageName() + "/" + R.raw.mm);
+		// + mContext.getPackageName() + "/" + R.raw.mm);
 
 		if (application.checkIsRingNewSource()) {
 			notification.sound = Uri.parse("android.resource://"

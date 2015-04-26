@@ -3,7 +3,6 @@ package com.ybxiang.driver.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
@@ -57,7 +56,7 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
 
-        mAdapter = new SafeListAdapter(context);
+        mAdapter = new SafeListAdapter(mContext);
         setListAdapter(mAdapter);
         setListShown(false);
         //
@@ -66,7 +65,7 @@ public class SafeListActivity extends BaseListActivity implements AbsListView.On
             ((TextView) findViewById(R.id.titlebar_id_content)).setText("太平洋保险记录");
         } else {
             ((TextView) findViewById(R.id.titlebar_id_content)).setText("平安保险记录");
-            TextView tipView = new TextView(context);
+            TextView tipView = new TextView(mContext);
             tipView.setText(R.string.pingan_tip);
             tipView.setTextColor(getResources().getColor(R.color.TextColorRed));
             mListView.addHeaderView(tipView);

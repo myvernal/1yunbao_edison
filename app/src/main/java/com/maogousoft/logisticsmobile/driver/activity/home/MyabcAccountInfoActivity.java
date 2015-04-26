@@ -93,7 +93,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
 		super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, ShareActivity.class));
+                startActivity(new Intent(mContext, ShareActivity.class));
                 break;
             case R.id.myabc_id_charge:
                 onCharge(v);
@@ -113,7 +113,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void onChangePasswd(View view) {
-		startActivity(new Intent(context, UpdatePwdActivity.class));
+		startActivity(new Intent(mContext, UpdatePwdActivity.class));
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void onAccountRecord(View view) {
-		startActivity(new Intent(context, AccountRecordActivity.class));
+		startActivity(new Intent(mContext, AccountRecordActivity.class));
 	}
 
 	/**
@@ -131,6 +131,6 @@ public class MyabcAccountInfoActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void onCharge(View view) {
-		startActivity(new Intent(context, ChargeActivity.class));
+		startActivity(new Intent(mContext, ChargeActivity.class));
 	}
 }

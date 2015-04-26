@@ -1,7 +1,6 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +26,6 @@ import com.ybxiang.driver.model.FocusLineInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,6 @@ import java.util.List;
 public class NewSourceActivity extends BaseListActivity implements
         OnScrollListener {
 
-    private Context mContext;// PR104
     private Button mMore;
     private int rightButton = 0;// 0显示查找货源，1显示关注此线路,2不显示此button
     // 底部更多
@@ -65,7 +62,6 @@ public class NewSourceActivity extends BaseListActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = NewSourceActivity.this;// PR104
         initViews();
         initData();
         // onFeedback();// PR1.4 test
@@ -90,7 +86,7 @@ public class NewSourceActivity extends BaseListActivity implements
         mListView.setOnScrollListener(this);
         mMore.setOnClickListener(this);
 
-        mAdapter = new NewSourceListAdapter(context);
+        mAdapter = new NewSourceListAdapter(mContext);
         setListAdapter(mAdapter);
         setListShown(false);
     }
@@ -159,7 +155,7 @@ public class NewSourceActivity extends BaseListActivity implements
                 // mMore
                 switch (rightButton) {
                     case 0:// 查找新货源
-                        startActivity(new Intent(context, SearchSourceActivity.class));
+                        startActivity(new Intent(mContext, SearchSourceActivity.class));
                         finish();
                         break;
                     case 1:// 关注此线路
@@ -169,17 +165,17 @@ public class NewSourceActivity extends BaseListActivity implements
                         // SearchSourceActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(context, MyFriendsActivity.class));
+                        startActivity(new Intent(mContext, MyFriendsActivity.class));
                         break;
                     case 3:
-                        startActivity(new Intent(context, MainLineActivity.class));
+                        startActivity(new Intent(mContext, MainLineActivity.class));
                         break;
                     default:
                         break;
                 }
                 break;
             case R.id.search:
-                startActivity(new Intent(context, SearchSourceActivity.class));
+                startActivity(new Intent(mContext, SearchSourceActivity.class));
                 break;
         }
         super.onClick(v);
@@ -226,7 +222,7 @@ public class NewSourceActivity extends BaseListActivity implements
 
                                         // if (result.equals("您当月的免费搜索次数已经用完")) {
                                         final MyAlertDialog dialog = new MyAlertDialog(
-                                                context);
+                                                mContext);
                                         dialog.show();
                                         dialog.setTitle("提示");
                                         // 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
@@ -240,7 +236,7 @@ public class NewSourceActivity extends BaseListActivity implements
 
                                                         String content = null;
                                                         startActivity(new Intent(
-                                                                context,
+                                                                mContext,
                                                                 ShareActivity.class)
                                                                 .putExtra("share",
                                                                         content));
@@ -305,7 +301,7 @@ public class NewSourceActivity extends BaseListActivity implements
 
             // 先检测是否已经完善了资料
             if (!application.checkIsRegOptional() && application.getUserType() == Constants.USER_DRIVER) {
-                final MyAlertDialog dialog = new MyAlertDialog(context);
+                final MyAlertDialog dialog = new MyAlertDialog(mContext);
                 dialog.show();
                 dialog.setTitle("提示");
                 dialog.setMessage("请完善信息，否则无法提供适合你车型、线路的货源。");
@@ -314,7 +310,7 @@ public class NewSourceActivity extends BaseListActivity implements
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        Intent intent = new Intent(context, OptionalActivity.class);
+                        Intent intent = new Intent(mContext, OptionalActivity.class);
                         intent.putExtra("isFormRegisterActivity", false);
                         startActivity(intent);
                         finish();
@@ -328,8 +324,8 @@ public class NewSourceActivity extends BaseListActivity implements
                     }
                 });
             } else {
-                final Intent intent = new Intent(context, SourceDetailActivity.class);
-                intent.putExtra(SourceDetailActivity.ORDER_ID,
+                final Intent intent = new Intent(mContext, SourceDetailActivity.class);
+                intent.putExtra(Constants.ORDER_ID,
                         ((NewSourceListAdapter) mAdapter).getList().get(position).getId());
                 intent.putExtra("type", "NewSourceActivity");
                 startActivityForResult(intent, 1000);
@@ -497,9 +493,7 @@ public class NewSourceActivity extends BaseListActivity implements
                 listRestul.add(list.get(y));
             }
         }
-
         return listRestul;
-
     }
 
     // PR104 begin

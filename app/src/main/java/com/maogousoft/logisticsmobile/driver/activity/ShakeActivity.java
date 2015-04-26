@@ -16,7 +16,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
@@ -40,7 +40,7 @@ public class ShakeActivity extends BaseActivity {
         mVibrator = (Vibrator) getApplication().getSystemService(VIBRATOR_SERVICE);
         mImgUp = (RelativeLayout) findViewById(R.id.shakeImgUp);
         mImgDn = (RelativeLayout) findViewById(R.id.shakeImgDown);
-        mShakeListener = new ShakeListener(context);
+        mShakeListener = new ShakeListener(mContext);
         mShakeListener.setOnShakeListener(new ShakeListener.OnShakeListener() {
             public void onShake() {
                 //Toast.makeText(getApplicationContext(), "抱歉，暂时没有找到在同一时刻摇一摇的人。\n再试一次吧！", Toast.LENGTH_SHORT).show();
@@ -54,7 +54,7 @@ public class ShakeActivity extends BaseActivity {
                         /*Toast.makeText(getApplicationContext(), "抱歉，暂时没有找到\n在同一时刻摇一摇的人。\n再试一次吧！", Toast.LENGTH_SHORT).show();
                         mVibrator.cancel();
                         mShakeListener.start();*/
-                        Intent intent = new Intent(context, NewSourceActivity.class);
+                        Intent intent = new Intent(mContext, NewSourceActivity.class);
                         intent.putExtra(Constants.SEARCH_SOURCE, true);
                         startActivity(intent);
                         finish();

@@ -85,7 +85,7 @@ public class HistroyOrderDetailActivity extends BaseActivity {
 			mName.setText(mSourceInfo.getCargo_desc());
 			mType.setText(mSourceInfo.getCargo_type_str());
 			mWeight.setText(mSourceInfo.getCargo_number()
-					+ CheckUtils.getCargoUnitName(context, mSourceInfo.getCargo_unit()));
+					+ CheckUtils.getCargoUnitName(mContext, mSourceInfo.getCargo_unit()));
 			mPrice.setText(String.format(
 					getString(R.string.sourcedetail_price),
 					mSourceInfo.getPrice()));
@@ -103,7 +103,7 @@ public class HistroyOrderDetailActivity extends BaseActivity {
 		super.onClick(v);
 		if (v == mEvaluate) {
 			if (mSourceInfo != null) {
-				startActivity(new Intent(context, EvaluateActivity.class)
+				startActivity(new Intent(mContext, EvaluateActivity.class)
 						.putExtra("historyOrder", mSourceInfo));
 			}
 		}

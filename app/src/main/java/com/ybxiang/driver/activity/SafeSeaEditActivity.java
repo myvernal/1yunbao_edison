@@ -73,7 +73,7 @@ public class SafeSeaEditActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //获取详细货物类别
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item);
                 cargo_type2.setAdapter(arrayAdapter);
                 cargo_type2.setEnabled(false);
                 getSafeCargoType(Constants.getSeaSafeSourceTypeValues(i));
@@ -141,7 +141,7 @@ public class SafeSeaEditActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                Intent intent = new Intent(context, SafeListActivity.class);
+                Intent intent = new Intent(mContext, SafeListActivity.class);
                 intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_CPIC);
                 startActivity(intent);
                 break;
@@ -162,7 +162,7 @@ public class SafeSeaEditActivity extends BaseActivity {
                 keyList.add(dictInfo.getName());
                 valuesList.add(dictInfo.getId());
             }
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, keyList);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, keyList);
             Constants.seaSafeSourceType2Values = valuesList.toArray(new Integer[valuesList.size()]);
             cargo_type2.setAdapter(arrayAdapter);
         } else {
@@ -188,7 +188,7 @@ public class SafeSeaEditActivity extends BaseActivity {
                                                 keyList.add(dictInfo.getName());
                                                 valuesList.add(dictInfo.getId());
                                             }
-                                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, keyList);
+                                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, keyList);
                                             Constants.seaSafeSourceType2Values = valuesList.toArray(new Integer[valuesList.size()]);
                                             cargo_type2.setAdapter(arrayAdapter);
                                             cargo_type2.setEnabled(true);
@@ -222,7 +222,7 @@ public class SafeSeaEditActivity extends BaseActivity {
             }
         };
         Calendar calendar = Calendar.getInstance();
-        Dialog dialog = new DatePickerDialog(context, mDateSetListener,
+        Dialog dialog = new DatePickerDialog(mContext, mDateSetListener,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
@@ -261,7 +261,7 @@ public class SafeSeaEditActivity extends BaseActivity {
                 TextUtils.isEmpty(insured_name.getText()) || TextUtils.isEmpty(shiping_number.getText()) ||
                 TextUtils.isEmpty(packet_number.getText()) || TextUtils.isEmpty(ship_type.getText()) || TextUtils.isEmpty(ship_tool.getText()) ||
                 TextUtils.isEmpty(plate_number.getText()) || TextUtils.isEmpty(start_area.getText()) || TextUtils.isEmpty(end_area.getText()) ) {
-            Toast.makeText(context, "请填写所有需要填写的数据!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "请填写所有需要填写的数据!", Toast.LENGTH_SHORT).show();
             return;
         }
         safeSeaInfo.setStart_date(start_date.getText().toString());
@@ -278,7 +278,7 @@ public class SafeSeaEditActivity extends BaseActivity {
         safeSeaInfo.setCargo_type1(Constants.getSeaSafeSourceTypeValues(cargo_type1.getSelectedItemPosition()));
         safeSeaInfo.setCargo_type2(Constants.getSeaSafeSourceType2Values(cargo_type2.getSelectedItemPosition()));
         safeSeaInfo.setPackage_type(Constants.getSeaSafeBZDMTypeValues(package_type.getSelectedItemPosition()));
-        Intent intent = new Intent(context, SafeSeaDetailActivity.class);
+        Intent intent = new Intent(mContext, SafeSeaDetailActivity.class);
         intent.putExtra(Constants.COMMON_KEY, safeSeaInfo);
         startActivity(intent);
     }

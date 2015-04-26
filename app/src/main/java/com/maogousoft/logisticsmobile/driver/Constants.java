@@ -2,6 +2,15 @@ package com.maogousoft.logisticsmobile.driver;
 
 
 public class Constants {
+    /*
+    易运宝信息平台（微信公众服务号）
+    帐号：lanchong@1yunbao.com
+    密码：yiyunkeji
+    友盟统计：
+    账号：orientwindweibo@gmail.com
+    密码：lanchong
+    Key:  51c939ad56240b834e01d81e
+    * */
 
 	// 位置上报间隔
 	public static final int LOC_UPDATE_TIME = 30 * 60 * 1000;
@@ -37,6 +46,8 @@ public class Constants {
 
     //货主id
     public static final String USER_ID = "USER_ID";
+
+    public static final String INVOICE_TYPE = "INVOICE_TYPE";
 	// PREFERENCE KEYS
 
 	public static final String CALLBACK_ACTIVITY_PACKAGE_NAME = "CALLBACK_ACTIVITY_PACKAGE_NAME";
@@ -465,6 +476,8 @@ public class Constants {
     public static final int SOURCE_SEARCH_TYPE_SPECIAL = 2;
     public static final int ADD_CAR = 0;
     public static final int EDIT_CAR = 1;
+    // 传递订单编号
+    public static final String ORDER_ID = "order_id";
 
     public static String MAP_TYPE = "MAP_TYPE";
     public static String MAP_TYPE_DEFAULT = "default";

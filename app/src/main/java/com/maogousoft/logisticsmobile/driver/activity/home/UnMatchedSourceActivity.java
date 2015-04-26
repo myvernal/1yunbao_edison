@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -40,7 +39,7 @@ public class UnMatchedSourceActivity extends BaseListActivity {
 		((TextView) findViewById(R.id.titlebar_id_content))
 				.setText(R.string.string_home_unmatched_title);
 
-		mAdapter = new UnMatchedSourceListAdapter(context);
+		mAdapter = new UnMatchedSourceListAdapter(mContext);
 		setListAdapter(mAdapter);
 		setListShown(false);
 	}
@@ -100,8 +99,8 @@ public class UnMatchedSourceActivity extends BaseListActivity {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		final Intent intent = new Intent(context, SourceDetailActivity.class);
-		intent.putExtra(SourceDetailActivity.ORDER_ID,
+		final Intent intent = new Intent(mContext, SourceDetailActivity.class);
+		intent.putExtra(Constants.ORDER_ID,
 				((UnMatchedSourceListAdapter) mAdapter).getList().get(position)
 						.getId());
 		intent.putExtra("type", "UnMatchedSourceActivity");

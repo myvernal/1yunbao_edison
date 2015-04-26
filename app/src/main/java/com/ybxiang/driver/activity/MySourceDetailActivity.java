@@ -81,7 +81,7 @@ public class MySourceDetailActivity extends BaseActivity {
         //运输方式
         Integer shipType = mSourceInfo.getShip_type();
         if (shipType != null && shipType > 0) {
-            String[] shipTypeStr = context.getResources().getStringArray(R.array.ship_type);
+            String[] shipTypeStr = mContext.getResources().getStringArray(R.array.ship_type);
             for (int i = 0; i < Constants.shipTypeValues.length; i++) {
                 if (Constants.shipTypeValues[i] == shipType) {
                     sb.append("  " + shipTypeStr[i]);
@@ -91,7 +91,7 @@ public class MySourceDetailActivity extends BaseActivity {
         //车型
         Integer carTypeValue = mSourceInfo.getCar_type();
         if (carTypeValue != null && carTypeValue > 0) {
-            String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
+            String[] carTypeStr = mContext.getResources().getStringArray(R.array.car_types_name);
             for (int i = 0; i < Constants.carTypeValues.length; i++) {
                 if (Constants.carTypeValues[i] == carTypeValue) {
                     sb.append("  " + carTypeStr[i]);
@@ -103,7 +103,7 @@ public class MySourceDetailActivity extends BaseActivity {
         //报价单位
         Integer unitPrice = mSourceInfo.getCargo_unit();
         if (unitPrice != null) {
-            String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
+            String[] unitPriceStr = mContext.getResources().getStringArray(R.array.car_price_unit);
             for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                 if (Constants.unitTypeValues[i] == unitPrice) {
                     sb.append("  " + mSourceInfo.getUnit_price() + "元/" + unitPriceStr[i]);
@@ -126,7 +126,7 @@ public class MySourceDetailActivity extends BaseActivity {
                 share();
                 break;
             case R.id.source_detail_edit:
-                Intent intent = new Intent(context, PublishGoodsSourceActivity.class);
+                Intent intent = new Intent(mContext, PublishGoodsSourceActivity.class);
                 intent.putExtra(Constants.COMMON_KEY, mSourceInfo);
                 startActivity(intent);
                 finish();
@@ -155,7 +155,7 @@ public class MySourceDetailActivity extends BaseActivity {
                         public void receive(int code, Object result) {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    Toast.makeText(context, "操作成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, "操作成功", Toast.LENGTH_SHORT).show();
                                     finish();
                                     break;
                                 case ResultCode.RESULT_ERROR:

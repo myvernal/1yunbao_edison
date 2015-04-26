@@ -152,8 +152,8 @@ public class RegisterActivity extends BaseActivity {
      */
     private void initUtils() {
         mDBUtils = new CityDBUtils(application.getCitySDB());
-        mAdapterFirst = new CityListAdapter(context);
-        mAdapterFirst2 = new CityListAdapter(context);
+        mAdapterFirst = new CityListAdapter(mContext);
+        mAdapterFirst2 = new CityListAdapter(mContext);
 
         mGridViewFirst.setAdapter(mAdapterFirst);
         mGridViewFirst2.setAdapter(mAdapterFirst2);
@@ -334,7 +334,7 @@ public class RegisterActivity extends BaseActivity {
                 mAdapterFirst2.setList(mList4);
                 break;
             case R.id.info_id_register_skan_remark:
-                new AlertDialog.Builder(context)
+                new AlertDialog.Builder(mContext)
                         .setTitle("易运宝平台服务使用协议")
                         .setMessage(R.string.tips_reg)
                         .setPositiveButton("确定",
@@ -374,7 +374,7 @@ public class RegisterActivity extends BaseActivity {
      * 坐标定位
      */
     public void onGetLocation() {
-        LocHelper.getInstance(context).getResult(new LocHelper.LocCallback() {
+        LocHelper.getInstance(mContext).getResult(new LocHelper.LocCallback() {
 
             @Override
             public void onRecivedLoc(double lat, double lng, String addr) {
@@ -484,7 +484,7 @@ public class RegisterActivity extends BaseActivity {
                                     application.startXMPPService();
 
                                     final com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog dialog = new com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog(
-                                            context);
+                                            mContext);
                                     dialog.show();
                                     dialog.setTitle("提示");
                                     dialog.setMessage("注册成功");
@@ -494,7 +494,7 @@ public class RegisterActivity extends BaseActivity {
                                                 @Override
                                                 public void onClick(View v) {
                                                     dialog.dismiss();
-                                                    Intent intent = new Intent(context, OptionalActivity.class);
+                                                    Intent intent = new Intent(mContext, OptionalActivity.class);
                                                     intent.putExtra("isFormRegisterActivity", true);
                                                     startActivity(intent);
                                                     finish();
@@ -506,7 +506,7 @@ public class RegisterActivity extends BaseActivity {
                                                 @Override
                                                 public void onClick(View v) {
                                                     dialog.dismiss();
-                                                    startActivity(new Intent(context, MainActivity.class));
+                                                    startActivity(new Intent(mContext, MainActivity.class));
                                                     // 第一次进入，获取 所有 新货源
                                                     getNewSourceData(1);
                                                     finish();
@@ -616,7 +616,7 @@ public class RegisterActivity extends BaseActivity {
                                         List<NewSourceInfo> mList = (List<NewSourceInfo>) result;
 
                                         if (mList != null) {
-                                            NotificationManager mNotificationManager = (NotificationManager) context
+                                            NotificationManager mNotificationManager = (NotificationManager) mContext
                                                     .getSystemService(Context.NOTIFICATION_SERVICE);
 
                                             for (int i = 0; i < mList.size(); i++) {
@@ -631,7 +631,7 @@ public class RegisterActivity extends BaseActivity {
 
                                                 Integer unitPrice = newSourceInfo.getCargo_unit();
                                                 if (unitPrice != null && unitPrice > 0) {
-                                                    String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
+                                                    String[] unitPriceStr = mContext.getResources().getStringArray(R.array.car_price_unit);
                                                     for (int j = 0; j < Constants.unitTypeValues.length; j++) {
                                                         if (Constants.unitTypeValues[i] == unitPrice) {
                                                             sb.append(unitPriceStr[i]);
@@ -640,7 +640,7 @@ public class RegisterActivity extends BaseActivity {
                                                 }
 
                                                 mNotificationManager.notify(i, getOrderNotification(
-                                                        context,
+                                                        mContext,
                                                         sb.toString(),
                                                         newSourceInfo, i));
                                             }
@@ -671,7 +671,7 @@ public class RegisterActivity extends BaseActivity {
         notification.setLatestEventInfo(context, title, "点击查看订单详情",
                 pendingIntent);
         // notification.sound = Uri.parse("android.resource://"
-        // + context.getPackageName() + "/" + R.raw.mm);
+        // + mContext.getPackageName() + "/" + R.raw.mm);
 
         if (application.checkIsRingNewSource()) {
             notification.sound = Uri.parse("android.resource://"

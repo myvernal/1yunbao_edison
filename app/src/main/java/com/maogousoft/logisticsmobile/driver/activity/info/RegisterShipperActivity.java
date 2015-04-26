@@ -1,6 +1,5 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -8,13 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,11 +27,9 @@ import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.MD5;
@@ -161,7 +153,7 @@ public class RegisterShipperActivity extends BaseActivity {
 			break;
 
 		case R.id.info_id_register_skan_remark:
-			new AlertDialog.Builder(context)
+			new AlertDialog.Builder(mContext)
 					.setTitle("易运宝平台服务使用协议")
 					.setMessage(R.string.tips_reg)
 					.setPositiveButton("确定",
@@ -271,7 +263,7 @@ public class RegisterShipperActivity extends BaseActivity {
 								application.startXMPPService();
 
 								final com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog dialog = new com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog(
-										context);
+                                        mContext);
 								dialog.show();
 								dialog.setTitle("提示");
 								dialog.setMessage("注册成功");
@@ -282,7 +274,7 @@ public class RegisterShipperActivity extends BaseActivity {
 											public void onClick(View v) {
 												dialog.dismiss();
 												Intent intent = new Intent(
-														context,
+                                                        mContext,
 														OptionalShipperActivity.class);
 												intent.putExtra(
 														"isFormRegisterActivity",
@@ -298,7 +290,7 @@ public class RegisterShipperActivity extends BaseActivity {
 											public void onClick(View v) {
 												dialog.dismiss();
 												startActivity(new Intent(
-														context,
+                                                        mContext,
 														MainActivity.class));
 												// 第一次进入，获取 所有 新货源
 												// getNewSourceData(1);

@@ -157,7 +157,7 @@ public class OptionalActivity extends BaseActivity {
             isFormPushSourceDetail = getIntent().getBooleanExtra("isFormPushSourceDetail", false);
         }
 
-        mCarTypeAdapter = new CarTypeListAdapter(context);
+        mCarTypeAdapter = new CarTypeListAdapter(mContext);
         mCarType.setAdapter(mCarTypeAdapter);
         mCarType.setPrompt("高栏");
         application.getDictList(new AjaxCallBack() {
@@ -247,22 +247,22 @@ public class OptionalActivity extends BaseActivity {
                 }
                 if (!TextUtils.isEmpty(abcInfo.getId_card_photo())) {
                     ImageLoader.getInstance().displayImage(abcInfo.getId_card_photo(), id_card_photo, options,
-                            new Utils.MyImageLoadingListener(context, id_card_photo));
+                            new Utils.MyImageLoadingListener(mContext, id_card_photo));
                     userPhotoUrl = abcInfo.getId_card_photo();
                 }
                 if (!TextUtils.isEmpty(abcInfo.getCar_photo1())) {
                     ImageLoader.getInstance().displayImage(abcInfo.getCar_photo1(), car_photo1, options,
-                            new Utils.MyImageLoadingListener(context, car_photo1));
+                            new Utils.MyImageLoadingListener(mContext, car_photo1));
                     mCarPhotosUrl1 = abcInfo.getCar_photo1();
                 }
                 if (!TextUtils.isEmpty(abcInfo.getCar_photo2())) {
                     ImageLoader.getInstance().displayImage(abcInfo.getCar_photo2(), car_photo2, options,
-                            new Utils.MyImageLoadingListener(context, car_photo2));
+                            new Utils.MyImageLoadingListener(mContext, car_photo2));
                     mCarPhotosUrl2 = abcInfo.getCar_photo2();
                 }
                 if (!TextUtils.isEmpty(abcInfo.getCar_photo3())) {
                     ImageLoader.getInstance().displayImage(abcInfo.getCar_photo3(), car_photo3, options,
-                            new Utils.MyImageLoadingListener(context, car_photo3));
+                            new Utils.MyImageLoadingListener(mContext, car_photo3));
                     mCarPhotosUrl3 = abcInfo.getCar_photo3();
                 }
             }
@@ -278,7 +278,7 @@ public class OptionalActivity extends BaseActivity {
                 uploadImageAndSubmit();
                 break;
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, ShareActivity.class));
+                startActivity(new Intent(mContext, ShareActivity.class));
                 break;
             case R.id.id_card_photo:
                 Intent imageCaptureIntent0 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -491,7 +491,7 @@ public class OptionalActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (isFormRegisterActivity) {
-                                        startActivity(new Intent(context, MainActivity.class));
+                                        startActivity(new Intent(mContext, MainActivity.class));
                                         // 第一次进入，获取 所有 新货源
                                         getNewSourceData(1);
                                     }
@@ -540,7 +540,7 @@ public class OptionalActivity extends BaseActivity {
                                         List<NewSourceInfo> mList = (List<NewSourceInfo>) result;
 
                                         if (mList != null) {
-                                            NotificationManager mNotificationManager = (NotificationManager) context
+                                            NotificationManager mNotificationManager = (NotificationManager) mContext
                                                     .getSystemService(Context.NOTIFICATION_SERVICE);
 
                                             for (int i = 0; i < mList.size(); i++) {
@@ -554,7 +554,7 @@ public class OptionalActivity extends BaseActivity {
                                                 sb.append(newSourceInfo.getCargo_number());
                                                 Integer unitPrice = newSourceInfo.getCargo_unit();
                                                 if(unitPrice != null && unitPrice>0) {
-                                                    String[] unitPriceStr = context.getResources().getStringArray(R.array.car_price_unit);
+                                                    String[] unitPriceStr = mContext.getResources().getStringArray(R.array.car_price_unit);
                                                     for (int j = 0; j < Constants.unitTypeValues.length; j++) {
                                                         if (Constants.unitTypeValues[i] == unitPrice) {
                                                             sb.append(unitPriceStr[i]);
@@ -562,7 +562,7 @@ public class OptionalActivity extends BaseActivity {
                                                     }
                                                 }
                                                 mNotificationManager.notify(i, getOrderNotification(
-                                                                context,
+                                                        mContext,
                                                                 sb.toString(),
                                                                 newSourceInfo, i));
                                             }
@@ -602,7 +602,7 @@ public class OptionalActivity extends BaseActivity {
         }
 
         // notification.sound = Uri.parse("android.resource://"
-        // + context.getPackageName() + "/" + R.raw.mm);
+        // + mContext.getPackageName() + "/" + R.raw.mm);
 
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         return notification;
@@ -612,7 +612,7 @@ public class OptionalActivity extends BaseActivity {
     public void onBackPressed() {
         if (isFormPushSourceDetail) {
             application.finishAllActivity();
-            Intent intent = new Intent(context, MainActivity.class);
+            Intent intent = new Intent(mContext, MainActivity.class);
             startActivity(intent);
         } else {
             super.onBackPressed();
@@ -639,7 +639,7 @@ public class OptionalActivity extends BaseActivity {
                     new UploadImageFileTask(3).execute(mCarPhotos3);
                 }
 //                    System.out.println(mCarPhotos.get(i - 1).getPath());
-//                    params.put("photo" + i, HttpUtils.getBitmapBase64(context, mCarPhotos.get(i - 1).getPath()));
+//                    params.put("photo" + i, HttpUtils.getBitmapBase64(mContext, mCarPhotos.get(i - 1).getPath()));
             } catch (Exception e) {
                 e.printStackTrace();
             }

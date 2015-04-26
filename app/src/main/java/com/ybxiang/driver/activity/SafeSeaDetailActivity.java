@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
@@ -180,8 +179,8 @@ public class SafeSeaDetailActivity extends BaseActivity {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    Toast.makeText(context, "添加保单成功!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(context, SafeListActivity.class);
+                                    Toast.makeText(mContext, "添加保单成功!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(mContext, SafeListActivity.class);
                                     intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_CPIC);
                                     startActivity(intent);
                                     break;

@@ -23,7 +23,6 @@ import java.util.List;
 
 public class MyFriendsActivity extends BaseListActivity implements
         OnClickListener, OnScrollListener {
-    private Context mContext;
     private Button mTitleBarMore;
     // 底部更多
     private View mFootView;
@@ -41,7 +40,6 @@ public class MyFriendsActivity extends BaseListActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = MyFriendsActivity.this;
         initViews();
     }
 

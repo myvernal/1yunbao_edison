@@ -24,54 +24,54 @@ public class HomeSpecialActivity extends BaseActivity {
 
 	// 找货
 	public void onSearchSource(View view) {
-		startActivity(new Intent(context, SearchSourceActivity.class));
+		startActivity(new Intent(mContext, SearchSourceActivity.class));
 	}
 
 	// 找车
 	public void onFindCar(View view) {
-		startActivity(new Intent(context, SearchCarSourceActivity.class));
+		startActivity(new Intent(mContext, SearchCarSourceActivity.class));
 	}
 
 	// 我的好友
 	public void onMyFriends(View view) {
-		startActivity(new Intent(context, MyFriendsActivity.class));
+		startActivity(new Intent(mContext, MyFriendsActivity.class));
 	}
 
 	// 发货
 	public void onPublishGoods(View view) {
-		startActivity(new Intent(context, PublishGoodsSourceActivity.class));
+		startActivity(new Intent(mContext, PublishGoodsSourceActivity.class));
 	}
 
 	// 发车
 	public void onPublishCar(View view) {
-		startActivity(new Intent(context, PublishCarSourceActivity.class));
+		startActivity(new Intent(mContext, PublishCarSourceActivity.class));
 	}
 
 	// 新货源
 	public void onNewSource(View view) {
-		Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+		Intent intentNewSource = new Intent(mContext, NewSourceActivity.class);
 		intentNewSource.putExtra("isFromHomeActivity", true);
 		startActivity(intentNewSource);
 	}
 
 	// 验证保险
 	public void onCheckSafe(View view) {
-		startActivity(new Intent(context, CheckSafeActivity.class));
+		startActivity(new Intent(mContext, CheckSafeActivity.class));
 	}
 
 	// 互动
 	public void onInteraction(View view) {
-		startActivity(new Intent(context, OthersActivity.class));
+		startActivity(new Intent(mContext, OthersActivity.class));
 	}
 
 	// 会员特权
 	public void onVIP(View view) {
-		startActivity(new Intent(context, SearchShopActivity.class));
+		startActivity(new Intent(mContext, SearchShopActivity.class));
 	}
 
 	// 我的推广
 	public void onSpread(View view) {
-		startActivity(new Intent(context, SpreadActivity.class));
+		startActivity(new Intent(mContext, SpreadActivity.class));
 	}
 
 	@Override

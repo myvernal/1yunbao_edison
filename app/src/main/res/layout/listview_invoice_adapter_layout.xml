@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:background="@color/TextColorWhite"
+    android:padding="3dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:padding="8dp"
+        android:src="@drawable/common_check_box_style" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TextColorWhite"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/source_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/source_time"
+            android:gravity="center_vertical"
+            android:textColor="@color/TextColorBlack"
+            android:drawablePadding="5dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@id/source_id_order_info"
+            style="@style/home_source_order_info_style"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/TextColorBlack"
+            android:drawableLeft="@drawable/source_line"
+            android:layout_marginTop="5dp"
+            android:drawablePadding="3dp"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@id/source_id_order_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/source_coins"
+                android:drawablePadding="3dp"
+                android:textColor="@color/TextColorBlack"
+                android:layout_alignParentLeft="true"
+                android:textSize="14sp"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/source_id_order_info_detail"
+                style="@style/home_source_order_info_style"
+                android:drawableLeft="@drawable/source_detail"
+                android:drawablePadding="3dp"
+                android:textSize="14sp"
+                android:textColor="@color/font_gray3"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/source_id_order_money"
+                android:layout_toLeftOf="@id/source_detail_phone" />
+
+            <ImageView
+                android:id="@+id/source_detail_phone"
+                style="@style/button_source_detail_phone"
+                android:layout_width="70dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5dp"
+                android:layout_height="35dp"
+                android:background="@drawable/selector_common_btn_empty"
+                android:src="@drawable/phone_img" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

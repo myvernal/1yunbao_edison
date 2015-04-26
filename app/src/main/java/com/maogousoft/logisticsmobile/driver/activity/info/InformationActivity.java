@@ -40,7 +40,7 @@ public class InformationActivity extends BaseListActivity {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_main_search);
 		mListView.setDivider(null);
 		mListView.setSelector(android.R.color.transparent);
-		mAdapter = new InfoListAdapter(context);
+		mAdapter = new InfoListAdapter(mContext);
 		setListAdapter(mAdapter);
 		setListShown(false);
 	}

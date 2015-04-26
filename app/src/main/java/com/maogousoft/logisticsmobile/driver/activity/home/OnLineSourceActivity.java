@@ -18,10 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
-import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
@@ -30,7 +28,6 @@ import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.GrabDialog;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper.LocCallback;
-import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 
 /**
  * 在途货源
@@ -260,7 +257,7 @@ public class OnLineSourceActivity extends BaseActivity {
 		final int id = v.getId();
 		switch (id) {
 		case R.id.home_id_onlinesource_chat: {
-			Intent intent = new Intent(context, ChatListActivity.class);
+			Intent intent = new Intent(mContext, ChatListActivity.class);
 			intent.putExtra("user_id", mSourceInfo.getUser_id() + "");
 			intent.putExtra("user_name", mSourceInfo.getUser_name());
 			startActivity(intent);
@@ -272,7 +269,7 @@ public class OnLineSourceActivity extends BaseActivity {
 			startActivity(intent);
 			break;
 		case R.id.home_id_onlinesource_evaluate:
-			startActivity(new Intent(context, EvaluateActivity.class).putExtra(
+			startActivity(new Intent(mContext, EvaluateActivity.class).putExtra(
 					"onlineSourceInfo", mSourceInfo));
 			break;
 		case android.R.id.button1:
@@ -281,7 +278,7 @@ public class OnLineSourceActivity extends BaseActivity {
 		case R.id.home_id_onlinesource_location:
 
 			showDefaultProgress();
-			LocHelper.getInstance(context).getResult(new LocCallback() {
+			LocHelper.getInstance(mContext).getResult(new LocCallback() {
 
 				@Override
 				public void onRecivedLoc(double lat, double lng, String addr) {
@@ -368,7 +365,7 @@ public class OnLineSourceActivity extends BaseActivity {
 
 	// 回单密码
 	private void returnPassword() {
-		final GrabDialog dialog = new GrabDialog(context);
+		final GrabDialog dialog = new GrabDialog(mContext);
 		dialog.show();
 		final EditText mInput = (EditText) dialog
 				.findViewById(android.R.id.text1);
@@ -410,7 +407,7 @@ public class OnLineSourceActivity extends BaseActivity {
 												showMsg("订单已完成");
 												finish();
 												startActivity(new Intent(
-														context,
+                                                        mContext,
 														EvaluateActivity.class)
 														.putExtra(
 																"onlineSourceInfo",

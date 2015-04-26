@@ -10,7 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,14 +61,12 @@ public class FindCarActivity extends BaseActivity {
 	private int selectedCarStatus = 0;// 选择的车辆状态 不限，空车，在途
 	private int selectedCarLocationStatus = 0;// 选择车辆定位有效事件状态 今天，两小时内，六小时内
 	private int selectedCarType = 0;// 选择的车辆类型
-	private Context mContext; // PR1.3
 	private int selectedCarWay = 0;// 选择的车辆方式，PR1.3
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.find_car_source);
-		mContext = FindCarActivity.this;// PR1.3
 		initViews();
 		initUtils();
 		initDatas();
@@ -115,7 +112,7 @@ public class FindCarActivity extends BaseActivity {
 			if (application.checkIsRegOptional()) {
 				submit();
 			} else {
-				final MyAlertDialog dialog = new MyAlertDialog(context);
+				final MyAlertDialog dialog = new MyAlertDialog(mContext);
 				dialog.show();
 				dialog.setTitle("提示");
 				dialog.setMessage("请完善信息，否则无法提供适合你车型、线路的货源。");
@@ -124,7 +121,7 @@ public class FindCarActivity extends BaseActivity {
 					@Override
 					public void onClick(View v) {
 						dialog.dismiss();
-						Intent intent = new Intent(context,
+						Intent intent = new Intent(mContext,
 								OptionalActivity.class);
 						intent.putExtra("isFormRegisterActivity", false);
 						startActivity(intent);
@@ -217,13 +214,13 @@ public class FindCarActivity extends BaseActivity {
 									List<NewSourceInfo> mList = (ArrayList<NewSourceInfo>) result;
 
 									if (mList.size() != 0) {
-										Intent intent = new Intent(context,
+										Intent intent = new Intent(mContext,
 												NewSourceActivity.class);
 										intent.putExtra("isFromHomeActivity",
 												true);
 										intent.putExtra("NewSourceInfos",
 												(Serializable) mList);
-										context.startActivity(intent);
+										mContext.startActivity(intent);
 									} else {
 										showMsg("暂无满足条件的信息，请扩大搜索范围再试。");
 									}
@@ -240,7 +237,7 @@ public class FindCarActivity extends BaseActivity {
 
 									// if (result.equals("您当月的免费搜索次数已经用完")) {
 									final MyAlertDialog dialog = new MyAlertDialog(
-											context);
+                                            mContext);
 									dialog.show();
 									dialog.setTitle("提示");
 									// 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
@@ -254,7 +251,7 @@ public class FindCarActivity extends BaseActivity {
 
 													String content = null;
 													startActivity(new Intent(
-															context,
+                                                            mContext,
 															ShareActivity.class)
 															.putExtra("share",
 																	content));

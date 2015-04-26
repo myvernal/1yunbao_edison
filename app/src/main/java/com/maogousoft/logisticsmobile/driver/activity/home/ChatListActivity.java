@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -30,7 +29,6 @@ import com.maogousoft.logisticsmobile.driver.adapter.MessageListAdapter;
 import com.maogousoft.logisticsmobile.driver.db.DBUtils;
 import com.maogousoft.logisticsmobile.driver.im.SendMessageCallback;
 import com.maogousoft.logisticsmobile.driver.model.MessageInfo;
-import com.maogousoft.logisticsmobile.driver.model.OnlineSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.FileCache;
 import com.maogousoft.logisticsmobile.driver.utils.PickPhoto;
 import com.maogousoft.logisticsmobile.driver.widget.RecordButton;
@@ -118,7 +116,7 @@ public class ChatListActivity extends BaseActivity {
 		receiver = new MessageReceiver();
 		filter = new IntentFilter(Constants.CURRENT_MESSAGE_RECEIVE);
 		registerReceiver(receiver, filter);
-		mFileCache = new FileCache(context);
+		mFileCache = new FileCache(mContext);
 
 		mDbUtils = new DBUtils(sdb);
 		callback = new SendMessageCallback() {
@@ -191,7 +189,7 @@ public class ChatListActivity extends BaseActivity {
 			return;
 		}
 
-		mAdapter = new MessageListAdapter(context);
+		mAdapter = new MessageListAdapter(mContext);
 
 		if (getIntent().hasExtra("user_name")) {
 			mAdapter.setChatObject(application.getDriverName(), getIntent()
@@ -238,7 +236,7 @@ public class ChatListActivity extends BaseActivity {
 		final int id = v.getId();
 		switch (id) {
 		case R.id.home_id_chat_img:
-			new AlertDialog.Builder(context)
+			new AlertDialog.Builder(mContext)
 					.setTitle(R.string.string_tips_select)
 					.setItems(R.array.select_photo,
 							new DialogInterface.OnClickListener() {
@@ -336,7 +334,7 @@ public class ChatListActivity extends BaseActivity {
 			if (mOutUri != null) {
 				final String output = mOutUri.getPath();
 				MessageInfo m1 = new MessageInfo();
-				m1.setMsgContent(PickPhoto.scalePicture(context, output, 480,
+				m1.setMsgContent(PickPhoto.scalePicture(mContext, output, 480,
 						800));
 				m1.setMsgFrom(application.getDriverId());
 				m1.setMsgTo(CHAT_TO);
@@ -358,7 +356,7 @@ public class ChatListActivity extends BaseActivity {
 			mOutUri = Uri.fromFile(new File(out));
 			cursor.close();
 			MessageInfo m1 = new MessageInfo();
-			m1.setMsgContent(PickPhoto.scalePicture(context, out, 480, 800));
+			m1.setMsgContent(PickPhoto.scalePicture(mContext, out, 480, 800));
 			m1.setMsgFrom(application.getDriverId());
 			m1.setMsgTo(CHAT_TO);
 			m1.setMsgType(2);

@@ -189,9 +189,9 @@ public class VenderShopDetailActivity extends BaseListActivity implements OnScro
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, VenderShopListMapActivity.class);
+				Intent intent = new Intent(mContext, VenderShopListMapActivity.class);
 				intent.putExtra("shopInfo", shopInfo);
-				context.startActivity(intent);
+				mContext.startActivity(intent);
 			}
 		});
 	}
@@ -210,7 +210,7 @@ public class VenderShopDetailActivity extends BaseListActivity implements OnScro
 			return;
 		}
 
-		mImageAdapter = new ImageGridAdapter(context);
+		mImageAdapter = new ImageGridAdapter(mContext);
 		mGridView.setAdapter(mImageAdapter);
 		final ArrayList<String> listImageUrl = new ArrayList<String>();
 		if (!TextUtils.isEmpty(shopInfo.getPhoto1()) && !shopInfo.getPhoto1().equals("")) {
@@ -226,7 +226,7 @@ public class VenderShopDetailActivity extends BaseListActivity implements OnScro
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				startActivity(new Intent(context, ImagePagerActivity.class).putStringArrayListExtra("images", listImageUrl));
+				startActivity(new Intent(mContext, ImagePagerActivity.class).putStringArrayListExtra("images", listImageUrl));
 			}
 		});
 		mImageAdapter.setList(listImageUrl);
@@ -304,7 +304,7 @@ public class VenderShopDetailActivity extends BaseListActivity implements OnScro
 			btnAddr.setText("无地址信息");
 		}
 
-		mVipShopDetailAdapter = new ShopDetailListAdapter(context);
+		mVipShopDetailAdapter = new ShopDetailListAdapter(mContext);
 		mListView.setAdapter(mVipShopDetailAdapter);
 
 	}

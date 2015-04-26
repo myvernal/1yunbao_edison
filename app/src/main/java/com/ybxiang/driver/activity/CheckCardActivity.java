@@ -2,7 +2,6 @@ package com.ybxiang.driver.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
@@ -13,9 +12,8 @@ import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.model.CardInfo;
-import com.ybxiang.driver.util.Utils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,21 +62,21 @@ public class CheckCardActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, CheckCardListActivity.class));
+                startActivity(new Intent(mContext, CheckCardListActivity.class));
                 break;
             case R.id.check:
                 if (TextUtils.isEmpty(check_name.getText())) {
-                    Toast.makeText(context, "请填写姓名", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "请填写姓名", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(check_number.getText())) {
-                    Toast.makeText(context, "请填写身份证号码.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "请填写身份证号码.", Toast.LENGTH_SHORT).show();
                 } else if (!checkBox.isChecked()) {
-                    Toast.makeText(context, "请勾选同意服务协议.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "请勾选同意服务协议.", Toast.LENGTH_SHORT).show();
                 } else {
                     if(userGold == -1) {
-                        Toast.makeText(context, "正在获取账户余额,请稍后...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "正在获取账户余额,请稍后...", Toast.LENGTH_SHORT).show();
                     } else if(userGold < 2) {
-                        Toast.makeText(context, "账户余额不足,请充值...", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(context, ChargeActivity.class));
+                        Toast.makeText(mContext, "账户余额不足,请充值...", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(mContext, ChargeActivity.class));
                     } else {
                         checkData();
                     }
@@ -108,7 +106,7 @@ public class CheckCardActivity extends BaseActivity {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof CardInfo) {
                                         CardInfo cardInfo = (CardInfo) result;
-                                        Intent intent = new Intent(context, CheckCardResultActivity.class);
+                                        Intent intent = new Intent(mContext, CheckCardResultActivity.class);
                                         intent.putExtra(Constants.COMMON_KEY, cardInfo);
                                         startActivity(intent);
                                     }
@@ -171,6 +169,6 @@ public class CheckCardActivity extends BaseActivity {
      * @param view
      */
     public void onCharge(View view) {
-        startActivity(new Intent(context, ChargeActivity.class));
+        startActivity(new Intent(mContext, ChargeActivity.class));
     }
 }

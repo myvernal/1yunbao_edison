@@ -9,13 +9,11 @@ import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
+
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
@@ -23,14 +21,13 @@ import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
-import com.maogousoft.logisticsmobile.driver.utils.MD5;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PublishCarSourceActivity extends BaseActivity implements
         OnClickListener {
     private static final String TAG = "PublishCarSourceActivity";
-    private Context mContext;
     private TextView mTitleBarContent;
     private EditText price, mCarNum, mCarlength, car_weight, description, ower_name, dayId, hourId;
     // 当前位置，报价,
@@ -47,7 +44,6 @@ public class PublishCarSourceActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.driver_home_publish_car_source);
-        mContext = PublishCarSourceActivity.this;
         initViews();
         onGetLocation();
     }
@@ -123,7 +119,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
      * 坐标定位
      */
     public void onGetLocation() {
-        LocHelper.getInstance(context).getResult(new LocHelper.LocCallback() {
+        LocHelper.getInstance(mContext).getResult(new LocHelper.LocCallback() {
 
             @Override
             public void onRecivedLoc(double lat, double lng, String addr) {
@@ -201,7 +197,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    Toast.makeText(context, "发布成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, "发布成功", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent();
                                     intent.setClass(mContext, ManagerCarSourceActivity.class);
                                     startActivity(intent);

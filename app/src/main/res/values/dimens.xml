@@ -13,4 +13,5 @@
     <dimen name="home_drawable_padding">5dp</dimen>
     <dimen name="home_drawable_space">5dp</dimen>
     <dimen name="home_ad_height">110dp</dimen>
+    <dimen name="invoice_menu_title_size">14sp</dimen>
 </resources>

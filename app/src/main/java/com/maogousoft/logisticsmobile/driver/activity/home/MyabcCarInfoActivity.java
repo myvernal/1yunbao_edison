@@ -3,7 +3,6 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,16 +13,11 @@ import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-import com.maogousoft.logisticsmobile.driver.activity.info.ChangePathActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
-import com.maogousoft.logisticsmobile.driver.model.HistoryOrder;
-import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
-import com.maogousoft.logisticsmobile.driver.utils.TimeUtils;
 
 /**
  * Myabc 车辆信息
@@ -134,7 +128,7 @@ public class MyabcCarInfoActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void onComplementCarInfo(View view) {
-		startActivity(new Intent(context, OptionalActivity.class).putExtra(
+		startActivity(new Intent(mContext, OptionalActivity.class).putExtra(
 				"info", mAbcInfo));
 	}
 }

@@ -78,7 +78,7 @@ public class DistanceCalcActivity extends BaseActivity implements OnItemClickLis
 	}
 
 	private void initData() {
-		mAdapter1 = new CityListAdapter(context);
+		mAdapter1 = new CityListAdapter(mContext);
 
 		gridView1.setOnItemClickListener(this);
 		gridView1.setAdapter(mAdapter1);
@@ -111,7 +111,7 @@ public class DistanceCalcActivity extends BaseActivity implements OnItemClickLis
 	}
 
 	private void change() {
-		Animation a = AnimationUtils.loadAnimation(context, R.anim.anim_view_rotate);
+		Animation a = AnimationUtils.loadAnimation(mContext, R.anim.anim_view_rotate);
 		a.setAnimationListener(new AnimationListener() {
 
 			public void onAnimationStart(Animation animation) {

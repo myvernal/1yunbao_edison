@@ -119,7 +119,7 @@ public class VenderShopListActivity extends BaseListActivity implements OnScroll
 
 		mListView.setOnScrollListener(this);
 
-		mAdapter = new ShopListAdapter(context);
+		mAdapter = new ShopListAdapter(mContext);
 		setListAdapter(mAdapter);
 		setListShown(false);
 	}
@@ -145,7 +145,7 @@ public class VenderShopListActivity extends BaseListActivity implements OnScroll
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					finish();
-					startActivity(new Intent(context, VenderIndexGridActivity.class));
+					startActivity(new Intent(mContext, VenderIndexGridActivity.class));
 				}
 			}
 		});
@@ -154,7 +154,7 @@ public class VenderShopListActivity extends BaseListActivity implements OnScroll
 
 			@Override
 			public void onClick(View v) {
-				final GrabDialog dialog = new GrabDialog(context);
+				final GrabDialog dialog = new GrabDialog(mContext);
 				dialog.show();
 				final EditText mInput = (EditText) dialog.findViewById(android.R.id.text1);
 				dialog.setTitle("提示");
@@ -193,7 +193,7 @@ public class VenderShopListActivity extends BaseListActivity implements OnScroll
 											dismissProgress();
 											switch (code) {
 												case ResultCode.RESULT_OK:
-													startActivity(new Intent(context, com.maogousoft.logisticsmobile.driver.activity.vip.AddActivity.class));
+													startActivity(new Intent(mContext, com.maogousoft.logisticsmobile.driver.activity.vip.AddActivity.class));
 													break;
 
 												default:
@@ -255,7 +255,7 @@ public class VenderShopListActivity extends BaseListActivity implements OnScroll
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		Intent intent = new Intent(context, VenderShopDetailActivity.class);
+		Intent intent = new Intent(mContext, VenderShopDetailActivity.class);
 		intent.putExtra("ShopInfo", (ShopInfo) mAdapter.getItem(position));
 		startActivityForResult(intent, 1000);
 	}

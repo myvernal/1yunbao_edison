@@ -3,7 +3,6 @@ package com.ybxiang.driver.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
@@ -50,22 +49,22 @@ public class ShipDPActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-				startActivity(new Intent(context, ShareActivity.class));
+				startActivity(new Intent(mContext, ShareActivity.class));
                 break;
             case R.id.part1:
-                startActivity(new Intent(context, SearchThreePartyActivity.class));
+                startActivity(new Intent(mContext, SearchThreePartyActivity.class));
                 break;
             case R.id.part2:
-                startActivity(new Intent(context, SearchSpecialLineActivity.class));
+                startActivity(new Intent(mContext, SearchSpecialLineActivity.class));
                 break;
             case R.id.part3:
-                startActivity(new Intent(context, SearchFactoryUserActivity.class));
+                startActivity(new Intent(mContext, SearchFactoryUserActivity.class));
                 break;
             case R.id.part4:
-                startActivity(new Intent(context, SearchShopActivity.class));
+                startActivity(new Intent(mContext, SearchShopActivity.class));
                 break;
             case R.id.part5:
-                startActivity(new Intent(context, MyBusinessCardUser.class));
+                startActivity(new Intent(mContext, MyBusinessCardUser.class));
                 break;
 
         }

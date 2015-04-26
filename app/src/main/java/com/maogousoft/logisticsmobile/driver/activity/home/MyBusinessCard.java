@@ -8,26 +8,20 @@ import java.io.IOException;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.MediaStore;
 import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.activity.info.*;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
-import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.ybxiang.driver.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,7 +44,6 @@ import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
  */
 public class MyBusinessCard extends BaseActivity {
 
-    private Context mContext; // PR111
     // 返回,完善资料
     private Button mUpdate, mShareCard;
     private TextView mName, mNumber, mPhone, mUpdatePwd;
@@ -66,7 +59,6 @@ public class MyBusinessCard extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_card_layout);
-        mContext = this; // PR111
         initViews();
         initUtils();
     }
@@ -128,7 +120,7 @@ public class MyBusinessCard extends BaseActivity {
 
         super.onClick(v);
         if (v == mUpdatePwd) {
-            startActivity(new Intent(context, UpdatePwdActivity.class));
+            startActivity(new Intent(mContext, UpdatePwdActivity.class));
         }
 //        else if (v == mCreditContainer) {
 //            startActivity(new Intent(mContext, MyCreditActivity.class).putExtra(
@@ -139,7 +131,7 @@ public class MyBusinessCard extends BaseActivity {
 //            startActivity(new Intent(mContext, AccountRecordActivity.class));
 //        }
         else if (v == mUpdate) {
-            startActivity(new Intent(context, OptionalActivity.class).putExtra(
+            startActivity(new Intent(mContext, OptionalActivity.class).putExtra(
                     "info", mAbcInfo));
         }
 //        else if (v == mHistory) {
@@ -153,13 +145,13 @@ public class MyBusinessCard extends BaseActivity {
 
             String[] array = new String[]{"线路1", "线路2", "线路3"};
             new com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog.Builder(
-                    context).setTitle("选择需要修改的路线")
+                    mContext).setTitle("选择需要修改的路线")
                     .setItems(array, new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            Intent intent = new Intent(context,
+                            Intent intent = new Intent(mContext,
                                     ChangePathActivity.class);
                             // intent.putExtra("info", mAbcInfo);
                             intent.putExtra("path", which);
@@ -267,19 +259,19 @@ public class MyBusinessCard extends BaseActivity {
                                         //显示照片
                                         if(!TextUtils.isEmpty(mAbcInfo.getId_card_photo())) {
                                             ImageLoader.getInstance().displayImage(mAbcInfo.getId_card_photo(), id_card_photo, options,
-                                                    new Utils.MyImageLoadingListener(context, id_card_photo));
+                                                    new Utils.MyImageLoadingListener(mContext, id_card_photo));
                                         }
                                         if(!TextUtils.isEmpty(mAbcInfo.getCar_photo1())) {
                                             ImageLoader.getInstance().displayImage(mAbcInfo.getCar_photo1(), car_photo1, options,
-                                                    new Utils.MyImageLoadingListener(context, car_photo1));
+                                                    new Utils.MyImageLoadingListener(mContext, car_photo1));
                                         }
                                         if(!TextUtils.isEmpty(mAbcInfo.getCar_photo2())) {
                                             ImageLoader.getInstance().displayImage(mAbcInfo.getCar_photo2(), car_photo2, options,
-                                                    new Utils.MyImageLoadingListener(context, car_photo2));
+                                                    new Utils.MyImageLoadingListener(mContext, car_photo2));
                                         }
                                         if(!TextUtils.isEmpty(mAbcInfo.getCar_photo3())) {
                                             ImageLoader.getInstance().displayImage(mAbcInfo.getCar_photo3(), car_photo3, options,
-                                                    new Utils.MyImageLoadingListener(context, car_photo3));
+                                                    new Utils.MyImageLoadingListener(mContext, car_photo3));
                                         }
                                     }
                                     break;
@@ -313,7 +305,7 @@ public class MyBusinessCard extends BaseActivity {
     @Override
     public void onBackPressed() {
         application.finishAllActivity();
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(mContext, MainActivity.class);
         startActivity(intent);
     }
 

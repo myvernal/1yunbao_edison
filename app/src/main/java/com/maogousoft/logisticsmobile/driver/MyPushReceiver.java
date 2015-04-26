@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import cn.jpush.android.api.JPushInterface;
 import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.InformationActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -221,7 +220,7 @@ public class MyPushReceiver extends BroadcastReceiver {
                 // content = messageInfo.getMsgContent();
                 // mNotificationManager.notify(
                 // 0,
-                // getChatNotification(context, "收到新消息,请点击查看", content,
+                // getChatNotification(mContext, "收到新消息,请点击查看", content,
                 // messageInfo.getMsgFrom()));
                 // break;
             }
@@ -248,23 +247,23 @@ public class MyPushReceiver extends BroadcastReceiver {
     }
 
     // // 跳入聊天界面
-    // private Notification getChatNotification(Context context, String title,
+    // private Notification getChatNotification(Context mContext, String title,
     // String message, String msgFrom) {
     //
     // LogUtil.e("wst", "聊天，msgFrom是：" + msgFrom);
     //
     // Notification notification = new Notification(R.drawable.ic_launcher,
     // title, System.currentTimeMillis());
-    // final Intent intent = new Intent(context, ChatListActivity.class);
+    // final Intent intent = new Intent(mContext, ChatListActivity.class);
     // Bundle bundle = new Bundle();
     // bundle.putString("user_id", msgFrom);
     // intent.putExtras(bundle);
-    // PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+    // PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0,
     // intent, PendingIntent.FLAG_UPDATE_CURRENT);
     //
-    // notification.sound = getSound(context);
+    // notification.sound = getSound(mContext);
     //
-    // notification.setLatestEventInfo(context, title, message, pendingIntent);
+    // notification.setLatestEventInfo(mContext, title, message, pendingIntent);
     // notification.flags |= Notification.FLAG_AUTO_CANCEL;
     // return notification;
     // }
@@ -274,7 +273,7 @@ public class MyPushReceiver extends BroadcastReceiver {
         Notification notification = new Notification(R.drawable.ic_launcher, title, System.currentTimeMillis());
         Intent intent = new Intent(context, NewSourceActivity.class);
         intent.putExtra("QUERY_MAIN_LINE_ORDER", true);
-        intent.putExtra(SourceDetailActivity.ORDER_ID, order_id);
+        intent.putExtra(Constants.ORDER_ID, order_id);
 //        intent.putExtra("type", "MessageBroadCastReceiver");
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setLatestEventInfo(context, title, "点击查看关注货源", pendingIntent);

@@ -34,7 +34,6 @@ import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
  */
 public class FriendsDetailActivity extends BaseListActivity implements
 		OnClickListener, OnScrollListener {
-	private Context mContext;
 	private Button mTitleBarMore;
 	// 底部更多
 	private View mFootView;
@@ -52,7 +51,6 @@ public class FriendsDetailActivity extends BaseListActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mContext = FriendsDetailActivity.this;
 		initViews();
 	}
 

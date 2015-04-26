@@ -126,11 +126,11 @@ public class LoginActivity extends BaseActivity {
                 switch (mUserType) {
                     // 司机
                     case Constants.USER_DRIVER:
-                        startActivity(new Intent(context, RegisterActivity.class));
+                        startActivity(new Intent(mContext, RegisterActivity.class));
                         break;
                     // 货主
                     case Constants.USER_SHIPPER:
-                        startActivity(new Intent(context, RegisterShipperActivity.class));
+                        startActivity(new Intent(mContext, RegisterShipperActivity.class));
                         break;
                     default:
                         break;
@@ -174,11 +174,11 @@ public class LoginActivity extends BaseActivity {
                 switch (mUserType) {
                     // 司机
                     case Constants.USER_DRIVER:
-                        startActivity(new Intent(context, ForgetActivity.class));
+                        startActivity(new Intent(mContext, ForgetActivity.class));
                         break;
                     // 货主
                     case Constants.USER_SHIPPER:
-                        startActivity(new Intent(context, ForgetShipperActivity.class));
+                        startActivity(new Intent(mContext, ForgetShipperActivity.class));
                         break;
                     default:
                         break;
@@ -190,7 +190,7 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
                 application.setIsAnonymous(true);
-                startActivity(new Intent(context, MainActivity.class));
+                startActivity(new Intent(mContext, MainActivity.class));
                 break;
             default:
                 break;
@@ -229,8 +229,8 @@ public class LoginActivity extends BaseActivity {
                             application.setToken(userInfo.getToken());
                             application.writeInfo("name",userInfo.getName());
                             application.startXMPPService();
-                            startActivity(new Intent(context, MainActivity.class));
-                            // startActivity(new Intent(context,
+                            startActivity(new Intent(mContext, MainActivity.class));
+                            // startActivity(new Intent(mContext,
                             // SearchSourceActivity.class));
                             finish();
 

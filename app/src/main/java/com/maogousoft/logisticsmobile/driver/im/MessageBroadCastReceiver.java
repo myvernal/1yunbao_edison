@@ -42,7 +42,7 @@ public class MessageBroadCastReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(final Context context, Intent intent) {
 
-		// Toast.makeText(context, "成功收到推送信息！！！", Toast.LENGTH_LONG).show();
+		// Toast.makeText(mContext, "成功收到推送信息！！！", Toast.LENGTH_LONG).show();
 
 		final String action = intent.getAction();
 		if (mNotificationManager == null) {
@@ -119,7 +119,7 @@ public class MessageBroadCastReceiver extends BroadcastReceiver {
 				// }
 				//
 				// mNotificationManager.notify(0,
-				// getOrderNotification(context, sb.toString(),
+				// getOrderNotification(mContext, sb.toString(),
 				// newSourceInfo.getId()));
 				// break;
 				// case 6:
@@ -139,7 +139,7 @@ public class MessageBroadCastReceiver extends BroadcastReceiver {
 				// LogUtil.i(TAG, "不包含订单号!!!");
 				// }
 				//
-				// LocHelper.getInstance(context.getApplicationContext()).getResult(new
+				// LocHelper.getInstance(mContext.getApplicationContext()).getResult(new
 				// LocCallback() {
 				//
 				// @Override
@@ -157,7 +157,7 @@ public class MessageBroadCastReceiver extends BroadcastReceiver {
 				// LogUtil.i("MessageBroadCastReceiver", "获取到位置");
 				//
 				// MGApplication application = (MGApplication)
-				// context.getApplicationContext();
+				// mContext.getApplicationContext();
 				//
 				// JSONObject jsonObject = new JSONObject();
 				// try {
@@ -200,7 +200,7 @@ public class MessageBroadCastReceiver extends BroadcastReceiver {
 				// if (result.toString().contains("token")) {
 				//
 				// // token异常
-				// login(context);
+				// login(mContext);
 				// }
 				// }
 				// break;
@@ -210,7 +210,7 @@ public class MessageBroadCastReceiver extends BroadcastReceiver {
 				// if (result.toString().contains("token")) {
 				//
 				// // token异常
-				// login(context);
+				// login(mContext);
 				// }
 				// }
 				// break;
@@ -229,14 +229,14 @@ public class MessageBroadCastReceiver extends BroadcastReceiver {
 				// break;
 				// case 7:
 				// mNotificationManager.notify(0,
-				// getInfoCenterNotification(context, "信息中心有新的消息"));
+				// getInfoCenterNotification(mContext, "信息中心有新的消息"));
 				// break;
 
 				// default:
 				// content = messageInfo.getMsgContent();
 				// mNotificationManager.notify(
 				// 0,
-				// getChatNotification(context, "收到新消息,请点击查看", content,
+				// getChatNotification(mContext, "收到新消息,请点击查看", content,
 				// messageInfo.getMsgFrom()));
 				// break;
 				}
@@ -268,34 +268,34 @@ public class MessageBroadCastReceiver extends BroadcastReceiver {
 	}
 
 	// // 跳入新货源详情
-	// private Notification getOrderNotification(Context context, String title,
+	// private Notification getOrderNotification(Context mContext, String title,
 	// int order_id) {
 	// Notification notification = new Notification(R.drawable.ic_launcher,
 	// title, System.currentTimeMillis());
-	// final Intent intent = new Intent(context, SourceDetailActivity.class);
+	// final Intent intent = new Intent(mContext, SourceDetailActivity.class);
 	// intent.putExtra(SourceDetailActivity.ORDER_ID, order_id);
 	// intent.putExtra("type", "MessageBroadCastReceiver");
-	// PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+	// PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0,
 	// intent, PendingIntent.FLAG_UPDATE_CURRENT);
-	// notification.setLatestEventInfo(context, title, "点击查看货源详情",
+	// notification.setLatestEventInfo(mContext, title, "点击查看货源详情",
 	// pendingIntent);
-	// notification.sound = getSound(context);
+	// notification.sound = getSound(mContext);
 	// notification.flags |= Notification.FLAG_AUTO_CANCEL;
 	// return notification;
 	// }
 	//
 	// // 跳入信息中心
-	// private Notification getInfoCenterNotification(Context context, String
+	// private Notification getInfoCenterNotification(Context mContext, String
 	// title) {
 	// Notification notification = new Notification(R.drawable.ic_launcher,
 	// title, System.currentTimeMillis());
-	// final Intent intent = new Intent(context, InformationActivity.class);
+	// final Intent intent = new Intent(mContext, InformationActivity.class);
 	// Bundle bundle = new Bundle();
 	// intent.putExtras(bundle);
-	// PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+	// PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0,
 	// intent, PendingIntent.FLAG_UPDATE_CURRENT);
-	// notification.setLatestEventInfo(context, title, "点击查看详情", pendingIntent);
-	// notification.sound = getSound(context);
+	// notification.setLatestEventInfo(mContext, title, "点击查看详情", pendingIntent);
+	// notification.sound = getSound(mContext);
 	//
 	// notification.flags |= Notification.FLAG_AUTO_CANCEL;
 	// return notification;

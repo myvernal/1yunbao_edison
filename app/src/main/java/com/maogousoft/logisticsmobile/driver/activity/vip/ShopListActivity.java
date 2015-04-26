@@ -76,7 +76,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 
 		mListView.setOnScrollListener(this);
 
-		mAdapter = new ShopListAdapter(context);
+		mAdapter = new ShopListAdapter(mContext);
 		setListAdapter(mAdapter);
 		setListShown(false);
 	}
@@ -87,7 +87,7 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 			@Override
 			public void onClick(View v) {
                 //进入添加物流园区的页面
-                startActivity(new Intent(context, AddActivity.class));
+                startActivity(new Intent(mContext, AddActivity.class));
 			}
 		});
 	}
@@ -105,10 +105,10 @@ public class ShopListActivity extends BaseListActivity implements OnScrollListen
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(context, MapActivity.class);
+        Intent intent = new Intent(mContext, MapActivity.class);
         intent.putExtra(Constants.MAP_TYPE, Constants.MAP_TYPE_SHOP);
         intent.putExtra(Constants.COMMON_KEY, (ShopInfo) mAdapter.getItem(position));
-        context.startActivity(intent);
+        mContext.startActivity(intent);
 	}
 
 	// 请求指定页数的数据

@@ -23,6 +23,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+
 /**
  * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
  *
@@ -100,6 +102,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         if (ex == null) {
             return false;
         }
+        ex.printStackTrace();
         //使用Toast来显示异常信息
         new Thread() {
             @Override

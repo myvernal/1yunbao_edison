@@ -6,7 +6,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -97,7 +96,7 @@ public class UserCreditActivity extends BaseActivity {
 		credit_score3.setRating(user_score3);
 
 		creditPhone.setText(CheckUtils.pbContent(user_phone));
-		mAdapter = new EvaluateListAdapter(context);
+		mAdapter = new EvaluateListAdapter(mContext);
 		mListView.setAdapter(mAdapter);
 	}
 

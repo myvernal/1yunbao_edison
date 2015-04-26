@@ -2,7 +2,6 @@ package com.ybxiang.driver.activity;
 
 // add this file for 发布货源
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,7 +22,6 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 public class PublishGoodsSourceActivity extends BaseActivity implements OnClickListener {
-    private Context mContext;
     private Button mRightButton;
     private CitySelectView cityselectStart, cityselectEnd;
     private TextView mTitleBarContent;
@@ -47,7 +45,6 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
 
     // 初始化视图
     private void initViews() {
-        mContext = PublishGoodsSourceActivity.this;
         mTitleBarContent = (TextView) findViewById(R.id.titlebar_id_content);
         mRightButton = (Button) findViewById(R.id.titlebar_id_more);
 
@@ -271,7 +268,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
     @Override
     public void onBackPressed() {
         application.finishAllActivity();
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(mContext, MainActivity.class);
         startActivity(intent);
     }
 }

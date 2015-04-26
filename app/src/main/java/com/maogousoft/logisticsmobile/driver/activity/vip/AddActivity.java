@@ -161,10 +161,10 @@ public class AddActivity extends BaseActivity {
 	}
 
 	private void initUtils() {
-		mFileCache = new FileCache(context);
+		mFileCache = new FileCache(mContext);
 
 		mDBUtils = new CityDBUtils(application.getCitySDB());
-		mAdapter = new CityListAdapter(context);
+		mAdapter = new CityListAdapter(mContext);
 
 		mGridView.setAdapter(mAdapter);
 		mGridView.setOnItemClickListener(mOnItemClickListener);
@@ -172,7 +172,7 @@ public class AddActivity extends BaseActivity {
 
 	// 初始化data
 	private void initData() {
-		CarTypeListAdapter mCarTypeAdapter = new CarTypeListAdapter(context);
+		CarTypeListAdapter mCarTypeAdapter = new CarTypeListAdapter(mContext);
 		mType.setAdapter(mCarTypeAdapter);
 		mType.setPrompt("请选择");
 
@@ -293,11 +293,11 @@ public class AddActivity extends BaseActivity {
 					list.add(mCarPhotos.get(i).getPath());
 				}
 			}
-			startActivity(new Intent(context, ImagePagerActivity.class).putStringArrayListExtra("images", list));
+			startActivity(new Intent(mContext, ImagePagerActivity.class).putStringArrayListExtra("images", list));
 		} else if (v == mLBS) {
 			showProgress("正在获取经纬度");
 
-			LocHelper.getInstance(context).getResult(new LocCallback() {
+			LocHelper.getInstance(mContext).getResult(new LocCallback() {
 
 				@Override
 				public void onRecivedLoc(double lat, double lng, String addr) {
@@ -384,7 +384,7 @@ public class AddActivity extends BaseActivity {
 				case CAR_CAMERA_CODE:
 					if (mCarOut != null) {
 
-						String path = PickPhoto.scalePicture(context, mCarOut.getPath(), 480, 800);
+						String path = PickPhoto.scalePicture(mContext, mCarOut.getPath(), 480, 800);
 						mCarOut = Uri.fromFile(new File(path));
 						mCarPhotos.add(mCarOut);
 					}
@@ -396,7 +396,7 @@ public class AddActivity extends BaseActivity {
 					String out = cursor.getString(index);
 					cursor.close();
 
-					String path = PickPhoto.scalePicture(context, out, 480, 800);
+					String path = PickPhoto.scalePicture(mContext, out, 480, 800);
 
 					mCarOut = Uri.fromFile(new File(path));
 
@@ -484,7 +484,7 @@ public class AddActivity extends BaseActivity {
 			// try {
 			// for (int i = 1; i <= mCarPhotos.size(); i++) {
 			// System.out.println(mCarPhotos.get(i - 1).getPath());
-			// params.put("photo" + i, HttpUtils.getBitmapBase64(context, mCarPhotos.get(i - 1).getPath()));
+			// params.put("photo" + i, HttpUtils.getBitmapBase64(mContext, mCarPhotos.get(i - 1).getPath()));
 			// }
 			// } catch (Exception e) {
 			// e.printStackTrace();
@@ -568,7 +568,7 @@ public class AddActivity extends BaseActivity {
 			try {
 				for (int i = 0; i < mCarPhotos.size(); i++) {
 					// System.out.println(mCarPhotos.get(i - 1).getPath());
-					// params.put("photo" + i, HttpUtils.getBitmapBase64(context, mCarPhotos.get(i - 1).getPath()));
+					// params.put("photo" + i, HttpUtils.getBitmapBase64(mContext, mCarPhotos.get(i - 1).getPath()));
 					new UploadImageFileTask().execute(mCarPhotos.get(i).getPath());
 
 				}

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.activity.home.OfferDriverActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.RenZhengActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
@@ -63,8 +64,9 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 			holder.order_info = (TextView) convertView.findViewById(R.id.source_id_order_info);
             holder.order_info_detail = (TextView) convertView.findViewById(R.id.source_id_order_info_detail);
 			holder.order_money = (TextView) convertView.findViewById(R.id.source_id_order_money);
-			holder.order_grab = (TextView) convertView.findViewById(R.id.source_id_order_grab);
 			holder.tvDjs = (TextView) convertView.findViewById(R.id.tv_djs);
+            holder.source_qiangdan = convertView.findViewById(R.id.source_id_order_grab);
+            holder.source_baojia = convertView.findViewById(R.id.source_id_order_state);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -105,9 +107,6 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		holder.order_money.setText(Html.fromHtml(String.format(mResources
 				.getString(R.string.string_home_newsource_order_money),
 				sourceInfo.getUser_bond())));
-        holder.order_money.setText(Html.fromHtml(String.format(mResources
-				.getString(R.string.string_home_newsource_order_money),
-				sourceInfo.getUser_bond())));
 
         Date date = new Date();
         String betweenTime = "刚发布";
@@ -130,8 +129,8 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             }
         });
 
-		holder.order_grab.setOnClickListener(new ClickListener(position, sourceInfo, mContext));
-
+		holder.source_qiangdan.setOnClickListener(new ClickListener(position, sourceInfo, mContext));
+		holder.source_baojia.setOnClickListener(new ClickListener(position, sourceInfo, mContext));
 		return convertView;
 	}
 
@@ -152,7 +151,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		@Override
 		public void onClick(View v) {
 			// 先检测是否已经 通过了 诚信认证
-			if (application.checkIsThroughRezheng()) {
+			/*if (application.checkIsThroughRezheng()) {
 				getBalance(sourceInfo, ctx);
 			} else {
 				final MyAlertDialog dialog = new MyAlertDialog(ctx);
@@ -175,19 +174,15 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 						dialog.dismiss();
 					}
 				});
-			}
-
+			}*/
+            Intent intent = new Intent(mContext, OfferDriverActivity.class);
+            mContext.startActivity(intent);
 		}
 	}
 
 	static class ViewHolder {
-
-
-		TextView order_info, order_info_detail, order_money, order_grab;
-
-		View source_detail_phone;
-
-		TextView tvDjs;
+		TextView order_info, order_info_detail, order_money, tvDjs;
+		View source_detail_phone, source_qiangdan, source_baojia;
 	}
 
 	// 获取余额，并抢单

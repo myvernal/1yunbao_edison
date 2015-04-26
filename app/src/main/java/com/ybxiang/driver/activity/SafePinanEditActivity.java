@@ -17,7 +17,6 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.DictInfo;
 import com.maogousoft.logisticsmobile.driver.model.PinganPackageTypeInfo;
 import com.maogousoft.logisticsmobile.driver.model.SafePinanInfo;
 import com.ybxiang.driver.model.PinanAreaInfo;
@@ -74,7 +73,7 @@ public class SafePinanEditActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //获取详细货物类别
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item);
                 start_city.setAdapter(arrayAdapter);
                 start_city.setEnabled(false);
                 if(!provinceInfoList.isEmpty()) {
@@ -108,7 +107,7 @@ public class SafePinanEditActivity extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //获取详细货物类别
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item);
                 end_city.setAdapter(arrayAdapter);
                 end_city.setEnabled(false);
                 if(!provinceInfoList.isEmpty()) {
@@ -189,7 +188,7 @@ public class SafePinanEditActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                Intent intent = new Intent(context, SafeListActivity.class);
+                Intent intent = new Intent(mContext, SafeListActivity.class);
                 intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_PINGAN);
                 startActivity(intent);
                 break;
@@ -204,7 +203,7 @@ public class SafePinanEditActivity extends BaseActivity {
             }
         };
         Calendar calendar = Calendar.getInstance();
-        Dialog dialog = new DatePickerDialog(context, mDateSetListener,
+        Dialog dialog = new DatePickerDialog(mContext, mDateSetListener,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
@@ -244,7 +243,7 @@ public class SafePinanEditActivity extends BaseActivity {
                 || TextUtils.isEmpty(lianxiren_name.getText())
                 || null == citySelectView.getSelectedProvince() || null == citySelectView.getSelectedCity()
                 || TextUtils.isEmpty(plate_number.getText())) {
-            Toast.makeText(context, "请填写所有需要填写的数据!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "请填写所有需要填写的数据!", Toast.LENGTH_SHORT).show();
             return;
         }
         safePinanInfo.setLianxiren_name(lianxiren_name.getText().toString());
@@ -267,7 +266,7 @@ public class SafePinanEditActivity extends BaseActivity {
         safePinanInfo.setEnd_area(Constants.getPinanEndProvinceType2Values(end_area.getSelectedItemPosition()));
         safePinanInfo.setEnd_city(Constants.getPinanEndCityType2Values(end_city.getSelectedItemPosition()));
         safePinanInfo.setPeichang_area(peichang_area.getText().toString());
-        Intent intent = new Intent(context, SafePinanDetailActivity.class);
+        Intent intent = new Intent(mContext, SafePinanDetailActivity.class);
         intent.putExtra(Constants.COMMON_KEY, safePinanInfo);
         startActivity(intent);
     }
@@ -298,7 +297,7 @@ public class SafePinanEditActivity extends BaseActivity {
                                             keyList.add(info.getDiscribe());
                                             valuesList.add(info.getCode());
                                         }
-                                        ArrayAdapter<String> arrayEndAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, keyList);
+                                        ArrayAdapter<String> arrayEndAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, keyList);
                                         Constants.pinanSourceType2Values = valuesList.toArray(new String[valuesList.size()]);
                                         package_type.setAdapter(arrayEndAdapter);
                                         package_type.setEnabled(true);
@@ -358,8 +357,8 @@ public class SafePinanEditActivity extends BaseActivity {
                                             keyList.add(info.getProvince());
                                             valuesList.add(info.getPcode());
                                         }
-                                        ArrayAdapter<String> arrayStartAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, keyList);
-                                        ArrayAdapter<String> arrayEndAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, keyList);
+                                        ArrayAdapter<String> arrayStartAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, keyList);
+                                        ArrayAdapter<String> arrayEndAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, keyList);
                                         Constants.pinanStartProvinceType2Values = valuesList.toArray(new String[valuesList.size()]);
                                         Constants.pinanEndProvinceType2Values = valuesList.toArray(new String[valuesList.size()]);
                                         start_area.setAdapter(arrayStartAdapter);
@@ -403,7 +402,7 @@ public class SafePinanEditActivity extends BaseActivity {
                 keyList.add(cityInfo.getCity());
                 valuesList.add(cityInfo.getCitycode());
             }
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, keyList);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, keyList);
             if(spinner == start_area) {
                 cityStartInfoList = areaInfoList;
                 Constants.pinanStartCityType2Values = valuesList.toArray(new String[valuesList.size()]);
@@ -438,7 +437,7 @@ public class SafePinanEditActivity extends BaseActivity {
                                                 keyList.add(dictInfo.getCity());
                                                 valuesList.add(dictInfo.getCitycode());
                                             }
-                                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, keyList);
+                                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, keyList);
                                             if(spinner == start_area) {
                                                 cityStartInfoList = cityInfoList;
                                                 Constants.pinanStartCityType2Values = valuesList.toArray(new String[valuesList.size()]);

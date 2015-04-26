@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -60,7 +59,7 @@ public class AccountRecordActivity extends BaseListActivity implements OnScrollL
 
 		mListView.setOnScrollListener(this);
 
-		mAdapter = new AccountRecordAdapter(context);
+		mAdapter = new AccountRecordAdapter(mContext);
 		setListAdapter(mAdapter);
 		setListShown(false);
 	}

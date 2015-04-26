@@ -146,7 +146,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                                             .append(carInfo.getCar_length() + "米");
                                     //车型
                                     int carTypeValue = carInfo.getCar_type();
-                                    String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
+                                    String[] carTypeStr = mContext.getResources().getStringArray(R.array.car_types_name);
                                     for (int i = 0; i < Constants.carTypeValues.length; i++) {
                                         if (Constants.carTypeValues[i] == carTypeValue) {
                                             carInfoDescription.append(carTypeStr[i]);
@@ -166,7 +166,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                                             marker.setPosition(llNew);
                                             mBaiduMap.hideInfoWindow();
                                             //点击弹出的信息框,进入车辆详情
-                                            Intent intent = new Intent(context, MyCarsDetailActivity.class);
+                                            Intent intent = new Intent(mContext, MyCarsDetailActivity.class);
                                             intent.putExtra(Constants.COMMON_KEY, Integer.parseInt(marker.getExtraInfo().getString("carID")));
                                             intent.putExtra(Constants.QUERY_CAR_INFO_FROM_MAP, true);
                                             startActivity(intent);
@@ -201,7 +201,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         CloudManager.getInstance().init(this);
         mLocClient = new LocationClient(this);
         // 初始化adapter
-        mAdapter = new CloudSearchAdapter(context);
+        mAdapter = new CloudSearchAdapter(mContext);
         mListView.setAdapter(mAdapter);
         //开始定位
         locationAction();
@@ -229,7 +229,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                 }
                 break;
             case R.id.search:
-                Intent intent = new Intent(context, SearchCarSourceActivity.class);
+                Intent intent = new Intent(mContext, SearchCarSourceActivity.class);
                 intent.putExtra(Constants.CLOUD_CARS_SEARCH, true);
                 startActivity(intent);
                 break;
@@ -242,7 +242,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
     public void onGetDetailSearchResult(DetailSearchResult result, int error) {
         if (result != null) {
             if (result.poiInfo != null) {
-                Toast.makeText(context, result.poiInfo.title, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, result.poiInfo.title, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(CarCloudSearchActivity.this, "status:" + result.status, Toast.LENGTH_SHORT).show();
             }

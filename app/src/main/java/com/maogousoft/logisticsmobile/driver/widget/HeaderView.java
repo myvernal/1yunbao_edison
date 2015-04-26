@@ -41,6 +41,26 @@ public class HeaderView extends LinearLayout implements View.OnClickListener {
         mBack.setOnClickListener(this);
     }
 
+    public void setTitle(String title) {
+        mTitle.setText(title);
+        mTitle.setVisibility(VISIBLE);
+    }
+
+    public void setTitle(int titleId) {
+        mTitle.setText(titleId);
+        mTitle.setVisibility(VISIBLE);
+    }
+
+    public void setTipTitle(String tip) {
+        mTip.setText(tip);
+        mTip.setVisibility(VISIBLE);
+    }
+
+    public void setTipTitle(int tipId) {
+        mTip.setText(tipId);
+        mTip.setVisibility(VISIBLE);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

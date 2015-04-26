@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.maogousoft.logisticsmobile.driver.CitySelectView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -57,7 +57,7 @@ public class SearchFactoryUserActivity extends BaseActivity {
 //                            .put("city", citySelect.getSelectedCity() == null ? "" : citySelect.getSelectedCity().getName())
 //                            .put("distict", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedTowns().getName())
                             .put("searchKey", TextUtils.isEmpty(searchKey.getText()) ? "" : searchKey.getText());
-                    Intent intent = new Intent(context, SearchDPListActivity.class);
+                    Intent intent = new Intent(mContext, SearchDPListActivity.class);
                     intent.putExtra(Constants.COMMON_KEY, params.toString());
                     intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_FACTORY_USER);
                     startActivity(intent);

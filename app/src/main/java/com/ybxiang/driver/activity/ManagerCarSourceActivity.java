@@ -24,7 +24,6 @@ import java.util.List;
 public class ManagerCarSourceActivity extends BaseListActivity implements
         OnClickListener, OnScrollListener {
     private String TAG = "ManagerCarSourceActivity";
-    private Context mContext;
     private Button mTitleBarMore;
     // 底部更多
     private View mFootView;
@@ -42,7 +41,6 @@ public class ManagerCarSourceActivity extends BaseListActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = ManagerCarSourceActivity.this;
         initViews();
     }
 

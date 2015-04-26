@@ -1,6 +1,5 @@
 package com.ybxiang.driver.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,7 +30,6 @@ import java.util.List;
 
 public class CarsListActivity extends BaseListActivity implements
         OnClickListener, OnScrollListener {
-    private Context mContext;
     private Button mTitleBarMore;
     private TextView mTitleBarContent;
     // 底部更多
@@ -54,7 +52,6 @@ public class CarsListActivity extends BaseListActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = CarsListActivity.this;
         initViews();
         initData(getIntent());
     }
@@ -197,7 +194,7 @@ public class CarsListActivity extends BaseListActivity implements
                                     if (result != null && TextUtils.equals(queryAction, Constants.QUERY_CAR_SOURCE)) {
                                         // 您当月的免费搜索次数已经用完
                                         // if (result.equals("您当月的免费搜索次数已经用完")) {
-                                        final MyAlertDialog dialog = new MyAlertDialog(context);
+                                        final MyAlertDialog dialog = new MyAlertDialog(mContext);
                                         dialog.show();
                                         dialog.setTitle("提示");
                                         // 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
@@ -210,7 +207,7 @@ public class CarsListActivity extends BaseListActivity implements
                                                         dialog.dismiss();
                                                         String content = null;
                                                         startActivity(new Intent(
-                                                                context,
+                                                                mContext,
                                                                 ShareActivity.class)
                                                                 .putExtra("share",
                                                                         content));
@@ -243,7 +240,7 @@ public class CarsListActivity extends BaseListActivity implements
         switch (v.getId()) {
             case R.id.titlebar_id_more:
                 if(Constants.QUERY_CAR_SOURCE.equals(queryAction)) {
-                    Intent intent = new Intent(context, CarCloudSearchActivity.class);
+                    Intent intent = new Intent(mContext, CarCloudSearchActivity.class);
                     //地图显示车辆信息
                     if(mAdapter.getCount() > 0) {
                         intent.putExtra(Constants.COMMON_KEY, (Serializable) mAdapter.getList());
@@ -251,12 +248,12 @@ public class CarsListActivity extends BaseListActivity implements
                     intent.putExtra(Constants.MY_CARS_SEARCH, true);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(context, AddCarActivity.class);
+                    Intent intent = new Intent(mContext, AddCarActivity.class);
                     startActivityForResult(intent, Constants.REQUEST_CODE);
                 }
                 break;
             case R.id.search:
-                Intent searchIntent = new Intent(context, SearchCarSourceActivity.class);
+                Intent searchIntent = new Intent(mContext, SearchCarSourceActivity.class);
                 searchIntent.putExtra(Constants.COMMON_KEY, (java.io.Serializable) mAdapter.getList());
                 searchIntent.putExtra(Constants.MY_CARS_SEARCH, true);
                 startActivity(searchIntent);

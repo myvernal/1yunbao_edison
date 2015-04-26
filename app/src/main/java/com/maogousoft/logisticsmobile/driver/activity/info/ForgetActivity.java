@@ -98,7 +98,7 @@ public class ForgetActivity extends BaseActivity {
                 submit();
                 break;
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, ShareActivity.class));
+                startActivity(new Intent(mContext, ShareActivity.class));
                 break;
             default:
                 break;

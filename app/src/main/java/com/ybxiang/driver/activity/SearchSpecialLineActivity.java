@@ -57,7 +57,7 @@ public class SearchSpecialLineActivity extends BaseActivity {
         mQuery.setOnClickListener(this);
 
         //关注线路
-        mAdapter = new FocusLineAdapter(context);
+        mAdapter = new FocusLineAdapter(mContext);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -82,7 +82,7 @@ public class SearchSpecialLineActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.query:
                 if (citySelectStart.getSelectedCity() == null || citySelectEnd.getSelectedCity() == null) {
-                    Toast.makeText(context, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 final JSONObject params = new JSONObject();
@@ -98,7 +98,7 @@ public class SearchSpecialLineActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(context, SearchDPListActivity.class);
+                Intent intent = new Intent(mContext, SearchDPListActivity.class);
                 intent.putExtra(Constants.COMMON_KEY, params.toString());
                 intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_SPECIAL_LINE);
                 startActivity(intent);
@@ -157,7 +157,7 @@ public class SearchSpecialLineActivity extends BaseActivity {
                                                     public void run() {
                                                         ViewGroup.LayoutParams lp = mGridView.getLayoutParams();
                                                         lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                                                        int size = context.getResources().getDimensionPixelSize(R.dimen.focus_line_item_height);
+                                                        int size = mContext.getResources().getDimensionPixelSize(R.dimen.focus_line_item_height);
                                                         int row = (focusLineInfoList.size() / 2) + (focusLineInfoList.size() % 2);
                                                         lp.height = size * row * 2;
                                                         mAdapter.addAll(focusLineInfoList);
@@ -190,7 +190,7 @@ public class SearchSpecialLineActivity extends BaseActivity {
      * 已关注路线的快捷设置
      */
     public void onFastSetting(View view) {
-        Intent intent = new Intent(context, FocusLineInfoActivity.class);
+        Intent intent = new Intent(mContext, FocusLineInfoActivity.class);
         intent.putExtra(Constants.COMMON_KEY, Constants.SOURCE_SEARCH_TYPE_SPECIAL);
         startActivity(intent);
     }

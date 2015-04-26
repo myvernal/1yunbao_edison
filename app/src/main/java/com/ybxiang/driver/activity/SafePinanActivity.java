@@ -86,12 +86,12 @@ public class SafePinanActivity extends BaseActivity {
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                Intent intent = new Intent(context, SafeListActivity.class);
+                Intent intent = new Intent(mContext, SafeListActivity.class);
                 intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_PINGAN);
                 startActivity(intent);
                 break;
             case R.id.desc:
-                Intent intentDesc = new Intent(context, BaoxianDescActivity.class);
+                Intent intentDesc = new Intent(mContext, BaoxianDescActivity.class);
                 intentDesc.putExtra(Constants.COMMON_KEY, Constants.SAFE_PINGAN);
                 startActivity(intentDesc);
                 break;
@@ -162,7 +162,7 @@ public class SafePinanActivity extends BaseActivity {
                                                 safe_money.setText(allMoney + "");
                                             }
                                         } else {
-                                            Toast.makeText(context, "获取保险费率出错,请联系客服...", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(mContext, "获取保险费率出错,请联系客服...", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                     break;
@@ -191,7 +191,7 @@ public class SafePinanActivity extends BaseActivity {
      * @param view
      */
     public void onCharge(View view) {
-        startActivity(new Intent(context, ChargeActivity.class));
+        startActivity(new Intent(mContext, ChargeActivity.class));
     }
 
     /**
@@ -210,18 +210,18 @@ public class SafePinanActivity extends BaseActivity {
      */
     public void onClickNext(View view) {
         if(Float.valueOf(safe_percent.getText().toString()) <= 0) {
-            Toast.makeText(context, "正在获取保险费率,请稍后...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "正在获取保险费率,请稍后...", Toast.LENGTH_SHORT).show();
         } else if(safe_all_money.getText().length() <= 0) {
-            Toast.makeText(context, "请填写保险金额!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "请填写保险金额!", Toast.LENGTH_SHORT).show();
         } else if (!safe_check_box.isChecked()) {
-            Toast.makeText(context, "请勾选同意保险协议", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "请勾选同意保险协议", Toast.LENGTH_SHORT).show();
         } else if(userGold == -1) {
-            Toast.makeText(context, "正在获取账户余额,请稍后...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "正在获取账户余额,请稍后...", Toast.LENGTH_SHORT).show();
         } else if(userGold <= Double.valueOf(safe_money.getText().toString())) {
-            Toast.makeText(context, "账户余额不足,请充值...", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(context, ChargeActivity.class));
+            Toast.makeText(mContext, "账户余额不足,请充值...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(mContext, ChargeActivity.class));
         } else {
-            Intent intent = new Intent(context, SafePinanEditActivity.class);
+            Intent intent = new Intent(mContext, SafePinanEditActivity.class);
             SafePinanInfo safePinanInfo = new SafePinanInfo();
             safePinanInfo.setType(Constants.SAFE_PINGAN);
             safePinanInfo.setAmount_covered(Double.valueOf(safe_all_money.getText().toString()));//保险金额

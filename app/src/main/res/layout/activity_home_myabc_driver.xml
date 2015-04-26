@@ -72,7 +72,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_line"
                     android:onClick="onMainLine"
                     android:text="主营路线"/>
             <View android:layout_width="match_parent"
@@ -84,7 +84,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_car_info"
                     android:onClick="onCarInfo"
                     android:text="车辆信息"/>
             <View android:layout_width="match_parent"
@@ -106,7 +106,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_focus"
                     android:onClick="onFocusSource"
                     android:text="关注货源"/>
             <View android:layout_width="match_parent"
@@ -116,7 +116,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_account"
                     android:onClick="onMyAccountInfo"
                     android:text="账号管理"/>
             <View android:layout_width="match_parent"
@@ -128,7 +128,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_card"
                     android:onClick="onCard"
                     android:text="货运名片"/>
             <View android:layout_width="match_parent"
@@ -138,7 +138,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_deal_manager"
                     android:onClick="onMyAccountInfo"
                     android:text="合同管理"/>
             <View android:layout_width="match_parent"
@@ -150,7 +150,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_money_manager"
                     android:onClick="onPdf"
                     android:text="财务管理"/>
             <View android:layout_width="match_parent"
@@ -160,7 +160,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_park"
                     android:onClick="onVIP"
                     android:text="物流园区"/>
             <View android:layout_width="match_parent"
@@ -172,7 +172,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_tools"
                     android:onClick="onInteraction"
                     android:text="实用工具"/>
             <View android:layout_width="match_parent"
@@ -182,7 +182,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@id/myabc_id_mycredit"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_rypj"
                     android:onClick="onMyReputation"
                     android:text="信誉评价"/>
             <View android:layout_width="match_parent"
@@ -206,7 +206,7 @@
             <TextView
                     style="@style/settingInfoStyle"
                     android:id="@+id/myabc_is_ring"
-                    android:drawableLeft="@drawable/setting_driver_frends"
+                    android:drawableLeft="@drawable/setting_ring"
                     android:onClick="onSound"
                     android:text="@string/string_is_ring"/>
             <View android:layout_width="match_parent"

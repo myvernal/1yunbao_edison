@@ -72,7 +72,7 @@ public class LoadingActivity extends BaseActivity {
         mTimerTask = new TimerTask() {
 
             public void run() {
-                startActivity(new Intent(context, LoginActivity.class));
+                startActivity(new Intent(mContext, LoginActivity.class));
                 finish();
             }
         };
@@ -119,7 +119,7 @@ public class LoadingActivity extends BaseActivity {
             super.onPostExecute(result);
             // 判断当前网络是否可用
             if (!application.checkNetWork()) {
-                MyAlertDialog dialog = new MyAlertDialog(context);
+                MyAlertDialog dialog = new MyAlertDialog(mContext);
                 dialog.show();
                 dialog.setTitle("提示");
                 dialog.setMessage("网络错误,请检查网络!");
@@ -175,7 +175,7 @@ public class LoadingActivity extends BaseActivity {
                                             application.writeInfo("name",
                                                     userInfo.getName());
                                             application.startXMPPService();
-                                            startActivity(new Intent(context, MainActivity.class));
+                                            startActivity(new Intent(mContext, MainActivity.class));
                                             finish();
                                             break;
                                         case ResultCode.RESULT_ERROR:
@@ -203,7 +203,7 @@ public class LoadingActivity extends BaseActivity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(context, LoginActivity.class));
+                startActivity(new Intent(mContext, LoginActivity.class));
                 finish();
             }
         }, 2000);

@@ -26,7 +26,6 @@ import java.util.List;
  */
 public class SearchDPListActivity extends BaseListActivity implements
         View.OnClickListener, AbsListView.OnScrollListener {
-    private Context mContext;
     private Button mTitleBarMore;
     private TextView mTitleBarContent;
     // 底部更多
@@ -48,7 +47,6 @@ public class SearchDPListActivity extends BaseListActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
         initViews();
         initData();
     }

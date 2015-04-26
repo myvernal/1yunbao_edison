@@ -1,12 +1,12 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -43,7 +43,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseActivity extends Activity implements OnClickListener {
+public class BaseActivity extends FragmentActivity implements OnClickListener {
 
 	private Button mShare;
 
@@ -51,7 +51,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 
 	public MGApplication application;
 
-	public Context context;
+	public Context mContext;
 
 	protected ImageLoader imageLoader;
 
@@ -86,7 +86,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 		application = (MGApplication) getApplication();
 		imageLoader = application.getImageLoader();
 		sdb = application.getDB();
-		context = this;
+		mContext = this;
 		mBinder = application.getBinder();
 		application.addTask(this);
 		init();
@@ -110,7 +110,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 		LogUtil.i("wst", "baseactivity-init");
 
 		imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-		progressDialog = new MyProgressDialog(context);
+		progressDialog = new MyProgressDialog(mContext);
 		progressDialog.setCancelable(true);
 		progressDialog.setCanceledOnTouchOutside(false);
 
@@ -174,10 +174,10 @@ public class BaseActivity extends Activity implements OnClickListener {
 			return;
 		}
 		if (null == toast) {
-			toast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
+			toast = Toast.makeText(mContext, "", Toast.LENGTH_SHORT);
 		}
 		if (null == toastView) {
-			toastView = View.inflate(context, R.layout.view_toast, null);
+			toastView = View.inflate(mContext, R.layout.view_toast, null);
 		}
 		((TextView) toastView).setText(msg);
 		toast.setGravity(Gravity.CENTER, toast.getXOffset() / 2,
@@ -212,7 +212,7 @@ public class BaseActivity extends Activity implements OnClickListener {
         //如果是匿名登陆,并且不是登陆或者注册页面,需要显示遮罩层
         if(application.isAnonymous() && isShowAnonymousActivity && isFirstResume == 0) {
             isFirstResume++;//显示过一次就不再显示
-            startActivity(new Intent(context, AnonymousActivity.class));
+            startActivity(new Intent(mContext, AnonymousActivity.class));
         } else if(isShowAnonymousActivity && isFirstResume > 0) {
             finish();
         }
@@ -235,7 +235,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 //        else if (v.getId() == R.id.titlebar_id_more) {
 //			if (isRightKeyIntoShare) {
 //                LogUtil.e(TAG, "titlebar_id_more");
-//				startActivity(new Intent(context, ShareActivity.class)
+//				startActivity(new Intent(mContext, ShareActivity.class)
 //						.putExtra("share", content));
 //			}
 //		}
@@ -243,7 +243,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 
 	protected void exitAppHint() {
 
-		final MyAlertDialog dialog = new MyAlertDialog(context);
+		final MyAlertDialog dialog = new MyAlertDialog(mContext);
 		dialog.show();
 		dialog.setTitle("提示");
 		dialog.setMessage("您确定要退出么？");
@@ -297,7 +297,7 @@ public class BaseActivity extends Activity implements OnClickListener {
         }
         intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.common_share_info));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(Intent.createChooser(intent, ""));
+        mContext.startActivity(Intent.createChooser(intent, ""));
     }
 
     // 快速搜索新货源
@@ -328,12 +328,12 @@ public class BaseActivity extends Activity implements OnClickListener {
                                         List<NewSourceInfo> mList = (ArrayList<NewSourceInfo>) result;
 
                                         if (mList.size() != 0) {
-                                            Intent intent = new Intent(context, NewSourceActivity.class);
+                                            Intent intent = new Intent(mContext, NewSourceActivity.class);
                                             intent.putExtra("isFromHomeActivity", true);
                                             intent.putExtra("NewSourceInfos", (Serializable) mList);
                                             intent.putExtra("focusLineInfo", focusLineInfo);
                                             intent.putExtra("params", params.toString());
-                                            context.startActivity(intent);
+                                            mContext.startActivity(intent);
                                         } else {
                                             showMsg("暂无满足条件的信息，请扩大搜索范围再试。");
                                         }
@@ -348,7 +348,7 @@ public class BaseActivity extends Activity implements OnClickListener {
                                         // 您当月的免费搜索次数已经用完
                                         // if (result.equals("您当月的免费搜索次数已经用完")) {
                                         final MyAlertDialog dialog = new MyAlertDialog(
-                                                context);
+                                                mContext);
                                         dialog.show();
                                         dialog.setTitle("提示");
                                         // 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
@@ -362,7 +362,7 @@ public class BaseActivity extends Activity implements OnClickListener {
 
                                                         String content = null;
                                                         startActivity(new Intent(
-                                                                context,
+                                                                mContext,
                                                                 ShareActivity.class)
                                                                 .putExtra("share",
                                                                         content));
@@ -398,11 +398,11 @@ public class BaseActivity extends Activity implements OnClickListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Intent intent = new Intent(context, CarsListActivity.class);
+        Intent intent = new Intent(mContext, CarsListActivity.class);
         intent.putExtra(Constants.COMMON_KEY, params.toString());
         intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_CAR_SOURCE);
         //将搜索条件传下去
-        context.startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     // 快速查找车源
@@ -417,10 +417,10 @@ public class BaseActivity extends Activity implements OnClickListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Intent intent = new Intent(context, SearchDPListActivity.class);
+        Intent intent = new Intent(mContext, SearchDPListActivity.class);
         intent.putExtra(Constants.COMMON_KEY, params.toString());
         intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_SPECIAL_LINE);
         //将搜索条件传下去
-        context.startActivity(intent);
+        mContext.startActivity(intent);
     }
 }

@@ -140,24 +140,24 @@ public class ChangePathActivity extends BaseActivity {
 	/** 初始化工具类 **/
 	private void initUtils() {
 		mDBUtils = new CityDBUtils(application.getCitySDB());
-		mAdapterFirst = new CityListAdapter(context);
-		mAdapterFirst2 = new CityListAdapter(context);
+		mAdapterFirst = new CityListAdapter(mContext);
+		mAdapterFirst2 = new CityListAdapter(mContext);
 
 		mGridViewFirst.setAdapter(mAdapterFirst);
 		mGridViewFirst2.setAdapter(mAdapterFirst2);
 		mGridViewFirst.setOnItemClickListener(mOnItemClickListenerFirst);
 		mGridViewFirst2.setOnItemClickListener(mOnItemClickListenerFirst2);
 
-		mAdapterSecond = new CityListAdapter(context);
-		mAdapterSecond2 = new CityListAdapter(context);
+		mAdapterSecond = new CityListAdapter(mContext);
+		mAdapterSecond2 = new CityListAdapter(mContext);
 
 		mGridViewSecond.setAdapter(mAdapterSecond);
 		mGridViewSecond2.setAdapter(mAdapterSecond2);
 		mGridViewSecond.setOnItemClickListener(mOnItemClickListenerSecond);
 		mGridViewSecond2.setOnItemClickListener(mOnItemClickListenerSecond2);
 
-		mAdapterThird = new CityListAdapter(context);
-		mAdapterThird2 = new CityListAdapter(context);
+		mAdapterThird = new CityListAdapter(mContext);
+		mAdapterThird2 = new CityListAdapter(mContext);
 
 		mGridViewThird.setAdapter(mAdapterThird);
 		mGridViewThird2.setAdapter(mAdapterThird2);

@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -64,7 +63,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	 * @param view
 	 */
 	public void onMainLine(View view) {
-		startActivity(new Intent(context, MainLineActivity.class));
+		startActivity(new Intent(mContext, MainLineActivity.class));
 	}
 
 	/**
@@ -73,7 +72,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	 * @param view
 	 */
 	public void onCarInfo(View view) {
-		startActivity(new Intent(context, MyabcCarInfoActivity.class));
+		startActivity(new Intent(mContext, MyabcCarInfoActivity.class));
 	}
 
 	/**
@@ -82,36 +81,36 @@ public class MyabcActivityDriver extends BaseActivity {
 	 * @param view
 	 */
 	public void onMyAccountInfo(View view) {
-		startActivity(new Intent(context, MyabcAccountInfoActivity.class));
+		startActivity(new Intent(mContext, MyabcAccountInfoActivity.class));
 	}
 
     // 好友货源
     public void onFriendsSource(View view) {
-        Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+        Intent intentNewSource = new Intent(mContext, NewSourceActivity.class);
         intentNewSource.putExtra("getFriendOrderList", true);
         startActivity(intentNewSource);
     }
 
     // 关注货源
     public void onFocusSource(View view) {
-        Intent intentNewSource = new Intent(context, NewSourceActivity.class);
+        Intent intentNewSource = new Intent(mContext, NewSourceActivity.class);
         intentNewSource.putExtra("QUERY_MAIN_LINE_ORDER", true);
         startActivity(intentNewSource);
     }
 
     //货运名片
     public void onCard(View view) {
-        startActivity(new Intent(context, MyBusinessCard.class));
+        startActivity(new Intent(mContext, MyBusinessCard.class));
     }
 
     // 物流园区
     public void onVIP(View view) {
-        startActivity(new Intent(context, SearchShopActivity.class));
+        startActivity(new Intent(mContext, SearchShopActivity.class));
     }
 
     // 实用工具
     public void onInteraction(View view) {
-        startActivity(new Intent(context, OthersActivity.class));
+        startActivity(new Intent(mContext, OthersActivity.class));
     }
 
 	/**
@@ -120,7 +119,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	 * @param view
 	 */
 	public void onMyReputation(View view) {
-		startActivity(new Intent(context, MyReputationActivity.class));
+		startActivity(new Intent(mContext, MyReputationActivity.class));
 	}
 
 	private void initViews() {
@@ -150,23 +149,23 @@ public class MyabcActivityDriver extends BaseActivity {
 
 	@Override
 	public void onClick(View v) {
-		((BaseActivity) context).setIsRightKeyIntoShare(false);
+		((BaseActivity) mContext).setIsRightKeyIntoShare(false);
 		super.onClick(v);
 		if (v == mComplete) {
 			application.logout();
-			startActivity(new Intent(context, LoginActivity.class));
+			startActivity(new Intent(mContext, LoginActivity.class));
 		} else if(v == mUpdate) {
             if(mAbcInfo == null) {
-                Toast.makeText(context, "正在获取账号资料,请稍后", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "正在获取账号资料,请稍后", Toast.LENGTH_SHORT).show();
                 return;
             }
-            startActivity(new Intent(context, OptionalActivity.class).putExtra("info", mAbcInfo));
+            startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", mAbcInfo));
         } else if (v == mContactKeFu) {
 			// PR111 begin
 			// Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
 			// + "4008765156"));
 			// startActivity(intent);
-			AlertDialog.Builder builder = new AlertDialog.Builder(context)
+			AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
 					.setTitle(R.string.contact_kehu).setItems(
 							R.array.contact_kehu_items,
 							new DialogInterface.OnClickListener() {
@@ -184,7 +183,7 @@ public class MyabcActivityDriver extends BaseActivity {
 										break;
 									// 发QQ
 									case 1:
-										Toast.makeText(context,
+										Toast.makeText(mContext,
 												R.string.contact_kehu_qq,
 												Toast.LENGTH_LONG).show();
 										// sendImageToQQ("hello");
@@ -308,7 +307,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	 * @param view
 	 */
 	public void onMyHistoryOrder(View view) {
-		startActivity(new Intent(context, HistroyOrderActivity.class).putExtra(
+		startActivity(new Intent(mContext, HistroyOrderActivity.class).putExtra(
 				"info", mAbcInfo));
 	}
 
@@ -319,7 +318,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	 */
 	public void onSound(View view) {
 
-		final MyAlertDialog dialog = new MyAlertDialog(context);
+		final MyAlertDialog dialog = new MyAlertDialog(mContext);
 		dialog.show();
 		dialog.setTitle("提示");
 		dialog.setMessage("收到新货源，需要提示音么？");

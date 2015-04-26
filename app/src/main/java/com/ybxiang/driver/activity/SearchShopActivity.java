@@ -2,10 +2,8 @@ package com.ybxiang.driver.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.CitySelectView;
@@ -53,7 +51,7 @@ public class SearchShopActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //进入添加物流园区的页面
-                startActivity(new Intent(context, AddActivity.class));
+                startActivity(new Intent(mContext, AddActivity.class));
             }
         });
     }
@@ -64,7 +62,7 @@ public class SearchShopActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.query:
                 if (citySelect.getSelectedProvince() == null || citySelect.getSelectedCity() == null) {
-                    Toast.makeText(context, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (citySelect.getSelectedProvince() == null || citySelect.getSelectedProvince() == null) {
@@ -76,7 +74,7 @@ public class SearchShopActivity extends BaseActivity {
                             .put("province", citySelect.getSelectedProvince().getId())
                             .put("city", citySelect.getSelectedCity() == null ? "" :citySelect.getSelectedCity().getId())
                             .put("district", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedTowns().getId());
-                    Intent intent = new Intent(context, ShopListActivity.class);
+                    Intent intent = new Intent(mContext, ShopListActivity.class);
                     intent.putExtra(Constants.COMMON_KEY, params.toString());
                     startActivity(intent);
                 } catch (JSONException e) {

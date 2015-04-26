@@ -18,7 +18,6 @@ import com.maogousoft.logisticsmobile.driver.adapter.CompleteOrderListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.HistoryOrder;
 
 /**
@@ -39,7 +38,7 @@ public class HistroyOrderActivity extends BaseListActivity {
 
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("历史订单");
 
-		mAdapter = new CompleteOrderListAdapter(context);
+		mAdapter = new CompleteOrderListAdapter(mContext);
 		setListAdapter(mAdapter);
 		setListShown(false);
 	}
@@ -98,7 +97,7 @@ public class HistroyOrderActivity extends BaseListActivity {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		final Intent intent = new Intent(context,
+		final Intent intent = new Intent(mContext,
 				HistroyOrderDetailActivity.class);
 		intent.putExtra("sourceInfo", ((CompleteOrderListAdapter) mAdapter)
 				.getList().get(position));

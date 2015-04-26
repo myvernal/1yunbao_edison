@@ -18,7 +18,6 @@ import com.maogousoft.logisticsmobile.driver.model.CarInfo;
  * @author ybxiang
  */
 public class CarInfoDetailActivity extends BaseActivity {
-    private Context mContext;
     private Button mTitleBarMore;
     private CarInfo carInfo;
     private TextView car_info_detail_way, car_info_detail_number, car_info_detail_car_length,
@@ -28,7 +27,6 @@ public class CarInfoDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = CarInfoDetailActivity.this;
         setContentView(R.layout.car_info_detail);
         initViews();
         initData();

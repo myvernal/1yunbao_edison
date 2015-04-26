@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
@@ -31,10 +30,10 @@ public class CheckSafeActivity extends BaseActivity implements OnClickListener {
 		super.onClick(v);
         switch (v.getId()) {
             case R.id.safePinanBtn:
-                startActivity(new Intent(context, SafePinanActivity.class));
+                startActivity(new Intent(mContext, SafePinanActivity.class));
                 break;
             case R.id.safeSeaBtn:
-                startActivity(new Intent(context, SafeSeaActivity.class));
+                startActivity(new Intent(mContext, SafeSeaActivity.class));
                 break;
         }
 	}

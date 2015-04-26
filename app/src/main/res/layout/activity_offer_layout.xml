@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:id="@+id/headerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="60dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="我的报价" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/offer_value"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/title_bg"
+            android:inputType="numberDecimal"
+            android:background="@drawable/select_edit_bg" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroup"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/offer_type_car"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="元/车"
+                android:drawablePadding="5dp"
+                android:padding="5dp"
+                android:onClick="onChooseOfferType"
+                android:drawableLeft="@drawable/common_check_box_style" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/offer_type_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="元/吨"
+                android:padding="5dp"
+                android:drawablePadding="5dp"
+                android:onClick="onChooseOfferType"
+                android:drawableLeft="@drawable/common_check_box_style" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1px"
+                android:layout_weight="1" />
+        </RadioGroup>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/offer_confirm"
+            android:padding="10dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/TextColorWhite"
+            android:textSize="16sp"
+            android:background="@drawable/selector_common_button"
+            android:text="确认"/>
+    </LinearLayout>
+</LinearLayout>

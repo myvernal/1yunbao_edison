@@ -73,7 +73,7 @@ public class VenderIndexGridActivity extends BaseActivity implements OnItemClick
 			map.put("title", arrays[i]);
 			mList.add(map);
 		}
-		mAdapter = new SimpleAdapter(context, mList, R.layout.griditem_others, new String[] { "icon", "title" },
+		mAdapter = new SimpleAdapter(mContext, mList, R.layout.griditem_others, new String[] { "icon", "title" },
 				new int[] { R.id.other_id_item_icon, R.id.other_id_item_title });
 		mGridView.setAdapter(mAdapter);
 		mGridView.setOnItemClickListener(this);
@@ -85,7 +85,7 @@ public class VenderIndexGridActivity extends BaseActivity implements OnItemClick
 			@Override
 			public void onClick(View v) {
 
-				final GrabDialog dialog = new GrabDialog(context);
+				final GrabDialog dialog = new GrabDialog(mContext);
 				dialog.show();
 				final EditText mInput = (EditText) dialog.findViewById(android.R.id.text1);
 				dialog.setTitle("提示");
@@ -124,7 +124,7 @@ public class VenderIndexGridActivity extends BaseActivity implements OnItemClick
 											dismissProgress();
 											switch (code) {
 												case ResultCode.RESULT_OK:
-													startActivity(new Intent(context, com.maogousoft.logisticsmobile.driver.activity.vip.AddActivity.class));
+													startActivity(new Intent(mContext, com.maogousoft.logisticsmobile.driver.activity.vip.AddActivity.class));
 													break;
 
 												default:
@@ -158,7 +158,7 @@ public class VenderIndexGridActivity extends BaseActivity implements OnItemClick
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
 					finish();
-					startActivity(new Intent(context, com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity.class));
+					startActivity(new Intent(mContext, com.maogousoft.logisticsmobile.driver.activity.vip.ShopListActivity.class));
 				}
 
 			}
@@ -171,22 +171,22 @@ public class VenderIndexGridActivity extends BaseActivity implements OnItemClick
 
 		switch (position) {
 			case 0:
-				startActivity(new Intent(context, VenderShopListActivity.class).putExtra("type", 0));
+				startActivity(new Intent(mContext, VenderShopListActivity.class).putExtra("type", 0));
 				break;
 			case 1:
-				startActivity(new Intent(context, VenderShopListActivity.class).putExtra("type", 1));
+				startActivity(new Intent(mContext, VenderShopListActivity.class).putExtra("type", 1));
 				break;
 			case 2:
-				startActivity(new Intent(context, VenderShopListActivity.class).putExtra("type", 2));
+				startActivity(new Intent(mContext, VenderShopListActivity.class).putExtra("type", 2));
 				break;
 			case 3:
-				startActivity(new Intent(context, VenderShopListActivity.class).putExtra("type", 3));
+				startActivity(new Intent(mContext, VenderShopListActivity.class).putExtra("type", 3));
 				break;
 			case 4:
-				startActivity(new Intent(context, VenderShopListActivity.class).putExtra("type", 4));
+				startActivity(new Intent(mContext, VenderShopListActivity.class).putExtra("type", 4));
 				break;
 			case 5:
-				startActivity(new Intent(context, VenderShopListActivity.class).putExtra("type", 5));
+				startActivity(new Intent(mContext, VenderShopListActivity.class).putExtra("type", 5));
 				break;
 		}
 	}

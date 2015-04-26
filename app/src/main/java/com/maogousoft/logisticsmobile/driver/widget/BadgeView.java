@@ -87,7 +87,7 @@ public class BadgeView extends TextView {
 	 * create a new BadgeView instance attached to a target {@link android.view.View}.
 	 * 
 	 * @param context
-	 *            context for this view.
+	 *            mContext for this view.
 	 * @param target
 	 *            the View to attach the badge to.
 	 */
@@ -101,7 +101,7 @@ public class BadgeView extends TextView {
 	 * a given index.
 	 * 
 	 * @param context
-	 *            context for this view.
+	 *            mContext for this view.
 	 * @param target
 	 *            the TabWidget to attach the badge to.
 	 * @param index

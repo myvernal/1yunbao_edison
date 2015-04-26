@@ -2,12 +2,10 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 
 import java.util.List;
 
-import android.view.View;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -96,7 +94,7 @@ public class MyCreditActivity extends BaseActivity {
 				mScore3.setRating(score3);
 			}
 		}
-		mAdapter = new EvaluateListAdapter(context);
+		mAdapter = new EvaluateListAdapter(mContext);
 		mListView.setAdapter(mAdapter);
 	}
 

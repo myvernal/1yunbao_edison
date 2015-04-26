@@ -86,7 +86,7 @@ public class SearchCarSourceActivity extends BaseActivity {
         mSubmit.setOnClickListener(this);
         mRightButton.setOnClickListener(this);
         //关注线路
-        mAdapter = new FocusLineAdapter(context);
+        mAdapter = new FocusLineAdapter(mContext);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -146,7 +146,7 @@ public class SearchCarSourceActivity extends BaseActivity {
                 if (application.checkIsRegOptional()) {
                     submit();
                 } else {
-                    final MyAlertDialog dialog = new MyAlertDialog(context);
+                    final MyAlertDialog dialog = new MyAlertDialog(mContext);
                     dialog.show();
                     dialog.setTitle("提示");
                     dialog.setMessage("请完善信息，否则无法提供适合你车型、线路的货源。");
@@ -155,7 +155,7 @@ public class SearchCarSourceActivity extends BaseActivity {
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            Intent intent = new Intent(context,
+                            Intent intent = new Intent(mContext,
                                     OptionalActivity.class);
                             intent.putExtra("isFormRegisterActivity", false);
                             startActivity(intent);
@@ -175,11 +175,11 @@ public class SearchCarSourceActivity extends BaseActivity {
             // PR206 附近车源 begin
             case R.id.titlebar_id_more:
 //                Intent nearbyCarSourceIntent = new Intent();
-//                nearbyCarSourceIntent.setClass(context, NearbyCarSourceActivity.class);
+//                nearbyCarSourceIntent.setClass(mContext, NearbyCarSourceActivity.class);
 //                startActivity(nearbyCarSourceIntent);
                 //我的车队
 
-                Intent intent = new Intent(context, CarCloudSearchActivity.class);
+                Intent intent = new Intent(mContext, CarCloudSearchActivity.class);
                 //TODO 是我的车队搜索
                 if(isMyCarsFilter) {
                     Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
@@ -242,7 +242,7 @@ public class SearchCarSourceActivity extends BaseActivity {
         }catch (JSONException e) {
             e.printStackTrace();
         }
-        Intent intent = new Intent(context, CarsListActivity.class);
+        Intent intent = new Intent(mContext, CarsListActivity.class);
         intent.putExtra(Constants.COMMON_KEY, params.toString());
         intent.putExtra(Constants.MY_CARS_SEARCH, isMyCarsFilter);
         if(isMyCarsFilter) {
@@ -251,7 +251,7 @@ public class SearchCarSourceActivity extends BaseActivity {
             intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_CAR_SOURCE);
         }
         //将搜索条件传下去
-        context.startActivity(intent);
+        mContext.startActivity(intent);
         finish();
     }
     // add for PR1.3  begin
@@ -301,7 +301,7 @@ public class SearchCarSourceActivity extends BaseActivity {
                                                     public void run() {
                                                         ViewGroup.LayoutParams lp = mGridView.getLayoutParams();
                                                         lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                                                        int size = context.getResources().getDimensionPixelSize(R.dimen.focus_line_item_height);
+                                                        int size = mContext.getResources().getDimensionPixelSize(R.dimen.focus_line_item_height);
                                                         int row = (focusLineInfoList.size() / 2) + (focusLineInfoList.size() % 2);
                                                         lp.height = size * row * 2;
                                                         mAdapter.addAll(focusLineInfoList);
@@ -334,7 +334,7 @@ public class SearchCarSourceActivity extends BaseActivity {
      * 已关注路线的快捷设置
      */
     public void onFastSetting(View view) {
-        Intent intent = new Intent(context, FocusLineInfoActivity.class);
+        Intent intent = new Intent(mContext, FocusLineInfoActivity.class);
         intent.putExtra(Constants.COMMON_KEY, Constants.CAR_SEARCH_TYPE);
         startActivity(intent);
     }

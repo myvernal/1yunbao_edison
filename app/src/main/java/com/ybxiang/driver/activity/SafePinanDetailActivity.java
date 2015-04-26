@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.model.SafePinanInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -136,7 +135,7 @@ public class SafePinanDetailActivity extends BaseActivity {
                                     if (result instanceof String) {
                                         showMsg(result.toString());
                                     }
-                                    Intent intent = new Intent(context, SafeListActivity.class);
+                                    Intent intent = new Intent(mContext, SafeListActivity.class);
                                     intent.putExtra(Constants.COMMON_KEY, Constants.SAFE_PINGAN);
                                     startActivity(intent);
                                     finish();

@@ -25,7 +25,6 @@ import java.util.List;
  */
 public class MySourceActivity extends BaseListActivity implements AbsListView.OnScrollListener {
 
-    private Context mContext;
     private Button mTitleBarMore;
     // 底部更多
     private View mFootView;
@@ -43,7 +42,6 @@ public class MySourceActivity extends BaseListActivity implements AbsListView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = MySourceActivity.this;// PR104
         initViews();
     }
 

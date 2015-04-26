@@ -49,7 +49,7 @@ public class SearchThreePartyActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.query:
                 if (citySelect.getSelectedProvince() == null || citySelect.getSelectedCity() == null) {
-                    Toast.makeText(context, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "请至少选择到城市一级", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 try {
@@ -58,7 +58,7 @@ public class SearchThreePartyActivity extends BaseActivity {
                             .put("city", citySelect.getSelectedCity().getName())
                             .put("distict", citySelect.getSelectedTowns() == null ? "" : citySelect.getSelectedCity().getName())
                             .put("searchKey", TextUtils.isEmpty(searchKey.getText()) ? "" : searchKey.getText());
-                    Intent intent = new Intent(context, SearchDPListActivity.class);
+                    Intent intent = new Intent(mContext, SearchDPListActivity.class);
                     intent.putExtra(Constants.COMMON_KEY, params.toString());
                     intent.putExtra(Constants.COMMON_ACTION_KEY, Constants.QUERY_THREE_PARTY);
                     startActivity(intent);

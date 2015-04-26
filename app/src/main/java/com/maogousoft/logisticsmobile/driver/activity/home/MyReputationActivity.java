@@ -138,7 +138,7 @@ public class MyReputationActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void onMyCreditContainer(View view) {
-		startActivity(new Intent(context, MyCreditActivity.class).putExtra(
+		startActivity(new Intent(mContext, MyCreditActivity.class).putExtra(
 				"info", mAbcInfo));
 	}
 }

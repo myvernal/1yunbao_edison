@@ -7,14 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-import com.maogousoft.logisticsmobile.driver.activity.other.MapActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -26,7 +23,6 @@ import com.ybxiang.driver.model.LocationInfo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -132,13 +128,13 @@ public class MyCarsDetailActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.edit:
                 if (carInfo != null) {
-                    Intent intent = new Intent(context, AddCarActivity.class);
+                    Intent intent = new Intent(mContext, AddCarActivity.class);
                     intent.putExtra(Constants.COMMON_KEY, carInfo);
                     intent.putExtra(Constants.CAR_EDIT_TYPE, Constants.EDIT_CAR);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(context, "没有车辆数据!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "没有车辆数据!", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.delete:
@@ -152,7 +148,7 @@ public class MyCarsDetailActivity extends BaseActivity {
                 break;
             case R.id.titlebar_id_more:
                 LogUtil.e(TAG, "titlebar_id_more");
-                startActivity(new Intent(context, ShareActivity.class).putExtra("share", content));
+                startActivity(new Intent(mContext, ShareActivity.class).putExtra("share", content));
                 break;
         }
     }
@@ -227,7 +223,7 @@ public class MyCarsDetailActivity extends BaseActivity {
             //报价
             if(!TextUtils.isEmpty(carInfo.getPrice())) {
                 int priceUnits = carInfo.getUnits();
-                String[] unitsArray = context.getResources().getStringArray(R.array.car_price_unit);
+                String[] unitsArray = mContext.getResources().getStringArray(R.array.car_price_unit);
                 for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                     if (Constants.unitTypeValues[i] == priceUnits) {
                         price.setText(carInfo.getPrice() + "元/" + unitsArray[i]);
@@ -267,7 +263,7 @@ public class MyCarsDetailActivity extends BaseActivity {
         car_length.setText(car_length.getText() + carInfo.getCar_length() + "米");
         //车型
         int carTypeValue = carInfo.getCar_type();
-        String[] carTypeStr = context.getResources().getStringArray(R.array.car_types_name);
+        String[] carTypeStr = mContext.getResources().getStringArray(R.array.car_types_name);
         for (int i = 0; i < Constants.carTypeValues.length; i++) {
             if (Constants.carTypeValues[i] == carTypeValue) {
                 car_type.setText(car_type.getText().toString() + carTypeStr[i]);
@@ -317,7 +313,7 @@ public class MyCarsDetailActivity extends BaseActivity {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    Toast.makeText(context, "删除车辆成功", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, "删除车辆成功", Toast.LENGTH_SHORT).show();
                                     finish();
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -362,19 +358,19 @@ public class MyCarsDetailActivity extends BaseActivity {
                                         LocationInfo info = (LocationInfo) result;
                                         if (!info.isDone()) {
                                             if(info.getBeginTime() != null) {
-                                                Toast.makeText(context, "没有找到对方地理数据", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(mContext, "没有找到对方地理数据", Toast.LENGTH_SHORT).show();
                                                 return;
                                             } else {
-                                                Toast.makeText(context, "定位成功", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(mContext, "定位成功", Toast.LENGTH_SHORT).show();
                                             }
                                             location_address.setText(info.getAddress());
                                             location_address.setVisibility(View.VISIBLE);
                                             location_time.setText("时间:" + info.getTimestamp());
-//                                            Intent intent = new Intent(context, MapActivity.class);
+//                                            Intent intent = new Intent(mContext, MapActivity.class);
 //                                            intent.putExtra(Constants.COMMON_KEY, info);
 //                                            startActivity(intent);
                                         } else {
-                                            Toast.makeText(context, "定位超时", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(mContext, "定位超时", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                     break;
@@ -421,7 +417,7 @@ public class MyCarsDetailActivity extends BaseActivity {
      * 免费定位未注册提示
      */
     private void showFreeLocationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("邀请加入");
         builder.setMessage("对方现在还不是易运宝用户,邀请对方注册使用,从此平台随时自动更新司机位置.");
         builder.setPositiveButton("邀请", new DialogInterface.OnClickListener() {
@@ -443,7 +439,7 @@ public class MyCarsDetailActivity extends BaseActivity {
      * 收费定位未开通提示
      */
     private void showPhoneLocationDialogFailed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("定位授权");
         builder.setMessage("将发送信息给对方，对方回复Y后，请再次点击手机定位.司机也可以主动编辑短信Y，移动发送至10658012174，联通发送至106550101832224261");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -459,7 +455,7 @@ public class MyCarsDetailActivity extends BaseActivity {
      * 收费定位确认提示
      */
     private void showPhoneLocationDialogConfirm() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("确认信息");
         builder.setMessage("您正在使用收费定位功能,将扣除您0.1个物流币!");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -519,7 +515,7 @@ public class MyCarsDetailActivity extends BaseActivity {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    Toast.makeText(context, "添加车辆成功!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(mContext, "添加车辆成功!", Toast.LENGTH_SHORT).show();
                                     finish();
                                     break;
                                 case ResultCode.RESULT_ERROR:

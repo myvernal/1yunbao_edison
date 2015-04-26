@@ -1,6 +1,5 @@
 package com.ybxiang.driver.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -85,15 +84,15 @@ public class AddCarActivity extends BaseActivity {
     public void addToMyCar(View view) {
         try {
             if(TextUtils.isEmpty(ower_name.getText())) {
-                Toast.makeText(context, "司机姓名不能为空", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "司机姓名不能为空", Toast.LENGTH_SHORT).show();
                 return;
             }
             if(TextUtils.isEmpty(ower_phone.getText())) {
-                Toast.makeText(context, "手机号码不能为空", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "手机号码不能为空", Toast.LENGTH_SHORT).show();
                 return;
             }
             if(TextUtils.isEmpty(mCarNum.getText())) {
-                Toast.makeText(context, "车牌号码不能为空", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "车牌号码不能为空", Toast.LENGTH_SHORT).show();
                 return;
             }
             final JSONObject jsonObject = new JSONObject();
@@ -161,9 +160,9 @@ public class AddCarActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if(Constants.EDIT_CAR == type) {
-                                        Toast.makeText(context, "修改车辆成功!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mContext, "修改车辆成功!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(context, "添加车辆成功!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mContext, "添加车辆成功!", Toast.LENGTH_SHORT).show();
                                     }
                                     finish();
                                     break;

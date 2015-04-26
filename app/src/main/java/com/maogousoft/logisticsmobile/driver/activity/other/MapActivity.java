@@ -168,15 +168,15 @@ public class MapActivity extends BaseActivity implements BDLocationListener, OnG
                 strInfo += ",";
             }
             strInfo += "找到结果";
-            Toast.makeText(context, strInfo, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, strInfo, Toast.LENGTH_LONG).show();
         }
     }
 
     public void onGetPoiDetailResult(PoiDetailResult result) {
         if (result.error != SearchResult.ERRORNO.NO_ERROR) {
-            Toast.makeText(context, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, result.getName() + ": " + result.getAddress(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, result.getName() + ": " + result.getAddress(), Toast.LENGTH_SHORT).show();
         }
     }
 

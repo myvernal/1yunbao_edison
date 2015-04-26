@@ -1,11 +1,9 @@
 package com.ybxiang.driver.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
@@ -26,7 +24,6 @@ import java.util.List;
  */
 public class CheckCardListActivity extends BaseListActivity implements View.OnClickListener, AbsListView.OnScrollListener {
 
-    private Context mContext;
     private TextView mTitleBarContent;
     // 底部更多
     private View mFootView;
@@ -44,7 +41,6 @@ public class CheckCardListActivity extends BaseListActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
         initViews();
         initData();
     }
@@ -141,7 +137,7 @@ public class CheckCardListActivity extends BaseListActivity implements View.OnCl
         super.onClick(v);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                startActivity(new Intent(context, AddCarActivity.class));
+                startActivity(new Intent(mContext, AddCarActivity.class));
                 break;
         }
     }

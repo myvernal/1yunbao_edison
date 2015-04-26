@@ -1,6 +1,5 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -36,7 +35,6 @@ import java.io.IOException;
  * Created by aliang on 2014/9/6.
  */
 public class MyBusinessCardUser extends BaseActivity {
-    private Context mContext; // PR111
     // 返回,完善资料
     private Button mShareCard, mUpdate;
     private TextView insurance_count, fleet_count, verify_count, address, company_name, name, phone,
@@ -52,7 +50,6 @@ public class MyBusinessCardUser extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mybusiness_card_user);
-        mContext = this; // PR111
         initViews();
         initUtils();
     }
@@ -109,13 +106,13 @@ public class MyBusinessCardUser extends BaseActivity {
 
         super.onClick(v);
         if (v == mHistory) {
-            startActivity(new Intent(context, MySourceActivity.class));
+            startActivity(new Intent(mContext, MySourceActivity.class));
         } else if (v == mUpdate) {
             if(userInfo == null) {
                 Toast.makeText(mContext, "正在获取用户信息,请稍后", Toast.LENGTH_SHORT).show();
                 return;
             }
-            startActivity(new Intent(context, OptionalShipperActivity.class).putExtra("info", userInfo));
+            startActivity(new Intent(mContext, OptionalShipperActivity.class).putExtra("info", userInfo));
         } else if (v == mShareCard) {
             // PR111 end
             mUpdate.setVisibility(View.GONE);
@@ -182,19 +179,19 @@ public class MyBusinessCardUser extends BaseActivity {
                                         //显示照片
                                         if(!TextUtils.isEmpty(userInfo.getCompany_logo())) {
                                             ImageLoader.getInstance().displayImage(userInfo.getCompany_logo(), company_photo, options,
-                                                    new Utils.MyImageLoadingListener(context, company_photo));
+                                                    new Utils.MyImageLoadingListener(mContext, company_photo));
                                         }
                                         if(!TextUtils.isEmpty(userInfo.getCompany_photo1())) {
                                             ImageLoader.getInstance().displayImage(userInfo.getCompany_photo1(), company_photo1, options,
-                                                    new Utils.MyImageLoadingListener(context, company_photo1));
+                                                    new Utils.MyImageLoadingListener(mContext, company_photo1));
                                         }
                                         if(!TextUtils.isEmpty(userInfo.getCompany_photo2())) {
                                             ImageLoader.getInstance().displayImage(userInfo.getCompany_photo2(), company_photo2, options,
-                                                    new Utils.MyImageLoadingListener(context, company_photo2));
+                                                    new Utils.MyImageLoadingListener(mContext, company_photo2));
                                         }
                                         if(!TextUtils.isEmpty(userInfo.getCompany_photo3())) {
                                             ImageLoader.getInstance().displayImage(userInfo.getCompany_photo3(), company_photo3, options,
-                                                    new Utils.MyImageLoadingListener(context, company_photo3));
+                                                    new Utils.MyImageLoadingListener(mContext, company_photo3));
                                         }
                                     }
                                     break;
