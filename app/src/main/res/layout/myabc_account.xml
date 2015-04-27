@@ -2,13 +2,197 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <com.maogousoft.logisticsmobile.driver.widget.HeaderView android:layout_width="match_parent"
-                                                             android:layout_height="wrap_content"/>
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/common_line_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/TextColorWhite"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:id="@+id/account_photo"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/account_name_layout"
+                    android:layout_toRightOf="@+id/account_photo"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/settingAccountInfoStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/string_home_myabc_title_name_driver" />
+
+                    <TextView
+                        android:id="@id/myabc_id_name"
+                        style="@style/settingAccountInfoStyle"
+                        android:text="无" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/account_name_layout"
+                    android:layout_toRightOf="@+id/account_photo"
+                    android:id="@+id/account_car_number"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/settingAccountInfoStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/string_home_myabc_title_car_number" />
+
+                    <TextView
+                        android:id="@+id/myabc_account_card_number"
+                        style="@style/settingAccountInfoStyle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/account_car_number"
+                    android:layout_toRightOf="@+id/account_photo"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/settingAccountInfoStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/string_home_myabc_title_account_name" />
+
+                    <TextView
+                        android:id="@+id/myabc_account_name"
+                        style="@style/settingAccountInfoStyle" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+            <!-- 驾驶证号 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/account_jsz"
+                android:onClick="onMainLine"
+                android:text="驾驶证号" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+            <!-- 联系电话 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/account_phone"
+                android:onClick="onCarInfo"
+                android:text="联系电话" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+            <!-- 家庭电话 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/account_phone2"
+                android:onClick="onCarInfo"
+                android:text="家庭电话" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+
+            <!-- 转账卡开户银行 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/account_credit_card"
+                android:onClick="onCarInfo"
+                android:text="转账卡开户银行" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+
+            <!-- 转账卡开户银行 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/account_credit_card"
+                android:onClick="onCarInfo"
+                android:text="收款卡号" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+
+            <!-- 现住地址 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/account_location"
+                android:onClick="onCarInfo"
+                android:text="现住地址" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/info_open"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/account_info_open"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.maogousoft.logisticsmobile.driver.widget.CommonBottomView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- old layout -->
     <TableLayout
             style="@style/home_myabc_layout_style"
+            android:visibility="gone"
             android:layout_height="wrap_content" >
 
         <TextView

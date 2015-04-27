@@ -93,9 +93,14 @@
     <string name="string_home_myabc_title">个人中心</string><!-- 我的易运宝  变成 个人中心 -->
     <string name="string_home_myabc_title_info">个人资料</string>
     <string name="string_is_ring">铃声提醒(%s)</string>
+    <!--我的账号-->
+    <string name="account_info_open">此标记为已公开</string>
     <string name="string_home_myabc_title_name">姓\t\t\t名：</string>
+    <string name="string_home_myabc_title_name_driver">车主姓名：</string>
     <string name="string_home_myabc_title_carnum">车牌号码：</string>
     <string name="string_home_myabc_title_phone">手机号码：</string>
+    <string name="string_home_myabc_title_car_number">身份证号：</string>
+    <string name="string_home_myabc_title_account_name">易运宝账号：</string>
     <string name="string_home_myabc_title_tel">座机号码：</string>
     <string name="string_home_myabc_title_recommend">推荐人帐号：</string>
     <string name="string_home_myabc_title_myaccount">我的账户</string>
