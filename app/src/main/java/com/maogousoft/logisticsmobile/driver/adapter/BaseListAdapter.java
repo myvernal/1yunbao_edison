@@ -147,6 +147,10 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
 		return this.mListView;
 	}
 
+    public void showMsg(int resId) {
+        showMsg(mContext.getResources().getString(resId));
+    }
+
     public void showMsg(String msg) {
         if (TextUtils.isEmpty(msg) || !isShown) {
             return;

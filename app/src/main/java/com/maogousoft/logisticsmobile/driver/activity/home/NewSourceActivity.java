@@ -68,7 +68,6 @@ public class NewSourceActivity extends BaseListActivity implements
     }
 
     private void initViews() {
-
         mMore = (Button) findViewById(R.id.titlebar_id_more);
         mMore.setText("查找货源");
         setIsRightKeyIntoShare(false);
@@ -131,6 +130,13 @@ public class NewSourceActivity extends BaseListActivity implements
                 mMore.setText("主营线路");
                 titlebar_id_content.setText("关注货源");
                 rightButton = 3;
+            }
+        }
+        if (getIntent().hasExtra("SHAKE_ONE_SHAKE")) {
+            if (getIntent().getBooleanExtra("SHAKE_ONE_SHAKE", false)) {
+                queryType = Constants.SHAKE_ONE_SHAKE;//摇一摇
+                params = getIntent().getStringExtra("params");
+                mMore.setVisibility(View.GONE);
             }
         }
         if(getIntent().getBooleanExtra(Constants.SEARCH_SOURCE, false)) {
@@ -325,6 +331,9 @@ public class NewSourceActivity extends BaseListActivity implements
                 });
             } else {
                 final Intent intent = new Intent(mContext, SourceDetailActivity.class);
+                if(getIntent().getBooleanExtra(Constants.SEARCH_SOURCE, false)) {
+                    position = position - 1;
+                }
                 intent.putExtra(Constants.ORDER_ID,
                         ((NewSourceListAdapter) mAdapter).getList().get(position).getId());
                 intent.putExtra("type", "NewSourceActivity");

@@ -34,23 +34,26 @@ public class HttpUtils {
 		try {
 			if (params != null) {
 				StringBuilder builder = new StringBuilder();
+				StringBuilder logBuilder = new StringBuilder();
 				Iterator<?> it = params.keys();
 				while (it.hasNext()) {
 					final String key = it.next().toString();
 					builder.append(key).append("=").append(URLEncoder.encode(params.get(key).toString(), "UTF-8")).append("&");
+                    logBuilder.append(key).append("=").append(params.get(key).toString()).append("&");
 				}
 				builder.deleteCharAt(builder.length() - 1);
-                LogUtil.e("url", builder.toString());
-				byte[] entitydata = builder.toString().getBytes();
+                String paramsUrl = builder.toString();
+                LogUtil.e("url", logBuilder.toString());
+				byte[] entityData = paramsUrl.getBytes();
 				URL _url = new URL(url);
 				HttpURLConnection connection = (HttpURLConnection) _url.openConnection();
 				connection.setRequestMethod("POST");
 				connection.setConnectTimeout(TIME_OUT);
 				connection.setDoOutput(true);
 				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-				connection.setRequestProperty("Content-Length", String.valueOf(entitydata.length));
+				connection.setRequestProperty("Content-Length", String.valueOf(entityData.length));
 				OutputStream outStream = connection.getOutputStream();
-				outStream.write(entitydata);
+				outStream.write(entityData);
 				outStream.flush();
 				outStream.close();
 				if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {

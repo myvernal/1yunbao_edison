@@ -17,6 +17,8 @@
     
     <string name="tips_sourcedetail_qiang">正在抢单,请稍候</string>
     <string name="tips_sourcedetail_qiang_success">抢单成功!</string>
+    <string name="tips_sourcedetail_qiang_normal">抢单</string>
+    <string name="tips_sourcedetail_qiang_over">已抢单</string>
     <string name="tips_sourcedetail_submit">正在提交请求,请稍候</string>
     <string name="tips_sourcedetail_attention_success">关注成功!</string>
     <string name="tips_sourcedetail_cancel_attention_success">取消关注成功!</string>

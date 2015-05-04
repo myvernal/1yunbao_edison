@@ -1,6 +1,5 @@
 package com.maogousoft.logisticsmobile.driver;
 
-
 public class Constants {
     /*
     易运宝信息平台（微信公众服务号）
@@ -166,7 +165,6 @@ public class Constants {
 
 	/** 帮助页面地址 **/
 	public static final String HELP_SERVER_URL = BASE_URL + "/help.html";
-	// add by ybxiang end
 
 	/** 司机端注册获取验证码 **/
 	public static final String DRIVER_REG_GETCODE = "driver_reg_getcode";
@@ -204,9 +202,6 @@ public class Constants {
 	/** 货源详情 2 **/
 	public static final String GET_SOURCE_ORDER_DETAIL2 = "get_source_order_detail_2";
 
-	/** 新货源抢单 **/
-	public static final String PLACE_SOURCE_ORDER = "place_source_order";
-
 	/** 搜索新货源 **/
 	public static final String SEARCH_SOURCE_ORDER = "search_source_order";
 	
@@ -227,9 +222,6 @@ public class Constants {
 	
 	/** 司机端:已关注的所有货主好友列表 **/
 	public static final String QUERY_FRIENDS = "query_attentionUserList";
-
-	/** 待定货源列表 **/
-	public static final String QUERY_PENDING_SOURCE_ORDER = "query_pending_source_order";
 
 	/** 已完成订单 **/
 	public static final String DRIVER_QUERY_FINISHED_ORDER = "driver_query_finished_order";
@@ -382,6 +374,18 @@ public class Constants {
 
     /** 司机端:删除关注线路 */
     public static final String DELETE_ALL_FOCUS_LINE = "delete_Attention_Line";
+
+    /** 司机端:摇一摇 */
+    public static final String SHAKE_ONE_SHAKE = "shake_one_shake";
+
+    /** 司机端:报价 */
+    public static final String QUERY_SOURCE_ORDER_COUNTSSS = "query_source_order_countsss";
+
+    /** 司机端:抢单 */
+    public static final String PLACE_SOURCE_ORDER = "place_source_order";
+
+    /** 司机端:货单列表 */
+    public static final String QUERY_PENDING_SOURCE_ORDER = "query_pending_source_order";
 
     /** 货主端:车队添加车辆 */
     public static final String ADD_MY_FLEET = "add_my_fleet";

@@ -41,6 +41,11 @@ public class LocHelper {
 		void onRecivedLoc(double lat, double lng, String addr);
 	}
 
+    public interface LocAddrCallback {
+
+        void onRecivedLoc(String province, String city);
+    }
+
 	// public static LocHelper getInstance(Context ctx, int flag) {
 	// if (locHelper == null) {
 	// locHelper = new LocHelper();

@@ -582,10 +582,7 @@ public class SourceDetailActivity extends BaseActivity {
                                                                         });
 
                                                     } else {
-                                                        placeOrder(mInput.getText()
-                                                                        .toString(),
-                                                                mInput2.getText()
-                                                                        .toString());
+                                                        placeOrder();
                                                     }
 
                                                     break;
@@ -753,20 +750,13 @@ public class SourceDetailActivity extends BaseActivity {
 
     /**
      * 抢单
-     *
-     * @param mInput
      */
-    public void placeOrder(String mInput, String mInput2) {
+    public void placeOrder() {
         final JSONObject params = new JSONObject();
         try {
             params.put(Constants.ACTION, Constants.PLACE_SOURCE_ORDER);
             params.put(Constants.TOKEN, application.getToken());
-            params.put(
-                    Constants.JSON,
-                    new JSONObject().put("order_id", mSourceInfo.getId())
-                            .put("driver_bond", mInput)
-                            .put("driver_proportion", 0)
-                            .put("driver_price", mInput2).toString());
+            params.put(Constants.JSON, new JSONObject().put("order_id", mSourceInfo.getId()).toString());
             showProgress(mResources.getString(R.string.tips_sourcedetail_qiang));
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, params, null,
                     new AjaxCallBack() {
@@ -780,49 +770,11 @@ public class SourceDetailActivity extends BaseActivity {
                                     finish();
                                     break;
                                 case ResultCode.RESULT_ERROR:
-
-                                    // 你仍处于在途货运中，输入回单密码确认货运完成后方可再次抢单。（到货时请向收货方或发货方索取回单密码）
-
-                                    // 已经承接了其他货单，不能再抢单了
-                                    if (result.toString().contains("已经承接了其他货单")) {
-                                        final MyAlertDialog dialog = new MyAlertDialog(
-                                                mContext);
-                                        dialog.show();
-                                        dialog.setTitle("温馨提示");
-                                        dialog.setMessage("你仍处于在途货运中，输入回单密码确认货运完成后方可再次抢单。（到货时请向收货方或发货方索取回单密码）");
-                                        dialog.setLeftButton("确定",
-                                                new OnClickListener() {
-
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        dialog.dismiss();
-                                                    }
-                                                });
-                                    } else {
-                                        showMsg(result.toString());
-                                    }
-
+                                    showMsg(result.toString());
                                     break;
                                 case ResultCode.RESULT_FAILED:
-                                    if (result.toString().contains("已经承接了其他货单")) {
-                                        final MyAlertDialog dialog = new MyAlertDialog(
-                                                mContext);
-                                        dialog.show();
-                                        dialog.setTitle("温馨提示");
-                                        dialog.setMessage("你仍处于在途货运中，输入回单密码确认货运完成后方可再次抢单。（到货时请向收货方或发货方索取回单密码）");
-                                        dialog.setLeftButton("确定",
-                                                new OnClickListener() {
-
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        dialog.dismiss();
-                                                    }
-                                                });
-                                    } else {
-                                        showMsg(result.toString());
-                                    }
+                                    showMsg(result.toString());
                                     break;
-
                                 default:
                                     break;
                             }

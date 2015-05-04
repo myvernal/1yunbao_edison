@@ -7,9 +7,11 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -17,25 +19,42 @@ import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
+import com.maogousoft.logisticsmobile.driver.model.CarInfo;
+import com.maogousoft.logisticsmobile.driver.utils.HttpUtils;
+import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Edison on 2015/3/29.
  */
-public class ShakeActivity extends BaseActivity {
+public class ShakeActivity extends BaseActivity implements BDLocationListener {
     private ShakeListener mShakeListener = null;
     private Vibrator mVibrator;
     private RelativeLayout mImgUp;
     private RelativeLayout mImgDn;
+    private LocationClient mLocClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shake_layout);
         ((TextView) findViewById(R.id.titlebar_id_content)).setText("摇一摇");
-
+        mLocClient = new LocationClient(mContext);
         //drawerSet ();//设置  drawer监听    切换 按钮的方向
         mVibrator = (Vibrator) getApplication().getSystemService(VIBRATOR_SERVICE);
         mImgUp = (RelativeLayout) findViewById(R.id.shakeImgUp);
@@ -48,20 +67,21 @@ public class ShakeActivity extends BaseActivity {
                 mShakeListener.stop();
 
                 startVibrato(); //开始 震动
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        /*Toast.makeText(getApplicationContext(), "抱歉，暂时没有找到\n在同一时刻摇一摇的人。\n再试一次吧！", Toast.LENGTH_SHORT).show();
-                        mVibrator.cancel();
-                        mShakeListener.start();*/
-                        Intent intent = new Intent(mContext, NewSourceActivity.class);
-                        intent.putExtra(Constants.SEARCH_SOURCE, true);
-                        startActivity(intent);
-                        finish();
-                    }
-                }, 2000);
+                showDefaultProgress();
+                locationAction();
             }
         });
+    }
+
+    // 定位初始化
+    private void locationAction() {
+        mLocClient.registerLocationListener(this);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);// 打开gps
+        option.setCoorType("bd09ll"); // 设置坐标类型
+        option.setScanSpan(1000);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
     }
 
     public void startAnim() {   //定义摇一摇动画动画
@@ -102,6 +122,111 @@ public class ShakeActivity extends BaseActivity {
         if (mShakeListener != null) {
             mShakeListener.stop();
         }
+    }
+
+    /**
+     * 开始查询
+     * @param params
+     */
+    private void startSearch(String params) {
+        Intent intent = new Intent(mContext, NewSourceActivity.class);
+        intent.putExtra("SHAKE_ONE_SHAKE", true);
+        intent.putExtra("params", params);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation location) {
+        LogUtil.e(TAG, "onReceiveLocation");
+        if (location == null) {
+            //定位失败重新定位一次
+            mLocClient.requestLocation();
+            LogUtil.e(TAG, "location:" + location);
+            return;
+        }
+        final JSONObject params = new JSONObject();
+        if (TextUtils.isEmpty(location.getCity())) {
+            getAddress(location.getLatitude(), location.getLongitude(), new LocHelper.LocAddrCallback() {
+                @Override
+                public void onRecivedLoc(String province, String city) {
+                    try {
+                        //获取到城市地名
+                        params.put("location_province", province);
+                        params.put("location_city", city);
+                        startSearch(params.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        } else {
+            try {
+                params.put("location_province", location.getProvince());
+                params.put("location_city", location.getCity());
+                startSearch(params.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        mLocClient.stop();
+    }
+
+    /**
+     * 通过经纬度,查询地址
+     *
+     * @param lat
+     * @param lng
+     */
+    public void getAddress(final double lat, final double lng, final LocHelper.LocAddrCallback resultCallback) {
+        new AsyncTask<BDLocation, Object, HashMap<String, Object>>() {
+
+            @Override
+            protected void onPostExecute(HashMap<String, Object> result) {
+                if (result != null) {
+                    String province = (String) result.get("province");
+                    String city = (String) result.get("city");
+                    LogUtil.e(TAG, "geocoder，获取到的城市:" + province + city);
+                    if (resultCallback != null) {
+                        resultCallback.onRecivedLoc(province, city);
+                    }
+                } else {
+                    if (resultCallback != null) {
+                        resultCallback.onRecivedLoc(null, null);
+                    }
+                }
+                super.onPostExecute(result);
+            }
+
+            @Override
+            protected HashMap<String, Object> doInBackground(BDLocation... params) {
+
+                String url = "http://api.map.baidu.com/geocoder?" + "location=" + lat + "," + lng + "&output=json&key="
+                        + Constants.strKey;
+
+                // 时效宝 百度key b66fbb5a289082fa86ef1a7df81ab57f
+                String returnStr = HttpUtils.getURLData(url);
+                HashMap<String, Object> hmResult = null;
+                JSONObject jObject;
+                try {
+                    jObject = new JSONObject(returnStr);
+
+                    if (!jObject.getString("status").equalsIgnoreCase("OK")) {
+                        LogUtil.e(TAG, "geocoder，没有获取到数据");
+                        return null;
+                    }
+
+                    hmResult = new HashMap<String, Object>();
+                    String province = jObject.getJSONObject("result").getJSONObject("addressComponent").getString("province");
+                    String city = jObject.getJSONObject("result").getJSONObject("addressComponent").getString("city");
+                    hmResult.put("province", province);
+                    hmResult.put("city", city);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return hmResult;
+            }
+        }.execute();
     }
 }
 

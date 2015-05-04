@@ -16,6 +16,7 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseListFragment;
 import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.InvoiceAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.NewSourceListAdapter;
+import com.maogousoft.logisticsmobile.driver.adapter.UnMatchedSourceListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
@@ -80,11 +81,11 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.QUERY_SOURCE_ORDER);
+            jsonObject.put(Constants.ACTION, Constants.QUERY_PENDING_SOURCE_ORDER);
             jsonObject.put(Constants.TOKEN, application.getToken());
             JSONObject json = new JSONObject();
             json.put("page", page);
-            json.put("invoiceType", invoiceType);
+            json.put("order_type", invoiceType);
             jsonObject.put(Constants.JSON, json.toString());
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
@@ -107,7 +108,7 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
                                                 mFootProgress.setVisibility(View.GONE);
                                                 mFootMsg.setText("已加载全部");
                                             }
-                                            mAdapter.addAll(sort(mList));
+                                            mAdapter.addAll(mList);
                                             mAdapter.notifyDataSetChanged();
                                         }
                                     }
@@ -138,39 +139,12 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        if (position < mAdapter.getList().size()) {
-            final Intent intent = new Intent(mContext, SourceDetailActivity.class);
-            intent.putExtra("type", "NewSourceActivity");
-            NewSourceInfo sourceInfo = ((InvoiceAdapter) mAdapter).getList().get(position);
-            intent.putExtra(Constants.ORDER_ID, sourceInfo.getId());
-            startActivity(intent);
-        }
-    }
-
-    /**
-     * 按照已关注，未读，已读 排序
-     */
-    public List<NewSourceInfo> sort(List<NewSourceInfo> list) {
-        ArrayList<NewSourceInfo> listRestul = new ArrayList<NewSourceInfo>();
-
-        if (list == null || list.size() == 0) {
-            return listRestul;
-        }
-
-        for (int i = 0; i < list.size(); i++) {
-            int status = list.get(i).getFavorite_status();
-            if (status == 1) {
-                listRestul.add(list.get(i));
-            }
-        }
-
-        for (int y = 0; y < list.size(); y++) {
-            int status = list.get(y).getFavorite_status();
-            if (status != 1) {
-                listRestul.add(list.get(y));
-            }
-        }
-        return listRestul;
+        final Intent intent = new Intent(mContext, SourceDetailActivity.class);
+        intent.putExtra(Constants.ORDER_ID,
+                ((UnMatchedSourceListAdapter) mAdapter).getList().get(position)
+                        .getId());
+        intent.putExtra("type", "UnMatchedSourceActivity");
+        startActivity(intent);
     }
 
     @Override
