@@ -184,16 +184,11 @@ public class SourceDetailActivity extends BaseActivity {
         } else if (type.equals("NewSourceActivity")) {
             order_id = getIntent().getIntExtra(Constants.ORDER_ID, 0);
             getSourceDetail(order_id);
-        } else if (type.equals("UnMatchedSourceActivity")) {
-            mPlace.setText("取消订单");
-            ((TextView) findViewById(R.id.titlebar_id_content))
-                    .setText("待定货源详情");
-
+        } else if (type.equals("InvoiceActivity")) {
+            ((TextView) findViewById(R.id.titlebar_id_content)).setText("货单详情");
             order_id = getIntent().getIntExtra(Constants.ORDER_ID, 0);
             getSourceDetail(order_id);
-
         } else {
-            mPlace.setText("取消订单");
             ((TextView) findViewById(R.id.titlebar_id_content)).setText("已发布货源详情");
             order_id = getIntent().getIntExtra(Constants.ORDER_ID, 0);
             getSourceDetail(order_id);

@@ -140,10 +140,8 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         final Intent intent = new Intent(mContext, SourceDetailActivity.class);
-        intent.putExtra(Constants.ORDER_ID,
-                ((UnMatchedSourceListAdapter) mAdapter).getList().get(position)
-                        .getId());
-        intent.putExtra("type", "UnMatchedSourceActivity");
+        intent.putExtra(Constants.ORDER_ID, ((InvoiceAdapter) mAdapter).getList().get(position).getId());
+        intent.putExtra("type", "InvoiceActivity");
         startActivity(intent);
     }
 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/TextColorWhite">
+
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+            <!-- 修改支付密码 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/money_change_password"
+                android:onClick="onMyHistoryOrder"
+                android:text="修改支付密码" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+            <!-- 运宝余额 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/money_yunbao_money"
+                android:onClick="onMyHistoryOrder"
+                android:text="运宝余额" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+            <!-- 账户余额 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/money_account_money"
+                android:onClick="onMyHistoryOrder"
+                android:text="账户余额" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+            <!-- 账户记录 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/money_notes"
+                android:onClick="onMyHistoryOrder"
+                android:text="账户记录" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+            <!-- 充值 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/money_add"
+                android:onClick="onMyHistoryOrder"
+                android:text="充值" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+            <!-- 转账 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/money_transfer"
+                android:onClick="onMyHistoryOrder"
+                android:text="转账" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+            <!-- 提现 -->
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@id/myabc_id_mycredit"
+                android:drawableLeft="@drawable/money_cash"
+                android:onClick="onMyHistoryOrder"
+                android:text="提现" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+        </LinearLayout>
+    </ScrollView>
+
+    <com.maogousoft.logisticsmobile.driver.widget.CommonBottomView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

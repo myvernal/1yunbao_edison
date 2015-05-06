@@ -2,75 +2,180 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/TextColorWhite">
 
-    <com.maogousoft.logisticsmobile.driver.widget.HeaderView android:layout_width="match_parent"
-                                                             android:layout_height="wrap_content"/>
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <TableLayout
-        style="@style/home_myabc_layout_style"
-        android:layout_height="wrap_content" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <TableRow android:background="@drawable/ic_info_centerbg" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+
+            <!-- 个人资料 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onComplementCarInfo"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/account_photo"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/account_name_layout"
+                    android:layout_toRightOf="@+id/account_photo"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/settingAccountInfoStyle"
+                        android:layout_width="wrap_content"
+                        android:text="车主姓名：" />
+
+                    <TextView
+                        android:id="@id/myabc_id_name"
+                        style="@style/settingAccountInfoStyle"
+                        android:text="无" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/account_name_layout"
+                    android:layout_toRightOf="@+id/account_photo"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/settingAccountInfoStyle"
+                        android:layout_width="wrap_content"
+                        android:text="@string/string_home_myabc_title_phone" />
+
+                    <TextView
+                        android:id="@id/myabc_id_phone"
+                        style="@style/settingAccountInfoStyle" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+            <!-- 车牌号 -->
             <TextView
-                style="@style/home_myabc_title_style"
-                android:drawableLeft="@drawable/ic_info_carnum"
-                android:text="车牌号：" />
-
-            <TextView
+                style="@style/settingInfoStyle"
                 android:id="@+id/myabc_id_car_num"
-                style="@style/home_myabc_content_style"
-                android:text="无" />
-        </TableRow>
+                android:drawableLeft="@drawable/car_info_car_num"
+                android:onClick="onComplementCarInfo"
+                android:text="车牌号" />
 
-        <TableRow android:background="@drawable/ic_info_centerbg" >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
 
             <TextView
-                style="@style/home_myabc_title_style"
-                android:drawableLeft="@drawable/ic_info_carnum"
-                android:text="车长：" />
+                style="@style/settingInfoStyle"
+                android:id="@+id/myabc_id_car_contact"
+                android:drawableLeft="@drawable/car_info_contact"
+                android:onClick="onComplementCarInfo"
+                android:text="联系人" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
 
             <TextView
+                style="@style/settingInfoStyle"
+                android:id="@+id/myabc_id_car_card_number"
+                android:drawableLeft="@drawable/car_info_card_num"
+                android:onClick="onComplementCarInfo"
+                android:text="车架号" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/common_line_color" />
+
+            <!-- 车长 -->
+            <TextView
+                style="@style/settingInfoStyle"
                 android:id="@+id/myabc_id_car_length111"
-                style="@style/home_myabc_content_style"
-                android:text="无" />
-        </TableRow>
+                android:drawableLeft="@drawable/car_info_car_length"
+                android:onClick="onComplementCarInfo"
+                android:text="车长" />
 
-        <TableRow android:background="@drawable/ic_info_centerbg" >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
 
+            <!-- 车型 -->
             <TextView
-                style="@style/home_myabc_title_style"
-                android:drawableLeft="@drawable/ic_info_phone"
-                android:text="车型：" />
-
-            <TextView
+                style="@style/settingInfoStyle"
                 android:id="@+id/myabc_id_car_type"
-                style="@style/home_myabc_content_style"
-                android:text="无" />
-        </TableRow>
+                android:drawableLeft="@drawable/car_info_car_type"
+                android:onClick="onComplementCarInfo"
+                android:text="车型" />
 
-        <TableRow android:background="@drawable/ic_info_bottombg" >
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+            <!-- 载重 -->
             <TextView
-                style="@style/home_myabc_title_style"
-                android:drawableLeft="@drawable/ic_info_recommend"
-                android:text="载重：" />
-
-            <TextView
+                style="@style/settingInfoStyle"
                 android:id="@+id/myabc_id_car_zhaizhong"
-                style="@style/home_myabc_content_style"
-                android:text="无" />
-        </TableRow>
+                android:drawableLeft="@drawable/car_info_car_weight"
+                android:onClick="onComplementCarInfo"
+                android:text="载重" />
 
-        <Button
-            android:id="@id/myabc_id_update"
-            style="@style/info_button_style"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:onClick="onComplementCarInfo"
-            android:text="完善资料"
-            android:visibility="gone" />
-    </TableLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/info_open"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/account_info_open"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.maogousoft.logisticsmobile.driver.widget.CommonBottomView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 // PR111 个人中心【我的易运宝】
 import java.util.List;
 
+import com.maogousoft.logisticsmobile.driver.activity.info.MoneyManagerActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
 import com.ybxiang.driver.activity.SearchShopActivity;
@@ -113,6 +114,11 @@ public class MyabcActivityDriver extends BaseActivity {
         startActivity(new Intent(mContext, OthersActivity.class));
     }
 
+    // 财务管理
+    public void onMoneyManager(View view) {
+        startActivity(new Intent(mContext, MoneyManagerActivity.class));
+    }
+
 	/**
 	 * 我的信誉
 	 * 
@@ -123,8 +129,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	}
 
 	private void initViews() {
-		((TextView) findViewById(R.id.titlebar_id_content))
-				.setText(R.string.string_home_myabc_title);
+		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_home_myabc_title);
 		mContactKeFu = (Button) findViewById(R.id.titlebar_id_more);
 		mContactKeFu.setText("联系客服");
 
@@ -293,11 +298,9 @@ public class MyabcActivityDriver extends BaseActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 		if (resultCode == RESULT_OK) {
 			getABCInfo();
 		}
-
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
@@ -307,8 +310,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	 * @param view
 	 */
 	public void onMyHistoryOrder(View view) {
-		startActivity(new Intent(mContext, HistroyOrderActivity.class).putExtra(
-				"info", mAbcInfo));
+		startActivity(new Intent(mContext, HistroyOrderActivity.class).putExtra("info", mAbcInfo));
 	}
 
 	/**

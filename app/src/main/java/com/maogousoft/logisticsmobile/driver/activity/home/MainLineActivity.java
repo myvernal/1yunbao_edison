@@ -55,7 +55,7 @@ public class MainLineActivity extends BaseActivity {
 
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("主营路线");
-
+        findViewById(R.id.titlebar_id_more).setVisibility(View.VISIBLE);
 
 		mChangePath = (Button) findViewById(R.id.myabc_id_change_path);
 		mPath1 = (TextView) findViewById(R.id.myabc_id_path1);
@@ -203,8 +203,7 @@ public class MainLineActivity extends BaseActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 
-						Intent intent = new Intent(mContext,
-								ChangePathActivity.class);
+						Intent intent = new Intent(mContext, ChangePathActivity.class);
 						// intent.putExtra("info", mAbcInfo);
 						intent.putExtra("path", which);
 						startActivityForResult(intent, 1);

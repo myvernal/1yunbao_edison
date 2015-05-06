@@ -45,7 +45,7 @@ import java.util.List;
 
 public class BaseActivity extends FragmentActivity implements OnClickListener {
 
-	private Button mShare;
+	private View mShare;
 
 	protected SQLiteDatabase sdb;
 
@@ -99,10 +99,7 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
 	@Override
 	public void setContentView(int layoutResID) {
 		super.setContentView(layoutResID);
-		mShare = (Button) findViewById(R.id.titlebar_id_more);
-		if (mShare != null) {
-			mShare.setOnClickListener(this);
-		}
+		mShare = findViewById(R.id.titlebar_id_more);
 	}
 
 	private void init() {

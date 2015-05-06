@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
+import com.maogousoft.logisticsmobile.driver.activity.home.InvoiceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.MyabcActivityDriver;
 import com.maogousoft.logisticsmobile.driver.activity.home.MyabcActivityShipper;
 import com.ybxiang.driver.activity.PublishCarSourceActivity;
@@ -57,7 +58,7 @@ public class CommonBottomView extends LinearLayout implements View.OnClickListen
                 mContext.startActivity(new Intent(mContext, PublishCarSourceActivity.class));
                 break;
             case R.id.bottom_pager:
-                mContext.startActivity(new Intent(mContext, PublishCarSourceActivity.class));
+                mContext.startActivity(new Intent(mContext, InvoiceActivity.class));
                 break;
             case R.id.bottom_mine:
                 mContext.startActivity(new Intent(mContext, MyabcActivityShipper.class));

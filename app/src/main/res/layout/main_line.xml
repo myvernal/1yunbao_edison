@@ -15,7 +15,7 @@
 
             <TextView
                     style="@style/home_myabc_title_style"
-                    android:drawableLeft="@drawable/ic_info_carnum"
+                    android:drawableLeft="@drawable/setting_line"
                     android:text="1:"/>
 
             <TextView
@@ -35,7 +35,7 @@
 
             <TextView
                     style="@style/home_myabc_title_style"
-                    android:drawableLeft="@drawable/ic_info_carnum"
+                    android:drawableLeft="@drawable/setting_line"
                     android:text="2:"/>
 
             <TextView
@@ -55,7 +55,7 @@
 
             <TextView
                     style="@style/home_myabc_title_style"
-                    android:drawableLeft="@drawable/ic_info_carnum"
+                    android:drawableLeft="@drawable/setting_line"
                     android:text="3:"/>
 
             <TextView

@@ -30,7 +30,7 @@ public class InvoiceActivity extends BaseActivity {
         setContentView(R.layout.activity_invoice_layout);
         mHeaderView = (HeaderView) findViewById(R.id.headerView);
         mHeaderView.setTitle(R.string.invoice_title);
-        mHeaderView.setTipTitle(R.string.invoice_tip_title);
+        mHeaderView.setMoreTitle(R.string.invoice_tip_title);
         initView();
         initViewPager();
     }
@@ -75,9 +75,9 @@ public class InvoiceActivity extends BaseActivity {
     public void initViewPager() {
         mPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentList = new ArrayList<Fragment>();
-        Fragment firstFragment = InvoiceFragment.newInstance(0);
-        Fragment secondFragment = InvoiceFragment.newInstance(1);
-        Fragment thirdFragment = InvoiceFragment.newInstance(2);
+        Fragment firstFragment = InvoiceFragment.newInstance(1);
+        Fragment secondFragment = InvoiceFragment.newInstance(2);
+        Fragment thirdFragment = InvoiceFragment.newInstance(3);
         fragmentList.add(firstFragment);
         fragmentList.add(secondFragment);
         fragmentList.add(thirdFragment);

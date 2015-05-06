@@ -47,10 +47,9 @@ public class MyabcCarInfoActivity extends BaseActivity {
 
 	private void initViews() {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("车辆信息");
-
+        findViewById(R.id.titlebar_id_more).setVisibility(View.VISIBLE);
 
 		mUpdate = (Button) findViewById(R.id.myabc_id_update);
-
 		mCarNum = (TextView) findViewById(R.id.myabc_id_car_num);
 		mCarlength = (TextView) findViewById(R.id.myabc_id_car_length111);
 		mCartype = (TextView) findViewById(R.id.myabc_id_car_type);
@@ -80,22 +79,14 @@ public class MyabcCarInfoActivity extends BaseActivity {
 							case ResultCode.RESULT_OK:
 								if (result != null) {
 									mAbcInfo = (AbcInfo) result;
-									if (!TextUtils.isEmpty(mAbcInfo
-											.getPlate_number())) {
-										mCarNum.setText(mAbcInfo
-												.getPlate_number());
+									if (!TextUtils.isEmpty(mAbcInfo.getPlate_number())) {
+										mCarNum.setText(getString(R.string.string_car_detail_number, mAbcInfo.getPlate_number()));
 									}
-
-									mCarlength.setText(mAbcInfo.getCar_length()
-											+ "米");
-									if (!TextUtils.isEmpty(mAbcInfo
-											.getCar_type_str())) {
-										mCartype.setText(mAbcInfo
-												.getCar_type_str());
+									mCarlength.setText(getString(R.string.string_car_detail_car_length, mAbcInfo.getCar_length() + "米"));
+									if (!TextUtils.isEmpty(mAbcInfo.getCar_type_str())) {
+										mCartype.setText(getString(R.string.string_car_detail_car_type, mAbcInfo.getCar_type_str()));
 									}
-									mCarzhaizhong.setText(mAbcInfo
-											.getCar_weight() + "吨");
-
+									mCarzhaizhong.setText(getString(R.string.string_car_detail_car_weight, mAbcInfo.getCar_weight() + "吨"));
 								}
 								break;
 							case ResultCode.RESULT_ERROR:
@@ -128,7 +119,6 @@ public class MyabcCarInfoActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void onComplementCarInfo(View view) {
-		startActivity(new Intent(mContext, OptionalActivity.class).putExtra(
-				"info", mAbcInfo));
+		startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", mAbcInfo));
 	}
 }

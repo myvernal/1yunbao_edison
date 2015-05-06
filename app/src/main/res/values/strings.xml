@@ -79,7 +79,13 @@
     <string name="string_update_newpwd2">请再次输入新密码</string>
     <string name="string_update_submit">提交</string>
     <string name="string_update_title">修改密码</string>
-
+    <!--车辆详情-->
+    <string name="string_car_detail_number">车牌号\t\t\t\t\t\t\t\t%s</string>
+    <string name="string_car_detail_contact">联系人\t\t\t\t\t\t\t\t%s</string>
+    <string name="string_car_detail_card_num">车架号\t\t\t\t\t\t\t\t%s</string>
+    <string name="string_car_detail_car_length">车长\t\t\t\t\t\t\t\t\t%s</string>
+    <string name="string_car_detail_car_type">车型\t\t\t\t\t\t\t\t\t%s</string>
+    <string name="string_car_detail_car_weight">载重\t\t\t\t\t\t\t\t\t%s</string>
     <!-- 登录 -->
     <string name="string_info_login_auto">自动登录</string>
     <string name="string_info_login_forget">忘记密码</string>
@@ -90,9 +96,11 @@
     <!-- 忘记密码 -->
     <string name="string_info_forget_title">忘记密码</string>
     <string name="string_home_business_card">货运名片</string>
-    <string name="string_home_myabc_title">个人中心</string><!-- 我的易运宝  变成 个人中心 -->
+    <!-- 我的易运宝  变成 个人中心 -->
+    <string name="string_home_myabc_title">个人中心</string>
     <string name="string_home_myabc_title_info">个人资料</string>
     <string name="string_is_ring">铃声提醒(%s)</string>
+    <string name="string_money_manager">财务管理</string>
     <!--我的账号-->
     <string name="account_info_open">此标记为已公开</string>
     <string name="string_home_myabc_title_name">姓\t\t\t名：</string>

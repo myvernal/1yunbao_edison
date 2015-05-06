@@ -177,6 +177,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             } else if(v.getId() == R.id.source_id_order_state) {
                 //报价
                 Intent intent = new Intent(mContext, OfferDriverActivity.class);
+                intent.putExtra(Constants.COMMON_KEY, sourceInfo);
                 mContext.startActivity(intent);
             }
         }
