@@ -3,15 +3,15 @@ package com.maogousoft.logisticsmobile.driver;
 public class Constants {
     /*
     易运宝信息平台（微信公众服务号）
-    帐号：lanchong@1yunbao.com
-    密码：yiyunkeji
+        帐号：lanchong@1yunbao.com
+        密码：yiyunkeji
     微信开发账号:
-    帐号：395354735@qq.com
-    密码：1yunbao.com
+        帐号：395354735@qq.com
+        密码：1yunbao.com
     友盟统计：
-    账号：orientwindweibo@gmail.com
-    密码：lanchong
-    Key:  51c939ad56240b834e01d81e
+        账号：orientwindweibo@gmail.com
+        密码：lanchong
+        Key:  51c939ad56240b834e01d81e
     * */
 
 	// 位置上报间隔

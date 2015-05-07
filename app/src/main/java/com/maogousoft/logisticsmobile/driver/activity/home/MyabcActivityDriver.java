@@ -6,6 +6,7 @@ import java.util.List;
 import com.maogousoft.logisticsmobile.driver.activity.info.MoneyManagerActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ybxiang.driver.activity.SearchShopActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +24,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
+import com.ybxiang.driver.util.Utils;
 
 /**
  * 我的ABC
@@ -48,6 +51,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	private Button mContactKeFu; // 联系客服
 	private TextView mName, mRecommender, mPhone;// 姓名，手机号，推荐人账号
 	private TextView mIsRing; // 铃声的有，无
+    private ImageView mPhoto;
 	// 个人abc信息
 	private AbcInfo mAbcInfo;
 
@@ -138,7 +142,7 @@ public class MyabcActivityDriver extends BaseActivity {
         mName = (TextView) findViewById(R.id.myabc_id_name);
 		mRecommender = (TextView) findViewById(R.id.myabc_id_recommender);
 		mPhone = (TextView) findViewById(R.id.myabc_id_phone);
-
+        mPhoto = (ImageView) findViewById(R.id.account_photo);
 		mIsRing = (TextView) findViewById(R.id.myabc_is_ring);
 
 		mContactKeFu.setOnClickListener(this);
@@ -269,7 +273,8 @@ public class MyabcActivityDriver extends BaseActivity {
 												.getRecommender());
 									}
 									mPhone.setText(mAbcInfo.getPhone());
-
+                                    ImageLoader.getInstance().displayImage(mAbcInfo.getId_card_photo(), mPhoto, options,
+                                                new Utils.MyImageLoadingListener(mContext, mPhoto));
 									if (application.checkIsRingNewSource()) {
 										mIsRing.setText(getString(R.string.string_is_ring, "是"));
 									} else {

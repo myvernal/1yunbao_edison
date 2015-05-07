@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
@@ -18,6 +19,8 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.ybxiang.driver.util.Utils;
 
 /**
  * Myabc 车辆信息
@@ -27,7 +30,8 @@ import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
 public class MyabcCarInfoActivity extends BaseActivity {
 	// 返回,完善资料
 	private Button mBack, mUpdate;
-	private TextView mCarNum, mCarlength, mCartype, mCarzhaizhong;
+	private TextView mName, mPhone, mCarNum, mCarlength, mCartype, mCarzhaizhong;
+    private ImageView mPhoto;
 	// 个人abc信息
 	private AbcInfo mAbcInfo;
 
@@ -49,12 +53,15 @@ public class MyabcCarInfoActivity extends BaseActivity {
 		((TextView) findViewById(R.id.titlebar_id_content)).setText("车辆信息");
         findViewById(R.id.titlebar_id_more).setVisibility(View.VISIBLE);
 
-		mUpdate = (Button) findViewById(R.id.myabc_id_update);
+        mPhoto = (ImageView) findViewById(R.id.account_photo);
+        mUpdate = (Button) findViewById(R.id.myabc_id_update);
 		mCarNum = (TextView) findViewById(R.id.myabc_id_car_num);
 		mCarlength = (TextView) findViewById(R.id.myabc_id_car_length111);
 		mCartype = (TextView) findViewById(R.id.myabc_id_car_type);
 		mCarzhaizhong = (TextView) findViewById(R.id.myabc_id_car_zhaizhong);
-	}
+        mName = (TextView) findViewById(R.id.myabc_id_name);
+        mPhone = (TextView) findViewById(R.id.myabc_id_phone);
+    }
 
 	private void initData(Bundle savedInstanceState) {
 
@@ -87,7 +94,13 @@ public class MyabcCarInfoActivity extends BaseActivity {
 										mCartype.setText(getString(R.string.string_car_detail_car_type, mAbcInfo.getCar_type_str()));
 									}
 									mCarzhaizhong.setText(getString(R.string.string_car_detail_car_weight, mAbcInfo.getCar_weight() + "吨"));
-								}
+                                    if (!TextUtils.isEmpty(mAbcInfo.getId_card_photo())) {
+                                        ImageLoader.getInstance().displayImage(mAbcInfo.getId_card_photo(), mPhoto, options,
+                                                new Utils.MyImageLoadingListener(mContext, mPhoto));
+                                    }
+                                    mName.setText(mAbcInfo.getName());
+                                    mPhone.setText(mAbcInfo.getPhone());
+                                }
 								break;
 							case ResultCode.RESULT_ERROR:
 								if (result != null)

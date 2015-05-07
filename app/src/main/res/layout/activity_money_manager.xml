@@ -52,9 +52,9 @@
             <!-- 账户余额 -->
             <TextView
                 style="@style/settingInfoStyle"
-                android:id="@id/myabc_id_mycredit"
+                android:id="@id/myabc_id_balance"
                 android:drawableLeft="@drawable/money_account_money"
-                android:onClick="onMyHistoryOrder"
+                android:onClick="onCharge"
                 android:text="账户余额" />
 
             <View
@@ -68,7 +68,7 @@
                 style="@style/settingInfoStyle"
                 android:id="@id/myabc_id_mycredit"
                 android:drawableLeft="@drawable/money_notes"
-                android:onClick="onMyHistoryOrder"
+                android:onClick="onAccountRecord"
                 android:text="账户记录" />
 
             <View
@@ -80,7 +80,7 @@
                 style="@style/settingInfoStyle"
                 android:id="@id/myabc_id_mycredit"
                 android:drawableLeft="@drawable/money_add"
-                android:onClick="onMyHistoryOrder"
+                android:onClick="onCharge"
                 android:text="充值" />
 
             <View

@@ -79,7 +79,7 @@ public class OptionalActivity extends BaseActivity {
     private String mCarPhotosUrl1;
     private String mCarPhotosUrl2;
     private String mCarPhotosUrl3;
-    private DisplayImageOptions options;
+
     private ImageView id_card_photo, car_photo1, car_photo2, car_photo3;
     private static final int RESULT_CAPTURE_IMAGE_ID_PHOTO = 1001;
     private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO1 = 1002;

@@ -396,12 +396,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.info.ChargeActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name="com.yeepay.android.plugin.YeepayPlugin"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
@@ -917,26 +911,60 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <!--货单页面-->
-        <activity android:name=".activity.home.InvoiceActivity"
+        <activity
+            android:name=".activity.home.InvoiceActivity"
             android:configChanges="keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <!--报价页面-->
-        <activity android:name=".activity.home.OfferDriverActivity"
+        <activity
+            android:name=".activity.home.OfferDriverActivity"
             android:configChanges="keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <!--财务管理-->
-        <activity android:name=".activity.info.MoneyManagerActivity"
+        <activity
+            android:name=".activity.info.MoneyManagerActivity"
             android:configChanges="keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+
+
+
+
+
+        <!--支付-->
+        <activity
+            android:name=".activity.info.ChargeActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <!--微信支付信息-->
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wxb4260c7f64d395ba" />
+            </intent-filter>
+        </activity>
+        <!--微信支付begin-->
+        <activity
+            android:name=".pay.wx.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <receiver android:name=".pay.wx.utils.AppRegister">
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+        </receiver>
+        <!--微信支付end-->
     </application>
 
 </manifest>

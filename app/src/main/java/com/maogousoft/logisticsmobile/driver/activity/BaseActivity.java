@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -19,6 +20,9 @@ import android.widget.Toast;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.ybxiang.driver.activity.AnonymousActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
@@ -71,7 +75,7 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
 	public String content = null;
 
 	public InputMethodManager imm = null;
-
+    public DisplayImageOptions options;
 	private boolean isRightKeyIntoShare = true;// 顶部条右键是否进入分享
     private boolean isShowAnonymousActivity = true;
     private int isFirstResume = 0;
@@ -103,9 +107,6 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	private void init() {
-
-		LogUtil.i("wst", "baseactivity-init");
-
 		imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 		progressDialog = new MyProgressDialog(mContext);
 		progressDialog.setCancelable(true);
@@ -113,6 +114,13 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
 
 		resources = getResources();
 		MobclickAgent.onError(this);
+
+        options = new DisplayImageOptions.Builder().resetViewBeforeLoading()
+                .cacheOnDisc()
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)
+                .showImageForEmptyUri(R.drawable.ic_img_loading)
+                .displayer(new FadeInBitmapDisplayer(300)).build();
 	}
 
 	/** 设置分享内容 **/

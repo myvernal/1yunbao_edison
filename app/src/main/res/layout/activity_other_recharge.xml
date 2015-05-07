@@ -2,130 +2,152 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <com.maogousoft.logisticsmobile.driver.widget.HeaderView android:layout_width="match_parent"
-                                                             android:layout_height="wrap_content"/>
-
-    <LinearLayout
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="vertical">
 
-            <TextView
-                style="@style/home_motorcade_item_title_style"
-                android:text="@string/string_other_recharge_phone" />
-
-            <TextView
-                android:id="@+id/recharge_phone"
-                style="@style/home_motorcade_item_title_style" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                style="@style/home_motorcade_item_title_style"
-                android:text="@string/string_other_recharge_price" />
-
-            <EditText
-                android:id="@+id/recharge_price"
-                style="@style/home_publish_edittext_style"
-                android:layout_width="110dip"
-                android:layout_weight="0"
-                android:inputType="number"
-                android:text="0.1" />
-        </LinearLayout>
-
-        <com.maogousoft.logisticsmobile.driver.widget.MyGridView
-            android:id="@+id/recharge_gridview"
-            style="@style/gridviewStyle"
-            android:horizontalSpacing="3dp"
-            android:numColumns="3"
-            android:verticalSpacing="3dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:orientation="horizontal" >
-
-            <TextView
-                style="@style/home_motorcade_item_title_style"
-                android:text="@string/string_other_recharge_type" />
-
-            <RadioGroup
-                android:id="@+id/recharge_group"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_margin="10dp"
+                android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/radio0"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:button="@drawable/radiobutton"
-                    android:checked="true"
-                    android:drawablePadding="10dp"
-                    android:drawableRight="@drawable/alipay"
-                    android:textColor="@color/font_gray3" />
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/radio1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:button="@drawable/radiobutton"
-                    android:drawablePadding="10dp"
-                    android:drawableRight="@drawable/yeepay"
-                    android:textColor="@color/font_gray3" />
+                    <TextView
+                        style="@style/home_motorcade_item_title_style"
+                        android:text="@string/string_other_recharge_phone" />
 
-                <RadioButton
-                    android:id="@+id/radio2"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/recharge_phone"
+                        style="@style/home_motorcade_item_title_style" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:button="@drawable/radiobutton"
-                    android:drawablePadding="10dp"
-                    android:drawableRight="@drawable/logo_recharge"
-                    android:textColor="@color/font_gray3" />
-            </RadioGroup>
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/home_motorcade_item_title_style"
+                        android:text="@string/string_other_recharge_price" />
+
+                    <EditText
+                        android:id="@+id/recharge_price"
+                        style="@style/home_publish_edittext_style"
+                        android:layout_width="110dip"
+                        android:layout_weight="0"
+                        android:inputType="number"
+                        android:text="0.1" />
+                </LinearLayout>
+
+                <com.maogousoft.logisticsmobile.driver.widget.MyGridView
+                    android:id="@+id/recharge_gridview"
+                    style="@style/gridviewStyle"
+                    android:horizontalSpacing="3dp"
+                    android:numColumns="3"
+                    android:verticalSpacing="3dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/home_motorcade_item_title_style"
+                        android:text="@string/string_other_recharge_type" />
+
+                    <RadioGroup
+                        android:id="@+id/recharge_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/radio0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@drawable/radiobutton"
+                            android:checked="true"
+                            android:drawablePadding="10dp"
+                            android:drawableRight="@drawable/alipay"
+                            android:textColor="@color/font_gray3" />
+
+                        <RadioButton
+                            android:id="@+id/radio1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:button="@drawable/radiobutton"
+                            android:drawablePadding="10dp"
+                            android:drawableRight="@drawable/yeepay"
+                            android:textColor="@color/font_gray3" />
+
+                        <RadioButton
+                            android:id="@+id/radio2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:button="@drawable/radiobutton"
+                            android:drawablePadding="10dp"
+                            android:drawableRight="@drawable/logo_recharge"
+                            android:textColor="@color/font_gray3" />
+
+                        <RadioButton
+                            android:id="@+id/radio3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:button="@drawable/radiobutton"
+                            android:drawablePadding="10dp"
+                            android:drawableRight="@drawable/logo_recharge"
+                            android:textColor="@color/font_gray3" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <TextView
+                    style="@style/home_motorcade_item_title_style"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:singleLine="false"
+                    android:text="@string/string_other_recharge_info" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/recharge_submitbtn"
+                style="@style/button1_style"
+                android:layout_marginTop="5dp"
+                android:text="@string/string_forgot_submit" />
+
+            <TextView
+                android:id="@+id/recharge_records"
+                style="@style/home_motorcade_item_title_style"
+                android:layout_gravity="right"
+                android:layout_margin="14dp"
+                android:text="账户记录"
+                android:textColor="@color/font_blue2"
+                android:textSize="16sp" />
+
         </LinearLayout>
-
-        <TextView
-            style="@style/home_motorcade_item_title_style"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:singleLine="false"
-            android:text="@string/string_other_recharge_info" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/recharge_submitbtn"
-        style="@style/button1_style"
-        android:layout_marginTop="5dp"
-        android:text="@string/string_forgot_submit" />
-
-    <TextView
-        android:id="@+id/recharge_records"
-        style="@style/home_motorcade_item_title_style"
-        android:layout_gravity="right"
-        android:layout_margin="14dp"
-        android:text="账户记录"
-        android:textColor="@color/font_blue2"
-        android:textSize="16sp" />
-
+    </ScrollView>
 </LinearLayout>

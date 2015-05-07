@@ -36,6 +36,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CityInfo;
+import com.maogousoft.logisticsmobile.driver.pay.wx.WeChatPayUtils;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.YeepayUtils;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.AlixId;
@@ -55,8 +56,7 @@ import com.yeepay.android.plugin.YeepayPlugin;
 public class ChargeActivity extends BaseActivity implements
 		OnCheckedChangeListener, OnItemClickListener {
 
-	private static final String LOGTAG = LogUtil
-			.makeLogTag(ChargeActivity.class);
+	private static final String LOGTAG = LogUtil.makeLogTag(ChargeActivity.class);
 
 	private AQuery phone, gridView;
 
@@ -85,9 +85,7 @@ public class ChargeActivity extends BaseActivity implements
 	}
 
 	private void initView() {
-		new AQuery(this).id(R.id.titlebar_id_back).clicked(this);
-		new AQuery(this).id(R.id.titlebar_id_content).text(
-				R.string.string_other_recharge);
+		new AQuery(this).id(R.id.titlebar_id_content).text(R.string.string_other_recharge);
 		new AQuery(this).id(R.id.titlebar_id_more).clicked(this).visible();
 
 		phone = new AQuery(this).id(R.id.recharge_phone);
@@ -200,7 +198,10 @@ public class ChargeActivity extends BaseActivity implements
 		case R.id.recharge_submitbtn:
 			if (type == 2) {
 				startActivity(new Intent(this, RechargeCardActivity.class));
-			} else {
+			} else if(type == 3) {
+                WeChatPayUtils weChatPayUtils = new WeChatPayUtils(mContext);
+                weChatPayUtils.pay(Double.valueOf(price.getText().toString()) * 100);
+            } else {
 				check();
 			}
 			break;
@@ -218,14 +219,17 @@ public class ChargeActivity extends BaseActivity implements
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
 		switch (checkedId) {
 		case R.id.radio0:
-			type = 0;
+			type = 0;//支付宝
 			break;
 		case R.id.radio1:
-			type = 1;
+			type = 1;//易宝
 			break;
 		case R.id.radio2:
-			type = 2;
+			type = 2;//易运宝
 			break;
+        case R.id.radio3:
+            type = 3;//微信支付
+            break;
 		}
 	}
 
