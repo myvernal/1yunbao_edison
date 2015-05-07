@@ -94,7 +94,7 @@
                 style="@style/settingInfoStyle"
                 android:id="@id/myabc_id_mycredit"
                 android:drawableLeft="@drawable/money_transfer"
-                android:onClick="onMyHistoryOrder"
+                android:onClick="onCharge"
                 android:text="转账" />
 
             <View
@@ -106,7 +106,7 @@
                 style="@style/settingInfoStyle"
                 android:id="@id/myabc_id_mycredit"
                 android:drawableLeft="@drawable/money_cash"
-                android:onClick="onMyHistoryOrder"
+                android:onClick="onCharge"
                 android:text="提现" />
 
             <View

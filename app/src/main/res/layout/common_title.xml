@@ -11,8 +11,8 @@
         android:layout_centerInParent="true"
         android:ellipsize="end"
         android:gravity="center"
-        android:paddingLeft="96.0dip"
-        android:paddingRight="96.0dip"
+        android:paddingLeft="45dp"
+        android:paddingRight="45dp"
         android:shadowColor="#4c000000"
         android:shadowDx="0.0"
         android:shadowDy="1.0"
@@ -23,11 +23,10 @@
 
     <ImageView
         android:id="@id/titlebar_id_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="12dp"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:padding="13dp"
         android:src="@drawable/header_back" />
 
     <RelativeLayout

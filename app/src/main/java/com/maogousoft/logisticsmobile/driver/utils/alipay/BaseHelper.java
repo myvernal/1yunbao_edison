@@ -64,7 +64,7 @@ public class BaseHelper {
 	 * @param icon
 	 *            图标
 	 */
-	public static void showDialog(Activity context, String strTitle,
+	public static void showDialog(Context context, String strTitle,
 			String strText, int icon) {
 		AlertDialog.Builder tDialog = new AlertDialog.Builder(context);
 		tDialog.setIcon(icon);

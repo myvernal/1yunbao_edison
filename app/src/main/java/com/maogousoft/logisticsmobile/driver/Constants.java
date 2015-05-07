@@ -336,6 +336,12 @@ public class Constants {
 
 	public final static String KEY = "og779h1A30w7V637JG8SAF4gQ1g17y7d9ytu849aR6A1493Hj6V8d85H3A15";
 
+    /** 微信支付:统一下单*/
+    public final static String WEIXIN_PLACE_ORDER = "weixin_place_order";
+
+    /** 微信支付:后台查询实际支付结果*/
+    public final static String WEIXIN_QUERY_PAY_RESULT = "weixin_query_pay_result";
+
 	/** 是否已经完善了资料 */
 	public static final String IS_REG_OPTIONAL = "is_reg_optional";
 

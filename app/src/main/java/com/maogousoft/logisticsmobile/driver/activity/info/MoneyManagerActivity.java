@@ -82,7 +82,7 @@ public class MoneyManagerActivity extends BaseActivity {
     }
 
     /**
-     * 帐号充值
+     * 帐号充值/转账/提现
      *
      * @param view
      */

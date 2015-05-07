@@ -936,14 +936,11 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
 
-
-
-
-
         <!--支付-->
         <activity
             android:name=".activity.info.ChargeActivity"
             android:configChanges="keyboardHidden|orientation"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
@@ -956,7 +953,7 @@
         </activity>
         <!--微信支付begin-->
         <activity
-            android:name=".pay.wx.wxapi.WXPayEntryActivity"
+            android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
         <receiver android:name=".pay.wx.utils.AppRegister">

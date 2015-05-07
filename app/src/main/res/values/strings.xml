@@ -257,14 +257,15 @@
     <string name="string_charge_record_title">充值记录</string>
     <string name="string_other_recharge_phone">手机号码:</string>
     <string name="string_other_recharge_price">充值金额:</string>
-    <string name="string_other_recharge_type">支付方式:</string>
+    <string name="string_other_recharge_help">代充账号:</string>
+    <string name="string_other_recharge_type">支付方式</string>
     <string name="string_other_recharge_type1">支付宝</string>
     <string name="string_other_recharge_type2">易宝</string>
     <string name="string_other_recharge_sumbit">立即充值</string>
     <string name="string_other_recharge_unit">单位:元</string>
     <string name="string_other_recharge_info">提示：充值金额将按照1：1的比例，直接兑换成物流币充入登录账户</string>
     <string name="string_other_recharge_records">充值记录</string>
-    <string name="string_other_recharge">充值</string>
+    <string name="string_other_recharge">充值/转账/提现</string>
     <string name="string_other_recharge_record_serialnumber">流水号:%d</string>
     <string name="string_other_recharge_record_phone">帐号:</string>
     <string name="string_other_recharge_record_money">金额:</string>
@@ -438,7 +439,7 @@
     <string name="invoice_tip_title">完成</string>
     <!-- pay -->
     <string name="string_pay_wechat_tip">提示</string>
-    <string name="string_pay_wechat_getting_prepayid">正在获取预支付订单...</string>
+    <string name="string_pay_wechat_getting_prepayid">正在获取支付订单...</string>
     <string name="string_pay_wechat_pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>
     <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
 </resources>

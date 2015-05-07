@@ -736,26 +736,11 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:paddingTop">3dp</item>
-        <item name="android:paddingBottom">3dp</item>
-        <item name="android:paddingRight">5dp</item>
         <item name="android:singleLine">true</item>
     </style>
 
     <style name="home_motorcade_item_title_style2" parent="home_motorcade_item_title_style">
         <item name="android:textColor">@color/font_gray3</item>
-    </style>
-
-    <style name="home_publish_edittext_style">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1.0</item>
-        <item name="android:textSize">@dimen/font_size_normal</item>
-        <item name="android:padding">8dp</item>
-        <item name="android:selectAllOnFocus">true</item>
-        <item name="android:maxLength">8</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:singleLine">true</item>
     </style>
 
     <style name="other_charge_style">
