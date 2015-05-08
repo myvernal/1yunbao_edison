@@ -385,7 +385,7 @@ public class Constants {
     public static final String SHAKE_ONE_SHAKE = "shake_one_shake";
 
     /** 司机端:报价 */
-    public static final String QUERY_SOURCE_ORDER_COUNTSSS = "query_source_order_countsss";
+    public static final String DRIVER_QUOTE = "driver_quote";
 
     /** 司机端:抢单 */
     public static final String PLACE_SOURCE_ORDER = "place_source_order";
