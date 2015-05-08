@@ -391,7 +391,6 @@ public class NewSourceActivity extends BaseListActivity implements
                                                 mFootMsg.setText("已加载全部");
                                             }
                                             mAdapter.addAll(sort(mList));
-                                            mAdapter.notifyDataSetChanged();
                                         }
                                     }
                                     break;

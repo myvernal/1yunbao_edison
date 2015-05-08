@@ -51,7 +51,7 @@ public class BaseListActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_list);
 		ensureList();
-	};
+	}
 
 	public void onListItemClick(ListView l, View v, int position, long id) {
 	}

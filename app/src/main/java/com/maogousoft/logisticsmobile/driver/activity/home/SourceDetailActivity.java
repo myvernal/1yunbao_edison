@@ -76,8 +76,7 @@ public class SourceDetailActivity extends BaseActivity {
 
     // 初始化视图
     private void initViews() {
-        ((TextView) findViewById(R.id.titlebar_id_content))
-                .setText(R.string.string_home_sourcedetail_title);
+        ((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_home_sourcedetail_title);
 
         mPlace = (Button) findViewById(R.id.source_id_detail_place);
         mShare = (Button) findViewById(R.id.titlebar_id_more);
@@ -677,14 +676,10 @@ public class SourceDetailActivity extends BaseActivity {
         super.onClick(v);
         final int id = v.getId();
         switch (id) {
-            case R.id.titlebar_id_more:
-                share(shareContent.toString());
-                break;
             case R.id.source_id_detail_attention:
                 attentionOrder();
                 break;
             case R.id.source_id_detail_place:
-
                 // 先检测是否已经 通过了 诚信认证
                 if (application.checkIsThroughRezheng()) {
                     if (mPlace.getText().toString().equals("抢单或报价")) {
@@ -718,7 +713,6 @@ public class SourceDetailActivity extends BaseActivity {
 
                 break;
             case R.id.source_id_pj:
-
                 startActivity(new Intent(mContext, UserCreditActivity.class)
                         .putExtra("user_id", mSourceInfo.getUser_id())
                         .putExtra("user_score", mSourceInfo.getScore())
@@ -726,7 +720,6 @@ public class SourceDetailActivity extends BaseActivity {
                         .putExtra("user_score1", mSourceInfo.getScore1())
                         .putExtra("user_score2", mSourceInfo.getScore2())
                         .putExtra("user_score3", mSourceInfo.getScore3()));
-
                 break;
 
             case R.id.source_detail_phone:

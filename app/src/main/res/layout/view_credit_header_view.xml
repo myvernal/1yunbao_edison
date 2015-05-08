@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/common_line_color" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TextColorWhite"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:id="@+id/account_photo"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/account_name_layout"
+            android:layout_toRightOf="@+id/account_photo"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/settingAccountInfoStyle"
+                android:layout_width="wrap_content"
+                android:text="@string/string_home_myabc_title_name_driver" />
+
+            <TextView
+                android:id="@id/tv_name"
+                style="@style/settingAccountInfoStyle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/account_name_layout"
+            android:layout_toRightOf="@+id/account_photo"
+            android:id="@+id/account_car_number"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/settingAccountInfoStyle"
+                android:layout_width="wrap_content"
+                android:text="手机号码：" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/settingAccountInfoStyle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/account_car_number"
+            android:layout_toRightOf="@+id/account_photo"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/settingAccountInfoStyle"
+                android:layout_width="wrap_content"
+                android:text="@string/string_home_myabc_title_account_name" />
+
+            <TextView
+                android:id="@+id/tv_account_name"
+                style="@style/settingAccountInfoStyle" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/common_line_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/huozhu_info_layout"
+        android:orientation="vertical">
+        <!-- 公司 -->
+        <TextView
+            style="@style/settingInfoStyle"
+            android:id="@+id/tv_company_name"
+            android:drawableLeft="@drawable/credit_company"
+            android:drawableRight="@null"
+            android:onClick="onMainLine"
+            android:text="公司\t\t\t\t" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/common_line_color" />
+        <!-- 地址 -->
+        <TextView
+            style="@style/settingInfoStyle"
+            android:id="@id/tv_addr"
+            android:drawableLeft="@drawable/credit_compay_address"
+            android:drawableRight="@null"
+            android:onClick="onMainLine"
+            android:text="地址\t\t\t\t" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/common_line_color" />
+    </LinearLayout>
+
+    <!-- 信用 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TextColorWhite"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/settingInfoStyle"
+            android:id="@id/tv_addr"
+            android:layout_width="180dp"
+            android:drawableLeft="@drawable/credit_xinyu"
+            android:drawableRight="@null"
+            android:onClick="onMainLine"
+            android:text="信用\t\t\t\t" />
+
+        <RatingBar
+            android:id="@+id/credit_score"
+            style="@style/home_sourcedetail_ratingbar_style" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/common_line_color" />
+    <!-- 履约诚信度 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TextColorWhite"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/settingInfoStyle"
+            android:id="@id/tv_addr"
+            android:layout_width="180dp"
+            android:drawableRight="@null"
+            android:onClick="onMainLine"
+            android:text="履约诚信度\t\t\t\t" />
+
+        <RatingBar
+            android:id="@+id/credit_score1"
+            style="@style/home_sourcedetail_ratingbar_style" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/common_line_color" />
+    <!-- 履约诚信度 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TextColorWhite"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/settingInfoStyle"
+            android:id="@id/tv_addr"
+            android:layout_width="180dp"
+            android:drawableRight="@null"
+            android:onClick="onMainLine"
+            android:text="信息真实度\t\t\t\t" />
+
+        <RatingBar
+            android:id="@+id/credit_score2"
+            style="@style/home_sourcedetail_ratingbar_style" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/common_line_color" />
+
+    <!-- 履约诚信度 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TextColorWhite"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/settingInfoStyle"
+            android:id="@id/tv_addr"
+            android:layout_width="180dp"
+            android:drawableRight="@null"
+            android:onClick="onMainLine"
+            android:text="付款及时率\t\t\t\t" />
+
+        <RatingBar
+            android:id="@+id/credit_score3"
+            style="@style/home_sourcedetail_ratingbar_style" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/common_line_color" />
+</LinearLayout>

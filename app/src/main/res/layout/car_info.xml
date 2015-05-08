@@ -29,11 +29,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onComplementCarInfo"
-                android:padding="20dp">
+                android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:id="@+id/account_photo"
                     android:layout_marginRight="20dp"
                     android:src="@drawable/ic_launcher" />
