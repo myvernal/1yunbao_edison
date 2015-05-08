@@ -36,7 +36,7 @@ import com.maogousoft.logisticsmobile.driver.activity.info.LoginActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.ybxiang.driver.util.Utils;
 
@@ -53,7 +53,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	private TextView mIsRing; // 铃声的有，无
     private ImageView mPhoto;
 	// 个人abc信息
-	private AbcInfo mAbcInfo;
+	private DriverInfo mDriverInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -164,11 +164,11 @@ public class MyabcActivityDriver extends BaseActivity {
 			application.logout();
 			startActivity(new Intent(mContext, LoginActivity.class));
 		} else if(v == mUpdate) {
-            if(mAbcInfo == null) {
+            if(mDriverInfo == null) {
                 Toast.makeText(mContext, "正在获取账号资料,请稍后", Toast.LENGTH_SHORT).show();
                 return;
             }
-            startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", mAbcInfo));
+            startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", mDriverInfo));
         } else if (v == mContactKeFu) {
 			// PR111 begin
 			// Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
@@ -255,25 +255,25 @@ public class MyabcActivityDriver extends BaseActivity {
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			jsonObject.put(Constants.JSON, "");
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-					AbcInfo.class, new AjaxCallBack() {
+					DriverInfo.class, new AjaxCallBack() {
 
 						@Override
 						public void receive(int code, Object result) {
 							switch (code) {
 							case ResultCode.RESULT_OK:
 								if (result != null) {
-									mAbcInfo = (AbcInfo) result;
+									mDriverInfo = (DriverInfo) result;
 
-									if (!TextUtils.isEmpty(mAbcInfo.getName())) {
-										mName.setText(mAbcInfo.getName());
+									if (!TextUtils.isEmpty(mDriverInfo.getName())) {
+										mName.setText(mDriverInfo.getName());
 									}
-									if (!TextUtils.isEmpty(mAbcInfo
+									if (!TextUtils.isEmpty(mDriverInfo
 											.getRecommender())) {
-										mRecommender.setText(mAbcInfo
+										mRecommender.setText(mDriverInfo
 												.getRecommender());
 									}
-									mPhone.setText(mAbcInfo.getPhone());
-                                    ImageLoader.getInstance().displayImage(mAbcInfo.getId_card_photo(), mPhoto, options,
+									mPhone.setText(mDriverInfo.getPhone());
+                                    ImageLoader.getInstance().displayImage(mDriverInfo.getId_card_photo(), mPhoto, options,
                                                 new Utils.MyImageLoadingListener(mContext, mPhoto));
 									if (application.checkIsRingNewSource()) {
 										mIsRing.setText(getString(R.string.string_is_ring, "是"));
@@ -315,7 +315,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	 * @param view
 	 */
 	public void onMyHistoryOrder(View view) {
-		startActivity(new Intent(mContext, HistroyOrderActivity.class).putExtra("info", mAbcInfo));
+		startActivity(new Intent(mContext, HistroyOrderActivity.class).putExtra("info", mDriverInfo));
 	}
 
 	/**

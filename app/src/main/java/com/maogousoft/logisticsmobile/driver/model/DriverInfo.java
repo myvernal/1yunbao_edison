@@ -2,7 +2,7 @@ package com.maogousoft.logisticsmobile.driver.model;
 
 import java.io.Serializable;
 
-public class AbcInfo implements Serializable {
+public class DriverInfo implements Serializable {
 
 	// 手机号码
 	private String phone = "";

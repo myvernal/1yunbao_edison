@@ -13,7 +13,7 @@ import com.maogousoft.logisticsmobile.driver.activity.info.UpdatePwdActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ybxiang.driver.util.Utils;
 
@@ -29,7 +29,7 @@ public class MyabcAccountInfoActivity extends BaseActivity {
     private ImageView mPhoto;
     private TextView mName;
     // 个人abc信息
-    private AbcInfo mAbcInfo;
+    private DriverInfo mDriverInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,16 +63,16 @@ public class MyabcAccountInfoActivity extends BaseActivity {
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, "");
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    AbcInfo.class, new AjaxCallBack() {
+                    DriverInfo.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {
-                                        mAbcInfo = (AbcInfo) result;
-                                        mName.setText(mAbcInfo.getName());
-                                        ImageLoader.getInstance().displayImage(mAbcInfo.getId_card_photo(), mPhoto, options,
+                                        mDriverInfo = (DriverInfo) result;
+                                        mName.setText(mDriverInfo.getName());
+                                        ImageLoader.getInstance().displayImage(mDriverInfo.getId_card_photo(), mPhoto, options,
                                                 new Utils.MyImageLoadingListener(mContext, mPhoto));
                                     }
                                     break;

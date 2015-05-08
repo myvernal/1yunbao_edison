@@ -27,7 +27,6 @@ public class MoneyManagerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_money_manager);
         initViews();
-        initData();
     }
 
     private void initViews() {
@@ -37,8 +36,11 @@ public class MoneyManagerActivity extends BaseActivity {
         mBalance = (TextView) findViewById(R.id.myabc_id_balance);
     }
 
-    private void initData() {
-        getBalance();// 获取账户余额
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 获取账户余额
+        getBalance();
     }
 
     // 获取账户余额

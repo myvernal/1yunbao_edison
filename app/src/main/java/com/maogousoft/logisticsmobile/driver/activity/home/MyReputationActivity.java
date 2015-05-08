@@ -15,7 +15,7 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 
 /**
  * 我的信誉
@@ -27,7 +27,7 @@ public class MyReputationActivity extends BaseActivity {
 	private TextView mOnlineTime, mOnlineTimeRank, mRecommonedCount,
 			mRecommonedCountRank, mClinch, mClinchRank;
 	// 个人abc信息
-	private AbcInfo mAbcInfo;
+	private DriverInfo mDriverInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,32 +75,32 @@ public class MyReputationActivity extends BaseActivity {
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			jsonObject.put(Constants.JSON, "");
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-					AbcInfo.class, new AjaxCallBack() {
+					DriverInfo.class, new AjaxCallBack() {
 
 						@Override
 						public void receive(int code, Object result) {
 							switch (code) {
 							case ResultCode.RESULT_OK:
 								if (result != null) {
-									mAbcInfo = (AbcInfo) result;
+									mDriverInfo = (DriverInfo) result;
 
-									mOnlineTime.setText(mAbcInfo
+									mOnlineTime.setText(mDriverInfo
 											.getOnline_time() + "天");
 									mOnlineTimeRank.setText(String
 											.format(getString(R.string.string_home_myabc_rank),
-													mAbcInfo.getOnline_time_rank()));
-									mRecommonedCount.setText(mAbcInfo
+													mDriverInfo.getOnline_time_rank()));
+									mRecommonedCount.setText(mDriverInfo
 											.getRecommender_count() + "人");
 									mRecommonedCountRank.setText(String
 											.format(getString(R.string.string_home_myabc_rank),
-													mAbcInfo.getRecommender_count_rank()));
-									mClinch.setText(mAbcInfo.getOrder_count()
+													mDriverInfo.getRecommender_count_rank()));
+									mClinch.setText(mDriverInfo.getOrder_count()
 											+ "单");
 									mClinchRank.setText(String
 											.format(getString(R.string.string_home_myabc_rank),
-													mAbcInfo.getOrder_count_rank()));
+													mDriverInfo.getOrder_count_rank()));
 
-									float score = mAbcInfo.getScore();
+									float score = mDriverInfo.getScore();
 									if (score == 0) {
 										score = 5;
 									}
@@ -139,6 +139,6 @@ public class MyReputationActivity extends BaseActivity {
 	 */
 	public void onMyCreditContainer(View view) {
 		startActivity(new Intent(mContext, MyCreditActivity.class).putExtra(
-				"info", mAbcInfo));
+				"info", mDriverInfo));
 	}
 }

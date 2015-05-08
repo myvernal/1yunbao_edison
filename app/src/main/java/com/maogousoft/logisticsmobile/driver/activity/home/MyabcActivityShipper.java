@@ -17,7 +17,7 @@ import com.maogousoft.logisticsmobile.driver.activity.info.*;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.HuoZhuUserInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.ybxiang.driver.activity.MySourceActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +35,7 @@ public class MyabcActivityShipper extends BaseActivity {
 			mCharge, mAccountRecord, mOnlineTime;
 	private RelativeLayout mHistory;
 	// 个人abc信息
-	private HuoZhuUserInfo userInfo;
+	private ShipperInfo userInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -172,14 +172,14 @@ public class MyabcActivityShipper extends BaseActivity {
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    HuoZhuUserInfo.class, new AjaxCallBack() {
+                    ShipperInfo.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {
-                                        userInfo = (HuoZhuUserInfo) result;
+                                        userInfo = (ShipperInfo) result;
 
                                         if (!TextUtils.isEmpty(userInfo.getName())) {
                                             mName.setText(userInfo.getName());

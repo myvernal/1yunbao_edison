@@ -2,7 +2,6 @@ package com.maogousoft.logisticsmobile.driver;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
@@ -20,7 +19,7 @@ import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.DriverSqliteOpenHelper;
 import com.maogousoft.logisticsmobile.driver.im.KBBinder;
 import com.maogousoft.logisticsmobile.driver.im.ServiceManager;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.DictInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.ExtendedImageDownloader;
@@ -61,7 +60,7 @@ public class MGApplication extends Application {
 	private ServiceManager manager;
 	private KBBinder mBinder;
 	private boolean isAnonymous = false;
-    private AbcInfo abcInfo = null;
+    private DriverInfo driverInfo = null;
     private UserInfo userInfo = null;
 
     @Override
@@ -489,12 +488,12 @@ public class MGApplication extends Application {
         this.isAnonymous = isAnonymous;
     }
 
-    public AbcInfo getAbcInfo() {
-        return abcInfo;
+    public DriverInfo getDriverInfo() {
+        return driverInfo;
     }
 
-    public void setAbcInfo(AbcInfo abcInfo) {
-        this.abcInfo = abcInfo;
+    public void setDriverInfo(DriverInfo driverInfo) {
+        this.driverInfo = driverInfo;
     }
 
     public Class preClass;

@@ -35,7 +35,7 @@ import com.maogousoft.logisticsmobile.driver.activity.MainActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 
 /**
  * 货运名片
@@ -53,7 +53,7 @@ public class MyBusinessCard extends BaseActivity {
     private ImageView id_card_photo, car_photo1, car_photo2, car_photo3;
     private DisplayImageOptions options;
     // 个人abc信息
-    private AbcInfo mAbcInfo;
+    private DriverInfo mDriverInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +132,7 @@ public class MyBusinessCard extends BaseActivity {
 //        }
         else if (v == mUpdate) {
             startActivity(new Intent(mContext, OptionalActivity.class).putExtra(
-                    "info", mAbcInfo));
+                    "info", mDriverInfo));
         }
 //        else if (v == mHistory) {
 //            startActivity(new Intent(mContext, HistroyOrderActivity.class)
@@ -200,77 +200,77 @@ public class MyBusinessCard extends BaseActivity {
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, "");
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    AbcInfo.class, new AjaxCallBack() {
+                    DriverInfo.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {
-                                        mAbcInfo = (AbcInfo) result;
+                                        mDriverInfo = (DriverInfo) result;
 
-                                        if (!TextUtils.isEmpty(mAbcInfo.getName())) {
-                                            mName.setText(mAbcInfo.getName());
+                                        if (!TextUtils.isEmpty(mDriverInfo.getName())) {
+                                            mName.setText(mDriverInfo.getName());
                                         }
-                                        if (!TextUtils.isEmpty(mAbcInfo.getPlate_number())) {
-                                            mNumber.setText(mAbcInfo.getPlate_number());
+                                        if (!TextUtils.isEmpty(mDriverInfo.getPlate_number())) {
+                                            mNumber.setText(mDriverInfo.getPlate_number());
                                         }
-                                        mPhone.setText(mAbcInfo.getPhone());
+                                        mPhone.setText(mDriverInfo.getPhone());
 
                                         CityDBUtils mDBUtils = new CityDBUtils(
                                                 application.getCitySDB());
                                         String path1Str = mDBUtils.getStartEndStr(
-                                                mAbcInfo.getStart_province(),
-                                                mAbcInfo.getStart_city(),
-                                                mAbcInfo.getEnd_province(),
-                                                mAbcInfo.getEnd_city());
+                                                mDriverInfo.getStart_province(),
+                                                mDriverInfo.getStart_city(),
+                                                mDriverInfo.getEnd_province(),
+                                                mDriverInfo.getEnd_city());
                                         String path2Str = mDBUtils.getStartEndStr(
-                                                mAbcInfo.getStart_province2(),
-                                                mAbcInfo.getStart_city2(),
-                                                mAbcInfo.getEnd_province2(),
-                                                mAbcInfo.getEnd_city2());
+                                                mDriverInfo.getStart_province2(),
+                                                mDriverInfo.getStart_city2(),
+                                                mDriverInfo.getEnd_province2(),
+                                                mDriverInfo.getEnd_city2());
                                         String path3Str = mDBUtils.getStartEndStr(
-                                                mAbcInfo.getStart_province3(),
-                                                mAbcInfo.getStart_city3(),
-                                                mAbcInfo.getEnd_province3(),
-                                                mAbcInfo.getEnd_city3());
+                                                mDriverInfo.getStart_province3(),
+                                                mDriverInfo.getStart_city3(),
+                                                mDriverInfo.getEnd_province3(),
+                                                mDriverInfo.getEnd_city3());
 
                                         mPath1.setText(path1Str);
                                         mPath2.setText(path2Str);
                                         mPath3.setText(path3Str);
 
-                                        if (!TextUtils.isEmpty(mAbcInfo
+                                        if (!TextUtils.isEmpty(mDriverInfo
                                                 .getPlate_number())) {
-                                            mCarNum.setText(mAbcInfo
+                                            mCarNum.setText(mDriverInfo
                                                     .getPlate_number());
                                         }
 
-                                        mCarlength.setText(mAbcInfo.getCar_length()
+                                        mCarlength.setText(mDriverInfo.getCar_length()
                                                 + "米");
-                                        if (!TextUtils.isEmpty(mAbcInfo
+                                        if (!TextUtils.isEmpty(mDriverInfo
                                                 .getCar_type_str())) {
-                                            mCartype.setText(mAbcInfo
+                                            mCartype.setText(mDriverInfo
                                                     .getCar_type_str());
                                         }
-                                        mCarzhaizhong.setText(mAbcInfo.getCar_weight() + "吨");
-                                        if(!TextUtils.isEmpty(mAbcInfo.getMyself_recommendation())) {
-                                            myself_recommendation.setText(mAbcInfo.getMyself_recommendation());
+                                        mCarzhaizhong.setText(mDriverInfo.getCar_weight() + "吨");
+                                        if(!TextUtils.isEmpty(mDriverInfo.getMyself_recommendation())) {
+                                            myself_recommendation.setText(mDriverInfo.getMyself_recommendation());
                                         }
                                         //显示照片
-                                        if(!TextUtils.isEmpty(mAbcInfo.getId_card_photo())) {
-                                            ImageLoader.getInstance().displayImage(mAbcInfo.getId_card_photo(), id_card_photo, options,
+                                        if(!TextUtils.isEmpty(mDriverInfo.getId_card_photo())) {
+                                            ImageLoader.getInstance().displayImage(mDriverInfo.getId_card_photo(), id_card_photo, options,
                                                     new Utils.MyImageLoadingListener(mContext, id_card_photo));
                                         }
-                                        if(!TextUtils.isEmpty(mAbcInfo.getCar_photo1())) {
-                                            ImageLoader.getInstance().displayImage(mAbcInfo.getCar_photo1(), car_photo1, options,
+                                        if(!TextUtils.isEmpty(mDriverInfo.getCar_photo1())) {
+                                            ImageLoader.getInstance().displayImage(mDriverInfo.getCar_photo1(), car_photo1, options,
                                                     new Utils.MyImageLoadingListener(mContext, car_photo1));
                                         }
-                                        if(!TextUtils.isEmpty(mAbcInfo.getCar_photo2())) {
-                                            ImageLoader.getInstance().displayImage(mAbcInfo.getCar_photo2(), car_photo2, options,
+                                        if(!TextUtils.isEmpty(mDriverInfo.getCar_photo2())) {
+                                            ImageLoader.getInstance().displayImage(mDriverInfo.getCar_photo2(), car_photo2, options,
                                                     new Utils.MyImageLoadingListener(mContext, car_photo2));
                                         }
-                                        if(!TextUtils.isEmpty(mAbcInfo.getCar_photo3())) {
-                                            ImageLoader.getInstance().displayImage(mAbcInfo.getCar_photo3(), car_photo3, options,
+                                        if(!TextUtils.isEmpty(mDriverInfo.getCar_photo3())) {
+                                            ImageLoader.getInstance().displayImage(mDriverInfo.getCar_photo3(), car_photo3, options,
                                                     new Utils.MyImageLoadingListener(mContext, car_photo3));
                                         }
                                     }

@@ -15,7 +15,7 @@ import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.HuoZhuUserInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.maogousoft.logisticsmobile.driver.model.SafeSeaInfo;
 import com.ybxiang.driver.util.Utils;
 import org.json.JSONException;
@@ -34,7 +34,7 @@ public class SafeSeaActivity extends BaseActivity {
     private CheckBox safe_check_box;
     private double userGold = -1;
     private double ratio = 0.0f;
-    private HuoZhuUserInfo userInfo;
+    private ShipperInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +194,7 @@ public class SafeSeaActivity extends BaseActivity {
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    HuoZhuUserInfo.class, new AjaxCallBack() {
+                    ShipperInfo.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
@@ -202,7 +202,7 @@ public class SafeSeaActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {
-                                        userInfo = (HuoZhuUserInfo) result;
+                                        userInfo = (ShipperInfo) result;
                                         //选择对应的费率
                                         changeRatioBySpinnerSelect(safe_type_spinner.getSelectedItemPosition());
                                         if(ratio > 0) {

@@ -1,7 +1,7 @@
 package com.maogousoft.logisticsmobile.driver.activity;
 
 import android.view.View;
-import android.widget.TextView;
+
 import com.baidu.mapapi.SDKInitializer;
 import com.maogousoft.logisticsmobile.driver.activity.home.*;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
@@ -30,7 +30,7 @@ import com.maogousoft.logisticsmobile.driver.activity.info.LoginActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.umeng.update.UmengUpdateAgent;
 
@@ -182,17 +182,17 @@ public class MainActivity extends TabActivity {
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, "");
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    AbcInfo.class, new AjaxCallBack() {
+                    DriverInfo.class, new AjaxCallBack() {
 
                 @Override
                 public void receive(int code, Object result) {
                     switch (code) {
                         case ResultCode.RESULT_OK:
                             if (result != null) {
-                                AbcInfo mAbcInfo = (AbcInfo) result;
-                                application.setAbcInfo(mAbcInfo);
-                                String idCard = mAbcInfo.getId_card();// 身份证号码
-                                String name = mAbcInfo.getName();// 司机姓名
+                                DriverInfo mDriverInfo = (DriverInfo) result;
+                                application.setDriverInfo(mDriverInfo);
+                                String idCard = mDriverInfo.getId_card();// 身份证号码
+                                String name = mDriverInfo.getName();// 司机姓名
 
                                 if (!TextUtils.isEmpty(idCard)) {
                                     application.writeIsThroughRezheng(true);

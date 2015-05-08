@@ -17,7 +17,7 @@ import com.maogousoft.logisticsmobile.driver.activity.info.OptionalShipperActivi
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.HuoZhuUserInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
@@ -41,7 +41,7 @@ public class MyBusinessCardUser extends BaseActivity {
             telNum, company_recommendation;
     private RelativeLayout mHistory;
     // 个人abc信息
-    private HuoZhuUserInfo userInfo;
+    private ShipperInfo userInfo;
     private View my_abc_layout;
     private ImageView company_photo, company_photo1, company_photo2, company_photo3;
     private DisplayImageOptions options;
@@ -151,14 +151,14 @@ public class MyBusinessCardUser extends BaseActivity {
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("user_id", application.getUserId()));
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    HuoZhuUserInfo.class, new AjaxCallBack() {
+                    ShipperInfo.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {
-                                        userInfo = (HuoZhuUserInfo) result;
+                                        userInfo = (ShipperInfo) result;
 
                                         if (!TextUtils.isEmpty(userInfo.getName())) {
                                             name.setText(userInfo.getName());

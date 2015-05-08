@@ -23,10 +23,12 @@ import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.maogousoft.logisticsmobile.driver.utils.GrabDialog;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ybxiang.driver.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +50,8 @@ public class SourceDetailActivity extends BaseActivity {
     private Button mPlace, mAttention, mPhone, mShare;
     private MyGridView mGridView;
     private ImageGridAdapter mAdapter;
-    private TextView mOrderNumber, mName, mLine, mSourceName, mSourceType, mShipType, mSourceCarLength,
+    private ImageView mPhoto;
+    private TextView mOrderNumber, mContactName, mShipperName, mLine, mSourceName, mSourceType, mShipType, mSourceCarLength,
             mSourceCarType, mSourcePrice, mSourceGold, mValidateTime, mZhuangCheTime, mWeight, sourceOther;
     private RatingBar mScore, ratingbarScore1, ratingbarScore2, ratingbarScore3;
     private Resources mResources;
@@ -86,7 +89,7 @@ public class SourceDetailActivity extends BaseActivity {
 
         mOrderNumber = (TextView) findViewById(R.id.source_id_order_number);
 
-        mName = (TextView) findViewById(R.id.source_detail_name);
+        mContactName = (TextView) findViewById(R.id.source_detail_name);
         mPhone = (Button) findViewById(R.id.source_detail_phone);
         mPingjia = (RelativeLayout) findViewById(R.id.source_id_pj);
         mPingjia.setClickable(false);
@@ -109,7 +112,8 @@ public class SourceDetailActivity extends BaseActivity {
         mShare.setOnClickListener(this);
 
         mResources = getResources();
-
+        mPhoto = (ImageView) findViewById(R.id.source_detail_shipper_photo);
+        mShipperName = (TextView) findViewById(R.id.source_detail_shipper_name);
         mLine = (TextView) findViewById(R.id.source_detail_xianlu);
         mSourceName = (TextView) findViewById(R.id.source_detail_mingchen);
         mSourceType = (TextView) findViewById(R.id.source_detail_leixing);
@@ -225,17 +229,11 @@ public class SourceDetailActivity extends BaseActivity {
         // mResources.getString(R.string.sourcedetail_number),
         // sourceInfo.getId()));
         mOrderNumber.setVisibility(View.GONE);
-
+        //联系人
         if (!TextUtils.isEmpty(sourceInfo.getCargo_user_name())) {
-            mName.setText(mName.getText() + sourceInfo.getCargo_user_name());
-        } else {
-            if (!TextUtils.isEmpty(sourceInfo.getUser_name())) {
-                mName.setText(mName.getText() + sourceInfo.getUser_name());
-            } else {
-                mName.setText(mName.getText() + "无");
-            }
-
+            mContactName.setText(mContactName.getText() + sourceInfo.getCargo_user_name());
         }
+
         String phone = "";
         if (!TextUtils.isEmpty(sourceInfo.getCargo_user_phone())) {
             phone = sourceInfo.getCargo_user_phone();
@@ -345,28 +343,16 @@ public class SourceDetailActivity extends BaseActivity {
         mValidateTime.setText(mValidateTime.getText() + createTime);
 
         float score = Float.parseFloat(String.valueOf(sourceInfo.getScore()));
-        if (score == 0) {
-            score = 5;
-        }
-        mScore.setRating(score);
+        mScore.setRating(score == 0 ? 5 : score);
 
         float score1 = Float.parseFloat(String.valueOf(sourceInfo.getScore1()));
-        if (score1 == 0) {
-            score1 = 5;
-        }
-        ratingbarScore1.setRating(score1);
+        ratingbarScore1.setRating(score1 == 0 ? 5 : score1);
 
         float score2 = Float.parseFloat(String.valueOf(sourceInfo.getScore2()));
-        if (score2 == 0) {
-            score2 = 5;
-        }
-        ratingbarScore2.setRating(score2);
+        ratingbarScore2.setRating(score2 == 0 ? 5 : score2);
 
         float score3 = Float.parseFloat(String.valueOf(sourceInfo.getScore3()));
-        if (score3 == 0) {
-            score3 = 5;
-        }
-        ratingbarScore3.setRating(score3);
+        ratingbarScore3.setRating(score3 == 0 ? 5 : score3);
 
         final ArrayList<String> list = new ArrayList<String>();
         if (!TextUtils.isEmpty(sourceInfo.getCargo_photo1())) {
@@ -383,8 +369,7 @@ public class SourceDetailActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                startActivity(new Intent(mContext, ImagePagerActivity.class)
-                        .putStringArrayListExtra("images", list));
+                startActivity(new Intent(mContext, ImagePagerActivity.class).putStringArrayListExtra("images", list));
             }
         });
         mAdapter.setList(list);
@@ -428,6 +413,7 @@ public class SourceDetailActivity extends BaseActivity {
                                 case ResultCode.RESULT_OK:
                                     mSourceInfo = (NewSourceInfo) result;
                                     showSourceDetail(mSourceInfo);
+                                    queryShipperInfo(mSourceInfo.getUser_id());
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     showMsg(result.toString());
@@ -763,6 +749,45 @@ public class SourceDetailActivity extends BaseActivity {
                                 case ResultCode.RESULT_FAILED:
                                     showMsg(result.toString());
                                     break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //获取货主信息,显示头像等
+    private void queryShipperInfo(int userId) {
+        final JSONObject jsonObject1 = new JSONObject();
+        try {
+            jsonObject1.put(Constants.ACTION, Constants.GET_USER_INFO);
+            jsonObject1.put(Constants.TOKEN, application.getToken());
+            jsonObject1.put(Constants.JSON, new JSONObject().put("user_id", userId).toString());
+            ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject1,
+                    ShipperInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    ShipperInfo shipperInfo = (ShipperInfo) result;
+                                    //发货方
+                                    if (!TextUtils.isEmpty(shipperInfo.getCompany_name())) {
+                                        mShipperName.setText(mShipperName.getText() + shipperInfo.getCompany_name());
+                                    }
+                                    ImageLoader.getInstance().displayImage(shipperInfo.getCompany_logo(), mPhoto, options,
+                                            new Utils.MyImageLoadingListener(mContext, mPhoto));
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    showMsg(result.toString());
+                                    break;
+
                                 default:
                                     break;
                             }

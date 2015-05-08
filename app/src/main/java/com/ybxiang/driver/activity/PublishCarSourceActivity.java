@@ -17,7 +17,7 @@ import android.view.View.OnClickListener;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
@@ -75,7 +75,7 @@ public class PublishCarSourceActivity extends BaseActivity implements
         search_car_type = (Spinner) findViewById(R.id.search_car_type);//车型
 
         //填充
-        if (application.getAbcInfo() == null) {
+        if (application.getDriverInfo() == null) {
             getABCInfo();
         } else {
             initData();
@@ -83,12 +83,12 @@ public class PublishCarSourceActivity extends BaseActivity implements
     }
 
     private void initData() {
-        mCarNum.setText(application.getAbcInfo().getPlate_number() + "");
-        mCarlength.setText(application.getAbcInfo().getCar_length() + "");
-        car_weight.setText(application.getAbcInfo().getCar_weight() + "");
-        ower_name.setText(application.getAbcInfo().getName() + "");
-        ower_phone.setText(application.getAbcInfo().getPhone() + "");
-        int value = application.getAbcInfo().getCar_type();
+        mCarNum.setText(application.getDriverInfo().getPlate_number() + "");
+        mCarlength.setText(application.getDriverInfo().getCar_length() + "");
+        car_weight.setText(application.getDriverInfo().getCar_weight() + "");
+        ower_name.setText(application.getDriverInfo().getName() + "");
+        ower_phone.setText(application.getDriverInfo().getPhone() + "");
+        int value = application.getDriverInfo().getCar_type();
         for (int i = 0; i < Constants.carTypeValues.length; i++) {
             if (value == Constants.carTypeValues[i]) {
                 search_car_type.setSelection(i);
@@ -229,15 +229,15 @@ public class PublishCarSourceActivity extends BaseActivity implements
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, "");
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    AbcInfo.class, new AjaxCallBack() {
+                    DriverInfo.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result != null) {
-                                        AbcInfo mAbcInfo = (AbcInfo) result;
-                                        application.setAbcInfo(mAbcInfo);
+                                        DriverInfo mDriverInfo = (DriverInfo) result;
+                                        application.setDriverInfo(mDriverInfo);
                                         initData();
                                     }
                                     break;

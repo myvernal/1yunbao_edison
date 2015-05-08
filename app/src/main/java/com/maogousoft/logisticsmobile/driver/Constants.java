@@ -140,7 +140,7 @@ public class Constants {
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
     public static final String BASE_URL = "http://1yunbao.com:8083/service";
-	//public static final String BASE_URL = "http://192.168.1.100:8080/service";
+	//public static final String BASE_URL = "http://192.168.1.110:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin

@@ -85,7 +85,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/huozhu_info_layout"
+        android:id="@+id/shipper_info_layout"
         android:orientation="vertical">
         <!-- 公司 -->
         <TextView

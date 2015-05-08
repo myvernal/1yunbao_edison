@@ -18,7 +18,7 @@ import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ybxiang.driver.util.Utils;
 
@@ -33,7 +33,7 @@ public class MyabcCarInfoActivity extends BaseActivity {
 	private TextView mName, mPhone, mCarNum, mCarlength, mCartype, mCarzhaizhong;
     private ImageView mPhoto;
 	// 个人abc信息
-	private AbcInfo mAbcInfo;
+	private DriverInfo mDriverInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,28 +78,26 @@ public class MyabcCarInfoActivity extends BaseActivity {
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			jsonObject.put(Constants.JSON, "");
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-					AbcInfo.class, new AjaxCallBack() {
+					DriverInfo.class, new AjaxCallBack() {
 
 						@Override
 						public void receive(int code, Object result) {
 							switch (code) {
 							case ResultCode.RESULT_OK:
 								if (result != null) {
-									mAbcInfo = (AbcInfo) result;
-									if (!TextUtils.isEmpty(mAbcInfo.getPlate_number())) {
-										mCarNum.setText(getString(R.string.string_car_detail_number, mAbcInfo.getPlate_number()));
+									mDriverInfo = (DriverInfo) result;
+									if (!TextUtils.isEmpty(mDriverInfo.getPlate_number())) {
+										mCarNum.setText(getString(R.string.string_car_detail_number, mDriverInfo.getPlate_number()));
 									}
-									mCarlength.setText(getString(R.string.string_car_detail_car_length, mAbcInfo.getCar_length() + "米"));
-									if (!TextUtils.isEmpty(mAbcInfo.getCar_type_str())) {
-										mCartype.setText(getString(R.string.string_car_detail_car_type, mAbcInfo.getCar_type_str()));
+									mCarlength.setText(getString(R.string.string_car_detail_car_length, mDriverInfo.getCar_length() + "米"));
+									if (!TextUtils.isEmpty(mDriverInfo.getCar_type_str())) {
+										mCartype.setText(getString(R.string.string_car_detail_car_type, mDriverInfo.getCar_type_str()));
 									}
-									mCarzhaizhong.setText(getString(R.string.string_car_detail_car_weight, mAbcInfo.getCar_weight() + "吨"));
-                                    if (!TextUtils.isEmpty(mAbcInfo.getId_card_photo())) {
-                                        ImageLoader.getInstance().displayImage(mAbcInfo.getId_card_photo(), mPhoto, options,
-                                                new Utils.MyImageLoadingListener(mContext, mPhoto));
-                                    }
-                                    mName.setText(mAbcInfo.getName());
-                                    mPhone.setText(mAbcInfo.getPhone());
+									mCarzhaizhong.setText(getString(R.string.string_car_detail_car_weight, mDriverInfo.getCar_weight() + "吨"));
+                                    ImageLoader.getInstance().displayImage(mDriverInfo.getId_card_photo(), mPhoto, options,
+                                            new Utils.MyImageLoadingListener(mContext, mPhoto));
+                                    mName.setText(mDriverInfo.getName());
+                                    mPhone.setText(mDriverInfo.getPhone());
                                 }
 								break;
 							case ResultCode.RESULT_ERROR:
@@ -132,6 +130,6 @@ public class MyabcCarInfoActivity extends BaseActivity {
 	 * @param view
 	 */
 	public void onComplementCarInfo(View view) {
-		startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", mAbcInfo));
+		startActivity(new Intent(mContext, OptionalActivity.class).putExtra("info", mDriverInfo));
 	}
 }

@@ -17,7 +17,7 @@ import com.maogousoft.logisticsmobile.driver.adapter.EvaluateListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.EvaluateInfo;
 
 /**
@@ -46,8 +46,7 @@ public class MyCreditActivity extends BaseActivity {
 	// 初始化视图
 	private void initViews() {
 
-		((TextView) findViewById(R.id.titlebar_id_content))
-				.setText(R.string.string_home_driver_credit_title);
+		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_home_driver_credit_title);
 		mListView = (ListView) findViewById(android.R.id.list);
 		mName = (TextView) findViewById(R.id.credit_name);
 		mPhone = (TextView) findViewById(R.id.credit_phone);
@@ -66,28 +65,28 @@ public class MyCreditActivity extends BaseActivity {
 	// 初始化数据
 	private void initData() {
 		if (getIntent().hasExtra("info")) {
-			AbcInfo abcInfo = (AbcInfo) getIntent()
+			DriverInfo driverInfo = (DriverInfo) getIntent()
 					.getSerializableExtra("info");
-			if (abcInfo != null) {
-				mName.setText(abcInfo.getName());
-				mPhone.setText(abcInfo.getPhone());
-				mCarNumber.setText(abcInfo.getPlate_number());
-				float score = abcInfo.getScore();
+			if (driverInfo != null) {
+				mName.setText(driverInfo.getName());
+				mPhone.setText(driverInfo.getPhone());
+				mCarNumber.setText(driverInfo.getPlate_number());
+				float score = driverInfo.getScore();
 				if (score == 0) {
 					score = 5;
 				}
 				mScore.setRating(score);
-				float score1 = abcInfo.getScroe1();
+				float score1 = driverInfo.getScroe1();
 				if (score1 == 0) {
 					score1 = 5;
 				}
 				mScore1.setRating(score1);
-				float score2 = abcInfo.getScroe2();
+				float score2 = driverInfo.getScroe2();
 				if (score2 == 0) {
 					score2 = 5;
 				}
 				mScore2.setRating(score2);
-				float score3 = abcInfo.getScroe3();
+				float score3 = driverInfo.getScroe3();
 				if (score3 == 0) {
 					score3 = 5;
 				}

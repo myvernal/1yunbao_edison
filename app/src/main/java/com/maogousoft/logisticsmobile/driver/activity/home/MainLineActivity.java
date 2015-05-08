@@ -25,7 +25,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 
 /**
  * 主营路线
@@ -37,7 +37,7 @@ public class MainLineActivity extends BaseActivity {
 	private TextView mPath1, mPath2, mPath3, mTip;
     private ImageView sound_line_1, sound_line_2, sound_line_3;
 	// 个人abc信息
-	private AbcInfo mAbcInfo;
+	private DriverInfo mDriverInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,31 +95,31 @@ public class MainLineActivity extends BaseActivity {
 			jsonObject.put(Constants.TOKEN, application.getToken());
 			jsonObject.put(Constants.JSON, "");
 			ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-					AbcInfo.class, new AjaxCallBack() {
+					DriverInfo.class, new AjaxCallBack() {
 
 						@Override
 						public void receive(int code, Object result) {
 							switch (code) {
 							case ResultCode.RESULT_OK:
 								if (result != null) {
-									mAbcInfo = (AbcInfo) result;
+									mDriverInfo = (DriverInfo) result;
 									CityDBUtils mDBUtils = new CityDBUtils(
 											application.getCitySDB());
 									String path1Str = mDBUtils.getStartEndStr(
-											mAbcInfo.getStart_province(),
-											mAbcInfo.getStart_city(),
-											mAbcInfo.getEnd_province(),
-											mAbcInfo.getEnd_city());
+											mDriverInfo.getStart_province(),
+											mDriverInfo.getStart_city(),
+											mDriverInfo.getEnd_province(),
+											mDriverInfo.getEnd_city());
 									String path2Str = mDBUtils.getStartEndStr(
-											mAbcInfo.getStart_province2(),
-											mAbcInfo.getStart_city2(),
-											mAbcInfo.getEnd_province2(),
-											mAbcInfo.getEnd_city2());
+											mDriverInfo.getStart_province2(),
+											mDriverInfo.getStart_city2(),
+											mDriverInfo.getEnd_province2(),
+											mDriverInfo.getEnd_city2());
 									String path3Str = mDBUtils.getStartEndStr(
-											mAbcInfo.getStart_province3(),
-											mAbcInfo.getStart_city3(),
-											mAbcInfo.getEnd_province3(),
-											mAbcInfo.getEnd_city3());
+											mDriverInfo.getStart_province3(),
+											mDriverInfo.getStart_city3(),
+											mDriverInfo.getEnd_province3(),
+											mDriverInfo.getEnd_city3());
 
 									mPath1.setText(path1Str);
 									mPath2.setText(path2Str);

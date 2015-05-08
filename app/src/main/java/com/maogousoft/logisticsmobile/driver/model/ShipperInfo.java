@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author wst
  * @date 2013-6-6 下午5:02:21
  */
-public class HuoZhuUserInfo implements Serializable {
+public class ShipperInfo implements Serializable {
 
 	// 货主公司名字、地址、联系手机、座机电话
 

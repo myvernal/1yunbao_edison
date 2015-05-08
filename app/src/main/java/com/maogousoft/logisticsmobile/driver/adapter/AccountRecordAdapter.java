@@ -53,6 +53,9 @@ public class AccountRecordAdapter extends BaseListAdapter<AccountRecordInfo> {
 		String typeStr = "";
         LogUtil.e(TAG, "交易类型:" + c.getBusiness_type());
 		switch (c.getBusiness_type()) {
+            case AccountRecordInfo.BUSINESS_TYPE_RECHARGE:
+                typeStr = "充值";
+                break;
 			case AccountRecordInfo.BUSINESS_TYPE_VIOLATE:
 				typeStr = "违约扣除";
 				break;
@@ -100,7 +103,6 @@ public class AccountRecordAdapter extends BaseListAdapter<AccountRecordInfo> {
 	}
 
 	static class ViewHolder {
-
 		AQuery serialnumber, phone, mode, money, time;
 	}
 }

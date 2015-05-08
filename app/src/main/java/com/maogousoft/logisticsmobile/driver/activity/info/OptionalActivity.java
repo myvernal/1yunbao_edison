@@ -24,7 +24,7 @@ import com.maogousoft.logisticsmobile.driver.adapter.CarTypeListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.DictInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
@@ -67,7 +67,7 @@ public class OptionalActivity extends BaseActivity {
     private CarTypeListAdapter mCarTypeAdapter;
     private boolean isFormRegisterActivity;
     private boolean isFormPushSourceDetail;// 是否从推送进入，并且没有完善资料，然后进入的本页面
-    private AbcInfo abcInfo;
+    private DriverInfo driverInfo;
     //头像
     private String userPhoto;
     private String userPhotoUrl;
@@ -186,11 +186,11 @@ public class OptionalActivity extends BaseActivity {
                         }
 
                         // 司机本身已经设置过 车辆类型，需要显示到界面
-                        if (abcInfo != null) {
+                        if (driverInfo != null) {
                             if (mCarTypeAdapter.getList() != null) {
                                 for (int i = 0; i < mCarTypeAdapter.getList()
                                         .size(); i++) {
-                                    if (mCarTypeAdapter.getList().get(i).getId() == abcInfo
+                                    if (mCarTypeAdapter.getList().get(i).getId() == driverInfo
                                             .getCar_type()) {
                                         mCarType.setSelection(i);
                                         break;
@@ -217,53 +217,53 @@ public class OptionalActivity extends BaseActivity {
         mShuiChePhone.setText(application.getUserName());
 
         if (getIntent().hasExtra("info")) {
-            abcInfo = (AbcInfo) getIntent().getSerializableExtra("info");
-            if (abcInfo != null) {
+            driverInfo = (DriverInfo) getIntent().getSerializableExtra("info");
+            if (driverInfo != null) {
 
-                mShuiChePhone.setText(abcInfo.getCar_phone());
+                mShuiChePhone.setText(driverInfo.getCar_phone());
 
                 // 没有车主phone，需要后台给
-                mChezhuPhone.setText(abcInfo.getCar_phone());
-                mName.setText(abcInfo.getName());
+                mChezhuPhone.setText(driverInfo.getCar_phone());
+                mName.setText(driverInfo.getName());
 
-                mLength.setText(abcInfo.getCar_length() + "");
-                mWeight.setText(abcInfo.getCar_weight() + "");
+                mLength.setText(driverInfo.getCar_length() + "");
+                mWeight.setText(driverInfo.getCar_weight() + "");
 
                 if (mCarTypeAdapter.getList() != null) {
                     for (int i = 0; i < mCarTypeAdapter.getList().size(); i++) {
-                        if (mCarTypeAdapter.getList().get(i).getId() == abcInfo
+                        if (mCarTypeAdapter.getList().get(i).getId() == driverInfo
                                 .getCar_type()) {
                             mCarType.setSelection(i);
                             break;
                         }
                     }
                 }
-                mNumber.setText(abcInfo.getPlate_number());
+                mNumber.setText(driverInfo.getPlate_number());
 
-                if (TextUtils.isEmpty(abcInfo.getMyself_recommendation())) {
+                if (TextUtils.isEmpty(driverInfo.getMyself_recommendation())) {
                     myself_recommendation.setText(R.string.business_description);
                 } else {
-                    myself_recommendation.setText(abcInfo.getMyself_recommendation());
+                    myself_recommendation.setText(driverInfo.getMyself_recommendation());
                 }
-                if (!TextUtils.isEmpty(abcInfo.getId_card_photo())) {
-                    ImageLoader.getInstance().displayImage(abcInfo.getId_card_photo(), id_card_photo, options,
+                if (!TextUtils.isEmpty(driverInfo.getId_card_photo())) {
+                    ImageLoader.getInstance().displayImage(driverInfo.getId_card_photo(), id_card_photo, options,
                             new Utils.MyImageLoadingListener(mContext, id_card_photo));
-                    userPhotoUrl = abcInfo.getId_card_photo();
+                    userPhotoUrl = driverInfo.getId_card_photo();
                 }
-                if (!TextUtils.isEmpty(abcInfo.getCar_photo1())) {
-                    ImageLoader.getInstance().displayImage(abcInfo.getCar_photo1(), car_photo1, options,
+                if (!TextUtils.isEmpty(driverInfo.getCar_photo1())) {
+                    ImageLoader.getInstance().displayImage(driverInfo.getCar_photo1(), car_photo1, options,
                             new Utils.MyImageLoadingListener(mContext, car_photo1));
-                    mCarPhotosUrl1 = abcInfo.getCar_photo1();
+                    mCarPhotosUrl1 = driverInfo.getCar_photo1();
                 }
-                if (!TextUtils.isEmpty(abcInfo.getCar_photo2())) {
-                    ImageLoader.getInstance().displayImage(abcInfo.getCar_photo2(), car_photo2, options,
+                if (!TextUtils.isEmpty(driverInfo.getCar_photo2())) {
+                    ImageLoader.getInstance().displayImage(driverInfo.getCar_photo2(), car_photo2, options,
                             new Utils.MyImageLoadingListener(mContext, car_photo2));
-                    mCarPhotosUrl2 = abcInfo.getCar_photo2();
+                    mCarPhotosUrl2 = driverInfo.getCar_photo2();
                 }
-                if (!TextUtils.isEmpty(abcInfo.getCar_photo3())) {
-                    ImageLoader.getInstance().displayImage(abcInfo.getCar_photo3(), car_photo3, options,
+                if (!TextUtils.isEmpty(driverInfo.getCar_photo3())) {
+                    ImageLoader.getInstance().displayImage(driverInfo.getCar_photo3(), car_photo3, options,
                             new Utils.MyImageLoadingListener(mContext, car_photo3));
-                    mCarPhotosUrl3 = abcInfo.getCar_photo3();
+                    mCarPhotosUrl3 = driverInfo.getCar_photo3();
                 }
             }
         }

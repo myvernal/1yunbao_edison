@@ -20,7 +20,7 @@ import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.HuoZhuUserInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
@@ -54,7 +54,7 @@ import java.io.File;
 public class OptionalShipperActivity extends BaseActivity {
     private Button mLogin, mRegister;
     private EditText mName, mPhone, mTelNum, mAddress, mCompanyName, mSelfDesc;
-    private HuoZhuUserInfo abcInfo;
+    private ShipperInfo abcInfo;
     // 公司LOGO
     private String userPhoto;
     private String userPhotoUrl;
@@ -128,7 +128,7 @@ public class OptionalShipperActivity extends BaseActivity {
 
     private void initData() {
         if (getIntent().hasExtra("info")) {
-            abcInfo = (HuoZhuUserInfo) getIntent().getSerializableExtra("info");
+            abcInfo = (ShipperInfo) getIntent().getSerializableExtra("info");
             mName.setText(abcInfo.getName());
             mPhone.setText(abcInfo.getPhone());
             mTelNum.setText(abcInfo.getTelcom());

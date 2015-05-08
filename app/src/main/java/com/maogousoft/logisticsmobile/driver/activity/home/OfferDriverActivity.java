@@ -1,9 +1,8 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,7 +12,7 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 
@@ -30,7 +29,7 @@ public class OfferDriverActivity extends BaseActivity {
     private HeaderView mHeaderView;
     private EditText offerValue;
     private View offer_type_car, offer_type_weight;
-    private int offerType;
+    private String offerType = "车";
     private NewSourceInfo sourceInfo;
 
     @Override
@@ -45,6 +44,7 @@ public class OfferDriverActivity extends BaseActivity {
 
     private void initView() {
         offerValue = (EditText) findViewById(R.id.offer_value);
+        offerValue.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         offer_type_car = findViewById(R.id.offer_type_car);
         offer_type_weight = findViewById(R.id.offer_type_weight);
         offer_type_car.setOnClickListener(this);
@@ -64,12 +64,12 @@ public class OfferDriverActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.offer_type_car:
                 // 元/车
-                offerType = 0;
+                offerType = "车";
                 offer_type_car.setSelected(true);
                 offer_type_weight.setSelected(false);
                 break;
             case R.id.offer_type_weight:
-                offerType = 1;
+                offerType = "吨";
                 offer_type_car.setSelected(false);
                 offer_type_weight.setSelected(true);
                 // 元/吨
@@ -83,7 +83,7 @@ public class OfferDriverActivity extends BaseActivity {
      * @param view
      */
     public void onOffer(View view) {
-        if (offerValue.getText().toString().length() <= 0) {
+        if (Double.parseDouble(offerValue.getText().toString()) <= 0) {
             Toast.makeText(mContext, "请输入报价", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -94,9 +94,10 @@ public class OfferDriverActivity extends BaseActivity {
             JSONObject params = new JSONObject();
             params.put("order_id", sourceInfo.getId());
             params.put("driver_price", offerValue.getText());
+            params.put("type", offerType);
             jsonObject.put(Constants.JSON, params.toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    AbcInfo.class, new AjaxCallBack() {
+                    DriverInfo.class, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {

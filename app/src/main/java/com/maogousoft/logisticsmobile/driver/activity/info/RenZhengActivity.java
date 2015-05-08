@@ -27,7 +27,7 @@ import com.maogousoft.logisticsmobile.driver.activity.home.ImagePagerActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.AbcInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.FileCache;
 import com.maogousoft.logisticsmobile.driver.utils.HttpUtils;
@@ -174,20 +174,20 @@ public class RenZhengActivity extends BaseActivity {
 	// 初始化data
 	private void initData() {
 		if (getIntent().hasExtra("info")) {
-			AbcInfo mAbcInfo = (AbcInfo) getIntent().getSerializableExtra(
+			DriverInfo mDriverInfo = (DriverInfo) getIntent().getSerializableExtra(
 					"info");
-			if (mAbcInfo != null) {
-				mLicenseName.setText(CheckUtils.checkIsNull(mAbcInfo
+			if (mDriverInfo != null) {
+				mLicenseName.setText(CheckUtils.checkIsNull(mDriverInfo
 						.getLicense_name()));
-				mLicenseNumber.setText(CheckUtils.checkIsNull(mAbcInfo
+				mLicenseNumber.setText(CheckUtils.checkIsNull(mDriverInfo
 						.getLicense()));
-				mRegistrationName.setText(CheckUtils.checkIsNull(mAbcInfo
+				mRegistrationName.setText(CheckUtils.checkIsNull(mDriverInfo
 						.getRegistration_name()));
-				mRegistrationNumber.setText(CheckUtils.checkIsNull(mAbcInfo
+				mRegistrationNumber.setText(CheckUtils.checkIsNull(mDriverInfo
 						.getRegistration()));
-				mCardName.setText(CheckUtils.checkIsNull(mAbcInfo
+				mCardName.setText(CheckUtils.checkIsNull(mDriverInfo
 						.getId_card_name()));
-				mCardNumber.setText(CheckUtils.checkIsNull(mAbcInfo
+				mCardNumber.setText(CheckUtils.checkIsNull(mDriverInfo
 						.getId_card()));
 
 			}

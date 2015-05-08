@@ -49,8 +49,6 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
 
     private View toastView;
 
-    private boolean isShown = false;
-
 	public BaseListAdapter(Context context) {
 		this.mContext = context;
 		mInflater = LayoutInflater.from(mContext);
@@ -152,7 +150,7 @@ public abstract class BaseListAdapter<T> extends BaseAdapter {
     }
 
     public void showMsg(String msg) {
-        if (TextUtils.isEmpty(msg) || !isShown) {
+        if (TextUtils.isEmpty(msg)) {
             return;
         }
         if (null == toast) {

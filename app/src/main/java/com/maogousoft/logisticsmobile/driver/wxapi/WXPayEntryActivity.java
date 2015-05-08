@@ -3,6 +3,7 @@ package com.maogousoft.logisticsmobile.driver.wxapi;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
@@ -103,7 +104,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
                                         final MyAlertDialog dialog = new MyAlertDialog(mContext);
                                         dialog.show();
                                         dialog.setTitle(R.string.string_pay_wechat_tip);
-                                        dialog.setMessage(payOrderResult.getTrade_state_desc());
+                                        dialog.setMessage(switchTradeStateDesc(payOrderResult.getTrade_state()));
                                         dialog.setCancelable(false);
                                         dialog.setLeftButton(getString(R.string.submit), new View.OnClickListener() {
 
@@ -116,12 +117,16 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:
-                                    if (result instanceof String)
+                                    if (result instanceof String) {
                                         Toast.makeText(mContext, result.toString(), Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
                                     break;
                                 case ResultCode.RESULT_FAILED:
-                                    if (result instanceof String)
+                                    if (result instanceof String) {
                                         Toast.makeText(mContext, result.toString(), Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
                                     break;
                                 default:
                                     break;
@@ -131,5 +136,30 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 解析支付结果状态
+     * @param tradeState
+     * @return
+     */
+    private String switchTradeStateDesc(String tradeState) {
+        String stateDesc = "支付失败";
+        if(TextUtils.equals(tradeState, "SUCCESS")) {
+            stateDesc = "支付成功";
+        } else if(TextUtils.equals(tradeState, "REFUND")) {
+            stateDesc = "转入退款";
+        } else if(TextUtils.equals(tradeState, "NOTPAY")) {
+            stateDesc = "未支付";
+        } else if(TextUtils.equals(tradeState, "CLOSED")) {
+            stateDesc = "已关闭";
+        } else if(TextUtils.equals(tradeState, "REVOKED")) {
+            stateDesc = "已撤销";
+        } else if(TextUtils.equals(tradeState, "USERPAYING")) {
+            stateDesc = "用户支付中";
+        } else if(TextUtils.equals(tradeState, "PAYERROR")) {
+            stateDesc = "支付失败";
+        }
+        return stateDesc;
     }
 }
