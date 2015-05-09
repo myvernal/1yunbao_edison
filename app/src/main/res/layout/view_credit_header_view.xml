@@ -12,6 +12,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
+        android:focusable="false"
         android:background="@color/TextColorWhite"
         android:padding="10dp">
 
@@ -86,6 +88,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/shipper_info_layout"
+        android:enabled="false"
         android:orientation="vertical">
         <!-- 公司 -->
         <TextView
@@ -93,7 +96,6 @@
             android:id="@+id/tv_company_name"
             android:drawableLeft="@drawable/credit_company"
             android:drawableRight="@null"
-            android:onClick="onMainLine"
             android:text="公司\t\t\t\t" />
 
         <View
@@ -108,7 +110,6 @@
             android:id="@id/tv_addr"
             android:drawableLeft="@drawable/credit_compay_address"
             android:drawableRight="@null"
-            android:onClick="onMainLine"
             android:text="地址\t\t\t\t" />
 
         <View
@@ -124,15 +125,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/TextColorWhite"
+        android:enabled="false"
         android:orientation="horizontal">
 
         <TextView
             style="@style/settingInfoStyle"
-            android:id="@id/tv_addr"
             android:layout_width="180dp"
             android:drawableLeft="@drawable/credit_xinyu"
             android:drawableRight="@null"
-            android:onClick="onMainLine"
             android:text="信用\t\t\t\t" />
 
         <RatingBar
@@ -151,14 +151,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/TextColorWhite"
+        android:enabled="false"
         android:orientation="horizontal">
 
         <TextView
             style="@style/settingInfoStyle"
-            android:id="@id/tv_addr"
             android:layout_width="180dp"
             android:drawableRight="@null"
-            android:onClick="onMainLine"
             android:text="履约诚信度\t\t\t\t" />
 
         <RatingBar
@@ -177,14 +176,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/TextColorWhite"
+        android:enabled="false"
         android:orientation="horizontal">
 
         <TextView
             style="@style/settingInfoStyle"
-            android:id="@id/tv_addr"
             android:layout_width="180dp"
             android:drawableRight="@null"
-            android:onClick="onMainLine"
             android:text="信息真实度\t\t\t\t" />
 
         <RatingBar
@@ -204,14 +202,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/TextColorWhite"
+        android:enabled="false"
         android:orientation="horizontal">
 
         <TextView
             style="@style/settingInfoStyle"
-            android:id="@id/tv_addr"
             android:layout_width="180dp"
             android:drawableRight="@null"
-            android:onClick="onMainLine"
             android:text="付款及时率\t\t\t\t" />
 
         <RatingBar
@@ -223,4 +220,102 @@
         android:layout_width="match_parent"
         android:layout_height="15dp"
         android:background="@color/common_line_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:focusable="false"
+        android:background="@color/TextColorWhite"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:drawableLeft="@drawable/credit_comment"
+            android:drawablePadding="5dp"
+            android:id="@+id/comment_count"
+            android:text="评论\t\t0"
+            android:textSize="@dimen/font_size_normal" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:clickable="true"
+            android:id="@+id/like_count"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawableLeft="@drawable/credit_like"
+            android:drawablePadding="5dp"
+            android:onClick="onLike"
+            android:enabled="false"
+            android:text="0"
+            android:textColor="@color/common_btn_bg"
+            android:textSize="@dimen/font_size_normal" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="onCommentLayout"
+            android:id="@+id/comment_layout_button"
+            android:gravity="right"
+            android:drawablePadding="5dp"
+            android:text="我要点评"
+            android:textColor="@color/common_btn_bg"
+            android:textSize="@dimen/font_size_normal" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/common_line_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/comment_layout"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:visibility="gone"
+        android:background="@color/TextColorWhite"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/comment_content"
+            android:background="@drawable/select_edit_bg"
+            android:textSize="@dimen/font_size_normal"
+            android:layout_marginRight="10dp"
+            android:hint="好评!"/>
+
+        <Button
+            style="@style/button1_style3"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:onClick="onComment"
+            android:id="@+id/comment_button"
+            android:text="发送"/>
+    </LinearLayout>
 </LinearLayout>

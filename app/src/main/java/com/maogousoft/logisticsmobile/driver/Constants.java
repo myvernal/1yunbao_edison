@@ -139,8 +139,8 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
-    public static final String BASE_URL = "http://1yunbao.com:8083/service";
-	//public static final String BASE_URL = "http://192.168.1.110:8080/service";
+    //public static final String BASE_URL = "http://1yunbao.com:8083/service";
+	public static final String BASE_URL = "http://192.168.1.110:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -247,9 +247,6 @@ public class Constants {
 	/** 获取字典数据 **/
 	public static final String COMMON_GET_DICT_LIST = "common_get_dict_list";
 
-	/** 评价货主 **/
-	public static final String RATING_TO_USER = "rating_to_user";
-
 	/** 意见反馈 **/
 	public static final String POST_FEEDBACK = "post_feedback";
 
@@ -265,7 +262,7 @@ public class Constants {
     /** 货主端:获取货主信息 */
 	public static final String GET_USER_INFO = "get_user_info";
 
-	/** 评价列表 **/
+	/** 司机评价列表 **/
 	public static final String GET_DRIVER_REPLY = "get_driver_reply";
 
 	/** 货主评价列表 **/
@@ -351,6 +348,9 @@ public class Constants {
 	/** 新货源推送，是否响铃 */
 	public static final String IS_RING_NEW_SOURCE = "is_ring_new_source";
 
+    /** 获取点赞数 */
+    public static final String GET_PRAISE_COUNT = "get_praise_count";
+
     /** 货主端:发布货源 */
     public static final String PUBLISH_SOURCE = "publish_order";
 
@@ -390,8 +390,20 @@ public class Constants {
     /** 司机端:抢单 */
     public static final String PLACE_SOURCE_ORDER = "place_source_order";
 
+    /** 司机端:给货主点赞 */
+    public static final String DRIVER_TO_USER_PRAISE = "driver_toUser_praise";
+
+    /** 司机端:给货主评价 */
+    public static final String RATING_TO_USER = "rating_to_user";
+
     /** 司机端:货单列表 */
     public static final String QUERY_PENDING_SOURCE_ORDER = "query_pending_source_order";
+
+    /** 货主端:给司机点赞 */
+    public static final String USER_TO_DRIVER_PRAISE = "user_toDriver_praise";
+
+    /** 货主端:给司机评价 */
+    public static final String RATING_TO_DRIVER = "rating_to_driver";
 
     /** 货主端:车队添加车辆 */
     public static final String ADD_MY_FLEET = "add_my_fleet";

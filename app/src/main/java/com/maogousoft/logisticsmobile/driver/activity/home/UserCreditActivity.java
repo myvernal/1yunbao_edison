@@ -1,16 +1,16 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -24,29 +24,32 @@ import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.EvaluateInfo;
+import com.maogousoft.logisticsmobile.driver.model.PraiseInfo;
 import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ybxiang.driver.util.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 // 货主信誉
 public class UserCreditActivity extends BaseListActivity implements AbsListView.OnScrollListener {
 
     private RatingBar credit_score, credit_score1, credit_score2, credit_score3;
-    private String user_phone;
+    private TextView commentCount, likeCount;
+    private EditText commentContent;
     private float user_score;
     private View shipperInfoLayout;
     private TextView tvName, tvCompanyName, tvAddr, tvPhone, tvAccountName;
     private ImageView mPhoto;
-    private ShipperInfo shipperInfo = new ShipperInfo();
-    private DriverInfo driverInfo = new DriverInfo();
-    // 当前模式
-    private int state = WAIT;
-    // 当前页码
-    private int pageIndex = 1;
-    // 滑动状态
-    private boolean state_idle = false;
-    // 已加载全部
-    private boolean load_all = false;
+    private ShipperInfo shipperInfo;
+    private DriverInfo driverInfo;
+    private int userId = 0;//被查看信誉的id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +61,10 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     // 初始化视图
     private void initViews() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.view_credit_header_view, null);
-        mListView.addHeaderView(view);
+        mListView.addHeaderView(view, null, false);
         mAdapter = new EvaluateListAdapter(mContext);
         mListView.setOnScrollListener(this);
+        mListView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         mListView.setAdapter(mAdapter);
         setListShown(false);
 
@@ -80,11 +84,25 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
         tvAddr = (TextView) findViewById(R.id.tv_addr);
         tvPhone = (TextView) findViewById(R.id.tv_phone);
         tvAccountName = (TextView) findViewById(R.id.tv_account_name);
+
+        commentCount = (TextView) findViewById(R.id.comment_count);
+        commentContent = (EditText) findViewById(R.id.comment_content);
+        likeCount = (TextView) findViewById(R.id.like_count);
+
+        commentContent.setEnabled(true);
+        commentContent.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return false;
+            }
+        });
+        commentContent.requestFocus();
+        commentContent.requestFocusFromTouch();
     }
 
     // 初始化数据
     private void initData() {
-        int user_id = 0;
+
         Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
         if (serializable instanceof DriverInfo) {
             //司机信誉
@@ -105,8 +123,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
             //货主信誉
             ((TextView) findViewById(R.id.titlebar_id_content)).setText("货主信誉");
 
-            user_id = getIntent().getIntExtra("user_id", 0);
-            user_phone = getIntent().getStringExtra("user_phone");
+            userId = getIntent().getIntExtra("user_id", 0);
             user_score = getIntent().getFloatExtra("user_score", 0);
             credit_score.setRating(user_score == 0 ? 5 : user_score);
             float user_score1 = getIntent().getIntExtra("user_score1", 0);
@@ -118,18 +135,23 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
             float user_score3 = getIntent().getIntExtra("user_score3", 0);
             credit_score3.setRating(user_score3 == 0 ? 5 : user_score3);
 
-            queryShipperInfo(user_id);
+            queryShipperInfo(userId);
         }
         //请求评论数据
-        queryData(user_id);
+        queryData();
+        //获取点赞数
+        getPraiseCount();
     }
 
     // 获取评论列表
-    private void queryData(int userId) {
+    private void queryData() {
         final JSONObject jsonObject = new JSONObject();
         try {
-            state = ISREFRESHING;
-            jsonObject.put(Constants.ACTION, Constants.GET_USER_REPLY);
+            if (driverInfo != null) {
+                jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_REPLY);
+            } else {
+                jsonObject.put(Constants.ACTION, Constants.GET_USER_REPLY);
+            }
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject().put("user_id", userId).toString());
             ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
@@ -144,13 +166,10 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
                                     if (result instanceof ArrayList) {
                                         List<EvaluateInfo> list = (List<EvaluateInfo>) result;
                                         mAdapter.addAll(list);
-                                        if (list.size() < 10) {
-                                            load_all = true;
-                                        }
+                                        commentCount.setText(getString(R.string.comment_count, list.size()));
                                     }
                                     break;
                             }
-                            state = WAIT;
                         }
                     });
         } catch (JSONException e) {
@@ -198,6 +217,172 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
             e.printStackTrace();
         }
     }
+
+    //给货主点赞
+    public void onLike(View view) {
+        LogUtil.d(TAG, "onLike");
+        final JSONObject jsonObject = new JSONObject();
+        showProgress("正在处理");
+        try {
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            JSONObject params = new JSONObject();
+            if (driverInfo != null) {
+                //给司机点赞
+                jsonObject.put(Constants.ACTION, Constants.USER_TO_DRIVER_PRAISE);
+                params.put("driverId", userId);
+            } else {
+                //给货主点赞
+                jsonObject.put(Constants.ACTION, Constants.DRIVER_TO_USER_PRAISE);
+                params.put("use_id", userId);
+            }
+            jsonObject.put(Constants.JSON, params.toString());
+            ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
+                    null, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    //点赞成功后,查询点赞结果
+                                    getPraiseCount();
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //评论
+    public void onComment(View view) {
+        final JSONObject jsonObject = new JSONObject();
+        showProgress("正在评论");
+        try {
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            JSONObject params = new JSONObject();
+            if (driverInfo != null) {
+                //给司机评价
+                jsonObject.put(Constants.ACTION, Constants.RATING_TO_DRIVER);
+                params.put("driverId", userId);
+            } else {
+                //给货主评价
+                jsonObject.put(Constants.ACTION, Constants.RATING_TO_USER);
+                params.put("user_id", userId);
+            }
+            params.put("reply_content", TextUtils.isEmpty(commentContent.getText()) ? commentContent.getHint() : commentContent.getText());
+            jsonObject.put(Constants.JSON, params.toString());
+            ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
+                    null, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    showMsg("评论成功");
+                                    //TODO 评论成功后,查询最新评论结果
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //显示发表评论按钮
+    public void onCommentLayout(View view) {
+        LogUtil.d(TAG, "onCommentLayout");
+        findViewById(R.id.comment_layout).setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 获取点赞数
+     */
+    private void getPraiseCount() {
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.ACTION, Constants.GET_PRAISE_COUNT);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            if (driverInfo != null) {
+                //获取司机点赞数
+                jsonObject.put(Constants.JSON, new JSONObject().put("uid", "d" + userId).toString());
+            } else {
+                //获取货主点赞数
+                jsonObject.put(Constants.JSON, new JSONObject().put("uid", "u" + userId).toString());
+            }
+            ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
+                    PraiseInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result instanceof PraiseInfo) {
+                                        PraiseInfo praiseInfo = (PraiseInfo) result;
+                                        likeCount.setText(praiseInfo.getCount() + "");
+                                        if (TextUtils.equals("Y", praiseInfo.getIsEnablePraise())) {
+                                            likeCount.setEnabled(true);
+                                        } else {
+                                            likeCount.setEnabled(false);
+                                        }
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param editText 系统键盘的弹出
+     */
+    /*public void showSoftInput(View editText) {
+        LogUtil.d(TAG, "showSoftInput:" + editText.isFocusableInTouchMode() + "," + editText.isFocused());
+        //3个一起设置才有效,不然可能无效
+        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();
+        editText.requestFocusFromTouch();
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        //系统键盘显示后=>隐藏的切换
+        //inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
+        //没用
+        //inputMethodManager.showSoftInputFromInputMethod(viewHolder004.et_code.getWindowToken(), //InputMethodManager.SHOW_IMPLICIT);
+        //显示系统键盘
+        inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+    }*/
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {

@@ -440,6 +440,7 @@
         <activity
             android:name=".activity.home.UserCreditActivity"
             android:configChanges="keyboardHidden|orientation"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

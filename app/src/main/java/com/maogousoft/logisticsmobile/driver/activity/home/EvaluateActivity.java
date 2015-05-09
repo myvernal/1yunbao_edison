@@ -53,9 +53,7 @@ public class EvaluateActivity extends BaseActivity {
 	}
 
 	private void initViews() {
-
-		((TextView) findViewById(R.id.titlebar_id_content))
-				.setText(R.string.string_home_onlinesource_evaluate);
+		((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_home_onlinesource_evaluate);
 		mOrderNumber = (TextView) findViewById(R.id.source_id_order_number);
 		mOrderLine = (TextView) findViewById(R.id.source_id_detail_line);
 		mOrderName = (TextView) findViewById(R.id.source_id_detail_name);

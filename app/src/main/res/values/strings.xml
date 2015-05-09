@@ -433,7 +433,8 @@
     <string name="safe_list_item_number">运单号:%s</string>
     <string name="safe_list_item_type">保险种类:%s</string>
     <string name="safe_list_item_date">起运日期:%s</string>
-
+    <!--评论-->
+    <string name="comment_count">评论\t%s</string>
     <!--货单-->
     <string name="invoice_title">货单</string>
     <string name="invoice_tip_title">完成</string>
