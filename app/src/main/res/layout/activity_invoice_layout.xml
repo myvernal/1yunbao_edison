@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/tv_guid1"
             style="@style/InvoiceTopMenuStyle"
-            android:text="待定货单" />
+            android:text="待订货单" />
 
         <TextView
             android:id="@+id/tv_guid2"
@@ -51,33 +51,65 @@
         android:layout_height="1px"
         android:src="@color/common_line_color" />
 
+    <!--待定货单-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/invoice_menu_1"
         android:padding="5dp"
         android:background="@color/font_register"
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/menu_bottom_failed"
+            android:id="@+id/menu_bottom1"
+            style="@style/InvoiceTopMenuStyle"
+            android:background="@null"
+            android:padding="0dp"
+            android:src="@drawable/invoice_delete" />
+
+        <ImageView
+            android:id="@+id/menu_bottom2"
+            style="@style/InvoiceTopMenuStyle"
+            android:background="@null"
+            android:padding="0dp"
+            android:src="@drawable/invoice_over" />
+
+        <ImageView
+            android:id="@+id/menu_bottom3"
+            style="@style/InvoiceTopMenuStyle"
+            android:background="@null"
+            android:padding="0dp"
+            android:src="@drawable/invoice_yaoyue" />
+    </LinearLayout>
+    <!--待装货单-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/invoice_menu_2"
+        android:padding="5dp"
+        android:background="@color/font_register"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/menu_bottom4"
             style="@style/InvoiceTopMenuStyle"
             android:background="@null"
             android:padding="0dp"
             android:src="@drawable/invoice_failed" />
 
         <ImageView
-            android:id="@+id/menu_bottom_success"
+            android:id="@+id/menu_bottom5"
             style="@style/InvoiceTopMenuStyle"
             android:background="@null"
             android:padding="0dp"
             android:src="@drawable/invoice_success" />
 
         <ImageView
-            android:id="@+id/menu_bottom_confirm"
+            android:id="@+id/menu_bottom6"
             style="@style/InvoiceTopMenuStyle"
             android:background="@null"
             android:padding="0dp"
             android:src="@drawable/invoice_confirm" />
-
     </LinearLayout>
-</LinearLayout> 
+</LinearLayout>

@@ -34,6 +34,8 @@ import java.util.List;
 public class InvoiceFragment extends BaseListFragment implements AbsListView.OnScrollListener {
     private static final String TAG = "InvoiceFragment";
     private int invoiceType = 0;
+    //用户类型
+    private int userType;
     // 底部更多
     private View mFootView;
     private ProgressBar mFootProgress;
@@ -47,10 +49,11 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
     // 已加载全部
     private boolean load_all = false;
 
-    public static InvoiceFragment newInstance(int invoiceType) {
+    public static InvoiceFragment newInstance(int invoiceType,int userType) {
         InvoiceFragment newFragment = new InvoiceFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.INVOICE_TYPE, invoiceType);
+        bundle.putInt(Constants.INVOICE_USER_TYPE, userType);
         newFragment.setArguments(bundle);
         //bundle还可以在每个标签里传送数据
         return newFragment;
@@ -61,6 +64,7 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
         View view = super.onCreateView(inflater, container, savedInstanceState);
         Bundle args = getArguments();
         invoiceType = args.getInt(Constants.INVOICE_TYPE, 0);
+        userType = args.getInt(Constants.INVOICE_USER_TYPE, Constants.USER_DRIVER);
         // 页脚信息
         mFootView = LayoutInflater.from(mContext).inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
@@ -81,7 +85,11 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.QUERY_PENDING_SOURCE_ORDER);
+            if(userType == Constants.USER_DRIVER) {
+                jsonObject.put(Constants.ACTION, Constants.QUERY_PENDING_SOURCE_ORDER);
+            } else {
+                jsonObject.put(Constants.ACTION, Constants.QUERY_ORDER);
+            }
             jsonObject.put(Constants.TOKEN, application.getToken());
             JSONObject json = new JSONObject();
             json.put("page", page);

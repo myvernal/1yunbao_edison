@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.fragment.InvoiceFragment;
@@ -22,6 +23,10 @@ public class InvoiceActivity extends BaseActivity {
     private HeaderView mHeaderView;
     private ArrayList<Fragment> fragmentList;
     private TextView view1, view2, view3;
+    private View bottomMenu1, bottomMenu2;
+    private Fragment firstFragment;
+    private Fragment secondFragment;
+    private Fragment thirdFragment;
     private int currIndex = 0;//当前页卡编号
 
     @Override
@@ -49,6 +54,8 @@ public class InvoiceActivity extends BaseActivity {
         view2 = (TextView) findViewById(R.id.tv_guid2);
         view3 = (TextView) findViewById(R.id.tv_guid3);
 
+        bottomMenu1 = findViewById(R.id.invoice_menu_1);
+        bottomMenu2 = findViewById(R.id.invoice_menu_2);
         view1.setOnClickListener(this);
         view2.setOnClickListener(this);
         view3.setOnClickListener(this);
@@ -66,6 +73,24 @@ public class InvoiceActivity extends BaseActivity {
             case R.id.tv_guid3:
                 mPager.setCurrentItem(2);
                 break;
+            case R.id.menu_bottom1:
+                //待定货单(司机)
+                break;
+            case R.id.menu_bottom2:
+                //待定货单(司机)
+                break;
+            case R.id.menu_bottom3:
+                //待定货单(司机)
+                break;
+            case R.id.menu_bottom4:
+                //待定货单(司机)
+                break;
+            case R.id.menu_bottom5:
+                //待定货单(司机)
+                break;
+            case R.id.menu_bottom6:
+                //待定货单(司机)
+                break;
         }
     }
 
@@ -75,9 +100,9 @@ public class InvoiceActivity extends BaseActivity {
     public void initViewPager() {
         mPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentList = new ArrayList<Fragment>();
-        Fragment firstFragment = InvoiceFragment.newInstance(1);
-        Fragment secondFragment = InvoiceFragment.newInstance(2);
-        Fragment thirdFragment = InvoiceFragment.newInstance(3);
+        firstFragment = InvoiceFragment.newInstance(1, application.getUserType());
+        secondFragment = InvoiceFragment.newInstance(2, application.getUserType());
+        thirdFragment = InvoiceFragment.newInstance(3,application.getUserType());
         fragmentList.add(firstFragment);
         fragmentList.add(secondFragment);
         fragmentList.add(thirdFragment);
@@ -115,16 +140,22 @@ public class InvoiceActivity extends BaseActivity {
                 view1.setSelected(true);
                 view2.setSelected(false);
                 view3.setSelected(false);
+                bottomMenu1.setVisibility(View.VISIBLE);
+                bottomMenu2.setVisibility(View.GONE);
                 break;
             case 1:
                 view1.setSelected(false);
                 view2.setSelected(true);
                 view3.setSelected(false);
+                bottomMenu1.setVisibility(View.GONE);
+                bottomMenu2.setVisibility(View.VISIBLE);
                 break;
             case 2:
                 view1.setSelected(false);
                 view2.setSelected(false);
                 view3.setSelected(true);
+                bottomMenu1.setVisibility(View.GONE);
+                bottomMenu2.setVisibility(View.GONE);
                 break;
         }
     }

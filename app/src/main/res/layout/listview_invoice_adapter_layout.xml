@@ -8,13 +8,14 @@
     android:padding="3dp"
     android:orientation="horizontal">
 
-    <ImageView
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center"
         android:padding="8dp"
-        android:src="@drawable/common_check_box_style" />
+        android:button="@null"
+        android:drawableLeft="@drawable/radiobutton"/>
 
     <LinearLayout
         android:layout_width="match_parent"

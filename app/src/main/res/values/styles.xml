@@ -54,6 +54,7 @@
         <item name="android:drawSelectorOnTop">false</item>
         <item name="android:listSelector">@drawable/selector_list_holo_light</item>
         <item name="android:divider">@drawable/abs__list_divider_holo_light</item>
+        <item name="android:descendantFocusability">blocksDescendants</item>
     </style>
 
     <style name="gridviewStyle">

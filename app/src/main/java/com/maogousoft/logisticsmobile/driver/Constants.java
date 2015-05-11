@@ -50,6 +50,8 @@ public class Constants {
     public static final String USER_ID = "USER_ID";
 
     public static final String INVOICE_TYPE = "INVOICE_TYPE";
+
+    public static final String INVOICE_USER_TYPE = "INVOICE_USER_TYPE";
 	// PREFERENCE KEYS
 
 	public static final String CALLBACK_ACTIVITY_PACKAGE_NAME = "CALLBACK_ACTIVITY_PACKAGE_NAME";
@@ -139,8 +141,8 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
-    //public static final String BASE_URL = "http://1yunbao.com:8083/service";
-	public static final String BASE_URL = "http://192.168.1.110:8080/service";
+    public static final String BASE_URL = "http://1yunbao.com:8083/service";
+	//public static final String BASE_URL = "http://192.168.1.110:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -398,6 +400,9 @@ public class Constants {
 
     /** 司机端:货单列表 */
     public static final String QUERY_PENDING_SOURCE_ORDER = "query_pending_source_order";
+
+    /** 货主端:货单列表 */
+    public static final String QUERY_ORDER = "query_order";
 
     /** 货主端:给司机点赞 */
     public static final String USER_TO_DRIVER_PRAISE = "user_toDriver_praise";
