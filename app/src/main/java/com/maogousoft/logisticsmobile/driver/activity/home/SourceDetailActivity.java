@@ -705,14 +705,14 @@ public class SourceDetailActivity extends BaseActivity {
                         .putExtra("user_phone", mSourceInfo.getUser_phone())
                         .putExtra("user_score1", mSourceInfo.getScore1())
                         .putExtra("user_score2", mSourceInfo.getScore2())
-                        .putExtra("user_score3", mSourceInfo.getScore3()));
+                        .putExtra("user_score3", mSourceInfo.getScore3())
+                        .putExtra(Constants.ORDER_ID, mSourceInfo.getId()));
                 break;
 
             case R.id.source_detail_phone:
                 String phoneStr = mPhone.getText().toString();
                 if (!TextUtils.isEmpty(phoneStr) && !phoneStr.equals("无")) {
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
-                            + phoneStr));
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneStr));
                     startActivity(intent);
                 }
                 break;

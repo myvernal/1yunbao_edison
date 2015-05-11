@@ -7,6 +7,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.maogousoft.logisticsmobile.driver.R;
@@ -14,13 +15,18 @@ import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
 /**
  * Created by aliang on 2015/4/26.
  */
 public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
 
-    // 信息费
     private CityDBUtils dbUtils;
+    private int checkedPosition = -1;//用于记录被选中的RadioButton的状态，并保证只可选一个
+    private RadioButton preRadioButton;//保存上一个被选中的radioButton
 
     public InvoiceAdapter(Context context) {
         super(context);
@@ -28,8 +34,8 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final ViewHolder holder;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.listview_invoice_adapter_layout, parent, false);
             holder = new ViewHolder();
@@ -38,6 +44,7 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
             holder.order_info_detail = (TextView) convertView.findViewById(R.id.source_id_order_info_detail);
             holder.order_money = (TextView) convertView.findViewById(R.id.source_id_order_money);
             holder.order_id = (TextView) convertView.findViewById(R.id.source_id);
+            holder.radioButton = (RadioButton) convertView.findViewById(R.id.radioButton);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -90,11 +97,44 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
                 }
             }
         });
+        //单选按钮
+        holder.radioButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                if(checkedPosition == position) {
+                    return;
+                }
+                //初始情况下没有被选中的radioButton
+                if(preRadioButton != null) {
+                    //重置之前被选中的radioButton
+                    preRadioButton.setChecked(false);
+                }
+                //重置，确保最多只有一项被选中
+                checkedPosition = position;
+                //保存当前的被选中的radioButton
+                preRadioButton = holder.radioButton;
+            }
+        });
+        //单选按钮状态
+        if (checkedPosition == position) {
+            holder.radioButton.setChecked(true);
+        } else {
+            holder.radioButton.setChecked(false);
+        }
         return convertView;
+    }
+
+    public NewSourceInfo getSelectedSource() {
+        if(checkedPosition != -1) {
+            return mList.get(checkedPosition);
+        } else {
+            return null;
+        }
     }
 
     class ViewHolder {
         TextView order_info, order_info_detail, order_money, order_id;
         View source_detail_phone;
+        RadioButton radioButton;
     }
 }

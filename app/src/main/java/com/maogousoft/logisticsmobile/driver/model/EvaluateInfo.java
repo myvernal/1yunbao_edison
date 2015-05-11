@@ -7,114 +7,76 @@ package com.maogousoft.logisticsmobile.driver.model;
  * 
  */
 public class EvaluateInfo {
-
-	private int order_id;
-	private float score1;
-	private float score2;
-	private float score3;
-	private int start_province;
-	private int start_city;
-	private int start_district;
-	private int end_province;
-	private int end_city;
-	private int end_district;
-	private String cargo_desc = "";
+    private int id;
+    private int user_id;
+    private int driver_id;
+    private String driver_name;
+    private long reply_time = -1;
 	private String reply_content = "";
+    private String return_content = "";
+    private long return_time = -1;
 
-	public int getOrder_id() {
-		return order_id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setOrder_id(int order_id) {
-		this.order_id = order_id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public float getScore1() {
-		return score1;
-	}
+    public int getUser_id() {
+        return user_id;
+    }
 
-	public void setScore1(float score1) {
-		this.score1 = score1;
-	}
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
 
-	public float getScore2() {
-		return score2;
-	}
+    public int getDriver_id() {
+        return driver_id;
+    }
 
-	public void setScore2(float score2) {
-		this.score2 = score2;
-	}
+    public void setDriver_id(int driver_id) {
+        this.driver_id = driver_id;
+    }
 
-	public float getScore3() {
-		return score3;
-	}
+    public long getReply_time() {
+        return reply_time;
+    }
 
-	public void setScore3(float score3) {
-		this.score3 = score3;
-	}
+    public void setReply_time(long reply_time) {
+        this.reply_time = reply_time;
+    }
 
-	public int getStart_province() {
-		return start_province;
-	}
+    public String getReply_content() {
+        return reply_content;
+    }
 
-	public void setStart_province(int start_province) {
-		this.start_province = start_province;
-	}
+    public void setReply_content(String reply_content) {
+        this.reply_content = reply_content;
+    }
 
-	public int getStart_city() {
-		return start_city;
-	}
+    public String getReturn_content() {
+        return return_content;
+    }
 
-	public void setStart_city(int start_city) {
-		this.start_city = start_city;
-	}
+    public void setReturn_content(String return_content) {
+        this.return_content = return_content;
+    }
 
-	public int getStart_district() {
-		return start_district;
-	}
+    public String getDriver_name() {
+        return driver_name;
+    }
 
-	public void setStart_district(int start_district) {
-		this.start_district = start_district;
-	}
+    public void setDriver_name(String driver_name) {
+        this.driver_name = driver_name;
+    }
 
-	public int getEnd_province() {
-		return end_province;
-	}
+    public long getReturn_time() {
+        return return_time;
+    }
 
-	public void setEnd_province(int end_province) {
-		this.end_province = end_province;
-	}
-
-	public int getEnd_city() {
-		return end_city;
-	}
-
-	public void setEnd_city(int end_city) {
-		this.end_city = end_city;
-	}
-
-	public int getEnd_district() {
-		return end_district;
-	}
-
-	public void setEnd_district(int end_district) {
-		this.end_district = end_district;
-	}
-
-	public String getCargo_desc() {
-		return cargo_desc;
-	}
-
-	public void setCargo_desc(String cargo_desc) {
-		this.cargo_desc = cargo_desc;
-	}
-
-	public String getReply_content() {
-		return reply_content;
-	}
-
-	public void setReply_content(String reply_content) {
-		this.reply_content = reply_content;
-	}
-
+    public void setReturn_time(long return_time) {
+        this.return_time = return_time;
+    }
 }

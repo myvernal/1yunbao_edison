@@ -435,6 +435,7 @@
     <string name="safe_list_item_date">起运日期:%s</string>
     <!--评论-->
     <string name="comment_count">评论\t%s</string>
+    <string name="comment_name">%1$s评论了\t%2$s</string>
     <!--货单-->
     <string name="invoice_title">货单</string>
     <string name="invoice_tip_title">完成</string>

@@ -1,15 +1,11 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -50,6 +46,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     private ShipperInfo shipperInfo;
     private DriverInfo driverInfo;
     private int userId = 0;//被查看信誉的id
+    private int orderId;//订单号
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +61,6 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
         mListView.addHeaderView(view, null, false);
         mAdapter = new EvaluateListAdapter(mContext);
         mListView.setOnScrollListener(this);
-        mListView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         mListView.setAdapter(mAdapter);
         setListShown(false);
 
@@ -102,7 +98,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
 
     // 初始化数据
     private void initData() {
-
+        orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
         Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
         if (serializable instanceof DriverInfo) {
             //司机信誉
@@ -164,8 +160,11 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof ArrayList) {
+                                        mAdapter.removeAll();
                                         List<EvaluateInfo> list = (List<EvaluateInfo>) result;
-                                        mAdapter.addAll(list);
+                                        if(!list.isEmpty()) {
+                                            mAdapter.addAll(list);
+                                        }
                                         commentCount.setText(getString(R.string.comment_count, list.size()));
                                     }
                                     break;
@@ -233,7 +232,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
             } else {
                 //给货主点赞
                 jsonObject.put(Constants.ACTION, Constants.DRIVER_TO_USER_PRAISE);
-                params.put("use_id", userId);
+                params.put("userId", userId);
             }
             jsonObject.put(Constants.JSON, params.toString());
             ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
@@ -270,16 +269,15 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
         showProgress("正在评论");
         try {
             jsonObject.put(Constants.TOKEN, application.getToken());
-            JSONObject params = new JSONObject();
             if (driverInfo != null) {
                 //给司机评价
                 jsonObject.put(Constants.ACTION, Constants.RATING_TO_DRIVER);
-                params.put("driverId", userId);
             } else {
                 //给货主评价
                 jsonObject.put(Constants.ACTION, Constants.RATING_TO_USER);
-                params.put("user_id", userId);
             }
+            JSONObject params = new JSONObject();
+            params.put("order_id", orderId);
             params.put("reply_content", TextUtils.isEmpty(commentContent.getText()) ? commentContent.getHint() : commentContent.getText());
             jsonObject.put(Constants.JSON, params.toString());
             ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
@@ -291,7 +289,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     showMsg("评论成功");
-                                    //TODO 评论成功后,查询最新评论结果
+                                    queryData();
                                     break;
                                 case ResultCode.RESULT_ERROR:
                                     showMsg(result.toString());
@@ -364,25 +362,6 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
             e.printStackTrace();
         }
     }
-
-    /**
-     * @param editText 系统键盘的弹出
-     */
-    /*public void showSoftInput(View editText) {
-        LogUtil.d(TAG, "showSoftInput:" + editText.isFocusableInTouchMode() + "," + editText.isFocused());
-        //3个一起设置才有效,不然可能无效
-        editText.setFocusable(true);
-        editText.setFocusableInTouchMode(true);
-        editText.requestFocus();
-        editText.requestFocusFromTouch();
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        //系统键盘显示后=>隐藏的切换
-        //inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
-        //没用
-        //inputMethodManager.showSoftInputFromInputMethod(viewHolder004.et_code.getWindowToken(), //InputMethodManager.SHOW_IMPLICIT);
-        //显示系统键盘
-        inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-    }*/
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {

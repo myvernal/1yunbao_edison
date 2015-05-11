@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 评价 -->
+<?xml version="1.0" encoding="utf-8"?><!-- 评价 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,82 +6,45 @@
     android:paddingBottom="5dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:paddingTop="5dp" >
+    android:paddingTop="5dp">
 
-    <TextView
-        android:id="@+id/evaluate_number"
-        style="@style/evaluate_style"
-        android:text="@string/string_evaluate_order"
-        android:textColor="@color/font_blue" />
-
-    <TextView
-        android:id="@+id/evaluate_line"
-        style="@style/evaluate_style"
-        android:text="@string/string_evaluate_line" />
-
-    <TextView
-        android:id="@+id/evaluate_name"
-        style="@style/evaluate_style"
-        android:text="@string/string_evaluate_name" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/comment_photo"
+            android:src="@drawable/ic_launcher"/>
 
         <TextView
-            style="@style/evaluate_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/comment_name"
+            android:layout_toRightOf="@+id/comment_photo"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_gray3"/>
+
+        <TextView
             android:layout_width="wrap_content"
-            android:text="@string/string_evaluate_lvyue" />
-
-        <RatingBar
-            android:id="@+id/evaluate_score1"
-            style="@style/ratingbar_style" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+            android:layout_height="wrap_content"
+            android:id="@+id/comment_time"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/comment_name"
+            android:layout_toRightOf="@+id/comment_photo"
+            android:textSize="@dimen/font_size_normal"
+            android:textColor="@color/font_gray3"
+            android:text="2014-4-12 17:17:17"/>
 
         <TextView
-            style="@style/evaluate_style"
-            android:layout_width="wrap_content"
-            android:text="@string/string_evaluate_xinxi" />
-
-        <RatingBar
-            android:id="@+id/evaluate_score2"
-            style="@style/ratingbar_style" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/evaluate_style"
-            android:layout_width="wrap_content"
-            android:text="@string/string_evaluate_fuwu" />
-
-        <RatingBar
-            android:id="@+id/evaluate_score3"
-            style="@style/ratingbar_style" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/evaluate_style"
-            android:layout_width="wrap_content"
-            android:text="@string/string_evaluate_detail" />
-
-        <TextView
-            android:id="@+id/evaluate_detail"
-            style="@style/evaluate_style" />
-    </LinearLayout>
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/comment_content"
+            android:textColor="@color/TextColorBlack"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/comment_photo"
+            android:textSize="@dimen/font_size_normal"
+            android:text="好评!"/>
+    </RelativeLayout>
 </LinearLayout>
