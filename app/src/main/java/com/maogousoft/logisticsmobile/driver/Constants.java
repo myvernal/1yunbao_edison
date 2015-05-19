@@ -436,11 +436,17 @@ public class Constants {
     /** 司机端：已装车*/
     public static final String TRUCK_LOADING_FINISH = "truck_loading_finish";
 
+    /** 司机端：订单确认*/
+    public static final String USER_CONFIM_CONTRACT = "user_confim_Contract";
+
     /** 司机端：司机端接受签约邀请 */
     public static final String ACCEPT_CONTRACT_INVITE = "accept_contract_invite";
 
     /** 司机端：司机电话反馈 */
     public static final String DRIVER_PHONE_FEEDBACK = "driver_phone_feedback";
+
+   /** 司机端：司机电话反馈 */
+    public static final String GET_CONTRACT_LIST = "getContract_list";
 
     /** 货主端：货单列表数量查询*/
     public static final String QUERY_ORDER_COUNT = "query_order_count";

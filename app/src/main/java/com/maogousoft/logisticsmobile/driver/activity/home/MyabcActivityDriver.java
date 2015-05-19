@@ -3,6 +3,7 @@ package com.maogousoft.logisticsmobile.driver.activity.home;
 // PR111 个人中心【我的易运宝】
 import java.util.List;
 
+import com.maogousoft.logisticsmobile.driver.activity.info.AgreementActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.MoneyManagerActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.other.OthersActivity;
@@ -121,6 +122,11 @@ public class MyabcActivityDriver extends BaseActivity {
     // 财务管理
     public void onMoneyManager(View view) {
         startActivity(new Intent(mContext, MoneyManagerActivity.class));
+    }
+
+    // 合同管理
+    public void onAgreement(View view) {
+        startActivity(new Intent(mContext, AgreementActivity.class));
     }
 
 	/**

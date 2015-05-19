@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
@@ -19,14 +18,12 @@ import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.InvoiceNumberInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
-import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by aliang on 2015/4/25.
@@ -156,12 +153,14 @@ public class InvoiceActivity extends BaseActivity {
      *
      * @param view
      */
-    public void onBottomMenu2(View view) {
+    public void onBottomMenu2(View view) throws JSONException {
         NewSourceInfo sourceInfo = secondFragment.getSelectedItem();
         if (sourceInfo == null) {
             showMsg("请选择货单");
             return;
         }
+        JSONObject params = new JSONObject();
+        params.put("order_id", sourceInfo.getId());
         switch (view.getId()) {
             case R.id.menu_bottom4:
                 //装车不成功货单(通用)
@@ -171,11 +170,23 @@ public class InvoiceActivity extends BaseActivity {
                 break;
             case R.id.menu_bottom5:
                 //已装车货单(司机)
-                showMsg("已装车货单" + sourceInfo.getId());
+                doAction(Constants.TRUCK_LOADING_FINISH, params.toString(), true, new ActionCallBack() {
+                    @Override
+                    public void onCallBack(Object result) {
+                        showMsg(result.toString());
+                        //firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                    }
+                });
                 break;
             case R.id.menu_bottom6:
                 //订单确认货单(司机)
-                showMsg("订单确认货单" + sourceInfo.getId());
+                doAction(Constants.USER_CONFIM_CONTRACT, params.toString(), true, new ActionCallBack() {
+                    @Override
+                    public void onCallBack(Object result) {
+                        showMsg(result.toString());
+                        //firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                    }
+                });
                 break;
         }
     }
@@ -205,15 +216,27 @@ public class InvoiceActivity extends BaseActivity {
                 break;
             case R.id.menu_bottom8:
                 //已装车货单(货主)
-                showMsg("修改货单" + sourceInfo.getId());
+                doAction(Constants.TRUCK_LOADING_FINISH, params.toString(), true, new ActionCallBack() {
+                    @Override
+                    public void onCallBack(Object result) {
+                        showMsg(result.toString());
+                        //firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                    }
+                });
                 break;
             case R.id.menu_bottom9:
                 //订单确认货单(货主)
-                showMsg("推送货单" + sourceInfo.getId());
+                doAction(Constants.USER_CONFIM_CONTRACT, params.toString(), true, new ActionCallBack() {
+                    @Override
+                    public void onCallBack(Object result) {
+                        showMsg(result.toString());
+                        //firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                    }
+                });
                 break;
             case R.id.menu_bottom10:
-                //订单确认货单(货主)
-                showMsg("导入货单" + sourceInfo.getId());
+                //导入合同(货主)
+                showMsg("导入合同" + sourceInfo.getId());
                 break;
         }
     }

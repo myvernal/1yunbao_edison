@@ -158,6 +158,11 @@ public class MyabcActivityShipper extends BaseActivity {
         startActivity(new Intent(mContext, MoneyManagerActivity.class));
     }
 
+    // 合同管理
+    public void onAgreement(View view) {
+        startActivity(new Intent(mContext, AgreementActivity.class));
+    }
+
     /**
      * 我的信誉
      *

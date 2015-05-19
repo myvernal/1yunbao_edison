@@ -163,7 +163,7 @@
                 style="@style/settingInfoStyle"
                 android:id="@id/myabc_id_mycredit"
                 android:drawableLeft="@drawable/setting_deal_manager"
-                android:onClick="onMyAccountInfo"
+                android:onClick="onAgreement"
                 android:text="合同管理" />
 
             <View

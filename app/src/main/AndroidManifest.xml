@@ -918,6 +918,22 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <!--合同管理-->
+        <activity
+            android:name=".activity.info.AgreementActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <!--合同查看-->
+        <activity
+            android:name=".activity.info.AgreementPreviewActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <!--财务管理-->
         <activity
             android:name=".activity.info.MoneyManagerActivity"
