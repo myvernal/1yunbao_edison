@@ -82,7 +82,7 @@
             android:background="@null"
             android:padding="0dp"
             android:onClick="onBottomMenu1"
-            android:src="@drawable/invoice_yaoyue" />
+            android:src="@drawable/invoice_yaoyue_disable" />
     </LinearLayout>
     <!--待装货单(司机/货主通用)-->
     <LinearLayout
@@ -116,7 +116,7 @@
             android:background="@null"
             android:padding="0dp"
             android:onClick="onBottomMenu2"
-            android:src="@drawable/invoice_confirm" />
+            android:src="@drawable/invoice_confirm_disable" />
     </LinearLayout>
 
     <!--待定货单(货主)-->
@@ -159,6 +159,6 @@
             android:background="@null"
             android:padding="0dp"
             android:onClick="onBottomMenu3"
-            android:src="@drawable/invoice_confirm" />
+            android:src="@drawable/invoice_confirm_disable" />
     </LinearLayout>
 </LinearLayout>

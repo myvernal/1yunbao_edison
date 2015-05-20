@@ -1,16 +1,7 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +12,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -39,9 +29,10 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CityInfo;
+import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.maogousoft.logisticsmobile.driver.pay.wx.WeChatPayUtils;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
-import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.utils.YeepayUtils;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.AlixId;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.BaseHelper;
@@ -51,6 +42,13 @@ import com.maogousoft.logisticsmobile.driver.utils.alipay.PartnerConfig;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.ResultChecker;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.Rsa;
 import com.yeepay.android.plugin.YeepayPlugin;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 充值
@@ -62,7 +60,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     private static final String LOGTAG = LogUtil.makeLogTag(ChargeActivity.class);
     private AQuery gridView;
     private CityListAdapter mAdapter;
-    private EditText price, charge_help_account, payPassword, forwardAccount;
+    private EditText price, charge_help_account, payPassword, forwardAccountBank, forwardAccountName, forwardAccountCard;
     private RadioGroup groups;
     private String OrderId;
     private int type = ALI_PAY;
@@ -74,7 +72,6 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     private static final int WX_PAY = 2;//微信支付
     private static final int YIYUNBAO_PAY = 3;//易运宝支付
     private RadioGroup chargePurposeGroup;//资金操作目的布局
-    private RadioGroup getMoneyGroup;//提现布局
     private View chargeHelpLayout;//代充账号布局
     private View moneyForwardLayout;//转账账号布局
     private View payPasswordLayout;//支付密码
@@ -96,18 +93,19 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         charge_help_account.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         price = (EditText) findViewById(R.id.recharge_price);
         price.setInputType(EditorInfo.TYPE_CLASS_PHONE);
-        forwardAccount = (EditText) findViewById(R.id.charge_forward_account);
-        forwardAccount.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        forwardAccountCard = (EditText) findViewById(R.id.charge_forward_account_card);
+        forwardAccountBank = (EditText) findViewById(R.id.charge_forward_account_bank);
+        forwardAccountName = (EditText) findViewById(R.id.charge_forward_account_name);
+        forwardAccountCard.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         payPassword = (EditText) findViewById(R.id.pay_password);
 
         payPasswordLayout = findViewById(R.id.pay_password_layout);
         chargeHelpLayout = findViewById(R.id.charge_help_layout);
         moneyForwardLayout = findViewById(R.id.charge_forward_layout);
         chargePurposeGroup = (RadioGroup) findViewById(R.id.charge_purpose_group);
-        getMoneyGroup = (RadioGroup) findViewById(R.id.get_money_group);
+        //getMoneyGroup = (RadioGroup) findViewById(R.id.get_money_group);
         groups = (RadioGroup) findViewById(R.id.recharge_group);
         groups.setOnCheckedChangeListener(this);
-        getMoneyGroup.setOnCheckedChangeListener(this);
         chargePurposeGroup.setOnCheckedChangeListener(this);
         new AQuery(this).id(R.id.recharge_submitbtn).clicked(this);
 
@@ -130,7 +128,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     @Override
     protected void onResume() {
         super.onResume();
-        getGold(1);
+        getABCInfo();
     }
 
     private void getGold(final int type) {
@@ -139,7 +137,6 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             return;
         }
         try {
-            showSpecialProgress();
             JSONObject params = new JSONObject();
             params.put(Constants.ACTION, Constants.GET_ACCOUNT_GOLD);
             params.put(Constants.TOKEN, application.getToken());
@@ -307,9 +304,9 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             price.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(forwardAccount.getText().toString().trim())) {
+        if (TextUtils.isEmpty(forwardAccountCard.getText().toString().trim())) {
             showMsg("请输入转账卡号");
-            forwardAccount.requestFocus();
+            forwardAccountCard.requestFocus();
             return;
         }
         if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
@@ -323,10 +320,16 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             JSONObject params = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.TRANSFER_ACCOUNTS);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            params.put("bank_account", forwardAccount.getText());//转账卡号
-            params.put("name", price.getText());//转账对象名称
-            params.put("money", price.getText());//金额
+            if(application.getUserType() == Constants.USER_DRIVER) {
+                DriverInfo driverInfo = application.getDriverInfo();
+            } else {
+                ShipperInfo shipperInfo = application.getShipperInfo();
+            }
             params.put("bank_name", price.getText());//银行名称
+            params.put("bank_account", forwardAccountCard.getText());//转账卡号
+            params.put("name", price.getText());//转账对象名称
+
+            params.put("money", price.getText());//金额
             params.put("user_type", application.getUserType());//用户类型
             jsonObject.put(Constants.JSON, params.toString());
             ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject, null,
@@ -423,21 +426,18 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                 payPasswordLayout.setVisibility(View.GONE);
                 chargeHelpLayout.setVisibility(View.GONE);
                 moneyForwardLayout.setVisibility(View.GONE);
-                getMoneyGroup.setVisibility(View.GONE);
                 actionType = 0;
                 break;
             case R.id.purpose_radio1://代充值
                 payPasswordLayout.setVisibility(View.VISIBLE);
                 chargeHelpLayout.setVisibility(View.VISIBLE);
                 moneyForwardLayout.setVisibility(View.GONE);
-                getMoneyGroup.setVisibility(View.GONE);
                 actionType = 1;
                 break;
             case R.id.purpose_radio2://转账
                 payPasswordLayout.setVisibility(View.GONE);
                 moneyForwardLayout.setVisibility(View.VISIBLE);
                 chargeHelpLayout.setVisibility(View.GONE);
-                getMoneyGroup.setVisibility(View.GONE);
                 actionType = 2;
                 break;
             case R.id.purpose_radio3://提现
@@ -447,18 +447,76 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                 moneyForwardLayout.setVisibility(View.GONE);
                 actionType = 3;
                 break;
-            case R.id.get_money_to_wx://提现到微信
-                break;
-            case R.id.get_money_to_alipay://提现到支付宝
-                break;
-            case R.id.get_money_to_yb://提现到易宝
-                break;
         }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         price.setText(String.valueOf(50 * mAdapter.getList().get(position).getId()));
+    }
+
+    // 获取我的abc信息
+    private void getABCInfo() {
+        final JSONObject jsonObject = new JSONObject();
+        showDefaultProgress();
+        try {
+            Class clz;
+            if(Constants.USER_DRIVER == application.getUserType()) {
+                jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+                clz = DriverInfo.class;
+            } else {
+                jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
+                clz = ShipperInfo.class;
+            }
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, "");
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    clz, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result != null) {
+                                        String forwardBank = null;
+                                        String forwardName = null;
+                                        String forwardCard = null;
+                                        if(result instanceof DriverInfo) {
+                                            DriverInfo mDriverInfo = (DriverInfo) result;
+                                            application.setDriverInfo(mDriverInfo);
+                                            forwardCard = mDriverInfo.getBank_account();// 转账账号
+                                            forwardBank = mDriverInfo.getBank();//银行名称
+                                        } else if (result instanceof ShipperInfo) {
+                                            ShipperInfo shipperInfo = (ShipperInfo) result;
+                                            application.setShipperInfo(shipperInfo);
+                                            forwardCard = shipperInfo.getBank_account();// 转账账号
+                                            forwardBank = shipperInfo.getBank();//银行名称
+                                            forwardName = shipperInfo.getAccount_name();//账号姓名
+                                        }
+                                        forwardAccountBank.setText(TextUtils.isEmpty(forwardBank) ? "": forwardBank);
+                                        forwardAccountCard.setText(TextUtils.isEmpty(forwardCard) ? "": forwardCard);
+                                        forwardAccountName.setText(TextUtils.isEmpty(forwardName) ? "": forwardName);
+                                        //获取余额
+                                        getGold(1);
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    // if (result != null)
+                                    // showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    // if (result != null)
+                                    // showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -148,7 +148,7 @@
                 android:layout_height="15dp"
                 android:background="@color/common_line_color" />
 
-            <RadioGroup
+            <!--<RadioGroup
                 android:id="@+id/get_money_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -188,31 +188,84 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:background="@color/common_line_color" />
+                android:background="@color/common_line_color" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/charge_forward_layout"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center_vertical"
                 android:visibility="gone"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    style="@style/home_motorcade_item_title_style"
-                    android:text="转账卡号:" />
+                    <TextView
+                        style="@style/home_motorcade_item_title_style"
+                        android:layout_width="100dp"
+                        android:text="转账银行:" />
 
-                <EditText
-                    android:id="@+id/charge_forward_account"
-                    style="@style/info_edittext_style"
-                    android:layout_width="150dp"
-                    android:hint="请输入转账卡号" />
+                    <EditText
+                        android:id="@+id/charge_forward_account_bank"
+                        style="@style/info_edittext_style"
+                        android:layout_width="150dp"
+                        android:hint="请输入转账银行" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/home_motorcade_item_title_style"
+                        android:layout_width="100dp"
+                        android:text="转账姓名:" />
+
+                    <EditText
+                        android:id="@+id/charge_forward_account_name"
+                        style="@style/info_edittext_style"
+                        android:layout_width="150dp"
+                        android:hint="请输入转账姓名" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/home_motorcade_item_title_style"
+                        android:layout_width="100dp"
+                        android:text="转账卡号:" />
+
+                    <EditText
+                        android:id="@+id/charge_forward_account_card"
+                        style="@style/info_edittext_style"
+                        android:minWidth="150dp"
+                        android:hint="请输入转账卡号" />
+                </LinearLayout>
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -227,6 +280,7 @@
 
                 <TextView
                     style="@style/home_motorcade_item_title_style"
+                    android:layout_width="100dp"
                     android:text="支付密码:" />
 
                 <EditText
@@ -234,9 +288,6 @@
                     style="@style/info_edittext_style"
                     android:layout_width="150dp"
                     android:inputType="textPassword"/>
-                <TextView
-                    style="@style/home_motorcade_item_title_style"
-                    android:text="元" />
             </LinearLayout>
 
             <LinearLayout
@@ -254,6 +305,7 @@
 
                 <TextView
                     style="@style/home_motorcade_item_title_style"
+                    android:layout_width="100dp"
                     android:text="@string/string_other_recharge_help" />
 
                 <EditText
@@ -277,7 +329,8 @@
 
                 <TextView
                     style="@style/home_motorcade_item_title_style"
-                    android:text="金\t\t额:" />
+                    android:layout_width="100dp"
+                    android:text="金\t\t\t\t额:" />
 
                 <EditText
                     android:id="@+id/recharge_price"

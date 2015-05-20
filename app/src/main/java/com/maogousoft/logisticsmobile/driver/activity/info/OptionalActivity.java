@@ -480,7 +480,7 @@ public class OptionalActivity extends BaseActivity {
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, params);
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    UserInfo.class, new AjaxCallBack() {
+                    null, new AjaxCallBack() {
 
                         @Override
                         public void receive(int code, Object result) {

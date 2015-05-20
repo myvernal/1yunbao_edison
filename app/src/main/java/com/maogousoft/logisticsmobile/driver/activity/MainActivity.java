@@ -28,6 +28,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.umeng.update.UmengUpdateAgent;
@@ -145,34 +146,45 @@ public class MainActivity extends TabActivity {
 
         final JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+            Class clz;
+            if(Constants.USER_DRIVER == application.getUserType()) {
+                jsonObject.put(Constants.ACTION, Constants.DRIVER_PROFILE);
+                clz = DriverInfo.class;
+            } else {
+                jsonObject.put(Constants.ACTION, Constants.GET_USER_INFO);
+                clz = ShipperInfo.class;
+            }
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, "");
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    DriverInfo.class, new AjaxCallBack() {
+                    clz, new AjaxCallBack() {
 
                 @Override
                 public void receive(int code, Object result) {
                     switch (code) {
                         case ResultCode.RESULT_OK:
                             if (result != null) {
-                                DriverInfo mDriverInfo = (DriverInfo) result;
-                                application.setDriverInfo(mDriverInfo);
-                                String idCard = mDriverInfo.getId_card();// 身份证号码
-                                String name = mDriverInfo.getName();// 司机姓名
-
-                                if (!TextUtils.isEmpty(idCard)) {
-                                    application.writeIsThroughRezheng(true);
-                                } else {
-                                    application.writeIsThroughRezheng(false);
+                                String name = null;
+                                if(result instanceof DriverInfo) {
+                                    DriverInfo mDriverInfo = (DriverInfo) result;
+                                    application.setDriverInfo(mDriverInfo);
+                                    String idCard = mDriverInfo.getId_card();// 身份证号码
+                                    name = mDriverInfo.getBank_account();// 转账账号
+                                    if (!TextUtils.isEmpty(idCard)) {
+                                        application.writeIsThroughRezheng(true);
+                                    } else {
+                                        application.writeIsThroughRezheng(false);
+                                    }
+                                } else if (result instanceof ShipperInfo) {
+                                    ShipperInfo shipperInfo = (ShipperInfo) result;
+                                    application.setShipperInfo(shipperInfo);
+                                    name = shipperInfo.getBank_account();// 转账账号
                                 }
-
                                 if (!TextUtils.isEmpty(name)) {
                                     application.writeIsRegOptional(true);
                                 } else {
                                     application.writeIsRegOptional(false);
                                 }
-
                             }
                             break;
                         case ResultCode.RESULT_ERROR:

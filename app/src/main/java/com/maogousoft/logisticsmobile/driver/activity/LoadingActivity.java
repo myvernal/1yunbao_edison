@@ -169,12 +169,9 @@ public class LoadingActivity extends BaseActivity {
                                         case ResultCode.RESULT_OK:
                                             UserInfo userInfo = (UserInfo) result;
                                             application.setUserInfo(userInfo);
-                                            application.writeUserInfo(phone,
-                                                    password, userInfo.getDriver_id(), userInfo.getId());
-                                            application.setToken(userInfo
-                                                    .getToken());
-                                            application.writeInfo("name",
-                                                    userInfo.getName());
+                                            application.writeUserInfo(phone, password, userInfo.getDriver_id(), userInfo.getId());
+                                            application.setToken(userInfo .getToken());
+                                            application.writeInfo("name", userInfo.getName());
                                             application.startXMPPService();
                                             startActivity(new Intent(mContext, MainActivity.class));
                                             finish();

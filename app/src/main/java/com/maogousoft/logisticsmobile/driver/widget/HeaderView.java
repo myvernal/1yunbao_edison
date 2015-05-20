@@ -80,12 +80,12 @@ public class HeaderView extends LinearLayout implements View.OnClickListener {
                 mContext.startActivity(new Intent(mContext, ShareActivity.class));
                 break;
             case R.id.titlebar_id_tip:
-                //mContext.startActivity(new Intent(mContext, ShareActivity.class));
-                String testUrl = "http://112.124.33.14:8083/service/page/contract?order_id=2005&driver_phone=13683427216&user_id=2&type=2";
+                mContext.startActivity(new Intent(mContext, ShareActivity.class));
+                /*String testUrl = "http://112.124.33.14:8083/service/page/contract?order_id=2005&driver_phone=13683427216&user_id=2&type=2";
                 final Intent intent = new Intent(mContext, AgreementPreviewActivity.class);
                 //intent.putExtra(Constants.COMMON_KEY, ((InvoiceAdapter) mAdapter).getList().get(position).getId());
                 intent.putExtra(Constants.COMMON_KEY, testUrl);
-                mContext.startActivity(intent);
+                mContext.startActivity(intent);*/
                 break;
         }
     }

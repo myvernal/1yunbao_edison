@@ -21,6 +21,7 @@ import com.maogousoft.logisticsmobile.driver.im.KBBinder;
 import com.maogousoft.logisticsmobile.driver.im.ServiceManager;
 import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.DictInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.ExtendedImageDownloader;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -61,6 +62,7 @@ public class MGApplication extends Application {
 	private KBBinder mBinder;
 	private boolean isAnonymous = false;
     private DriverInfo driverInfo = null;
+    private ShipperInfo shipperInfo = null;
     private UserInfo userInfo = null;
 
     @Override
@@ -496,7 +498,15 @@ public class MGApplication extends Application {
         this.driverInfo = driverInfo;
     }
 
-    public Class preClass;
+	public ShipperInfo getShipperInfo() {
+		return shipperInfo;
+	}
+
+	public void setShipperInfo(ShipperInfo shipperInfo) {
+		this.shipperInfo = shipperInfo;
+	}
+
+	public Class preClass;
     public Class getPreClass() {
         return preClass;
     }
