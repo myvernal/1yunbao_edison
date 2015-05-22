@@ -340,6 +340,12 @@
         <item name="android:textColor">@color/font_gray2</item>
     </style>
 
+    <style name="CarDetailLineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/common_line_color</item>
+    </style>
+
     <style name="info_register_button_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -815,11 +821,21 @@
 
     <style name="CarrierItemStyle">
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:id">@+id/radioButton</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">10dp</item>
         <item name="android:button">@null</item>
+        <item name="android:background">@null</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
         <item name="android:drawableLeft">@drawable/radiobutton</item>
+    </style>
+
+    <style name="CarResourceCheckStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@drawable/shape_car_resource_check_bg</item>
+        <item name="android:textColor">@color/common_btn_bg</item>
+        <item name="android:textSize">@dimen/font_size_normal</item>
     </style>
 </resources>
