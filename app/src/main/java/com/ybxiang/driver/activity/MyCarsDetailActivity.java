@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +25,9 @@ import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
+import com.maogousoft.logisticsmobile.driver.model.PopupMenuInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ybxiang.driver.model.LocationInfo;
 import com.ybxiang.driver.util.Utils;
@@ -33,12 +37,14 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by aliang on 2014/8/22.
  */
-public class MyCarsDetailActivity extends BaseActivity {
+public class MyCarsDetailActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private int id;
     private TextView driver_name, carState, way1, way2, way3, plate_number, car_weight, car_length,
@@ -51,9 +57,10 @@ public class MyCarsDetailActivity extends BaseActivity {
     private String phoneNumber = "";
     private CarInfo carInfo;
     private View edit_action_layout, location_action_desc, location_action_layout;//我的车队详情特有
-    private View add_my_fleet, remark_layout;//搜索货源详情特有
+    private View remark_layout;//搜索货源详情特有
     private TextView remark, price;
     private boolean isSearchFromMap = false;
+    private PopupWindow popWindow;// popupwindow
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +71,10 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     private void initViews() {
-        ((TextView) findViewById(R.id.titlebar_id_content)).setText("车辆详情");
+        HeaderView headerView = (HeaderView) findViewById(R.id.headerView);
+        headerView.getTipViewVisible().setOnClickListener(this);
+        headerView.setTitle("车辆详情");
+        popWindow = headerView.createPopupWindow(this, initPopupData());
 
         driver_name = (TextView) findViewById(R.id.driver_name);
         carState = (TextView) findViewById(R.id.car_info_state);
@@ -89,7 +99,6 @@ public class MyCarsDetailActivity extends BaseActivity {
         edit_action_layout = findViewById(R.id.edit_action_layout);
         location_action_desc = findViewById(R.id.location_action_desc);
         location_action_layout = findViewById(R.id.location_action_layout);
-        add_my_fleet = findViewById(R.id.add_my_fleet);
         remark_layout = findViewById(R.id.remark_layout);
         remark = (TextView) findViewById(R.id.remark);
         price = (TextView) findViewById(R.id.price);
@@ -123,7 +132,6 @@ public class MyCarsDetailActivity extends BaseActivity {
             location_action_desc.setVisibility(View.GONE);
             location_action_layout.setVisibility(View.GONE);
             //显示搜索车源详情特有的控件
-            add_my_fleet.setVisibility(View.VISIBLE);
             remark_layout.setVisibility(View.VISIBLE);
 
             getDriverInfo(carInfo.getDriverInfo());
@@ -133,7 +141,6 @@ public class MyCarsDetailActivity extends BaseActivity {
             location_action_desc.setVisibility(View.GONE);
             location_action_layout.setVisibility(View.GONE);
             //显示搜索车源详情特有的控件
-            add_my_fleet.setVisibility(View.VISIBLE);
             remark_layout.setVisibility(View.VISIBLE);
             getData(true);
         } else if (getIntent().getBooleanExtra(Constants.QUERY_CAR_INFO_FROM_MAP, false)) {
@@ -172,6 +179,15 @@ public class MyCarsDetailActivity extends BaseActivity {
             case R.id.titlebar_id_more:
                 LogUtil.e(TAG, "titlebar_id_more");
                 startActivity(new Intent(mContext, ShareActivity.class).putExtra("share", content));
+                break;
+            case R.id.titlebar_id_tip:
+                if (popWindow.isShowing()) {
+                    // 关闭
+                    popWindow.dismiss();
+                } else {
+                    // 显示
+                    popWindow.showAsDropDown(v);
+                }
                 break;
         }
     }
@@ -243,7 +259,6 @@ public class MyCarsDetailActivity extends BaseActivity {
                 location_action_layout.setVisibility(View.GONE);
             }
             //显示搜索车源详情特有的控件
-            add_my_fleet.setVisibility(View.VISIBLE);
             remark_layout.setVisibility(View.VISIBLE);
             //报价
             if (!TextUtils.isEmpty(carInfo.getPrice())) {
@@ -449,7 +464,7 @@ public class MyCarsDetailActivity extends BaseActivity {
         }
     }
 
-    public void onSendMessage(View view) {
+    private void onSendMessage() {
         if (phoneNumber == null || TextUtils.isEmpty(phoneNumber)) {
             return;
         }
@@ -457,7 +472,7 @@ public class MyCarsDetailActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    public void onCall(View view) {
+    private void onCall() {
         if (phoneNumber == null || TextUtils.isEmpty(phoneNumber)) {
             return;
         }
@@ -541,7 +556,7 @@ public class MyCarsDetailActivity extends BaseActivity {
     }
 
     // 添加到我的车队
-    public void addCarToMyFleet(View view) {
+    private void addCarToMyFleet() {
         try {
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.ADD_MY_FLEET);
@@ -600,6 +615,43 @@ public class MyCarsDetailActivity extends BaseActivity {
                     });
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    /*header更多菜单*/
+    private List<PopupMenuInfo> initPopupData() {
+        List<PopupMenuInfo> moreList = new ArrayList<PopupMenuInfo>();
+        moreList.add(new PopupMenuInfo("分享", R.drawable.header_more_share));
+        moreList.add(new PopupMenuInfo("礼品", R.drawable.header_more_present));
+        moreList.add(new PopupMenuInfo("车队", R.drawable.header_more_add));
+        moreList.add(new PopupMenuInfo("短信", R.drawable.header_more_message));
+        moreList.add(new PopupMenuInfo("电话", R.drawable.header_more_call));
+        moreList.add(new PopupMenuInfo("推送", R.drawable.header_more_push));
+        return moreList;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        popWindow.dismiss();
+        switch (position) {
+            case 0:
+                share();
+                break;
+            case 1:
+                startActivity(new Intent(mContext, ShareActivity.class));
+                break;
+            case 2:
+                addCarToMyFleet();
+                break;
+            case 3:
+                onSendMessage();
+                break;
+            case 4:
+                onCall();
+                break;
+            case 5:
+                showMsg(view.toString());
+                break;
         }
     }
 }

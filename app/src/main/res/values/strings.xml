@@ -134,6 +134,7 @@
     <string name="string_home_myabc_logout">退出登录</string>
     <string name="string_home_myabc_rank">排名%d位</string>
     <string name="string_home_myabc_balance">账户余额\t\t\t\t%.2f元</string>
+    <string name="string_home_myabc_yunbao_gold">运宝余额\t\t\t\t%s元</string>
     <string name="string_home_sourcedetail_title">新货源详情</string>
     <string name="string_home_sourcedetail_line">线路：</string>
     <string name="string_home_sourcedetail_name">货物名称：</string>

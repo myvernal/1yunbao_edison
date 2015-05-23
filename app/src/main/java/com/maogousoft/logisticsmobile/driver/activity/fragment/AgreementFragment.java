@@ -48,7 +48,7 @@ public class AgreementFragment extends BaseListFragment implements AbsListView.O
     private boolean load_all = false;
 
     public static AgreementFragment newInstance(int agreementType) {
-        //0初始合同 1 签约完成合同 3 待结算 4结算合同
+        //1 执行中的合同 2近半月的合同 4历史合同
         AgreementFragment newFragment = new AgreementFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.AGREEMENT_TYPE, agreementType);
@@ -88,9 +88,9 @@ public class AgreementFragment extends BaseListFragment implements AbsListView.O
             json.put("page", page);
             json.put("contract_status", invoiceType);
             if (application.getUserType() == Constants.USER_DRIVER) {
-                json.put("driver_id", application.getDriverId().substring(1));
+                json.put("driver_id", application.getUserId());
             } else {
-                json.put("user_id", application.getUserId().substring(1));
+                json.put("user_id", application.getUserId());
             }
             jsonObject.put(Constants.JSON, json.toString());
 

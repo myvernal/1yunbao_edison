@@ -32,15 +32,16 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true">
 
         <ImageView
-            android:layout_width="45dp"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:id="@id/titlebar_id_tip"
-            android:gravity="center_vertical"
-            android:paddingRight="10dp"
+            android:layout_centerVertical="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:visibility="gone"
             android:src="@drawable/header_more"/>
 

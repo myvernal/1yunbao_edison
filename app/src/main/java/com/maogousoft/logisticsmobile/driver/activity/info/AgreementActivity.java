@@ -33,7 +33,7 @@ public class AgreementActivity extends BaseActivity {
         setContentView(R.layout.activity_agreement_layout);
         HeaderView mHeaderView = (HeaderView) findViewById(R.id.headerView);
         mHeaderView.setTitle(R.string.agreement_title);
-        mHeaderView.setMoreTitle(R.string.agreement_edit_tip);
+        //mHeaderView.setMoreTitle(R.string.agreement_edit_tip);
         initView();
         initViewPager();
         initData();
@@ -83,9 +83,9 @@ public class AgreementActivity extends BaseActivity {
     public void initViewPager() {
         mPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentList = new ArrayList<Fragment>();
-        //0初始合同 1 签约完成合同 3 待结算 4结算合同
-        firstFragment = AgreementFragment.newInstance(3);
-        secondFragment = AgreementFragment.newInstance(4);
+        //0初始合同 1签约完成合同 2近半个月合同 3待结算 4结算合同
+        firstFragment = AgreementFragment.newInstance(1);
+        secondFragment = AgreementFragment.newInstance(2);
         thirdFragment = AgreementFragment.newInstance(4);
         fragmentList.add(firstFragment);
         fragmentList.add(secondFragment);

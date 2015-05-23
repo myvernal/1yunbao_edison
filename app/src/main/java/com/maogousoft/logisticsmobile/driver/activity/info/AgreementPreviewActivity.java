@@ -20,6 +20,7 @@ import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+import com.maogousoft.logisticsmobile.driver.utils.MyProgressDialog;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -120,19 +121,16 @@ public class AgreementPreviewActivity extends BaseActivity {
         }
 
         @Override
-        public boolean onCreateWindow(WebView view, boolean dialog,
-                                      boolean userGesture, Message resultMsg) {
+        public boolean onCreateWindow(WebView view, boolean dialog, boolean userGesture, Message resultMsg) {
             return super.onCreateWindow(view, dialog, userGesture, resultMsg);
         }
 
         /**
          * 覆盖默认的window.alert展示界面，避免title里显示为“：来自file:////”
          */
-        public boolean onJsAlert(WebView view, String url, String message,
-                                 JsResult result) {
+        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-
-            builder.setTitle("对话框")
+            builder.setTitle("提示")
                     .setMessage(message)
                     .setPositiveButton("确定", null);
 
@@ -164,7 +162,7 @@ public class AgreementPreviewActivity extends BaseActivity {
         public boolean onJsConfirm(WebView view, String url, String message,
                                    final JsResult result) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-            builder.setTitle("对话框")
+            builder.setTitle("提示")
                     .setMessage(message)
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -207,8 +205,7 @@ public class AgreementPreviewActivity extends BaseActivity {
                                   String defaultValue, final JsPromptResult result) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-            builder.setTitle("对话框").setMessage(message);
-
+            builder.setTitle("提示").setMessage(message);
             final EditText et = new EditText(view.getContext());
             et.setSingleLine();
             et.setText(defaultValue);
@@ -266,7 +263,8 @@ public class AgreementPreviewActivity extends BaseActivity {
     final class JavaScriptInterface {
 
         public void closeHtml() {
-            mWebView.loadUrl("javascript: closeHtml()");
+            LogUtil.e(TAG, "closeHtml!");
+            finish();
         }
     }
 

@@ -76,7 +76,7 @@ public class AgreementAdapter extends BaseListAdapter<AgreementInfo> {
             detail.append(sourceInfo.getCar_type_str());
 
         }*/
-        holder.order_line.setText(agreementInfo.getLoading_address().replaceAll("-", "") + agreementInfo.getUnload_address().replaceAll("-", ""));
+        holder.order_line.setText(agreementInfo.getLoading_address().replaceAll("-", "") + "-" + agreementInfo.getUnload_address().replaceAll("-", ""));
 
         Date date = new Date();
         String betweenTime = "刚发布";

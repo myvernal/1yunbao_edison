@@ -40,7 +40,7 @@
             <!-- 运宝余额 -->
             <TextView
                 style="@style/settingInfoStyle"
-                android:id="@id/myabc_id_mycredit"
+                android:id="@+id/myabc_id_yunbao_pay"
                 android:drawableLeft="@drawable/money_yunbao_money"
                 android:onClick="onCharge"
                 android:text="运宝余额" />

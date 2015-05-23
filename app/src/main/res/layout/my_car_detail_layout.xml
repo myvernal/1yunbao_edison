@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:id="@+id/headerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -435,17 +436,6 @@
                     android:gravity="center"
                     android:text="删除" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/add_my_fleet"
-                style="@style/button1_style2"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dip"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:onClick="addCarToMyFleet"
-                android:text="添加到我的车队"
-                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -17,16 +17,19 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.RenZhengActivity;
+import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.ImageGridAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
+import com.maogousoft.logisticsmobile.driver.model.PopupMenuInfo;
 import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.maogousoft.logisticsmobile.driver.utils.GrabDialog;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
+import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ybxiang.driver.util.Utils;
@@ -36,18 +39,19 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 货源详情
  *
  * @author lenovo
  */
-public class SourceDetailActivity extends BaseActivity {
+public class SourceDetailActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
     private static final String TAG = "SourceDetailActivity";
     public static final String ORDER_INFO = "sourceInfo";
     private int order_id;
-    private Button mPlace, mAttention, mPhone, mShare;
+    private Button mPhone;
     private MyGridView mGridView;
     private ImageGridAdapter mAdapter;
     private ImageView mPhoto;
@@ -58,16 +62,9 @@ public class SourceDetailActivity extends BaseActivity {
     private NewSourceInfo mSourceInfo;
     private RelativeLayout mPingjia;
     private CityDBUtils dbUtils;
-    /**
-     * 司机账户余额
-     */
-    private double balance;
-    /**
-     * 信息费
-     */
-    private double messagePrice;
     private boolean isFromPush = false;
     private StringBuffer shareContent = new StringBuffer();
+    private PopupWindow popWindow;// popupwindow
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +76,12 @@ public class SourceDetailActivity extends BaseActivity {
 
     // 初始化视图
     private void initViews() {
-        ((TextView) findViewById(R.id.titlebar_id_content)).setText(R.string.string_home_sourcedetail_title);
+        HeaderView headerView = (HeaderView) findViewById(R.id.headerView);
+        headerView.getTipViewVisible().setOnClickListener(this);
+        headerView.setTitle(R.string.string_home_sourcedetail_title);
+        popWindow = headerView.createPopupWindow(this, initPopupData());
 
-        mPlace = (Button) findViewById(R.id.source_id_detail_place);
-        mShare = (Button) findViewById(R.id.titlebar_id_more);
-        mShare.setText("分享");
-        mAttention = (Button) findViewById(R.id.source_id_detail_attention);
         mGridView = (MyGridView) findViewById(R.id.source_id_order_gridview);
-
         mOrderNumber = (TextView) findViewById(R.id.source_id_order_number);
 
         mContactName = (TextView) findViewById(R.id.source_detail_name);
@@ -105,11 +100,8 @@ public class SourceDetailActivity extends BaseActivity {
         ratingbarScore3.setIsIndicator(true);
 
         sourceOther = (TextView) findViewById(R.id.source_detail_other);
-        mPlace.setOnClickListener(this);
-        mAttention.setOnClickListener(this);
         mPingjia.setOnClickListener(this);
         mPhone.setOnClickListener(this);
-        mShare.setOnClickListener(this);
 
         mResources = getResources();
         mPhoto = (ImageView) findViewById(R.id.source_detail_shipper_photo);
@@ -128,7 +120,7 @@ public class SourceDetailActivity extends BaseActivity {
 
         //如果是货主身份,不显示好友
         if (application.getUserType() == Constants.USER_SHIPPER) {
-            mAttention.setVisibility(View.GONE);
+            //mAttention.setVisibility(View.GONE);
         }
     }
 
@@ -376,9 +368,9 @@ public class SourceDetailActivity extends BaseActivity {
         mPingjia.setClickable(true);
 
         if (mSourceInfo.getFavorite_status() == 0) {
-            mAttention.setText("关注货主为好友");
+            //TODO mAttention.setText("关注货主为好友");
         } else {
-            mAttention.setText("取消关注货主");
+            //TODO mAttention.setText("取消关注货主");
         }
 
         Date dateNow = new Date();
@@ -432,173 +424,6 @@ public class SourceDetailActivity extends BaseActivity {
         }
     }
 
-    // 获取余额，并抢单
-    private void getBalance() {
-
-        // 信息费为运价的3%，不超过200元
-
-        if (mSourceInfo.getPrice() == null
-                || mSourceInfo.getPrice().equalsIgnoreCase("")) {
-            messagePrice = 0;
-        } else {
-            messagePrice = Double.parseDouble(mSourceInfo.getPrice()) * 0.03;
-            if (messagePrice > 200) {
-                messagePrice = 200;
-            }
-        }
-
-        final GrabDialog dialog = new GrabDialog(mContext);
-        dialog.show();
-        final EditText mInput = (EditText) dialog
-                .findViewById(android.R.id.text1);
-        final EditText mInput2 = (EditText) dialog
-                .findViewById(android.R.id.text2);
-        mInput2.setVisibility(View.VISIBLE);
-        TextView t = (TextView) dialog.findViewById(R.id.grabdialog_text);
-        TextView t1 = (TextView) dialog.findViewById(R.id.grabdialog_text1);
-        TextView t2 = (TextView) dialog.findViewById(R.id.grabdialog_text2);
-        t.setVisibility(View.VISIBLE);
-        t1.setVisibility(View.VISIBLE);
-        t2.setVisibility(View.VISIBLE);
-        if (mSourceInfo.getPrice() == null
-                || mSourceInfo.getPrice().equalsIgnoreCase("")) {
-            mInput2.setText("0");
-        } else {
-            mInput2.setText(mSourceInfo.getPrice());
-        }
-        dialog.setTitle("提示");
-
-        mInput.setText(mSourceInfo.getUser_bond() + "");
-
-        String messageStr = String.format("请输入保证金,保证金必须大于等于%d元。",
-                mSourceInfo.getUser_bond())
-                + String.format("如达成交易，将付出信息费%d物流币。", Integer
-                .parseInt(new java.text.DecimalFormat("0")
-                        .format(messagePrice)));
-        dialog.setMessage(messageStr);
-        dialog.setLeftButton("确定", new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (TextUtils.isEmpty(mInput.getText())
-                            || mSourceInfo.getUser_bond() > Integer
-                            .parseInt(mInput.getText().toString())) {
-                        showMsg(String.format("保证金必须大于等于%d元",
-                                mSourceInfo.getUser_bond()));
-                    } else if (TextUtils.isEmpty(mInput2.getText())
-                            || Integer.parseInt(mInput2.getText().toString()) < 0) {
-                        Toast.makeText(mContext, "自报价：必须大于0元哦",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        dialog.dismiss();
-                        final JSONObject jsonObject = new JSONObject();
-                        try {
-                            jsonObject.put(Constants.ACTION,
-                                    Constants.GET_ACCOUNT_GOLD);
-                            jsonObject.put(Constants.TOKEN,
-                                    application.getToken());
-                            showProgress(mResources
-                                    .getString(R.string.tips_sourcedetail_submit));
-                            ApiClient.doWithObject(Constants.COMMON_SERVER_URL,
-                                    jsonObject, null, new AjaxCallBack() {
-
-                                        @Override
-                                        public void receive(int code,
-                                                            Object result) {
-                                            switch (code) {
-                                                case ResultCode.RESULT_OK:
-                                                    JSONObject object = (JSONObject) result;
-                                                    // mBalance.setText(String.format(getString(R.string.string_home_myabc_balance),
-                                                    // object.optDouble("gold")));
-                                                    balance = object
-                                                            .optDouble("gold");
-
-                                                    if (balance < (messagePrice + Double
-                                                            .parseDouble(mInput
-                                                                    .getText()
-                                                                    .toString()))) {
-
-                                                        dismissProgress();
-
-                                                        final MyAlertDialog dialogCharg = new MyAlertDialog(
-                                                                mContext);
-                                                        dialogCharg.show();
-                                                        dialogCharg.setTitle("提示");
-                                                        dialogCharg.setMessage("需要金额"
-                                                                + (messagePrice + Double
-                                                                .parseDouble(mInput
-                                                                        .getText()
-                                                                        .toString()))
-                                                                + "元，您的余额不足，请先充值。");
-                                                        dialogCharg
-                                                                .setLeftButton(
-                                                                        "去充值",
-                                                                        new OnClickListener() {
-
-                                                                            @Override
-                                                                            public void onClick(
-                                                                                    View v) {
-
-                                                                                Intent intent = new Intent(
-                                                                                        SourceDetailActivity.this,
-                                                                                        ChargeActivity.class);
-                                                                                SourceDetailActivity.this
-                                                                                        .startActivity(intent);
-                                                                            }
-                                                                        });
-
-                                                        dialogCharg
-                                                                .setRightButton(
-                                                                        "取消",
-                                                                        new OnClickListener() {
-
-                                                                            @Override
-                                                                            public void onClick(
-                                                                                    View v) {
-                                                                                dialogCharg
-                                                                                        .dismiss();
-                                                                            }
-                                                                        });
-
-                                                    } else {
-                                                        placeOrder();
-                                                    }
-
-                                                    break;
-                                                case ResultCode.RESULT_FAILED:
-                                                    dismissProgress();
-                                                    showMsg(result.toString());
-                                                    break;
-                                                case ResultCode.RESULT_ERROR:
-                                                    dismissProgress();
-                                                    showMsg(result.toString());
-                                                    break;
-
-                                                default:
-                                                    break;
-                                            }
-                                        }
-                                    });
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        dialog.setRightButton("取消", new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-    }
-
     // 关注货主
     private void attentionOrder() {
         final JSONObject params = new JSONObject();
@@ -624,9 +449,9 @@ public class SourceDetailActivity extends BaseActivity {
                                         showMsg(R.string.tips_sourcedetail_cancel_attention_success);
                                     }
                                     if (mSourceInfo.getFavorite_status() == 0) {
-                                        mAttention.setText("关注货主为好友");
+                                        //TODO mAttention.setText("关注货主为好友");
                                     } else {
-                                        mAttention.setText("取消关注货主");
+                                        //TODO mAttention.setText("取消关注货主");
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -665,39 +490,6 @@ public class SourceDetailActivity extends BaseActivity {
             case R.id.source_id_detail_attention:
                 attentionOrder();
                 break;
-            case R.id.source_id_detail_place:
-                // 先检测是否已经 通过了 诚信认证
-                if (application.checkIsThroughRezheng()) {
-                    if (mPlace.getText().toString().equals("抢单或报价")) {
-                        getBalance();
-                    } else {
-                        cancelOrder();
-                    }
-                } else {
-                    final MyAlertDialog dialog = new MyAlertDialog(mContext);
-                    dialog.show();
-                    dialog.setTitle("提示");
-                    dialog.setMessage("为确保诚信交易，你必须提供相关证件方可得到货主的认可。");
-                    dialog.setLeftButton("诚信认证", new OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                            Intent intent = new Intent(mContext,
-                                    RenZhengActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                    dialog.setRightButton("取消", new OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                }
-
-                break;
             case R.id.source_id_pj:
                 startActivity(new Intent(mContext, UserCreditActivity.class)
                         .putExtra("user_id", mSourceInfo.getUser_id())
@@ -716,46 +508,17 @@ public class SourceDetailActivity extends BaseActivity {
                     startActivity(intent);
                 }
                 break;
-
+            case R.id.titlebar_id_tip:
+                if (popWindow.isShowing()) {
+                    // 关闭
+                    popWindow.dismiss();
+                } else {
+                    // 显示
+                    popWindow.showAsDropDown(v);
+                }
+                break;
             default:
                 break;
-        }
-    }
-
-    /**
-     * 抢单
-     */
-    public void placeOrder() {
-        final JSONObject params = new JSONObject();
-        try {
-            params.put(Constants.ACTION, Constants.PLACE_SOURCE_ORDER);
-            params.put(Constants.TOKEN, application.getToken());
-            params.put(Constants.JSON, new JSONObject().put("order_id", mSourceInfo.getId()).toString());
-            showProgress(mResources.getString(R.string.tips_sourcedetail_qiang));
-            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, params, null,
-                    new AjaxCallBack() {
-
-                        @Override
-                        public void receive(int code, Object result) {
-                            dismissProgress();
-                            switch (code) {
-                                case ResultCode.RESULT_OK:
-                                    showMsg(R.string.tips_sourcedetail_qiang_success);
-                                    finish();
-                                    break;
-                                case ResultCode.RESULT_ERROR:
-                                    showMsg(result.toString());
-                                    break;
-                                case ResultCode.RESULT_FAILED:
-                                    showMsg(result.toString());
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    });
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 
@@ -799,77 +562,108 @@ public class SourceDetailActivity extends BaseActivity {
     }
 
     /**
-     * 取消订单
+     * 抢单
      */
-    public void cancelOrder() {
+    private void placeOrder() {
+        final JSONObject params = new JSONObject();
+        try {
+            params.put(Constants.ACTION, Constants.PLACE_SOURCE_ORDER);
+            params.put(Constants.TOKEN, application.getToken());
+            params.put(Constants.JSON, new JSONObject().put("order_id", mSourceInfo.getId()).toString());
+            showProgress(mResources.getString(R.string.tips_sourcedetail_qiang));
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, params, null,
+                    new AjaxCallBack() {
 
-        final MyAlertDialog dialog = new MyAlertDialog(
-                SourceDetailActivity.this);
-        dialog.show();
-        dialog.setTitle("提示");
-        dialog.setMessage("您确定要取消抢单吗？");
-        dialog.setLeftButton("确定", new OnClickListener() {
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    showMsg(R.string.tips_sourcedetail_qiang_success);
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    showMsg(result.toString());
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                final JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put(Constants.ACTION,
-                            Constants.CANCEL_PLACE_SOURCE_ORDER);
-                    jsonObject.put(Constants.TOKEN, application.getToken());
-                    jsonObject.put(
-                            Constants.JSON,
-                            new JSONObject().put("order_id",
-                                    mSourceInfo.getId()));
-                    ((BaseActivity) SourceDetailActivity.this)
-                            .showProgress("请求提交中,请稍候");
-                    ApiClient.doWithObject(Constants.DRIVER_SERVER_URL,
-                            jsonObject, null, new AjaxCallBack() {
+    //报价
+    private void onBaojia() {
+        Intent intent = new Intent(mContext, OfferDriverActivity.class);
+        intent.putExtra(Constants.COMMON_KEY, mSourceInfo);
+        mContext.startActivity(intent);
+    }
 
-                                @Override
-                                public void receive(int code, Object result) {
-                                    ((BaseActivity) SourceDetailActivity.this)
-                                            .dismissProgress();
-                                    switch (code) {
-                                        case ResultCode.RESULT_OK:
-                                            ((BaseActivity) SourceDetailActivity.this)
-                                                    .showMsg("取消成功!");
+    private void onSendMessage() {
+        CharSequence phoneNumber = mPhone.getText();
+        if (phoneNumber == null || TextUtils.isEmpty(phoneNumber)) {
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumber));
+        startActivity(intent);
+    }
 
-                                            finish();
-                                            // startActivity(new
-                                            // Intent(SourceDetailActivity.this,
-                                            // NewSourceActivity.class));
-                                            // 待定货源中，如果有取消抢单，则立即转移到新货源中
+    private void onCall() {
+        CharSequence phoneNumber = mPhone.getText();
+        if (phoneNumber == null || TextUtils.isEmpty(phoneNumber)) {
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
+        startActivity(intent);
+    }
 
-                                            break;
-                                        case ResultCode.RESULT_ERROR:
-                                            if (result != null)
-                                                ((BaseActivity) SourceDetailActivity.this)
-                                                        .showMsg(result.toString());
-                                            break;
-                                        case ResultCode.RESULT_FAILED:
-                                            if (result != null)
-                                                ((BaseActivity) SourceDetailActivity.this)
-                                                        .showMsg(result.toString());
-                                            break;
+    /*header更多菜单*/
+    private List<PopupMenuInfo> initPopupData() {
+        List<PopupMenuInfo> moreList = new ArrayList<PopupMenuInfo>();
+        moreList.add(new PopupMenuInfo("分享", R.drawable.header_more_share));
+        moreList.add(new PopupMenuInfo("礼品", R.drawable.header_more_present));
+        moreList.add(new PopupMenuInfo("关注", R.drawable.header_more_focus));
+        moreList.add(new PopupMenuInfo("好友", R.drawable.header_more_follow));
+        moreList.add(new PopupMenuInfo("抢单", R.drawable.header_more_qd));
+        moreList.add(new PopupMenuInfo("报价", R.drawable.header_more_money));
+        moreList.add(new PopupMenuInfo("短信", R.drawable.header_more_message));
+        moreList.add(new PopupMenuInfo("电话", R.drawable.header_more_call));
+        return moreList;
+    }
 
-                                        default:
-                                            break;
-                                    }
-                                }
-                            });
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        dialog.setRightButton("取消", new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        popWindow.dismiss();
+        switch (position) {
+            case 0:
+                share();
+                break;
+            case 1:
+                startActivity(new Intent(mContext, ShareActivity.class));
+                break;
+            case 2:
+                attentionOrder();
+                break;
+            case 3:
+                attentionOrder();
+                break;
+            case 4:
+                placeOrder();
+                break;
+            case 5:
+                onBaojia();
+                break;
+            case 6:
+                onSendMessage();
+                break;
+            case 7:
+                onCall();
+                break;
+        }
     }
 }

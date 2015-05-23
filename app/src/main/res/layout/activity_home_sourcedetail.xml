@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:id="@+id/headerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -360,21 +361,6 @@
                     style="@style/ratingbar_style"
                     android:layout_gravity="center_vertical" />
             </LinearLayout>
-
-            <Button
-                android:id="@id/source_id_detail_place"
-                style="@style/info_button_style"
-                android:layout_marginTop="30dp"
-                android:text="抢单或报价"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@id/source_id_detail_attention"
-                style="@style/info_button_style"
-                android:visibility="gone"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/string_home_sourcedetail_attention" />
 
         </LinearLayout>
     </ScrollView>

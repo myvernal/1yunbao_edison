@@ -91,7 +91,7 @@ public class DriverInfo implements Serializable {
 	private int start_city3;// 是 线路起始点城市3
 	private int end_province3;// 是 线路终止点省份3
 	private int end_city3;// 是 线路终止点城市3
-
+    private String yunbao_gold = "0";//运宝币
 	private String car_phone = "";// 随车手机
     private String yunbao_pay;
     private String linkman;//联系人
@@ -100,6 +100,14 @@ public class DriverInfo implements Serializable {
     private String account_name;//账户名称
     private String bank_account;//银行账号
     private String business_address;//办公地址
+
+    public String getYunbao_gold() {
+        return yunbao_gold;
+    }
+
+    public void setYunbao_gold(String yunbao_gold) {
+        this.yunbao_gold = yunbao_gold;
+    }
 
     public int getId() {
         return id;

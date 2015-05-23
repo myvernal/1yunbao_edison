@@ -119,7 +119,7 @@ public class SearchCarInfoListAdapter extends BaseListAdapter<CarInfo> implement
 
             @Override
             public void onClick(View view) {
-                showMsg("货源推送");
+                notifySource(carInfo);
             }
         });
         // 添加车队
@@ -148,6 +148,11 @@ public class SearchCarInfoListAdapter extends BaseListAdapter<CarInfo> implement
             intent.putExtra(Constants.COMMON_KEY, carInfo.getId());
             intent.putExtra(Constants.COMMON_OBJECT_KEY, carInfo);
             mContext.startActivity(intent);
+    }
+
+    //给司机推送货源
+    public void notifySource(CarInfo carInfo) {
+
     }
 
     // 添加到我的车队

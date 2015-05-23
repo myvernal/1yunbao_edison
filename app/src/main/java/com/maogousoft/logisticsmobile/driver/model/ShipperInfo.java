@@ -35,7 +35,7 @@ public class ShipperInfo implements Serializable {
     private float score1 = 0;
     private float score2 = 0;
     private float score3 = 0;
-
+    private float gold = 0;
     private Double tpy_1;//基本险 费率
     private Double tpy_2;//基本险(易碎) 费率
     private Double tpy_3;//基本险(鲜活) 费率
@@ -47,6 +47,23 @@ public class ShipperInfo implements Serializable {
     private String bank;//开户银行名称
     private String bank_account;//银行账号
     private String account_name;//账号姓名
+    private String yunbao_gold = "0";//运宝币
+
+    public float getGold() {
+        return gold;
+    }
+
+    public void setGold(float gold) {
+        this.gold = gold;
+    }
+
+    public String getYunbao_gold() {
+        return yunbao_gold;
+    }
+
+    public void setYunbao_gold(String yunbao_gold) {
+        this.yunbao_gold = yunbao_gold;
+    }
 
     public String getBank() {
         return bank;

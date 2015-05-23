@@ -145,12 +145,13 @@
 
                 <TextView
                     style="@style/info_publish_text_style"
+                    android:drawableLeft="@drawable/public_car_baojia"
                     android:text="数量：" />
 
                 <EditText
                     style="@style/info_edittext_weight_style"
                     android:id="@+id/source_id_publish_source_weight"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:text="" />
 
                 <Spinner
@@ -174,6 +175,7 @@
                 <EditText
                     style="@style/info_edittext_weight_style"
                     android:id="@id/source_id_publish_unit_price"
+                    android:inputType="phone"
                     android:text="" />
 
                 <TextView
@@ -202,7 +204,7 @@
                 <EditText
                     style="@style/info_edittext_weight_style"
                     android:id="@id/source_id_publish_user_bond"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:text="" />
 
                 <TextView

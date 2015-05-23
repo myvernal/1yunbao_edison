@@ -24,7 +24,7 @@ import org.json.JSONObject;
  */
 public class MoneyManagerActivity extends BaseActivity {
 
-    private TextView mBalance;
+    private TextView mBalance, mYunbaoPay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,43 +38,13 @@ public class MoneyManagerActivity extends BaseActivity {
         findViewById(R.id.titlebar_id_more).setVisibility(View.VISIBLE);
 
         mBalance = (TextView) findViewById(R.id.myabc_id_balance);
+        mYunbaoPay = (TextView) findViewById(R.id.myabc_id_yunbao_pay);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         getAbcInfo();
-    }
-
-    // 获取账户余额
-    private void getBalance() {
-        final JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put(Constants.ACTION, Constants.GET_ACCOUNT_GOLD);
-            jsonObject.put(Constants.TOKEN, application.getToken());
-            ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
-                    null, new AjaxCallBack() {
-
-                        @Override
-                        public void receive(int code, Object result) {
-                            switch (code) {
-                                case ResultCode.RESULT_OK:
-                                    JSONObject object = (JSONObject) result;
-                                    mBalance.setText(String.format(getString(R.string.string_home_myabc_balance), object.optDouble("gold", 0d)));
-                                    break;
-                                case ResultCode.RESULT_FAILED:
-                                    break;
-                                case ResultCode.RESULT_ERROR:
-                                    break;
-
-                                default:
-                                    break;
-                            }
-                        }
-                    });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     // 获取我的abc信息
@@ -106,7 +76,8 @@ public class MoneyManagerActivity extends BaseActivity {
                                                 finish();
                                             } else {
                                                 // 获取账户余额
-                                                getBalance();
+                                                mYunbaoPay.setText(getString(R.string.string_home_myabc_yunbao_gold, TextUtils.isEmpty(userInfo.getYunbao_gold()) ? "0" : userInfo.getYunbao_gold()));
+                                                mBalance.setText(String.format(getString(R.string.string_home_myabc_balance), userInfo.getGold()));
                                             }
                                         } else if(result instanceof DriverInfo) {
                                             DriverInfo userInfo = (DriverInfo) result;
@@ -116,7 +87,8 @@ public class MoneyManagerActivity extends BaseActivity {
                                                 finish();
                                             } else {
                                                 // 获取账户余额
-                                                getBalance();
+                                                mYunbaoPay.setText(getString(R.string.string_home_myabc_yunbao_gold, TextUtils.isEmpty(userInfo.getYunbao_gold()) ? "0" : userInfo.getYunbao_gold()));
+                                                mBalance.setText(String.format(getString(R.string.string_home_myabc_balance), userInfo.getGold()));
                                             }
                                         }
                                     }

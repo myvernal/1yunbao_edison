@@ -319,7 +319,7 @@ public class MGApplication extends Application {
     public String getDriverId() {
         String s = "";
         try {
-
+            s = mSharedPreferences.getString(Constants.XMPP_DRIVER_ID, null);
         } catch (Exception e) {
             e.printStackTrace();
         }

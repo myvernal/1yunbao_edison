@@ -86,8 +86,7 @@ public class MyProgressDialog extends AlertDialog {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View view = LayoutInflater.from(mContext).inflate(
-				R.layout.view_progress, null);
+		View view = LayoutInflater.from(mContext).inflate(R.layout.view_progress, null);
 		// ImageView ivProgress = (ImageView)
 		// view.findViewById(R.id.iv_progress);
 		// ivProgress.setBackgroundResource(R.drawable.animation_progress);
