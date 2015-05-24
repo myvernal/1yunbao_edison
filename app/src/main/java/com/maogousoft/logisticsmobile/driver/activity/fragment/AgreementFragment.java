@@ -13,15 +13,12 @@ import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListFragment;
-import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
-import com.maogousoft.logisticsmobile.driver.activity.info.AgreementPreviewActivity;
+import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep3Activity;
 import com.maogousoft.logisticsmobile.driver.adapter.AgreementAdapter;
-import com.maogousoft.logisticsmobile.driver.adapter.InvoiceAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.AgreementInfo;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -145,10 +142,9 @@ public class AgreementFragment extends BaseListFragment implements AbsListView.O
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        String testUrl = "http://112.124.33.14:8083/service/page/contract?order_id=2005&driver_phone=13683427216&user_id=2&type=2";
-        final Intent intent = new Intent(mContext, AgreementPreviewActivity.class);
-        //intent.putExtra(Constants.COMMON_KEY, ((InvoiceAdapter) mAdapter).getList().get(position).getId());
-        intent.putExtra(Constants.COMMON_KEY, testUrl);
+        final Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
+        String url = ((AgreementAdapter) mAdapter).getList().get(position).getContract_page_url();
+        intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + url);
         startActivity(intent);
     }
 

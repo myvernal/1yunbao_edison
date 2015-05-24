@@ -4,6 +4,8 @@
     <color name="transparent">#00000000</color>
     <color name="title_bg">#FE5722</color>
     <color name="yellow">#FEC107</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="window_bg">#ffffff</color>
     <color name="orange_order">#ffab33</color>
     <color name="font_gray">#333333</color>
@@ -49,4 +51,7 @@
     <drawable name="popup_window_bg">@color/title_bg</drawable>
     <drawable name="popup_window_bg_p">#F0CE29</drawable>
     <drawable name="gray_line">#d5d5d5</drawable>
+
+    <drawable name="white">#ffffff</drawable>
+    <drawable name="black">#000000</drawable>
 </resources>

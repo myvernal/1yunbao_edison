@@ -1,5 +1,6 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Created by aliang on 2014/11/4.
@@ -64,6 +66,9 @@ public class TruckFailedReasonActivity extends BaseActivity {
     private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO1 = 1001;
     private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO2 = 1002;
     private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO3 = 1003;
+    private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO4 = 1004;
+    private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO5 = 1005;
+    private static final int RESULT_CAPTURE_IMAGE_CAR_PHOTO6 = 1006;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,18 +121,46 @@ public class TruckFailedReasonActivity extends BaseActivity {
     }
 
     public void onPicture(View view) {
+        Intent innerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        innerIntent.putExtra("crop", "true");// 才能出剪辑的小方框，不然没有剪辑功能，只能选取图片
+        innerIntent.putExtra("aspectX", 1); // 出现放大和缩小
+        innerIntent.setType("image/*"); // 查看类型 详细的类型在 com.google.android.mms.ContentType
 
+        File tempFile;
+        int requestCode;
+        if(mCarPhotos1 == null) {
+            tempFile = new File(Environment.getExternalStorageDirectory() + File.separator + "responsible1.jpg");
+            requestCode = RESULT_CAPTURE_IMAGE_CAR_PHOTO4;
+        } else if(mCarPhotos2 == null) {
+            tempFile = new File(Environment.getExternalStorageDirectory() + File.separator + "responsible2.jpg");
+            requestCode = RESULT_CAPTURE_IMAGE_CAR_PHOTO5;
+        } else if(mCarPhotos3 == null) {
+            tempFile = new File(Environment.getExternalStorageDirectory() + File.separator + "responsible3.jpg");
+            requestCode = RESULT_CAPTURE_IMAGE_CAR_PHOTO6;
+        } else {
+            showMsg("照片最多支持3张!");
+            return;
+        }
+        /*File temp = new File("/sdcard/ll1x/");//自已项目 文件夹
+        if (!temp.exists()) {
+            temp.mkdir();
+        }*/
+        innerIntent.putExtra("output", Uri.fromFile(tempFile));  // 专入目标文件
+        innerIntent.putExtra("outputFormat", "JPEG"); //输入文件格式
+
+        Intent wrapperIntent = Intent.createChooser(innerIntent, "先择图片"); //开始 并设置标题
+        startActivityForResult(wrapperIntent, requestCode);
     }
 
     public void onPhotoCam(View view) {
         Intent imageCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(mCarPhotos1 == null) {
+        if (mCarPhotos1 == null) {
             imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "responsible1.jpg")));
             startActivityForResult(imageCaptureIntent, RESULT_CAPTURE_IMAGE_CAR_PHOTO1);
-        } else if(mCarPhotos2 == null) {
+        } else if (mCarPhotos2 == null) {
             imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "responsible2.jpg")));
             startActivityForResult(imageCaptureIntent, RESULT_CAPTURE_IMAGE_CAR_PHOTO2);
-        } else if(mCarPhotos3 == null) {
+        } else if (mCarPhotos3 == null) {
             imageCaptureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory() + File.separator + "responsible3.jpg")));
             startActivityForResult(imageCaptureIntent, RESULT_CAPTURE_IMAGE_CAR_PHOTO3);
         } else {
@@ -153,13 +186,13 @@ public class TruckFailedReasonActivity extends BaseActivity {
             params.put("responsible_people", responsibleCause);
             params.put("evidence_material", moreReason.getText());
             StringBuilder stringBuilder = new StringBuilder();
-            if(!TextUtils.isEmpty(mCarPhotosUrl1)) {
+            if (!TextUtils.isEmpty(mCarPhotosUrl1)) {
                 stringBuilder.append(mCarPhotosUrl1);
             }
-            if(!TextUtils.isEmpty(mCarPhotosUrl2)){
+            if (!TextUtils.isEmpty(mCarPhotosUrl2)) {
                 stringBuilder.append("@").append(mCarPhotosUrl2);
             }
-            if(!TextUtils.isEmpty(mCarPhotosUrl3)) {
+            if (!TextUtils.isEmpty(mCarPhotosUrl3)) {
                 stringBuilder.append("@").append(mCarPhotosUrl3);
             }
             params.put("evicdence_pic", stringBuilder.toString());//图片链接
@@ -229,6 +262,21 @@ public class TruckFailedReasonActivity extends BaseActivity {
                     displayPhoto(CAR_PHOTO3, photo3);
                     mCarPhotos3 = CAR_PHOTO3;
                     break;
+                case RESULT_CAPTURE_IMAGE_CAR_PHOTO4:
+                    String CAR_PHOTO4 = Environment.getExternalStorageDirectory() + File.separator + "responsible1.jpg";
+                    displayPhoto(CAR_PHOTO4, photo1);
+                    mCarPhotos1 = CAR_PHOTO4;
+                    break;
+                case RESULT_CAPTURE_IMAGE_CAR_PHOTO5:
+                    String CAR_PHOTO5 = Environment.getExternalStorageDirectory() + File.separator + "responsible2.jpg";
+                    displayPhoto(CAR_PHOTO5, photo2);
+                    mCarPhotos2 = CAR_PHOTO5;
+                    break;
+                case RESULT_CAPTURE_IMAGE_CAR_PHOTO6:
+                    String CAR_PHOTO6 = Environment.getExternalStorageDirectory() + File.separator + "responsible3.jpg";
+                    displayPhoto(CAR_PHOTO6, photo3);
+                    mCarPhotos3 = CAR_PHOTO6;
+                    break;
                 default:
                     break;
             }
@@ -238,6 +286,7 @@ public class TruckFailedReasonActivity extends BaseActivity {
     private class UploadImageFileTask extends AsyncTask<String, Void, String> {
 
         private int type = -1;
+        private String filePath;
 
         UploadImageFileTask(int type) {
             this.type = type;
@@ -251,8 +300,7 @@ public class TruckFailedReasonActivity extends BaseActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
-            String filePath = params[0];
+            filePath = params[0];
             String serverResponse = null;
             HttpClient httpClient = new DefaultHttpClient();
             httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
@@ -292,10 +340,13 @@ public class TruckFailedReasonActivity extends BaseActivity {
                         LogUtil.d(TAG, "上传图片返回url地址：" + url);
                         if (type == 1) {
                             mCarPhotosUrl1 = url;
+                            deleteFile(new File(filePath));//上传完成后,删除图片
                         } else if (type == 2) {
                             mCarPhotosUrl2 = url;
+                            deleteFile(new File(filePath));//上传完成后,删除图片
                         } else if (type == 3) {
                             mCarPhotosUrl3 = url;
+                            deleteFile(new File(filePath));//上传完成后,删除图片
                         }
                         if ((TextUtils.isEmpty(mCarPhotos1) || (!TextUtils.isEmpty(mCarPhotos1) && !TextUtils.isEmpty(mCarPhotosUrl1)))
                                 && (TextUtils.isEmpty(mCarPhotos2) || (!TextUtils.isEmpty(mCarPhotos2) && !TextUtils.isEmpty(mCarPhotosUrl2)))
@@ -304,8 +355,8 @@ public class TruckFailedReasonActivity extends BaseActivity {
                             submitAllData();
                         }
                     } else {
-                        LogUtil.d(TAG, "上传图片失败");
-
+                        dismissProgress();
+                        showMsg("上传图片失败");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -323,7 +374,23 @@ public class TruckFailedReasonActivity extends BaseActivity {
      * @param imgView
      */
     private void displayPhoto(final String url, final ImageView imgView) {
+        LogUtil.d(TAG, url);
         imageLoader.displayImage(url, imgView);
         imgView.setVisibility(View.VISIBLE);
+    }
+
+    //删除文件
+    private void deleteFile(File file) {
+        if (file.exists()) { // 判断文件是否存在
+            if (file.isFile()) { // 判断是否是文件
+                file.delete(); // delete()方法 你应该知道 是删除的意思;
+            } else if (file.isDirectory()) { // 否则如果它是一个目录
+                File files[] = file.listFiles(); // 声明目录下所有的文件 files[];
+                for (int i = 0; i < files.length; i++) { // 遍历目录下所有的文件
+                    this.deleteFile(files[i]); // 把每个文件 用这个方法进行迭代
+                }
+            }
+            file.delete();
+        }
     }
 }

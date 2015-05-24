@@ -2,10 +2,13 @@ package com.maogousoft.logisticsmobile.driver.activity.info;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
@@ -32,6 +35,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
     private LinearLayout qiandanLayout, priceLayout, phoneLayout;
     private RadioButton preCheckedRadio;
     private RadioButton currentCheckedRadio;
+    private EditText other_driver;
     private int orderId;
     private int agreementType;
 
@@ -50,6 +54,25 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
         qiandanLayout = (LinearLayout) findViewById(R.id.qiangdan_list_container);
         priceLayout = (LinearLayout) findViewById(R.id.price_list_container);
         phoneLayout = (LinearLayout) findViewById(R.id.phone_list_container);
+        other_driver = (EditText) findViewById(R.id.other_driver);
+        other_driver.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 0 && currentCheckedRadio != null) {
+                    currentCheckedRadio.setChecked(false);
+                }
+            }
+        });
     }
 
     private void initData() {
@@ -65,6 +88,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
     // 根据条件请求指定页数的数据
     private void getData(int orderId) {
         try {
+            showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.GET_CARRIER_LIST);
             jsonObject.put(Constants.TOKEN, application.getToken());
@@ -75,6 +99,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
 
                         @Override
                         public void receive(int code, Object result) {
+                            dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
@@ -141,21 +166,72 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
             currentCheckedRadio = (RadioButton) compoundButton;
             preCheckedRadio = (RadioButton) compoundButton;
             currentCheckedRadio.setChecked(true);
+            other_driver.setText("");//选择承运人后,清空手动输入的账号
         } else {
             currentCheckedRadio = null;
         }
     }
 
     public void onNext(View view) {
-        if(currentCheckedRadio == null) {
+        if(currentCheckedRadio == null && other_driver.length() == 0) {
             showMsg("请选择承运人");
             return;
         }
-        CarrierInfo carrierInfo = (CarrierInfo) currentCheckedRadio.getTag();
-        startActivity(new Intent(mContext, AgreementCreateStep3Activity.class)
-                .putExtra(Constants.ORDER_ID, orderId)
-                .putExtra(Constants.AGREEMENT_TYPE, agreementType)
-                .putExtra(Constants.USER_ID, carrierInfo.getDriver_id()));
-        finish();
+        if(currentCheckedRadio != null) {
+            CarrierInfo carrierInfo = (CarrierInfo) currentCheckedRadio.getTag();
+            getAgreement(carrierInfo);
+        } else {
+            getAgreement(null);
+        }
+    }
+
+    // 进入合同制作页面
+    private void getAgreement(CarrierInfo carrierInfo) {
+        try {
+            showSpecialProgress();
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.CONTRACT_IMPORT_PREVIEW);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, new JSONObject()
+                    .put("order_id", orderId)
+                    .put("contract_type", agreementType)
+                    .put("driver_phone", other_driver.getText())
+                    .put("carrier_driverId", carrierInfo == null ? "" : carrierInfo.getDriver_id()).toString());
+
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    CarrierInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result instanceof CarrierInfo) {
+                                        CarrierInfo carrierInfo = (CarrierInfo) result;
+                                        if (!TextUtils.isEmpty(carrierInfo.getPath())) {
+                                            final Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
+                                            intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + carrierInfo.getPath());
+                                            mContext.startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

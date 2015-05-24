@@ -17,7 +17,7 @@ public class AgreementInfo implements Serializable {
     private String unload_address;//卸货地址
     private String loading_time;//装货时间
     private String reach_time;//到达时间
-    private float carriage;//运费
+    private String carriage;//运费
     private String pay_way;//支付方式
     private String receiving_people_phone;//收货人电话
     private float bond;//保证金
@@ -64,6 +64,15 @@ public class AgreementInfo implements Serializable {
     private int order_user_id;//托运方货主id
     private int is_forward;//是否转发 0  为转发 1 已转发
     private long create_time;//合同创建时间
+    private String contract_page_url;//合同地址
+
+    public String getContract_page_url() {
+        return contract_page_url;
+    }
+
+    public void setContract_page_url(String contract_page_url) {
+        this.contract_page_url = contract_page_url;
+    }
 
     public int getOrder_id() {
         return order_id;
@@ -145,11 +154,11 @@ public class AgreementInfo implements Serializable {
         this.reach_time = reach_time;
     }
 
-    public float getCarriage() {
+    public String getCarriage() {
         return carriage;
     }
 
-    public void setCarriage(float carriage) {
+    public void setCarriage(String carriage) {
         this.carriage = carriage;
     }
 

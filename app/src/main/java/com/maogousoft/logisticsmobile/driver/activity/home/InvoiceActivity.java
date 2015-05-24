@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
@@ -13,14 +14,16 @@ import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.fragment.InvoiceFragment;
 import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep1Activity;
-import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep2Activity;
+import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep3Activity;
 import com.maogousoft.logisticsmobile.driver.activity.info.TruckFailedReasonActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.CommonFragmentPagerAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.InvoiceNumberInfo;
+import com.maogousoft.logisticsmobile.driver.model.InviteInfo;
+import com.maogousoft.logisticsmobile.driver.model.InvoiceTotalInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 import com.ybxiang.driver.activity.PublishGoodsSourceActivity;
 
@@ -34,9 +37,10 @@ import java.util.ArrayList;
  */
 public class InvoiceActivity extends BaseActivity {
     private ViewPager mPager;
-    private HeaderView mHeaderView;
     private ArrayList<Fragment> fragmentList;
-    private TextView view1, view2, view3;
+    private View guid1, guid2, guid3;
+    private TextView guidView1, guidView2, guidView3;
+    private ImageView guidIcon1, guidIcon2;
     private View bottomMenu1, bottomMenu2, bottomMenu3;
     private InvoiceFragment firstFragment;
     private InvoiceFragment secondFragment;
@@ -47,34 +51,36 @@ public class InvoiceActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice_layout);
-        mHeaderView = (HeaderView) findViewById(R.id.headerView);
+        HeaderView mHeaderView = (HeaderView) findViewById(R.id.headerView);
         mHeaderView.setTitle(R.string.invoice_title);
-        mHeaderView.setMoreTitle(R.string.invoice_tip_title);
+        //mHeaderView.setMoreTitle(R.string.invoice_tip_title);
         initView();
         initViewPager();
-        initData();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        initData();//刷新顶部数据
         changeStates(currIndex);
     }
 
     /*
-         * 初始化标签名
-         */
+     * 初始化标签名
+     */
     public void initView() {
-        view1 = (TextView) findViewById(R.id.tv_guid1);
-        view2 = (TextView) findViewById(R.id.tv_guid2);
-        view3 = (TextView) findViewById(R.id.tv_guid3);
+        guid1 = findViewById(R.id.tv_guid1);
+        guid2 = findViewById(R.id.tv_guid2);
+        guid3 = findViewById(R.id.tv_guid3);
+        guidView1 = (TextView) findViewById(R.id.tv_guid1_text);
+        guidIcon1 = (ImageView) findViewById(R.id.tv_guid1_icon);
+        guidView2 = (TextView) findViewById(R.id.tv_guid2_text);
+        guidIcon2 = (ImageView) findViewById(R.id.tv_guid2_icon);
+        guidView3 = (TextView) findViewById(R.id.tv_guid3_text);
 
         bottomMenu1 = findViewById(R.id.invoice_menu_1);
         bottomMenu2 = findViewById(R.id.invoice_menu_2);
         bottomMenu3 = findViewById(R.id.invoice_menu_3);
-        view1.setOnClickListener(this);
-        view2.setOnClickListener(this);
-        view3.setOnClickListener(this);
     }
 
     private void initData() {
@@ -85,21 +91,28 @@ public class InvoiceActivity extends BaseActivity {
             action = Constants.QUERY_ORDER_COUNT;
         }
         //获取货单数量
-        doAction(action, "", false, InvoiceNumberInfo.class, new ActionCallBack() {
+        doAction(action, "", false, InvoiceTotalInfo.class, new ActionCallBack() {
             @Override
             public void onCallBack(Object result) {
-                if (result instanceof InvoiceNumberInfo) {
-                    InvoiceNumberInfo invoiceNumberInfo = (InvoiceNumberInfo) result;
-                    view1.setText(getString(R.string.invoice_1, invoiceNumberInfo.getPending_order_count()));
-                    view2.setText(getString(R.string.invoice_2, invoiceNumberInfo.getShipment_order_count()));
-                    view3.setText(getString(R.string.invoice_3, invoiceNumberInfo.getHistory_order_count()));
+                if (result instanceof InvoiceTotalInfo) {
+                    InvoiceTotalInfo invoiceTotalInfo = (InvoiceTotalInfo) result;
+                    guidView1.setText(getString(R.string.invoice_1, invoiceTotalInfo.getPending_order_count()));
+                    guidView2.setText(getString(R.string.invoice_2, invoiceTotalInfo.getShipment_order_count()));
+                    guidView3.setText(getString(R.string.invoice_3, invoiceTotalInfo.getHistory_order_count()));
+                    if(TextUtils.equals("Y", invoiceTotalInfo.getHas_invite()) && application.getUserType() == Constants.USER_DRIVER) {
+                        //是否有可邀约
+                        guidIcon1.setVisibility(View.VISIBLE);
+                    }
+                    if(TextUtils.equals("Y", invoiceTotalInfo.getHas_confim_contract())) {
+                        //是否有可确认订单
+                        guidIcon2.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
     }
 
-    @Override
-    public void onClick(View v) {
+    public void onGuidClick(View v) {
         switch (v.getId()) {
             case R.id.tv_guid1:
                 mPager.setCurrentItem(0);
@@ -148,10 +161,16 @@ public class InvoiceActivity extends BaseActivity {
             case R.id.menu_bottom3:
                 //接受邀约货单(司机)
                 if(TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
-                    doAction(Constants.ACCEPT_CONTRACT_INVITE, params.toString(), true, new ActionCallBack() {
+                    doAction(Constants.ACCEPT_CONTRACT_INVITE, params.toString(), false, InviteInfo.class, new ActionCallBack() {
                         @Override
                         public void onCallBack(Object result) {
-                            firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                            if(result instanceof InviteInfo) {
+                                InviteInfo inviteInfo = (InviteInfo) result;
+                                LogUtil.d(TAG, inviteInfo.getContract_url());
+                                Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
+                                startActivity(intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + inviteInfo.getContract_url()));
+                            }
+                            //firstFragment.removeDataAndNotifyDataChange(sourceInfo);
                         }
                     });
                 } else {
@@ -290,9 +309,9 @@ public class InvoiceActivity extends BaseActivity {
     public void initViewPager() {
         mPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentList = new ArrayList<Fragment>();
-        firstFragment = InvoiceFragment.newInstance(1);
-        secondFragment = InvoiceFragment.newInstance(2);
-        thirdFragment = InvoiceFragment.newInstance(3);
+        firstFragment = InvoiceFragment.newInstance(1, new SelectItemCallBackImpl(1));
+        secondFragment = InvoiceFragment.newInstance(2, new SelectItemCallBackImpl(2));
+        thirdFragment = InvoiceFragment.newInstance(3, new SelectItemCallBackImpl(3));
         fragmentList.add(firstFragment);
         fragmentList.add(secondFragment);
         fragmentList.add(thirdFragment);
@@ -303,7 +322,6 @@ public class InvoiceActivity extends BaseActivity {
         mPager.setOnPageChangeListener(new MyOnPageChangeListener());//页面变化时的监听器
         mPager.setOffscreenPageLimit(3);
     }
-
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
@@ -327,9 +345,12 @@ public class InvoiceActivity extends BaseActivity {
     private void changeStates(int position) {
         switch (position) {
             case 0:
-                view1.setSelected(true);
-                view2.setSelected(false);
-                view3.setSelected(false);
+                guid1.setSelected(true);
+                guidView1.setTextColor(getResources().getColor(R.color.white));
+                guid2.setSelected(false);
+                guidView2.setTextColor(getResources().getColor(R.color.black));
+                guid3.setSelected(false);
+                guidView3.setTextColor(getResources().getColor(R.color.black));
                 if (application.getUserType() == Constants.USER_DRIVER) {
                     bottomMenu1.setVisibility(View.VISIBLE);
                     bottomMenu3.setVisibility(View.GONE);
@@ -340,17 +361,23 @@ public class InvoiceActivity extends BaseActivity {
                 bottomMenu2.setVisibility(View.GONE);
                 break;
             case 1:
-                view1.setSelected(false);
-                view2.setSelected(true);
-                view3.setSelected(false);
+                guid1.setSelected(false);
+                guidView1.setTextColor(getResources().getColor(R.color.black));
+                guid2.setSelected(true);
+                guidView2.setTextColor(getResources().getColor(R.color.white));
+                guid3.setSelected(false);
+                guidView3.setTextColor(getResources().getColor(R.color.black));
                 bottomMenu1.setVisibility(View.GONE);
                 bottomMenu2.setVisibility(View.VISIBLE);
                 bottomMenu3.setVisibility(View.GONE);
                 break;
             case 2:
-                view1.setSelected(false);
-                view2.setSelected(false);
-                view3.setSelected(true);
+                guid1.setSelected(false);
+                guidView1.setTextColor(getResources().getColor(R.color.black));
+                guid2.setSelected(false);
+                guidView2.setTextColor(getResources().getColor(R.color.black));
+                guid3.setSelected(true);
+                guidView3.setTextColor(getResources().getColor(R.color.white));
                 bottomMenu1.setVisibility(View.GONE);
                 bottomMenu2.setVisibility(View.GONE);
                 bottomMenu3.setVisibility(View.GONE);
@@ -358,7 +385,49 @@ public class InvoiceActivity extends BaseActivity {
         }
     }
 
+    //选中货单后的回调
+    private class SelectItemCallBackImpl implements SelectItemCallBack {
+
+        private int type;
+
+        public SelectItemCallBackImpl (int type) {
+            this.type = type;
+        }
+
+        @Override
+        public void onItemCallBack(Object result) {
+            NewSourceInfo sourceInfo = (NewSourceInfo) result;
+            switch (type) {
+                case 1:
+                    //待定货单
+                    //是否可以接受邀约
+                    if(TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
+                        ((ImageView)findViewById(R.id.menu_bottom3)).setImageResource(R.drawable.invoice_yaoyue);
+                    } else {
+                        ((ImageView)findViewById(R.id.menu_bottom3)).setImageResource(R.drawable.invoice_yaoyue_disable);
+                    }
+                    break;
+                case 2:
+                    //待装货单
+                    //是否可以订单确认
+                    if(TextUtils.equals("Y", sourceInfo.getIs_able_confim_contract())) {
+                        ((ImageView)findViewById(R.id.menu_bottom6)).setImageResource(R.drawable.invoice_confirm);
+                    } else {
+                        ((ImageView)findViewById(R.id.menu_bottom6)).setImageResource(R.drawable.invoice_confirm_disable);
+                    }
+                    break;
+                case 3:
+                    //历史货单
+                    break;
+            }
+        }
+    }
+
     interface ActionCallBack {
         public void onCallBack(Object result);
+    }
+
+    public interface SelectItemCallBack {
+        public void onItemCallBack(Object result);
     }
 }

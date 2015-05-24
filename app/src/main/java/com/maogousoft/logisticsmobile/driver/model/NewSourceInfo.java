@@ -153,11 +153,28 @@ public class NewSourceInfo implements Serializable {
     private int vie_driver_count; //已抢单司机数量
     private int order_vie_count; //报价人数
     private int order_place_count; //电话反馈人数
-
+	private String contract_status;//如果合同状态为2 显示红点，取签约失败原因
+	private String signing_failed_reason;//如果已经签约且失败，查看签约失败信息
     private String is_able_confim_contract;//是否有邀约
     private String is_has_invite;//是否可以订单确认
 
-    public String getIs_has_invite() {
+	public String getContract_status() {
+		return contract_status;
+	}
+
+	public void setContract_status(String contract_status) {
+		this.contract_status = contract_status;
+	}
+
+	public String getSigning_failed_reason() {
+		return signing_failed_reason;
+	}
+
+	public void setSigning_failed_reason(String signing_failed_reason) {
+		this.signing_failed_reason = signing_failed_reason;
+	}
+
+	public String getIs_has_invite() {
         return is_has_invite;
     }
 

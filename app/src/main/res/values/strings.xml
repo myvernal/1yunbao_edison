@@ -450,6 +450,7 @@
     <!--合同-->
     <string name="agreement_title">合同管理</string>
     <string name="agreement_edit_tip">编制合同</string>
+    <string name="agreement_edit_pay_tip">支付验证</string>
     <string name="agreement_carrier_name">姓名：%s</string>
     <string name="agreement_carrier_phone">电话：%s</string>
     <string name="agreement_carrier_price">报价：%.2f元</string>

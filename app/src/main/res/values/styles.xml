@@ -262,6 +262,7 @@
         <item name="android:paddingRight">5dp</item>
         <item name="android:layout_gravity">center_vertical</item>
     </style>
+
     <style name="safe_text_title_pingan_info_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -401,6 +402,7 @@
         <item name="android:orientation">vertical</item>
         <item name="android:layout_marginBottom">10dp</item>
     </style>
+
     <style name="home_myabc_layout_nobuttom_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -730,6 +732,7 @@
         <item name="android:textColor">@color/font_gray3</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
     </style>
+
     <style name="spinner_car_time_style">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -808,15 +811,37 @@
         <item name="android:layout_weight">1</item>
     </style>
 
-    <style name="InvoiceTopMenuStyle">
+    <style name="InvoiceTopLayoutStyle">
         <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/shape_invoice_menu_bg_selector</item>
+    </style>
+
+    <style name="InvoiceBottomMenuStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/invoice_menu_title_size</item>
+    </style>
+
+    <style name="InvoiceTopMenuStyle">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">6dp</item>
         <item name="android:paddingBottom">6dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/shape_invoice_menu_bg_selector</item>
+        <item name="android:layout_centerHorizontal">true</item>
         <item name="android:textSize">@dimen/invoice_menu_title_size</item>
+    </style>
+
+    <style name="InvoiceTopMenuStyle.Icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/invoice_icon</item>
+        <item name="android:visibility">gone</item>
     </style>
 
     <style name="CarrierItemStyle">

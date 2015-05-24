@@ -106,7 +106,7 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity
-            android:name=".activity.info.AgreementCreateStep3Activity"
+            android:name=".activity.info.AgreementCreateStep4Activity"
             android:configChanges="keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -941,9 +941,9 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <!--合同查看-->
         <activity
-            android:name=".activity.info.AgreementPreviewActivity"
+            android:name=".activity.info.AgreementCreateStep3Activity"
             android:configChanges="keyboardHidden|orientation"
-            android:launchMode="singleTask"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />

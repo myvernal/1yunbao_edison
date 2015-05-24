@@ -2,12 +2,9 @@ package com.maogousoft.logisticsmobile.driver.activity.info;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioButton;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -16,31 +13,24 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarrierInfo;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
  * Created by aliang on 2014/11/13.
  */
-public class AgreementCreateStep3Activity extends BaseActivity {
+public class AgreementCreateStep4Activity extends BaseActivity {
 
-    private int orderId;
     private EditText payPassword;
-    private int agreementType;
-    private int driverId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agreement_step3);
         HeaderView mHeaderView = (HeaderView) findViewById(R.id.headerView);
-        mHeaderView.setTitle(R.string.agreement_edit_tip);
+        mHeaderView.setTitle(R.string.agreement_edit_pay_tip);
 
         initView();
         initData();
@@ -51,12 +41,7 @@ public class AgreementCreateStep3Activity extends BaseActivity {
     }
 
     private void initData() {
-        orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
-        agreementType = getIntent().getIntExtra(Constants.AGREEMENT_TYPE, -1);
-        driverId = getIntent().getIntExtra(Constants.USER_ID, -1);
-        if (orderId == -1 || agreementType == -1 || driverId == -1) {
-            finish();
-        }
+
     }
 
     public void onNext(View view) {
@@ -67,18 +52,15 @@ public class AgreementCreateStep3Activity extends BaseActivity {
         getAgreement();
     }
 
-    // 进入合同制作页面
+    // 验证支付密码
     private void getAgreement() {
         try {
             showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, Constants.CONTRACT_IMPORT_PREVIEW);
+            jsonObject.put(Constants.ACTION, Constants.VALIDATION_PAY_PASSWORD);
             jsonObject.put(Constants.TOKEN, application.getToken());
             jsonObject.put(Constants.JSON, new JSONObject()
-                    .put("order_id", orderId)
-                    .put("contract_type", agreementType)
-                    .put("pay_password", payPassword.getText())
-                    .put("carrier_driverId", driverId).toString());
+                    .put("pay_password", payPassword.getText()).toString());
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     CarrierInfo.class, new AjaxCallBack() {
@@ -86,30 +68,22 @@ public class AgreementCreateStep3Activity extends BaseActivity {
                         @Override
                         public void receive(int code, Object result) {
                             dismissProgress();
+                            Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    if (result instanceof CarrierInfo) {
-                                        CarrierInfo carrierInfo = (CarrierInfo) result;
-                                        if(!TextUtils.isEmpty(carrierInfo.getPath())) {
-                                            final Intent intent = new Intent(mContext, AgreementPreviewActivity.class);
-                                            intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + carrierInfo.getPath());
-                                            mContext.startActivity(intent);
-                                            finish();
-                                        }
-                                    }
+                                    intent.putExtra(Constants.COMMON_KEY, "");
                                     break;
                                 case ResultCode.RESULT_ERROR:
-                                    if (result instanceof String)
-                                        showMsg(result.toString());
+                                    intent.putExtra(Constants.COMMON_KEY, result.toString());
                                     break;
                                 case ResultCode.RESULT_FAILED:
-                                    if (result instanceof String)
-                                        showMsg(result.toString());
+                                    intent.putExtra(Constants.COMMON_KEY, result.toString());
                                     break;
-
                                 default:
                                     break;
                             }
+                            startActivity(intent);
+                            finish();
                         }
                     });
         } catch (JSONException e) {

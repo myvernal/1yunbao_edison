@@ -118,6 +118,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
                 tvAddr.setText(tvAddr.getText() + shipperInfo.getAddress());
                 displayShipperData();
             }
+            findViewById(R.id.comment_layout_button).setVisibility(View.INVISIBLE);
         } else if (isCarReputation) {
             Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
             //司机信誉
@@ -342,7 +343,6 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
 
     //显示发表评论按钮
     public void onCommentLayout(View view) {
-        LogUtil.d(TAG, "onCommentLayout");
         findViewById(R.id.comment_layout).setVisibility(View.VISIBLE);
     }
 

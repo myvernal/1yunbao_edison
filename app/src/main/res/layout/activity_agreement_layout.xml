@@ -18,17 +18,29 @@
 
         <TextView
             android:id="@+id/tv_guid1"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceTopLayoutStyle"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:gravity="center"
+            android:textColor="@drawable/selector_agreement_top_title"
             android:text="执行中合同" />
 
         <TextView
             android:id="@+id/tv_guid2"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceTopLayoutStyle"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:gravity="center"
+            android:textColor="@drawable/selector_agreement_top_title"
             android:text="近半月合同" />
 
         <TextView
             android:id="@+id/tv_guid3"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceTopLayoutStyle"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:gravity="center"
+            android:textColor="@drawable/selector_agreement_top_title"
             android:text="历史合同" />
 
     </LinearLayout>

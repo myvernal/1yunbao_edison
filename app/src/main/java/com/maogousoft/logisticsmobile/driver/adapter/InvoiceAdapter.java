@@ -12,13 +12,12 @@ import android.widget.TextView;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.activity.home.InvoiceActivity;
+import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
-
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 
 /**
  * Created by aliang on 2015/4/26.
@@ -30,12 +29,13 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
     private RadioButton preRadioButton;//保存上一个被选中的radioButton
     private boolean isShowRadioButton;
     private int userType;
-
-    public InvoiceAdapter(Context context, boolean isShowRadioButton, int userType) {
+    private InvoiceActivity.SelectItemCallBack callBack;
+    public InvoiceAdapter(Context context, boolean isShowRadioButton, int userType, InvoiceActivity.SelectItemCallBack itemCallBack) {
         super(context);
         dbUtils = new CityDBUtils(application.getCitySDB());
         this.isShowRadioButton = isShowRadioButton;
         this.userType = userType;
+        this.callBack = itemCallBack;
     }
 
     @Override
@@ -96,7 +96,18 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
                 && sourceInfo.getCar_length() != 0.0) {
             detail.append("/").append(sourceInfo.getCar_length()).append("米");
         }
-
+        //是否可以订单确认
+        if(TextUtils.equals("Y", sourceInfo.getIs_able_confim_contract())) {
+            holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line_h, 0, 0, 0);
+        } else {
+            holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line, 0, 0, 0);
+        }
+        //是否可以接受邀约
+        if(TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
+            holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line_h, 0, 0, 0);
+        } else {
+            holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line, 0, 0, 0);
+        }
         holder.order_info.setText(title.toString());
         holder.order_info_detail.setText(detail.toString());
         holder.order_money.setText(Html.fromHtml(String.format(mResources
@@ -131,6 +142,10 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
                 checkedPosition = position;
                 //保存当前的被选中的radioButton
                 preRadioButton = holder.radioButton;
+                if(callBack != null) {
+                    //回调货单状态
+                    callBack.onItemCallBack(sourceInfo);
+                }
             }
         });
         //单选按钮状态
@@ -171,6 +186,41 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
             }
             holder.invoice_call.setText(mContext.getString(R.string.invoice_action_number, num3));
         }
+        //合同是否签约成功
+        if(TextUtils.equals("2", sourceInfo.getContract_status())) {
+            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.invoice_icon, 0);
+        } else {
+            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //如果状态是2,则合同签约失败,可查看失败状态
+                if(TextUtils.equals("2", sourceInfo.getContract_status())) {
+                    final MyAlertDialog dialog = new MyAlertDialog(mContext);
+                    dialog.setTitle("签约失败");
+                    dialog.setMessage(sourceInfo.getSigning_failed_reason());
+                    dialog.setLeftButton("确定", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //查看后消除小红点
+                            dialog.dismiss();
+                            sourceInfo.setContract_status("");
+                            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                        }
+                    });
+                    dialog.setCancelable(false);
+                    dialog.show();
+                } else {
+                    Intent intent = new Intent(mContext, SourceDetailActivity.class);
+                    intent.putExtra(Constants.ORDER_ID, sourceInfo.getId());
+                    intent.putExtra("type", "InvoiceActivity");
+                    mContext.startActivity(intent);
+                }
+            }
+        });
+
         return convertView;
     }
 

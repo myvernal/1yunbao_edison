@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListFragment;
+import com.maogousoft.logisticsmobile.driver.activity.home.InvoiceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.InvoiceAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
@@ -43,9 +44,16 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
     private boolean state_idle = false;
     // 已加载全部
     private boolean load_all = false;
+    private InvoiceActivity.SelectItemCallBack callBack;
 
-    public static InvoiceFragment newInstance(int invoiceType) {
-        InvoiceFragment newFragment = new InvoiceFragment();
+    public InvoiceFragment() {}
+
+    public InvoiceFragment (InvoiceActivity.SelectItemCallBack callBack) {
+        this.callBack = callBack;
+    }
+
+    public static InvoiceFragment newInstance(int invoiceType, InvoiceActivity.SelectItemCallBack callBack) {
+        InvoiceFragment newFragment = new InvoiceFragment(callBack);
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.INVOICE_TYPE, invoiceType);
         newFragment.setArguments(bundle);
@@ -66,7 +74,7 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
         mListView.addFooterView(mFootView);
         mListView.setOnScrollListener(this);
         //历史货单没有底部菜单,所以没有单选按钮
-        mAdapter = new InvoiceAdapter(mContext, invoiceType != 3, application.getUserType());
+        mAdapter = new InvoiceAdapter(mContext, invoiceType != 3, application.getUserType(), callBack);
         setListAdapter(mAdapter);
         setListShown(false);
 
@@ -145,15 +153,6 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        final Intent intent = new Intent(mContext, SourceDetailActivity.class);
-        intent.putExtra(Constants.ORDER_ID, ((InvoiceAdapter) mAdapter).getList().get(position).getId());
-        intent.putExtra("type", "InvoiceActivity");
-        startActivity(intent);
     }
 
     @Override

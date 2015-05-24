@@ -51,8 +51,11 @@ public class Constants {
 	// PR112 账户类型
 	public static final String USER_TYPE = "USER_TYPE";
 
-    //货主id
+    //用户id
     public static final String USER_ID = "USER_ID";
+
+    //用户账号
+    public static final String DRIVER_PHONE = "DRIVER_PHONE";
 
     public static final String INVOICE_TYPE = "INVOICE_TYPE";
     public static final String INVOICE_USER_TYPE = "INVOICE_USER_TYPE";
@@ -145,8 +148,8 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
-    public static final String BASE_URL = "http://1yunbao.com:8083/service";
-	//public static final String BASE_URL = "http://192.168.1.110:8080/service";
+    //public static final String BASE_URL = "http://1yunbao.com:8083/service";
+	public static final String BASE_URL = "http://192.168.1.110:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -371,6 +374,9 @@ public class Constants {
 
     /** 获取点赞数 */
     public static final String GET_PRAISE_COUNT = "get_praise_count";
+
+	/* 验证支付密码 */
+	public static final String VALIDATION_PAY_PASSWORD = "validation_pay_password";
 
     /** 货主端:发布货源 */
     public static final String PUBLISH_SOURCE = "publish_order";

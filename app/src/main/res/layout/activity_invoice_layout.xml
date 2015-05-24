@@ -12,25 +12,56 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
 
-        <TextView
+        <RelativeLayout
             android:id="@+id/tv_guid1"
-            style="@style/InvoiceTopMenuStyle"
-            android:text="待订货单" />
+            android:onClick="onGuidClick"
+            style="@style/InvoiceTopLayoutStyle"
+            android:orientation="horizontal">
 
-        <TextView
+            <TextView
+                android:id="@+id/tv_guid1_text"
+                style="@style/InvoiceTopMenuStyle"
+                android:text="待订货单" />
+
+            <ImageView
+                android:id="@+id/tv_guid1_icon"
+                android:layout_toRightOf="@+id/tv_guid1_text"
+                style="@style/InvoiceTopMenuStyle.Icon" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
             android:id="@+id/tv_guid2"
-            style="@style/InvoiceTopMenuStyle"
-            android:text="待装货单" />
+            android:onClick="onGuidClick"
+            style="@style/InvoiceTopLayoutStyle"
+            android:orientation="horizontal">
 
-        <TextView
+            <TextView
+                android:id="@+id/tv_guid2_text"
+                style="@style/InvoiceTopMenuStyle"
+                android:text="待装货单" />
+
+            <ImageView
+                android:id="@+id/tv_guid2_icon"
+                android:layout_toRightOf="@+id/tv_guid2_text"
+                style="@style/InvoiceTopMenuStyle.Icon" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/tv_guid3"
-            style="@style/InvoiceTopMenuStyle"
-            android:text="历史货单" />
+            android:onClick="onGuidClick"
+            style="@style/InvoiceTopLayoutStyle"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/tv_guid3_text"
+                style="@style/InvoiceTopMenuStyle"
+                android:text="历史货单" />
+        </RelativeLayout>
     </LinearLayout>
 
     <View
@@ -53,112 +84,112 @@
 
     <!--待定货单(司机)-->
     <LinearLayout
+        android:id="@+id/invoice_menu_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/invoice_menu_1"
-        android:padding="5dp"
         android:background="@color/font_register"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/menu_bottom1"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu1"
+            android:padding="0dp"
             android:src="@drawable/invoice_delete" />
 
         <ImageView
             android:id="@+id/menu_bottom2"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu1"
+            android:padding="0dp"
             android:src="@drawable/invoice_over" />
 
         <ImageView
             android:id="@+id/menu_bottom3"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu1"
+            android:padding="0dp"
             android:src="@drawable/invoice_yaoyue_disable" />
     </LinearLayout>
     <!--待装货单(司机/货主通用)-->
     <LinearLayout
+        android:id="@+id/invoice_menu_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/invoice_menu_2"
-        android:padding="5dp"
         android:background="@color/font_register"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/menu_bottom4"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu2"
+            android:padding="0dp"
             android:src="@drawable/invoice_failed" />
 
         <ImageView
             android:id="@+id/menu_bottom5"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu2"
+            android:padding="0dp"
             android:src="@drawable/invoice_success" />
 
         <ImageView
             android:id="@+id/menu_bottom6"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu2"
+            android:padding="0dp"
             android:src="@drawable/invoice_confirm_disable" />
     </LinearLayout>
 
     <!--待定货单(货主)-->
     <LinearLayout
+        android:id="@+id/invoice_menu_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/invoice_menu_3"
-        android:padding="5dp"
         android:background="@color/font_register"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/menu_bottom7"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu3"
+            android:padding="0dp"
             android:src="@drawable/invoice_cancel" />
 
         <ImageView
             android:id="@+id/menu_bottom8"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu3"
+            android:padding="0dp"
             android:src="@drawable/invoice_edit" />
 
         <ImageView
             android:id="@+id/menu_bottom9"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu3"
+            android:padding="0dp"
             android:src="@drawable/invoice_push" />
 
         <ImageView
             android:id="@+id/menu_bottom10"
-            style="@style/InvoiceTopMenuStyle"
+            style="@style/InvoiceBottomMenuStyle"
             android:background="@null"
-            android:padding="0dp"
             android:onClick="onBottomMenu3"
+            android:padding="0dp"
             android:src="@drawable/invoice_import" />
     </LinearLayout>
 </LinearLayout>
