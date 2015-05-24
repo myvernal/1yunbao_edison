@@ -47,6 +47,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     private DriverInfo driverInfo;
     private int userId = 0;//被查看信誉的id
     private int orderId;//订单号
+    private boolean isMyReputation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +60,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     private void initViews() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.view_credit_header_view, null);
         mListView.addHeaderView(view, null, false);
-        mAdapter = new EvaluateListAdapter(mContext);
         mListView.setOnScrollListener(this);
-        mListView.setAdapter(mAdapter);
-        setListShown(false);
 
         shipperInfoLayout = findViewById(R.id.shipper_info_layout);
         credit_score = (RatingBar) findViewById(R.id.credit_score);
@@ -100,8 +98,13 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     // 初始化数据
     private void initData() {
         orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
-        boolean isMyReputation = getIntent().getBooleanExtra(Constants.IS_MY_REPUTATION, false);
+        isMyReputation = getIntent().getBooleanExtra(Constants.IS_MY_REPUTATION, false);
         boolean isCarReputation = getIntent().getBooleanExtra(Constants.IS_CAR_REPUTATION, false);
+
+        mAdapter = new EvaluateListAdapter(mContext, application.getUserType(), isMyReputation);
+        mListView.setAdapter(mAdapter);
+        setListShown(false);
+
         if (isMyReputation) {
             Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
             //我的信誉
@@ -176,13 +179,23 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     private void queryData() {
         final JSONObject jsonObject = new JSONObject();
         try {
+            JSONObject params = new JSONObject();
             if (driverInfo != null) {
                 jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_REPLY);
+                params.put("driver_id", userId);
             } else {
                 jsonObject.put(Constants.ACTION, Constants.GET_USER_REPLY);
+                if(userId > 0) {
+                    //被查看人的id
+                    params.put("user_id", userId);
+                } else {
+                    //当前货主的id
+                    params.put("user_id", shipperInfo.getId());
+                }
             }
+
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, new JSONObject().put("user_id", userId).toString());
+            jsonObject.put(Constants.JSON, params.toString());
             ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject,
                     EvaluateInfo.class, new AjaxCallBack() {
 
@@ -252,6 +265,10 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
 
     //给货主点赞
     public void onLike(View view) {
+        if(isMyReputation) {
+            //不能评论自己
+            return;
+        }
         LogUtil.d(TAG, "onLike");
         final JSONObject jsonObject = new JSONObject();
         showProgress("正在处理");

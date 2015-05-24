@@ -82,6 +82,7 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
         mTitle.setText("附近车源");
         mMore = (Button) findViewById(R.id.titlebar_id_more);
         mMore.setText("查看列表");
+        mMore.setOnClickListener(this);
 
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();

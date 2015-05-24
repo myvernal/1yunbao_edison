@@ -17,6 +17,7 @@ public class ShipperInfo implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6581632252578946774L;
+    private int id;
 	private String phone = "";	// 手机号码
 	private String name = "";	// 姓名
 	private String company_name = "";	// 公司名称
@@ -48,6 +49,14 @@ public class ShipperInfo implements Serializable {
     private String bank_account;//银行账号
     private String account_name;//账号姓名
     private String yunbao_gold = "0";//运宝币
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public float getGold() {
         return gold;

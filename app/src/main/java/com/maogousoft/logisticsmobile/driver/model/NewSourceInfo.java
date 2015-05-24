@@ -157,8 +157,17 @@ public class NewSourceInfo implements Serializable {
 	private String signing_failed_reason;//如果已经签约且失败，查看签约失败信息
     private String is_able_confim_contract;//是否有邀约
     private String is_has_invite;//是否可以订单确认
+    private String is_truck_loading_success;//是否装车不成功 “Y“装车不成功“N”装车成功
 
-	public String getContract_status() {
+    public String getIs_truck_loading_success() {
+        return is_truck_loading_success;
+    }
+
+    public void setIs_truck_loading_success(String is_truck_loading_success) {
+        this.is_truck_loading_success = is_truck_loading_success;
+    }
+
+    public String getContract_status() {
 		return contract_status;
 	}
 

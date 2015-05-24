@@ -93,7 +93,7 @@ public class MyCreditActivity extends BaseActivity {
 				mScore3.setRating(score3);
 			}
 		}
-		mAdapter = new EvaluateListAdapter(mContext);
+		mAdapter = new EvaluateListAdapter(mContext, application.getUserType(), true);
 		mListView.setAdapter(mAdapter);
 	}
 

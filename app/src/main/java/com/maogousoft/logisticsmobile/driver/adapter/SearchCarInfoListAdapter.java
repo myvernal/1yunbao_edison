@@ -152,7 +152,7 @@ public class SearchCarInfoListAdapter extends BaseListAdapter<CarInfo> implement
 
     //给司机推送货源
     public void notifySource(CarInfo carInfo) {
-
+        Toast.makeText(mContext, "请求已发送", Toast.LENGTH_SHORT).show();
     }
 
     // 添加到我的车队

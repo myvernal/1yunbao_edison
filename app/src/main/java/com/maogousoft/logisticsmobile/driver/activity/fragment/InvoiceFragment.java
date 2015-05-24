@@ -46,19 +46,17 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
     private boolean load_all = false;
     private InvoiceActivity.SelectItemCallBack callBack;
 
-    public InvoiceFragment() {}
-
-    public InvoiceFragment (InvoiceActivity.SelectItemCallBack callBack) {
-        this.callBack = callBack;
-    }
-
-    public static InvoiceFragment newInstance(int invoiceType, InvoiceActivity.SelectItemCallBack callBack) {
-        InvoiceFragment newFragment = new InvoiceFragment(callBack);
+    public static InvoiceFragment newInstance(int invoiceType) {
+        InvoiceFragment newFragment = new InvoiceFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.INVOICE_TYPE, invoiceType);
         newFragment.setArguments(bundle);
         //bundle还可以在每个标签里传送数据
         return newFragment;
+    }
+
+    public void setCallBack(InvoiceActivity.SelectItemCallBack callBack) {
+        this.callBack =  callBack;
     }
 
     @Override
@@ -74,7 +72,7 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
         mListView.addFooterView(mFootView);
         mListView.setOnScrollListener(this);
         //历史货单没有底部菜单,所以没有单选按钮
-        mAdapter = new InvoiceAdapter(mContext, invoiceType != 3, application.getUserType(), callBack);
+        mAdapter = new InvoiceAdapter(mContext, invoiceType != 3, invoiceType == 1, application.getUserType(), callBack);
         setListAdapter(mAdapter);
         setListShown(false);
 

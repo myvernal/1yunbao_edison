@@ -446,7 +446,8 @@
     <string name="safe_list_item_date">起运日期:%s</string>
     <!--评论-->
     <string name="comment_count">评论\t%s</string>
-    <string name="comment_name">%1$s评论了\t%2$s</string>
+    <string name="comment_name">&lt;font color=&quot;#000000&quot;&gt;%1$s&lt;/font&gt;评论了\t&lt;font color=&quot;#000000&quot;&gt;%2$s&lt;/font&gt;</string>
+    <string name="return_name">&lt;font color=&quot;#000000&quot;&gt;%1$s&lt;/font&gt;的回复\t&lt;font color=&quot;#000000&quot;&gt;%2$s&lt;/font&gt;</string>
     <!--合同-->
     <string name="agreement_title">合同管理</string>
     <string name="agreement_edit_tip">编制合同</string>
@@ -464,7 +465,7 @@
     <string name="invoice_1">待订货单(%s)</string>
     <string name="invoice_2">待装货单(%s)</string>
     <string name="invoice_3">历史货单(%s)</string>
-
+    <string name="truck_loading_fail">因&lt;font color=&quot;#FE5722&quot;&gt; %s &lt;/font&gt;责任装车不成功，对方请求确认结算</string>
     <!-- pay -->
     <string name="string_pay_wechat_tip">提示</string>
     <string name="string_pay_wechat_getting_prepayid">正在获取支付订单...</string>

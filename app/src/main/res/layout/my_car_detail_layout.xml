@@ -410,7 +410,7 @@
                 android:id="@+id/location_action_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
+                android:padding="10dp"
                 android:text="@string/my_car_detail_tip"
                 android:textColor="@color/font_gray3" />
 
@@ -418,8 +418,7 @@
                 android:id="@+id/edit_action_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:layout_marginTop="10dip"
+                android:padding="10dp"
                 android:orientation="horizontal">
 
                 <TextView

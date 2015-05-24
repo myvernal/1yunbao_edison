@@ -261,7 +261,7 @@ public class MyCarsDetailActivity extends BaseActivity implements AdapterView.On
             //显示搜索车源详情特有的控件
             remark_layout.setVisibility(View.VISIBLE);
             //报价
-            if (!TextUtils.isEmpty(carInfo.getPrice())) {
+            /*if (!TextUtils.isEmpty(carInfo.getPrice())) {
                 int priceUnits = carInfo.getUnits();
                 String[] unitsArray = mContext.getResources().getStringArray(R.array.car_price_unit);
                 for (int i = 0; i < Constants.unitTypeValues.length; i++) {
@@ -269,7 +269,7 @@ public class MyCarsDetailActivity extends BaseActivity implements AdapterView.On
                         price.setText(price.getText() + carInfo.getPrice() + "元/" + unitsArray[i]);
                     }
                 }
-            }
+            } */
         } else {
             if (carInfo.getEnd_province1() > 0 || carInfo.getEnd_city1() > 0 || carInfo.getEnd_district1() > 0) {
                 String wayEnd1 = dbUtils.getCityInfo(carInfo.getEnd_province1(), carInfo.getEnd_city1(), carInfo.getEnd_district1());
@@ -342,6 +342,8 @@ public class MyCarsDetailActivity extends BaseActivity implements AdapterView.On
         } else {
             carState.setText(R.string.car_info_doing_f);
         }
+        //保证金
+        price.setText(price.getText() + (TextUtils.isEmpty(carInfo.getBond()) ?  "0元" : carInfo.getBond() + "元"));
     }
 
     // 获取司机信息

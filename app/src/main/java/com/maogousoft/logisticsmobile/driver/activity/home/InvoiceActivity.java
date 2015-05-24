@@ -309,9 +309,12 @@ public class InvoiceActivity extends BaseActivity {
     public void initViewPager() {
         mPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentList = new ArrayList<Fragment>();
-        firstFragment = InvoiceFragment.newInstance(1, new SelectItemCallBackImpl(1));
-        secondFragment = InvoiceFragment.newInstance(2, new SelectItemCallBackImpl(2));
-        thirdFragment = InvoiceFragment.newInstance(3, new SelectItemCallBackImpl(3));
+        firstFragment = InvoiceFragment.newInstance(1);
+        firstFragment.setCallBack(new SelectItemCallBackImpl(1));
+        secondFragment = InvoiceFragment.newInstance(2);
+        secondFragment.setCallBack(new SelectItemCallBackImpl(2));
+        thirdFragment = InvoiceFragment.newInstance(3);
+        thirdFragment.setCallBack(new SelectItemCallBackImpl(3));
         fragmentList.add(firstFragment);
         fragmentList.add(secondFragment);
         fragmentList.add(thirdFragment);

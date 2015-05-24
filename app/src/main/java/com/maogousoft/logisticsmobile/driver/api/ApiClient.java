@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.maogousoft.logisticsmobile.driver.AppException;
 import com.maogousoft.logisticsmobile.driver.utils.HttpUtils;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;

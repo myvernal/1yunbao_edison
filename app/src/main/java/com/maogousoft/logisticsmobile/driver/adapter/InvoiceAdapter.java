@@ -5,15 +5,18 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.home.InvoiceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
+import com.maogousoft.logisticsmobile.driver.activity.info.TruckFailInfoActivity;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
@@ -29,12 +32,15 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
     private RadioButton preRadioButton;//保存上一个被选中的radioButton
     private boolean isShowRadioButton;
     private int userType;
+    private boolean isShowPeopleNumber;
     private InvoiceActivity.SelectItemCallBack callBack;
-    public InvoiceAdapter(Context context, boolean isShowRadioButton, int userType, InvoiceActivity.SelectItemCallBack itemCallBack) {
+
+    public InvoiceAdapter(Context context, boolean isShowRadioButton, boolean isShowPeopleNumber, int userType, InvoiceActivity.SelectItemCallBack itemCallBack) {
         super(context);
         dbUtils = new CityDBUtils(application.getCitySDB());
         this.isShowRadioButton = isShowRadioButton;
         this.userType = userType;
+        this.isShowPeopleNumber = isShowPeopleNumber;
         this.callBack = itemCallBack;
     }
 
@@ -58,8 +64,10 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
             if (!isShowRadioButton) {
                 holder.radioButton.setVisibility(View.GONE);
             }
-            if(userType == Constants.USER_SHIPPER) {
-                holder.source_detail_right_shipper.setVisibility(View.VISIBLE);
+            if (userType == Constants.USER_SHIPPER) {
+                if (isShowPeopleNumber) {
+                    holder.source_detail_right_shipper.setVisibility(View.VISIBLE);
+                }
                 holder.source_detail_phone.setVisibility(View.GONE);
             }
             convertView.setTag(holder);
@@ -96,18 +104,17 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
                 && sourceInfo.getCar_length() != 0.0) {
             detail.append("/").append(sourceInfo.getCar_length()).append("米");
         }
-        //是否可以订单确认
-        if(TextUtils.equals("Y", sourceInfo.getIs_able_confim_contract())) {
+        //是否可以订单确认 或者装车不成功， 或者可以接受邀约
+        if (TextUtils.equals("Y", sourceInfo.getIs_able_confim_contract()) || TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())
+                || TextUtils.equals("Y", sourceInfo.getIs_has_invite()) || TextUtils.equals("2", sourceInfo.getContract_status())) {
             holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line_h, 0, 0, 0);
+            //是否签约成功
+            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_time, 0, R.drawable.invoice_icon, 0);
         } else {
             holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line, 0, 0, 0);
+            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_time, 0, 0, 0);
         }
-        //是否可以接受邀约
-        if(TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
-            holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line_h, 0, 0, 0);
-        } else {
-            holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line, 0, 0, 0);
-        }
+
         holder.order_info.setText(title.toString());
         holder.order_info_detail.setText(detail.toString());
         holder.order_money.setText(Html.fromHtml(String.format(mResources
@@ -142,7 +149,7 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
                 checkedPosition = position;
                 //保存当前的被选中的radioButton
                 preRadioButton = holder.radioButton;
-                if(callBack != null) {
+                if (callBack != null) {
                     //回调货单状态
                     callBack.onItemCallBack(sourceInfo);
                 }
@@ -186,19 +193,14 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
             }
             holder.invoice_call.setText(mContext.getString(R.string.invoice_action_number, num3));
         }
-        //合同是否签约成功
-        if(TextUtils.equals("2", sourceInfo.getContract_status())) {
-            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.invoice_icon, 0);
-        } else {
-            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-        }
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //如果状态是2,则合同签约失败,可查看失败状态
-                if(TextUtils.equals("2", sourceInfo.getContract_status())) {
+                if (TextUtils.equals("2", sourceInfo.getContract_status())) {
                     final MyAlertDialog dialog = new MyAlertDialog(mContext);
+                    dialog.show();
                     dialog.setTitle("签约失败");
                     dialog.setMessage(sourceInfo.getSigning_failed_reason());
                     dialog.setLeftButton("确定", new View.OnClickListener() {
@@ -207,12 +209,17 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
                             //查看后消除小红点
                             dialog.dismiss();
                             sourceInfo.setContract_status("");
-                            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_time, 0, 0, 0);
                         }
                     });
-                    dialog.setCancelable(false);
-                    dialog.show();
+                } else if (TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())) {
+                    //装车不成功详情
+                    Intent intent = new Intent(mContext, TruckFailInfoActivity.class);
+                    intent.putExtra(Constants.ORDER_ID, sourceInfo.getId());
+                    intent.putExtra("type", "InvoiceActivity");
+                    mContext.startActivity(intent);
                 } else {
+                    //查看货单详情
                     Intent intent = new Intent(mContext, SourceDetailActivity.class);
                     intent.putExtra(Constants.ORDER_ID, sourceInfo.getId());
                     intent.putExtra("type", "InvoiceActivity");

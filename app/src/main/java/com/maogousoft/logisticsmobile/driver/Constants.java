@@ -148,8 +148,8 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
-    //public static final String BASE_URL = "http://1yunbao.com:8083/service";
-	public static final String BASE_URL = "http://192.168.1.110:8080/service";
+    public static final String BASE_URL = "http://1yunbao.com:8083/service";
+	//public static final String BASE_URL = "http://192.168.1.110:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
@@ -450,8 +450,17 @@ public class Constants {
     /** 司机端：司机电话反馈 */
     public static final String DRIVER_PHONE_FEEDBACK = "driver_phone_feedback";
 
-   /** 司机端：司机电话反馈 */
+    /** 司机端：司机电话反馈 */
     public static final String GET_CONTRACT_LIST = "getContract_list";
+
+    /* 司机端：司机回复评论*/
+    public static final String DRIVER_RETURN_REPLY = "driver_return_reply";
+
+    /* 货主端; 货主回复评论*/
+    public static final String USER_RETURN_REPLY = "user_return_reply";
+
+    /* 货主端：查看装车不成功原因*/
+    public static final String GET_TRUCK_LOADING_FAIL_INFO = "get_truck_loading_fail_info";
 
     /** 货主端：货单列表数量查询*/
     public static final String QUERY_ORDER_COUNT = "query_order_count";

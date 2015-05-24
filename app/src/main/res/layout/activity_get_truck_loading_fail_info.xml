@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:id="@+id/headerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/desc"
+            android:textSize="@dimen/font_size_normal" />
+
+        <Button
+            style="@style/button1_style"
+            android:id="@+id/confirm"
+            android:layout_marginTop="60dp"
+            android:onClick="onConfirm"
+            android:text="确认" />
+    </LinearLayout>
+</LinearLayout>
