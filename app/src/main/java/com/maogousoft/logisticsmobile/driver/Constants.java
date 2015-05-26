@@ -48,6 +48,8 @@ public class Constants {
 
 	public static final String FIRST_USE = "first_use";
 
+	public static final String BASE_URL_KEY = "base_url_key";
+
 	// PR112 账户类型
 	public static final String USER_TYPE = "USER_TYPE";
 
@@ -148,14 +150,15 @@ public class Constants {
 	// public static final String DRIVER_SERVER_URL =
 	// "http://www.1yunbao.com/service/driver";
 	//public static final String BASE_URL = "http://www.1yunbao.com/service";
-    public static final String BASE_URL = "http://1yunbao.com:8083/service";
+    public static String BASE_URL = "http://1yunbao.com:8083/service";
 	//public static final String BASE_URL = "http://192.168.1.110:8080/service";
+	//public static String BASE_URL = "http://192.168.2.189:8080/service";
     /**
      1yunbao.com:8083/admin
      帐号：admin
      密码：111111
 
-     测试环境:货主 18899669966  123456      司机 16899669966/123456
+     测试环境:货主 16888668866  123456      司机 16899669966  123456
 
      线上:通用 15184432705 123456
      */

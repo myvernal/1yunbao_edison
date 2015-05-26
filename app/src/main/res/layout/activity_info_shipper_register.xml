@@ -73,7 +73,7 @@
                 android:layout_marginTop="10dp"
                 android:drawableLeft="@drawable/login_user"
                 android:drawablePadding="5dp"
-                android:hint="推荐人帐号" />
+                android:hint="推荐人帐号(可不填)" />
 
             <EditText
                 android:id="@+id/company_nameView"

@@ -109,7 +109,7 @@
                 <EditText
                     style="@style/info_edittext_weight_style"
                     android:id="@id/source_id_publish_car_length"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:text="" />
 
                 <TextView

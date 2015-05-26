@@ -3,8 +3,10 @@ package com.maogousoft.logisticsmobile.driver.utils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -63,7 +65,10 @@ public class MyAlertDialog extends AlertDialog {
 
     public void displayInputView () {
         mInput.setVisibility(View.VISIBLE);
-    }
+		mInput.setFocusable(true);
+		mInput.requestFocus();
+		onFocusChange(true);
+	}
 
     public EditText getInputView() {
         return mInput;
@@ -94,5 +99,19 @@ public class MyAlertDialog extends AlertDialog {
 		button3.setVisibility(View.VISIBLE);
 		if (listener != null)
 			button3.setOnClickListener(listener);
+	}
+
+	private void onFocusChange(boolean hasFocus) {
+		final boolean isFocus = hasFocus;
+		(new Handler()).postDelayed(new Runnable() {
+			public void run() {
+				InputMethodManager imm = (InputMethodManager) mInput.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+				if (isFocus) {
+					imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+				} else {
+					imm.hideSoftInputFromWindow(mInput.getWindowToken(), 0);
+				}
+			}
+		}, 1000);
 	}
 }

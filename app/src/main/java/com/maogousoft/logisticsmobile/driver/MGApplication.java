@@ -23,7 +23,9 @@ import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.DictInfo;
 import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
+import com.maogousoft.logisticsmobile.driver.service.SharedPreferencesProvider;
 import com.maogousoft.logisticsmobile.driver.utils.ExtendedImageDownloader;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -79,6 +81,9 @@ public class MGApplication extends Application {
 		//LocHelper.getInstance(this).init();
         //初始化百度sdk
         SDKInitializer.initialize(this);
+		//初始化环境地址,彩蛋功能,用于调试切换
+		Constants.BASE_URL = SharedPreferencesProvider.getInstance(this).getBaseUrl();
+		LogUtil.d("MGApplication", Constants.BASE_URL);
 	}
 
 	/** 初始化图片加载工具 **/

@@ -50,7 +50,7 @@ public class MyabcActivityDriver extends BaseActivity {
 
 	private Button mComplete, mUpdate; // 退出登录
 	private Button mContactKeFu; // 联系客服
-	private TextView mName, mRecommender, mPhone;// 姓名，手机号，推荐人账号
+	private TextView mName, mPhone;// 姓名，手机号
 	private TextView mIsRing; // 铃声的有，无
     private ImageView mPhoto;
 	// 个人abc信息
@@ -149,7 +149,6 @@ public class MyabcActivityDriver extends BaseActivity {
 		mComplete = (Button) findViewById(R.id.myabc_id_complete);
         mUpdate = (Button) findViewById(R.id.myabc_id_update);
         mName = (TextView) findViewById(R.id.myabc_id_name);
-		mRecommender = (TextView) findViewById(R.id.myabc_id_recommender);
 		mPhone = (TextView) findViewById(R.id.myabc_id_phone);
         mPhoto = (ImageView) findViewById(R.id.account_photo);
 		mIsRing = (TextView) findViewById(R.id.myabc_is_ring);
@@ -275,11 +274,6 @@ public class MyabcActivityDriver extends BaseActivity {
 
 									if (!TextUtils.isEmpty(mDriverInfo.getName())) {
 										mName.setText(mDriverInfo.getName());
-									}
-									if (!TextUtils.isEmpty(mDriverInfo
-											.getRecommender())) {
-										mRecommender.setText(mDriverInfo
-												.getRecommender());
 									}
 									mPhone.setText(mDriverInfo.getPhone());
                                     ImageLoader.getInstance().displayImage(mDriverInfo.getId_card_photo(), mPhoto, options,

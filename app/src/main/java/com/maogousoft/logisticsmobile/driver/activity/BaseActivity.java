@@ -254,7 +254,8 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
-				finish();
+                application.finishAllActivity();
+                android.os.Process.killProcess(android.os.Process.myPid());
 			}
 		});
 		dialog.setRightButton("取消", new OnClickListener() {

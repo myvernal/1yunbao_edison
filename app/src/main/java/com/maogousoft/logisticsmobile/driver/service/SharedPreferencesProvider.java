@@ -42,4 +42,13 @@ public class SharedPreferencesProvider {
     public boolean getFirstUse() {
         return sharedPreferences.getBoolean(Constants.FIRST_USE, true);
     }
+
+    public void saveBaseUrl(String url) {
+        editor.putString(Constants.BASE_URL_KEY, url);
+        editor.commit();
+    }
+
+    public String getBaseUrl() {
+        return sharedPreferences.getString(Constants.BASE_URL_KEY, Constants.BASE_URL);
+    }
 }

@@ -126,7 +126,10 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
         holder.source_detail_phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneStr = sourceInfo.getCargo_user_phone();
+                String phoneStr = sourceInfo.getUser_phone();
+                if (TextUtils.isEmpty(phoneStr)) {
+                    phoneStr = sourceInfo.getCargo_user_phone();
+                }
                 if (!TextUtils.isEmpty(phoneStr)) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneStr));
                     mContext.startActivity(intent);

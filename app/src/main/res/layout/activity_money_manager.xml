@@ -42,8 +42,9 @@
                 style="@style/settingInfoStyle"
                 android:id="@+id/myabc_id_yunbao_pay"
                 android:drawableLeft="@drawable/money_yunbao_money"
+                android:drawableRight="@null"
                 android:onClick="onCharge"
-                android:text="运宝余额" />
+                android:text="运宝币余额" />
 
             <View
                 android:layout_width="match_parent"
@@ -54,8 +55,9 @@
                 style="@style/settingInfoStyle"
                 android:id="@id/myabc_id_balance"
                 android:drawableLeft="@drawable/money_account_money"
+                android:drawableRight="@null"
                 android:onClick="onCharge"
-                android:text="账户余额" />
+                android:text="现金余额" />
 
             <View
                 android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.maogousoft.logisticsmobile.driver.model.PopupMenuInfo;
+import com.maogousoft.logisticsmobile.driver.service.SharedPreferencesProvider;
+import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 
 import java.util.List;
 
@@ -33,6 +38,10 @@ public class HeaderView extends LinearLayout implements View.OnClickListener {
     private ImageView mTip;
     private View mBack;
     private Context mContext;
+    //服务器配置彩蛋
+    private final long btwTime = 2000;
+    private long preEggTime;
+    private int eggNum;
 
     public HeaderView(Context context) {
         super(context);
@@ -55,6 +64,7 @@ public class HeaderView extends LinearLayout implements View.OnClickListener {
         mBack.setOnClickListener(this);
         mTip.setOnClickListener(this);
         mMore.setOnClickListener(this);
+        mTitle.setOnClickListener(this);
     }
 
     public void setTitle(String title) {
@@ -94,6 +104,37 @@ public class HeaderView extends LinearLayout implements View.OnClickListener {
                 break;
             case R.id.titlebar_id_tip:
                 mContext.startActivity(new Intent(mContext, ShareActivity.class));
+                break;
+            case R.id.titlebar_id_content:
+                if(eggNum <= 5) {
+                    if ((System.currentTimeMillis() - preEggTime) > btwTime) {
+                        eggNum++;
+                    }
+                } else {
+                    //开启对话框,配置服务器地址
+                    final MyAlertDialog dialog = new MyAlertDialog(mContext);
+                    dialog.show();
+                    dialog.setCancelable(false);
+                    dialog.setTitle("修改服务器地址");
+                    dialog.displayInputView();
+                    //初始化地址
+                    dialog.getInputView().setText(SharedPreferencesProvider.getInstance(mContext).getBaseUrl());
+                    dialog.getInputView().setSelection(dialog.getInputView().length());
+                    dialog.setLeftButton("保存", new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            if (dialog.getInputView().length() == 0) {
+                                Toast.makeText(mContext, "请输入服务器地址", Toast.LENGTH_SHORT).show();
+                            } else {
+                                SharedPreferencesProvider.getInstance(mContext).saveBaseUrl(dialog.getInputView().getText().toString());
+                                Toast.makeText(mContext, "保存成功,请退出程序,重新登录", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    eggNum = 0;
+                }
                 break;
         }
     }

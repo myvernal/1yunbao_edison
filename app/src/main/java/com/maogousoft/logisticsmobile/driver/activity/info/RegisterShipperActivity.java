@@ -238,9 +238,7 @@ public class RegisterShipperActivity extends BaseActivity {
 			// params.put("car_phone", mShuiChePhone.getText().toString());
 			params.put("vcode", mVerifyCode.getText().toString());
 			params.put("password", MD5.encode(mPassword.getText().toString()));
-
 			params.put("name", "");
-
 			params.put("recommender_phone", mRecommender.getText().toString());
 			params.put("company", mCompanyName.getText().toString());
 			params.put("device_type", Constants.DEVICE_TYPE);
