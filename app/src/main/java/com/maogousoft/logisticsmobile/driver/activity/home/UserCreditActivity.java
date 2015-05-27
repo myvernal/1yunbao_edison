@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -107,19 +108,21 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
 
         if (isMyReputation) {
             Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
-            //我的信誉
-            ((TextView) findViewById(R.id.titlebar_id_content)).setText("我的信誉");
-            if(application.getUserType() == Constants.USER_DRIVER) {
-                //司机信誉
-                driverInfo = (DriverInfo) serializable;
-                shipperInfoLayout.setVisibility(View.GONE);
-                displayDriverData();
-            } else {
-                //货主信誉
-                shipperInfo = (ShipperInfo) serializable;
-                tvCompanyName.setText(tvCompanyName.getText() + shipperInfo.getCompany_name());
-                tvAddr.setText(tvAddr.getText() + shipperInfo.getAddress());
-                displayShipperData();
+            if(serializable != null) {
+                //我的信誉
+                ((TextView) findViewById(R.id.titlebar_id_content)).setText("我的信誉");
+                if (application.getUserType() == Constants.USER_DRIVER) {
+                    //司机信誉
+                    driverInfo = (DriverInfo) serializable;
+                    shipperInfoLayout.setVisibility(View.GONE);
+                    displayDriverData();
+                } else {
+                    //货主信誉
+                    shipperInfo = (ShipperInfo) serializable;
+                    tvCompanyName.setText(tvCompanyName.getText() + shipperInfo.getCompany_name());
+                    tvAddr.setText(tvAddr.getText() + shipperInfo.getAddress());
+                    displayShipperData();
+                }
             }
             findViewById(R.id.comment_layout_button).setVisibility(View.INVISIBLE);
         } else if (isCarReputation) {
@@ -182,7 +185,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
             JSONObject params = new JSONObject();
             if (driverInfo != null) {
                 jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_REPLY);
-                params.put("driver_id", userId);
+                params.put("driver_id", driverInfo.getId());
             } else {
                 jsonObject.put(Constants.ACTION, Constants.GET_USER_REPLY);
                 if(userId > 0) {

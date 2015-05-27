@@ -81,12 +81,15 @@
     <string name="string_update_title">修改密码</string>
     <string name="string_update_pay_title">修改支付密码</string>
     <!--车辆详情-->
-    <string name="string_car_detail_number">车牌号\t\t\t\t\t\t\t\t%s</string>
-    <string name="string_car_detail_contact">联系人\t\t\t\t\t\t\t\t%s</string>
-    <string name="string_car_detail_card_num">车架号\t\t\t\t\t\t\t\t%s</string>
-    <string name="string_car_detail_car_length">车长\t\t\t\t\t\t\t\t\t%s米</string>
-    <string name="string_car_detail_car_type">车型\t\t\t\t\t\t\t\t\t%s</string>
-    <string name="string_car_detail_car_weight">载重\t\t\t\t\t\t\t\t\t%s吨</string>
+    <string name="string_car_detail_number">车牌号\t\t\t\t%s</string>
+    <string name="string_car_detail_contact">联系人\t\t\t\t%s</string>
+    <string name="string_car_detail_card_num">车架号\t\t\t\t%s</string>
+    <string name="string_car_detail_engine_number">发动机号\t\t\t%s</string>
+    <string name="string_car_detail_frame_car_number">车挂车架号\t\t%s</string>
+    <string name="string_car_detail_car_registration_number">车挂号\t\t\t\t%s</string>
+    <string name="string_car_detail_car_length">车长\t\t\t\t%s米</string>
+    <string name="string_car_detail_car_type">车型\t\t\t\t%s</string>
+    <string name="string_car_detail_car_weight">载重\t\t\t\t%s吨</string>
     <!-- 登录 -->
     <string name="string_info_login_auto">自动登录</string>
     <string name="string_info_login_forget">忘记密码?</string>
@@ -133,8 +136,8 @@
     <string name="string_home_myabc_complete">完善资料</string>
     <string name="string_home_myabc_logout">退出登录</string>
     <string name="string_home_myabc_rank">排名%d位</string>
-    <string name="string_home_myabc_balance">账户余额\t\t\t\t%.2f元</string>
-    <string name="string_home_myabc_yunbao_gold">运宝余额\t\t\t\t%s元</string>
+    <string name="string_home_myabc_balance">现金余额\t\t\t\t%.2f元</string>
+    <string name="string_home_myabc_yunbao_gold">运宝币余额\t\t\t\t%s元</string>
     <string name="string_home_sourcedetail_title">新货源详情</string>
     <string name="string_home_sourcedetail_line">线路：</string>
     <string name="string_home_sourcedetail_name">货物名称：</string>

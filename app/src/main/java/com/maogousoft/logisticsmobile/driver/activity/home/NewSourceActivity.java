@@ -87,10 +87,6 @@ public class NewSourceActivity extends BaseListActivity implements
 
         mListView.setOnScrollListener(this);
         mMore.setOnClickListener(this);
-
-        mAdapter = new NewSourceListAdapter(mContext, application.getUserType() == Constants.USER_DRIVER);
-        setListAdapter(mAdapter);
-        setListShown(false);
     }
 
     private void initData() {
@@ -146,6 +142,10 @@ public class NewSourceActivity extends BaseListActivity implements
             //从搜索过来的货源需要显示总货源数
             addHeaderSearchView();
         }
+
+        mAdapter = new NewSourceListAdapter(mContext, application.getUserType() == Constants.USER_DRIVER);
+        setListAdapter(mAdapter);
+        setListShown(false);
     }
 
     private void addHeaderSearchView() {

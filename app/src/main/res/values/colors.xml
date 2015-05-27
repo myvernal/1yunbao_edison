@@ -52,6 +52,7 @@
     <drawable name="popup_window_bg_p">#F0CE29</drawable>
     <drawable name="gray_line">#d5d5d5</drawable>
 
+    <drawable name="transparent">#00000000</drawable>
     <drawable name="white">#ffffff</drawable>
     <drawable name="black">#000000</drawable>
 </resources>

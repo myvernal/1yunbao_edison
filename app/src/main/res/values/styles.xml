@@ -106,7 +106,7 @@
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:padding">0dp</item>
         <item name="android:clickable">true</item>
-        <item name="android:background">@drawable/spinner_bg</item>
+        <item name="android:background">@drawable/selector_spinner_bg</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -751,6 +751,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/font_size_normal</item>
+        <item name="android:textColor">@drawable/common_check_box_text_style</item>
         <item name="android:ellipsize">end</item>
         <item name="android:singleLine">true</item>
     </style>

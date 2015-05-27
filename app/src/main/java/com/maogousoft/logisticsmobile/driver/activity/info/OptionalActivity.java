@@ -30,6 +30,7 @@ import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
+import com.maogousoft.logisticsmobile.driver.widget.CheckEditText;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
@@ -61,8 +62,9 @@ import java.util.List;
  */
 public class OptionalActivity extends BaseActivity {
     private Button mLogin, mRegister;
-    private EditText mShuiChePhone, mName, mLength, mWeight, mNumber, info_id_register_id_card,
-            mChezhuPhone, myself_recommendation, optional_linkman, optional_frame_number, optional_bank, optional_bank_account, optional_account_name;
+    private CheckEditText mShuiChePhone, mName, mLength, mWeight, mNumber, info_id_register_id_card,
+            mChezhuPhone, myself_recommendation, optional_linkman, optional_frame_number, optional_bank,
+            optional_bank_account, optional_account_name, optional_engine_number, optional_frame_car_number, optional_car_registration_number;
     private Spinner mCarType;
     private CarTypeListAdapter mCarTypeAdapter;
     private boolean isFormRegisterActivity;
@@ -102,19 +104,22 @@ public class OptionalActivity extends BaseActivity {
         mLogin = (Button) findViewById(R.id.titlebar_id_more);
         mRegister = (Button) findViewById(R.id.info_id_register_submit);
 
-        mShuiChePhone = (EditText) findViewById(R.id.info_id_register_shuiche_phone);
-        mChezhuPhone = (EditText) findViewById(R.id.info_id_register_chezhu_phone);
-        mName = (EditText) findViewById(R.id.info_id_register_name);
-        mLength = (EditText) findViewById(R.id.info_id_register_length);
-        mWeight = (EditText) findViewById(R.id.info_id_register_weight);
-        mNumber = (EditText) findViewById(R.id.info_id_register_number);
-        myself_recommendation = (EditText) findViewById(R.id.myself_recommendation);
-        info_id_register_id_card = (EditText) findViewById(R.id.info_id_register_id_card);
-        optional_linkman = (EditText) findViewById(R.id.optional_linkman);
-        optional_frame_number = (EditText) findViewById(R.id.optional_frame_number);
-        optional_bank = (EditText) findViewById(R.id.optional_bank);
-        optional_bank_account = (EditText) findViewById(R.id.optional_bank_account);
-        optional_account_name = (EditText) findViewById(R.id.optional_account_name);
+        mShuiChePhone = (CheckEditText) findViewById(R.id.info_id_register_shuiche_phone);
+        mChezhuPhone = (CheckEditText) findViewById(R.id.info_id_register_chezhu_phone);
+        mName = (CheckEditText) findViewById(R.id.info_id_register_name);
+        mLength = (CheckEditText) findViewById(R.id.info_id_register_length);
+        mWeight = (CheckEditText) findViewById(R.id.info_id_register_weight);
+        mNumber = (CheckEditText) findViewById(R.id.info_id_register_number);
+        myself_recommendation = (CheckEditText) findViewById(R.id.myself_recommendation);
+        info_id_register_id_card = (CheckEditText) findViewById(R.id.info_id_register_id_card);
+        optional_linkman = (CheckEditText) findViewById(R.id.optional_linkman);
+        optional_frame_number = (CheckEditText) findViewById(R.id.optional_frame_number);
+        optional_bank = (CheckEditText) findViewById(R.id.optional_bank);
+        optional_bank_account = (CheckEditText) findViewById(R.id.optional_bank_account);
+        optional_account_name = (CheckEditText) findViewById(R.id.optional_account_name);
+        optional_engine_number = (CheckEditText) findViewById(R.id.optional_engine_number);
+        optional_frame_car_number = (CheckEditText) findViewById(R.id.optional_frame_car_number);
+        optional_car_registration_number = (CheckEditText) findViewById(R.id.optional_car_registration_number);
 
         mCarType = (Spinner) findViewById(R.id.info_id_register_type);
         // mSkan.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -129,13 +134,6 @@ public class OptionalActivity extends BaseActivity {
         car_photo1.setOnClickListener(this);
         car_photo2.setOnClickListener(this);
         car_photo3.setOnClickListener(this);
-
-        mShuiChePhone.setOnFocusChangeListener(mOnFocusChangeListener);
-        mChezhuPhone.setOnFocusChangeListener(mOnFocusChangeListener);
-        mLength.setOnFocusChangeListener(mOnFocusChangeListener);
-        mWeight.setOnFocusChangeListener(mOnFocusChangeListener);
-        mNumber.setOnFocusChangeListener(mOnFocusChangeListener);
-        mName.setOnFocusChangeListener(mOnFocusChangeListener);
     }
 
     // 初始化数据，获取车型
@@ -181,9 +179,9 @@ public class OptionalActivity extends BaseActivity {
                             if (mCarTypeAdapter.getList() != null) {
                                 for (int i = 0; i < mCarTypeAdapter.getList()
                                         .size(); i++) {
-                                    if (mCarTypeAdapter.getList().get(i).getId() == driverInfo
-                                            .getCar_type()) {
+                                    if (mCarTypeAdapter.getList().get(i).getId() == driverInfo.getCar_type()) {
                                         mCarType.setSelection(i);
+                                        mCarType.setEnabled(false);
                                         break;
                                     }
                                 }
@@ -210,32 +208,31 @@ public class OptionalActivity extends BaseActivity {
         if (getIntent().hasExtra("info")) {
             driverInfo = (DriverInfo) getIntent().getSerializableExtra("info");
             if (driverInfo != null) {
-                info_id_register_id_card.setText(driverInfo.getId_card());
-                optional_account_name.setText(driverInfo.getAccount_name());
-                optional_linkman.setText(driverInfo.getLinkman());
-                optional_bank_account.setText(driverInfo.getBank_account());
-                optional_bank.setText(driverInfo.getBank());
-                optional_frame_number.setText(driverInfo.getFrame_number());
-                mShuiChePhone.setText(driverInfo.getCar_phone());
-
-                // 没有车主phone，需要后台给
-                mChezhuPhone.setText(driverInfo.getCar_phone());
-                mName.setText(driverInfo.getName());
-
-                mLength.setText(driverInfo.getCar_length() + "");
-                mWeight.setText(driverInfo.getCar_weight() + "");
-
+                info_id_register_id_card.setText(driverInfo.getId_card(), true);
+                optional_linkman.setText(driverInfo.getLinkman(), true);
+                optional_frame_number.setText(driverInfo.getFrame_number(), true);
+                optional_engine_number.setText(driverInfo.getEngine_number(), true);
+                optional_frame_car_number.setText(driverInfo.getFrame_car_number(), true);
+                optional_car_registration_number.setText(driverInfo.getCar_registration_number(), true);
+                mShuiChePhone.setText(driverInfo.getCar_phone(), true);
+                mChezhuPhone.setText(driverInfo.getCar_phone(), true);
+                mName.setText(driverInfo.getName(), true);
+                mNumber.setText(driverInfo.getPlate_number(), true);
+                mLength.setText(driverInfo.getCar_length() + "", true);
+                mWeight.setText(driverInfo.getCar_weight() + "", true);
                 if (mCarTypeAdapter.getList() != null) {
                     for (int i = 0; i < mCarTypeAdapter.getList().size(); i++) {
-                        if (mCarTypeAdapter.getList().get(i).getId() == driverInfo
-                                .getCar_type()) {
+                        if (mCarTypeAdapter.getList().get(i).getId() == driverInfo.getCar_type()) {
                             mCarType.setSelection(i);
+                            mCarType.setEnabled(false);
                             break;
                         }
                     }
                 }
-                mNumber.setText(driverInfo.getPlate_number());
 
+                optional_bank_account.setText(driverInfo.getBank_account());
+                optional_account_name.setText(driverInfo.getAccount_name());
+                optional_bank.setText(driverInfo.getBank());
                 if (TextUtils.isEmpty(driverInfo.getMyself_recommendation())) {
                     myself_recommendation.setText(R.string.business_description);
                 } else {
@@ -409,28 +406,6 @@ public class OptionalActivity extends BaseActivity {
         }*/
     }
 
-    // 输入框失去焦点事件监听
-    private final OnFocusChangeListener mOnFocusChangeListener = new OnFocusChangeListener() {
-
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            if (v == mShuiChePhone && !hasFocus) {
-
-            } else if (v == mName && !hasFocus) {
-
-            } else if (v == mLength && !hasFocus) {
-
-            } else if (v == mWeight && !hasFocus) {
-
-            } else if (v == mNumber && !hasFocus) {
-
-            } else if (v == mChezhuPhone && !hasFocus) {
-
-            }
-
-        }
-    };
-
     private void clearPhoto() {
         userPhotoUrl = null;
         mCarPhotosUrl1 = null;
@@ -470,6 +445,9 @@ public class OptionalActivity extends BaseActivity {
             params.put("linkman", optional_linkman.getText().toString());
             params.put("account_name", optional_account_name.getText().toString());
             params.put("frame_number", optional_frame_number.getText().toString());
+            params.put("engine_number", optional_engine_number.getText().toString());
+            params.put("frame_car_number", optional_frame_car_number.getText().toString());
+            params.put("car_registration_number", optional_car_registration_number.getText().toString());
             params.put("bank", optional_bank.getText().toString());
             params.put("bank_account", optional_bank_account.getText().toString());
             if (!TextUtils.isEmpty(userPhotoUrl)) {

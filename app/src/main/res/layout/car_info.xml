@@ -117,6 +117,48 @@
 
             <View
                 android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@+id/myabc_id_engine_number"
+                android:drawableLeft="@drawable/car_info_card_num"
+                android:onClick="onComplementCarInfo"
+                android:text="发动机号" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@+id/myabc_id_car_registration_number"
+                android:drawableLeft="@drawable/car_info_card_num"
+                android:onClick="onComplementCarInfo"
+                android:text="车挂号" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/common_line_color" />
+
+            <TextView
+                style="@style/settingInfoStyle"
+                android:id="@+id/myabc_id_frame_car_number"
+                android:drawableLeft="@drawable/car_info_card_num"
+                android:onClick="onComplementCarInfo"
+                android:text="车挂车架号" />
+
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="15dp"
                 android:background="@color/common_line_color" />
 

@@ -112,7 +112,6 @@
                     android:drawableLeft="@drawable/radiobutton"
                     android:button="@null"
                     android:drawablePadding="5dp"
-                    android:checked="true"
                     android:text="为本账号充值" />
 
                 <RadioButton

@@ -15,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
@@ -61,7 +62,6 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     private AQuery gridView;
     private CityListAdapter mAdapter;
     private EditText price, charge_help_account, payPassword, forwardAccountBank, forwardAccountName, forwardAccountCard;
-    private RadioGroup groups;
     private String OrderId;
     private int type = ALI_PAY;
     private double gold1 = 0d, gold2 = 0d;
@@ -71,12 +71,13 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     private static final int YEE_PAY = 1;//易宝支付
     private static final int WX_PAY = 2;//微信支付
     private static final int YIYUNBAO_PAY = 3;//易运宝支付
+    private RadioGroup groups;//支付选项
     private RadioGroup chargePurposeGroup;//资金操作目的布局
     private View chargeHelpLayout;//代充账号布局
     private View moneyForwardLayout;//转账账号布局
     private View payPasswordLayout;//支付密码
 
-    private int actionType = 0;//操作类型 0:充值,1:代充值,2:转账,3:提现
+    private int actionType = -1;//操作类型 0:充值,1:代充值,2:转账,3:提现
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,6 +209,11 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         super.onClick(v);
         switch (v.getId()) {
             case R.id.recharge_submitbtn:
+                if(type == -1) {
+                    showMsg("请选择支付方式!");
+                } else if(actionType == -1) {
+                    showMsg("请选择支付目的!");
+                }
                 switch (actionType) {
                     case 0://充值
                         if (type == YIYUNBAO_PAY) {
@@ -314,6 +320,11 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             price.requestFocus();
             return;
         }
+        if (payPassword.length() < 6) {
+            showMsg("请输入至少6位支付密码");
+            payPassword.requestFocus();
+            return;
+        }
         try {
             showSpecialProgress("正在操作中,请稍后...");
             JSONObject jsonObject = new JSONObject();
@@ -328,7 +339,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             params.put("bank_name", price.getText());//银行名称
             params.put("bank_account", forwardAccountCard.getText());//转账卡号
             params.put("name", price.getText());//转账对象名称
-
+            params.put("pay_password", payPassword.getText());//支付密码
             params.put("money", price.getText());//金额
             params.put("user_type", application.getUserType());//用户类型
             jsonObject.put(Constants.JSON, params.toString());
@@ -372,6 +383,11 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             price.requestFocus();
             return;
         }
+        if (payPassword.length() < 6) {
+            showMsg("请输入至少6位支付密码");
+            payPassword.requestFocus();
+            return;
+        }
         try {
             showSpecialProgress("正在操作中,请稍后...");
             JSONObject jsonObject = new JSONObject();
@@ -379,6 +395,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             jsonObject.put(Constants.ACTION, Constants.WITHDRAW_DEPOSIT);
             jsonObject.put(Constants.TOKEN, application.getToken());
             params.put("money", price.getText());
+            params.put("pay_password", payPassword.getText());//支付密码
             params.put("user_type", application.getUserType());
             jsonObject.put(Constants.JSON, params.toString());
             ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject, null,
@@ -407,20 +424,58 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         }
     }
 
+    /*1、支付宝/易宝支付/微信---对应：为本账号充值/代充值（此时后边的转账/提现为灰色，不可选）；
+      2、易运宝平台支付---对应：代充值/转账/提现（此时前边的为本账号充值为灰色，不可选）；
+      */
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.radio0:
                 type = ALI_PAY;//支付宝
+                findViewById(R.id.purpose_radio0).setEnabled(true);
+                findViewById(R.id.purpose_radio1).setEnabled(true);
+                findViewById(R.id.purpose_radio2).setEnabled(false);
+                findViewById(R.id.purpose_radio3).setEnabled(false);
+                ((RadioButton)findViewById(R.id.purpose_radio2)).setChecked(false);
+                ((RadioButton)findViewById(R.id.purpose_radio3)).setChecked(false);
+                if(actionType == 2 || actionType == 3) {
+                    actionType = -1;
+                }
                 break;
             case R.id.radio1:
-                type = YEE_PAY;//易宝
+                type = YEE_PAY;//易宝支付
+                findViewById(R.id.purpose_radio0).setEnabled(true);
+                findViewById(R.id.purpose_radio1).setEnabled(true);
+                findViewById(R.id.purpose_radio2).setEnabled(false);
+                findViewById(R.id.purpose_radio3).setEnabled(false);
+                ((RadioButton)findViewById(R.id.purpose_radio2)).setChecked(false);
+                ((RadioButton)findViewById(R.id.purpose_radio3)).setChecked(false);
+                if(actionType == 2 || actionType == 3) {
+                    actionType = -1;
+                }
                 break;
             case R.id.radio2:
                 type = WX_PAY;//微信支付
+                findViewById(R.id.purpose_radio0).setEnabled(true);
+                findViewById(R.id.purpose_radio1).setEnabled(true);
+                findViewById(R.id.purpose_radio2).setEnabled(false);
+                findViewById(R.id.purpose_radio3).setEnabled(false);
+                ((RadioButton)findViewById(R.id.purpose_radio2)).setChecked(false);
+                ((RadioButton)findViewById(R.id.purpose_radio3)).setChecked(false);
+                if(actionType == 2 || actionType == 3) {
+                    actionType = -1;
+                }
                 break;
             case R.id.radio3:
                 type = YIYUNBAO_PAY;//易运宝
+                findViewById(R.id.purpose_radio0).setEnabled(false);
+                findViewById(R.id.purpose_radio1).setEnabled(true);
+                findViewById(R.id.purpose_radio2).setEnabled(true);
+                findViewById(R.id.purpose_radio3).setEnabled(true);
+                ((RadioButton)findViewById(R.id.purpose_radio0)).setChecked(false);
+                if(actionType == 1) {
+                    actionType = -1;
+                }
                 break;
             case R.id.purpose_radio0://为本账号充值
                 payPasswordLayout.setVisibility(View.GONE);
@@ -435,14 +490,14 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                 actionType = 1;
                 break;
             case R.id.purpose_radio2://转账
-                payPasswordLayout.setVisibility(View.GONE);
+                payPasswordLayout.setVisibility(View.VISIBLE);
                 moneyForwardLayout.setVisibility(View.VISIBLE);
                 chargeHelpLayout.setVisibility(View.GONE);
                 actionType = 2;
                 break;
             case R.id.purpose_radio3://提现
                 //getMoneyGroup.setVisibility(View.VISIBLE);
-                payPasswordLayout.setVisibility(View.GONE);
+                payPasswordLayout.setVisibility(View.VISIBLE);
                 chargeHelpLayout.setVisibility(View.GONE);
                 moneyForwardLayout.setVisibility(View.GONE);
                 actionType = 3;

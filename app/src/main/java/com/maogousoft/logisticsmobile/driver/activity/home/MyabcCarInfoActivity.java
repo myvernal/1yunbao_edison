@@ -28,7 +28,8 @@ import com.ybxiang.driver.util.Utils;
  */
 public class MyabcCarInfoActivity extends BaseActivity {
 	private TextView mName, mPhone, mCarNum, mCarlength, mCartype, mCarzhaizhong,
-            myabc_id_car_contact, myabc_id_car_card_number;
+            myabc_id_car_contact, myabc_id_car_card_number, myabc_id_engine_number,
+			myabc_id_frame_car_number, myabc_id_car_registration_number;
     private ImageView mPhoto;
 	// 个人abc信息
 	private DriverInfo mDriverInfo;
@@ -60,6 +61,9 @@ public class MyabcCarInfoActivity extends BaseActivity {
 
         myabc_id_car_contact = (TextView) findViewById(R.id.myabc_id_car_contact);
         myabc_id_car_card_number = (TextView) findViewById(R.id.myabc_id_car_card_number);
+		myabc_id_engine_number = (TextView) findViewById(R.id.myabc_id_engine_number);
+		myabc_id_frame_car_number = (TextView) findViewById(R.id.myabc_id_frame_car_number);
+		myabc_id_car_registration_number = (TextView) findViewById(R.id.myabc_id_car_registration_number);
     }
 
 	// 获取我的abc信息
@@ -87,12 +91,15 @@ public class MyabcCarInfoActivity extends BaseActivity {
 									mCarlength.setText(getString(R.string.string_car_detail_car_length, mDriverInfo.getCar_length()));
 									mCarzhaizhong.setText(getString(R.string.string_car_detail_car_weight, mDriverInfo.getCar_weight()));
                                     ImageLoader.getInstance().displayImage(mDriverInfo.getId_card_photo(), mPhoto, options,
-                                            new Utils.MyImageLoadingListener(mContext, mPhoto));
+											new Utils.MyImageLoadingListener(mContext, mPhoto));
                                     mName.setText(mDriverInfo.getName());
                                     mPhone.setText(mDriverInfo.getPhone());
 
                                     myabc_id_car_contact.setText(getString(R.string.string_car_detail_contact, mDriverInfo.getLinkman()));
                                     myabc_id_car_card_number.setText(getString(R.string.string_car_detail_card_num, mDriverInfo.getFrame_number()));
+									myabc_id_engine_number.setText(getString(R.string.string_car_detail_engine_number, mDriverInfo.getEngine_number()));
+									myabc_id_frame_car_number.setText(getString(R.string.string_car_detail_frame_car_number, mDriverInfo.getFrame_car_number()));
+									myabc_id_car_registration_number.setText(getString(R.string.string_car_detail_car_registration_number, mDriverInfo.getCar_registration_number()));
                                     //车型
                                     int carTypeValue = mDriverInfo.getCar_type();
                                     String[] carTypeStr = getResources().getStringArray(R.array.car_types_name);

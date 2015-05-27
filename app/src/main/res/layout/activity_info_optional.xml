@@ -21,15 +21,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="随车手机:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@+id/info_id_register_shuiche_phone"
                     style="@style/info_edittext_style"
                     android:ems="10"
@@ -45,12 +47,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="司机姓名:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@id/info_id_register_name"
                     style="@style/info_edittext_style"
                     android:hint="司机姓名" />
@@ -63,12 +65,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="身份证号:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@+id/info_id_register_id_card"
                     style="@style/info_edittext_style"
                     android:ems="10"
@@ -83,12 +85,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="车主电话:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@+id/info_id_register_chezhu_phone"
                     style="@style/info_edittext_style"
                     android:ems="10"
@@ -104,12 +106,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="车长:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@id/info_id_register_length"
                     style="@style/info_edittext_style"
                     android:layout_weight="1"
@@ -127,7 +129,7 @@
                     android:layout_gravity="center_vertical"
                     android:text="载重:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@id/info_id_register_weight"
                     style="@style/info_edittext_style"
                     android:layout_weight="1"
@@ -148,7 +150,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="车型:" />
@@ -166,12 +168,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="车牌号:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@id/info_id_register_number"
                     style="@style/info_edittext_style"
                     android:hint="@string/string_tips_number" />
@@ -184,12 +186,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="联系人:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@+id/optional_linkman"
                     style="@style/info_edittext_style"
                     android:hint="请输入联系人" />
@@ -202,12 +204,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="车架编号:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@+id/optional_frame_number"
                     style="@style/info_edittext_style"
                     android:hint="请输入车架号" />
@@ -220,12 +222,66 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="发动机号:" />
+
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
+                    android:id="@+id/optional_engine_number"
+                    style="@style/info_edittext_style"
+                    android:hint="请输入发动机号" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="车挂车架号:" />
+
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
+                    android:id="@+id/optional_frame_car_number"
+                    style="@style/info_edittext_style"
+                    android:hint="请输入车挂车架号" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="车挂编号:" />
+
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
+                    android:id="@+id/optional_car_registration_number"
+                    style="@style/info_edittext_style"
+                    android:hint="请输入车挂编号" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="开户银行:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@+id/optional_bank"
                     style="@style/info_edittext_style"
                     android:hint="请输入开户银行" />
@@ -238,12 +294,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="银行账号:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@+id/optional_bank_account"
                     style="@style/info_edittext_style"
                     android:inputType="phone"
@@ -257,12 +313,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="账户姓名:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@+id/optional_account_name"
                     style="@style/info_edittext_style"
                     android:hint="请输入账户姓名" />
@@ -275,12 +331,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="自我推荐:" />
 
-                <EditText
+                <com.maogousoft.logisticsmobile.driver.widget.CheckEditText
                     android:id="@+id/myself_recommendation"
                     style="@style/info_edittext_style"
                     android:hint="@string/string_tips_myself_recommendation" />
@@ -294,7 +350,7 @@
 
                 <TextView
                     style="@style/info_register_text_style"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:text="头像照片:" />
 
                 <ImageView
@@ -313,7 +369,7 @@
 
                 <TextView
                     style="@style/info_register_text_style"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:text="车辆照片:" />
 
                 <ImageView

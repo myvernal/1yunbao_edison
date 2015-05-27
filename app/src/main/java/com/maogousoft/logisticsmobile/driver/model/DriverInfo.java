@@ -96,12 +96,39 @@ public class DriverInfo implements Serializable {
     private String yunbao_pay;
     private String linkman;//联系人
     private String frame_number;//车架号
+    private String engine_number;//发动机号
+    private String frame_car_number;//车挂车架号
+    private String car_registration_number;//车挂号
     private String bank;//开户银行名称
     private String account_name;//账户名称
     private String bank_account;//银行账号
     private String business_address;//办公地址
 
-    public String getYunbao_gold() {
+	public String getEngine_number() {
+		return engine_number;
+	}
+
+	public void setEngine_number(String engine_number) {
+		this.engine_number = engine_number;
+	}
+
+	public String getFrame_car_number() {
+		return frame_car_number;
+	}
+
+	public void setFrame_car_number(String frame_car_number) {
+		this.frame_car_number = frame_car_number;
+	}
+
+	public String getCar_registration_number() {
+		return car_registration_number;
+	}
+
+	public void setCar_registration_number(String car_registration_number) {
+		this.car_registration_number = car_registration_number;
+	}
+
+	public String getYunbao_gold() {
         return yunbao_gold;
     }
 

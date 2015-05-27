@@ -1,7 +1,9 @@
 package com.maogousoft.logisticsmobile.driver.widget;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -97,7 +100,7 @@ public class HeaderView extends LinearLayout implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.titlebar_id_back:
-                ((Activity)mContext).finish();
+                ((Activity) mContext).finish();
                 break;
             case R.id.titlebar_id_more:
                 mContext.startActivity(new Intent(mContext, ShareActivity.class));
@@ -106,33 +109,29 @@ public class HeaderView extends LinearLayout implements View.OnClickListener {
                 mContext.startActivity(new Intent(mContext, ShareActivity.class));
                 break;
             case R.id.titlebar_id_content:
-                if(eggNum <= 5) {
+                if (eggNum <= 5) {
                     if ((System.currentTimeMillis() - preEggTime) > btwTime) {
                         eggNum++;
                     }
                 } else {
                     //开启对话框,配置服务器地址
-                    final MyAlertDialog dialog = new MyAlertDialog(mContext);
-                    dialog.show();
-                    dialog.setCancelable(false);
-                    dialog.setTitle("修改服务器地址");
-                    dialog.displayInputView();
-                    //初始化地址
-                    dialog.getInputView().setText(SharedPreferencesProvider.getInstance(mContext).getBaseUrl());
-                    dialog.getInputView().setSelection(dialog.getInputView().length());
-                    dialog.setLeftButton("保存", new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                            if (dialog.getInputView().length() == 0) {
-                                Toast.makeText(mContext, "请输入服务器地址", Toast.LENGTH_SHORT).show();
-                            } else {
-                                SharedPreferencesProvider.getInstance(mContext).saveBaseUrl(dialog.getInputView().getText().toString());
-                                Toast.makeText(mContext, "保存成功,请退出程序,重新登录", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                    final EditText et = new EditText(mContext);
+                    et.setText(SharedPreferencesProvider.getInstance(mContext).getBaseUrl());
+                    //获取ip而已，不用在乎
+                    new AlertDialog.Builder(mContext).setCancelable(false).setTitle("修改服务器地址")
+                            .setIcon(android.R.drawable.ic_dialog_info).setView(et)
+                            .setPositiveButton("保存", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int arg1) {
+                                    if (et.length() == 0) {
+                                        Toast.makeText(mContext, "请输入服务器地址", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    dialog.dismiss();
+                                    //数据获取
+                                    SharedPreferencesProvider.getInstance(mContext).saveBaseUrl(et.getText().toString());
+                                }
+                            }).setNegativeButton("取消", null).show();
                     eggNum = 0;
                 }
                 break;
