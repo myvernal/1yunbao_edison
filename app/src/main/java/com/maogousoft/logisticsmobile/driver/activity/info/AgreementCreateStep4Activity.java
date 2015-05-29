@@ -2,9 +2,9 @@ package com.maogousoft.logisticsmobile.driver.activity.info;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -22,13 +22,13 @@ import org.json.JSONObject;
  * Created by aliang on 2014/11/13.
  */
 public class AgreementCreateStep4Activity extends BaseActivity {
-
+    private TextView payTip;
     private EditText payPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agreement_step3);
+        setContentView(R.layout.activity_agreement_step4);
         HeaderView mHeaderView = (HeaderView) findViewById(R.id.headerView);
         mHeaderView.setTitle(R.string.agreement_edit_pay_tip);
 
@@ -37,11 +37,14 @@ public class AgreementCreateStep4Activity extends BaseActivity {
     }
 
     private void initView() {
+        payTip = (TextView) findViewById(R.id.payTip);
         payPassword = (EditText) findViewById(R.id.pay_password);
     }
 
     private void initData() {
-
+        String money1 = getIntent().getStringExtra(Constants.COMMON_KEY_1);
+        String money2 = getIntent().getStringExtra(Constants.COMMON_KEY_2);
+        payTip.setText(getString(R.string.agreement_tip, money1, money2));
     }
 
     public void onNext(View view) {

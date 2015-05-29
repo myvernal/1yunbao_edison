@@ -185,6 +185,7 @@
                 <Spinner
                     android:id="@id/source_id_publish_cargo_unit"
                     style="@style/home_warp_spinner_style"
+                    android:visibility="gone"
                     android:entries="@array/car_price_unit" />
             </LinearLayout>
             <!-- 保证金 -->

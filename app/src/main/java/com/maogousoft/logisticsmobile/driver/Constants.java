@@ -164,19 +164,19 @@ public class Constants {
      */
 
 	/** 服务器地址 **/
-	public static final String DRIVER_SERVER_URL = BASE_URL + "/driver";
+	public static String DRIVER_SERVER_URL = BASE_URL + "/driver";
 	
 	/** 货主端注册地址**/
-	public static final String SHIPPER_SERVER_URL = BASE_URL + "/user";
+	public static String SHIPPER_SERVER_URL = BASE_URL + "/user";
 
 	/** 公用接口地址 **/
-	public static final String COMMON_SERVER_URL = BASE_URL + "/common";
+	public static String COMMON_SERVER_URL = BASE_URL + "/common";
 
 	/** 文件上传地址 **/
-	public static final String UPLOAD_FILE_URL = BASE_URL + "/upload/";
+	public static String UPLOAD_FILE_URL = BASE_URL + "/upload/";
 
 	/** 帮助页面地址 **/
-	public static final String HELP_SERVER_URL = BASE_URL + "/help.html";
+	public static String HELP_SERVER_URL = BASE_URL + "/help.html";
 
 	/** 司机端注册获取验证码 **/
 	public static final String DRIVER_REG_GETCODE = "driver_reg_getcode";
@@ -571,6 +571,8 @@ public class Constants {
     public static final String QUERY_ADVERT_LIST = "get_advert_list";
 
     public static final String COMMON_KEY = "common_key";
+    public static final String COMMON_KEY_1 = "common_key_1";
+    public static final String COMMON_KEY_2 = "common_key_2";
     public static final String IS_MY_REPUTATION = "IS_MY_REPUTATION";
     public static final String IS_CAR_REPUTATION = "IS_CAR_REPUTATION";
     public static final String AGREEMENT_TYPE = "AGREEMENT_TYPE";

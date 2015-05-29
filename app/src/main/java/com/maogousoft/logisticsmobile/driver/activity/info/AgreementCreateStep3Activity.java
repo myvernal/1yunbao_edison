@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.JsPromptResult;
@@ -47,7 +46,7 @@ public class AgreementCreateStep3Activity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agreement_preview_layout);
+        setContentView(R.layout.activity_agreement_step3);
         mHeaderView = (HeaderView) findViewById(R.id.headerView);
         mHeaderView.setTitle(R.string.agreement_title);
         initView();
@@ -278,8 +277,14 @@ public class AgreementCreateStep3Activity extends BaseActivity {
         }
 
         public void openPayPasswordWindow() {
+            openPayPasswordWindow("250", "150");
+        }
+
+        public void openPayPasswordWindow(String money1,String money2) {
             //验证支付密码
             Intent intent = new Intent(mContext, AgreementCreateStep4Activity.class);
+            intent.putExtra(Constants.COMMON_KEY_1, money1);
+            intent.putExtra(Constants.COMMON_KEY_2, money2);
             startActivity(intent);
             //startActivityForResult(intent, Constants.REQUEST_CODE);
         }

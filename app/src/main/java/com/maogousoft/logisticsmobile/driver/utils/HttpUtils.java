@@ -43,9 +43,9 @@ public class HttpUtils {
 				}
 				builder.deleteCharAt(builder.length() - 1);
                 String paramsUrl = builder.toString();
-                LogUtil.e("url", logBuilder.toString());
 				byte[] entityData = paramsUrl.getBytes();
 				URL _url = new URL(url);
+				LogUtil.e("url", url + "/"+ logBuilder.toString());
 				HttpURLConnection connection = (HttpURLConnection) _url.openConnection();
 				connection.setRequestMethod("POST");
 				connection.setConnectTimeout(TIME_OUT);

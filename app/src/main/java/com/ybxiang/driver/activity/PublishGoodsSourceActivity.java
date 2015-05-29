@@ -109,7 +109,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             if (unit != null && unit > 0) {
                 for (int i = 0; i < Constants.unitTypeValues.length; i++) {
                     if (Constants.unitTypeValues[i] == unit) {
-                        source_id_publish_cargo_unit.setSelection(i);
+                        source_id_publish_source_weight_unit.setSelection(i);
                     }
                 }
             }
@@ -219,7 +219,6 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             params.put("car_length", source_id_publish_car_length.getText());
             params.put("car_type", Constants.getCarTypeValues(source_id_publish_car_type.getSelectedItemPosition()));
             params.put("unit_price", source_id_publish_unit_price.getText());
-            params.put("cargo_unit", Constants.getUnitTypeValues(source_id_publish_cargo_unit.getSelectedItemPosition()));
             params.put("user_bond", source_id_publish_user_bond.getText());
             params.put("cargo_tip", ((TextView) source_id_publish_cargo_tip.getSelectedView()).getText());
             params.put("cargo_remark", source_id_publish_cargo_remark.getText());
@@ -227,8 +226,9 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             params.put("contact_phone", source_id_publish_contact_phone.getText());
             params.put("validate_day", source_id_publish_validate_day.getText());
             params.put("validate_hour", source_id_publish_validate_hour.getText());
-            //货物数量
+            //货物数量和单位
             params.put("cargo_number", source_id_publish_source_weight.getText());
+            params.put("cargo_unit", Constants.getUnitTypeValues(source_id_publish_source_weight_unit.getSelectedItemPosition()));
             if(null != mSourceInfo) {
                 params.put("id", mSourceInfo.getId());
             }

@@ -19,7 +19,7 @@ public class PhoneBroadcastListener extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        System.out.println("action" + intent.getAction());
+        LogUtil.e(TAG, "action" + intent.getAction());
         //如果是去电
         if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
             String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);

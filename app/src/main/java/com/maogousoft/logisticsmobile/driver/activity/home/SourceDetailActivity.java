@@ -9,14 +9,19 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
-import com.maogousoft.logisticsmobile.driver.activity.info.ChargeActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
-import com.maogousoft.logisticsmobile.driver.activity.info.RenZhengActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.ImageGridAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
@@ -26,13 +31,13 @@ import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.model.PopupMenuInfo;
 import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
-import com.maogousoft.logisticsmobile.driver.utils.GrabDialog;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.ybxiang.driver.util.Utils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -315,19 +320,8 @@ public class SourceDetailActivity extends BaseActivity implements AdapterView.On
         } else {
             mSourceCarType.setVisibility(View.GONE);
         }
-        //报价单位
-        Integer unitPrice = sourceInfo.getCargo_unit();
-        if (unitPrice != null && unitPrice > 0 && sourceInfo.getUnit_price() > 0) {
-            String[] unitPriceStr = mContext.getResources().getStringArray(R.array.car_price_unit);
-            for (int i = 0; i < Constants.unitTypeValues.length; i++) {
-                if (Constants.unitTypeValues[i] == unitPrice) {
-                    mSourcePrice.setText(Html.fromHtml(mSourcePrice.getText().toString() + Utils.textFormatRed(sourceInfo.getUnit_price() + "元/" + unitPriceStr[i])));
-                    break;
-                }
-            }
-        }/* else {
-            mSourcePrice.setVisibility(View.GONE);
-        }*/
+        //参考运费
+        mSourcePrice.setText(Html.fromHtml(mSourcePrice.getText().toString() + Utils.textFormatRed(sourceInfo.getUnit_price() + "元")));
         //
         mSourceGold.setText(mSourceGold.getText().toString() + sourceInfo.getUser_bond() + "元");
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");

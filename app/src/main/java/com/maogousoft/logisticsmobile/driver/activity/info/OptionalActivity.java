@@ -209,13 +209,13 @@ public class OptionalActivity extends BaseActivity {
             driverInfo = (DriverInfo) getIntent().getSerializableExtra("info");
             if (driverInfo != null) {
                 info_id_register_id_card.setText(driverInfo.getId_card(), true);
-                optional_linkman.setText(driverInfo.getLinkman(), true);
+                optional_linkman.setText(driverInfo.getLinkman(), false);
                 optional_frame_number.setText(driverInfo.getFrame_number(), true);
                 optional_engine_number.setText(driverInfo.getEngine_number(), true);
                 optional_frame_car_number.setText(driverInfo.getFrame_car_number(), true);
                 optional_car_registration_number.setText(driverInfo.getCar_registration_number(), true);
-                mShuiChePhone.setText(driverInfo.getCar_phone(), true);
-                mChezhuPhone.setText(driverInfo.getCar_phone(), true);
+                mShuiChePhone.setText(driverInfo.getCar_phone(), false);
+                mChezhuPhone.setText(driverInfo.getOwner_phone(), false);
                 mName.setText(driverInfo.getName(), true);
                 mNumber.setText(driverInfo.getPlate_number(), true);
                 mLength.setText(driverInfo.getCar_length() + "", true);
@@ -230,9 +230,9 @@ public class OptionalActivity extends BaseActivity {
                     }
                 }
 
-                optional_bank_account.setText(driverInfo.getBank_account());
-                optional_account_name.setText(driverInfo.getAccount_name());
-                optional_bank.setText(driverInfo.getBank());
+                optional_bank_account.setText(driverInfo.getBank_account(), true);
+                optional_account_name.setText(driverInfo.getAccount_name(), true);
+                optional_bank.setText(driverInfo.getBank(), true);
                 if (TextUtils.isEmpty(driverInfo.getMyself_recommendation())) {
                     myself_recommendation.setText(R.string.business_description);
                 } else {
