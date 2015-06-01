@@ -22,11 +22,28 @@
             android:id="@+id/desc"
             android:textSize="@dimen/font_size_normal" />
 
-        <Button
-            style="@style/button1_style"
-            android:id="@+id/confirm"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:onClick="onConfirm"
-            android:text="确认" />
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                style="@style/button1_style"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/error"
+                android:onClick="onError"
+                android:text="我有异议" />
+
+            <Button
+                style="@style/button1_style"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/confirm"
+                android:onClick="onConfirm"
+                android:text="确认" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

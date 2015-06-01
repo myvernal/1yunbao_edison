@@ -44,7 +44,7 @@ public class AgreementAdapter extends BaseListAdapter<AgreementInfo> {
             holder.order_line = (TextView) convertView.findViewById(R.id.order_line);
             holder.order_state = (TextView) convertView.findViewById(R.id.order_state);
 
-            if(userType == Constants.USER_SHIPPER) {
+            if (userType == Constants.USER_SHIPPER) {
                 holder.source_detail_phone.setVisibility(View.VISIBLE);
             } else {
                 holder.source_detail_phone.setVisibility(View.GONE);
@@ -87,10 +87,28 @@ public class AgreementAdapter extends BaseListAdapter<AgreementInfo> {
             betweenTime = hour + "时" + minites + "分";
         }
         holder.order_time.setText(betweenTime + "前");
-        if(agreementInfo.getStatus() == 0) {
-            holder.order_state.setText(R.string.car_info_wait);
-        } else {
-            holder.order_state.setText(R.string.car_info_doing);
+        switch (agreementInfo.getStatus()) {
+            case 0:
+                holder.order_state.setText(R.string.agreement0);
+                break;
+            case 1:
+                holder.order_state.setText(R.string.agreement1);
+                break;
+            case 2:
+                holder.order_state.setText(R.string.agreement2);
+                break;
+            case 3:
+                holder.order_state.setText(R.string.agreement3);
+                break;
+            case 4:
+                holder.order_state.setText(R.string.agreement4);
+                break;
+            case 5:
+                holder.order_state.setText(R.string.agreement5);
+                break;
+            case 6:
+                holder.order_state.setText(R.string.agreement6);
+                break;
         }
 
         //电话号码

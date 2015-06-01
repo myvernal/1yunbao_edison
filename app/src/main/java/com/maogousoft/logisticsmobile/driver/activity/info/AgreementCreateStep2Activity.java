@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
@@ -19,6 +23,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarrierInfo;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 
 import org.json.JSONException;
@@ -29,7 +34,7 @@ import java.util.List;
 /**
  * Created by aliang on 2014/11/11.
  */
-public class AgreementCreateStep2Activity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
+public class AgreementCreateStep2Activity extends BaseActivity implements CompoundButton.OnCheckedChangeListener, BDLocationListener {
 
     private static final String TAG = "AgreementCreateStep2Activity";
     private LinearLayout qiandanLayout, priceLayout, phoneLayout;
@@ -38,6 +43,9 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
     private EditText other_driver;
     private int orderId;
     private int agreementType;
+    private LocationClient mLocClient;
+    private double latitude;
+    private double longitude;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
 
         initView();
         initData();
+        locationAction();
     }
 
     private void initView() {
@@ -210,7 +219,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
                                         CarrierInfo carrierInfo = (CarrierInfo) result;
                                         if (!TextUtils.isEmpty(carrierInfo.getPath())) {
                                             final Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
-                                            intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + carrierInfo.getPath());
+                                            intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + carrierInfo.getPath() + "&latitude=" + latitude + "&longitude=" + longitude);
                                             mContext.startActivity(intent);
                                             finish();
                                         }
@@ -232,6 +241,36 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
                     });
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    // 开始定位
+    private void locationAction() {
+        showDefaultProgress();
+        mLocClient = new LocationClient(this);
+        mLocClient.registerLocationListener(this);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);// 打开gps
+        option.setCoorType("bd09ll"); // 设置坐标类型
+        option.setScanSpan(1000);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation location) {
+        LogUtil.e(TAG, "onReceiveLocation");
+        dismissProgress();
+        if (location == null) {
+            //定位失败重新定位一次
+            mLocClient.requestLocation();
+            LogUtil.e(TAG, "location:" + location);
+            return;
+        } else {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            LogUtil.e(TAG, "location:" + location.getLatitude() + "," + location.getLongitude());
+            mLocClient.stop();
         }
     }
 }

@@ -426,4 +426,6 @@ public class BaseActivity extends FragmentActivity implements OnClickListener {
         //将搜索条件传下去
         mContext.startActivity(intent);
     }
+
+
 }

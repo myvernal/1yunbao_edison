@@ -155,8 +155,8 @@ public class NewSourceInfo implements Serializable {
     private int order_place_count; //电话反馈人数
 	private String contract_status;//如果合同状态为2 显示红点，取签约失败原因
 	private String signing_failed_reason;//如果已经签约且失败，查看签约失败信息
-    private String is_able_confim_contract;//是否有邀约
-    private String is_has_invite;//是否可以订单确认
+    private String is_able_confim_contract;//是否可以订单确认
+    private String is_has_invite;//是否有邀约
     private String is_truck_loading_success;//是否装车不成功 “Y“装车不成功“N”装车成功
 
     public String getIs_truck_loading_success() {

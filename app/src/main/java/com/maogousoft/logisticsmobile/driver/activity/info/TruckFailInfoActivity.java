@@ -1,5 +1,6 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -25,6 +26,7 @@ public class TruckFailInfoActivity extends BaseActivity {
 
     private HeaderView mHeaderView;
     private TextView desc;
+    private TruckFailInfo truckFailInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class TruckFailInfoActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if(result instanceof TruckFailInfo) {
-                                        TruckFailInfo truckFailInfo = (TruckFailInfo) result;
+                                        truckFailInfo = (TruckFailInfo) result;
                                         //责任人 1托运方、2承运方 3配载方
                                         String cause = "";
                                         switch (truckFailInfo.getResponsible_people()) {
@@ -93,6 +95,13 @@ public class TruckFailInfoActivity extends BaseActivity {
 
     public void onConfirm(View view) {
         Toast.makeText(mContext, "订单确认！", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    public void onError(View view) {
+        Intent intent = new Intent(mContext, TruckFailedReasonActivity.class);
+        intent.putExtra(Constants.ORDER_ID, truckFailInfo.getOrder_id());
+        startActivity(intent);
         finish();
     }
 }

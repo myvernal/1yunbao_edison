@@ -475,6 +475,13 @@
     <string name="string_pay_wechat_pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>
     <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
     <!--车辆信息-->
+    <string name="agreement0">生成合同</string>
+    <string name="agreement1">签订了合同</string>
+    <string name="agreement2">签订合同失败</string>
+    <string name="agreement3">装车成功</string>
+    <string name="agreement4">合同完结</string>
+    <string name="agreement5">装车不成功</string>
+    <string name="agreement6">已发送给承运方</string>
     <string name="car_info_wait">找货中</string>
     <string name="car_info_doing">运货中</string>
     <string name="car_info_wait_f">车状态\t\t找货中</string>

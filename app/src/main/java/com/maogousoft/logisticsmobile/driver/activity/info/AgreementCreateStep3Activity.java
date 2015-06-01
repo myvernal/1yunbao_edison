@@ -16,7 +16,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
@@ -24,7 +23,6 @@ import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 /**
  * Created by EdisonZhao on 15/5/19.
@@ -32,16 +30,9 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 public class AgreementCreateStep3Activity extends BaseActivity {
 
     private View loadingView;
-    private ImageView imageView;
     private WebView mWebView;
-    private DisplayImageOptions options;
     private String url;
     private HeaderView mHeaderView;
-    //合同信息
-    private int orderId;
-    private int agreementType;
-    private int driverId;
-    private int driver_phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +46,10 @@ public class AgreementCreateStep3Activity extends BaseActivity {
 
     private void initView() {
         loadingView = findViewById(R.id.loading);
-        imageView = (ImageView) findViewById(R.id.image);
         mWebView = (WebView) findViewById(R.id.webView);
     }
 
     private void initData() {
-        orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
-        driver_phone = getIntent().getIntExtra(Constants.DRIVER_PHONE, -1);
-        agreementType = getIntent().getIntExtra(Constants.AGREEMENT_TYPE, -1);
-        driverId = getIntent().getIntExtra(Constants.USER_ID, -1);
         url = getIntent().getStringExtra(Constants.COMMON_KEY);
 
         WebSettings webSettings = mWebView.getSettings();
@@ -94,6 +80,7 @@ public class AgreementCreateStep3Activity extends BaseActivity {
         imageView.setVisibility(View.VISIBLE);
         loadingView.setVisibility(View.GONE);*/
         mWebView.loadUrl(url);
+        LogUtil.e(TAG, "AgreementCreateStep3Activity:" + url);
     }
 
     WebChromeClient webChromeClient = new MyWebChromeClient() {
@@ -277,7 +264,7 @@ public class AgreementCreateStep3Activity extends BaseActivity {
         }
 
         public void openPayPasswordWindow() {
-            openPayPasswordWindow("250", "150");
+            openPayPasswordWindow("**", "**");
         }
 
         public void openPayPasswordWindow(String money1,String money2) {

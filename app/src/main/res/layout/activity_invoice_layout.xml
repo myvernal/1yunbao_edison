@@ -191,5 +191,13 @@
             android:onClick="onBottomMenu3"
             android:padding="0dp"
             android:src="@drawable/invoice_import" />
+
+        <ImageView
+            android:id="@+id/menu_bottom11"
+            style="@style/InvoiceBottomMenuStyle"
+            android:background="@null"
+            android:onClick="onBottomMenu3"
+            android:padding="0dp"
+            android:src="@drawable/invoice_yaoyue_disable" />
     </LinearLayout>
 </LinearLayout>

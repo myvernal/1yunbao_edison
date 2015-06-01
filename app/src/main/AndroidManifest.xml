@@ -946,7 +946,6 @@
             android:name=".activity.info.AgreementCreateStep3Activity"
             android:configChanges="keyboardHidden|orientation"
             android:launchMode="singleInstance"
-            android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <!--财务管理-->

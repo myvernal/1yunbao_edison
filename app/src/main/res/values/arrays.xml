@@ -11,7 +11,7 @@
         <item>检查更新</item>
         <item>意见反馈</item>
         <item>联系我们</item>
-        <item>里程计算器</item>
+        <!--<item>里程计算器</item>-->
     </string-array>
     <string-array name="select_photo">
         <item>手机拍摄</item>

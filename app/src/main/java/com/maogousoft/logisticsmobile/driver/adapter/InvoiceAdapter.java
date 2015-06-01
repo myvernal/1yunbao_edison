@@ -108,11 +108,24 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
         if (TextUtils.equals("Y", sourceInfo.getIs_able_confim_contract()) || TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())
                 || TextUtils.equals("Y", sourceInfo.getIs_has_invite()) || TextUtils.equals("2", sourceInfo.getContract_status())) {
             holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line_h, 0, 0, 0);
-            //是否签约成功
-            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_time, 0, R.drawable.invoice_icon, 0);
+            holder.order_info.setTextColor(mContext.getResources().getColor(R.color.title_bg));
+
+            holder.order_id.setTextColor(mContext.getResources().getColor(R.color.title_bg));
+            if (TextUtils.equals("Y", sourceInfo.getIs_able_confim_contract())) {
+                holder.order_id.setText("" + sourceInfo.getId() + "（订单确认）");
+            } else if (TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())) {
+                holder.order_id.setText("" + sourceInfo.getId() + "（装车不成功）");
+            } else if (TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
+                holder.order_id.setText("" + sourceInfo.getId() + "（邀约）");
+            } else if (TextUtils.equals("2", sourceInfo.getContract_status())) {
+                holder.order_id.setText("" + sourceInfo.getId() + "（签约失败）");
+            }
         } else {
             holder.order_info.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_line, 0, 0, 0);
-            holder.order_id.setCompoundDrawablesWithIntrinsicBounds(R.drawable.source_time, 0, 0, 0);
+            holder.order_info.setTextColor(mContext.getResources().getColor(R.color.TextColorBlack));
+
+            holder.order_id.setTextColor(mContext.getResources().getColor(R.color.TextColorBlack));
+            holder.order_id.setText("" + sourceInfo.getId());
         }
 
         holder.order_info.setText(title.toString());
@@ -120,8 +133,6 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
         holder.order_money.setText(Html.fromHtml(String.format(mResources
                         .getString(R.string.string_home_newsource_order_money),
                 sourceInfo.getUser_bond())));
-
-        holder.order_id.setText("" + sourceInfo.getId());
         //电话号码
         holder.source_detail_phone.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,21 +1,15 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -23,9 +17,7 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
-import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
-import com.ybxiang.driver.util.Utils;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -43,7 +35,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 /**
  * Created by aliang on 2014/11/4.
@@ -54,7 +45,7 @@ public class TruckFailedReasonActivity extends BaseActivity {
     private View userShipper, userDriver, userThird;
     private ImageView photo1, photo2, photo3;
     private int responsibleCause = 1;
-    private NewSourceInfo sourceInfo;
+    private int orderId;
     // 保存车辆照片的list
     private String mCarPhotos1;
     private String mCarPhotos2;
@@ -92,7 +83,7 @@ public class TruckFailedReasonActivity extends BaseActivity {
     }
 
     private void initData() {
-        sourceInfo = (NewSourceInfo) getIntent().getSerializableExtra(Constants.COMMON_KEY);
+        orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
     }
 
     @Override
@@ -182,7 +173,7 @@ public class TruckFailedReasonActivity extends BaseActivity {
             jsonObject.put(Constants.ACTION, Constants.TRUCK_LOADING_FAIL);
             jsonObject.put(Constants.TOKEN, application.getToken());
             JSONObject params = new JSONObject();
-            params.put("order_id", sourceInfo.getId());
+            params.put("order_id", orderId);
             params.put("responsible_people", responsibleCause);
             params.put("evidence_material", moreReason.getText());
             StringBuilder stringBuilder = new StringBuilder();

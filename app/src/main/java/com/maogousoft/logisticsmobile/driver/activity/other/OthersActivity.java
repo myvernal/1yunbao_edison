@@ -71,8 +71,7 @@ public class OthersActivity extends BaseActivity implements
 				R.drawable.selector_others_bank,
 				R.drawable.selector_others_update,
 				R.drawable.selector_others_advice,
-				R.drawable.selector_others_contact,
-				R.drawable.selector_others_calc};
+				R.drawable.selector_others_contact};
 		final int lenght = arrays.length;
 		for (int i = 0; i < lenght; i++) {
 			Map<String, Object> map = new HashMap<String, Object>();

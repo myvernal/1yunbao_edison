@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.cloud.CloudManager;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
@@ -16,6 +21,7 @@ import com.maogousoft.logisticsmobile.driver.activity.fragment.InvoiceFragment;
 import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep1Activity;
 import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep3Activity;
 import com.maogousoft.logisticsmobile.driver.activity.info.TruckFailedReasonActivity;
+import com.maogousoft.logisticsmobile.driver.adapter.CloudSearchAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.CommonFragmentPagerAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -35,7 +41,7 @@ import java.util.ArrayList;
 /**
  * Created by aliang on 2015/4/25.
  */
-public class InvoiceActivity extends BaseActivity {
+public class InvoiceActivity extends BaseActivity implements BDLocationListener {
     private ViewPager mPager;
     private ArrayList<Fragment> fragmentList;
     private View guid1, guid2, guid3;
@@ -46,6 +52,9 @@ public class InvoiceActivity extends BaseActivity {
     private InvoiceFragment secondFragment;
     private InvoiceFragment thirdFragment;
     private int currIndex = 0;//当前页卡编号
+    private LocationClient mLocClient;
+    private double latitude;
+    private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +65,8 @@ public class InvoiceActivity extends BaseActivity {
         //mHeaderView.setMoreTitle(R.string.invoice_tip_title);
         initView();
         initViewPager();
+        //先定位
+        locationAction();
     }
 
     @Override
@@ -168,9 +179,8 @@ public class InvoiceActivity extends BaseActivity {
                                 InviteInfo inviteInfo = (InviteInfo) result;
                                 LogUtil.d(TAG, inviteInfo.getContract_url());
                                 Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
-                                startActivity(intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + inviteInfo.getContract_url()));
+                                startActivity(intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + inviteInfo.getContract_url() + "&latitude=" + latitude + "&longitude=" + longitude));
                             }
-                            //firstFragment.removeDataAndNotifyDataChange(sourceInfo);
                         }
                     });
                 } else {
@@ -197,7 +207,7 @@ public class InvoiceActivity extends BaseActivity {
             case R.id.menu_bottom4:
                 //装车不成功货单(通用)
                 Intent intent = new Intent(mContext, TruckFailedReasonActivity.class);
-                intent.putExtra(Constants.COMMON_KEY, sourceInfo);
+                intent.putExtra(Constants.ORDER_ID, sourceInfo.getId());
                 startActivity(intent);
                 break;
             case R.id.menu_bottom5:
@@ -255,6 +265,25 @@ public class InvoiceActivity extends BaseActivity {
             case R.id.menu_bottom10:
                 //导入合同(货主)
                 startActivity(new Intent(mContext, AgreementCreateStep1Activity.class).putExtra(Constants.ORDER_ID, sourceInfo.getId()));
+                break;
+            case R.id.menu_bottom11:
+                //接受邀约货单(货主)
+                if(TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
+                    doAction(Constants.ACCEPT_CONTRACT_INVITE, params.toString(), false, InviteInfo.class, new ActionCallBack() {
+                        @Override
+                        public void onCallBack(Object result) {
+                            if(result instanceof InviteInfo) {
+                                InviteInfo inviteInfo = (InviteInfo) result;
+                                LogUtil.d(TAG, inviteInfo.getContract_url());
+                                Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
+                                startActivity(intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + inviteInfo.getContract_url() + "&latitude=" + latitude + "&longitude=" + longitude));
+                            }
+                            //firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                        }
+                    });
+                } else {
+                    showMsg("该货单没有被邀约！");
+                }
                 break;
         }
     }
@@ -324,6 +353,36 @@ public class InvoiceActivity extends BaseActivity {
         mPager.setCurrentItem(0);//设置当前显示标签页为第一页
         mPager.setOnPageChangeListener(new MyOnPageChangeListener());//页面变化时的监听器
         mPager.setOffscreenPageLimit(3);
+    }
+
+    // 开始定位
+    private void locationAction() {
+        showDefaultProgress();
+        mLocClient = new LocationClient(this);
+        mLocClient.registerLocationListener(this);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);// 打开gps
+        option.setCoorType("bd09ll"); // 设置坐标类型
+        option.setScanSpan(1000);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation location) {
+        LogUtil.e(TAG, "onReceiveLocation");
+        dismissProgress();
+        if (location == null) {
+            //定位失败重新定位一次
+            mLocClient.requestLocation();
+            LogUtil.e(TAG, "location:" + location);
+            return;
+        } else {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            LogUtil.e(TAG, "location:" + location.getLatitude() + "," + location.getLongitude());
+            mLocClient.stop();
+        }
     }
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
@@ -406,8 +465,10 @@ public class InvoiceActivity extends BaseActivity {
                     //是否可以接受邀约
                     if(TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
                         ((ImageView)findViewById(R.id.menu_bottom3)).setImageResource(R.drawable.invoice_yaoyue);
+                        ((ImageView)findViewById(R.id.menu_bottom11)).setImageResource(R.drawable.invoice_yaoyue);
                     } else {
                         ((ImageView)findViewById(R.id.menu_bottom3)).setImageResource(R.drawable.invoice_yaoyue_disable);
+                        ((ImageView)findViewById(R.id.menu_bottom11)).setImageResource(R.drawable.invoice_yaoyue_disable);
                     }
                     break;
                 case 2:
