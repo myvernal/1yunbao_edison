@@ -92,6 +92,18 @@ public class AccountRecordAdapter extends BaseListAdapter<AccountRecordInfo> {
             case AccountRecordInfo.BUSINESS_TYPE_INSURE_PAID:
                 typeStr = "购买保险扣除";
                 break;
+            case AccountRecordInfo.BUSINESS_TYPE_CONTRACT:
+                typeStr = "合同交易冻结";
+                break;
+            case AccountRecordInfo.BUSINESS_TYPE_CONTRACT_DEDUCT:
+                typeStr = "合同交易扣除";
+                break;
+            case AccountRecordInfo.CONTRACT_MARGIN_RETURN:
+                typeStr = "合同交易返还";
+                break;
+            case AccountRecordInfo.CONTRACT_AGENCY_FUND_TO_CONSIGN_USER:
+                typeStr = "合同交易代收款收入";
+                break;
 		}
 
 		holder.mode.text(typeStr);

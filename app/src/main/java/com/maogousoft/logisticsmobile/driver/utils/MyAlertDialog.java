@@ -20,10 +20,6 @@ import com.maogousoft.logisticsmobile.driver.R;
  */
 public class MyAlertDialog extends AlertDialog {
 
-	public MyAlertDialog(Context context) {
-		super(context, R.style.DialogTheme);
-	}
-
 	private TextView mTitle;
 
 	private TextView mMessage;
@@ -31,6 +27,14 @@ public class MyAlertDialog extends AlertDialog {
     private EditText mInput;
 
 	private Button button1, button2, button3;
+
+    public MyAlertDialog(Context context) {
+        super(context);
+    }
+
+    public MyAlertDialog(Context context, int theme) {
+        super(context, theme);
+    }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +71,7 @@ public class MyAlertDialog extends AlertDialog {
         mInput.setVisibility(View.VISIBLE);
 		mInput.setFocusable(true);
 		mInput.requestFocus();
-		onFocusChange(true);
+		//onFocusChange(true);
 	}
 
     public EditText getInputView() {

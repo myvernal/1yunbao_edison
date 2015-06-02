@@ -1,6 +1,7 @@
 package com.maogousoft.logisticsmobile.driver.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -158,6 +159,15 @@ public class NewSourceInfo implements Serializable {
     private String is_able_confim_contract;//是否可以订单确认
     private String is_has_invite;//是否有邀约
     private String is_truck_loading_success;//是否装车不成功 “Y“装车不成功“N”装车成功
+    private List<CarrierInfo> carrierInfoList;//抢单报价列表
+
+    public List<CarrierInfo> getCarrierInfoList() {
+        return carrierInfoList;
+    }
+
+    public void setCarrierInfoList(List<CarrierInfo> carrierInfoList) {
+        this.carrierInfoList = carrierInfoList;
+    }
 
     public String getIs_truck_loading_success() {
         return is_truck_loading_success;

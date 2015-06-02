@@ -84,7 +84,29 @@ public class AccountRecordInfo implements Serializable {
      */
     public static final int BUSINESS_TYPE_INSURE_PAID = 13 ;
 
-	/**
+    /**
+     * 合同交易冻结
+     */
+    public static final int BUSINESS_TYPE_CONTRACT = 14;
+
+    /**
+     * 合同交易扣除
+     */
+    public static final int BUSINESS_TYPE_CONTRACT_DEDUCT = 15;
+
+    /**
+     * 合同交易返还
+     */
+    public static final int CONTRACT_MARGIN_RETURN = 16;
+
+    /**
+     * 合同交易代收款收入
+     */
+    public static final int CONTRACT_AGENCY_FUND_TO_CONSIGN_USER = 17;
+
+
+
+    /**
 	 * 
 	 */
 	private static final long serialVersionUID = -2893166774843992078L;

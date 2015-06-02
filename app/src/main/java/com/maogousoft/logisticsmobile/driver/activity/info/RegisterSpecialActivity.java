@@ -41,6 +41,7 @@ import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.MD5;
+import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 
 /**
  * 注册
@@ -440,8 +441,7 @@ public class RegisterSpecialActivity extends BaseActivity {
 										.toString(), mUserInfo.getDriver_id(), mUserInfo.getId());
 								application.startXMPPService();
 
-								final com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog dialog = new com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog(
-                                        mContext);
+								final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
 								dialog.show();
 								dialog.setTitle("提示");
 								dialog.setMessage("注册成功");

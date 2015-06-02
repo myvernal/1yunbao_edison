@@ -146,7 +146,7 @@ public class SearchCarSourceActivity extends BaseActivity {
                 if (application.checkIsRegOptional()) {
                     submit();
                 } else {
-                    final MyAlertDialog dialog = new MyAlertDialog(mContext);
+                    final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
                     dialog.show();
                     dialog.setTitle("提示");
                     dialog.setMessage("请完善信息，否则无法提供适合你车型、线路的货源。");

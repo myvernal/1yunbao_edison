@@ -120,7 +120,7 @@ public class LoadingActivity extends BaseActivity {
             super.onPostExecute(result);
             // 判断当前网络是否可用
             if (!application.checkNetWork()) {
-                MyAlertDialog dialog = new MyAlertDialog(mContext);
+                MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
                 dialog.show();
                 dialog.setTitle("提示");
                 dialog.setMessage("网络错误,请检查网络!");

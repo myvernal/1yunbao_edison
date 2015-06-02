@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.Html;
 import android.text.TextUtils;
-import android.view.Gravity;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -18,9 +19,13 @@ import com.maogousoft.logisticsmobile.driver.activity.home.InvoiceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.TruckFailInfoActivity;
 import com.maogousoft.logisticsmobile.driver.db.CityDBUtils;
+import com.maogousoft.logisticsmobile.driver.model.CarrierInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
+import com.maogousoft.logisticsmobile.driver.widget.InvoiceCarrierView;
+
+import java.util.List;
 
 /**
  * Created by aliang on 2015/4/26.
@@ -33,6 +38,7 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
     private boolean isShowRadioButton;
     private int userType;
     private boolean isShowPeopleNumber;
+    private SparseArray<List<CarrierInfo>> sparseArray = new SparseArray<List<CarrierInfo>>();
     private InvoiceActivity.SelectItemCallBack callBack;
 
     public InvoiceAdapter(Context context, boolean isShowRadioButton, boolean isShowPeopleNumber, int userType, InvoiceActivity.SelectItemCallBack itemCallBack) {
@@ -58,6 +64,8 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
             holder.radioButton = (RadioButton) convertView.findViewById(R.id.radioButton);
 
             holder.source_detail_right_shipper = convertView.findViewById(R.id.source_detail_right_shipper);
+            holder.carrierButton = (CheckBox) convertView.findViewById(R.id.carrierButton);
+            holder.carrierView = (InvoiceCarrierView) convertView.findViewById(R.id.carrierView);
             holder.invoice_qd = (TextView) convertView.findViewById(R.id.invoice_qd);
             holder.invoice_bj = (TextView) convertView.findViewById(R.id.invoice_bj);
             holder.invoice_call = (TextView) convertView.findViewById(R.id.invoice_call);
@@ -68,7 +76,6 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
                 if (isShowPeopleNumber) {
                     holder.source_detail_right_shipper.setVisibility(View.VISIBLE);
                 }
-                holder.source_detail_phone.setVisibility(View.GONE);
             }
             convertView.setTag(holder);
         } else {
@@ -208,12 +215,31 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
             holder.invoice_call.setText(mContext.getString(R.string.invoice_action_number, num3));
         }
 
+        holder.carrierButton.setChecked(false);
+        holder.carrierView.setVisibility(View.GONE);
+        holder.carrierButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if(checked) {
+                    holder.carrierView.setVisibility(View.VISIBLE);
+                    holder.carrierView.initData(sourceInfo.getId(), sparseArray.get(sourceInfo.getId()), application, new DataCallBack() {
+                        @Override
+                        public void callBack(List<CarrierInfo> list) {
+                            sparseArray.put(sourceInfo.getId(), list);
+                        }
+                    });
+                } else {
+                    holder.carrierView.setVisibility(View.GONE);
+                }
+            }
+        });
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //如果状态是2,则合同签约失败,可查看失败状态
                 if (TextUtils.equals("2", sourceInfo.getContract_status())) {
-                    final MyAlertDialog dialog = new MyAlertDialog(mContext);
+                    final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
                     dialog.show();
                     dialog.setTitle("签约失败");
                     dialog.setMessage(sourceInfo.getSigning_failed_reason());
@@ -257,6 +283,12 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
         TextView order_info, order_info_detail, order_money, order_id;
         TextView invoice_qd, invoice_bj, invoice_call;
         View source_detail_phone, source_detail_right_shipper;
+        InvoiceCarrierView carrierView;
         RadioButton radioButton;
+        CheckBox carrierButton;
+    }
+
+    public interface DataCallBack {
+        void callBack(List<CarrierInfo> list);
     }
 }

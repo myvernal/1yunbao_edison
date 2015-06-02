@@ -67,7 +67,7 @@ public class BaseHelper {
 	 *            图标
 	 */
 	public static void showDialog(Context context, String strTitle, String strText, int icon) {
-		final MyAlertDialog tDialog = new MyAlertDialog(context);
+		final MyAlertDialog tDialog = new MyAlertDialog(context, R.style.DialogTheme);
         tDialog.show();
 		tDialog.setTitle(strTitle);
 		tDialog.setMessage(strText);

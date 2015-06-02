@@ -328,7 +328,7 @@ public class MyabcActivityDriver extends BaseActivity {
 	 */
 	public void onSound(View view) {
 
-		final MyAlertDialog dialog = new MyAlertDialog(mContext);
+		final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
 		dialog.show();
 		dialog.setTitle("提示");
 		dialog.setMessage("收到新货源，需要提示音么？");

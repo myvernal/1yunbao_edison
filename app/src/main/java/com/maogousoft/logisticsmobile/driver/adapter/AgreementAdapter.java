@@ -109,6 +109,9 @@ public class AgreementAdapter extends BaseListAdapter<AgreementInfo> {
             case 6:
                 holder.order_state.setText(R.string.agreement6);
                 break;
+            case 7:
+                holder.order_state.setText(R.string.agreement7);
+                break;
         }
 
         //电话号码

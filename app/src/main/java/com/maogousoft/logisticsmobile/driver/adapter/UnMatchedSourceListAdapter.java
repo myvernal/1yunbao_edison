@@ -172,7 +172,7 @@ public class UnMatchedSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 		@Override
 		public void onClick(View v) {
 			if (sourceInfo != null) {
-				final MyAlertDialog dialog = new MyAlertDialog(mContext);
+				final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
 				dialog.show();
 				dialog.setTitle("提示");
 				dialog.setMessage("您确定要取消抢单吗？");

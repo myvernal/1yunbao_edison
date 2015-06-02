@@ -77,7 +77,7 @@ public class SpreadActivity extends BaseActivity implements
 	
 	// 我要推广
 	public void onSpread(View view) {
-		final MyAlertDialog dialog = new MyAlertDialog(mContext);
+		final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
 		dialog.show();
 		dialog.setTitle("提示");
 		dialog.setMessage("使用此功能会扣除X个物流币");

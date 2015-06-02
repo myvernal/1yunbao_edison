@@ -154,7 +154,7 @@ public class SourceDetailActivity extends BaseActivity implements AdapterView.On
                 order_id = getIntent().getIntExtra(Constants.ORDER_ID, 0);
                 getSourceDetail(order_id);
             } else {
-                final MyAlertDialog dialog = new MyAlertDialog(mContext);
+                final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
                 dialog.show();
                 dialog.setTitle("提示");
                 dialog.setMessage("请完善信息，否则无法提供适合你车型、线路的货源。");

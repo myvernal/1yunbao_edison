@@ -482,6 +482,7 @@
     <string name="agreement4">合同完结</string>
     <string name="agreement5">装车不成功</string>
     <string name="agreement6">已发送给承运方</string>
+    <string name="agreement7">待托运方签</string>
     <string name="car_info_wait">找货中</string>
     <string name="car_info_doing">运货中</string>
     <string name="car_info_wait_f">车状态\t\t找货中</string>

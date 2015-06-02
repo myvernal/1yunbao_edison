@@ -283,8 +283,7 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
                                                     if (balance < (messagePrice + Double.parseDouble(mInput.getText().toString()))) {
                                                         dismissProgress();
 
-                                                        final MyAlertDialog dialogCharg = new MyAlertDialog(
-                                                                context);
+                                                        final MyAlertDialog dialogCharg = new MyAlertDialog(context, R.style.DialogTheme);
                                                         dialogCharg.show();
                                                         dialogCharg.setTitle("提示");
                                                         dialogCharg.setMessage("需要金额"

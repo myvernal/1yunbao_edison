@@ -142,7 +142,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
             if (TextUtils.equals("Y", carrierInfo.getIs_grab_single_car())) {
                 RadioButton button = new RadioButton(mContext);
                 button.setTextAppearance(mContext, R.style.CarrierItemStyle);
-                button.setText(carrierInfo.getName() + "\t" + carrierInfo.getPhone() + "\t" + getString(R.string.agreement_carrier_price, carrierInfo.getDriver_price()));
+                button.setText(carrierInfo.getName() + "\t" + carrierInfo.getPhone());
                 button.setOnCheckedChangeListener(this);
                 button.setTag(carrierInfo);
                 qiandanLayout.addView(button);
@@ -158,7 +158,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
             if (TextUtils.equals("Y", carrierInfo.getIs_phone_car())) {
                 RadioButton button = new RadioButton(mContext);
                 button.setTextAppearance(mContext, R.style.CarrierItemStyle);
-                button.setText(carrierInfo.getName() + "\t" + carrierInfo.getPhone() + "\t" + getString(R.string.agreement_carrier_price, carrierInfo.getDriver_price()));
+                button.setText(carrierInfo.getName() + "\t" + carrierInfo.getPhone());
                 button.setOnCheckedChangeListener(this);
                 button.setTag(carrierInfo);
                 phoneLayout.addView(button);

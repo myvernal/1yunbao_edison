@@ -101,7 +101,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof PayOrderResult) {
                                         final PayOrderResult payOrderResult = (PayOrderResult) result;
-                                        final MyAlertDialog dialog = new MyAlertDialog(mContext);
+                                        final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
                                         dialog.show();
                                         dialog.setTitle(R.string.string_pay_wechat_tip);
                                         dialog.setMessage(switchTradeStateDesc(payOrderResult.getTrade_state()));

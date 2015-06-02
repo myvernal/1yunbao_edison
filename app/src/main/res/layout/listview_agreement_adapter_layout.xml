@@ -107,7 +107,8 @@
                     android:layout_width="70dp"
                     android:layout_height="35dp"
                     android:background="@drawable/selector_common_btn_empty"
-                    android:src="@drawable/phone_img" />
+                    android:src="@drawable/phone_img"
+                    android:visibility="gone"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

@@ -132,7 +132,7 @@ public class BaseFragmentActivity extends FragmentActivity implements
 
 	protected void exitAppHint() {
 
-		final MyAlertDialog dialog = new MyAlertDialog(context);
+		final MyAlertDialog dialog = new MyAlertDialog(context, R.style.DialogTheme);
 		dialog.show();
 		dialog.setTitle("提示");
 		dialog.setMessage("您确定要退出么？");

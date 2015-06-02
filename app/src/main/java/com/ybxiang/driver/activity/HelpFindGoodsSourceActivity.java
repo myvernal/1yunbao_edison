@@ -28,7 +28,7 @@ public class HelpFindGoodsSourceActivity extends BaseActivity implements
 	}
 
 	public void onHelpFindGoods(View view) {
-		final MyAlertDialog dialog = new MyAlertDialog(mContext);
+		final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
 		dialog.show();
 		dialog.setTitle("提示");
 		dialog.setMessage("使用此功能将会扣除您X个物流币");

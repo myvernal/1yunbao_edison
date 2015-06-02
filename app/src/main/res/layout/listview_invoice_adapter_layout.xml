@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
@@ -11,7 +11,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_marginTop="30dp"
         android:id="@+id/radioButton"
         android:gravity="center"
         android:padding="8dp"
@@ -21,8 +21,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/rightLayout"
         android:background="@color/TextColorWhite"
         android:padding="5dp"
+        android:layout_toRightOf="@+id/radioButton"
         android:orientation="vertical">
 
         <TextView
@@ -78,48 +80,69 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/source_id_order_info_detail"
+                android:id="@+id/source_detail_right_shipper"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/carrierButton"
+                    android:background="@null"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/carrier_check_box_style"
+                    android:layout_alignBottom="@+id/rightLayout" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="3dp"
+                    android:id="@+id/invoice_qd"
+                    android:textSize="@dimen/font_size_normal"
+                    android:textColor="@color/TextColorGray"
+                    android:drawableLeft="@drawable/invoice_qd" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="3dp"
+                    android:id="@+id/invoice_bj"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/TextColorGray"
+                    android:textSize="@dimen/font_size_normal"
+                    android:drawableLeft="@drawable/invoice_bj" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="3dp"
+                    android:id="@+id/invoice_call"
+                    android:textColor="@color/TextColorGray"
+                    android:textSize="@dimen/font_size_normal"
+                    android:drawableLeft="@drawable/invoice_call" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/source_detail_right_layout"
                 android:layout_marginLeft="5dp"
                 android:layout_alignParentRight="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/source_detail_right_shipper"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="3dp"
-                        android:id="@+id/invoice_qd"
-                        android:textSize="@dimen/font_size_normal"
-                        android:textColor="@color/TextColorGray"
-                        android:drawableLeft="@drawable/invoice_qd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="3dp"
-                        android:id="@+id/invoice_bj"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:textColor="@color/TextColorGray"
-                        android:textSize="@dimen/font_size_normal"
-                        android:drawableLeft="@drawable/invoice_bj" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="3dp"
-                        android:id="@+id/invoice_call"
-                        android:textColor="@color/TextColorGray"
-                        android:textSize="@dimen/font_size_normal"
-                        android:drawableLeft="@drawable/invoice_call" />
-                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/source_detail_phone"
@@ -131,4 +154,12 @@
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <com.maogousoft.logisticsmobile.driver.widget.InvoiceCarrierView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rightLayout"
+        android:layout_marginTop="10dp"
+        android:id="@+id/carrierView"
+        android:visibility="gone" />
+</RelativeLayout>

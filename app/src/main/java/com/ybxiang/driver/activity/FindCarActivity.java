@@ -112,7 +112,7 @@ public class FindCarActivity extends BaseActivity {
 			if (application.checkIsRegOptional()) {
 				submit();
 			} else {
-				final MyAlertDialog dialog = new MyAlertDialog(mContext);
+				final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
 				dialog.show();
 				dialog.setTitle("提示");
 				dialog.setMessage("请完善信息，否则无法提供适合你车型、线路的货源。");
@@ -236,8 +236,7 @@ public class FindCarActivity extends BaseActivity {
 									// 您当月的免费搜索次数已经用完
 
 									// if (result.equals("您当月的免费搜索次数已经用完")) {
-									final MyAlertDialog dialog = new MyAlertDialog(
-                                            mContext);
+									final MyAlertDialog dialog = new MyAlertDialog(mContext, R.style.DialogTheme);
 									dialog.show();
 									dialog.setTitle("提示");
 									// 您本月的搜索次数已达到10次，你须要向朋友分享易运宝才能继续使用搜索功能！
