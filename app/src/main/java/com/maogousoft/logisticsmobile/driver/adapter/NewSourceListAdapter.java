@@ -40,15 +40,10 @@ import java.util.Date;
 public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 
     private MyProgressDialog progressDialog;
-
-    // 信息费
-    private double messagePrice;
-    private boolean isShowBottomMenu;
     private CityDBUtils dbUtils;
 
-    public NewSourceListAdapter(Context context, boolean isShowBottomMenu) {
+    public NewSourceListAdapter(Context context) {
         super(context);
-        this.isShowBottomMenu = isShowBottomMenu;
         dbUtils = new CityDBUtils(application.getCitySDB());
         progressDialog = new MyProgressDialog(context);
         progressDialog.setCancelable(true);
@@ -68,10 +63,6 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             holder.tvDjs = (TextView) convertView.findViewById(R.id.tv_djs);
             holder.source_qiangdan = convertView.findViewById(R.id.source_id_order_grab);
             holder.source_baojia = convertView.findViewById(R.id.source_id_order_state);
-            if(!isShowBottomMenu) {
-                holder.source_qiangdan.setVisibility(View.GONE);
-                holder.source_baojia.setVisibility(View.GONE);
-            }
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -152,31 +143,6 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
 
         @Override
         public void onClick(View v) {
-            // 先检测是否已经 通过了 诚信认证
-            /*if (application.checkIsThroughRezheng()) {
-                getBalance(sourceInfo, ctx);
-			} else {
-				final MyAlertDialog dialog = new MyAlertDialog(ctx);
-				dialog.show();
-				dialog.setTitle("提示");
-				dialog.setMessage("为确保诚信交易，你必须提供相关证件方可得到货主的认可。");
-				dialog.setLeftButton("诚信认证", new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-						Intent intent = new Intent(ctx, RenZhengActivity.class);
-						ctx.startActivity(intent);
-					}
-				});
-				dialog.setRightButton("取消", new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-					}
-				});
-			}*/
             if(v.getId() == R.id.source_id_order_grab) {
                 //抢单
                 placeOrder(sourceInfo, (TextView) v);
@@ -192,160 +158,6 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
     static class ViewHolder {
         TextView order_info, order_info_detail, order_money, tvDjs;
         View source_detail_phone, source_qiangdan, source_baojia;
-    }
-
-    // 获取余额，并抢单
-    private void getBalance(final NewSourceInfo mSourceInfo, final Context context) {
-
-        messagePrice = 0;
-
-        // 信息费为运价的3%，不超过200元
-
-        try {
-            if (mSourceInfo.getPrice() == null
-                    || mSourceInfo.getPrice().equalsIgnoreCase("")) {
-                messagePrice = 0;
-            } else {
-                messagePrice = Double.parseDouble(mSourceInfo.getPrice()) * 0.03;
-                if (messagePrice > 200) {
-                    messagePrice = 200;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        final GrabDialog dialog = new GrabDialog(context);
-        dialog.show();
-        final EditText mInput = (EditText) dialog
-                .findViewById(android.R.id.text1);
-        final EditText mInput2 = (EditText) dialog
-                .findViewById(android.R.id.text2);
-        TextView t = (TextView) dialog.findViewById(R.id.grabdialog_text);
-        TextView t1 = (TextView) dialog.findViewById(R.id.grabdialog_text1);
-        TextView t2 = (TextView) dialog.findViewById(R.id.grabdialog_text2);
-        t.setVisibility(View.VISIBLE);
-        t1.setVisibility(View.VISIBLE);
-        t2.setVisibility(View.VISIBLE);
-        mInput2.setVisibility(View.VISIBLE);
-        if (mSourceInfo.getPrice() == null
-                || mSourceInfo.getPrice().equalsIgnoreCase("")) {
-            mInput2.setText("0");
-        } else {
-            mInput2.setText(mSourceInfo.getPrice());
-        }
-        dialog.setTitle("提示");
-
-        mInput.setText(mSourceInfo.getUser_bond() + "");
-
-        String messageStr = String.format("请输入保证金,保证金必须大于等于%d元。",
-                mSourceInfo.getUser_bond())
-                + String.format("如达成交易，将付出信息费%d物流币。", Integer
-                .parseInt(new java.text.DecimalFormat("0")
-                        .format(messagePrice)));
-        dialog.setMessage(messageStr);
-        dialog.setLeftButton("确定", new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (TextUtils.isEmpty(mInput.getText())
-                            || mSourceInfo.getUser_bond() > Integer
-                            .parseInt(mInput.getText().toString())) {
-                        Toast.makeText(
-                                context,
-                                String.format("保证金必须大于等于%d元",
-                                        mSourceInfo.getUser_bond()),
-                                Toast.LENGTH_SHORT).show();
-                    } else if (TextUtils.isEmpty(mInput2.getText())
-                            || Integer.parseInt(mInput2.getText().toString()) < 0) {
-                        Toast.makeText(context, "自报价：必须大于0元哦",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        dialog.dismiss();
-                        final JSONObject jsonObject = new JSONObject();
-                        try {
-                            jsonObject.put(Constants.ACTION, Constants.GET_ACCOUNT_GOLD);
-                            jsonObject.put(Constants.TOKEN, application.getToken());
-                            showProgress(mResources.getString(R.string.tips_sourcedetail_qiang));
-                            ApiClient.doWithObject(Constants.COMMON_SERVER_URL,
-                                    jsonObject, null, new AjaxCallBack() {
-
-                                        @Override
-                                        public void receive(int code, Object result) {
-                                            switch (code) {
-                                                case ResultCode.RESULT_OK:
-                                                    JSONObject object = (JSONObject) result;
-                                                    // mBalance.setText(String.format(getString(R.string.string_home_myabc_balance),
-                                                    // object.optDouble("gold")));
-                                                    double balance = object.optDouble("gold");
-
-                                                    if (balance < (messagePrice + Double.parseDouble(mInput.getText().toString()))) {
-                                                        dismissProgress();
-
-                                                        final MyAlertDialog dialogCharg = new MyAlertDialog(context, R.style.DialogTheme);
-                                                        dialogCharg.show();
-                                                        dialogCharg.setTitle("提示");
-                                                        dialogCharg.setMessage("需要金额"
-                                                                + (messagePrice + Double.parseDouble(mInput.getText().toString()))
-                                                                + "元，您的余额不足，请先充值。");
-                                                        dialogCharg.setLeftButton("去充值", new OnClickListener() {
-                                                            @Override
-                                                            public void onClick(View v) {
-                                                                Intent intent = new Intent(context, ChargeActivity.class);
-                                                                context.startActivity(intent);
-                                                            }
-                                                        });
-
-                                                        dialogCharg.setRightButton("取消", new OnClickListener() {
-
-                                                            @Override
-                                                            public void onClick(
-                                                                    View v) {
-                                                                dialogCharg.dismiss();
-                                                            }
-                                                        });
-                                                    } else {
-                                                        //placeOrder(mSourceInfo);
-                                                    }
-                                                    break;
-                                                case ResultCode.RESULT_FAILED:
-                                                    dismissProgress();
-                                                    Toast.makeText(context,
-                                                            result.toString(),
-                                                            Toast.LENGTH_SHORT)
-                                                            .show();
-                                                    break;
-                                                case ResultCode.RESULT_ERROR:
-                                                    dismissProgress();
-                                                    Toast.makeText(context,
-                                                            result.toString(),
-                                                            Toast.LENGTH_SHORT)
-                                                            .show();
-                                                    break;
-
-                                                default:
-                                                    break;
-                                            }
-                                        }
-                                    });
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        dialog.setRightButton("取消", new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
     }
 
     /**

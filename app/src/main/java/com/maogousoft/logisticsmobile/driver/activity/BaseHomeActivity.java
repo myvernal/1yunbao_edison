@@ -43,7 +43,7 @@ public class BaseHomeActivity extends  BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mImageLoader = ((MGApplication) getApplication()).getImageLoader();
-        adUrlArray = new String[]{"" + R.drawable.top_ad_1, "" + R.drawable.top_ad_2, "" + R.drawable.top_ad_3};
+        adUrlArray = new String[]{"" + R.drawable.banner, "" + R.drawable.banner1, "" + R.drawable.banner2};
         initViews();
         getAdvertList();
     }

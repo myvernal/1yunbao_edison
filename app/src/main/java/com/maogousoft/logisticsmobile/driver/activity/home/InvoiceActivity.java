@@ -212,6 +212,10 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                 break;
             case R.id.menu_bottom5:
                 //已装车货单(通用)
+                if (TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())) {
+                    showMsg("装车不成功，不能选择已装车！");
+                    return;
+                }
                 doAction(Constants.TRUCK_LOADING_FINISH, params.toString(), true, null);
                 break;
             case R.id.menu_bottom6:

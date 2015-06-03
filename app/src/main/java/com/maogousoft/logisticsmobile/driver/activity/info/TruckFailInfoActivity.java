@@ -100,7 +100,7 @@ public class TruckFailInfoActivity extends BaseActivity {
 
     public void onError(View view) {
         Intent intent = new Intent(mContext, TruckFailedReasonActivity.class);
-        intent.putExtra(Constants.ORDER_ID, truckFailInfo.getOrder_id());
+        intent.putExtra(Constants.COMMON_KEY, Integer.parseInt(truckFailInfo.getOrder_id()));
         startActivity(intent);
         finish();
     }

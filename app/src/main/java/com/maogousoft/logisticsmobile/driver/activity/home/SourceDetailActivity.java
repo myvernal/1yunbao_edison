@@ -621,12 +621,13 @@ public class SourceDetailActivity extends BaseActivity implements AdapterView.On
         List<PopupMenuInfo> moreList = new ArrayList<PopupMenuInfo>();
         moreList.add(new PopupMenuInfo("分享", R.drawable.header_more_share));
         moreList.add(new PopupMenuInfo("礼品", R.drawable.header_more_present));
-        moreList.add(new PopupMenuInfo("关注", R.drawable.header_more_focus));
-        moreList.add(new PopupMenuInfo("好友", R.drawable.header_more_follow));
         moreList.add(new PopupMenuInfo("抢单", R.drawable.header_more_qd));
         moreList.add(new PopupMenuInfo("报价", R.drawable.header_more_money));
         moreList.add(new PopupMenuInfo("短信", R.drawable.header_more_message));
         moreList.add(new PopupMenuInfo("电话", R.drawable.header_more_call));
+        if(application.getUserType() == Constants.USER_DRIVER) {
+            moreList.add(new PopupMenuInfo("关注", R.drawable.header_more_focus));
+        }
         return moreList;
     }
 
@@ -641,22 +642,19 @@ public class SourceDetailActivity extends BaseActivity implements AdapterView.On
                 startActivity(new Intent(mContext, ShareActivity.class));
                 break;
             case 2:
-                attentionOrder();
-                break;
-            case 3:
-                attentionOrder();
-                break;
-            case 4:
                 placeOrder();
                 break;
-            case 5:
+            case 3:
                 onBaojia();
                 break;
-            case 6:
+            case 4:
                 onSendMessage();
                 break;
-            case 7:
+            case 5:
                 onCall();
+                break;
+            case 6:
+                attentionOrder();
                 break;
         }
     }

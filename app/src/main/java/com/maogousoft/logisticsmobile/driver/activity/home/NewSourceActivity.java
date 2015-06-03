@@ -143,7 +143,7 @@ public class NewSourceActivity extends BaseListActivity implements
             addHeaderSearchView();
         }
 
-        mAdapter = new NewSourceListAdapter(mContext, application.getUserType() == Constants.USER_DRIVER);
+        mAdapter = new NewSourceListAdapter(mContext);
         setListAdapter(mAdapter);
         setListShown(false);
     }
@@ -161,7 +161,6 @@ public class NewSourceActivity extends BaseListActivity implements
         ((BaseListActivity) mContext).setIsRightKeyIntoShare(false);
         switch (v.getId()) {
             case R.id.titlebar_id_more:
-                // mMore
                 switch (rightButton) {
                     case 0:// 查找新货源
                         startActivity(new Intent(mContext, SearchSourceActivity.class));
@@ -169,9 +168,6 @@ public class NewSourceActivity extends BaseListActivity implements
                         break;
                     case 1:// 关注此线路
                         doFocus();
-                        //Toast.makeText(mContext, "关注此线路成功", Toast.LENGTH_SHORT).show();
-                        // startActivity(new Intent(mContext,
-                        // SearchSourceActivity.class));
                         break;
                     case 2:
                         startActivity(new Intent(mContext, MyFriendsActivity.class));
@@ -359,9 +355,7 @@ public class NewSourceActivity extends BaseListActivity implements
             getData(pageIndex);
         }
         //如果是拨打的货主电话，弹出反馈页面
-        if(application.getUserType() == Constants.USER_DRIVER
-                && TextUtils.equals(Constants.CALL_NUMBER_SOURCE, Constants.CALL_NUMBER)
-                && !TextUtils.isEmpty(Constants.CALL_NUMBER_SOURCE)) {
+        if(TextUtils.equals(Constants.CALL_NUMBER_SOURCE, Constants.CALL_NUMBER) && !TextUtils.isEmpty(Constants.CALL_NUMBER_SOURCE)) {
             Constants.CALL_NUMBER = "";
             Constants.CALL_NUMBER_SOURCE = "";
 
@@ -395,13 +389,13 @@ public class NewSourceActivity extends BaseListActivity implements
             }
             switch (view.getId()) {
                 case R.id.error_type1:
-                    callFeedBack(Constants.CALL_NUMBER_SOURCE_ORDER_ID, 1);//信息有误
+                    callFeedBack(Constants.CALL_NUMBER_SOURCE_ORDER_ID, 1);//电话反馈(信息有误)
                     break;
                 case R.id.error_type2:
-                    callFeedBack(Constants.CALL_NUMBER_SOURCE_ORDER_ID, 3);//没有谈好
+                    callFeedBack(Constants.CALL_NUMBER_SOURCE_ORDER_ID, 3);//电话反馈(没有谈好)
                     break;
                 case R.id.error_type3:
-                    callFeedBack(Constants.CALL_NUMBER_SOURCE_ORDER_ID, 2);//货已订出
+                    callFeedBack(Constants.CALL_NUMBER_SOURCE_ORDER_ID, 2);//电话反馈(货已订出)
                     break;
                 case R.id.qiangdan:
                     placeOrder(Constants.CALL_NUMBER_SOURCE_ORDER_ID);
@@ -618,57 +612,4 @@ public class NewSourceActivity extends BaseListActivity implements
         }
         return listRestul;
     }
-
-    // PR104 begin
-
-    /**
-     * 货物状态反馈 货已拉走，价格太低，联系不上，虚假信息
-     *
-     * @param view
-     */
-    public void onFeedback(View view) {
-        // public void onFeedback(){ only for test
-        // Toast.makeText(mContext,R.string.feedback_msg,
-        // Toast.LENGTH_LONG).show();
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
-                .setItems(R.array.feedback_type,
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                // TODO Auto-generated method stub
-                                switch (which) {
-                                    case 0:
-                                        Toast.makeText(mContext,
-                                                R.string.feedback_hylz,
-                                                Toast.LENGTH_SHORT).show();
-                                        break;
-                                    case 1:
-                                        Toast.makeText(mContext,
-                                                R.string.feedback_jgtd,
-                                                Toast.LENGTH_SHORT).show();
-                                        break;
-                                    case 2:
-                                        Toast.makeText(mContext,
-                                                R.string.feedback_lxbs,
-                                                Toast.LENGTH_SHORT).show();
-                                        break;
-                                    case 3:
-                                        Toast.makeText(mContext,
-                                                R.string.feedback_xjxx,
-                                                Toast.LENGTH_SHORT).show();
-                                        break;
-
-                                    default:
-                                        Toast.makeText(mContext,
-                                                R.string.feedback_error,
-                                                Toast.LENGTH_SHORT).show();
-                                        break;
-                                }
-                            }
-                        });
-        builder.create().show();
-    }
-    // PR104 end
 }

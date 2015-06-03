@@ -6,7 +6,6 @@ import java.io.Serializable;
  * Created by aliang on 2015/5/24.
  */
 public class TruckFailInfo implements Serializable {
-
     private String order_id; //货单ID
     private int responsible_people; //责任人 1托运方、2承运方 3配载方
     private String evidence_material; //补充证据材料
