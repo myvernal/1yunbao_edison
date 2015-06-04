@@ -211,12 +211,10 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                 startActivity(intent);
                 break;
             case R.id.menu_bottom5:
-                //已装车货单(通用)
-                if (TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())) {
-                    showMsg("装车不成功，不能选择已装车！");
-                    return;
+                //已装车货单(通用):如果货单装车不成功,则不能执行已装车请求
+                if (!TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())) {
+                    doAction(Constants.TRUCK_LOADING_FINISH, params.toString(), true, null);
                 }
-                doAction(Constants.TRUCK_LOADING_FINISH, params.toString(), true, null);
                 break;
             case R.id.menu_bottom6:
                 //订单确认货单(通用)
@@ -482,6 +480,12 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                         ((ImageView)findViewById(R.id.menu_bottom6)).setImageResource(R.drawable.invoice_confirm);
                     } else {
                         ((ImageView)findViewById(R.id.menu_bottom6)).setImageResource(R.drawable.invoice_confirm_disable);
+                    }
+
+                    if (TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())) {
+                        ((ImageView)findViewById(R.id.menu_bottom5)).setImageResource(R.drawable.invoice_success_disable);
+                    } else {
+                        ((ImageView)findViewById(R.id.menu_bottom5)).setImageResource(R.drawable.invoice_success);
                     }
                     break;
                 case 3:
