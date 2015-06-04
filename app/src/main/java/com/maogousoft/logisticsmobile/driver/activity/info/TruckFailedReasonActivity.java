@@ -42,7 +42,7 @@ import java.io.File;
 public class TruckFailedReasonActivity extends BaseActivity {
 
     private EditText moreReason;
-    private View userShipper, userDriver, userThird;
+    private View userShipper, userDriver;
     private ImageView photo1, photo2, photo3;
     private int responsibleCause = 1;
     private int orderId;
@@ -76,10 +76,8 @@ public class TruckFailedReasonActivity extends BaseActivity {
         photo3 = (ImageView) findViewById(R.id.photo3);
         userShipper = findViewById(R.id.user_shipper);
         userDriver = findViewById(R.id.user_driver);
-        userThird = findViewById(R.id.user_third);
         userShipper.setOnClickListener(this);
         userDriver.setOnClickListener(this);
-        userThird.setOnClickListener(this);
     }
 
     private void initData() {
@@ -93,19 +91,11 @@ public class TruckFailedReasonActivity extends BaseActivity {
             case R.id.user_shipper:
                 responsibleCause = 1;
                 userShipper.setSelected(true);
-                userThird.setSelected(false);
-                userDriver.setSelected(false);
-                break;
-            case R.id.user_third:
-                responsibleCause = 2;
-                userShipper.setSelected(false);
-                userThird.setSelected(true);
                 userDriver.setSelected(false);
                 break;
             case R.id.user_driver:
-                responsibleCause = 3;
+                responsibleCause = 2;
                 userShipper.setSelected(false);
-                userThird.setSelected(false);
                 userDriver.setSelected(true);
                 break;
 

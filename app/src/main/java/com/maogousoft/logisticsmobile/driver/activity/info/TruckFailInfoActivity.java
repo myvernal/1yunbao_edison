@@ -75,9 +75,6 @@ public class TruckFailInfoActivity extends BaseActivity {
                                             case 2:
                                                 cause = "承运方";
                                                 break;
-                                            case 3:
-                                                cause = "配载方";
-                                                break;
                                         }
                                         desc.setText(Html.fromHtml(getString(R.string.truck_loading_fail, cause)));
                                     }

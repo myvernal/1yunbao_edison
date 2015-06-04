@@ -40,20 +40,7 @@
                     android:gravity="center"
                     android:text="托运方"
                     android:drawablePadding="5dp"
-                    android:drawableLeft="@drawable/selector_radio" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1px"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/user_third"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="承运方"
-                    android:drawablePadding="5dp"
-                    android:drawableLeft="@drawable/selector_radio" />
+                    android:drawableLeft="@drawable/radiobutton" />
 
                 <View
                     android:layout_width="0dp"
@@ -64,9 +51,14 @@
                     android:id="@+id/user_driver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="配载方"
+                    android:text="承运方"
                     android:drawablePadding="5dp"
-                    android:drawableLeft="@drawable/selector_radio" />
+                    android:drawableLeft="@drawable/radiobutton" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1" />
             </RadioGroup>
 
             <TextView
