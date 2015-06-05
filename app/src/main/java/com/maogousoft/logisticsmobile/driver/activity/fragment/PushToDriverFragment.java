@@ -1,39 +1,42 @@
-package com.ybxiang.driver.activity;
+package com.maogousoft.logisticsmobile.driver.activity.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.*;
-import android.widget.AbsListView.OnScrollListener;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
-import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
-import com.maogousoft.logisticsmobile.driver.activity.CarCloudSearchActivity;
-import com.maogousoft.logisticsmobile.driver.activity.home.SearchCarSourceActivity;
-import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
+import com.maogousoft.logisticsmobile.driver.activity.BaseListFragment;
+import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep3Activity;
+import com.maogousoft.logisticsmobile.driver.adapter.AgreementAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.MyCarInfoListAdapter;
-import com.maogousoft.logisticsmobile.driver.adapter.SearchCarInfoListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.model.AgreementInfo;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.model.CarInfoList;
-import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarsListActivity extends BaseListActivity implements
-        OnClickListener, OnScrollListener {
-    private Button mTitleBarMore;
-    private TextView mTitleBarContent;
+/**
+ * Created by EdisonZhao on 15/6/5.
+ */
+public class PushToDriverFragment extends BaseListFragment implements AbsListView.OnScrollListener {
+    private static final String TAG = "PushToDriverFragment";
+    private int orderId = 0;
     // 底部更多
-    private View mFootView, mHeaderView;
+    private View mFootView;
     private ProgressBar mFootProgress;
     private TextView mFootMsg;
     // 当前模式
@@ -44,93 +47,34 @@ public class CarsListActivity extends BaseListActivity implements
     private boolean state_idle = false;
     // 已加载全部
     private boolean load_all = false;
-    //查询类型
-    private String queryAction = Constants.QUERY_MY_FLEET; //默认为我的车队
-    private JSONObject queryParams = new JSONObject();
-    private boolean isMyCarsFilter = false;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initViews();
-        initData(getIntent());
+    public static PushToDriverFragment newInstance(int agreementType) {
+        PushToDriverFragment newFragment = new PushToDriverFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.AGREEMENT_TYPE, agreementType);
+        newFragment.setArguments(bundle);
+        //bundle还可以在每个标签里传送数据
+        return newFragment;
     }
 
-    private void initViews() {
-        mTitleBarContent = ((TextView) findViewById(R.id.titlebar_id_content));
-        mTitleBarContent.setText("我的车队");
-        // 返回按钮生效
-
-        // 更多按钮隐藏
-        mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
-        mTitleBarMore.setText("添加车辆");
-        mTitleBarMore.setOnClickListener(this);
-
-        // 数据加载中进度条
-        mFootView = getLayoutInflater().inflate(R.layout.listview_footview, null);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        Bundle args = getArguments();
+        orderId = args.getInt(Constants.ORDER_ID, 0);
+        // 页脚信息
+        mFootView = LayoutInflater.from(mContext).inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
         mFootProgress = (ProgressBar) mFootView.findViewById(android.R.id.progress);
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
         mListView.setOnScrollListener(this);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        initData(intent);
-    }
-
-    private void initData(Intent intent) {
-        //从车源搜索页面过来的
-        String params = intent.getStringExtra(Constants.COMMON_KEY);
-        String action = intent.getStringExtra(Constants.COMMON_ACTION_KEY);
-        isMyCarsFilter = intent.getBooleanExtra(Constants.MY_CARS_SEARCH, false);
-        if(!TextUtils.isEmpty(params) && !TextUtils.isEmpty(action)) {
-            try {
-                queryParams = new JSONObject(params);
-                queryAction = action;
-                if(isMyCarsFilter) {
-                    // 我的车队的adapter
-                    mAdapter = new MyCarInfoListAdapter(mContext);
-                    if(mListView.getHeaderViewsCount() <= 0) {
-                        mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
-                        mHeaderView.setOnClickListener(this);
-                        mListView.addHeaderView(mHeaderView);
-                    } else {
-                        mListView.removeHeaderView(mHeaderView);
-                    }
-                } else {
-                    // 搜索车源的adapter
-                    mAdapter = new SearchCarInfoListAdapter(mContext);
-                    mTitleBarContent.setText("搜索车源列表");
-                    if(Constants.QUERY_CAR_SOURCE.equals(action)) {
-                        mTitleBarMore.setText("地图显示");
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        } else {
-            // 我的车队的adapter
-            mAdapter = new MyCarInfoListAdapter(mContext);
-            mHeaderView = getLayoutInflater().inflate(R.layout.listview_header_search_layout, null);
-            mHeaderView.setOnClickListener(this);
-            mListView.addHeaderView(mHeaderView);
-        }
+        mAdapter = new MyCarInfoListAdapter(mContext);
         setListAdapter(mAdapter);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // list未加载数据不显示
-        // 重新刷新数据
         setListShown(false);
-        mAdapter.removeAll();
-        pageIndex = 1;
-        load_all = false;
+
         getData(pageIndex);
+        return view;
     }
 
     // 请求指定页数的数据
@@ -138,11 +82,11 @@ public class CarsListActivity extends BaseListActivity implements
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put(Constants.ACTION, queryAction);
+            jsonObject.put(Constants.ACTION, Constants.QUERY_MY_FLEET);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            jsonObject.put(Constants.JSON, queryParams.put("page", page).toString());
+            jsonObject.put(Constants.JSON, new JSONObject().put("page", page).toString());
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
-                    isMyCarsFilter ? CarInfoList.class : CarInfo.class, new AjaxCallBack() {
+                    CarInfoList.class, new AjaxCallBack() {
                         @Override
                         public void receive(int code, Object result) {
                             setListShown(true);
@@ -163,10 +107,6 @@ public class CarsListActivity extends BaseListActivity implements
                                             }
                                             mAdapter.addAll(mList);
                                             mAdapter.notifyDataSetChanged();
-                                        }
-                                        //如果是我的车队,显示共有多少辆车
-                                        if(queryAction.equals(Constants.QUERY_MY_FLEET)) {
-                                            ((TextView) mHeaderView.findViewById(R.id.number)).setText(getString(R.string.string_car_number, carInfoList.getTotalRow()));
                                         }
                                     }
                                     if (result instanceof ArrayList) {
@@ -210,35 +150,17 @@ public class CarsListActivity extends BaseListActivity implements
     }
 
     @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        switch (v.getId()) {
-            case R.id.titlebar_id_more:
-                if(Constants.QUERY_CAR_SOURCE.equals(queryAction)) {
-                    Intent intent = new Intent(mContext, CarCloudSearchActivity.class);
-                    //地图显示车辆信息
-                    if(mAdapter.getCount() > 0) {
-                        intent.putExtra(Constants.COMMON_KEY, (Serializable) mAdapter.getList());
-                    }
-                    intent.putExtra(Constants.MY_CARS_SEARCH, true);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(mContext, AddCarActivity.class);
-                    startActivityForResult(intent, Constants.REQUEST_CODE);
-                }
-                break;
-            case R.id.search:
-                Intent searchIntent = new Intent(mContext, SearchCarSourceActivity.class);
-                searchIntent.putExtra(Constants.COMMON_KEY, (java.io.Serializable) mAdapter.getList());
-                searchIntent.putExtra(Constants.MY_CARS_SEARCH, true);
-                startActivity(searchIntent);
-                break;
-        }
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        final Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
+        String url = ((AgreementAdapter) mAdapter).getList().get(position).getContract_page_url();
+        intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + url);
+        startActivity(intent);
     }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (scrollState != OnScrollListener.SCROLL_STATE_IDLE) {
+        if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
             return;
         }
         if (state != WAIT) {

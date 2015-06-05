@@ -261,6 +261,7 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                 startActivity(new Intent(mContext, PublishGoodsSourceActivity.class).putExtra(Constants.COMMON_KEY, sourceInfo));
                 break;
             case R.id.menu_bottom9:
+                //PopupWindow发送推送
                 //推送货单(货主)
                 doAction(Constants.PUSH_ORDER, params.toString(), true, null);
                 break;
