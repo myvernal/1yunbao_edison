@@ -1,27 +1,32 @@
-package com.maogousoft.logisticsmobile.driver.activity.fragment;
+package com.maogousoft.logisticsmobile.driver.activity.info;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListFragment;
 import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep3Activity;
 import com.maogousoft.logisticsmobile.driver.adapter.AgreementAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.MyCarInfoListAdapter;
+import com.maogousoft.logisticsmobile.driver.adapter.PushToDriverAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.AgreementInfo;
 import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.model.CarInfoList;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +37,7 @@ import java.util.List;
 /**
  * Created by EdisonZhao on 15/6/5.
  */
-public class PushToDriverFragment extends BaseListFragment implements AbsListView.OnScrollListener {
+public class PushToDriverActivity extends BaseListActivity implements AbsListView.OnScrollListener {
     private static final String TAG = "PushToDriverFragment";
     private int orderId = 0;
     // 底部更多
@@ -48,20 +53,21 @@ public class PushToDriverFragment extends BaseListFragment implements AbsListVie
     // 已加载全部
     private boolean load_all = false;
 
-    public static PushToDriverFragment newInstance(int agreementType) {
-        PushToDriverFragment newFragment = new PushToDriverFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(Constants.AGREEMENT_TYPE, agreementType);
-        newFragment.setArguments(bundle);
-        //bundle还可以在每个标签里传送数据
-        return newFragment;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initView();
+        initData();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-        Bundle args = getArguments();
-        orderId = args.getInt(Constants.ORDER_ID, 0);
+    private void initView() {
+        orderId = getIntent().getIntExtra(Constants.ORDER_ID, 0);
+        TextView mTitleBarContent = ((TextView) findViewById(R.id.titlebar_id_content));
+        mTitleBarContent.setText("推送");
+        // 更多按钮隐藏
+        TextView mTitleBarMore = (Button) findViewById(R.id.titlebar_id_more);
+        mTitleBarMore.setText("确定");
+        mTitleBarMore.setOnClickListener(this);
         // 页脚信息
         mFootView = LayoutInflater.from(mContext).inflate(R.layout.listview_footview, null);
         mFootView.setClickable(false);
@@ -69,12 +75,12 @@ public class PushToDriverFragment extends BaseListFragment implements AbsListVie
         mFootMsg = (TextView) mFootView.findViewById(android.R.id.text1);
         mListView.addFooterView(mFootView);
         mListView.setOnScrollListener(this);
-        mAdapter = new MyCarInfoListAdapter(mContext);
+        mAdapter = new PushToDriverAdapter(mContext);
         setListAdapter(mAdapter);
-        setListShown(false);
+    }
 
+    private void initData() {
         getData(pageIndex);
-        return view;
     }
 
     // 请求指定页数的数据
@@ -95,22 +101,6 @@ public class PushToDriverFragment extends BaseListFragment implements AbsListVie
                                     if (result instanceof CarInfoList) {
                                         CarInfoList carInfoList = (CarInfoList) result;
                                         List<CarInfo> mList = carInfoList.getList();
-                                        if (mList == null || mList.isEmpty()) {
-                                            load_all = true;
-                                            mFootProgress.setVisibility(View.GONE);
-                                            mFootMsg.setText("已加载全部");
-                                        } else {
-                                            if (mList.size() < 10) {
-                                                load_all = true;
-                                                mFootProgress.setVisibility(View.GONE);
-                                                mFootMsg.setText("已加载全部");
-                                            }
-                                            mAdapter.addAll(mList);
-                                            mAdapter.notifyDataSetChanged();
-                                        }
-                                    }
-                                    if (result instanceof ArrayList) {
-                                        List<CarInfo> mList = (List<CarInfo>) result;
                                         if (mList == null || mList.isEmpty()) {
                                             load_all = true;
                                             mFootProgress.setVisibility(View.GONE);
@@ -150,12 +140,61 @@ public class PushToDriverFragment extends BaseListFragment implements AbsListVie
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        final Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
-        String url = ((AgreementAdapter) mAdapter).getList().get(position).getContract_page_url();
-        intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + url);
-        startActivity(intent);
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.titlebar_id_more:
+                SparseArray<CarInfo> sparseArray = ((PushToDriverAdapter) mAdapter).getSelectedDriver();
+                if (sparseArray.size() == 0) {
+                    showMsg("请选择需要推送的车源！");
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < sparseArray.size(); i++) {
+                        int key = sparseArray.keyAt(i);
+                        CarInfo carInfo = sparseArray.get(key);
+                        if (carInfo.getDriverInfo() != null) {
+                            sb.append(carInfo.getDriverInfo().getId()).append(",");
+                        }
+                    }
+                    String drivers = sb.toString();
+                    if(drivers.length() > 0) {
+                        drivers = drivers.substring(0, drivers.length() - 1);
+                        doAction(drivers);
+                    } else {
+                        showMsg("抱歉，你选择的车源没有司机信息！");
+                    }
+                }
+                break;
+        }
+    }
+
+    private void doAction(String drivers) {
+        try {
+            showProgress("正在处理");
+            LogUtil.d(TAG, "push driver:" + drivers);
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.PUSH_ORDER);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, new JSONObject().put("order_id", orderId).put("driver_id", drivers));
+
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    null, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    showMsg("请求已发送");
+                                    break;
+                                default:
+                                    showMsg(result.toString());
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

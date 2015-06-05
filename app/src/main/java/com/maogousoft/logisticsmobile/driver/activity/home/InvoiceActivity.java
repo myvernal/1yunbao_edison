@@ -20,6 +20,7 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.fragment.InvoiceFragment;
 import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep1Activity;
 import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep3Activity;
+import com.maogousoft.logisticsmobile.driver.activity.info.PushToDriverActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.TruckFailedReasonActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.CloudSearchAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.CommonFragmentPagerAdapter;
@@ -261,9 +262,8 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                 startActivity(new Intent(mContext, PublishGoodsSourceActivity.class).putExtra(Constants.COMMON_KEY, sourceInfo));
                 break;
             case R.id.menu_bottom9:
-                //PopupWindow发送推送
                 //推送货单(货主)
-                doAction(Constants.PUSH_ORDER, params.toString(), true, null);
+                startActivity(new Intent(mContext, PushToDriverActivity.class).putExtra(Constants.ORDER_ID, sourceInfo.getId()));
                 break;
             case R.id.menu_bottom10:
                 //导入合同(货主)
@@ -494,6 +494,10 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                     break;
             }
         }
+    }
+
+    public void showPushSourceWindow() {
+
     }
 
     interface ActionCallBack {

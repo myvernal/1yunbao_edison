@@ -271,6 +271,9 @@ public class Constants {
     /** 推送货源 */
     public static final String PUSH_ORDER = "push_order";
 
+    /** 装车失败确认完结货单 */
+    public static final String LOADING_FAIL_CONTRACT_BALANCE = "loading_fail_contract_balance";
+
 	/** 账户余额 **/
 	public static final String GET_ACCOUNT_GOLD = "get_account_gold";
 

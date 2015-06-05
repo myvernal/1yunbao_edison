@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:background="@color/TextColorWhite"
+    android:padding="3dp"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox"
+        android:drawableLeft="@drawable/radiobutton"
+        android:button="@null"
+        android:background="@null"
+        android:padding="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TextColorWhite"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/car_info_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/TextColorBlack"
+            android:drawableLeft="@drawable/source_line"
+            android:drawablePadding="3dp"
+            android:gravity="left|top"
+            android:textSize="16sp" />
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/car_info_desc"
+                style="@style/home_source_order_info_style"
+                android:drawableLeft="@drawable/source_detail"
+                android:drawablePadding="3dp"
+                android:textSize="@dimen/font_size_normal"
+                android:textColor="@color/font_gray3"
+                android:layout_toLeftOf="@id/source_detail_phone" />
+
+            <TextView
+                android:id="@+id/car_info_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/car_resource_state"
+                android:drawablePadding="3dp"
+                android:textColor="@color/common_btn_bg"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/car_info_desc"
+                android:textSize="@dimen/font_size_normal"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/car_info_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/source_coins"
+                android:drawablePadding="3dp"
+                android:textColor="@color/common_btn_bg"
+                android:layout_toRightOf="@+id/car_info_state"
+                android:layout_below="@id/car_info_desc"
+                android:layout_marginLeft="10dp"
+                android:textSize="@dimen/font_size_normal"
+                android:singleLine="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

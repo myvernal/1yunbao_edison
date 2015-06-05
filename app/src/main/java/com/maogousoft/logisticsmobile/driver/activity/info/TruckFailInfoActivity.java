@@ -14,6 +14,7 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.TruckFailInfo;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 
 import org.json.JSONException;
@@ -27,6 +28,7 @@ public class TruckFailInfoActivity extends BaseActivity {
     private HeaderView mHeaderView;
     private TextView desc;
     private TruckFailInfo truckFailInfo;
+    private int orderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class TruckFailInfoActivity extends BaseActivity {
     }
 
     private void initData() {
-        int orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
+        orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
         getData(orderId);
     }
 
@@ -64,7 +66,7 @@ public class TruckFailInfoActivity extends BaseActivity {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    if(result instanceof TruckFailInfo) {
+                                    if (result instanceof TruckFailInfo) {
                                         truckFailInfo = (TruckFailInfo) result;
                                         //责任人 1托运方、2承运方 3配载方
                                         String cause = "";
@@ -91,8 +93,33 @@ public class TruckFailInfoActivity extends BaseActivity {
     }
 
     public void onConfirm(View view) {
-        Toast.makeText(mContext, "订单确认！", Toast.LENGTH_SHORT).show();
-        finish();
+        try {
+            showProgress("正在处理");
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.LOADING_FAIL_CONTRACT_BALANCE);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, new JSONObject().put("order_id", orderId));
+
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    null, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    showMsg("装车失败确认完结货单!");
+                                    finish();
+                                    break;
+                                default:
+                                    showMsg(result.toString());
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onError(View view) {
