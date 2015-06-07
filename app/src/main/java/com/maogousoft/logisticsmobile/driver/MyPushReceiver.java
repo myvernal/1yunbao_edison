@@ -22,10 +22,13 @@ import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper.LocCallback;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MD5;
+import com.ybxiang.driver.util.Utils;
+
 import org.jivesoftware.smack.packet.Message;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -58,8 +61,7 @@ public class MyPushReceiver extends BroadcastReceiver {
             // int order_id = 0;
 
             if (mNotificationManager == null) {
-                mNotificationManager = (NotificationManager) context
-                        .getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager = (NotificationManager) context .getSystemService(Context.NOTIFICATION_SERVICE);
             }
 
             JSONObject json;
@@ -301,27 +303,19 @@ public class MyPushReceiver extends BroadcastReceiver {
 
     private static Uri getSound(Context ctx) {
         Uri uri;
-
         Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
-
         if (hour > 22 || hour < 7) {
-            uri = Uri.parse("android.resource://" + ctx.getPackageName() + "/"
-                    + R.raw.silence);
+            uri = Uri.parse("android.resource://" + ctx.getPackageName() + "/" + R.raw.silence);
         } else {
             MGApplication app = (MGApplication) ctx.getApplicationContext();
-
             if (app.checkIsRingNewSource()) {
-                uri = Uri.parse("android.resource://" + ctx.getPackageName()
-                        + "/" + R.raw.mm);
+                uri = Uri.parse("android.resource://" + ctx.getPackageName() + "/" + R.raw.mm);
             } else {
-                uri = Uri.parse("android.resource://" + ctx.getPackageName()
-                        + "/" + R.raw.silence);
+                uri = Uri.parse("android.resource://" + ctx.getPackageName() + "/" + R.raw.silence);
             }
         }
-
         return uri;
-
     }
 
     // 登录

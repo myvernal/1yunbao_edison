@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.ImageView;
@@ -34,6 +36,22 @@ public class Utils {
         value = value.replace("{", "<font color=#FE5722>");
         value = value.replace("}", "</font>");
         return value;
+    }
+
+    /**
+     * 播放提示音
+     * @param context
+     * @throws IllegalArgumentException
+     * @throws SecurityException
+     * @throws IllegalStateException
+     * @throws IOException
+     */
+    public static void soundRing(Context context) throws IllegalArgumentException, SecurityException, IllegalStateException, IOException{
+        MediaPlayer mp = new MediaPlayer();
+        mp.reset();
+        mp.setDataSource(context, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        mp.prepare();
+        mp.start();
     }
 
     public static String textFormatBold(String value) {

@@ -469,6 +469,7 @@
     <string name="invoice_2">待装货单(%s)</string>
     <string name="invoice_3">历史货单(%s)</string>
     <string name="truck_loading_fail">因&lt;font color=&quot;#FE5722&quot;&gt; %s &lt;/font&gt;责任装车不成功，对方请求确认结算</string>
+    <string name="truck_loading_fail_other">因&lt;font color=&quot;#FE5722&quot;&gt; 托运方和承运方 &lt;/font&gt;都有异议，请联系平台客服</string>
     <!-- pay -->
     <string name="string_pay_wechat_tip">提示</string>
     <string name="string_pay_wechat_getting_prepayid">正在获取支付订单...</string>

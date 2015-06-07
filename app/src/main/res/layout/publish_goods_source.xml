@@ -296,17 +296,7 @@
 
                 <EditText
                     style="@style/info_edittext_weight_style"
-                    android:inputType="number"
-                    android:id="@id/source_id_publish_validate_day"
-                    android:text="0" />
-
-                <TextView
-                    style="@style/info_register_text_style"
-                    android:text="天" />
-
-                <EditText
-                    style="@style/info_edittext_weight_style"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:id="@id/source_id_publish_validate_hour"
                     android:text="8" />
 

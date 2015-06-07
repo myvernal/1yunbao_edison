@@ -3,9 +3,9 @@ package com.maogousoft.logisticsmobile.driver.activity.info;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
@@ -14,11 +14,13 @@ import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.TruckFailInfo;
-import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by aliang on 2015/5/24.
@@ -27,7 +29,7 @@ public class TruckFailInfoActivity extends BaseActivity {
 
     private HeaderView mHeaderView;
     private TextView desc;
-    private TruckFailInfo truckFailInfo;
+    private List<TruckFailInfo> truckFailInfoList;
     private int orderId;
 
     @Override
@@ -66,19 +68,29 @@ public class TruckFailInfoActivity extends BaseActivity {
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
-                                    if (result instanceof TruckFailInfo) {
-                                        truckFailInfo = (TruckFailInfo) result;
-                                        //责任人 1托运方、2承运方 3配载方
-                                        String cause = "";
-                                        switch (truckFailInfo.getResponsible_people()) {
-                                            case 1:
-                                                cause = "托运方";
-                                                break;
-                                            case 2:
-                                                cause = "承运方";
-                                                break;
+                                    if (result instanceof ArrayList) {
+                                        truckFailInfoList = (List<TruckFailInfo>) result;
+                                        if(truckFailInfoList.size() == 1) {
+                                            //责任人 1托运方、2承运方
+                                            String cause = "";
+                                            TruckFailInfo truckFailInfo = truckFailInfoList.get(0);
+                                            switch (truckFailInfo.getResponsible_people()) {
+                                                case 1:
+                                                    cause = "托运方";
+                                                    break;
+                                                case 2:
+                                                    cause = "承运方";
+                                                    break;
+                                            }
+                                            desc.setText(Html.fromHtml(getString(R.string.truck_loading_fail, cause)));
+                                            if(TextUtils.equals("Y", truckFailInfo.getIs_able_has_confirm())) {
+                                                findViewById(R.id.confirm).setVisibility(View.VISIBLE);
+                                            }
+                                        } else {
+                                            //大于2条不成功原因，认为是纠纷问题
+                                            desc.setText(Html.fromHtml(getString(R.string.truck_loading_fail_other)));
+                                            findViewById(R.id.error).setVisibility(View.GONE);
                                         }
-                                        desc.setText(Html.fromHtml(getString(R.string.truck_loading_fail, cause)));
                                     }
                                     break;
                                 default:
@@ -123,9 +135,12 @@ public class TruckFailInfoActivity extends BaseActivity {
     }
 
     public void onError(View view) {
-        Intent intent = new Intent(mContext, TruckFailedReasonActivity.class);
-        intent.putExtra(Constants.COMMON_KEY, Integer.parseInt(truckFailInfo.getOrder_id()));
-        startActivity(intent);
-        finish();
+        if(truckFailInfoList.size() == 1) {
+            TruckFailInfo truckFailInfo = truckFailInfoList.get(0);
+            Intent intent = new Intent(mContext, TruckFailedReasonActivity.class);
+            intent.putExtra(Constants.ORDER_ID, Integer.parseInt(truckFailInfo.getOrder_id()));
+            startActivity(intent);
+            finish();
+        }
     }
 }

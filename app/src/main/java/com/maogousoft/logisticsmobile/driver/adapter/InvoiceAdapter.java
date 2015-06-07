@@ -72,11 +72,6 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
             if (!isShowRadioButton) {
                 holder.radioButton.setVisibility(View.GONE);
             }
-            if (userType == Constants.USER_SHIPPER) {
-                if (isShowPeopleNumber) {
-                    holder.source_detail_right_shipper.setVisibility(View.VISIBLE);
-                }
-            }
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -119,7 +114,7 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
 
             holder.order_id.setTextColor(mContext.getResources().getColor(R.color.title_bg));
             if (TextUtils.equals("Y", sourceInfo.getIs_able_confim_contract())) {
-                holder.order_id.setText("" + sourceInfo.getId() + "（订单确认）");
+                holder.order_id.setText("" + sourceInfo.getId() + "（订单已装车确认）");
             } else if (TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())) {
                 holder.order_id.setText("" + sourceInfo.getId() + "（装车不成功）");
             } else if (TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
@@ -181,6 +176,14 @@ public class InvoiceAdapter extends BaseListAdapter<NewSourceInfo> {
             holder.radioButton.setChecked(true);
         } else {
             holder.radioButton.setChecked(false);
+        }
+
+        if (userType == Constants.USER_SHIPPER) {
+            if (isShowPeopleNumber && Integer.parseInt(application.getUserId()) == sourceInfo.getUser_id()) {
+                holder.source_detail_right_shipper.setVisibility(View.VISIBLE);
+            } else {
+                holder.source_detail_right_shipper.setVisibility(View.GONE);
+            }
         }
 
         if (userType == Constants.USER_SHIPPER) {

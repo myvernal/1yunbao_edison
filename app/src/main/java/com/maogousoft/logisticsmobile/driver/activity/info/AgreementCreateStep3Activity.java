@@ -51,6 +51,11 @@ public class AgreementCreateStep3Activity extends BaseActivity {
 
     private void initData() {
         url = getIntent().getStringExtra(Constants.COMMON_KEY);
+        if(application.getUserType() == Constants.USER_DRIVER) {
+            url = url + "&user_id=d" + application.getUserId();
+        } else{
+            url = url + "&user_id=u" + application.getUserId();
+        }
 
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);

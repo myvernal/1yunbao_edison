@@ -29,7 +29,7 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
     private EditText source_id_publish_cargo_desc, source_id_publish_car_length,
             source_id_publish_unit_price, source_id_publish_user_bond, source_id_publish_cargo_remark,
             source_id_publish_contact_name, source_id_publish_contact_phone,
-            source_id_publish_validate_day, source_id_publish_validate_hour, source_id_publish_source_weight;
+            source_id_publish_validate_hour, source_id_publish_source_weight;
     private Spinner source_id_publish_cargo_type, source_id_publish_car_type,
             source_id_publish_cargo_unit, source_id_publish_cargo_tip, source_id_publish_source_weight_unit;
     private NewSourceInfo mSourceInfo;
@@ -60,7 +60,6 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
         source_id_publish_cargo_remark = (EditText) findViewById(R.id.source_id_publish_cargo_remark);
         source_id_publish_contact_name = (EditText) findViewById(R.id.source_id_publish_contact_name);
         source_id_publish_contact_phone = (EditText) findViewById(R.id.source_id_publish_contact_phone);
-        source_id_publish_validate_day = (EditText) findViewById(R.id.source_id_publish_validate_day);
         source_id_publish_validate_hour = (EditText) findViewById(R.id.source_id_publish_validate_hour);
         source_id_publish_source_weight = (EditText) findViewById(R.id.source_id_publish_source_weight);
 
@@ -180,6 +179,14 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             showMsg("联系人手机号码是必填项,请重新填写");
             return;
         }
+        if (source_id_publish_validate_hour.length() == 0) {
+            showMsg("请输入货源有效时间！");
+            return;
+        }
+        if (Integer.parseInt(source_id_publish_validate_hour.getText().toString()) > 72) {
+            showMsg("货源有效时间不能超过72小时！");
+            return;
+        }
         final JSONObject jsonObject = new JSONObject();
         final JSONObject params = new JSONObject();
         try {
@@ -224,7 +231,6 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             params.put("cargo_remark", source_id_publish_cargo_remark.getText());
             params.put("contact_name", source_id_publish_contact_name.getText());
             params.put("contact_phone", source_id_publish_contact_phone.getText());
-            params.put("validate_day", source_id_publish_validate_day.getText());
             params.put("validate_hour", source_id_publish_validate_hour.getText());
             //货物数量和单位
             params.put("cargo_number", source_id_publish_source_weight.getText());
@@ -232,9 +238,8 @@ public class PublishGoodsSourceActivity extends BaseActivity implements OnClickL
             if(null != mSourceInfo) {
                 params.put("id", mSourceInfo.getId());
             }
-            long day = Integer.valueOf(source_id_publish_validate_day.getText().toString()) * 24 * 60 * 60 * 1000;
             long hour = Integer.valueOf(source_id_publish_validate_hour.getText().toString()) * 60 * 60 * 1000;
-            params.put("validate_time", day + hour);
+            params.put("validate_time", hour);
             params.put("loading_time", 60 * 60 * 1000);
 
             jsonObject.put(Constants.JSON, params);

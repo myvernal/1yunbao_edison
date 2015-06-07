@@ -13,6 +13,15 @@ public class TruckFailInfo implements Serializable {
     private String evicdence_pic0;//图片证据
     private String evicdence_pic1;
     private String evicdence_pic2;
+    private String is_able_has_confirm;//是否可以结算
+
+    public String getIs_able_has_confirm() {
+        return is_able_has_confirm;
+    }
+
+    public void setIs_able_has_confirm(String is_able_has_confirm) {
+        this.is_able_has_confirm = is_able_has_confirm;
+    }
 
     public String getOrder_id() {
         return order_id;

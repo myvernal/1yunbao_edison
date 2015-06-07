@@ -1,16 +1,19 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,6 +32,7 @@ import com.maogousoft.logisticsmobile.driver.adapter.CityListAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.model.CarrierInfo;
 import com.maogousoft.logisticsmobile.driver.model.CityInfo;
 import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
@@ -42,11 +46,13 @@ import com.maogousoft.logisticsmobile.driver.utils.alipay.MobileSecurePayer;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.PartnerConfig;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.ResultChecker;
 import com.maogousoft.logisticsmobile.driver.utils.alipay.Rsa;
+import com.ybxiang.driver.util.Utils;
 import com.yeepay.android.plugin.YeepayPlugin;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +67,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     private static final String LOGTAG = LogUtil.makeLogTag(ChargeActivity.class);
     private AQuery gridView;
     private CityListAdapter mAdapter;
-    private EditText price, charge_help_account, payPassword, forwardAccountBank, forwardAccountName, forwardAccountCard;
+    private EditText price, charge_help_account, forwardAccountBank, forwardAccountName, forwardAccountCard;
     private String OrderId;
     private int type = ALI_PAY;
     private double gold1 = 0d, gold2 = 0d;
@@ -75,7 +81,6 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
     private RadioGroup chargePurposeGroup;//资金操作目的布局
     private View chargeHelpLayout;//代充账号布局
     private View moneyForwardLayout;//转账账号布局
-    private View payPasswordLayout;//支付密码
 
     private int actionType = -1;//操作类型 0:充值,1:代充值,2:转账,3:提现
 
@@ -98,9 +103,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         forwardAccountBank = (EditText) findViewById(R.id.charge_forward_account_bank);
         forwardAccountName = (EditText) findViewById(R.id.charge_forward_account_name);
         forwardAccountCard.setInputType(EditorInfo.TYPE_CLASS_PHONE);
-        payPassword = (EditText) findViewById(R.id.pay_password);
 
-        payPasswordLayout = findViewById(R.id.pay_password_layout);
         chargeHelpLayout = findViewById(R.id.charge_help_layout);
         moneyForwardLayout = findViewById(R.id.charge_forward_layout);
         chargePurposeGroup = (RadioGroup) findViewById(R.id.charge_purpose_group);
@@ -209,10 +212,16 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         super.onClick(v);
         switch (v.getId()) {
             case R.id.recharge_submitbtn:
-                if(type == -1) {
+                if (type == -1) {
                     showMsg("请选择支付方式!");
-                } else if(actionType == -1) {
+                    return;
+                } else if (actionType == -1) {
                     showMsg("请选择支付目的!");
+                    return;
+                }
+                if (!application.checkNetWork()) {
+                    showMsg(R.string.network_not_connected);
+                    return;
                 }
                 switch (actionType) {
                     case 0://充值
@@ -223,13 +232,53 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                         }
                         break;
                     case 1://代充值
-                        proxyPay();
+                        if (charge_help_account.length() != 11) {
+                            showMsg("请输入11位正确的手机号");
+                            charge_help_account.requestFocus();
+                            return;
+                        }
+                        if (TextUtils.isEmpty(price.getText().toString().trim())) {
+                            showMsg("请输入充值金额");
+                            price.requestFocus();
+                            return;
+                        }
+                        if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
+                            showMsg("请输入有效的充值金额");
+                            price.requestFocus();
+                            return;
+                        }
+                        checkPayPassword(1);
                         break;
                     case 2://转账
-                        transferAccounts();
+                        if (TextUtils.isEmpty(price.getText().toString().trim())) {
+                            showMsg("请输入转账金额");
+                            price.requestFocus();
+                            return;
+                        }
+                        if (TextUtils.isEmpty(forwardAccountCard.getText().toString().trim())) {
+                            showMsg("请输入转账卡号");
+                            forwardAccountCard.requestFocus();
+                            return;
+                        }
+                        if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
+                            showMsg("请输入有效的转账金额");
+                            price.requestFocus();
+                            return;
+                        }
+                        checkPayPassword(2);
                         break;
                     case 3://提现
-                        withdrawDeposit();
+                        if (TextUtils.isEmpty(price.getText().toString().trim())) {
+                            showMsg("请输入提现金额");
+                            price.requestFocus();
+                            return;
+                        }
+                        if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
+                            showMsg("请输入有效的提现金额");
+                            price.requestFocus();
+                            return;
+                        }
+                        checkPayPassword(3);
                         break;
                 }
                 break;
@@ -240,30 +289,6 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
      * 代充值
      */
     private void proxyPay() {
-        if (!application.checkNetWork()) {
-            showMsg(R.string.network_not_connected);
-            return;
-        }
-        if (charge_help_account.length() != 11) {
-            showMsg("请输入11位正确的手机号");
-            charge_help_account.requestFocus();
-            return;
-        }
-        if (TextUtils.isEmpty(price.getText().toString().trim())) {
-            showMsg("请输入充值金额");
-            price.requestFocus();
-            return;
-        }
-        if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
-            showMsg("请输入有效的充值金额");
-            price.requestFocus();
-            return;
-        }
-        if (payPassword.length() < 6) {
-            showMsg("请输入至少6位支付密码");
-            payPassword.requestFocus();
-            return;
-        }
         try {
             showSpecialProgress("正在操作中,请稍后...");
             JSONObject jsonObject = new JSONObject();
@@ -271,7 +296,6 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             jsonObject.put(Constants.ACTION, Constants.PROXY_PAY_MONEY);
             jsonObject.put(Constants.TOKEN, application.getToken());
             params.put("phone", charge_help_account.getText());
-            params.put("pay_password", payPassword.getText());
             params.put("money", price.getText());
             params.put("user_type", application.getUserType());
             jsonObject.put(Constants.JSON, params.toString());
@@ -282,6 +306,11 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
+                                    try {
+                                        Utils.soundRing(mContext);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                     BaseHelper.showDialog(mContext, "温馨提示", result.toString(), R.drawable.info);
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -305,41 +334,15 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
      * 转账
      */
     private void transferAccounts() {
-        if (TextUtils.isEmpty(price.getText().toString().trim())) {
-            showMsg("请输入转账金额");
-            price.requestFocus();
-            return;
-        }
-        if (TextUtils.isEmpty(forwardAccountCard.getText().toString().trim())) {
-            showMsg("请输入转账卡号");
-            forwardAccountCard.requestFocus();
-            return;
-        }
-        if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
-            showMsg("请输入有效的转账金额");
-            price.requestFocus();
-            return;
-        }
-        if (payPassword.length() < 6) {
-            showMsg("请输入至少6位支付密码");
-            payPassword.requestFocus();
-            return;
-        }
         try {
             showSpecialProgress("正在操作中,请稍后...");
             JSONObject jsonObject = new JSONObject();
             JSONObject params = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.TRANSFER_ACCOUNTS);
             jsonObject.put(Constants.TOKEN, application.getToken());
-            if(application.getUserType() == Constants.USER_DRIVER) {
-                DriverInfo driverInfo = application.getDriverInfo();
-            } else {
-                ShipperInfo shipperInfo = application.getShipperInfo();
-            }
             params.put("bank_name", price.getText());//银行名称
             params.put("bank_account", forwardAccountCard.getText());//转账卡号
             params.put("name", price.getText());//转账对象名称
-            params.put("pay_password", payPassword.getText());//支付密码
             params.put("money", price.getText());//金额
             params.put("user_type", application.getUserType());//用户类型
             jsonObject.put(Constants.JSON, params.toString());
@@ -350,6 +353,11 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
+                                    try {
+                                        Utils.soundRing(mContext);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                     BaseHelper.showDialog(mContext, "温馨提示", result.toString(), R.drawable.info);
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -373,21 +381,6 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
      * 提现
      */
     private void withdrawDeposit() {
-        if (TextUtils.isEmpty(price.getText().toString().trim())) {
-            showMsg("请输入提现金额");
-            price.requestFocus();
-            return;
-        }
-        if (Double.parseDouble(price.getText().toString().trim()) < 0.01) {
-            showMsg("请输入有效的提现金额");
-            price.requestFocus();
-            return;
-        }
-        if (payPassword.length() < 6) {
-            showMsg("请输入至少6位支付密码");
-            payPassword.requestFocus();
-            return;
-        }
         try {
             showSpecialProgress("正在操作中,请稍后...");
             JSONObject jsonObject = new JSONObject();
@@ -395,7 +388,6 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
             jsonObject.put(Constants.ACTION, Constants.WITHDRAW_DEPOSIT);
             jsonObject.put(Constants.TOKEN, application.getToken());
             params.put("money", price.getText());
-            params.put("pay_password", payPassword.getText());//支付密码
             params.put("user_type", application.getUserType());
             jsonObject.put(Constants.JSON, params.toString());
             ApiClient.doWithObject(Constants.COMMON_SERVER_URL, jsonObject, null,
@@ -405,6 +397,11 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                             dismissProgress();
                             switch (code) {
                                 case ResultCode.RESULT_OK:
+                                    try {
+                                        Utils.soundRing(mContext);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                     BaseHelper.showDialog(mContext, "温馨提示", result.toString(), R.drawable.info);
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -436,9 +433,9 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                 findViewById(R.id.purpose_radio1).setEnabled(true);
                 findViewById(R.id.purpose_radio2).setEnabled(false);
                 findViewById(R.id.purpose_radio3).setEnabled(false);
-                ((RadioButton)findViewById(R.id.purpose_radio2)).setChecked(false);
-                ((RadioButton)findViewById(R.id.purpose_radio3)).setChecked(false);
-                if(actionType == 2 || actionType == 3) {
+                ((RadioButton) findViewById(R.id.purpose_radio2)).setChecked(false);
+                ((RadioButton) findViewById(R.id.purpose_radio3)).setChecked(false);
+                if (actionType == 2 || actionType == 3) {
                     actionType = -1;
                 }
                 break;
@@ -448,9 +445,9 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                 findViewById(R.id.purpose_radio1).setEnabled(true);
                 findViewById(R.id.purpose_radio2).setEnabled(false);
                 findViewById(R.id.purpose_radio3).setEnabled(false);
-                ((RadioButton)findViewById(R.id.purpose_radio2)).setChecked(false);
-                ((RadioButton)findViewById(R.id.purpose_radio3)).setChecked(false);
-                if(actionType == 2 || actionType == 3) {
+                ((RadioButton) findViewById(R.id.purpose_radio2)).setChecked(false);
+                ((RadioButton) findViewById(R.id.purpose_radio3)).setChecked(false);
+                if (actionType == 2 || actionType == 3) {
                     actionType = -1;
                 }
                 break;
@@ -460,9 +457,9 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                 findViewById(R.id.purpose_radio1).setEnabled(true);
                 findViewById(R.id.purpose_radio2).setEnabled(false);
                 findViewById(R.id.purpose_radio3).setEnabled(false);
-                ((RadioButton)findViewById(R.id.purpose_radio2)).setChecked(false);
-                ((RadioButton)findViewById(R.id.purpose_radio3)).setChecked(false);
-                if(actionType == 2 || actionType == 3) {
+                ((RadioButton) findViewById(R.id.purpose_radio2)).setChecked(false);
+                ((RadioButton) findViewById(R.id.purpose_radio3)).setChecked(false);
+                if (actionType == 2 || actionType == 3) {
                     actionType = -1;
                 }
                 break;
@@ -472,32 +469,27 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                 findViewById(R.id.purpose_radio1).setEnabled(true);
                 findViewById(R.id.purpose_radio2).setEnabled(true);
                 findViewById(R.id.purpose_radio3).setEnabled(true);
-                ((RadioButton)findViewById(R.id.purpose_radio0)).setChecked(false);
-                if(actionType == 1) {
+                ((RadioButton) findViewById(R.id.purpose_radio0)).setChecked(false);
+                if (actionType == 1) {
                     actionType = -1;
                 }
                 break;
             case R.id.purpose_radio0://为本账号充值
-                payPasswordLayout.setVisibility(View.GONE);
                 chargeHelpLayout.setVisibility(View.GONE);
                 moneyForwardLayout.setVisibility(View.GONE);
                 actionType = 0;
                 break;
             case R.id.purpose_radio1://代充值
-                payPasswordLayout.setVisibility(View.VISIBLE);
                 chargeHelpLayout.setVisibility(View.VISIBLE);
                 moneyForwardLayout.setVisibility(View.GONE);
                 actionType = 1;
                 break;
             case R.id.purpose_radio2://转账
-                payPasswordLayout.setVisibility(View.VISIBLE);
                 moneyForwardLayout.setVisibility(View.VISIBLE);
                 chargeHelpLayout.setVisibility(View.GONE);
                 actionType = 2;
                 break;
             case R.id.purpose_radio3://提现
-                //getMoneyGroup.setVisibility(View.VISIBLE);
-                payPasswordLayout.setVisibility(View.VISIBLE);
                 chargeHelpLayout.setVisibility(View.GONE);
                 moneyForwardLayout.setVisibility(View.GONE);
                 actionType = 3;
@@ -516,7 +508,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         showDefaultProgress();
         try {
             Class clz;
-            if(Constants.USER_DRIVER == application.getUserType()) {
+            if (Constants.USER_DRIVER == application.getUserType()) {
                 jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_INFO);
                 clz = DriverInfo.class;
             } else {
@@ -536,7 +528,7 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                                         String forwardBank = null;
                                         String forwardName = null;
                                         String forwardCard = null;
-                                        if(result instanceof DriverInfo) {
+                                        if (result instanceof DriverInfo) {
                                             DriverInfo mDriverInfo = (DriverInfo) result;
                                             application.setDriverInfo(mDriverInfo);
                                             forwardCard = mDriverInfo.getBank_account();// 转账账号
@@ -548,9 +540,9 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
                                             forwardBank = shipperInfo.getBank();//银行名称
                                             forwardName = shipperInfo.getAccount_name();//账号姓名
                                         }
-                                        forwardAccountBank.setText(TextUtils.isEmpty(forwardBank) ? "": forwardBank);
-                                        forwardAccountCard.setText(TextUtils.isEmpty(forwardCard) ? "": forwardCard);
-                                        forwardAccountName.setText(TextUtils.isEmpty(forwardName) ? "": forwardName);
+                                        forwardAccountBank.setText(TextUtils.isEmpty(forwardBank) ? "" : forwardBank);
+                                        forwardAccountCard.setText(TextUtils.isEmpty(forwardCard) ? "" : forwardCard);
+                                        forwardAccountName.setText(TextUtils.isEmpty(forwardName) ? "" : forwardName);
                                         //获取余额
                                         getGold(1);
                                     }
@@ -900,4 +892,87 @@ public class ChargeActivity extends BaseActivity implements OnCheckedChangeListe
         return true;
     }
 
+    // 验证支付密码
+    private void checkPayPassword(final int actionType) {
+        try {
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("请输入支付密码");
+            final EditText editText = new EditText(mContext);
+            editText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            ViewGroup.MarginLayoutParams layoutParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(20, 15, 20, 15);
+            editText.setLayoutParams(new ViewGroup.LayoutParams(layoutParams));
+            builder.setView(editText);
+            builder.setCancelable(true);
+            builder.setNeutralButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(final DialogInterface dialogInterface, int i) {
+                    if (editText.length() < 6) {
+                        showMsg("请输入至少6位支付密码");
+                        editText.requestFocus();
+                    } else {
+                        showSpecialProgress();
+                        try {
+                            final JSONObject jsonObject = new JSONObject();
+                            jsonObject.put(Constants.ACTION, Constants.VALIDATION_PAY_PASSWORD);
+                            jsonObject.put(Constants.TOKEN, application.getToken());
+                            jsonObject.put(Constants.JSON, new JSONObject().put("pay_password", editText.getText()));
+
+                            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                                    CarrierInfo.class, new AjaxCallBack() {
+
+                                        @Override
+                                        public void receive(int code, Object result) {
+                                            dismissProgress();
+                                            dialogInterface.dismiss();
+                                            switch (code) {
+                                                case ResultCode.RESULT_OK:
+                                                    //验证支付密码成功
+                                                    switch (actionType) {
+                                                        case 1:
+                                                            //代充值
+                                                            proxyPay();
+                                                            break;
+                                                        case 2:
+                                                            //转账
+                                                            transferAccounts();
+                                                            break;
+                                                        case 3:
+                                                            //提现
+                                                            withdrawDeposit();
+                                                            break;
+                                                    }
+                                                    break;
+                                                case ResultCode.RESULT_ERROR:
+                                                    if (result instanceof String) {
+                                                        showMsg(result.toString());
+                                                    }
+                                                    break;
+                                                case ResultCode.RESULT_FAILED:
+                                                    if (result instanceof String) {
+                                                        showMsg(result.toString());
+                                                    }
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                    });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

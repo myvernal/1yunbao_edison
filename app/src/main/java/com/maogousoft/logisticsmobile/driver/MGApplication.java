@@ -340,7 +340,7 @@ public class MGApplication extends Application {
         return s;
     }
 
-    /** 获取保存的货主编号 **/
+    /** 获取保存的用户编号 **/
     public String getUserId() {
         String s = "";
         try {

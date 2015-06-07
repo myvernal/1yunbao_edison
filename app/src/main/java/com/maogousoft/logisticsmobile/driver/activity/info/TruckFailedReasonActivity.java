@@ -82,7 +82,7 @@ public class TruckFailedReasonActivity extends BaseActivity {
 
     private void initData() {
         Intent intent = getIntent();
-        orderId = intent.getIntExtra(Constants.COMMON_KEY, 0);
+        orderId = intent.getIntExtra(Constants.ORDER_ID, 0);
     }
 
     @Override

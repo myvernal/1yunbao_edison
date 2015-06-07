@@ -128,6 +128,15 @@ public class NewSourceListAdapter extends BaseListAdapter<NewSourceInfo> {
             }
         });
 
+        if (Integer.parseInt(application.getUserId()) == sourceInfo.getUser_id()) {
+            holder.source_qiangdan.setVisibility(View.GONE);
+            holder.source_baojia.setVisibility(View.GONE);
+            holder.source_detail_phone.setVisibility(View.GONE);
+        } else {
+            holder.source_qiangdan.setVisibility(View.VISIBLE);
+            holder.source_baojia.setVisibility(View.VISIBLE);
+            holder.source_detail_phone.setVisibility(View.VISIBLE);
+        }
         holder.source_qiangdan.setOnClickListener(new ClickListener(sourceInfo));
         holder.source_baojia.setOnClickListener(new ClickListener(sourceInfo));
         return convertView;

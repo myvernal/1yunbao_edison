@@ -26,6 +26,7 @@
         <item name="android:windowBackground">@color/window_bg</item>
         <item name="android:dropDownSelector">@drawable/selector_list_holo_light</item>
         <item name="android:divider">@drawable/abs__list_divider_holo_light</item>
+        <item name="android:dialogTheme">@android:style/Theme.Holo.Light.Dialog</item>
     </style>
 
     <style name="AppSpecialTheme" parent="AppTheme">
@@ -717,7 +718,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:paddingTop">7dp</item>
         <item name="android:paddingBottom">7dp</item>
-        <item name="android:background">@drawable/spinner_bg</item>
+        <item name="android:background">@drawable/selector_spinner_bg</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">@color/font_gray3</item>
