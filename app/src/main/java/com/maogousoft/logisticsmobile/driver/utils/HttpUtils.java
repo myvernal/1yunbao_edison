@@ -49,6 +49,7 @@ public class HttpUtils {
 				HttpURLConnection connection = (HttpURLConnection) _url.openConnection();
 				connection.setRequestMethod("POST");
 				connection.setConnectTimeout(TIME_OUT);
+				connection.setReadTimeout(TIME_OUT);
 				connection.setDoOutput(true);
 				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 				connection.setRequestProperty("Content-Length", String.valueOf(entityData.length));
