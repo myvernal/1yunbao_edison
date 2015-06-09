@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -22,6 +23,7 @@ import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
 import com.maogousoft.logisticsmobile.driver.api.ResultCode;
+import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.model.CarrierInfo;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
@@ -29,6 +31,7 @@ import com.maogousoft.logisticsmobile.driver.widget.HeaderView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -88,7 +91,14 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
         orderId = getIntent().getIntExtra(Constants.ORDER_ID, -1);
         agreementType = getIntent().getIntExtra(Constants.AGREEMENT_TYPE, -1);
         if (orderId > 0 && agreementType > 0) {
-            getData(orderId);
+            switch (agreementType) {
+                case 1://运输合同
+                    getData(orderId);
+                    break;
+                case 2://中介合同
+                    getDataFromFleet();
+                    break;
+            }
         } else {
             finish();
         }
@@ -113,8 +123,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
                                 case ResultCode.RESULT_OK:
                                     if (result instanceof List) {
                                         List<CarrierInfo> mList = (List<CarrierInfo>) result;
-                                        LayoutInflater inflater = LayoutInflater.from(mContext);
-                                        displayData(mList, inflater);
+                                        displayCarrier(mList);
                                     }
                                     break;
                                 case ResultCode.RESULT_ERROR:
@@ -136,8 +145,50 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
         }
     }
 
-    private void displayData(List<CarrierInfo> mList, LayoutInflater inflater) {
-        //遍历数据
+    // 根据条件请求指定页数的数据
+    private void getDataFromFleet() {
+        try {
+            showSpecialProgress();
+            final JSONObject jsonObject = new JSONObject();
+            jsonObject.put(Constants.ACTION, Constants.QUERY_MY_FLEET_ALL);
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, "");
+
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    CarInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            dismissProgress();
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result instanceof List) {
+                                        List<CarInfo> mList = (List<CarInfo>) result;
+                                        LayoutInflater inflater = LayoutInflater.from(mContext);
+                                        displayMyFleet(mList);
+                                    }
+                                    break;
+                                case ResultCode.RESULT_ERROR:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+                                case ResultCode.RESULT_FAILED:
+                                    if (result instanceof String)
+                                        showMsg(result.toString());
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //抢单列表
+    private void displayCarrier(List<CarrierInfo> mList) {
         for (CarrierInfo carrierInfo : mList) {
             if (TextUtils.equals("Y", carrierInfo.getIs_grab_single_car())) {
                 RadioButton button = new RadioButton(mContext);
@@ -146,6 +197,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
                 button.setOnCheckedChangeListener(this);
                 button.setTag(carrierInfo);
                 qiandanLayout.addView(button);
+                qiandanLayout.setVisibility(View.VISIBLE);
             }
             if (TextUtils.equals("Y", carrierInfo.getIs_price_car())) {
                 RadioButton button = new RadioButton(mContext);
@@ -154,6 +206,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
                 button.setOnCheckedChangeListener(this);
                 button.setTag(carrierInfo);
                 priceLayout.addView(button);
+                priceLayout.setVisibility(View.VISIBLE);
             }
             if (TextUtils.equals("Y", carrierInfo.getIs_phone_car())) {
                 RadioButton button = new RadioButton(mContext);
@@ -162,14 +215,29 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
                 button.setOnCheckedChangeListener(this);
                 button.setTag(carrierInfo);
                 phoneLayout.addView(button);
+                phoneLayout.setVisibility(View.VISIBLE);
             }
+        }
+    }
+
+    //我的车队
+    private void displayMyFleet(List<CarInfo> mList) {
+        ((TextView)findViewById(R.id.title1)).setText("我的车队");
+        qiandanLayout.setVisibility(View.VISIBLE);
+        for (CarInfo carInfo : mList) {
+            RadioButton button = new RadioButton(mContext);
+            button.setTextAppearance(mContext, R.style.CarrierItemStyle);
+            button.setText(carInfo.getDriver_name() + "\t" + carInfo.getPhone());
+            button.setOnCheckedChangeListener(this);
+            button.setTag(carInfo);
+            qiandanLayout.addView(button);
         }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
         if (checked) {
-            if(preCheckedRadio != null) {
+            if (preCheckedRadio != null) {
                 preCheckedRadio.setChecked(false);
             }
             currentCheckedRadio = (RadioButton) compoundButton;
@@ -182,21 +250,35 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
     }
 
     public void onNext(View view) {
-        if(currentCheckedRadio == null && other_driver.length() == 0) {
+        if (currentCheckedRadio == null && other_driver.length() == 0) {
             showMsg("请选择承运人");
             return;
         }
-        if(currentCheckedRadio != null) {
-            CarrierInfo carrierInfo = (CarrierInfo) currentCheckedRadio.getTag();
-            getAgreement(carrierInfo);
+        if (currentCheckedRadio != null) {
+            Object object = currentCheckedRadio.getTag();
+            if (object instanceof CarrierInfo) {
+                CarrierInfo carrierInfo = (CarrierInfo) object;
+                getAgreement(carrierInfo);
+            } else if (object instanceof CarInfo) {
+                CarInfo carInfo = (CarInfo) object;
+                getAgreement(carInfo);
+            }
         } else {
             getAgreement(null);
         }
     }
 
     // 进入合同制作页面
-    private void getAgreement(CarrierInfo carrierInfo) {
+    private void getAgreement(Serializable serializable) {
         try {
+            int driverId = -1;
+            if (serializable instanceof CarrierInfo) {
+                CarrierInfo carrierInfo = (CarrierInfo) serializable;
+                driverId = carrierInfo.getDriver_id();
+            } else if (serializable instanceof CarInfo) {
+                CarInfo carInfo = (CarInfo) serializable;
+                driverId = carInfo.getId();
+            }
             showSpecialProgress();
             final JSONObject jsonObject = new JSONObject();
             jsonObject.put(Constants.ACTION, Constants.CONTRACT_IMPORT_PREVIEW);
@@ -205,7 +287,7 @@ public class AgreementCreateStep2Activity extends BaseActivity implements Compou
                     .put("order_id", orderId)
                     .put("contract_type", agreementType)
                     .put("driver_phone", other_driver.getText())
-                    .put("carrier_driverId", carrierInfo == null ? "" : carrierInfo.getDriver_id()).toString());
+                    .put("carrier_driverId", driverId).toString());
 
             ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
                     CarrierInfo.class, new AjaxCallBack() {

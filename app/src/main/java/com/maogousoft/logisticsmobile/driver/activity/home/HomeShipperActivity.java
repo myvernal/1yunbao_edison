@@ -18,7 +18,7 @@ import com.ybxiang.driver.activity.*;
 public class HomeShipperActivity extends BaseHomeActivity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		LogUtil.i("wst", "HomeActivity Shipper -onCreate");
 		setContentView(R.layout.activity_home_new_shipper);
         super.onCreate(savedInstanceState);

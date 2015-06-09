@@ -52,7 +52,7 @@ public class MyCarsDetailActivity extends BaseActivity implements AdapterView.On
     private RatingBar mCreditRatingbar;
     private ImageView mPhoto;
     private TextView mOnlineTime, mOnlineTimeRank, mRecommonedCount, mRecommonedCountRank, mClinch, mClinchRank;
-    private View edit, delete, free_location, phone_location;
+    private View delete, free_location, phone_location;
     private CityDBUtils dbUtils;
     private String phoneNumber = "";
     private CarInfo carInfo;
@@ -87,8 +87,6 @@ public class MyCarsDetailActivity extends BaseActivity implements AdapterView.On
         car_type = (TextView) findViewById(R.id.car_type);
         location_address = (TextView) findViewById(R.id.location_address);
         location_time = (TextView) findViewById(R.id.location_time);
-        edit = findViewById(R.id.edit);
-        edit.setOnClickListener(this);
         delete = findViewById(R.id.delete);
         delete.setOnClickListener(this);
         free_location = findViewById(R.id.free_location);
@@ -157,7 +155,7 @@ public class MyCarsDetailActivity extends BaseActivity implements AdapterView.On
         super.onClick(v);
         switch (v.getId()) {
             case R.id.edit:
-                if (carInfo != null) {
+                /*if (carInfo != null) {
                     Intent intent = new Intent(mContext, AddCarActivity.class);
                     intent.putExtra(Constants.COMMON_KEY, carInfo);
                     intent.putExtra(Constants.CAR_EDIT_TYPE, Constants.EDIT_CAR);
@@ -165,7 +163,7 @@ public class MyCarsDetailActivity extends BaseActivity implements AdapterView.On
                     finish();
                 } else {
                     Toast.makeText(mContext, "没有车辆数据!", Toast.LENGTH_SHORT).show();
-                }
+                }*/
                 break;
             case R.id.delete:
                 deleteData();

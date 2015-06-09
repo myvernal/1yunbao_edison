@@ -56,6 +56,7 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
     private LocationClient mLocClient;
     private double latitude;
     private double longitude;
+    private String action;//区分车主和司机
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,32 +97,12 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
     }
 
     private void initData() {
-        String action;
-        if(application.getUserType() == Constants.USER_DRIVER) {
+        if (application.getUserType() == Constants.USER_DRIVER) {
             action = Constants.QUERY_PENDING_SOURCE_COUNT;
         } else {
             action = Constants.QUERY_ORDER_COUNT;
         }
-        //获取货单数量
-        doAction(action, "", false, InvoiceTotalInfo.class, new ActionCallBack() {
-            @Override
-            public void onCallBack(Object result) {
-                if (result instanceof InvoiceTotalInfo) {
-                    InvoiceTotalInfo invoiceTotalInfo = (InvoiceTotalInfo) result;
-                    guidView1.setText(getString(R.string.invoice_1, invoiceTotalInfo.getPending_order_count()));
-                    guidView2.setText(getString(R.string.invoice_2, invoiceTotalInfo.getShipment_order_count()));
-                    guidView3.setText(getString(R.string.invoice_3, invoiceTotalInfo.getHistory_order_count()));
-                    if(TextUtils.equals("Y", invoiceTotalInfo.getHas_invite()) && application.getUserType() == Constants.USER_DRIVER) {
-                        //是否有可邀约
-                        guidIcon1.setVisibility(View.VISIBLE);
-                    }
-                    if(TextUtils.equals("Y", invoiceTotalInfo.getHas_confim_contract())) {
-                        //是否有可确认订单
-                        guidIcon2.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-        });
+        getTotalData(action);
     }
 
     public void onGuidClick(View v) {
@@ -157,7 +138,7 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                 doAction(Constants.DELETE_PENDING_ORDER, params.toString(), true, new ActionCallBack() {
                     @Override
                     public void onCallBack(Object result) {
-                        firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                        deleteAndRefreshData(sourceInfo);
                     }
                 });
                 break;
@@ -166,17 +147,17 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                 doAction(Constants.DONE_PENDING_ORDER, params.toString(), true, new ActionCallBack() {
                     @Override
                     public void onCallBack(Object result) {
-                        firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                        deleteAndRefreshData(sourceInfo);
                     }
                 });
                 break;
             case R.id.menu_bottom3:
                 //接受邀约货单(司机)
-                if(TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
+                if (TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
                     doAction(Constants.ACCEPT_CONTRACT_INVITE, params.toString(), false, InviteInfo.class, new ActionCallBack() {
                         @Override
                         public void onCallBack(Object result) {
-                            if(result instanceof InviteInfo) {
+                            if (result instanceof InviteInfo) {
                                 InviteInfo inviteInfo = (InviteInfo) result;
                                 LogUtil.d(TAG, inviteInfo.getContract_url());
                                 Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
@@ -223,8 +204,7 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                     doAction(Constants.USER_CONFIM_CONTRACT, params.toString(), true, new ActionCallBack() {
                         @Override
                         public void onCallBack(Object result) {
-                            showMsg(result.toString());
-                            firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                            deleteAndRefreshData(sourceInfo);
                         }
                     });
                 } else {
@@ -250,10 +230,17 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
         switch (view.getId()) {
             case R.id.menu_bottom7:
                 //撤销货单(货主)
-                doAction(Constants.CANCEL_ORDER, params.toString(), true, new ActionCallBack() {
+                doAction(Constants.CANCEL_ORDER, params.toString(), false, new ActionCallBack() {
                     @Override
                     public void onCallBack(Object result) {
-                        firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                        if (result instanceof String) {
+                            String tip = result.toString();
+                            //如果这个货单有合同  就撤销合同，如果货单没有合同 就删除成功
+                            if (tip.contains("移除")) {
+                                deleteAndRefreshData(sourceInfo);
+                            }
+                            showMsg(tip);
+                        }
                     }
                 });
                 break;
@@ -271,17 +258,17 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                 break;
             case R.id.menu_bottom11:
                 //接受邀约货单(货主)
-                if(TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
+                if (TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
                     doAction(Constants.ACCEPT_CONTRACT_INVITE, params.toString(), false, InviteInfo.class, new ActionCallBack() {
                         @Override
                         public void onCallBack(Object result) {
-                            if(result instanceof InviteInfo) {
+                            if (result instanceof InviteInfo) {
                                 InviteInfo inviteInfo = (InviteInfo) result;
                                 LogUtil.d(TAG, inviteInfo.getContract_url());
                                 Intent intent = new Intent(mContext, AgreementCreateStep3Activity.class);
                                 startActivity(intent.putExtra(Constants.COMMON_KEY, Constants.BASE_URL + inviteInfo.getContract_url() + "&latitude=" + latitude + "&longitude=" + longitude));
                             }
-                            //firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+                            //deleteAndRefreshData(sourceInfo);
                         }
                     });
                 } else {
@@ -289,6 +276,38 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                 }
                 break;
         }
+    }
+
+    /**
+     * 删除数据并刷新统计数据
+     * @param sourceInfo
+     */
+    private void deleteAndRefreshData(NewSourceInfo sourceInfo) {
+        firstFragment.removeDataAndNotifyDataChange(sourceInfo);
+        getTotalData(action);
+    }
+
+    //获取货单数量
+    private void getTotalData(String action) {
+        doAction(action, "", false, InvoiceTotalInfo.class, new ActionCallBack() {
+            @Override
+            public void onCallBack(Object result) {
+                if (result instanceof InvoiceTotalInfo) {
+                    InvoiceTotalInfo invoiceTotalInfo = (InvoiceTotalInfo) result;
+                    guidView1.setText(getString(R.string.invoice_1, invoiceTotalInfo.getPending_order_count()));
+                    guidView2.setText(getString(R.string.invoice_2, invoiceTotalInfo.getShipment_order_count()));
+                    guidView3.setText(getString(R.string.invoice_3, invoiceTotalInfo.getHistory_order_count()));
+                    if (TextUtils.equals("Y", invoiceTotalInfo.getHas_invite()) && application.getUserType() == Constants.USER_DRIVER) {
+                        //是否有可邀约
+                        guidIcon1.setVisibility(View.VISIBLE);
+                    }
+                    if (TextUtils.equals("Y", invoiceTotalInfo.getHas_confim_contract())) {
+                        //是否有可确认订单
+                        guidIcon2.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -318,9 +337,13 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     if (hasTip) {
-                                        showMsg("请求已发送");
+                                        if(result instanceof String) {
+                                            showMsg(result.toString());
+                                        } else {
+                                            showMsg("请求已发送");
+                                        }
                                     }
-                                    if(actionCallBack != null) {
+                                    if (actionCallBack != null) {
                                         actionCallBack.onCallBack(result);
                                     }
                                     break;
@@ -455,7 +478,7 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
 
         private int type;
 
-        public SelectItemCallBackImpl (int type) {
+        public SelectItemCallBackImpl(int type) {
             this.type = type;
         }
 
@@ -466,27 +489,27 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
                 case 1:
                     //待定货单
                     //是否可以接受邀约
-                    if(TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
-                        ((ImageView)findViewById(R.id.menu_bottom3)).setImageResource(R.drawable.invoice_yaoyue);
-                        ((ImageView)findViewById(R.id.menu_bottom11)).setImageResource(R.drawable.invoice_yaoyue);
+                    if (TextUtils.equals("Y", sourceInfo.getIs_has_invite())) {
+                        ((ImageView) findViewById(R.id.menu_bottom3)).setImageResource(R.drawable.invoice_yaoyue);
+                        ((ImageView) findViewById(R.id.menu_bottom11)).setImageResource(R.drawable.invoice_yaoyue);
                     } else {
-                        ((ImageView)findViewById(R.id.menu_bottom3)).setImageResource(R.drawable.invoice_yaoyue_disable);
-                        ((ImageView)findViewById(R.id.menu_bottom11)).setImageResource(R.drawable.invoice_yaoyue_disable);
+                        ((ImageView) findViewById(R.id.menu_bottom3)).setImageResource(R.drawable.invoice_yaoyue_disable);
+                        ((ImageView) findViewById(R.id.menu_bottom11)).setImageResource(R.drawable.invoice_yaoyue_disable);
                     }
                     break;
                 case 2:
                     //待装货单
                     //是否可以订单确认
-                    if(TextUtils.equals("Y", sourceInfo.getIs_able_confim_contract())) {
-                        ((ImageView)findViewById(R.id.menu_bottom6)).setImageResource(R.drawable.invoice_confirm);
+                    if (TextUtils.equals("Y", sourceInfo.getIs_able_confim_contract())) {
+                        ((ImageView) findViewById(R.id.menu_bottom6)).setImageResource(R.drawable.invoice_confirm);
                     } else {
-                        ((ImageView)findViewById(R.id.menu_bottom6)).setImageResource(R.drawable.invoice_confirm_disable);
+                        ((ImageView) findViewById(R.id.menu_bottom6)).setImageResource(R.drawable.invoice_confirm_disable);
                     }
 
                     if (TextUtils.equals("Y", sourceInfo.getIs_truck_loading_success())) {
-                        ((ImageView)findViewById(R.id.menu_bottom5)).setImageResource(R.drawable.invoice_success_disable);
+                        ((ImageView) findViewById(R.id.menu_bottom5)).setImageResource(R.drawable.invoice_success_disable);
                     } else {
-                        ((ImageView)findViewById(R.id.menu_bottom5)).setImageResource(R.drawable.invoice_success);
+                        ((ImageView) findViewById(R.id.menu_bottom5)).setImageResource(R.drawable.invoice_success);
                     }
                     break;
                 case 3:

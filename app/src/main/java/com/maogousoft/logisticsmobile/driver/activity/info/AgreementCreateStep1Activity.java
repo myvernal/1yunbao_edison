@@ -56,10 +56,10 @@ public class AgreementCreateStep1Activity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.agreement_shipper:
-                agreementType = 1;
+                agreementType = 1;//运输合同
                 break;
             case R.id.agreement_third:
-                agreementType = 2;
+                agreementType = 2;//中介合同
                 break;
         }
     }

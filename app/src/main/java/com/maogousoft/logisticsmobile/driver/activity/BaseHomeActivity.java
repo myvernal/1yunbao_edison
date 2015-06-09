@@ -28,7 +28,7 @@ import java.util.List;
  * Created by EdisonZhao on 14-8-11.
  * Email:zhaoliangyu@sobey.com
  */
-public class BaseHomeActivity extends  BaseActivity {
+public class BaseHomeActivity extends ShakeActivity {
 
     private static final String TAG = "BaseHomeActivity";
     private OneGallery gallery;
@@ -40,7 +40,7 @@ public class BaseHomeActivity extends  BaseActivity {
     private OneGalleryBottomView oneGalleryBottomView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mImageLoader = ((MGApplication) getApplication()).getImageLoader();
         adUrlArray = new String[]{"" + R.drawable.banner, "" + R.drawable.banner1, "" + R.drawable.banner2};

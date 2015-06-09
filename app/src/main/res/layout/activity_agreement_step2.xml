@@ -37,11 +37,13 @@
                 android:id="@+id/qiangdan_list_container"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/title1"
                     android:textSize="@dimen/font_size_large"
                     android:textColor="@color/common_btn_bg"
                     android:padding="10dp"
@@ -52,7 +54,8 @@
                 android:id="@+id/price_list_container"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -67,7 +70,8 @@
                 android:id="@+id/phone_list_container"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"

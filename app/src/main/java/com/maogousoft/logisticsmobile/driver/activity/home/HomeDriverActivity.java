@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseHomeActivity;
-import com.maogousoft.logisticsmobile.driver.activity.ShakeActivity;
-import com.ybxiang.driver.activity.*;
+import com.ybxiang.driver.activity.HelpFindGoodsSourceActivity;
+import com.ybxiang.driver.activity.MyFriendsActivity;
+import com.ybxiang.driver.activity.PublishCarSourceActivity;
+import com.ybxiang.driver.activity.SpreadActivity;
 
 /**
  * 司机首页
@@ -18,7 +21,7 @@ import com.ybxiang.driver.activity.*;
 public class HomeDriverActivity extends BaseHomeActivity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_home_new_driver1);
         findViewById(R.id.titlebar_id_back).setVisibility(View.GONE);
         ((TextView)findViewById(R.id.titlebar_id_content)).setText("易运宝");
@@ -59,7 +62,8 @@ public class HomeDriverActivity extends BaseHomeActivity {
 
     //摇一摇
     public void onShakeSearch(View view) {
-        startActivity(new Intent(mContext, ShakeActivity.class));
+        //startActivity(new Intent(mContext, ShakeActivity.class));
+        shakeAction();
     }
 
     // 关注货源

@@ -28,7 +28,7 @@ import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 public class UnMatchedSourceActivity extends BaseListActivity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initViews();
 	}

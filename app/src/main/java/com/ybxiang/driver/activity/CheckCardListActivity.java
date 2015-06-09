@@ -133,16 +133,6 @@ public class CheckCardListActivity extends BaseListActivity implements View.OnCl
     }
 
     @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        switch (v.getId()) {
-            case R.id.titlebar_id_more:
-                startActivity(new Intent(mContext, AddCarActivity.class));
-                break;
-        }
-    }
-
-    @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
             return;

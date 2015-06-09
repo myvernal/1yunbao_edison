@@ -9,14 +9,8 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.TranslateAnimation;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -26,7 +20,6 @@ import com.baidu.location.LocationClientOption;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.home.NewSourceActivity;
-import com.maogousoft.logisticsmobile.driver.model.CarInfo;
 import com.maogousoft.logisticsmobile.driver.utils.HttpUtils;
 import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
 import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
@@ -34,10 +27,7 @@ import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Edison on 2015/3/29.
@@ -45,36 +35,50 @@ import java.util.List;
 public class ShakeActivity extends BaseActivity implements BDLocationListener {
     private ShakeListener mShakeListener = null;
     private Vibrator mVibrator;
-    private RelativeLayout mImgUp;
-    private RelativeLayout mImgDn;
+    /*private RelativeLayout mImgUp;
+    private RelativeLayout mImgDn;*/
     private LocationClient mLocClient;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shake_layout);
-        ((TextView) findViewById(R.id.titlebar_id_content)).setText("摇一摇");
-        mLocClient = new LocationClient(mContext);
-        //drawerSet ();//设置  drawer监听    切换 按钮的方向
-        mVibrator = (Vibrator) getApplication().getSystemService(VIBRATOR_SERVICE);
-        mImgUp = (RelativeLayout) findViewById(R.id.shakeImgUp);
-        mImgDn = (RelativeLayout) findViewById(R.id.shakeImgDown);
-        mShakeListener = new ShakeListener(mContext);
-        mShakeListener.setOnShakeListener(new ShakeListener.OnShakeListener() {
-            public void onShake() {
-                //Toast.makeText(getApplicationContext(), "抱歉，暂时没有找到在同一时刻摇一摇的人。\n再试一次吧！", Toast.LENGTH_SHORT).show();
-                startAnim();  //开始 摇一摇手掌动画
-                mShakeListener.stop();
+    }
 
-                startVibrato(); //开始 震动
-                showDefaultProgress();
-                locationAction();
-            }
-        });
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //司机才有摇一摇功能
+        if(application.getUserType() == Constants.USER_DRIVER) {
+        /*setContentView(R.layout.activity_shake_layout);
+        ((TextView) findViewById(R.id.titlebar_id_content)).setText("摇一摇");*/
+            //drawerSet ();//设置  drawer监听    切换 按钮的方向
+            mVibrator = (Vibrator) getApplication().getSystemService(VIBRATOR_SERVICE);
+        /*mImgUp = (RelativeLayout) findViewById(R.id.shakeImgUp);
+        mImgDn = (RelativeLayout) findViewById(R.id.shakeImgDown);*/
+            mShakeListener = new ShakeListener(mContext);
+            mShakeListener.setOnShakeListener(new ShakeListener.OnShakeListener() {
+                public void onShake() {
+                    shakeAction();
+                }
+            });
+        }
+    }
+
+    /**
+     * 执行摇一摇事件
+     */
+    public void shakeAction() {
+        LogUtil.e(TAG, "mShakeListener");
+        //startAnim();  //开始 摇一摇手掌动画
+        mShakeListener.stop();
+        startVibrato(); //开始 震动
+        showDefaultProgress();
+        locationAction();
     }
 
     // 定位初始化
     private void locationAction() {
+        mLocClient = new LocationClient(getApplicationContext());
         mLocClient.registerLocationListener(this);
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true);// 打开gps
@@ -84,7 +88,7 @@ public class ShakeActivity extends BaseActivity implements BDLocationListener {
         mLocClient.start();
     }
 
-    public void startAnim() {   //定义摇一摇动画动画
+    /*public void startAnim() {   //定义摇一摇动画动画
         AnimationSet animUp = new AnimationSet(true);
         TranslateAnimation animationStep0 = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, -0.5f);
         animationStep0.setDuration(500);
@@ -104,7 +108,7 @@ public class ShakeActivity extends BaseActivity implements BDLocationListener {
         animDown.addAnimation(animationStep2);
         animDown.addAnimation(animationStep3);
         mImgDn.startAnimation(animDown);
-    }
+    }*/
 
     public void startVibrato() {
         MediaPlayer player;
@@ -117,8 +121,8 @@ public class ShakeActivity extends BaseActivity implements BDLocationListener {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         if (mShakeListener != null) {
             mShakeListener.stop();
         }
@@ -126,6 +130,7 @@ public class ShakeActivity extends BaseActivity implements BDLocationListener {
 
     /**
      * 开始查询
+     *
      * @param params
      */
     private void startSearch(String params) {
@@ -133,7 +138,7 @@ public class ShakeActivity extends BaseActivity implements BDLocationListener {
         intent.putExtra("SHAKE_ONE_SHAKE", true);
         intent.putExtra("params", params);
         startActivity(intent);
-        finish();
+        dismissProgress();
     }
 
     @Override
@@ -263,16 +268,14 @@ class ShakeListener implements SensorEventListener {
     // 开始
     public void start() {
         // 获得传感器管理器
-        sensorManager = (SensorManager) mContext
-                .getSystemService(Context.SENSOR_SERVICE);
+        sensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager != null) {
             // 获得重力传感器
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }
         // 注册
         if (sensor != null) {
-            sensorManager.registerListener(this, sensor,
-                    SensorManager.SENSOR_DELAY_GAME);
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
         }
 
     }
@@ -316,7 +319,6 @@ class ShakeListener implements SensorEventListener {
         //sqrt 返回最近的双近似的平方根
         double speed = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ
                 * deltaZ) / timeInterval * 10000;
-        Log.v("thelog", "===========log===================");
         // 达到速度阀值，发出提示
         if (speed >= SPEED_SHRESHOLD) {
             onShakeListener.onShake();

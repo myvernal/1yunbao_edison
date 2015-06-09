@@ -15,6 +15,7 @@ import android.widget.AbsListView.OnScrollListener;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListActivity;
+import com.maogousoft.logisticsmobile.driver.activity.ShakeActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
 import com.maogousoft.logisticsmobile.driver.activity.share.ShareActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.NewSourceListAdapter;
@@ -37,8 +38,7 @@ import java.util.List;
  *
  * @author lenovo
  */
-public class NewSourceActivity extends BaseListActivity implements
-        OnScrollListener {
+public class NewSourceActivity extends BaseListActivity implements OnScrollListener {
 
     private Button mMore;
     private int rightButton = 0;// 0显示查找货源，1显示关注此线路,2不显示此button
@@ -63,11 +63,20 @@ public class NewSourceActivity extends BaseListActivity implements
     private JSONObject queryParams = new JSONObject();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initViews();
         initData();
-        // onFeedback();// PR1.4 test
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        //重置数据
+        if(mAdapter != null && !mAdapter.isEmpty()) {
+            mAdapter.removeAll();
+        }
+        initData();
     }
 
     private void initViews() {

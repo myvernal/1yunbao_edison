@@ -1,228 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.maogousoft.logisticsmobile.driver.widget.HeaderView android:layout_width="match_parent"
-                                                             android:layout_height="wrap_content"/>
+    <com.maogousoft.logisticsmobile.driver.widget.HeaderView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="vertical">
-            <!-- 车辆相关信息 -->
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="车牌号："/>
+                    style="@style/info_publish_text_style"
+                    android:text="车牌号/运宝账号：" />
 
                 <EditText
-                        android:id="@+id/mCarNum"
-                        style="@style/info_edittext_weight_style"
-                        android:text=""/>
+                    android:id="@+id/mCarNum"
+                    style="@style/info_edittext_weight_style"
+                    android:text="" />
             </LinearLayout>
 
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="司机姓名："/>
-
-                <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:id="@+id/ower_name"
-                        android:text=""/>
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="手机号码："/>
-
-                <EditText
-                        style="@style/info_edittext_weight_style"
-                        android:id="@+id/ower_phone"
-                        android:inputType="number"
-                        android:text=""/>
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="车长："/>
-
-                <EditText
-                        android:id="@+id/mCarlength"
-                        style="@style/info_edittext_weight_style"
-                        android:inputType="numberDecimal"
-                        android:text=""/>
-
-                <TextView
-                        style="@style/info_register_text_style"
-                        android:text="米"/>
-            </LinearLayout>
-            <!-- 车型：spinner.setSelection(5) -->
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp">
-
-                <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="车型："/>
-
-                <Spinner
-                        android:id="@+id/search_car_type"
-                        style="@style/home_publish_spinner_style"
-                        android:entries="@array/car_types_name"/>
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                <TextView
-                        style="@style/info_publish_text_style"
-                        android:text="载重："/>
-
-                <EditText
-                        android:id="@+id/car_weight"
-                        style="@style/info_edittext_weight_style"
-                        android:inputType="numberDecimal"
-                        android:text=""/>
-
-                <TextView
-                        style="@style/info_register_text_style"
-                        android:text="吨"/>
-            </LinearLayout>
-
-            <EditText
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:ems="10"
-                    android:gravity="top"
-                    android:hint="补充说明"
-                    android:minLines="5">
-            </EditText>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:orientation="vertical">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/start_position"
-                        android:textColor="@color/font_gray2"
-                        android:textSize="@dimen/font_size_normal"/>
-
-                <com.maogousoft.logisticsmobile.driver.CitySelectView
-                        android:id="@+id/cityselect_start"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="目的地"
-                        android:textColor="@color/font_gray2"
-                        android:textSize="@dimen/font_size_normal"/>
-
-                <com.maogousoft.logisticsmobile.driver.CitySelectView
-                        android:id="@+id/cityselect_end1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"/>
-
-                <com.maogousoft.logisticsmobile.driver.CitySelectView
-                        android:id="@+id/cityselect_end2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"/>
-
-                <com.maogousoft.logisticsmobile.driver.CitySelectView
-                        android:id="@+id/cityselect_end3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp"/>
-            </LinearLayout>
 
             <Button
-                    android:id="@+id/publish_car_source"
-                    style="@style/info_button_style"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="10dp"
-                    android:onClick="addToMyCar"
-                    android:text="确定"/>
+                android:id="@+id/publish_car_source"
+                style="@style/info_button_style"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="10dp"
+                android:onClick="addToMyCar"
+                android:text="添加" />
         </LinearLayout>
     </ScrollView>
 

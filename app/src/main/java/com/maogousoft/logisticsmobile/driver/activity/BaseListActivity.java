@@ -14,7 +14,7 @@ import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.nostra13.universalimageloader.core.assist.PauseOnScrollListener;
 
-public class BaseListActivity extends BaseActivity {
+public class BaseListActivity extends ShakeActivity {
 
     protected View mCitySelectView;
 	protected ListView mListView;

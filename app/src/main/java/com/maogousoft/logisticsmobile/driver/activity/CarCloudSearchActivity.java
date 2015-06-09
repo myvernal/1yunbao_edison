@@ -217,10 +217,6 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
                     currentModel = CURRENT_MODEL_LIST;
                     listContainer.setVisibility(View.VISIBLE);
                     mapContainer.setVisibility(View.GONE);
-                    //列表数据处理
-                    if (mAdapter.getCount() <= 0) {
-                        mEmpty.setVisibility(View.VISIBLE);
-                    }
                     mMore.setText("查看地图");
                 } else {
                     currentModel = CURRENT_MODEL_MAP;
@@ -382,6 +378,10 @@ public class CarCloudSearchActivity extends BaseActivity implements BDLocationLi
             public void run() {
                 mAdapter.removeAll();
                 mAdapter.addAll(mList);
+                //列表数据处理
+                if (mAdapter.getCount() <= 0) {
+                    mEmpty.setVisibility(View.VISIBLE);
+                }
                 mAdapter.notifyDataSetChanged();
                 mNext.setVisibility(View.VISIBLE);
             }

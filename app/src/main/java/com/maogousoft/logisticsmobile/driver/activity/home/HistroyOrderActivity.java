@@ -28,7 +28,7 @@ import com.maogousoft.logisticsmobile.driver.model.HistoryOrder;
 public class HistroyOrderActivity extends BaseListActivity {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initViews();
 	}
