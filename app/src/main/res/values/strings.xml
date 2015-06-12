@@ -136,8 +136,8 @@
     <string name="string_home_myabc_complete">完善资料</string>
     <string name="string_home_myabc_logout">退出登录</string>
     <string name="string_home_myabc_rank">排名%d位</string>
-    <string name="string_home_myabc_balance">现金余额\t\t\t\t%.2f元</string>
-    <string name="string_home_myabc_yunbao_gold">运宝币余额\t\t\t\t%s元</string>
+    <string name="string_home_myabc_balance">现金余额&lt;font color=&quot;#0C9D56&quot;&gt;%1$.2f&lt;/font&gt;元\t\t冻结金额&lt;font color=&quot;#FE5722&quot;&gt;%2$s&lt;/font&gt;元</string>
+    <string name="string_home_myabc_yunbao_gold">运宝币余额&lt;font color=&quot;#0C9D56&quot;&gt;%1$s&lt;/font&gt;元\t\t冻结金额&lt;font color=&quot;#FE5722&quot;&gt;%2$s&lt;/font&gt;元</string>
     <string name="string_home_sourcedetail_title">新货源详情</string>
     <string name="string_home_sourcedetail_line">线路：</string>
     <string name="string_home_sourcedetail_name">货物名称：</string>

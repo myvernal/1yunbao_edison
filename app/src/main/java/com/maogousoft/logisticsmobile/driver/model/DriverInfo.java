@@ -103,6 +103,24 @@ public class DriverInfo implements Serializable {
     private String account_name;//账户名称
     private String bank_account;//银行账号
     private String business_address;//办公地址
+	private String freeze_gold;//冻结的现金金额
+	private String freeze_yunbao_gold;//冻结的运宝币
+
+	public String getFreeze_gold() {
+		return freeze_gold;
+	}
+
+	public void setFreeze_gold(String freeze_gold) {
+		this.freeze_gold = freeze_gold;
+	}
+
+	public String getFreeze_yunbao_gold() {
+		return freeze_yunbao_gold;
+	}
+
+	public void setFreeze_yunbao_gold(String freeze_yunbao_gold) {
+		this.freeze_yunbao_gold = freeze_yunbao_gold;
+	}
 
 	public String getEngine_number() {
 		return engine_number;

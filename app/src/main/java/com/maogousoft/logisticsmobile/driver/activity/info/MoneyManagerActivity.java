@@ -2,6 +2,7 @@ package com.maogousoft.logisticsmobile.driver.activity.info;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -76,8 +77,10 @@ public class MoneyManagerActivity extends BaseActivity {
                                                 finish();
                                             } else {
                                                 // 获取账户余额
-                                                mYunbaoPay.setText(getString(R.string.string_home_myabc_yunbao_gold, TextUtils.isEmpty(userInfo.getYunbao_gold()) ? "0" : userInfo.getYunbao_gold()));
-                                                mBalance.setText(String.format(getString(R.string.string_home_myabc_balance), userInfo.getGold()));
+                                                String yunbaoGold = getString(R.string.string_home_myabc_yunbao_gold, TextUtils.isEmpty(userInfo.getYunbao_gold()) ? "0" : userInfo.getYunbao_gold(), TextUtils.isEmpty(userInfo.getFreeze_yunbao_gold()) ? "0" : userInfo.getFreeze_yunbao_gold());
+                                                mYunbaoPay.setText(Html.fromHtml(yunbaoGold));
+                                                String balance = String.format(getString(R.string.string_home_myabc_balance), userInfo.getGold(), TextUtils.isEmpty(userInfo.getFreeze_gold()) ? "0" : userInfo.getFreeze_gold());
+                                                mBalance.setText(Html.fromHtml(balance));
                                             }
                                         } else if(result instanceof DriverInfo) {
                                             DriverInfo userInfo = (DriverInfo) result;
@@ -87,8 +90,10 @@ public class MoneyManagerActivity extends BaseActivity {
                                                 finish();
                                             } else {
                                                 // 获取账户余额
-                                                mYunbaoPay.setText(getString(R.string.string_home_myabc_yunbao_gold, TextUtils.isEmpty(userInfo.getYunbao_gold()) ? "0" : userInfo.getYunbao_gold()));
-                                                mBalance.setText(String.format(getString(R.string.string_home_myabc_balance), userInfo.getGold()));
+                                                String yunbaoGold = getString(R.string.string_home_myabc_yunbao_gold, TextUtils.isEmpty(userInfo.getYunbao_gold()) ? "0" : userInfo.getYunbao_gold(), TextUtils.isEmpty(userInfo.getFreeze_yunbao_gold()) ? "0" : userInfo.getFreeze_yunbao_gold());
+                                                mYunbaoPay.setText(Html.fromHtml(yunbaoGold));
+                                                String balance = String.format(getString(R.string.string_home_myabc_balance), userInfo.getGold(), TextUtils.isEmpty(userInfo.getFreeze_gold()) ? "0" : userInfo.getFreeze_gold());
+                                                mBalance.setText(Html.fromHtml(balance));
                                             }
                                         }
                                     }

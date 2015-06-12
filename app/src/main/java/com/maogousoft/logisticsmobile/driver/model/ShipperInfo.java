@@ -49,6 +49,24 @@ public class ShipperInfo implements Serializable {
     private String bank_account;//银行账号
     private String account_name;//账号姓名
     private String yunbao_gold = "0";//运宝币
+    private String freeze_gold;//冻结的现金金额
+    private String freeze_yunbao_gold;//冻结的运宝币
+
+    public String getFreeze_gold() {
+        return freeze_gold;
+    }
+
+    public void setFreeze_gold(String freeze_gold) {
+        this.freeze_gold = freeze_gold;
+    }
+
+    public String getFreeze_yunbao_gold() {
+        return freeze_yunbao_gold;
+    }
+
+    public void setFreeze_yunbao_gold(String freeze_yunbao_gold) {
+        this.freeze_yunbao_gold = freeze_yunbao_gold;
+    }
 
     public int getId() {
         return id;
