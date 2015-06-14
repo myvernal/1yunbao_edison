@@ -128,6 +128,8 @@ public class Constants {
 	public static final String ACTION_NOTIFICATION_CLICKED = "org.androidpn.client.NOTIFICATION_CLICKED";
 
 	public static final String ACTION_NOTIFICATION_CLEARED = "org.androidpn.client.NOTIFICATION_CLEARED";
+
+    public static final String ACTION_NOTIFICATION_ORDER_CONFIRM = "ACTION_NOTIFICATION_ORDER_CONFIRM";//订单确认
 	// add by ybxiang begin
 	// /** 服务器地址 **/
 	// // public static final String DRIVER_SERVER_URL =

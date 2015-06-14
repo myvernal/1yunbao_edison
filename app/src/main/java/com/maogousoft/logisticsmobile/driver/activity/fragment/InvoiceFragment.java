@@ -1,7 +1,11 @@
 package com.maogousoft.logisticsmobile.driver.activity.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,7 @@ import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseListFragment;
 import com.maogousoft.logisticsmobile.driver.activity.home.InvoiceActivity;
 import com.maogousoft.logisticsmobile.driver.activity.home.SourceDetailActivity;
+import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.InvoiceAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -46,6 +51,7 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
     private boolean load_all = false;
     private InvoiceActivity.SelectItemCallBack callBack;
 
+
     public static InvoiceFragment newInstance(int invoiceType) {
         InvoiceFragment newFragment = new InvoiceFragment();
         Bundle bundle = new Bundle();
@@ -56,7 +62,11 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
     }
 
     public void setCallBack(InvoiceActivity.SelectItemCallBack callBack) {
-        this.callBack =  callBack;
+        this.callBack = callBack;
+    }
+
+    public BaseListAdapter getAdapter() {
+        return mAdapter;
     }
 
     @Override
@@ -80,8 +90,13 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
         return view;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     public NewSourceInfo getSelectedItem() {
-        return ((InvoiceAdapter)mAdapter).getSelectedSource();
+        return ((InvoiceAdapter) mAdapter).getSelectedSource();
     }
 
     public void removeDataAndNotifyDataChange(Object object) {
@@ -94,7 +109,7 @@ public class InvoiceFragment extends BaseListFragment implements AbsListView.OnS
         try {
             state = ISREFRESHING;
             final JSONObject jsonObject = new JSONObject();
-            if(application.getUserType() == Constants.USER_DRIVER) {
+            if (application.getUserType() == Constants.USER_DRIVER) {
                 jsonObject.put(Constants.ACTION, Constants.QUERY_PENDING_SOURCE_ORDER);
             } else {
                 jsonObject.put(Constants.ACTION, Constants.QUERY_ORDER);

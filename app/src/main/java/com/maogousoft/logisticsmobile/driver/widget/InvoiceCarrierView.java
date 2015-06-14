@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.MGApplication;
 import com.maogousoft.logisticsmobile.driver.R;
+import com.maogousoft.logisticsmobile.driver.activity.home.UserCreditActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.InvoiceAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
 import com.maogousoft.logisticsmobile.driver.api.ApiClient;
@@ -19,6 +20,7 @@ import com.maogousoft.logisticsmobile.driver.api.ResultCode;
 import com.maogousoft.logisticsmobile.driver.model.CarrierInfo;
 import com.maogousoft.logisticsmobile.driver.model.DriverInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
+import com.maogousoft.logisticsmobile.driver.model.ShipperInfo;
 import com.ybxiang.driver.activity.MyCarsDetailActivity;
 
 import org.json.JSONException;
@@ -36,6 +38,7 @@ public class InvoiceCarrierView extends LinearLayout {
     private TextView loadingView;
     private Context mContext;
     private InvoiceAdapter.DataCallBack callBack;
+    private MGApplication application;
 
     public InvoiceCarrierView(Context context) {
         super(context);
@@ -64,7 +67,8 @@ public class InvoiceCarrierView extends LinearLayout {
 
     public void initData(int sourceId, List<CarrierInfo> list, MGApplication application, InvoiceAdapter.DataCallBack callBack) {
         this.callBack = callBack;
-        if(list != null) {
+        this.application = application;
+        if (list != null) {
             if (!list.isEmpty()) {
                 loadingView.setVisibility(GONE);
                 contentView.setVisibility(VISIBLE);
@@ -137,8 +141,7 @@ public class InvoiceCarrierView extends LinearLayout {
                 textView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(mContext, MyCarsDetailActivity.class);
-                        mContext.startActivity(intent.putExtra(Constants.COMMON_KEY, carrierInfo.getDriver_id()).putExtra(Constants.COMMON_BOOLEAN_KEY, true));
+                        getDriverInfo(carrierInfo.getDriver_id());
                     }
                 });
                 qiandanLayout.addView(textView);
@@ -150,8 +153,7 @@ public class InvoiceCarrierView extends LinearLayout {
                 textView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(mContext, MyCarsDetailActivity.class);
-                        mContext.startActivity(intent.putExtra(Constants.COMMON_KEY, carrierInfo.getDriver_id()).putExtra(Constants.COMMON_BOOLEAN_KEY, true));
+                        getDriverInfo(carrierInfo.getDriver_id());
                     }
                 });
                 phoneLayout.addView(textView);
@@ -163,12 +165,45 @@ public class InvoiceCarrierView extends LinearLayout {
                 textView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(mContext, MyCarsDetailActivity.class);
-                        mContext.startActivity(intent.putExtra(Constants.COMMON_KEY, carrierInfo.getDriver_id()).putExtra(Constants.COMMON_BOOLEAN_KEY, true));
+                        getDriverInfo(carrierInfo.getDriver_id());
                     }
                 });
                 priceLayout.addView(textView);
             }
+        }
+    }
+
+    // 获取我的abc信息
+    private void getDriverInfo(int driverId) {
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(Constants.ACTION, Constants.GET_DRIVER_INFO);
+
+            jsonObject.put(Constants.TOKEN, application.getToken());
+            jsonObject.put(Constants.JSON, new JSONObject().put("user_id", driverId));
+            ApiClient.doWithObject(Constants.DRIVER_SERVER_URL, jsonObject,
+                    DriverInfo.class, new AjaxCallBack() {
+
+                        @Override
+                        public void receive(int code, Object result) {
+                            switch (code) {
+                                case ResultCode.RESULT_OK:
+                                    if (result != null) {
+                                        if (result instanceof DriverInfo) {
+                                            DriverInfo mDriverInfo = (DriverInfo) result;
+                                            Intent intent = new Intent(mContext, UserCreditActivity.class);
+                                            mContext.startActivity(intent.putExtra(Constants.COMMON_KEY, mDriverInfo).putExtra(Constants.IS_CAR_REPUTATION, true));
+                                        }
+                                    }
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

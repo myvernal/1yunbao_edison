@@ -83,14 +83,17 @@ public class TruckFailInfoActivity extends BaseActivity {
                                                     break;
                                             }
                                             desc.setText(Html.fromHtml(getString(R.string.truck_loading_fail, cause)));
-                                            if(TextUtils.equals("Y", truckFailInfo.getIs_able_has_confirm())) {
-                                                findViewById(R.id.confirm).setVisibility(View.VISIBLE);
-                                            }
                                         } else {
                                             //大于2条不成功原因，认为是纠纷问题
                                             desc.setText(Html.fromHtml(getString(R.string.truck_loading_fail_other)));
                                             findViewById(R.id.error).setVisibility(View.GONE);
                                         }
+                                        /*for(TruckFailInfo truckFailInfo:truckFailInfoList) {
+                                            if (TextUtils.equals("Y", truckFailInfo.getIs_able_has_confirm())) {
+                                                findViewById(R.id.confirm).setVisibility(View.VISIBLE);
+                                                return;
+                                            }
+                                        }*/
                                     }
                                     break;
                                 default:
@@ -121,6 +124,9 @@ public class TruckFailInfoActivity extends BaseActivity {
                             switch (code) {
                                 case ResultCode.RESULT_OK:
                                     showMsg("装车失败确认完结货单!");
+                                    Intent intent = new Intent(Constants.ACTION_NOTIFICATION_ORDER_CONFIRM);
+                                    intent.putExtra(Constants.ORDER_ID, orderId);
+                                    sendBroadcast(intent);
                                     finish();
                                     break;
                                 default:

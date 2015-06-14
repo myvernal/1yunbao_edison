@@ -43,8 +43,8 @@
                 android:layout_weight="1"
                 android:id="@+id/confirm"
                 android:onClick="onConfirm"
-                android:visibility="gone"
-                android:text="确认" />
+                android:visibility="visible"
+                android:text="确认结算" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

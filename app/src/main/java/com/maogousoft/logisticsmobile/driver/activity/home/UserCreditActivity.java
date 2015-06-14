@@ -42,7 +42,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
     private EditText commentContent;
     private float user_score;
     private View shipperInfoLayout;
-    private TextView nameTip,tvName, tvCompanyName, tvAddr, tvPhone, tvAccountName;
+    private TextView nameTip, tvName, tvCompanyName, tvAddr, tvPhone, tvAccountName;
     private ImageView mPhoto;
     private ShipperInfo shipperInfo;
     private DriverInfo driverInfo;
@@ -108,7 +108,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
 
         if (isMyReputation) {
             Serializable serializable = getIntent().getSerializableExtra(Constants.COMMON_KEY);
-            if(serializable != null) {
+            if (serializable != null) {
                 //我的信誉
                 ((TextView) findViewById(R.id.titlebar_id_content)).setText("我的信誉");
                 if (application.getUserType() == Constants.USER_DRIVER) {
@@ -163,6 +163,9 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
         credit_score3.setRating(driverInfo.getScroe3() == 0 ? 5 : driverInfo.getScroe3());
         ImageLoader.getInstance().displayImage(driverInfo.getId_card_photo(), mPhoto, options,
                 new Utils.MyImageLoadingListener(mContext, mPhoto));
+        if (orderId <= 0) {
+            findViewById(R.id.comment_layout_button).setVisibility(View.INVISIBLE);
+        }
     }
 
     private void displayShipperData() {
@@ -188,7 +191,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
                 params.put("driver_id", driverInfo.getId());
             } else {
                 jsonObject.put(Constants.ACTION, Constants.GET_USER_REPLY);
-                if(userId > 0) {
+                if (userId > 0) {
                     //被查看人的id
                     params.put("user_id", userId);
                 } else {
@@ -211,7 +214,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
                                     if (result instanceof ArrayList) {
                                         mAdapter.removeAll();
                                         List<EvaluateInfo> list = (List<EvaluateInfo>) result;
-                                        if(!list.isEmpty()) {
+                                        if (!list.isEmpty()) {
                                             mAdapter.addAll(list);
                                         }
                                         commentCount.setText(getString(R.string.comment_count, list.size()));
@@ -268,7 +271,7 @@ public class UserCreditActivity extends BaseListActivity implements AbsListView.
 
     //给货主点赞
     public void onLike(View view) {
-        if(isMyReputation) {
+        if (isMyReputation) {
             //不能评论自己
             return;
         }

@@ -1,6 +1,9 @@
 package com.maogousoft.logisticsmobile.driver.activity.home;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -22,6 +25,7 @@ import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep1A
 import com.maogousoft.logisticsmobile.driver.activity.info.AgreementCreateStep3Activity;
 import com.maogousoft.logisticsmobile.driver.activity.info.PushToDriverActivity;
 import com.maogousoft.logisticsmobile.driver.activity.info.TruckFailedReasonActivity;
+import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.CloudSearchAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.CommonFragmentPagerAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
@@ -57,6 +61,7 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
     private double latitude;
     private double longitude;
     private String action;//区分车主和司机
+    private OrderBroadcastReceiver orderBroadcastReceiver = new OrderBroadcastReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,8 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
         initViewPager();
         //先定位
         locationAction();
+        IntentFilter intentFilter = new IntentFilter(Constants.ACTION_NOTIFICATION_ORDER_CONFIRM);
+        registerReceiver(orderBroadcastReceiver, intentFilter);
     }
 
     @Override
@@ -78,9 +85,15 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
         changeStates(currIndex);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(orderBroadcastReceiver);
+    }
+
     /*
-     * 初始化标签名
-     */
+         * 初始化标签名
+         */
     public void initView() {
         guid1 = findViewById(R.id.tv_guid1);
         guid2 = findViewById(R.id.tv_guid2);
@@ -519,8 +532,25 @@ public class InvoiceActivity extends BaseActivity implements BDLocationListener 
         }
     }
 
-    public void showPushSourceWindow() {
+    /**
+     * 收到订单确认的广播后，删除该数据
+     */
+    class OrderBroadcastReceiver extends BroadcastReceiver {
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (TextUtils.equals(intent.getAction(), Constants.ACTION_NOTIFICATION_ORDER_CONFIRM)) {
+                int orderId = intent.getIntExtra(Constants.ORDER_ID, -1);
+                BaseListAdapter adapter = secondFragment.getAdapter();
+                for(Object object:adapter.getList()) {
+                    NewSourceInfo newSourceInfo = (NewSourceInfo) object;
+                    if(newSourceInfo != null && newSourceInfo.getId() == orderId) {
+                        secondFragment.removeDataAndNotifyDataChange(object);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     interface ActionCallBack {
