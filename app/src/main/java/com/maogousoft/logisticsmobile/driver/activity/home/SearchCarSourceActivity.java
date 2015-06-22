@@ -9,13 +9,20 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.RadioButton;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.maogousoft.logisticsmobile.driver.CitySelectView;
 import com.maogousoft.logisticsmobile.driver.Constants;
 import com.maogousoft.logisticsmobile.driver.R;
 import com.maogousoft.logisticsmobile.driver.activity.BaseActivity;
 import com.maogousoft.logisticsmobile.driver.activity.CarCloudSearchActivity;
-import com.maogousoft.logisticsmobile.driver.activity.info.OptionalActivity;
+import com.maogousoft.logisticsmobile.driver.activity.info.OptionalShipperActivity;
 import com.maogousoft.logisticsmobile.driver.adapter.BaseListAdapter;
 import com.maogousoft.logisticsmobile.driver.adapter.FocusLineAdapter;
 import com.maogousoft.logisticsmobile.driver.api.AjaxCallBack;
@@ -26,6 +33,7 @@ import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.ybxiang.driver.activity.CarsListActivity;
 import com.ybxiang.driver.activity.FocusLineInfoActivity;
 import com.ybxiang.driver.model.FocusLineInfo;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -156,7 +164,7 @@ public class SearchCarSourceActivity extends BaseActivity {
                         public void onClick(View v) {
                             dialog.dismiss();
                             Intent intent = new Intent(mContext,
-                                    OptionalActivity.class);
+                                    OptionalShipperActivity.class);
                             intent.putExtra("isFormRegisterActivity", false);
                             startActivity(intent);
                             finish();

@@ -1,11 +1,5 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +29,12 @@ import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
 import com.maogousoft.logisticsmobile.driver.utils.MD5;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * 货主注册
  * 
@@ -43,7 +43,7 @@ import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 public class RegisterShipperActivity extends BaseActivity {
 
 	// 短信限制时间
-	private static final int MAX = 60;
+	private static final int MAX = 5*60;
 
 	private int current = MAX;
 	private Button mLogin, mRegister, mGetVerifyCode;

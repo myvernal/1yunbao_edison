@@ -1,15 +1,5 @@
 package com.maogousoft.logisticsmobile.driver.activity.info;
 
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import android.text.TextUtils;
-import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
-import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -22,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -48,9 +39,18 @@ import com.maogousoft.logisticsmobile.driver.model.CityInfo;
 import com.maogousoft.logisticsmobile.driver.model.NewSourceInfo;
 import com.maogousoft.logisticsmobile.driver.model.UserInfo;
 import com.maogousoft.logisticsmobile.driver.utils.CheckUtils;
+import com.maogousoft.logisticsmobile.driver.utils.LocHelper;
+import com.maogousoft.logisticsmobile.driver.utils.LogUtil;
 import com.maogousoft.logisticsmobile.driver.utils.MD5;
 import com.maogousoft.logisticsmobile.driver.utils.MyAlertDialog;
 import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 注册
@@ -60,7 +60,7 @@ import com.maogousoft.logisticsmobile.driver.widget.MyGridView;
 public class RegisterActivity extends BaseActivity {
 
     // 短信限制时间
-    private static final int MAX = 60;
+    private static final int MAX = 5*60;
 
     private int current = MAX;
     private Button mLogin, mRegister, mGetVerifyCode;
